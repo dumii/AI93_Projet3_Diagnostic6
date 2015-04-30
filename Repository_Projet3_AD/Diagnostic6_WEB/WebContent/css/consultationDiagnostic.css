@@ -1,0 +1,39 @@
+/*************************************/
+/* Bordure à supprimer  */
+/*************************************/
+
+
+
+/*************************************/
+/* Mini Barre d'état Consultation Diagnostic */
+/*************************************/
+
+#consultDiag
+{
+	margin-top : 7%;
+	margin-left: 18%;
+	width: 56%;
+
+}
+
+
+.mini-barreEtat
+{
+	background-image:linear-gradient(#f7f7f7, #f1f1f1);
+	border:#cccccc solid 1px;
+	height: 27px;
+}
+#mini-barreEtat-boutons
+{
+	float:right;
+}
+
+#accordionConsultErp > div
+{
+	height: 220px;
+}
+
+#accordeonErp
+{
+	font-size: small;
+}
