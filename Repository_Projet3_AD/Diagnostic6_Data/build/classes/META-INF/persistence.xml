@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="Malak_Diag_Data">
+	<jta-data-source>java:jboss/datasources/Malak_Diag_DS</jta-data-source>
+	
+		<class>fr.afcepf.ai93.diag6.entity.erp.Acces</class>
+		<class>fr.afcepf.ai93.diag6.entity.erp.Ascenceur</class>
+		<class>fr.afcepf.ai93.diag6.entity.erp.Batiment</class>
+		<class>fr.afcepf.ai93.diag6.entity.erp.CategorieErp</class>
+		<class>fr.afcepf.ai93.diag6.entity.erp.Erp</class>
+		<class>fr.afcepf.ai93.diag6.entity.erp.Escalier</class>
+		<class>fr.afcepf.ai93.diag6.entity.erp.Etage</class>
+		<class>fr.afcepf.ai93.diag6.entity.erp.FonctionPiece</class>
+		<class>fr.afcepf.ai93.diag6.entity.erp.HistoriqueErp</class>
+		<class>fr.afcepf.ai93.diag6.entity.erp.Piece</class>
+		<class>fr.afcepf.ai93.diag6.entity.erp.Proprietaire</class>
+		<class>fr.afcepf.ai93.diag6.entity.erp.TypeAcces</class>
+		<class>fr.afcepf.ai93.diag6.entity.erp.TypeErp</class>
+		<class>fr.afcepf.ai93.diag6.entity.erp.TypeVoirie</class>
+		<class>fr.afcepf.ai93.diag6.entity.erp.Voirie</class>
+		<class>fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie</class>
+		<class>fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic</class>
+		<class>fr.afcepf.ai93.diag6.entity.diagnostic.HistoriqueAnomalie</class>
+		<class>fr.afcepf.ai93.diag6.entity.diagnostic.HistoriqueDiagnostic</class>
+		<class>fr.afcepf.ai93.diag6.entity.diagnostic.Indicateur</class>
+		<class>fr.afcepf.ai93.diag6.entity.diagnostic.TypeDiagnostic</class>
+		<class>fr.afcepf.ai93.diag6.entity.travaux.EtatAvancementTravaux</class>
+		<class>fr.afcepf.ai93.diag6.entity.travaux.HistoriqueIntervention</class>
+		<class>fr.afcepf.ai93.diag6.entity.travaux.Intervention</class>
+		<class>fr.afcepf.ai93.diag6.entity.travaux.TypeArtisan</class>
+		<class>fr.afcepf.ai93.diag6.entity.travaux.TypeIntervention</class>
+		<class>fr.afcepf.ai93.diag6.entity.autres.Artisan</class>
+		<class>fr.afcepf.ai93.diag6.entity.autres.Expert</class>
+		<class>fr.afcepf.ai93.diag6.entity.autres.Favoris</class>
+		<class>fr.afcepf.ai93.diag6.entity.autres.Localisation</class>
+		<class>fr.afcepf.ai93.diag6.entity.autres.ProfilUtilisateur</class>
+		<class>fr.afcepf.ai93.diag6.entity.autres.Utilisateur</class>
+		
+	<properties>
+	
+		<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+		
+	</properties>
+	
+	</persistence-unit>
+	
+</persistence>

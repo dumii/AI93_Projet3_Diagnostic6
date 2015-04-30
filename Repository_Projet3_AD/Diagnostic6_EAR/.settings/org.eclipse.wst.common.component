@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="Diagnostic6_EAR">
+        <wb-resource deploy-path="/" source-path="/EarContent" tag="defaultRootSource"/>
+        <dependent-module archiveName="Diagnostic6_Entity.jar" deploy-path="/lib" handle="module:/resource/Diagnostic6_Entity/Diagnostic6_Entity">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="Diagnostic6_Data.jar" deploy-path="/" handle="module:/resource/Diagnostic6_Data/Diagnostic6_Data">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="Diagnostic6_Business.jar" deploy-path="/" handle="module:/resource/Diagnostic6_Business/Diagnostic6_Business">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="Diagnostic6_WEB.war" deploy-path="/" handle="module:/resource/Diagnostic6_WEB/Diagnostic6_WEB">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="Diagnostic6_API.jar" deploy-path="/lib" handle="module:/resource/Diagnostic6_API/Diagnostic6_API">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+    </wb-module>
+</project-modules>
