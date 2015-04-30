@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+<title>Insert title here</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+</head>
+<body>
+	<div id="enTete">	
+		<a href=""><img id="logoAccueil" src="images/Logo2.png" /></a>
+			
+		<form id="rechercheBandeau" action="">
+			<input type="text" value="Entrez votre recherche ici ...">
+			<input type="image" src="images/Loupe.png">
+			<div id="resultatRecherche">Entrez votre recherche ici ...
+			</br>
+			Ajouter
+			</br>
+			Filtre
+			</br>
+			Accordéon 1</div>
+		</form>
+		
+		<a href=""><img class="logoMenu" id="logoErp" src="images/ERPIconeBleue2.png" /></a>		
+		<a href=""><img class="logoMenu" id="logoDiag" src="images/DiagnosticIconeBleue.png" /></a>		
+		<a href=""><img class="logoMenu" id="logoTrav" src="images/BuildingConstruction_icon.png" /></a>		
+		<a href=""><img class="logoMenu" id="logoTabBord" src="images/TableauBordIconeOrange.png" /></a>		
+	</div>
+	
+	<div id=bandeauGauche>	
+		<div>
+			<button id="boutonAjouter">Ajouter</button>
+		</div>
+		
+		<div id="radio">
+			<input type="radio" id="radio1" name="radio"><label for="radio1">Filtre 1<span id="fleche">↓</span></label>
+			<input type="radio" id="radio2" name="radio"><label for="radio2">Filtre 2<span id="fleche"></span></label>
+			<input type="radio" id="radio3" name="radio"><label for="radio3">Filtre 3<span id="fleche"></span></label>
+		</div>
+  	
+  	<div id="accordion">
+			<h3>Accordéon 1</h3>
+			<div>
+				<p>
+					<ul>
+						<li>Cinéma Malakoff</li>
+						<li>MacDonald</li>
+						<li>Hopital Saint André</li>
+					</ul>
+				</p>
+			</div>
+ 
+			<h3>Accordéon 2</h3>
+			<div>
+				<p>
+					<ul>
+						<li>Diagnostic Accès - Cinéma Malakoff</li>
+						<li>Diagnostic Energie - MacDonald</li>
+						<li>Diagnostic Sécurité - Hopital Saint André</li>
+					</ul>
+				</p>
+			</div>
+
+			<h3>Accordéon 3</h3>
+			<div>
+				<p>
+					<ul>
+						<li>Diagnostic Accès - Cinéma Malakoff</li>
+						<li>Diagnostic Energie - MacDonald</li>
+						<li>Diagnostic Sécurité - Hopital Saint André</li>
+					</ul>
+				</p>
+			</div>			
+		</div>	
+		</div>
+
+	<div id="bandeauDroite">
+		<fieldset id="connection">
+			<legend>Bonjour Toto</legend>
+			blablablablablablablabla
+		</fieldset>
+		
+		<fieldset id="favoris">
+			<legend>Mes favoris</legend>
+			blablablablablablablabla
+		</fieldset>
+		
+		<fieldset id="notification">
+			<legend>Dernières actualités</legend>
+			
+				<article>
+					<header>Motif notification</header>
+					<time>20/11/2056</time>
+				<section>Lorem ipsum dolor sit amet</section>
+			</article>
+			
+			<article>
+				<header>Motif notification</header>
+				<time>20/11/2056</time>
+				<section>Lorem ipsum dolor sit amet</section>
+			</article>
+			
+		</fieldset>
+	</div>
+<script>
+  $( "#radio" ).buttonset();
+  $( "#accordion" ).accordion();
+  $("button").button();
+</script>
+
+</body>
+</html>

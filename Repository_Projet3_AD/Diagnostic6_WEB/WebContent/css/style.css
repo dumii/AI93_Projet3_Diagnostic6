@@ -1,0 +1,188 @@
+/*************************************/
+/* Mise en forme générale de la page */
+/*************************************/
+
+html
+{
+	overflow: scroll;
+}
+
+body
+{
+	background-image: url("../images/ArrierePlan.png");
+	background-size: 100%;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	overflow-y: auto;
+	font-family: sans-serif;
+	background-attachment: fixed;
+}
+
+
+/****************************/
+/* Barre de menu principale */
+/****************************/
+
+#enTete {
+	height: 75px;
+	width: 100%;	
+	background-image: url("../images/barreDeMenu4.png"), url("../images/ArrierePlan.png");
+ 	background-size: 100% 40px, 100%;
+ 	background-position: 0px 25px, top;
+  	background-repeat: no-repeat, no-repeat;
+	background-color: white;
+	position: fixed;
+}
+
+#rechercheBandeau {
+	display: inline-block;
+	padding-top: 3%;
+	padding-left: 5%;
+	position: absolute;
+}
+
+#rechercheBandeau > input[type="text"]
+{   
+    width: 200px;
+}
+
+#rechercheBandeau > input[type="image"]
+{
+	height: 19px;
+	float: right;
+	border: #BDBDBD solid 1px;
+	/*
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+	*/
+}
+
+#rechercheBandeau > div
+{
+	width: 89.5%;
+  	background-color: white;
+  	margin-left: 1px;
+  	display: none;
+}
+
+#logoAccueil {
+	margin-left: 7%;
+	height: 73%;
+	margin-bottom: 2%;
+}
+
+#logoErp {
+	margin-left: 31%;
+}
+
+.logoMenu {
+	margin-top: 1%;
+	height: 93%;
+	width: auto;
+}
+
+#logoTabBord
+{
+	margin-left: 5%;
+}
+
+.lienAccueil {
+	height: 87px;
+	width: 287px;
+}
+
+/**************************/
+/* Barre de menu latérale */
+/**************************/
+
+#bandeauGauche
+{
+	position: fixed;
+  	width: 200px;
+  	margin-left: 5%;
+  	margin-top: 7%;
+}
+
+#boutonAjouter
+{
+	width: 100%;
+}
+
+#radio
+{
+	font-size: x-small;
+	margin-top: 8px;
+	margin-right: 0px;
+}
+
+#radio > label
+{
+	width: 65px;
+	height: 20px;
+}
+
+#accordion
+{
+	font-size: x-small;
+	margin-top: 8px;
+}
+
+#accordion > div
+{
+	height: 200px;
+}
+
+
+/**************************/
+/*  Barre de menu droite  */
+/**************************/
+
+#bandeauDroite
+{
+	margin-left: 75%;
+ 	margin-top: 7%;
+ 	width: 200px;
+ 	background-color: white;
+ 	border: #BDBDBD solid 1px;
+	border-radius: 1px;
+	position: fixed;
+}
+
+fieldset
+{
+	border: none;
+	font-size: small;
+	padding: 6px;
+ 	margin-bottom: 12px;
+}
+
+fieldset > legend
+{
+	border-bottom: #333366 solid 1px;
+	font-weight: bold;
+	font-size: larger;
+	color: #333366;
+	width: 100%;
+}
+
+article
+{
+	margin-bottom: 10px;
+	border-bottom: #CCCCCC solid 1px;
+}
+
+article > header
+{
+	margin-bottom:5px;
+	color: blue;
+}
+
+article > time
+{
+	font-style: italic;
+}
+
+article > section
+{
+	margin-bottom: 10px;
+}
