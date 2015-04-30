@@ -24,7 +24,7 @@ public class Diagnostic implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column
+	@Column(name="No_Diagnostic")
 	private Integer idDiagnostic;
 	
 	@Column(name="nom_diagnostiqueur")

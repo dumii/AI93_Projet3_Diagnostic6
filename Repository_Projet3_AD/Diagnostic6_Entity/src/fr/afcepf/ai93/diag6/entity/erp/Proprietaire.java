@@ -21,7 +21,7 @@ public class Proprietaire implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_piece")
+	@Column(name="id_proprietaire")
 	private Integer idProprietaire;
 	
 	@Column(name="prenom_proprietaire")
