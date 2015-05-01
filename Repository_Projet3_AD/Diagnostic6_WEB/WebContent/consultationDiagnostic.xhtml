@@ -126,11 +126,17 @@
 			ici titre + boutons
 			<div id="mini-barreEtat-boutons">
 				<a href=""><img class="boutons-mini-barreEtat"
-					id="boutonModifier" src="images/DiagnosticBoutonModifier.26.26.png" /></a>
+					id="boutonModifier" src="images/consultationDiagnostic/DiagnosticBoutonModifier.26.26.png" /></a>
+					
 				<a href=""><img class="boutons-mini-barreEtat"
-					id="notificationGrisée" src="images/NotifIconeGrise.25.26.png" /></a>
+					id="notificationGrisee" src="images/consultationDiagnostic/NotifIconeGrise.25.26.png" /></a>
 				<a href=""><img class="boutons-mini-barreEtat"
-					id="notificationGrisée" src="images/NoFavoritesIcon.26.26.png" /></a>
+					id="notificationRouge" src="images/consultationDiagnostic/NotifIconeRouge.25.26.png" /></a>
+					
+				<a href=""><img class="boutons-mini-barreEtat"
+					id="favoritesGrisee" src="images/consultationDiagnostic/NoFavoritesIcon.26.26.png" /></a>
+				<a href=""><img class="boutons-mini-barreEtat"
+					id="favoriteJaune" src="images/consultationDiagnostic/FavoriteIcon.26.26.png" /></a>
 			</div>
 		</div>
 
@@ -143,67 +149,105 @@
 			<div class="tableErpDiagGeneral">
 				<table>
 					<tr>
-						<th class="accordErp" width="180px" style="text-align: right">ERP
-							concerné :</th>
-						<th id="ErpDiag" class="accordErp" width="180px"
-							style="text-align: right">#Résultat de Recherche#</th>
-						<th class="accordErp" width="180px" style="text-align: right">Expert
-							:</th>
-						<th id="expertDiag" class="accordErp" width="180px"
-							style="text-align: right">#Nom+Prénom#</th>
+						<th class="ErpGeneral" width="180px" style="text-align: right">ERPconcerné :</th>
+						<th id="ErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
+						<th class="ErpGeneral" width="180px" style="text-align: right">Expert :</th>
+						<th id="expertDiag" class="ErpGeneral" width="180px" style="text-align: right">#Nom+Prénom#</th>
 					</tr>
 					<tr>
-						<th class="accordErp" width="180px" style="text-align: right">Catégorie
-							:</th>
-						<th id="CategErpDiag" class="accordErp" width="180px"
-							style="text-align: right">#Résultat de Recherche#</th>
-						<th class="accordErp" width="180px" style="text-align: right">Coordonées
-							:</th>
-						<th id="expertDiag" class="accordErp" width="180px"
-							style="text-align: right">#Téléphone#</th>
+						<th class="ErpGeneral" width="180px" style="text-align: right">Catégorie :</th>
+						<th id="CategErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
+						<th class="ErpGeneral" width="180px" style="text-align: right">Coordonées :</th>
+						<th id="telExpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Téléphone#</th>
 					</tr>
 					<tr>
-						<th class="accordErp" width="180px" style="text-align: right">Fonction
-							:</th>
-						<th id="FoncErpDiag" class="accordErp" width="180px"
-							style="text-align: right">#Résultat de Recherche#</th>
-						<th class="accordErp" width="180px" style="text-align: right"></th>
-						<th class="accordErp" width="180px" style="text-align: right">#email#</th>
+						<th class="ErpGeneral" width="180px" style="text-align: right">Fonction :</th>
+						<th id="FoncErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
+						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
+						<th id="emailExpErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#email#</th>
 					</tr>
 					<tr>
-						<th class="accordErp" width="180px" style="text-align: right">Date
-							de Diagnostic :</th>
-						<th id="DateErpDiag" class="accordErp" width="180px"
-							style="text-align: right">#Résultat de Recherche#</th>
-						<th class="accordErp" width="180px" style="text-align: right"></th>
-						<th class="accordErp" width="180px" style="text-align: right">#Adresse#</th>
+						<th class="ErpGeneral" width="180px" style="text-align: right">Date de Diagnostic :</th>
+						<th id="DateErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
+						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
+						<th id="adrExpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Adresse#</th>
 					</tr>
 					<tr>
-						<th class="accordErp" width="180px" style="text-align: right">Adresse
-							:</th>
-						<th id="AdressErpDiag" class="accordErp" width="180px"
-							style="text-align: right">#Résultat de Recherche#</th>
+						<th class="ErpGeneral" width="180px" style="text-align: right">Adresse :</th>
+						<th id="AdressErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
 						<th class="accordErp" width="180px" style="text-align: right"></th>
-						<th class="accordErp" width="180px" style="text-align: right">#ville+CodePostal#</th>
+						<th id="villCPExpDiag" class="ErpGeneral" width="180px" style="text-align: right">#ville+CodePostal#</th>
 					</tr>
 					<tr>
-						<th class="accordErp" width="180px" style="text-align: right">Ville
-							:</th>
-						<th id="VilleErpDiag" class="accordErp" width="180px"
-							style="text-align: right">#Résultat de Recherche#</th>
-						<th class="accordErp" width="180px" style="text-align: right"></th>
-						<th class="accordErp" width="180px" style="text-align: right"></th>
+						<th class="ErpGeneral" width="180px" style="text-align: right">Ville :</th>
+						<th id="VilleErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
+						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
+						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
 					</tr>
 					<tr>
-						<th class="accordErp" width="180px" style="text-align: right">Code
-							Postal :</th>
-						<th id="CPErpDiag" class="accordErp" width="180px"
-							style="text-align: right">#Résultat de Recherche#</th>
-						<th class="accordErp" width="180px" style="text-align: right"></th>
-						<th class="accordErp" width="180px" style="text-align: right"></th>
+						<th class="ErpGeneral" width="180px" style="text-align: right">Code Postal :</th>
+						<th id="CPErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
+						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
+						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
 					</tr>
 				</table>
 			</div>
+		</div>
+	
+	
+		<button id="buttShowEDD">Informations Détaillées</button>
+	
+		<div id="ErpDiagDetaille">
+			<div class="tableErpDetaille">
+				<table>
+					<tr>
+						<th class="ErpGeneral" width="180px" style="text-align: right">ERPconcerné :</th>
+						<th id="ErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
+						<th class="ErpGeneral" width="180px" style="text-align: right">Expert :</th>
+						<th id="expertDiag" class="ErpGeneral" width="180px" style="text-align: right">#Nom+Prénom#</th>
+					</tr>
+					<tr>
+						<th class="ErpGeneral" width="180px" style="text-align: right">Catégorie :</th>
+						<th id="CategErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
+						<th class="ErpGeneral" width="180px" style="text-align: right">Coordonées :</th>
+						<th id="telExpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Téléphone#</th>
+					</tr>
+					<tr>
+						<th class="ErpGeneral" width="180px" style="text-align: right">Fonction :</th>
+						<th id="FoncErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
+						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
+						<th id="emailExpErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#email#</th>
+					</tr>
+					<tr>
+						<th class="ErpGeneral" width="180px" style="text-align: right">Date de Diagnostic :</th>
+						<th id="DateErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
+						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
+						<th id="adrExpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Adresse#</th>
+					</tr>
+					<tr>
+						<th class="ErpGeneral" width="180px" style="text-align: right">Adresse :</th>
+						<th id="AdressErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
+						<th class="accordErp" width="180px" style="text-align: right"></th>
+						<th id="villCPExpDiag" class="ErpGeneral" width="180px" style="text-align: right">#ville+CodePostal#</th>
+					</tr>
+					<tr>
+						<th class="ErpGeneral" width="180px" style="text-align: right">Ville :</th>
+						<th id="VilleErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
+						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
+						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
+					</tr>
+					<tr>
+						<th class="ErpGeneral" width="180px" style="text-align: right">Code Postal :</th>
+						<th id="CPErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
+						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
+						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
+					</tr>
+				</table>
+			</div>
+		</div>
+	
+		<div>
+			<span>ici les anomalies + les diernières infos du diagnostic</span>
 		</div>
 	</div>
 
@@ -211,6 +255,21 @@
   $( "#radio" ).buttonset();
   $( "#accordion" ).accordion();
   $("button").button();
+
+  $( "#buttShowEDD" ).click(function() {
+	  $( "#ErpDiagDetaille" ).toggle( "blind", 500 );
+	});
+	
+ /* 
+ $( "#notificationGrisee" ).click(function() {
+	  $( "#notificationGrisee" ).hide;
+	  $( "#notificationRouge" ).show;
+	});
+  $( "#favoritesGrisee" ).click(function() {
+	  $( "#favoritesGrisee" ).hide;
+	  $( "#favoriteJaune" ).show;
+	});
+	*/
 </script>
 </body>
 </html>
