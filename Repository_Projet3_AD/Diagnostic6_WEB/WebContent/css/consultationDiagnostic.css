@@ -13,9 +13,7 @@
 	margin-top : 7%;
 	margin-left: 18%;
 	width: 56%;
-
 }
-
 
 .mini-barreEtat
 {
@@ -23,17 +21,40 @@
 	border:#cccccc solid 1px;
 	height: 27px;
 }
+
 #mini-barreEtat-boutons
 {
 	float:right;
 }
 
-#accordionConsultErp > div
+/*************************************/
+/* Erp Diagnostic Infos Générales */
+/*************************************/
+#ErpDiagGeneral
 {
-	height: 220px;
+	background-image: #F7F7F7;
+	background-color: #F7F7F7;
+	margin-left: 1%;
+	width: 54%;
+	position: fixed;
 }
 
-#accordeonErp
+#ErpDiagGeneral > #ErpDiagTitre
+{
+	text-align: left;
+	color: CornflowerBlue;
+	font-size: medium;
+	text-decoration: underline;
+}
+
+#ErpDiagGeneral > .tableErpDiagGeneral
 {
 	font-size: small;
+}
+
+.accordionConsultErp
+{
+	Clear:both;
+	margin-top: 23%;
+	heightStyle: content;
 }
