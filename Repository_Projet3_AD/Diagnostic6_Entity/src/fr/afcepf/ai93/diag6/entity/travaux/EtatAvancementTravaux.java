@@ -53,16 +53,13 @@ public class EtatAvancementTravaux implements Serializable {
 	}
 
 	public EtatAvancementTravaux() {
-		super();
 	}
 
 	public EtatAvancementTravaux(Integer idEtatAvancement,
-			String intituleEtatAvancement,
-			List<Intervention> listeInterventionsEtatAvancement) {
-		super();
+			String intituleEtatAvancement)
+	{
 		this.idEtatAvancement = idEtatAvancement;
 		this.intituleEtatAvancement = intituleEtatAvancement;
-		this.listeInterventionsEtatAvancement = listeInterventionsEtatAvancement;
 	}
 	
 	

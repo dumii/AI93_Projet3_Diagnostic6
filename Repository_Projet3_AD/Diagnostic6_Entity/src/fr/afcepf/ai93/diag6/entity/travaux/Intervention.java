@@ -175,8 +175,6 @@ public class Intervention implements Serializable {
 		this.dateDebutIntervention = dateDebutIntervention;
 		this.dateFinIntervention = dateFinIntervention;
 		this.coutIntervention = coutIntervention;
-		//this.listeHistoriqueIntervention = listeHistoriqueIntervention;
-		//this.listeFavorisIntervention = listeFavorisIntervention;
 		this.anomalie = anomalie;
 		this.etatAvancementTravaux = etatAvancementTravaux;
 		this.typeIntervention = typeIntervention;

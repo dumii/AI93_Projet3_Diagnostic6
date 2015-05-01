@@ -22,8 +22,14 @@ public class TestTravauxManagedBean {
 	@EJB
 	private IBusinessIntervention proxyBusiness;
 	private List<Intervention> travaux;
+	private List<TypeIntervention> listeTypes;
+	private List<EtatAvancementTravaux> listeEtats;
 	private Intervention intervention;
 	private int idIntervention;
+	private int idType;
+	private int idEtat;
+	private String resultat;
+	private Date dateChoisie;
 	
 	private Intervention interventionAdd;
 	
@@ -32,12 +38,15 @@ public class TestTravauxManagedBean {
 	public void init()
 	{
 		travaux = proxyBusiness.recupereToutesIntervention();
+		listeTypes = proxyBusiness.recupererTousTypesIntervention();
+		listeEtats = proxyBusiness.recupererTousEtats();
 	}
 	
 	//Recherche d'une intervention via son id
 	public String rechercher()
 	{
-		intervention = proxyBusiness.recupereIntervention(idIntervention);
+		intervention = proxyBusiness.recupereIntervention(idIntervention);		
+		resultat = "";
 		return "";
 	}
 	
@@ -48,7 +57,7 @@ public class TestTravauxManagedBean {
 		//l'objet intervention dans la base de données
 		
 		Anomalie anom = new Anomalie();
-		anom.setIdAnomalie(2);
+		anom.setIdAnomalie(4);
 		
 		TypeIntervention type = new TypeIntervention();
 		type.setIdTypeIntervention(2);
@@ -63,18 +72,29 @@ public class TestTravauxManagedBean {
 		
 		//Maintenant je créé mon instance intervention et je lui ajoute les attributs
 		//On peut le faire sur une seule ligne mais je trouve ça plus propre comme ça
+		interventionAdd = new Intervention();
 		interventionAdd.setAnomalie(anom);
 		interventionAdd.setTypeIntervention(type);
 		interventionAdd.setArtisan(artisan);
 		interventionAdd.setEtatAvancementTravaux(etat);
 		interventionAdd.setDateDebutIntervention(date1);
-		interventionAdd.setDateFinIntervention(date1);
+		interventionAdd.setDateFinIntervention(dateChoisie);
 		interventionAdd.setCoutIntervention(2222.22);
 
-		//On ajoute dans la base de données et on rafraîchit la liste d'interventions à l'écran
-		proxyBusiness.ajouterIntervention(interventionAdd);
+		try
+		{
+			//On ajoute dans la base de données et on rafraîchit la liste d'interventions à l'écran
+			resultat = proxyBusiness.ajouterIntervention(interventionAdd);			
+		}
+		catch (Exception e)
+		{
+			//Si un champ est null, qu'il y ait des caractères inapropriés dans les champs date ou coût, une erreur sera générée
+			resultat="Erreur lors de l'enregistrement, veuillez vérifier que toutes les valeurs sont correctement indiquées ou réessayer dans quelques minutes.";
+		}
 		init();
-		
+		System.out.println("*****************************************************************************");
+		System.err.println(resultat);
+		System.out.println("*****************************************************************************");
 		return "";
 	}
 	
@@ -118,5 +138,53 @@ public class TestTravauxManagedBean {
 
 	public void setInterventionAdd(Intervention interventionAdd) {
 		this.interventionAdd = interventionAdd;
+	}
+
+	public String getResultat() {
+		return resultat;
+	}
+
+	public void setResultat(String resultat) {
+		this.resultat = resultat;
+	}
+
+	public Date getDateChoisie() {
+		return dateChoisie;
+	}
+
+	public void setDateChoisie(Date dateChoisie) {
+		this.dateChoisie = dateChoisie;
+	}
+
+	public List<TypeIntervention> getListeTypes() {
+		return listeTypes;
+	}
+
+	public void setListeTypes(List<TypeIntervention> listeTypes) {
+		this.listeTypes = listeTypes;
+	}
+
+	public int getIdType() {
+		return idType;
+	}
+
+	public void setIdType(int idType) {
+		this.idType = idType;
+	}
+
+	public List<EtatAvancementTravaux> getListeEtats() {
+		return listeEtats;
+	}
+
+	public void setListeEtats(List<EtatAvancementTravaux> listeEtats) {
+		this.listeEtats = listeEtats;
+	}
+
+	public int getIdEtat() {
+		return idEtat;
+	}
+
+	public void setIdEtat(int idEtat) {
+		this.idEtat = idEtat;
 	}
 }

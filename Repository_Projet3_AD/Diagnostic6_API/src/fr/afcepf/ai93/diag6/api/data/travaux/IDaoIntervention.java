@@ -15,5 +15,6 @@ public interface IDaoIntervention {
     public boolean modifierIntervention(Intervention intervention);
 
     public Intervention recupereIntervention(int idIntervention);
-	
+    
+    public boolean rechercherInterventionSurAnomalie(int idAnomalie);
 }

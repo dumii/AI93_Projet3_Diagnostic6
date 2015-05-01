@@ -54,16 +54,12 @@ public class TypeIntervention implements Serializable {
 	}
 
 	public TypeIntervention() {
-		super();
 	}
 
 	public TypeIntervention(Integer idTypeIntervention,
-			String typeIntervention,
-			List<Intervention> listeInterventionTypeIntervention) {
-		super();
+			String typeIntervention) {
 		this.idTypeIntervention = idTypeIntervention;
 		this.typeIntervention = typeIntervention;
-		this.listeInterventionTypeIntervention = listeInterventionTypeIntervention;
 	}
 	
 	

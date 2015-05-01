@@ -10,7 +10,17 @@
 <body>
 	<f:view>
 		<h:form>
+			<rich:calendar id="date" value="#{mbTestTravaux.dateChoisie}"></rich:calendar>
 			<h:commandButton value="Ajouter une intervention" action="#{mbTestTravaux.ajouter()}" />
+			
+			<h:selectOneMenu value="#{mbTestTravaux.idEtat}">
+					<f:selectItem itemLabel="-- Sélectionnez un état d'intervention --" itemValue="0"/>
+					<f:selectItems value="#{mbTestTravaux.listeEtats}"
+								   var="unType"
+								   itemLabel="#{unType.intituleEtatAvancement}"
+								   itemValue="#{unType.idEtatAvancement}"/>
+			</h:selectOneMenu>
+			
 			<rich:dataTable var="intervention" id="maTable"
 							value="#{mbTestTravaux.travaux}">					
 				<rich:column>
@@ -21,6 +31,10 @@
 				<rich:column>
 					<f:facet name="header">Coût d'intervention</f:facet>
 					#{intervention.coutIntervention}
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">Type d'intervention</f:facet>
+					#{intervention.typeIntervention.typeIntervention}
 				</rich:column>
 				<rich:column>
 							<a4j:commandLink value="Modifier"

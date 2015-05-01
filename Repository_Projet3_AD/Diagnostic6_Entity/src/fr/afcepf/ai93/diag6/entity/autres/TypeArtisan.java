@@ -1,4 +1,4 @@
-package fr.afcepf.ai93.diag6.entity.travaux;
+package fr.afcepf.ai93.diag6.entity.autres;
 
 import java.io.Serializable;
 import java.util.List;
@@ -10,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import fr.afcepf.ai93.diag6.entity.autres.Artisan;
 
 @Entity
 @Table(name="type_artisan")
@@ -27,7 +25,7 @@ public class TypeArtisan implements Serializable{
 	private String libelleTypeArtisan;
 	
 	@OneToMany(mappedBy="typeArtisan")
-	private List<Artisan> listeTypeArtisan;
+	private List<Artisan> listeArtisan;
 	
 	public Integer getIdTypeArtisan() {
 		return idTypeArtisan;
@@ -46,23 +44,21 @@ public class TypeArtisan implements Serializable{
 	}
 
 	public List<Artisan> getListeTypeArtisan() {
-		return listeTypeArtisan;
+		return listeArtisan;
 	}
 
-	public void setListeTypeArtisan(List<Artisan> listeTypeArtisan) {
-		this.listeTypeArtisan = listeTypeArtisan;
+	public void setListeTypeArtisan(List<Artisan> listeArtisan) {
+		this.listeArtisan = listeArtisan;
 	}
 
 	public TypeArtisan() {
 		super();
 	}
 
-	public TypeArtisan(Integer idTypeArtisan, String libelleTypeArtisan,
-			List<Artisan> listeTypeArtisan) {
+	public TypeArtisan(Integer idTypeArtisan, String libelleTypeArtisan) {
 		super();
 		this.idTypeArtisan = idTypeArtisan;
 		this.libelleTypeArtisan = libelleTypeArtisan;
-		this.listeTypeArtisan = listeTypeArtisan;
 	}
 	
 	

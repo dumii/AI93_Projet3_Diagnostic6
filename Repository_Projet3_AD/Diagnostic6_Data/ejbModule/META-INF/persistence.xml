@@ -27,7 +27,7 @@
 		<class>fr.afcepf.ai93.diag6.entity.travaux.EtatAvancementTravaux</class>
 		<class>fr.afcepf.ai93.diag6.entity.travaux.HistoriqueIntervention</class>
 		<class>fr.afcepf.ai93.diag6.entity.travaux.Intervention</class>
-		<class>fr.afcepf.ai93.diag6.entity.travaux.TypeArtisan</class>
+		<class>fr.afcepf.ai93.diag6.entity.autres.TypeArtisan</class>
 		<class>fr.afcepf.ai93.diag6.entity.travaux.TypeIntervention</class>
 		<class>fr.afcepf.ai93.diag6.entity.autres.Artisan</class>
 		<class>fr.afcepf.ai93.diag6.entity.autres.Expert</class>

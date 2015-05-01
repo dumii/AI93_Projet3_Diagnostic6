@@ -39,9 +39,32 @@ public class DaoInterventionImpl implements IDaoIntervention {
 
 	@Override
 	public Intervention recupereIntervention(int idIntervention) {
-		Query query = em.createQuery("SELECT e from Intervention e WHERE e.id = :pid");
+		Query query = em.createQuery("SELECT e from Intervention e WHERE e.idIntervention = :pid");
 		query.setParameter("pid", idIntervention);
 		Intervention intervention = (Intervention) query.getSingleResult();
 		return intervention;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see fr.afcepf.ai93.diag6.api.data.travaux.IDaoIntervention#rechercherInterventionSurAnomalie(int)
+	 * Recherche des interventions pour une anomalie
+	 * ==> Règle de gestion
+	 */
+	
+	@Override
+	public boolean rechercherInterventionSurAnomalie(int idAnomalie) {
+		Query query = em.createQuery("SELECT e from Intervention e WHERE e.id = :pid");
+		query.setParameter("pid", idAnomalie);
+		List<Intervention> liste = query.getResultList();
+		
+		if (liste.size() > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }
