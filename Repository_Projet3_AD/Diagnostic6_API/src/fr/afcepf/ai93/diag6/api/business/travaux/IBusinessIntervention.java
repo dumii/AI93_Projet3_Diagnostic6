@@ -5,13 +5,10 @@ import java.util.List;
 
 import fr.afcepf.ai93.diag6.entity.travaux.HistoriqueIntervention;
 import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
+import fr.afcepf.ai93.diag6.entity.travaux.TypeIntervention;
 
 public interface IBusinessIntervention {
 
-	public boolean modifierInterventionType(int idType);
-	
-	public boolean majInterventionEtatAvancement(int idAvancement);
-	
 	public List<HistoriqueIntervention> recupereToutHistoriqueIntervention();
 	
 	public List<Intervention> recupereToutesIntervention();
@@ -22,6 +19,4 @@ public interface IBusinessIntervention {
 
     public Intervention recupereIntervention(int idIntervention);
 
-    public List<Intervention> rechercheInterventions(String nomIntervention);
-	
 }
