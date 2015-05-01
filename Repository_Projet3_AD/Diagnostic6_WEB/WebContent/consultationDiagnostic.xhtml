@@ -123,7 +123,7 @@
 
 	<div id="consultDiag">
 		<div class="mini-barreEtat">
-			ici titre + boutons
+			#{o.intituleDiagnostic}
 			<div id="mini-barreEtat-boutons">
 				<a href=""><img class="boutons-mini-barreEtat"
 					id="boutonModifier" src="images/consultationDiagnostic/DiagnosticBoutonModifier.26.26.png" /></a>
@@ -150,43 +150,49 @@
 				<table>
 					<tr>
 						<th class="ErpGeneral" width="180px" style="text-align: right">ERPconcerné :</th>
-						<th id="ErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
+						<th id="ErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.nomErp}</th>
 						<th class="ErpGeneral" width="180px" style="text-align: right">Expert :</th>
-						<th id="expertDiag" class="ErpGeneral" width="180px" style="text-align: right">#Nom+Prénom#</th>
+						<th id="expertDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.prenomExpert}#{o.nomExpert}</th>
 					</tr>
 					<tr>
 						<th class="ErpGeneral" width="180px" style="text-align: right">Catégorie :</th>
-						<th id="CategErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
+						<th id="CategErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.denominationCategorieErp}</th>
 						<th class="ErpGeneral" width="180px" style="text-align: right">Coordonées :</th>
-						<th id="telExpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Téléphone#</th>
+						<th id="telExpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.telExpert}</th>
 					</tr>
 					<tr>
 						<th class="ErpGeneral" width="180px" style="text-align: right">Fonction :</th>
-						<th id="FoncErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
+						<th id="FoncErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.nomDiagnostiqueur}</th>
 						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
-						<th id="emailExpErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#email#</th>
+						<th id="emailExpErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.mailExpert}</th>
 					</tr>
 					<tr>
-						<th class="ErpGeneral" width="180px" style="text-align: right">Date de Diagnostic :</th>
-						<th id="DateErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
+						<th class="ErpGeneral" width="180px" style="text-align: right">Date de Réalisation du Diagnostic :</th>
+						<th id="DateErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.dateRealisationDiagnostic}</th>
 						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
-						<th id="adrExpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Adresse#</th>
+						<th id="adrExpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.numVoieExpert}#{o.nomVoieExpert}</th>
+					</tr>
+										<tr>
+						<th class="ErpGeneral" width="180px" style="text-align: right">Date d'enregistrement du Diagnostic :</th>
+						<th id="DateErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.dateSaisieDiagnostic}</th>
+						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
+						<th id="cpVillExpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.codePostal}#{o.ville}</th>
 					</tr>
 					<tr>
 						<th class="ErpGeneral" width="180px" style="text-align: right">Adresse :</th>
-						<th id="AdressErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
+						<th id="AdressErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.numVoieErp}#{o.numVoieErp}</th>
 						<th class="accordErp" width="180px" style="text-align: right"></th>
-						<th id="villCPExpDiag" class="ErpGeneral" width="180px" style="text-align: right">#ville+CodePostal#</th>
-					</tr>
-					<tr>
-						<th class="ErpGeneral" width="180px" style="text-align: right">Ville :</th>
-						<th id="VilleErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
-						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
-						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
+						<th class="accordErp" width="180px" style="text-align: right"></th>
 					</tr>
 					<tr>
 						<th class="ErpGeneral" width="180px" style="text-align: right">Code Postal :</th>
-						<th id="CPErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
+						<th id="CPErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.codePostal}</th>
+						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
+						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
+					</tr>
+					<tr>
+						<th class="ErpGeneral" width="180px" style="text-align: right">Ville :</th>
+						<th id="VilleErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.ville}</th>
 						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
 						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
 					</tr>
@@ -198,57 +204,69 @@
 		<button id="buttShowEDD">Informations Détaillées</button>
 	
 		<div id="ErpDiagDetaille">
+			<div id="nbBatimentErp" >
+				<span>Nombres de Batiments constituans l'ERP :  </span><span id="nbBatimentErpRecherche">#Résultat de Recherche#</span>
+			</div>
 			<div class="tableErpDetaille">
 				<table>
 					<tr>
-						<th class="ErpGeneral" width="180px" style="text-align: right">ERPconcerné :</th>
-						<th id="ErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
-						<th class="ErpGeneral" width="180px" style="text-align: right">Expert :</th>
-						<th id="expertDiag" class="ErpGeneral" width="180px" style="text-align: right">#Nom+Prénom#</th>
+						<th class="ErpDetaille" width="180px" style="text-align: right">Intitulé :</th>
+						<ui:repeat var="o" value="#{order.orderList}" varStatus="status">
+						<th id="batIntileErp" class="ErpDetaille" width="160px" style="text-align: right">#{o.intituleBatiment}</th>
+						</ui:repeat>
 					</tr>
 					<tr>
-						<th class="ErpGeneral" width="180px" style="text-align: right">Catégorie :</th>
-						<th id="CategErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
-						<th class="ErpGeneral" width="180px" style="text-align: right">Coordonées :</th>
-						<th id="telExpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Téléphone#</th>
+						<th class="ErpDetaille" width="180px" style="text-align: right">Nombre d'étages :</th>
+						<ui:repeat var="o" value="#{order.orderList}" varStatus="status">
+						<th id="nbEtagesBatErp" class="ErpDetaille" width="160px" style="text-align: right">#Résultat de Recherche#</th>
+						</ui:repeat>
 					</tr>
 					<tr>
-						<th class="ErpGeneral" width="180px" style="text-align: right">Fonction :</th>
-						<th id="FoncErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
-						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
-						<th id="emailExpErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#email#</th>
+						<th class="ErpDetaille" width="180px" style="text-align: right">Nombre de pièces :</th>
+						<ui:repeat var="o" value="#{order.orderList}" varStatus="status">
+						<th id="nbPiecesBatErp" class="ErpDetaille" width="160px" style="text-align: right">#Résultat de Recherche#</th>
+						</ui:repeat>
 					</tr>
 					<tr>
-						<th class="ErpGeneral" width="180px" style="text-align: right">Date de Diagnostic :</th>
-						<th id="DateErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
-						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
-						<th id="adrExpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Adresse#</th>
+						<th class="ErpDetaille" width="180px" style="text-align: right">Nombre d'accès :</th>
+						<ui:repeat var="o" value="#{order.orderList}" varStatus="status">
+						<th id="nbAccesBatErp" class="ErpDetaille" width="160px" style="text-align: right">#Résultat de Recherche#</th>
+						</ui:repeat>
 					</tr>
 					<tr>
-						<th class="ErpGeneral" width="180px" style="text-align: right">Adresse :</th>
-						<th id="AdressErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
-						<th class="accordErp" width="180px" style="text-align: right"></th>
-						<th id="villCPExpDiag" class="ErpGeneral" width="180px" style="text-align: right">#ville+CodePostal#</th>
+						<th class="ErpDetaille" width="180px" style="text-align: right">Nombre d'escaliers :</th>
+						<ui:repeat var="o" value="#{order.orderList}" varStatus="status">
+						<th id="nbEscaliersBatErp" class="ErpDetaille" width="160px" style="text-align: right">#Résultat de Recherche#</th>
+						</ui:repeat>
 					</tr>
 					<tr>
-						<th class="ErpGeneral" width="180px" style="text-align: right">Ville :</th>
-						<th id="VilleErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
-						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
-						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
-					</tr>
-					<tr>
-						<th class="ErpGeneral" width="180px" style="text-align: right">Code Postal :</th>
-						<th id="CPErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
-						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
-						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
+						<th class="ErpDetaille" width="180px" style="text-align: right">Nombre d'ascenseurs :</th>
+						<ui:repeat var="o" value="#{order.orderList}" varStatus="status">
+						<th id="nbAscenseursBatErp" class="ErpDetaille" width="160px" style="text-align: right">#Résultat de Recherche#</th>
+						</ui:repeat>
 					</tr>
 				</table>
 			</div>
+			<ui:repeat var="o" value="#{order.orderList}" varStatus="status">
+			<div id="foncPiecesErp" >
+				<span>	Fonctions des pièces dont dispose le batiment :  </span><span id="batIntileErp">#{o.intituleBatiment}</span>
+				<table id="tableFoncPiecesErp">
+					<ui:repeat var="o" value="#{order.orderList}" varStatus="status">
+						<tr>
+							<th id="nbPiecesBatErp" class="ErpDetaille" width="20px" style="text-align: right">#Résultat de Recherche#</th>
+							<th id="foncPiecesBatErp" class="ErpDetaille" width="160px" style="text-align: right">#{o.libelleFonctionPiece}</th>
+						</tr>
+					</ui:repeat>
+				</table>
+			</div>
+			</ui:repeat>
 		</div>
 	
-		<div>
+		<div id="diagAnomalieSection">
 			<span>ici les anomalies + les diernières infos du diagnostic</span>
+			<div id="diagnosticFiche"></div>
 		</div>
+		
 	</div>
 
 	<script>
