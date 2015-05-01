@@ -27,14 +27,14 @@ public class DaoInterventionImpl implements IDaoIntervention {
 
 	@Override
 	public void ajouterIntervention(Intervention intervention) {
-		// TODO Auto-generated method stub
-		
+		em.persist(intervention);
 	}
 
 	@Override
 	public boolean modifierIntervention(Intervention intervention) {
-		// TODO Auto-generated method stub
-		return false;
+		// Merges changes to the database
+		em.merge(intervention);
+		return true;
 	}
 
 	@Override

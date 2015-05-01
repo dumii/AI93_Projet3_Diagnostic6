@@ -21,19 +21,6 @@ public class BusinessInterventionImpl implements IBusinessIntervention {
 	private IDaoIntervention proxyIntervention;
 	
 	@Override
-	public boolean modifierInterventionType(TypeIntervention type) {
-		//TypeIntervention type = proxyTypeIntervention.
-		//return proxyIntervention.modifierIntervention();
-		return false;
-	}
-
-	@Override
-	public boolean majInterventionEtatAvancement(int idAvancement) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public List<HistoriqueIntervention> recupereToutHistoriqueIntervention() {
 		// TODO Auto-generated method stub
 		return null;
@@ -46,14 +33,12 @@ public class BusinessInterventionImpl implements IBusinessIntervention {
 
 	@Override
 	public void ajouterIntervention(Intervention intervention) {
-		// TODO Auto-generated method stub
-		
+		proxyIntervention.ajouterIntervention(intervention);
 	}
 
 	@Override
 	public boolean modifierIntervention(Intervention intervention) {
-		// TODO Auto-generated method stub
-		return false;
+		return proxyIntervention.modifierIntervention(intervention);
 	}
 
 	@Override

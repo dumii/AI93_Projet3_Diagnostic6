@@ -9,10 +9,6 @@ import fr.afcepf.ai93.diag6.entity.travaux.TypeIntervention;
 
 public interface IBusinessIntervention {
 
-	public boolean modifierInterventionType(TypeIntervention type);
-	
-	public boolean majInterventionEtatAvancement(int idAvancement);
-	
 	public List<HistoriqueIntervention> recupereToutHistoriqueIntervention();
 	
 	public List<Intervention> recupereToutesIntervention();
