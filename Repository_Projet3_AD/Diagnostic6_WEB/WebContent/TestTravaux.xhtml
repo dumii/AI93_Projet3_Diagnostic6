@@ -37,6 +37,16 @@
 						</rich:column>			
 					</rich:dataTable>
 		
+			<rich:tree toggleType="ajax" var="item">
+            <rich:treeModelRecursiveAdaptor roots="#{mbTestTravaux.travaux}" nodes="#{item.idIntervention}">
+                <rich:treeNode>
+                    #{item.etatAvancementTravaux.intituleEtatAvancement}
+                </rich:treeNode>
+                <rich:treeModelAdaptor nodes="#{item.etatAvancementTravaux}">
+                    <rich:treeNode>#{item}</rich:treeNode>
+                </rich:treeModelAdaptor>
+            </rich:treeModelRecursiveAdaptor>
+        </rich:tree>
 		</h:form>
 		</f:view>
 </body> 
