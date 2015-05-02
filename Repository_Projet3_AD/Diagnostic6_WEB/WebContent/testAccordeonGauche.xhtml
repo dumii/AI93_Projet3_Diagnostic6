@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"> 
+
+<h:head></h:head> 
+<body> 
+    <h:form>
+    	<p>test test</p>
+        <rich:tree toggleType="ajax" var="diag">
+            <rich:treeModelRecursiveAdaptor roots="#{mbRechercheDiagnostic.listeDiag}" nodes="#{diag}">
+                <rich:treeNode>#{diag.dateRealisationDiagnostic}</rich:treeNode>
+                <rich:treeModelAdaptor nodes="#{mbRechercheDiagnostic.listeDiag}">
+                	<rich:treeNode>#{diag.intituleDiagnostic}</rich:treeNode>
+                </rich:treeModelAdaptor>               
+            </rich:treeModelRecursiveAdaptor>
+        </rich:tree>
+    </h:form>
+</body> 
+</ui:composition>
