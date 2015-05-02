@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.criteria.CriteriaBuilder.In;
 
@@ -71,8 +72,8 @@ public class Anomalie implements Serializable{
 	@OneToMany(mappedBy="anomalie")
 	private List<HistoriqueAnomalie> listeHistoriqueAnomalie;
 	
-	@OneToMany(mappedBy="anomalie")
-	private List<Intervention> listeInterventions;
+	@OneToOne(mappedBy="anomalie")
+	private Intervention listeInterventions;
 	
 
 	public Integer getIdAnomalie() {

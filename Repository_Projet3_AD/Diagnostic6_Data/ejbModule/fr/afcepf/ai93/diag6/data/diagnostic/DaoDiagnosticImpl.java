@@ -33,7 +33,6 @@ public boolean recupereSiIntervEnCoursParDiag(int idDiag) {
 	requete.setParameter("id", idDiag);
 	List<Anomalie> listeAnomaliesAvecIntervention = requete.getResultList();
 	for (Anomalie a : listeAnomaliesAvecIntervention)
-		System.out.println(a.getIdAnomalie());
 	
 	if (listeAnomaliesAvecIntervention.size() > 0)
 	{

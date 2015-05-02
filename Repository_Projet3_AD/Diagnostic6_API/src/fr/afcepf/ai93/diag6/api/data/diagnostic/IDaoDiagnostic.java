@@ -22,6 +22,5 @@ public interface IDaoDiagnostic {
     public List<Diagnostic> rechercheDiagnostics(String nomDiagnostic);
 
     public List<Diagnostic> rechercheDiagnosticsErp(String nomERP);
-
-
+    
 }

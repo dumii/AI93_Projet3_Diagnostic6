@@ -13,7 +13,7 @@
         <rich:tree toggleType="ajax" var="diag">
             <rich:treeModelRecursiveAdaptor roots="#{mbRechercheDiagnostic.listeDiagnosticsIntervEnCours}" nodes="#{diag}">
                 <rich:treeNode>#{diag.dateRealisationDiagnostic}</rich:treeNode>
-                <rich:treeModelAdaptor nodes="#{mbRechercheDiagnostic.listeDiagnosticsIntervEnCours}">
+                <rich:treeModelAdaptor nodes = "#{mbRechercheDiagnostic.listeDiagnosticsIntervEnCours}" >
                 	<rich:treeNode>#{diag.intituleDiagnostic}</rich:treeNode>
                 </rich:treeModelAdaptor>               
             </rich:treeModelRecursiveAdaptor>
