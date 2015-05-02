@@ -1,6 +1,7 @@
 package fr.afcepf.ai93.diag6.entity.autres;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,9 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import fr.afcepf.ai93.diag6.entity.travaux.TypeArtisan;
+import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
 
 @Entity
 @Table(name="artisan")
@@ -47,6 +49,9 @@ public class Artisan implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="id_localisation")
 	private Localisation localisation;
+	
+	@OneToMany(mappedBy="artisan")
+	private List<Intervention> listeInterventions;
 
 	
 	public Integer getIdArtisan() {
@@ -121,6 +126,14 @@ public class Artisan implements Serializable {
 		this.localisation = localisation;
 	}
 
+	public List<Intervention> getListeInterventions() {
+		return listeInterventions;
+	}
+
+	public void setListeInterventions(List<Intervention> listeInterventions) {
+		this.listeInterventions = listeInterventions;
+	}
+
 	public Artisan() {
 		super();
 	}
@@ -139,8 +152,5 @@ public class Artisan implements Serializable {
 		this.mailArtisan = mailArtisan;
 		this.typeArtisan = typeArtisan;
 		this.localisation = localisation;
-	}
-	
-	
-	
+	}	
 }

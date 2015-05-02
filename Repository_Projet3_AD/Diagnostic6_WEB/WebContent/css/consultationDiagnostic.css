@@ -1,0 +1,83 @@
+/*************************************/
+/* Bordure à supprimer  */
+/*************************************/
+
+
+
+/*************************************/
+/* Mini Barre d'état Consultation Diagnostic */
+/*************************************/
+
+#consultDiag
+{
+	margin-top : 7%;
+	margin-left: 18%;
+	width: 56%;
+	position: fixed;
+}
+
+.mini-barreEtat
+{
+	background-image:linear-gradient(#f7f7f7, #f1f1f1);
+	border:#cccccc solid 1px;
+	height: 27px;
+}
+
+#mini-barreEtat-boutons
+{
+	float:right;
+}
+
+#notificationRouge
+{
+	display: none;
+}
+
+#favoriteJaune
+{
+	display: none;
+}
+
+/*************************************/
+/* Erp Diagnostic Infos Générales */
+/*************************************/
+#ErpDiagGeneral
+{
+	background-image: #F7F7F7;
+	background-color: #F7F7F7;
+	margin-left: 1%;
+	width: 54%;
+	position: fixed;
+}
+
+#ErpDiagGeneral > #ErpDiagTitre
+{
+	text-align: left;
+	color: CornflowerBlue;
+	font-size: medium;
+	text-decoration: underline;
+}
+
+#ErpDiagGeneral > .tableErpDiagGeneral
+{
+	font-size: small;
+}
+
+/*************************************/
+/* Erp Diagnostic Infos Détaillées */
+/*************************************/
+
+#buttShowEDD
+{
+	margin-top: 22%;
+	
+}
+
+#ErpDiagDetaille
+{
+	margin-left: 2%;
+	margin-right: 2%;
+	display: none;
+    background: #F7F7F7;
+    font-size: small;
+}

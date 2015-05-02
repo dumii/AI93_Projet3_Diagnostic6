@@ -22,6 +22,8 @@ import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
 @Table(name="intervention")
 public class Intervention implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_intervention")
@@ -161,23 +163,18 @@ public class Intervention implements Serializable {
 
 
 	public Intervention() {
-		super();
 	}
 
 
 	public Intervention(Integer idIntervention, Date dateDebutIntervention,
 			Date dateFinIntervention, double coutIntervention,
-			List<HistoriqueIntervention> listeHistoriqueIntervention,
-			List<Favoris> listeFavorisIntervention, Anomalie anomalie,
+			Anomalie anomalie,
 			EtatAvancementTravaux etatAvancementTravaux,
 			TypeIntervention typeIntervention, Artisan artisan) {
-		super();
 		this.idIntervention = idIntervention;
 		this.dateDebutIntervention = dateDebutIntervention;
 		this.dateFinIntervention = dateFinIntervention;
 		this.coutIntervention = coutIntervention;
-		this.listeHistoriqueIntervention = listeHistoriqueIntervention;
-		this.listeFavorisIntervention = listeFavorisIntervention;
 		this.anomalie = anomalie;
 		this.etatAvancementTravaux = etatAvancementTravaux;
 		this.typeIntervention = typeIntervention;

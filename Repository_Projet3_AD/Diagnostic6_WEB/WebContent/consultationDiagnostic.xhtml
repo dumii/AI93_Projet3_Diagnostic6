@@ -1,0 +1,275 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+<h:head>
+	<title>Diagnostic 6</title>
+
+	<link href="css/style.css" rel="stylesheet" type="text/css" />
+	<link href="css/consultationDiagnostic.css" rel="stylesheet"
+		type="text/css" />
+	<link rel="stylesheet"
+		href="//code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css" />
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+</h:head>
+<body>
+	<div id="enTete">
+
+		<a href=""><img id="logoAccueil" src="images/Logo2.png" /></a>
+
+		<h:form id="rechercheBandeau" action="">
+			<input type="text" value="Entrez votre recherche ici ..." />
+			<input type="image" src="images/Loupe.png" />
+			<div id="resultatRecherche">blabla</div>
+		</h:form>
+
+		<a href=""><img class="logoMenu" id="logoErp"
+			src="images/ERPIconeBleue2.png" /></a> <a href=""><img
+			class="logoMenu" id="logoDiag" src="images/DiagnosticIconeBleue.png" /></a>
+
+		<a href=""><img class="logoMenu" id="logoTrav"
+			src="images/BuildingConstruction_icon.png" /></a> <a href=""><img
+			class="logoMenu" id="logoTabBord"
+			src="images/TableauBordIconeOrange.png" /></a>
+
+	</div>
+
+	<div id="bandeauGauche">
+		<div>
+			<button id="boutonAjouter">
+				Ajouter
+				<ui:insert name="ajout" />
+			</button>
+		</div>
+
+		<div id="radio">
+			<input type="radio" id="radio1" name="radio" /><label for="radio1">Date</label>
+			<input type="radio" id="radio2" name="radio" /><label for="radio2"><ui:insert
+					name="radiofiltre2" /></label> <input type="radio" id="radio3"
+				name="radio" /><label for="radio3"><ui:insert
+					name="radiofiltre3" /></label>
+		</div>
+
+		<div id="accordion">
+			<h3>
+				<ui:insert name="accordeon1" />
+			</h3>
+			<div>
+				<p>
+					<ul>
+						<li><ui:insert name="arborescence1" /></li>
+					</ul>
+				</p>
+			</div>
+
+			<h3>
+				<ui:insert name="accordeon2" />
+			</h3>
+			<div>
+				<p>
+					<ul>
+						<li><ui:insert name="arborescence2" /></li>
+					</ul>
+				</p>
+			</div>
+
+			<h3>
+				<ui:insert name="accordeon3" />
+			</h3>
+			<div>
+				<p>
+					<ul>
+						<li><ui:insert name="arborescence3" /></li>
+					</ul>
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<div id="bandeauDroite">
+		<fieldset id="connection">
+			<legend>
+				Bonjour
+				<ui:insert name="nomUtilisateur" />
+			</legend>
+			<ui:insert name="roleUtilisateur" />
+		</fieldset>
+
+		<fieldset id="favoris">
+			<legend>Mes favoris</legend>
+		</fieldset>
+
+		<fieldset id="notification">
+			<legend>Dernières actualités</legend>
+
+			<article> <header> <ui:insert
+				name="motifNotification" /></header> <time> <ui:insert
+				name="dateNotification" /></time> <section> <ui:insert
+				name="notification" /></section> </article>
+
+			<article> <header> <ui:insert
+				name="motifNotification" /></header> <time> <ui:insert
+				name="dateNotification" /></time> <section> <ui:insert
+				name="notification" /></section> </article>
+
+		</fieldset>
+	</div>
+
+	<div id="consultDiag">
+		<div class="mini-barreEtat">
+			ici titre + boutons
+			<div id="mini-barreEtat-boutons">
+				<a href=""><img class="boutons-mini-barreEtat"
+					id="boutonModifier" src="images/consultationDiagnostic/DiagnosticBoutonModifier.26.26.png" /></a>
+					
+				<a href=""><img class="boutons-mini-barreEtat"
+					id="notificationGrisee" src="images/consultationDiagnostic/NotifIconeGrise.25.26.png" /></a>
+				<a href=""><img class="boutons-mini-barreEtat"
+					id="notificationRouge" src="images/consultationDiagnostic/NotifIconeRouge.25.26.png" /></a>
+					
+				<a href=""><img class="boutons-mini-barreEtat"
+					id="favoritesGrisee" src="images/consultationDiagnostic/NoFavoritesIcon.26.26.png" /></a>
+				<a href=""><img class="boutons-mini-barreEtat"
+					id="favoriteJaune" src="images/consultationDiagnostic/FavoriteIcon.26.26.png" /></a>
+			</div>
+		</div>
+
+		<div id="ErpDiagGeneral">
+			<div id="ErpDiagTitre">
+				<h3>
+					<span>Informations Générales</span>
+				</h3>
+			</div>
+			<div class="tableErpDiagGeneral">
+				<table>
+					<tr>
+						<th class="ErpGeneral" width="180px" style="text-align: right">ERPconcerné :</th>
+						<th id="ErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
+						<th class="ErpGeneral" width="180px" style="text-align: right">Expert :</th>
+						<th id="expertDiag" class="ErpGeneral" width="180px" style="text-align: right">#Nom+Prénom#</th>
+					</tr>
+					<tr>
+						<th class="ErpGeneral" width="180px" style="text-align: right">Catégorie :</th>
+						<th id="CategErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
+						<th class="ErpGeneral" width="180px" style="text-align: right">Coordonées :</th>
+						<th id="telExpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Téléphone#</th>
+					</tr>
+					<tr>
+						<th class="ErpGeneral" width="180px" style="text-align: right">Fonction :</th>
+						<th id="FoncErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
+						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
+						<th id="emailExpErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#email#</th>
+					</tr>
+					<tr>
+						<th class="ErpGeneral" width="180px" style="text-align: right">Date de Diagnostic :</th>
+						<th id="DateErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
+						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
+						<th id="adrExpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Adresse#</th>
+					</tr>
+					<tr>
+						<th class="ErpGeneral" width="180px" style="text-align: right">Adresse :</th>
+						<th id="AdressErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
+						<th class="accordErp" width="180px" style="text-align: right"></th>
+						<th id="villCPExpDiag" class="ErpGeneral" width="180px" style="text-align: right">#ville+CodePostal#</th>
+					</tr>
+					<tr>
+						<th class="ErpGeneral" width="180px" style="text-align: right">Ville :</th>
+						<th id="VilleErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
+						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
+						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
+					</tr>
+					<tr>
+						<th class="ErpGeneral" width="180px" style="text-align: right">Code Postal :</th>
+						<th id="CPErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
+						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
+						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
+					</tr>
+				</table>
+			</div>
+		</div>
+	
+	
+		<button id="buttShowEDD">Informations Détaillées</button>
+	
+		<div id="ErpDiagDetaille">
+			<div class="tableErpDetaille">
+				<table>
+					<tr>
+						<th class="ErpGeneral" width="180px" style="text-align: right">ERPconcerné :</th>
+						<th id="ErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
+						<th class="ErpGeneral" width="180px" style="text-align: right">Expert :</th>
+						<th id="expertDiag" class="ErpGeneral" width="180px" style="text-align: right">#Nom+Prénom#</th>
+					</tr>
+					<tr>
+						<th class="ErpGeneral" width="180px" style="text-align: right">Catégorie :</th>
+						<th id="CategErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
+						<th class="ErpGeneral" width="180px" style="text-align: right">Coordonées :</th>
+						<th id="telExpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Téléphone#</th>
+					</tr>
+					<tr>
+						<th class="ErpGeneral" width="180px" style="text-align: right">Fonction :</th>
+						<th id="FoncErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
+						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
+						<th id="emailExpErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#email#</th>
+					</tr>
+					<tr>
+						<th class="ErpGeneral" width="180px" style="text-align: right">Date de Diagnostic :</th>
+						<th id="DateErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
+						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
+						<th id="adrExpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Adresse#</th>
+					</tr>
+					<tr>
+						<th class="ErpGeneral" width="180px" style="text-align: right">Adresse :</th>
+						<th id="AdressErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
+						<th class="accordErp" width="180px" style="text-align: right"></th>
+						<th id="villCPExpDiag" class="ErpGeneral" width="180px" style="text-align: right">#ville+CodePostal#</th>
+					</tr>
+					<tr>
+						<th class="ErpGeneral" width="180px" style="text-align: right">Ville :</th>
+						<th id="VilleErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
+						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
+						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
+					</tr>
+					<tr>
+						<th class="ErpGeneral" width="180px" style="text-align: right">Code Postal :</th>
+						<th id="CPErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#Résultat de Recherche#</th>
+						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
+						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
+					</tr>
+				</table>
+			</div>
+		</div>
+	
+		<div>
+			<span>ici les anomalies + les diernières infos du diagnostic</span>
+		</div>
+	</div>
+
+	<script>
+  $( "#radio" ).buttonset();
+  $( "#accordion" ).accordion();
+  $("button").button();
+
+  $( "#buttShowEDD" ).click(function() {
+	  $( "#ErpDiagDetaille" ).toggle( "blind", 500 );
+	});
+	
+ /* 
+ $( "#notificationGrisee" ).click(function() {
+	  $( "#notificationGrisee" ).hide;
+	  $( "#notificationRouge" ).show;
+	});
+  $( "#favoritesGrisee" ).click(function() {
+	  $( "#favoritesGrisee" ).hide;
+	  $( "#favoriteJaune" ).show;
+	});
+	*/
+</script>
+</body>
+</html>
