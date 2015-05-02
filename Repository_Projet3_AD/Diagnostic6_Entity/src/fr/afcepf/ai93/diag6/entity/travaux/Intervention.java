@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import fr.afcepf.ai93.diag6.entity.autres.Artisan;
@@ -44,7 +45,7 @@ public class Intervention implements Serializable {
 	@OneToMany(mappedBy="intervention")
 	private List<Favoris> listeFavorisIntervention;
 	
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name="id_anomalie")
 	private Anomalie anomalie;
 	
