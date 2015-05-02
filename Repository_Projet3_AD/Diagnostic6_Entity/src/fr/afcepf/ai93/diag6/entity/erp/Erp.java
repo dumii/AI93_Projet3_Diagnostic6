@@ -33,7 +33,7 @@ public class Erp implements Serializable {
 	@Column(name="date_enregistrement_erp")
 	private Date dateEnregistrement;
 	
-	@Column(name="date_suppression_erp")
+	@Column(name="date_de_suppression_erp")
 	private Date dateSuppression;
 	
 	@Column(name="nom_voie_erp")
@@ -45,7 +45,7 @@ public class Erp implements Serializable {
 	@Column(name="complement_adresse_erp")
 	private String complementAdresseErp;
 	
-	@Column(name="date_acquisition")
+	@Column(name="date_acquistion")
 	private Date dateAcquisition;
 	
 	@Column(name="date_separation")
