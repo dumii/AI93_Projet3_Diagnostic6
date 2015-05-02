@@ -28,7 +28,7 @@ public class Voirie implements Serializable{
 	@Column(name="designation_voirie")
 	private String designationVoirie;
 	
-	@Column(name="intitule_voirie")
+	@Column(name="emplacement_voirie")
 	private String intituleVoirie;
 	
 	@ManyToOne
