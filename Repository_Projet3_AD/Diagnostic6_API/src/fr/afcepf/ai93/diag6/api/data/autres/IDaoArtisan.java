@@ -12,5 +12,5 @@ public interface IDaoArtisan {
 	
 	public boolean supprimerArtisan(Artisan artisan);
 	
-	
+	public List<Artisan> recupererArtisanParTypeIntervention(int idTypeIntervention);
 }

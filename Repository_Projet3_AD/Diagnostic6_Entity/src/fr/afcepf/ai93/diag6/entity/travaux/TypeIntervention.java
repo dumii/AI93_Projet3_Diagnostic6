@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import fr.afcepf.ai93.diag6.entity.autres.TypeArtisan;
+
 @Entity
 @Table(name="type_intervention")
 public class TypeIntervention implements Serializable {
@@ -26,6 +28,9 @@ public class TypeIntervention implements Serializable {
 	
 	@OneToMany(mappedBy="typeIntervention")
 	private List<Intervention> listeInterventionTypeIntervention;
+	
+	@OneToMany(mappedBy="typeIntervention")
+	private List<TypeArtisan> listeArtisans;
 
 	
 	public Integer getIdTypeIntervention() {
@@ -60,6 +65,14 @@ public class TypeIntervention implements Serializable {
 			String typeIntervention) {
 		this.idTypeIntervention = idTypeIntervention;
 		this.typeIntervention = typeIntervention;
+	}
+
+	public List<TypeArtisan> getListeArtisans() {
+		return listeArtisans;
+	}
+
+	public void setListeArtisans(List<TypeArtisan> listeArtisans) {
+		this.listeArtisans = listeArtisans;
 	}
 	
 	

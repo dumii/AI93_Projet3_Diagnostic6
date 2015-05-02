@@ -24,10 +24,7 @@ public interface IBusinessIntervention {
     //Type d'intervention
     public List<TypeIntervention> recupererTousTypesIntervention();
     
-    //Etat d'avancement des travaux
-	
+    //Etat d'avancement des travaux	
 	public List<EtatAvancementTravaux> recupererTousEtats();
-	
-	//Historique d'intervention à faire
 
 }

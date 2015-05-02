@@ -42,9 +42,8 @@ public class Artisan implements Serializable {
 	@Column(name="mail_artisan")
 	private String mailArtisan;
 	
-	@ManyToOne
-	@JoinColumn(name="id_type_artisan")
-	private TypeArtisan typeArtisan;
+	@OneToMany(mappedBy="artisan")
+	private List<TypeArtisan> listeTypeInterventions;
 	
 	@ManyToOne
 	@JoinColumn(name="id_localisation")
@@ -110,14 +109,6 @@ public class Artisan implements Serializable {
 		this.mailArtisan = mailArtisan;
 	}
 
-	public TypeArtisan getTypeArtisan() {
-		return typeArtisan;
-	}
-
-	public void setTypeArtisan(TypeArtisan typeArtisan) {
-		this.typeArtisan = typeArtisan;
-	}
-
 	public Localisation getLocalisation() {
 		return localisation;
 	}
@@ -150,7 +141,14 @@ public class Artisan implements Serializable {
 		this.nomVoieArtisan = nomVoieArtisan;
 		this.telArtisan = telArtisan;
 		this.mailArtisan = mailArtisan;
-		this.typeArtisan = typeArtisan;
 		this.localisation = localisation;
+	}
+
+	public List<TypeArtisan> getListeTypeInterventions() {
+		return listeTypeInterventions;
+	}
+
+	public void setListeTypeInterventions(List<TypeArtisan> listeTypeInterventions) {
+		this.listeTypeInterventions = listeTypeInterventions;
 	}	
 }
