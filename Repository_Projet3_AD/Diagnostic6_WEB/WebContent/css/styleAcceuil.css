@@ -1,0 +1,129 @@
+.fixEntete{
+ z-index: 9999;
+ position: fixed;
+ top: 0;
+ /* Mise en forme */
+ width: 100%; /* <-- Largeur de votre site */
+ height: 75px;
+ }
+
+
+
+/*************************/
+/* Div générale          */
+/*************************/
+
+
+
+#DivPrincipale
+{
+	border: #BDBDBD solid 1px;
+	width: 75%;
+	height: 400px;
+	float: left;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 20px;
+	border-radius: 7px;
+	
+}
+
+#statistiques
+{
+	border: #BDBDBD solid 1px;
+	height: 270px;
+	widows: 100%;
+	margin: 2px;
+	border-radius: 7px;
+	background-image:linear-gradient(#E0ECF8, #5D7A8C);
+	opacity: 0.5;
+}
+
+/************************/
+/* Bandeau recherche    */
+/************************/
+
+
+#BandeauRecherche
+{
+	
+	border: #BDBDBD solid 1px;
+	width: 19%;
+	height: auto;
+	float: left;
+	margin-top: 20px;
+	border-radius: 7px;
+	background-image:linear-gradient(#E0ECF8, #5D7A8C);
+	opacity: 0.5;
+}
+
+#divEnteteRecherche
+{
+	border: black solid 1px;
+	width: 80%;
+	margin-top: 10px;
+	text-align:center;
+	margin-left: 7%;
+	margin-right: 7%;	
+	background-image:linear-gradient(#5D7A8C, #08088A);
+	color: black;
+	font-size: 20px; 
+	opacity: 1;
+	border-radius: 7px;
+	
+}
+
+
+#champDeRecherche
+{
+	border: black solid 1px;
+	width: 80%;
+	margin-top: 10px;
+	border-radius: 7px;
+	vertical-align: middle;
+	margin-left: 7%;
+	margin-right: 7%;
+}
+
+#champsDeRecherche
+{
+	margin-top: 5px;
+	margin-left: 7%;
+	margin-right: 7%;
+}
+
+#resultatsDeRecherche
+{
+	border: black solid 1px;
+	width: 80%;
+	margin-top: 10px;
+	height : auto;
+	vertical-align: middle;
+	margin-left: 7%;
+	margin-right: 7%;
+	border-radius: 7px;
+	
+}
+
+.listBox4
+{
+	width:75%; 
+	margin-left: 7%;
+	margin-right: 7%;
+	margin-top: 1px;
+	margin-bottom: 1px;
+	border-style: solid;
+	border-color: #BDBDBD;
+}
+
+ #enteteStatistiques
+{
+	font-size: 15px;
+	font-weight: bold;
+	text-align: center;
+	border-style: solid;
+	border-color: black;
+	margin-left: 7%;
+	margin-right: 7%;
+	opacity:1;
+}

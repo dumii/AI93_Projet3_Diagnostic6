@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+<h:head>
+	<title>
+		Acceuil
+	</title>
+	
+	<link href="css/styleAcceuil.css" rel="stylesheet" type="text/css" />
+	<link href="css/style.css" rel="stylesheet" type="text/css" />
+ 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css"/>
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<script type="jqplot/jquery.jqplot.js"></script>
+
+
+	<script language="javascript" type="text/javascript" src="jqplot/excanvas.js"/>
+	<script language="javascript" type="text/javascript" src="jqplot/jquery.jqplot.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/jquery.jqplot.css" />
+	<script type="text/javascript" src="jqplot/jquery.jqplot.min.js"></script>
+	<script type="text/javascript" src="jqplot/jqplot.pieRenderer.min.js"></script>
+	<script type="text/javascript" src="jqplot/jqplot.donutRenderer.min.js"></script>
+	<script type="text/javascript" src="jqplot/jqplot.barRenderer.min.js"></script>
+	<script type="text/javascript" src="jqplot/jqplot.categoryAxisRenderer.min.js"></script>
+	<script type="text/javascript" src="jqplot/jqplot.pointLabels.min.js"></script>
+
+</h:head> 
+<body> 
+	<div id="enTete">
+	
+		<a href=""><img id="logoAccueil" src="images/Logo2.png" /></a>
+			
+		<h:form id="rechercheBandeau" action="">
+			<input type="text" value="Entrez votre recherche ici ..."/>
+			<input type="image" src="images/Loupe.png"/>
+			<div id="resultatRecherche">blabla</div>
+		</h:form>
+		
+		<a href=""><img class="logoMenu" id="logoErp" src="images/ERPIconeBleue2.png" /></a>
+		
+		<a href=""><img class="logoMenu" id="logoDiag" src="images/DiagnosticIconeBleue.png" /></a>
+		
+		<a href=""><img class="logoMenu" id="logoTrav" src="images/BuildingConstruction_icon.png" /></a>
+		
+		<a href=""><img class="logoMenu" id="logoTabBord" src="images/TableauBordIconeOrange.png" /></a>
+		
+	</div>
+	
+	
+		<div id="DivPrincipale">
+			<div id="statistiques">
+				<div>
+					<div>
+					<h:outputLabel value="Statistique du moi de mai" id="enteteStatistiques" />
+					</div>
+				</div>
+				<div>
+					<div id="chart1" style="height:250px;width:390px;float:left;">
+						
+					</div>
+					<div id="chart2" style="height:250px;width:390px;float:left; ">
+						
+					</div>
+					<div id="chart3" style="height:250px;width:390px;float:left; ">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	
+	<div id="BandeauRecherche">
+		
+		
+		<div>
+		<h:form>
+			<div id="divEnteteRecherche">
+				<h:outputText value="Recherche" />
+			</div>
+			<div >
+				<div id="champDeRecherche">
+				
+					<div id="champsDeRecherche"><h:outputLabel value="Type d'ERP:" /></div>
+					<div id="champsDeRecherche"><h:selectOneListbox value="Coucou" id="listBox2" style="width:75%"></h:selectOneListbox></div>
+					<div id="champsDeRecherche"><h:outputLabel value="Diagnostic recherché:" /></div>
+					<div id="champsDeRecherche"><h:selectOneListbox value="Coucou2" id="listBox3" style="width:75%"></h:selectOneListbox></div>
+					<div id="champsDeRecherche"><h:selectManyCheckbox value=""><f:selectItem itemValue="Coche" itemLabel="travauxEnCours" /></h:selectManyCheckbox></div>
+					
+				</div>
+				<div id="resultatsDeRecherche">
+					<h:selectManyListbox value=""  styleClass="listBox4" size="50">
+						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
+						
+						
+					</h:selectManyListbox>
+				</div>
+			
+			</div>
+		</h:form>
+		</div>
+		
+	
+</div>
+<script>
+$(function(){
+	   $(window).scroll(function () {//Au scroll dans la fenetre on déclenche la fonction
+	      if ($(this).scrollTop() > 0) { //si on a défilé de plus de 150px du haut vers le bas
+	          $('#enTete').addClass("fixEntete"); 
+	      } else {
+	      $('#enTete').removeClass("fixEntete");
+	      }
+	   });
+	 });
+
+$(document).ready(function(){
+	  var data = [
+	    ['Heavy Industry', 12],['Retail', 9], ['Light Industry', 14], 
+	    ['Out of home', 16],['Commuting', 7], ['Orientation', 9]
+	  ];
+	  var plot1 = jQuery.jqplot ('chart1', [data], 
+	    { 
+	      seriesDefaults: {
+	        // Make this a pie chart.
+	        renderer: jQuery.jqplot.PieRenderer, 
+	        rendererOptions: {
+	          // Put data labels on the pie slices.
+	          // By default, labels show the percentage of the slice.
+	          showDataLabels: true
+	        }
+	      }, 
+	      legend: { show:true, location: 'e' }
+	    }
+	  );
+	});
+$(document).ready(function(){
+	  var data = [
+	    ['Heavy Industry', 12],['Retail', 9], ['Light Industry', 14], 
+	    ['Out of home', 16],['Commuting', 7], ['Orientation', 9]
+	  ];
+	  var plot2 = jQuery.jqplot ('chart2', [data], 
+	    {
+	      seriesDefaults: {
+	        renderer: jQuery.jqplot.PieRenderer, 
+	        rendererOptions: {
+	          // Turn off filling of slices.
+	          fill: false,
+	          showDataLabels: true, 
+	          // Add a margin to seperate the slices.
+	          sliceMargin: 4, 
+	          // stroke the slices with a little thicker line.
+	          lineWidth: 5
+	        }
+	      }, 
+	      legend: { show:true, location: 'e' }
+	    }
+	  );
+	});
+
+$(document).ready(function(){
+    var s1 = [2, 6, 7, 10];
+    var s2 = [7, 5, 3, 2];
+    var ticks = ['a', 'b', 'c', 'd'];
+     
+    plot2 = $.jqplot('chart3', [s1, s2], {
+        seriesDefaults: {
+            renderer:$.jqplot.BarRenderer,
+            pointLabels: { show: true }
+        },
+        axes: {
+            xaxis: {
+                renderer: $.jqplot.CategoryAxisRenderer,
+                ticks: ticks
+            }
+        }
+    });
+ 
+    $('#chart3').bind('jqplotDataHighlight', 
+        function (ev, seriesIndex, pointIndex, data) {
+            $('#info2').html('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
+        }
+    );
+         
+    $('#chart2').bind('jqplotDataUnhighlight', 
+        function (ev) {
+            $('#info2').html('Nothing');
+        }
+    );
+});
+</script>
+</body>
+</html>

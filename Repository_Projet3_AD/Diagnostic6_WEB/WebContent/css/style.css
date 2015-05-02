@@ -4,7 +4,7 @@
 
 html
 {
-	overflow: scroll;
+	/*overflow: scroll;*/
 }
 
 body
@@ -31,7 +31,8 @@ body
  	background-position: 0px 25px, top;
   	background-repeat: no-repeat, no-repeat;
 	background-color: white;
-	position: fixed;
+	/*position: fixed;*/
+
 }
 
 #rechercheBandeau {
