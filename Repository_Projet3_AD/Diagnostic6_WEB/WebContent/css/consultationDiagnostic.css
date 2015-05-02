@@ -8,12 +8,18 @@
 /* Mini Barre d'état Consultation Diagnostic */
 /*************************************/
 
+html
+{
+	overflow: scroll;
+}
+
 #consultDiag
 {
 	margin-top : 7%;
 	margin-left: 18%;
 	width: 56%;
-	position: fixed;
+	
+	
 }
 
 .mini-barreEtat
@@ -21,6 +27,7 @@
 	background-image:linear-gradient(#f7f7f7, #f1f1f1);
 	border:#cccccc solid 1px;
 	height: 27px;
+	/*position: fixed;*/
 }
 
 #mini-barreEtat-boutons
@@ -30,12 +37,17 @@
 
 #notificationRouge
 {
-	display: none;
+	visibility: hidden;
 }
 
 #favoriteJaune
 {
-	display: none;
+	visibility: hidden;
+}
+
+#InfoErpDiagnostic
+{
+	/*position: fixed;*/
 }
 
 /*************************************/
@@ -43,11 +55,11 @@
 /*************************************/
 #ErpDiagGeneral
 {
-	background-image: #F7F7F7;
 	background-color: #F7F7F7;
 	margin-left: 1%;
-	width: 54%;
-	position: fixed;
+	width: 97%;
+	/*position: fixed;*/
+	margin-top: 29px;
 }
 
 #ErpDiagGeneral > #ErpDiagTitre
@@ -69,15 +81,86 @@
 
 #buttShowEDD
 {
-	margin-top: 22%;
-	
+	/*margin-top: 31%;*/
+	/*margin-top: 66%;*/
 }
 
 #ErpDiagDetaille
 {
+	/*margin-top: 76%;*/
 	margin-left: 2%;
 	margin-right: 2%;
 	display: none;
     background: #F7F7F7;
     font-size: small;
+   
+}
+
+#nbBatimentErp
+{
+	font-size: small; 
+	font-weight: bolder;
+}
+#foncPiecesErp
+{
+	font-size: small; 
+	font-weight: bolder;
+}
+
+/*************************************/
+/* Section Diagnostic & Anomalies */
+/*************************************/
+
+#diagAnomalieSection
+{
+    font-size: small;
+    font-weight: bolder;
+	background: #F2F7F7;
+	
+}
+
+#diagAnomalieSection > #diagnosticFiche > #ficheDiagTitre
+{
+	text-align: left;
+	color: CornflowerBlue;
+	font-size: medium;
+	text-decoration: underline;
+}
+
+.ficheDiagTitreImage
+{
+	margin-top: -2%;
+  	margin-left: 50%;
+  	position: absolute;
+}
+
+#diagAnomalieSection > #diagnosticFiche > #ficheAnomTitre
+{
+	text-align: left;
+	color: CornflowerBlue;
+	font-size: medium;
+}
+
+/*************************************/
+/* anomaliesFiche */
+/*************************************/
+
+#localisationAnomalie
+{
+	display: none;
+}
+
+#pieceAnomalie
+{
+	display: none;
+}
+
+#interEnCoursAno
+{
+	display: none;
+}
+
+#interFinitAno
+{
+	display: none;
 }
