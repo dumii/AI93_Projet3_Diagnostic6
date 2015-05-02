@@ -9,7 +9,9 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoDiagnostic;
+import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
+import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
 
 @Stateless
 @Remote(IDaoDiagnostic.class)
@@ -23,6 +25,21 @@ public List<Diagnostic> recupereToutDiagnostic() {
 	Query requete = em.createQuery("SELECT d FROM Diagnostic d"); 
 	List<Diagnostic> listeToutDiag = requete.getResultList(); 
 	return listeToutDiag;
+}
+
+@Override
+public boolean recupereSiIntervEnCoursParDiag(int idDiag) {
+	Query requete = em.createQuery("SELECT a from Anomalie a inner join fetch a.listeInterventions where a.diagnostic.idDiagnostic = :id");
+	requete.setParameter("id", idDiag);
+	List<Anomalie> listeAnomaliesAvecIntervention = requete.getResultList();
+	for (Anomalie a : listeAnomaliesAvecIntervention)
+		System.out.println(a.getIdAnomalie());
+	
+	if (listeAnomaliesAvecIntervention.size() > 0)
+	{
+		return true;
+	}
+	return false;
 }
 
 @Override
@@ -66,4 +83,6 @@ public List<Diagnostic> rechercheDiagnosticsErp(String nomERP) {
 	// TODO Auto-generated method stub
 	return null;
 }
+
+
 }

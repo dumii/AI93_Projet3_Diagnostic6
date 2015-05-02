@@ -19,17 +19,16 @@ public class RechercheDiagnosticManagedBean implements Serializable  {
 	private IBusinessDiagnostic proxyBusiness; 
 	
 	private List<Diagnostic> listeDiag; 
-//	private List<Diagnostic> listeDiagnosticsIntervEnCours =null; 
-//	private List<Diagnostic> listeDiagnosticsIntervAttente =null;
-//	private List<Diagnostic> listeDiagnosticsIntervArchive =null;
-//	private List<Diagnostic> listeDiagnostics; 
+	private List<Diagnostic> listeDiagnosticsIntervEnCours; 
+	private List<Diagnostic> listeDiagnosticsIntervAttente;
+	private List<Diagnostic> listeDiagnosticsIntervArchive;
 	
 	@PostConstruct
 	public void init() {
-		System.out.println("appel");
 		listeDiag = proxyBusiness.recupereToutDiagnostic();
-		for (Diagnostic d : listeDiag)
-			System.out.println(d.getIntituleDiagnostic());
+		listeDiagnosticsIntervEnCours = proxyBusiness.recupereToutDiagnosticIntervEnCours(); 
+		listeDiagnosticsIntervAttente = proxyBusiness.recupereToutDiagnosticEnAttente(); 		
+		listeDiagnosticsIntervArchive = proxyBusiness.recupereToutDiagnosticArchives(); 
 	}
 
 	public IBusinessDiagnostic getProxyBusiness() {
@@ -40,11 +39,41 @@ public class RechercheDiagnosticManagedBean implements Serializable  {
 		this.proxyBusiness = proxyBusiness;
 	}
 
+	public List<Diagnostic> getListeDiagnosticsIntervEnCours() {
+		return listeDiagnosticsIntervEnCours;
+	}
+
+	public void setListeDiagnosticsIntervEnCours(
+			List<Diagnostic> listeDiagnosticsIntervEnCours) {
+		this.listeDiagnosticsIntervEnCours = listeDiagnosticsIntervEnCours;
+	}
+
 	public List<Diagnostic> getListeDiag() {
 		return listeDiag;
 	}
 
 	public void setListeDiag(List<Diagnostic> listeDiag) {
 		this.listeDiag = listeDiag;
+	}
+
+	public List<Diagnostic> getListeDiagnosticsIntervAttente() {
+		return listeDiagnosticsIntervAttente;
+	}
+
+	public void setListeDiagnosticsIntervAttente(
+			List<Diagnostic> listeDiagnosticsIntervAttente) {
+		this.listeDiagnosticsIntervAttente = listeDiagnosticsIntervAttente;
+	}
+
+	public List<Diagnostic> getListeDiagnosticsIntervArchive() {
+		return listeDiagnosticsIntervArchive;
+	}
+
+	public void setListeDiagnosticsIntervArchive(
+			List<Diagnostic> listeDiagnosticsIntervArchive) {
+		this.listeDiagnosticsIntervArchive = listeDiagnosticsIntervArchive;
 	}	
+	
+	
+	
 }

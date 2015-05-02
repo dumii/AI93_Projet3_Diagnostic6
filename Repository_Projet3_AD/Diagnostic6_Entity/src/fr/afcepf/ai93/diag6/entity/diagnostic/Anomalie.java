@@ -19,6 +19,7 @@ import fr.afcepf.ai93.diag6.entity.erp.Ascenceur;
 import fr.afcepf.ai93.diag6.entity.erp.Escalier;
 import fr.afcepf.ai93.diag6.entity.erp.Piece;
 import fr.afcepf.ai93.diag6.entity.erp.Voirie;
+import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
 
 
 @Entity
@@ -69,6 +70,10 @@ public class Anomalie implements Serializable{
 	
 	@OneToMany(mappedBy="anomalie")
 	private List<HistoriqueAnomalie> listeHistoriqueAnomalie;
+	
+	@OneToMany(mappedBy="anomalie")
+	private List<Intervention> listeInterventions;
+	
 
 	public Integer getIdAnomalie() {
 		return idAnomalie;
