@@ -125,11 +125,11 @@
 					src="images/consultationDiagnostic/DiagnosticBoutonModifier.26.26.png" /></a>
 					
 				<a href=""><img class="boutons-mini-barreEtat"
-					id="notificationGrisee" name="notification" 
-					src="images/consultationDiagnostic/NotifIconeGrise.25.26.png"  onClick="notification(this.src)"/></a>
+					id="notificationGrisee" name="notificationG" 
+					src="images/consultationDiagnostic/NotificationIconeDiagGrise.26.26.nette.png"  onClick="notification(this.src)"/></a>
 				<a href=""><img class="boutons-mini-barreEtat"
-					id="notificationRouge" name="notification" 
-					src="images/consultationDiagnostic/NotifIconeRouge.25.26.png"  onClick="denotification(this.src)"/></a>
+					id="notificationRouge" name="notificationR" 
+					src="images/consultationDiagnostic/NotifIconeDiagRouge.26.26.png"  onClick="denotification(this.src)"/></a>
 					
 				<a href=""><img class="boutons-mini-barreEtat"
 					id="favoritesGrisee" name="favorite" 
@@ -152,59 +152,60 @@
 					<tr>
 						<th class="ErpGeneral" width="180px" style="text-align: right">ERPconcerné :</th>
 						<th id="ErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.nomErp}</th>
-						<th class="ErpGeneral" width="180px" style="text-align: right">Expert :</th>
-						<th id="expertDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.prenomExpert}#{o.nomExpert}</th>
-					</tr>
+						<th class="ErpGeneral" width="230px" style="text-align: right">Date de réalisation du diagnostic :</th>
+						<th id="DateErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.dateRealisationDiagnostic}</th>
+						</tr>
 					<tr>
 						<th class="ErpGeneral" width="180px" style="text-align: right">Catégorie :</th>
 						<th id="CategErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.denominationCategorieErp}</th>
-						<th class="ErpGeneral" width="180px" style="text-align: right">Coordonées :</th>
-						<th id="telExpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.telExpert}</th>
+						<th class="ErpGeneral" width="230px" style="text-align: right">Date d'enregistrement diagnostic :</th>
+						<th id="DateErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.dateSaisieDiagnostic}</th>
+						
 					</tr>
 					<tr>
 						<th class="ErpGeneral" width="180px" style="text-align: right">Fonction :</th>
-						<th id="FoncErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.nomDiagnostiqueur}</th>
-						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
-						<th id="emailExpErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.mailExpert}</th>
-					</tr>
-					<tr>
-						<th class="ErpGeneral" width="180px" style="text-align: right">Date de Réalisation du Diagnostic :</th>
-						<th id="DateErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.dateRealisationDiagnostic}</th>
-						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
-						<th id="adrExpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.numVoieExpert}#{o.nomVoieExpert}</th>
-					</tr>
-										<tr>
-						<th class="ErpGeneral" width="180px" style="text-align: right">Date d'enregistrement du Diagnostic :</th>
-						<th id="DateErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.dateSaisieDiagnostic}</th>
-						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
-						<th id="cpVillExpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.codePostal}#{o.ville}</th>
+						<th id="FoncErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.typeErp}</th>
+						<th class="ErpGeneral" width="230px" style="text-align: right">Expert :</th>
+						<th id="expertDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.prenomExpert}#{o.nomExpert}</th>
 					</tr>
 					<tr>
 						<th class="ErpGeneral" width="180px" style="text-align: right">Adresse :</th>
 						<th id="AdressErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.numVoieErp}#{o.numVoieErp}</th>
-						<th class="accordErp" width="180px" style="text-align: right"></th>
-						<th class="accordErp" width="180px" style="text-align: right"></th>
+						<th class="ErpGeneral" width="230px" style="text-align: right">Coordonées :</th>
+						<th id="telExpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.telExpert}</th>
+						
 					</tr>
 					<tr>
-						<th class="ErpGeneral" width="180px" style="text-align: right">Code Postal :</th>
-						<th id="CPErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.codePostal}</th>
 						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
-						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
+						<th id="cpVillExpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.codePostal}#{o.ville}</th>
+						<th class="ErpGeneral" width="230px" style="text-align: right"></th>
+						<th id="emailExpErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.mailExpert}</th>
+						
+					
 					</tr>
 					<tr>
-						<th class="ErpGeneral" width="180px" style="text-align: right">Ville :</th>
-						<th id="VilleErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.ville}</th>
+						<th class="accordErp" width="180px" style="text-align: right"></th>
+						<th class="accordErp" width="180px" style="text-align: right"></th>
+						<th class="ErpGeneral" width="230px" style="text-align: right"></th>
+						<th id="adrExpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.numVoieExpert}#{o.nomVoieExpert}</th>
+					</tr>
+					<tr>
 						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
 						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
+						<th class="ErpGeneral" width="230px" style="text-align: right"></th>
+						<th id="adrExpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.codePostal}#{o.ville}</th>
 					</tr>
 				</table>
 			</div>
 		</div>
+		<div id="infoDetaille">
+			<div id="buttShowEDD">
+				<h3>
+					<span>Informations Détaillées</span>
+				</h3>
+			</div>
 	
-	
-		<button id="buttShowEDD">Informations Détaillées</button>
-	
-		<div id="ErpDiagDetaille">
+			<div id="ErpDiagDetaille">
 			<div id="nbBatimentErp" >
 				<span>Nombres de Batiments constituans l'ERP :  </span><span id="nbBatimentErpRecherche">#Résultat de Recherche#</span>
 			</div>
@@ -261,6 +262,7 @@
 				</table>
 			</div>
 			</ui:repeat>
+		</div>
 		</div>
 	</div>
 		<div id="diagAnomalieSection">
@@ -346,7 +348,7 @@
   function denotification() 
   { 
 	  $( "#notificationRouge" ).toggle();
-	  $( "#notificationGrisee" ).toggle;
+	  $( "#notificationGrisee" ).toggle();
 	  	document.getElementById(notificationRouge).src = url;
   }
   function favorisation() 
