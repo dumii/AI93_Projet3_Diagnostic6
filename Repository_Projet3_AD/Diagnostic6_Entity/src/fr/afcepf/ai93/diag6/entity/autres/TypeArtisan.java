@@ -8,8 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import fr.afcepf.ai93.diag6.entity.travaux.TypeIntervention;
 
 @Entity
 @Table(name="type_artisan")
@@ -21,11 +25,13 @@ public class TypeArtisan implements Serializable{
 	@Column(name="id_type_artisan")
 	private Integer idTypeArtisan;
 	
-	@Column(name="libelle_type_artisan")
-	private String libelleTypeArtisan;
+	@ManyToOne
+	@JoinColumn(name="id_artisan")
+	private Artisan artisan;
 	
-	@OneToMany(mappedBy="typeArtisan")
-	private List<Artisan> listeArtisan;
+	@ManyToOne
+	@JoinColumn(name="id_type_intervention")
+	private TypeIntervention typeIntervention;
 	
 	public Integer getIdTypeArtisan() {
 		return idTypeArtisan;
@@ -35,30 +41,30 @@ public class TypeArtisan implements Serializable{
 		this.idTypeArtisan = idTypeArtisan;
 	}
 
-	public String getLibelleTypeArtisan() {
-		return libelleTypeArtisan;
-	}
-
-	public void setLibelleTypeArtisan(String libelleTypeArtisan) {
-		this.libelleTypeArtisan = libelleTypeArtisan;
-	}
-
-	public List<Artisan> getListeTypeArtisan() {
-		return listeArtisan;
-	}
-
-	public void setListeTypeArtisan(List<Artisan> listeArtisan) {
-		this.listeArtisan = listeArtisan;
-	}
-
 	public TypeArtisan() {
-		super();
 	}
 
-	public TypeArtisan(Integer idTypeArtisan, String libelleTypeArtisan) {
+	public TypeArtisan(Integer idTypeArtisan, Artisan artisan, TypeIntervention type) {
 		super();
 		this.idTypeArtisan = idTypeArtisan;
-		this.libelleTypeArtisan = libelleTypeArtisan;
+		this.artisan = artisan;
+		this.typeIntervention = type;
+	}
+
+	public Artisan getArtisan() {
+		return artisan;
+	}
+
+	public void setArtisan(Artisan artisan) {
+		this.artisan = artisan;
+	}
+
+	public TypeIntervention getTypeIntervention() {
+		return typeIntervention;
+	}
+
+	public void setTypeIntervention(TypeIntervention typeIntervention) {
+		this.typeIntervention = typeIntervention;
 	}
 	
 	

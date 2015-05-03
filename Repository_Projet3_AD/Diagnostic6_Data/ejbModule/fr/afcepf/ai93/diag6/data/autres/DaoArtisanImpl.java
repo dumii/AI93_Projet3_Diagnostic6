@@ -10,6 +10,7 @@ import javax.persistence.Query;
 
 import fr.afcepf.ai93.diag6.api.data.autres.IDaoArtisan;
 import fr.afcepf.ai93.diag6.entity.autres.Artisan;
+import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
 
 @Stateless
 @Remote(IDaoArtisan.class)
@@ -35,5 +36,24 @@ public class DaoArtisanImpl implements IDaoArtisan {
 		em.merge(artisan);
 		return true;
 	}
+
+	@Override
+	public List<Artisan> recupererArtisanParTypeIntervention(
+			int idTypeIntervention) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	//Méthode à modifier
+	/*
+	@Override
+	public List<Artisan> recupererArtisanParTypeIntervention(
+			int idTypeIntervention) {
+		Query query = em.createQuery("SELECT Artisan e from TypeArtisan e WHERE e.idTypeIntervention = :pid");
+		query.setParameter("pid", idTypeIntervention);
+		List<Artisan> liste = query.getResultList();
+		return liste;
+	}
+	*/
 
 }

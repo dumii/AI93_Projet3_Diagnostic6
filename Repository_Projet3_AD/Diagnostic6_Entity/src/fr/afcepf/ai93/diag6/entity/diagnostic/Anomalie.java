@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.criteria.CriteriaBuilder.In;
 
@@ -19,6 +20,7 @@ import fr.afcepf.ai93.diag6.entity.erp.Ascenceur;
 import fr.afcepf.ai93.diag6.entity.erp.Escalier;
 import fr.afcepf.ai93.diag6.entity.erp.Piece;
 import fr.afcepf.ai93.diag6.entity.erp.Voirie;
+import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
 
 
 @Entity
@@ -69,6 +71,10 @@ public class Anomalie implements Serializable{
 	
 	@OneToMany(mappedBy="anomalie")
 	private List<HistoriqueAnomalie> listeHistoriqueAnomalie;
+	
+	@OneToOne(mappedBy="anomalie")
+	private Intervention listeInterventions;
+	
 
 	public Integer getIdAnomalie() {
 		return idAnomalie;

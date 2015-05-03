@@ -13,7 +13,11 @@ public interface IBusinessArtisan {
 	public void ajouterArtisant(Artisan artisan);
 	
 	public boolean supprimerArtisan(Artisan artisan);
+	
+	//!!!!Type artisan = type d'intervention (les deux tables sont cohérentes entre elles)!!!!
+	public List<Artisan> recupererArtisanParTypeIntervention(int idTypeIntervention);
 
 	//Type d'artisan
-	public List<TypeArtisan> recupererTypeArtisan();
+	public List<TypeArtisan> recupererTypeArtisan();	
+	
 }
