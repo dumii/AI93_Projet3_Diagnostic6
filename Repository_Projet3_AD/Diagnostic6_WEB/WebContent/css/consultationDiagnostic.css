@@ -8,19 +8,26 @@
 /* Mini Barre d'état Consultation Diagnostic */
 /*************************************/
 
+html
+{
+	overflow: scroll;
+}
+
 #consultDiag
 {
 	margin-top : 7%;
-	margin-left: 18%;
-	width: 56%;
-	position: fixed;
+	margin-left: 19%;
+	width: 55%;
+	
+	
 }
 
 .mini-barreEtat
 {
-	background-image:linear-gradient(#f7f7f7, #f1f1f1);
+	background-image:linear-gradient(#f9f9f9, #f1f1f1);
 	border:#cccccc solid 1px;
 	height: 27px;
+	/*position: fixed;*/
 }
 
 #mini-barreEtat-boutons
@@ -30,54 +37,142 @@
 
 #notificationRouge
 {
-	display: none;
+	display : none;
 }
 
 #favoriteJaune
 {
-	display: none;
+	display : none;
 }
+
 
 /*************************************/
 /* Erp Diagnostic Infos Générales */
 /*************************************/
 #ErpDiagGeneral
 {
-	background-image: #F7F7F7;
-	background-color: #F7F7F7;
+	background :#f7f7f7;
 	margin-left: 1%;
-	width: 54%;
-	position: fixed;
+	width: 97.5%;
+	margin-top: 16px;
+	border:#cccccc solid 1px;
 }
 
 #ErpDiagGeneral > #ErpDiagTitre
 {
+	margin-top: -18px;
+	background-image:linear-gradient(#f9f9f9, #f1f1f1);
 	text-align: left;
 	color: CornflowerBlue;
 	font-size: medium;
-	text-decoration: underline;
+	height: 27px;
 }
 
 #ErpDiagGeneral > .tableErpDiagGeneral
 {
 	font-size: small;
+	
 }
 
 /*************************************/
 /* Erp Diagnostic Infos Détaillées */
 /*************************************/
+#infoDetaille
+{
+	    border:#cccccc solid 1px;
+	    margin-left: 1%;
+		width: 97.5%;
+		margin-top: 2%;
+}
 
 #buttShowEDD
 {
-	margin-top: 22%;
-	
+	background-image:linear-gradient(#f9f9f9, #f1f1f1);
+	text-align: left;
+	color: CornflowerBlue;
+	font-size: medium;
+	height: 27px;
+	margin-top: -18px;
 }
 
 #ErpDiagDetaille
 {
-	margin-left: 2%;
-	margin-right: 2%;
 	display: none;
     background: #F7F7F7;
+    font-size: small; 
+}
+
+#nbBatimentErp
+{
+	font-size: small; 
+	font-weight: bolder;
+}
+#foncPiecesErp
+{
+	font-size: small; 
+	font-weight: bolder;
+}
+
+/*************************************/
+/* Section Diagnostic & Anomalies */
+/*************************************/
+
+#diagAnomalieSection
+{
     font-size: small;
+    font-weight: bolder;
+	background: #F6F7F7;
+	border:#cccccc solid 1px;
+	margin-top: 2%;
+	margin-left: 1%;
+	width: 97.5%;
+}
+
+#diagAnomalieSection > #diagnosticFiche > #ficheDiagTitre
+{
+	background-image:linear-gradient(#f9f9f9, #f1f1f1);
+	height: 27px;
+	text-align: left;
+	color: CornflowerBlue;
+	font-size: medium;
+	margin-top: -2%;
+}
+
+.ficheDiagTitreImage
+{
+	margin-top: 0%;
+  	margin-left: 48%;
+  	position: absolute;
+}
+
+#diagAnomalieSection > #diagnosticFiche > #ficheAnomTitre
+{
+	text-align: left;
+	color: CornflowerBlue;
+	font-size: small;
+	font-weight: bold
+}
+
+/*************************************/
+/* anomaliesFiche */
+/*************************************/
+
+#localisationAnomalie
+{
+	display: none;
+}
+
+#pieceAnomalie
+{
+	display: none;
+}
+
+#interEnCoursAno
+{
+	display: none;
+}
+
+#interFinitAno
+{
+	display: none;
 }

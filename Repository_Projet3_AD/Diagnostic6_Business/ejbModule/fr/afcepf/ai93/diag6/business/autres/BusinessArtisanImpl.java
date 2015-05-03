@@ -42,4 +42,9 @@ public class BusinessArtisanImpl implements IBusinessArtisan {
 		return proxyTypeArtisan.recupererTypeArtisan();
 	}
 
+	@Override
+	public List<Artisan> recupererArtisanParTypeIntervention(int idTypeIntervention) {
+		return proxyArtisan.recupererArtisanParTypeIntervention(idTypeIntervention);
+	}
+
 }
