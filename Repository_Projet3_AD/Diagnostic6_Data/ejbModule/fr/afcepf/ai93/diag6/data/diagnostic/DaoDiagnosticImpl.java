@@ -42,6 +42,14 @@ public boolean recupereSiIntervEnCoursParDiag(int idDiag) {
 }
 
 @Override
+public Diagnostic recupereDiagnostic(int idDiagnostic) {
+	Query requete = em.createQuery("select d from Diagnostic d where idDiagnostic = :id");
+	requete.setParameter("id", idDiagnostic); 
+	Diagnostic diag = (Diagnostic) requete.getSingleResult(); 
+	return diag;
+}
+
+@Override
 public void ajouterDiagnostic(Diagnostic diagnostic) {
 	// TODO Auto-generated method stub
 	
@@ -65,11 +73,7 @@ public void historiserDiagnostic(Diagnostic diagnostic) {
 	
 }
 
-@Override
-public Diagnostic recupereDiagnostic(int idDiagnostic) {
-	// TODO Auto-generated method stub
-	return null;
-}
+
 
 @Override
 public List<Diagnostic> rechercheDiagnostics(String nomDiagnostic) {
