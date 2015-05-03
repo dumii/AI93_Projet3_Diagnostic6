@@ -10,7 +10,7 @@
 	</title>
 	
 	<link href="css/styleAcceuil.css" rel="stylesheet" type="text/css" />
-	<link href="css/style.css" rel="stylesheet" type="text/css" />
+	
  	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css"/>
 	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -57,19 +57,46 @@
 					<h:outputLabel value="Statistique du moi de mai" id="enteteStatistiques" />
 					</div>
 				</div>
-				<div>
-					<div id="chart1" style="height:250px;width:390px;float:left;">
+				<div id="graphs">
+					<div id="chart1" style="height:200px;width:33%;float:left; margin-left: 1px">
 						
 					</div>
-					<div id="chart2" style="height:250px;width:390px;float:left; ">
+					<div id="chart2" style="height:200px;width:33%;float:left; ">
 						
 					</div>
-					<div id="chart3" style="height:250px;width:390px;float:left; ">
+					<div id="chart3" style="height:200px;width:33%;float:left; ">
 						
 					</div>
 				</div>
 			</div>
+			<div id="publications">
+				<img src="images/acceuil/flechegauche2.png" alt="Publication suivante" style="float:left; width: 30%; cursor: pointer;}"/>
+				<img src="http://media.topito.com/wp-content/uploads/2013/04/Animal12.jpg" alt="Image publication1" style="width: 100%"/>
+				<h:outputLabel value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
+			</div>
+			<div id="publications">
+			<div>
+					<img src="images/acceuil/flechedroite2.png" alt="Publication Précédente" style="float:right; width: 30%; cursor: pointer;"/>
+					<img src="http://flepi.net/images/animaux-etrange-560x373.jpg" alt="Publication suivante" style="width: 100%" />
+					<h:outputLabel value="Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?" />
+				
+				</div>
+			</div>
+			
 		</div>
+	<div id="login">
+		<input type="button" value="Espace professionel" class="boutonOuvertureLogin" onclick="ouvertureLogin('login2')"/>
+		
+		<div id="login2" style="display: none;"> 
+		
+		<div id="champIdentifiant"><h:outputLabel value="Identifiant:"/> </div>
+		<div id="champIdentifiant"><h:inputText value="" id="identifiant"/></div>
+		<div id="champIdentifiant"><h:outputLabel value="Mot de passe:" /></div>
+		<div id="champIdentifiant"><h:inputText value="" id="motDePasse" /></div>
+		<div id="champIdentifiant"><h:button value="Connection" styleClass="boutonConnection"></h:button></div>
+		
+		</div>
+	</div>
 	
 	<div id="BandeauRecherche">
 		
@@ -90,8 +117,35 @@
 					
 				</div>
 				<div id="resultatsDeRecherche">
-					<h:selectManyListbox value=""  styleClass="listBox4" size="50">
+					<h:selectManyListbox value=""  styleClass="listBox4" >
 						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
+						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
+						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
+						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
+						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
+						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
+						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
+						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
+						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
+						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
+						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
+						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
+						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
+						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
+						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />	
+						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
+						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
+						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
+						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
+						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
+						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
+						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
+						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
+						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
+						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
+						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
+						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
+						
 						
 						
 					</h:selectManyListbox>
@@ -188,6 +242,18 @@ $(document).ready(function(){
         }
     );
 });
+
+</script>
+<script>
+function ouvertureLogin(id)
+{
+  if (document.getElementById(id).style.display == 'none') {
+       document.getElementById(id).style.display = 'block';
+  }
+  else {
+       document.getElementById(id).style.display = 'none';
+  }
+}
 </script>
 </body>
 </html>

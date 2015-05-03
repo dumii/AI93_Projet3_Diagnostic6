@@ -1,3 +1,5 @@
+
+
 .fixEntete{
  z-index: 9999;
  position: fixed;
@@ -5,6 +7,7 @@
  /* Mise en forme */
  width: 100%; /* <-- Largeur de votre site */
  height: 75px;
+ 
  }
 
 
@@ -17,9 +20,9 @@
 
 #DivPrincipale
 {
-	border: #BDBDBD solid 1px;
+	/*border: #BDBDBD solid 1px;*/
 	width: 75%;
-	height: 400px;
+	height: auto;
 	float: left;
 	margin-left: 20px;
 	margin-right: 20px;
@@ -28,15 +31,46 @@
 	
 }
 
+#graphs
+{
+	width: auto;
+	height: auto;
+}
+
 #statistiques
 {
 	border: #BDBDBD solid 1px;
-	height: 270px;
-	widows: 100%;
+	height: 220px;
+	width: auto;
 	margin: 2px;
 	border-radius: 7px;
 	background-image:linear-gradient(#E0ECF8, #5D7A8C);
-	opacity: 0.5;
+	/*opacity: 0.5;*/
+}
+
+ #enteteStatistiques
+{
+	font-size: 15px;
+	border-radius: 5px;
+	text-align: center;
+	border: #BDBDBD solid 1px;
+	margin-left: 7%;
+	margin-right: 7%;
+	background-image:linear-gradient(#E0ECF8, #5D7A8C);
+	padding: 2px;
+	margin-top: 10px;
+}
+
+#publications
+{
+	float:left;
+	border: #BDBDBD solid 1px;
+	margin-left: 1px;
+	margin-right: 1px;
+	width: 49.5%;
+	height: auto;
+	border-radius: 7px;
+	background-image:linear-gradient(#E0ECF8, #5D7A8C);
 }
 
 /************************/
@@ -44,7 +78,9 @@
 /************************/
 
 
+
 #BandeauRecherche
+
 {
 	
 	border: #BDBDBD solid 1px;
@@ -54,29 +90,29 @@
 	margin-top: 20px;
 	border-radius: 7px;
 	background-image:linear-gradient(#E0ECF8, #5D7A8C);
-	opacity: 0.5;
+	/*opacity: 0.5;*/
 }
 
 #divEnteteRecherche
 {
-	border: black solid 1px;
+	border: #BDBDBD solid 1px;
 	width: 80%;
 	margin-top: 10px;
 	text-align:center;
 	margin-left: 7%;
 	margin-right: 7%;	
-	background-image:linear-gradient(#5D7A8C, #08088A);
+	background-image:linear-gradient(#E0ECF8, #5D7A8C);
 	color: black;
 	font-size: 20px; 
-	opacity: 1;
 	border-radius: 7px;
+	
 	
 }
 
 
 #champDeRecherche
 {
-	border: black solid 1px;
+	border: #BDBDBD solid 1px;
 	width: 80%;
 	margin-top: 10px;
 	border-radius: 7px;
@@ -94,7 +130,7 @@
 
 #resultatsDeRecherche
 {
-	border: black solid 1px;
+	border: #BDBDBD solid 1px;
 	width: 80%;
 	margin-top: 10px;
 	height : auto;
@@ -114,16 +150,144 @@
 	margin-bottom: 1px;
 	border-style: solid;
 	border-color: #BDBDBD;
+	max-height: 335px;
 }
 
- #enteteStatistiques
+
+#login
 {
-	font-size: 15px;
-	font-weight: bold;
-	text-align: center;
-	border-style: solid;
-	border-color: black;
+	border: #BDBDBD solid 1px;
+	width: 19%;
+	height: auto;
+	float: left;
+	margin-top: 20px;
+	border-radius: 7px;
+	background-image:linear-gradient(#E0ECF8, #5D7A8C);
+}
+
+
+.boutonOuvertureLogin
+{
+	border: #BDBDBD solid 1px;
+	width: 86%;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	text-align:center;
 	margin-left: 7%;
-	margin-right: 7%;
-	opacity:1;
+	margin-right: 7%;	
+	background-image:linear-gradient(#E0ECF8, #5D7A8C);
+	color: black;
+	font-size: 20px; 
+	border-radius: 5px;
+}
+
+.boutonConnection
+{
+	border: #BDBDBD solid 1px;
+	background-image:linear-gradient(#E0ECF8, #5D7A8C);
+	color: black;
+	font-size: 20px; 
+	vertical-align: middle;
+	margin: 0 auto;
+	width: 70%;
+	border-radius: 5px;
+	margin-top: 1px;
+	margin-bottom: 1px;
+	
+}
+#champIdentifiant
+{
+	
+	vertical-align: middle;
+	margin: 0 auto;
+	width: 86%;
+	margin-top: 1px;
+}
+
+/*************************************************************************************/
+/**************************************************************************************/
+
+body
+{
+	background-image: url("../images/ArrierePlan.png");
+	background-size: 100%;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	overflow-y: auto;
+	font-family: sans-serif;
+	background-attachment: fixed;
+}
+
+
+/****************************/
+/* Barre de menu principale */
+/****************************/
+
+#enTete {
+	height: 75px;
+	width: 100%;	
+	background-image: url("../images/barreDeMenu4.png"), url("../images/ArrierePlan.png");
+ 	background-size: 100% 40px, 100%;
+ 	background-position: 0px 25px, top;
+  	background-repeat: no-repeat, no-repeat;
+	background-color: white;
+	/*position: fixed;*/
+
+}
+
+#rechercheBandeau {
+	display: inline-block;
+	padding-top: 3%;
+	padding-left: 5%;
+	position: absolute;
+}
+
+#rechercheBandeau > input[type="text"]
+{   
+    width: 200px;
+}
+
+#rechercheBandeau > input[type="image"]
+{
+	height: 19px;
+	float: right;
+	border: #BDBDBD solid 1px;
+	/*
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+	*/
+}
+
+#rechercheBandeau > div
+{
+	width: 89.5%;
+  	background-color: white;
+  	margin-left: 1px;
+  	display: none;
+}
+
+#logoAccueil {
+	margin-left: 7%;
+	height: 73%;
+	margin-bottom: 2%;
+}
+
+#logoErp {
+	margin-left: 31%;
+}
+
+.logoMenu {
+	margin-top: 1%;
+	height: 93%;
+	width: auto;
+}
+
+#logoTabBord
+{
+	margin-left: 5%;
+}
+
+.lienAccueil {
+	height: 87px;
+	width: 287px;
 }
