@@ -58,9 +58,17 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 	}
 
 	@Override
-	public void ajouterDiagnostic(Diagnostic diagnostic) {
-		// TODO Auto-generated method stub
-		
+	public String ajouterDiagnostic(Diagnostic diagnostic) {
+		Diagnostic ajoutAutorise = proxyDiagnostic.recupereDiagnostic(diagnostic.getTypeDiagnostic().getIdTypeDiagnostic());
+		if (ajoutAutorise.equals(null))
+		{
+			proxyDiagnostic.ajouterDiagnostic(diagnostic);
+			return "Intervention enregristrée avec succès";
+		}
+		else
+		{
+			return "Un diagnostic de ce type a déjà été ajouté sur cet Erp, un seul diagnostic de chaque type peut-être attribué à un Erp.";
+		}
 	}
 
 	@Override

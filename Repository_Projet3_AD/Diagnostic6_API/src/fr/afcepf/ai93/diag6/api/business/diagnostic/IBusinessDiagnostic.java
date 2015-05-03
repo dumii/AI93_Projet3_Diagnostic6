@@ -17,7 +17,7 @@ public interface IBusinessDiagnostic {
 		public List<Diagnostic> recupereToutDiagnosticArchives();
 		
 
-	    public void ajouterDiagnostic(Diagnostic diagnostic);
+	    public String ajouterDiagnostic(Diagnostic diagnostic);
 
 	    public void modifierDiagnostic(Diagnostic diagnostic);
 

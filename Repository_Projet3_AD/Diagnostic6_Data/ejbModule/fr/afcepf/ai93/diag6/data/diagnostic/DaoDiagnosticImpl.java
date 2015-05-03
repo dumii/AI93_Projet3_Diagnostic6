@@ -43,7 +43,7 @@ public boolean recupereSiIntervEnCoursParDiag(int idDiag) {
 
 @Override
 public void ajouterDiagnostic(Diagnostic diagnostic) {
-	// TODO Auto-generated method stub
+	em.persist(diagnostic);
 	
 }
 
