@@ -46,6 +46,13 @@
                     <rich:treeNode>#{item}</rich:treeNode>
                 </rich:treeModelAdaptor>
             </rich:treeModelRecursiveAdaptor>
+            
+            <ul id="listeTest">
+            	<ui:repeat var="var" value="#{mbTestTravaux.travaux}">
+            		<li>#{var.idIntervention}</li>
+            	</ui:repeat>            	
+            </ul>
+            <rich:list var="var" value="#{mbTestTravaux.travaux}">#{var.idIntervention}</rich:list>
         </rich:tree>
 		</h:form>
 		</f:view>
