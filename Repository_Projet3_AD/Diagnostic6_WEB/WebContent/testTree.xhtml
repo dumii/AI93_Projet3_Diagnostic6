@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j"> 
+
+<h:head></h:head> 
+<body> 
+<f:view>
+   <h:panelGrid columns="2" columnClasses="top,top" width="60%">
+        <h:form>
+            <rich:tree id="tree" nodeType="#{node.type}" var="node" value="#{treeBean.rootNodes}" toggleType="client"
+                selectionType="ajax" selectionChangeListener="#{treeBean.selectionChanged}">
+                <rich:treeNode type="erp">
+                    #{node.name}
+                </rich:treeNode>
+                <rich:treeNode type="diagnostic">
+                    #{node.intitule} - #{node.name} - #{node.traite}
+                </rich:treeNode>
+            </rich:tree>
+        </h:form>
+        <a4j:outputPanel ajaxRendered="true" layout="block">
+            <rich:panel header="Current Selection" rendered="#{not empty treeBean.currentSelection}">
+                <h:outputText value="Name:" />
+                <h:outputText value="#{treeBean.currentSelection.name}" />
+                <h:panelGroup rendered="#{treeBean.currentSelection.leaf}">
+                    <fieldset>
+                        <legend>Details</legend>
+                        <h:panelGrid columnClasses="bold" columns="2">
+                            <h:outputText value="ERP:" />
+                            <h:outputText value="#{treeBean.currentSelection.erp}" />
+                            <h:outputText value="Intitule:" />
+                            <h:outputText value="#{treeBean.currentSelection.intitule}" />
+                            <h:outputText value="Traité:" />
+                            <h:outputText value="#{treeBean.currentSelection.traite}"/>
+                        </h:panelGrid>
+                    </fieldset>
+                </h:panelGroup>
+            </rich:panel>
+        </a4j:outputPanel>
+    </h:panelGrid>
+</f:view>
+</body> 
+</html>

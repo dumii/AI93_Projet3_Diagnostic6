@@ -69,7 +69,7 @@ public class DaoDiagnosticImpl implements IDaoDiagnostic {
 
 	@Override
 public boolean recupereSiIntervEnCoursParDiag(int idDiag) {
-	Query requete = em.createQuery("SELECT a from Anomalie a inner join fetch a.listeInterventions where a.diagnostic.idDiagnostic = :id");
+	Query requete = em.createQuery("SELECT a from Anomalie a inner join fetch a.intervention where a.diagnostic.idDiagnostic = :id");
 	requete.setParameter("id", idDiag);
 	List<Anomalie> listeAnomaliesAvecIntervention = requete.getResultList();
 	for (Anomalie a : listeAnomaliesAvecIntervention)
