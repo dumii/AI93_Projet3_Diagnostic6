@@ -16,10 +16,9 @@
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<script type="jqplot/jquery.jqplot.js"></script>
 
-
+	<link rel="stylesheet" type="text/css" href="css/jquery.jqplot.css" />
 	<script language="javascript" type="text/javascript" src="jqplot/excanvas.js"/>
 	<script language="javascript" type="text/javascript" src="jqplot/jquery.jqplot.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/jquery.jqplot.css" />
 	<script type="text/javascript" src="jqplot/jquery.jqplot.min.js"></script>
 	<script type="text/javascript" src="jqplot/jqplot.pieRenderer.min.js"></script>
 	<script type="text/javascript" src="jqplot/jqplot.donutRenderer.min.js"></script>
@@ -33,21 +32,7 @@
 	
 		<a href=""><img id="logoAccueil" src="images/Logo2.png" /></a>
 			
-		<!--<h:form id="rechercheBandeau" action="">
-			 <input type="text" value="Entrez votre recherche ici ..."/> 
-			
-			<input type="image" src="images/Loupe.png"/>
-			<div id="resultatRecherche">blabla</div>
-		</h:form>
 		
-		 
-		<a href=""><img class="logoMenu" id="logoErp" src="images/ERPIconeBleue2.png" /></a>
-		
-		<a href=""><img class="logoMenu" id="logoDiag" src="images/DiagnosticIconeBleue.png" /></a>
-		
-		<a href=""><img class="logoMenu" id="logoTrav" src="images/BuildingConstruction_icon.png" /></a>
-		
-		<a href=""><img class="logoMenu" id="logoTabBord" src="images/TableauBordIconeOrange.png" /></a> -->
 		
 	</div>
 	
@@ -71,20 +56,38 @@
 					</div>
 				</div>
 			</div>
-			<div id="publications">
-				<img src="images/acceuil/flechegauche2.png" alt="Publication suivante" style="float:left; width: 30%; cursor: pointer;}"/>
-				<img src="http://media.topito.com/wp-content/uploads/2013/04/Animal12.jpg" alt="Image publication1" style="width: 100%"/>
-				<h:outputLabel value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
-			</div>
-			<div id="publications">
-			<div>
-					<img src="images/acceuil/flechedroite2.png" alt="Publication Précédente" style="float:right; width: 30%; cursor: pointer;"/>
-					<img src="http://flepi.net/images/animaux-etrange-560x373.jpg" alt="Publication suivante" style="width: 100%" />
-					<h:outputLabel value="Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?" />
-				
+			<div class="lesPublications">
+				<div id="publications">
+					<div>
+						<img src="images/acceuil/flechegauche2.png" alt="Publication suivante" style="float:left; width: 10%; cursor: pointer;position: absolute; z-index:1"/>
+						<img src="http://media.topito.com/wp-content/uploads/2013/04/Animal12.jpg" alt="Image publication1" style="width: 100%;position: relative; z-index:0"/>
+						<h:outputLabel value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
+					</div>
+				</div>
+				<div id="publications">
+					<div>
+						<img src="images/acceuil/flechedroite2.png" alt="Publication Précédente" style="float:right; width: 10%; cursor: pointer;position: absolute; z-index:1; margin-left: 27%"/>
+						<img src="http://flepi.net/images/animaux-etrange-560x373.jpg" alt="Publication suivante" style="width: 100%;position: relative; z-index:0" />
+						<h:outputLabel value="Sed ut perspiciatis  dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?" />
+					
+					</div>
 				</div>
 			</div>
-			
+			<div id="commentaireAll">
+				<div id="commentaires">
+						<ui:repeat var="" value="">
+							<span><h:outputText value="John" /> le <h:outputText value="21/04/2015" /></span>
+							<div style="border: #BDBDBD solid 1px;border-radius: 7px; "><h:outputText value="Ce site est vraiment génial!"/></div>
+						</ui:repeat>
+				</div>
+				<div class="ajoutCommentaires">
+					<span>Commentaire de <h:inputText value="" id="commentateur"/><input type="button" value="Envoyer" style="border-radius:5px"/></span>
+						
+						<div>
+						<h:inputTextarea value="" styleClass="zoneCommentaire" />				
+						</div>
+				</div>	
+			</div>		
 		</div>
 	<div id="login">
 		<input type="button" value="Espace professionel" class="boutonOuvertureLogin" onclick="ouvertureLogin('login2')"/>
@@ -95,7 +98,7 @@
 		<div id="champIdentifiant"><h:inputText value="" id="identifiant"/></div>
 		<div id="champIdentifiant"><h:outputLabel value="Mot de passe:" /></div>
 		<div id="champIdentifiant"><h:inputText value="" id="motDePasse" /></div>
-		<div id="champIdentifiant"><h:button value="Connection" styleClass="boutonConnection"></h:button></div>
+		<div id="champIdentifiant"><h:button value="Connexion" styleClass="boutonConnexion"></h:button></div>
 		
 		</div>
 	</div>
@@ -119,38 +122,7 @@
 					
 				</div>
 				<div id="resultatsDeRecherche">
-					<h:selectManyListbox value=""  styleClass="listBox4" >
-						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
-						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
-						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
-						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
-						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
-						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
-						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
-						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
-						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
-						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
-						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
-						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
-						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
-						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
-						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />	
-						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
-						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
-						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
-						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
-						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
-						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
-						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
-						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
-						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
-						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
-						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
-						<f:selectItem itemValue="Coche" itemLabel="TestTestTestTestTestTestTestTest" />
-						
-						
-						
-					</h:selectManyListbox>
+					<input type="button" value="Trouver" class="boutonTrouver"/>		
 				</div>
 			
 			</div>
@@ -170,10 +142,10 @@ $(function(){
 	   });
 	 });
 
-$(document).ready(function(){
+$(document).ready(function(){ 
 	  var data = [
-	    ['Heavy Industry', 12],['Retail', 9], ['Light Industry', 14], 
-	    ['Out of home', 16],['Commuting', 7], ['Orientation', 9]
+	    ['Terminées', #{mbPublic.nbInterventionTerminees}],['Planifiées', #{mbPublic.nbInterventionPlanifiees}], ['En cours', #{mbPublic.nbInterventionEnCours}], 
+	    ['En attente', #{mbPublic.nbInterventionDiagnostiquees}]
 	  ];
 	  var plot1 = jQuery.jqplot ('chart1', [data], 
 	    { 
@@ -192,8 +164,8 @@ $(document).ready(function(){
 	});
 $(document).ready(function(){
 	  var data = [
-	    ['Heavy Industry', 12],['Retail', 9], ['Light Industry', 14], 
-	    ['Out of home', 16],['Commuting', 7], ['Orientation', 9]
+	    ['Terminées', #{mbPublic.nbInterventionTerminees}],['Planifiées', #{mbPublic.nbInterventionPlanifiees}], ['En cours', #{mbPublic.nbInterventionEnCours}], 
+	    ['En attente', #{mbPublic.nbInterventionDiagnostiquees}],
 	  ];
 	  var plot2 = jQuery.jqplot ('chart2', [data], 
 	    {
@@ -256,6 +228,8 @@ function ouvertureLogin(id)
        document.getElementById(id).style.display = 'none';
   }
 }
+
+
 </script>
 </body>
 </html>

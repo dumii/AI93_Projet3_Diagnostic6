@@ -19,4 +19,12 @@ public interface IBusinessPublic {
     public List<Erp> calculErpParTraite(Diagnostic traite);
 
     public void localisationErpGoogleMap();
+    
+    
+    
+    
+    public Integer nbInterventionsTerminees();
+	public Integer nbInterventionsEnCours();
+	public Integer nbInterventionsPlanifiess();
+	public Integer nbInterventionsDiagnostiquees();
 }

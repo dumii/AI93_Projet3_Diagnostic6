@@ -1,5 +1,4 @@
 
-
 .fixEntete{
  z-index: 9999;
  position: fixed;
@@ -70,7 +69,47 @@
 	width: 49.5%;
 	height: auto;
 	border-radius: 7px;
+	/*background-image:linear-gradient(#E0ECF8, #5D7A8C);*/
+	display: table;
+}
+
+#commentaireAll
+{
+	clear:both;
+	
+}
+
+
+#commentaires
+{
+	clear:both;
+	float:left;
+	width:49%;
+	margin-top:15px;
+	border-radius: 7px;
 	background-image:linear-gradient(#E0ECF8, #5D7A8C);
+	
+}
+.ajoutCommentaires
+{
+	
+	border: #BDBDBD solid 1px;
+	border-radius: 7px;
+	margin-top: 15px;
+	width: 49%;
+	background-image:linear-gradient(#E0ECF8, #5D7A8C);
+	float: right;
+}
+
+.zoneCommentaire
+{
+	
+	width: 98%;
+	margin-left: 2px;
+	margin-right: 2px;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	
 }
 
 /************************/
@@ -130,7 +169,7 @@
 
 #resultatsDeRecherche
 {
-	border: #BDBDBD solid 1px;
+	/*border: #BDBDBD solid 1px;*/
 	width: 80%;
 	margin-top: 10px;
 	height : auto;
@@ -138,7 +177,7 @@
 	margin-left: 7%;
 	margin-right: 7%;
 	border-radius: 7px;
-	
+	margin-bottom: 10px;
 }
 
 .listBox4
@@ -181,7 +220,7 @@
 	border-radius: 5px;
 }
 
-.boutonConnection
+.boutonConnexion
 {
 	border: #BDBDBD solid 1px;
 	background-image:linear-gradient(#E0ECF8, #5D7A8C);
@@ -204,6 +243,19 @@
 	margin-top: 1px;
 }
 
+.boutonTrouver
+{
+	border: #BDBDBD solid 1px;
+	background-image:linear-gradient(#E0ECF8, #5D7A8C);
+	color: black;
+	font-size: 20px;
+
+	width: 70%;
+	border-radius: 5px;
+	margin-left: 5%;
+ 	margin-right: 5%;
+	
+}
 /*************************************************************************************/
 /**************************************************************************************/
 
@@ -214,7 +266,7 @@ body
 	margin: 0 0 0 0;
 	padding: 0 0 0 0;
 	overflow-y: auto;
-	font-family: sans-serif;
+	font-family: Corbel;
 	background-attachment: fixed;
 }
 
