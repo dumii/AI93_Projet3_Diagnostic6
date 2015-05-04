@@ -28,7 +28,10 @@ public class Voirie implements Serializable{
 	@Column(name="designation_voirie")
 	private String designationVoirie;
 	
-	
+
+	@Column(name="emplacement_voirie")
+	private String intituleVoirie;
+
 	
 	@ManyToOne
 	@JoinColumn(name="no_erp")
@@ -58,7 +61,13 @@ public class Voirie implements Serializable{
 		this.designationVoirie = designationVoirie;
 	}
 
-	
+	public String getIntituleVoirie() {
+		return intituleVoirie;
+	}
+
+	public void setIntituleVoirie(String intituleVoirie) {
+		this.intituleVoirie = intituleVoirie;
+	}
 
 	public Erp getErp() {
 		return erp;

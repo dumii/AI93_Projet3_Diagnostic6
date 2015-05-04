@@ -7,6 +7,10 @@ import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
 public interface IDaoDiagnostic {
 
 	public List<Diagnostic> recupereToutDiagnostic();
+	public boolean recupereSiIntervEnCoursParDiag(int idDiag);
+	
+    public Diagnostic recupereDiagnostic(int idDiagnostic);
+	
 
     public void ajouterDiagnostic(Diagnostic diagnostic);
 
@@ -16,9 +20,10 @@ public interface IDaoDiagnostic {
 
     public void historiserDiagnostic(Diagnostic diagnostic);
 
-    public Diagnostic recupereDiagnostic(int idDiagnostic);
+
 
     public List<Diagnostic> rechercheDiagnostics(String nomDiagnostic);
 
     public List<Diagnostic> rechercheDiagnosticsErp(String nomERP);
+    
 }

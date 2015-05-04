@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import fr.afcepf.ai93.diag6.entity.autres.Artisan;
@@ -21,6 +22,8 @@ import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
 @Entity
 @Table(name="intervention")
 public class Intervention implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -42,7 +45,7 @@ public class Intervention implements Serializable {
 	@OneToMany(mappedBy="intervention")
 	private List<Favoris> listeFavorisIntervention;
 	
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name="id_anomalie")
 	private Anomalie anomalie;
 	
@@ -161,23 +164,18 @@ public class Intervention implements Serializable {
 
 
 	public Intervention() {
-		super();
 	}
 
 
 	public Intervention(Integer idIntervention, Date dateDebutIntervention,
 			Date dateFinIntervention, double coutIntervention,
-			List<HistoriqueIntervention> listeHistoriqueIntervention,
-			List<Favoris> listeFavorisIntervention, Anomalie anomalie,
+			Anomalie anomalie,
 			EtatAvancementTravaux etatAvancementTravaux,
 			TypeIntervention typeIntervention, Artisan artisan) {
-		super();
 		this.idIntervention = idIntervention;
 		this.dateDebutIntervention = dateDebutIntervention;
 		this.dateFinIntervention = dateFinIntervention;
 		this.coutIntervention = coutIntervention;
-		this.listeHistoriqueIntervention = listeHistoriqueIntervention;
-		this.listeFavorisIntervention = listeFavorisIntervention;
 		this.anomalie = anomalie;
 		this.etatAvancementTravaux = etatAvancementTravaux;
 		this.typeIntervention = typeIntervention;

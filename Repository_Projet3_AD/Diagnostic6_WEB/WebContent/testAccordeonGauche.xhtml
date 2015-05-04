@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"> 
+
+<h:head></h:head> 
+<body> 
+    <h:form>
+    	<p>Diagnostics en cours</p>
+        <rich:tree toggleType="ajax" var="diag">
+            <rich:treeModelRecursiveAdaptor roots="#{mbRechercheDiagnostic.listeDiagnosticsIntervEnCours}" nodes="#{diag}">
+                <rich:treeNode>#{diag.dateRealisationDiagnostic}</rich:treeNode>
+                <rich:treeModelAdaptor nodes = "#{mbRechercheDiagnostic.listeDiagnosticsIntervEnCours}" >
+                	<rich:treeNode>#{diag.intituleDiagnostic}</rich:treeNode>
+                </rich:treeModelAdaptor>               
+            </rich:treeModelRecursiveAdaptor>
+        </rich:tree>
+        
+        <p>Diagnostics en attente</p>
+        <rich:tree toggleType="ajax" var="diag2">
+            <rich:treeModelRecursiveAdaptor roots="#{mbRechercheDiagnostic.listeDiagnosticsIntervAttente}" nodes="#{diag2}">
+                <rich:treeNode>#{diag2.dateRealisationDiagnostic}</rich:treeNode>
+                <rich:treeModelAdaptor nodes="#{mbRechercheDiagnostic.listeDiagnosticsIntervAttente}">
+                	<rich:treeNode>#{diag2.intituleDiagnostic}</rich:treeNode>
+                </rich:treeModelAdaptor>               
+            </rich:treeModelRecursiveAdaptor>
+        </rich:tree>
+        <p>Diagnostics archives</p>
+        <rich:tree toggleType="ajax" var="diag3">
+            <rich:treeModelRecursiveAdaptor roots="#{mbRechercheDiagnostic.listeDiagnosticsIntervArchive}" nodes="#{diag3}">
+                <rich:treeNode>#{diag3.dateRealisationDiagnostic}</rich:treeNode>
+                <rich:treeModelAdaptor nodes="#{mbRechercheDiagnostic.listeDiagnosticsIntervArchive}">
+                	<rich:treeNode>#{diag3.intituleDiagnostic}</rich:treeNode>
+                </rich:treeModelAdaptor>               
+            </rich:treeModelRecursiveAdaptor>
+        </rich:tree>
+        
+    </h:form>
+</body> 
+</ui:composition>
