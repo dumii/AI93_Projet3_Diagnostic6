@@ -1,9 +1,5 @@
 package fr.afcepf.ai93.diag6.data.erp;
 
-<<<<<<< HEAD
-public class DaoErpImpl {
-	
-=======
 import java.util.List;
 
 import javax.ejb.Remote;
@@ -13,7 +9,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import fr.afcepf.ai93.diag6.api.data.erp.IDaoErp;
-import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
 import fr.afcepf.ai93.diag6.entity.erp.Erp;
 
 @Stateless
@@ -28,5 +23,4 @@ public class DaoErpImpl implements IDaoErp {
 		List<Erp> listeToutErp = requete.getResultList(); 
 		return listeToutErp;
 	}
->>>>>>> branch 'master' of https://github.com/dumii/AI93_Projet3_Diagnostic6.git
 }

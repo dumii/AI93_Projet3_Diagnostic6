@@ -33,9 +33,8 @@ public class DaoAnomalieImpl implements IDaoAnomalie {
 	}
 
 	@Override
-	public boolean modifierAnomalie(Anomalie anomalie) {
+	public void modifierAnomalie(Anomalie anomalie) {
 		em.merge(anomalie);
-		return true;
 	}
 
 	@Override
@@ -47,16 +46,16 @@ public class DaoAnomalieImpl implements IDaoAnomalie {
 	}
 
 	@Override
-	public List<Anomalie> rechercheAnomaliesErp(int no-ERP) {
+	public List<Anomalie> rechercheAnomaliesErp(int noERP) {
 		Query query = em.createQuery("SELECT a FROM Anomalie WHERE a.id = :pid");
-		query.setParameter("pid", no-ERP);
+		query.setParameter("pid", noERP);
 		List<Anomalie> liste = query.getResultList();
 		
 		if (liste.size() > 0) {
-			return true;
+			return null;
 		}
 		else {
-			return false;
+			return null;
 		// je me suis inspiré de ce qu'a fait Elsa pour la rechercheInterventionSurAnomalie()
 		// mais je ne suis pas sur de mon coup ;)
 		}
@@ -79,6 +78,12 @@ public class DaoAnomalieImpl implements IDaoAnomalie {
 		query.setParameter("pid", nomAnomalie);
 		List <Anomalie> liste = query.getResultList();
 		return liste;
+	}
+
+	@Override
+	public List<Anomalie> rechercheAnomaliesErp(String nomERP) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
 

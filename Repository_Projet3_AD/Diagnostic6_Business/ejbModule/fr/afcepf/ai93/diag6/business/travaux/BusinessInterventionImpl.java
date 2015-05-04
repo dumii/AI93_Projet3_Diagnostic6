@@ -8,8 +8,10 @@ import javax.ejb.Stateless;
 
 import fr.afcepf.ai93.diag6.api.business.travaux.IBusinessIntervention;
 import fr.afcepf.ai93.diag6.api.data.travaux.IDaoAvancementIntervention;
+import fr.afcepf.ai93.diag6.api.data.travaux.IDaoHistoriqueIntervention;
 import fr.afcepf.ai93.diag6.api.data.travaux.IDaoIntervention;
 import fr.afcepf.ai93.diag6.api.data.travaux.IDaoTypeIntervention;
+import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 import fr.afcepf.ai93.diag6.entity.travaux.EtatAvancementTravaux;
 import fr.afcepf.ai93.diag6.entity.travaux.HistoriqueIntervention;
 import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
@@ -25,11 +27,12 @@ public class BusinessInterventionImpl implements IBusinessIntervention {
 	private IDaoTypeIntervention proxyTypeIntervention;
 	@EJB
 	private IDaoAvancementIntervention proxyEtatAvancement;
+	@EJB
+	private IDaoHistoriqueIntervention proxyHistorique;
 	
 	@Override
 	public List<HistoriqueIntervention> recupereToutHistoriqueIntervention() {
-		// TODO Auto-generated method stub
-		return null;
+		return proxyHistorique.recupereToutHistoriqueIntervention();	
 	}
 
 	@Override
@@ -52,7 +55,7 @@ public class BusinessInterventionImpl implements IBusinessIntervention {
 	}
 
 	@Override
-	public String modifierIntervention(Intervention intervention) {
+	public String modifierIntervention(Intervention intervention, Utilisateur user) {
 		
 		Intervention interventionInitiale = proxyIntervention.recupereIntervention(intervention.getIdIntervention());
 		int idAvancementInitial = interventionInitiale.getEtatAvancementTravaux().getIdEtatAvancement();
@@ -61,6 +64,7 @@ public class BusinessInterventionImpl implements IBusinessIntervention {
 		if (idAvancementInitial <= idAvancementNouveau)
 		{
 			proxyIntervention.modifierIntervention(intervention);
+			proxyHistorique.historiser(interventionInitiale, intervention, user);
 			return "Modification enregistrée avec succès";
 		}
 		else

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import fr.afcepf.ai93.diag6.api.data.autres.IDaoExpert;
 import fr.afcepf.ai93.diag6.entity.autres.Expert;

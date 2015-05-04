@@ -2,7 +2,6 @@ package fr.afcepf.ai93.diag6.data.autres;
 
 import java.util.List;
 
-<<<<<<< HEAD
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -15,41 +14,12 @@ public class DaoArtisanImpl implements IDaoArtisan {
 	@PersistenceContext(unitName="Malak_Diag_Data")
 	private EntityManager em;
 	
-	@Override
-	public List<Artisan> recupererToutArtisan() {
-		Query query = em.createQuery("SELECT a FROM Artisan a");
-		List <Artisan> liste = query.getResultList();
-		return liste;
-	}
-
+	
 	@Override
 	public void ajouterArtisant(Artisan artisan) {
 		em.persist(artisan);
 		
 	}
-
-	@Override
-	public boolean supprimerArtisan(Artisan artisan) {
-		em.merge(artisan);
-		return false;
-	}
-=======
-import javax.ejb.Remote;
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-
-import fr.afcepf.ai93.diag6.api.data.autres.IDaoArtisan;
-import fr.afcepf.ai93.diag6.entity.autres.Artisan;
-import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
-
-@Stateless
-@Remote(IDaoArtisan.class)
-public class DaoArtisanImpl implements IDaoArtisan {
-
-	@PersistenceContext(unitName="Malak_Diag_Data")
-	private EntityManager em;
 	
 	@Override
 	public List<Artisan> recupererToutArtisan() {
@@ -58,10 +28,6 @@ public class DaoArtisanImpl implements IDaoArtisan {
 		return liste;
 	}
 
-	@Override
-	public void ajouterArtisant(Artisan artisan) {
-		em.persist(artisan);		
-	}
 
 	@Override
 	public boolean supprimerArtisan(Artisan artisan) {
@@ -87,6 +53,4 @@ public class DaoArtisanImpl implements IDaoArtisan {
 		return liste;
 	}
 	*/
->>>>>>> branch 'master' of https://github.com/dumii/AI93_Projet3_Diagnostic6.git
-
 }
