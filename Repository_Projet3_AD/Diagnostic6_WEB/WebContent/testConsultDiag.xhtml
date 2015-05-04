@@ -19,9 +19,13 @@
 					value="Recuperer diagnostic"
 					action="#{mbDonneesGenerales.recupererDiagnostic()}" 
 					render="lblReponseAjax" />
-				<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.nomErp} #{mbDonneesGenerales.diagnosticSelectionne.erp.categorieErp.denominationCategorieErp} #{mbDonneesGenerales.diagnosticSelectionne.intituleDiagnostic} 
-				#{mbDonneesGenerales.diagnosticSelectionne.expert.nomExpert} #{mbDonneesGenerales.diagnosticSelectionne.expert.prenomExpert} " 	
-				id="lblReponseAjax" />
+				<h:panelGroup id="lblReponseAjax" layout="block">
+					<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.nomErp}"/> <br />
+					<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.categorieErp.denominationCategorieErp}" /><br />
+					<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.intituleDiagnostic}" /><br />
+					<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.nomExpert}" />
+					<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.prenomExpert}" 	/>
+				</h:panelGroup>
 			</rich:panel>
 		</h:form>
 </f:view>
