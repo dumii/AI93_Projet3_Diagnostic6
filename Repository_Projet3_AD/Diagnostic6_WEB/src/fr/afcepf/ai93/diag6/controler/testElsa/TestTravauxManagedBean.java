@@ -101,7 +101,7 @@ public class TestTravauxManagedBean {
 	public String modifier(Intervention intervention)
 	{
 		intervention.setCoutIntervention(5555.55);
-		proxyBusiness.modifierIntervention(intervention);
+		//proxyBusiness.modifierIntervention(intervention);
 		init();
 		
 		return "";
