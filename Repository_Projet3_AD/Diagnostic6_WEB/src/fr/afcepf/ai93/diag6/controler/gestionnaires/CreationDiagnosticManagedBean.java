@@ -44,6 +44,8 @@ public class CreationDiagnosticManagedBean {
 	
 	//Ajout d'un diagnostic :
 	public String ajouterDiagnostic(){
+		System.out.println("début de la méthode");
+		System.out.println("1111111111111111111111111111111111111");
 		
 		//création des objets correspondant aux clefs étrangères dans la table Diagnostic
 		//attribution d'un numéro id temporaire puisque la page xhtml n'est pas encore faite
@@ -69,13 +71,13 @@ public class CreationDiagnosticManagedBean {
 		diagnosticAdd.setTypeDiagnostic(typeDiag);
 		diagnosticAdd.setNomDiagnostiqueur("SteevyS");
 		diagnosticAdd.setDateSaisieDiagnostic(dateSaisie);
-		diagnosticAdd.setDateRealisationDiagnostic(dateChoisie);
-		diagnosticAdd.setIntituleDiagnostic("généréParUneMéthodeNonFaite");
+		diagnosticAdd.setDateRealisationDiagnostic(new Date());
+		diagnosticAdd.setIntituleDiagnostic("Louis Test Creation Diagnostic ");
 		diagnosticAdd.setTraite(0);
 		
 		try{
 			//On ajoute dans la base de données et on rafraîchit la liste de diagnostic à l'écran
-			resultat.proxyBusinessDiag.ajouterDiagnostic(diagnosticAdd);
+			resultat = proxyBusinessDiag.ajouterDiagnostic(diagnosticAdd);
 		}
 		catch (Exception e)
 		{
@@ -83,7 +85,11 @@ public class CreationDiagnosticManagedBean {
 			resultat="Erreur lors de l'enregistrement, veuillez vérifier que toutes les valeurs sont correctement indiquées "
 					+ "ou réessayer dans quelques minutes.";
 		}
-		
+		init();
+		System.out.println("*****************************************************************************");
+		System.err.println(resultat);
+		System.out.println("*****************************************************************************");
+		return "";
 	}
 
 	public IBusinessDiagnostic getProxyBusinessDiag() {
@@ -133,6 +139,18 @@ public class CreationDiagnosticManagedBean {
 	}
 	public void setDateChoisie(Date dateChoisie) {
 		this.dateChoisie = dateChoisie;
+	}
+	public List<Diagnostic> getListeDiag() {
+		return listeDiag;
+	}
+	public void setListeDiag(List<Diagnostic> listeDiag) {
+		this.listeDiag = listeDiag;
+	}
+	public List<Erp> getListeERP() {
+		return listeERP;
+	}
+	public void setListeERP(List<Erp> listeERP) {
+		this.listeERP = listeERP;
 	}
 	
 	

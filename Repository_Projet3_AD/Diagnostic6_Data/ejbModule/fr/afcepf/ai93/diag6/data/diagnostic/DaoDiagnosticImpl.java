@@ -11,77 +11,87 @@ import javax.persistence.Query;
 import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoDiagnostic;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
+import fr.afcepf.ai93.diag6.entity.erp.Erp;
 import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
 
 @Stateless
 @Remote(IDaoDiagnostic.class)
 
 public class DaoDiagnosticImpl implements IDaoDiagnostic {
-@PersistenceContext(unitName="Malak_Diag_Data")
-private EntityManager em; 
+	@PersistenceContext(unitName="Malak_Diag_Data")
+	private EntityManager em; 
 
-@Override
-public List<Diagnostic> recupereToutDiagnostic() {
-	Query requete = em.createQuery("SELECT d FROM Diagnostic d"); 
-	List<Diagnostic> listeToutDiag = requete.getResultList(); 
-	return listeToutDiag;
-}
-
-@Override
-public boolean recupereSiIntervEnCoursParDiag(int idDiag) {
-	Query requete = em.createQuery("SELECT a from Anomalie a inner join fetch a.listeInterventions where a.diagnostic.idDiagnostic = :id");
-	requete.setParameter("id", idDiag);
-	List<Anomalie> listeAnomaliesAvecIntervention = requete.getResultList();
-	for (Anomalie a : listeAnomaliesAvecIntervention)
-	
-	if (listeAnomaliesAvecIntervention.size() > 0)
-	{
-		return true;
+	@Override
+	public List<Diagnostic> recupereToutDiagnostic() {
+		Query requete = em.createQuery("SELECT d FROM Diagnostic d"); 
+		List<Diagnostic> listeToutDiag = requete.getResultList(); 
+		return listeToutDiag;
 	}
-	return false;
-}
 
-@Override
-public void ajouterDiagnostic(Diagnostic diagnostic) {
-	em.persist(diagnostic);
-	
-}
+	@Override
+	public boolean recupereSiIntervEnCoursParDiag(int idDiag) {
+		Query requete = em.createQuery("SELECT a from Anomalie a inner join fetch a.listeInterventions where a.diagnostic.idDiagnostic = :id");
+		requete.setParameter("id", idDiag);
+		List<Anomalie> listeAnomaliesAvecIntervention = requete.getResultList();
+		for (Anomalie a : listeAnomaliesAvecIntervention)
 
-@Override
-public void modifierDiagnostic(Diagnostic diagnostic) {
-	// TODO Auto-generated method stub
-	
-}
+			if (listeAnomaliesAvecIntervention.size() > 0)
+			{
+				return true;
+			}
+		return false;
+	}
 
-@Override
-public void notifierDiagnostic() {
-	// TODO Auto-generated method stub
-	
-}
+	@Override
+	public void ajouterDiagnostic(Diagnostic diagnostic) {
+		em.persist(diagnostic);
 
-@Override
-public void historiserDiagnostic(Diagnostic diagnostic) {
-	// TODO Auto-generated method stub
-	
-}
+	}
 
-@Override
-public Diagnostic recupereDiagnostic(int idDiagnostic) {
-	// TODO Auto-generated method stub
-	return null;
-}
+	@Override
+	public void modifierDiagnostic(Diagnostic diagnostic) {
+		// TODO Auto-generated method stub
 
-@Override
-public List<Diagnostic> rechercheDiagnostics(String nomDiagnostic) {
-	// TODO Auto-generated method stub
-	return null;
-}
+	}
 
-@Override
-public List<Diagnostic> rechercheDiagnosticsErp(String nomERP) {
-	// TODO Auto-generated method stub
-	return null;
-}
+	@Override
+	public void notifierDiagnostic() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void historiserDiagnostic(Diagnostic diagnostic) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public Diagnostic recupereDiagnostic(int idDiagnostic) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Diagnostic> rechercheDiagnostics(String nomDiagnostic) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Diagnostic> rechercheDiagnosticsErp(String nomERP) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Diagnostic> recupereDiagnosticParErp(Erp erp) {
+		//et where traite = 0
+		Query requete = em.createQuery("SELECT a.listeDiagnosticErp from Erp a WHERE a.idErp = :pid");
+		requete.setParameter("pid", erp.getIdErp());
+		List<Diagnostic> liste = requete.getResultList();
+		return liste;
+	}
 
 
 }

@@ -59,15 +59,33 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 
 	@Override
 	public String ajouterDiagnostic(Diagnostic diagnostic) {
-		Diagnostic ajoutAutorise = proxyDiagnostic.recupereDiagnostic(diagnostic.getTypeDiagnostic().getIdTypeDiagnostic());
-		if (ajoutAutorise.equals(null))
-		{
+		
+		//en premier lieu on vérifie si le diagnostic lié à cet Erp n'est pas déjà traité
+		boolean ajoutAutorise = true;
+		
+		int typeDiag = diagnostic.getTypeDiagnostic().getIdTypeDiagnostic();
+		
+		//on affiche les Erp avec leurs diags avec leurs Type de diag
+		List<Diagnostic> liste =  proxyDiagnostic.recupereDiagnosticParErp(diagnostic.getErp());
+		for (Diagnostic diag2 : liste) {
+			if(diag2.getTraite() == 0 && diag2.getTypeDiagnostic().getIdTypeDiagnostic() == typeDiag)
+			{
+				ajoutAutorise = false;
+				System.out.println(diag2.getErp().getIdErp() + "/" + diag2.getIdDiagnostic() + "/" + diag2.getTypeDiagnostic().getNomType());
+				System.out.println(ajoutAutorise);
+				System.out.println(diag2.getTraite() + diag2.getTypeDiagnostic().getIdTypeDiagnostic());
+			}	
+		} 
+		if (ajoutAutorise == true) {
+			System.out.println("on est dans le business");
+			System.out.println("2222222222222222222222222222222222222");	
 			proxyDiagnostic.ajouterDiagnostic(diagnostic);
+			System.out.println(ajoutAutorise);
 			return "Intervention enregristrée avec succès";
-		}
-		else
+				
+		}else
 		{
-			return "Un diagnostic de ce type a déjà été ajouté sur cet Erp, un seul diagnostic de chaque type peut-être attribué à un Erp.";
+			return "Un diagnostic de ce type est déjà actif sur cet Erp, un seul diagnostic de chaque type peut-être attribué à un Erp.";
 		}
 	}
 
