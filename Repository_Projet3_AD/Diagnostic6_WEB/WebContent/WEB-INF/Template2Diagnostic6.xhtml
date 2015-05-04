@@ -6,10 +6,12 @@
 
 <h:head>
 	<title>
-		Diagnostic 6
+		<ui:insert name="title"></ui:insert>
 	</title>
 	
 	<link href="css/style.css" rel="stylesheet" type="text/css" />
+	<link href="css/consultationDiagnostic.css" rel="stylesheet"
+		type="text/css" />
  	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css"/>
 	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -74,9 +76,11 @@
 					</ul>
 				</p>
 			</div>			
-		</div>	
+		</div>
+			
 	</div>
-
+		
+		
 	<div id="bandeauDroite">
 		<fieldset id="connection">
 			<legend>Bonjour <ui:insert name="nomUtilisateur"/></legend>
@@ -105,6 +109,8 @@
 		</fieldset>
 	</div>
 
+	<ui:insert name="content" />
+		
 <script>
   $( "#radio" ).buttonset();
   $( "#accordion" ).accordion();

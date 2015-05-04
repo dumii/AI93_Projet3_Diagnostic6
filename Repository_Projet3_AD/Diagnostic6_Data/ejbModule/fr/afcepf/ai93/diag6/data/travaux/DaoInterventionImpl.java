@@ -12,6 +12,10 @@ import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoDiagnostic;
 import fr.afcepf.ai93.diag6.api.data.travaux.IDaoIntervention;
 import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/dumii/AI93_Projet3_Diagnostic6.git
 
 @Stateless
 @Remote(IDaoIntervention.class)
@@ -68,6 +72,11 @@ public class DaoInterventionImpl implements IDaoIntervention {
 		{
 			return true;
 		}
+<<<<<<< HEAD
 	}
+=======
+	}
+	
+>>>>>>> branch 'master' of https://github.com/dumii/AI93_Projet3_Diagnostic6.git
 }
 

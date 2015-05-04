@@ -68,10 +68,17 @@ public class DaoDiagnosticImpl implements IDaoDiagnostic {
 	}
 
 	@Override
-	public boolean recupereSiIntervEnCoursParDiag(int idDiag) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+public boolean recupereSiIntervEnCoursParDiag(int idDiag) {
+	Query requete = em.createQuery("SELECT a from Anomalie a inner join fetch a.listeInterventions where a.diagnostic.idDiagnostic = :id");
+	requete.setParameter("id", idDiag);
+	List<Anomalie> listeAnomaliesAvecIntervention = requete.getResultList();
+	for (Anomalie a : listeAnomaliesAvecIntervention)
 	
+	if (listeAnomaliesAvecIntervention.size() > 0)
+	{
+		return true;
+	}
+	return false;
+}
 	
 }

@@ -46,9 +46,9 @@ public class DaoAnomalieImpl implements IDaoAnomalie {
 	}
 
 	@Override
-	public List<Anomalie> rechercheAnomaliesErp(int noERP) {
+	public List<Anomalie> rechercheAnomaliesErp(String nomERP) {
 		Query query = em.createQuery("SELECT a FROM Anomalie WHERE a.id = :pid");
-		query.setParameter("pid", noERP);
+		query.setParameter("pid", nomERP);
 		List<Anomalie> liste = query.getResultList();
 		
 		if (liste.size() > 0) {
@@ -78,12 +78,6 @@ public class DaoAnomalieImpl implements IDaoAnomalie {
 		query.setParameter("pid", nomAnomalie);
 		List <Anomalie> liste = query.getResultList();
 		return liste;
-	}
-
-	@Override
-	public List<Anomalie> rechercheAnomaliesErp(String nomERP) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }
 
