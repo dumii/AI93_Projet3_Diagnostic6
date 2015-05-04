@@ -16,6 +16,14 @@ public interface IBusinessDiagnostic {
 
 		public List<Diagnostic> recupereToutDiagnosticArchives();
 		
+		public Diagnostic recupereDiagnostic(int idDiagnostic);
+		
+		
+		
+		public List<Diagnostic> rechercheDiagnostics(String nomDiagnostic);
+
+		public List<Diagnostic> rechercheDiagnosticsErp(String nomERP);
+		
 
 	    public void ajouterDiagnostic(Diagnostic diagnostic);
 
@@ -29,11 +37,9 @@ public interface IBusinessDiagnostic {
 
 	    public List<TypeDiagnostic> recupereTypeDiagnostic();
 
-	    public Diagnostic recupereDiagnostic(int idDiagnostic);
+	 
 
-	    public List<Diagnostic> rechercheDiagnostics(String nomDiagnostic);
-
-	    public List<Diagnostic> rechercheDiagnosticsErp(String nomERP);
+	   
 
 
 
