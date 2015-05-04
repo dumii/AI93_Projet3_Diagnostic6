@@ -1,9 +1,6 @@
 package fr.afcepf.ai93.diag6.data.diagnostic;
 
 import java.util.List;
-<<<<<<< HEAD
-=======
-
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -42,77 +39,6 @@ public boolean recupereSiIntervEnCoursParDiag(int idDiag) {
 	}
 	return false;
 }
-
-@Override
-public Diagnostic recupereDiagnostic(int idDiagnostic) {
-	Query requete = em.createQuery("select d from Diagnostic d where idDiagnostic = :id");
-	requete.setParameter("id", idDiagnostic); 
-	Diagnostic diag = (Diagnostic) requete.getSingleResult(); 
-	return diag;
-}
-
-@Override
-public void ajouterDiagnostic(Diagnostic diagnostic) {
-	// TODO Auto-generated method stub
-	
-}
-
-@Override
-public void modifierDiagnostic(Diagnostic diagnostic) {
-	// TODO Auto-generated method stub
-	
-}
-
-@Override
-public void notifierDiagnostic() {
-	// TODO Auto-generated method stub
-	
-}
-
-@Override
-public void historiserDiagnostic(Diagnostic diagnostic) {
-	// TODO Auto-generated method stub
-	
-}
-
-
-
-@Override
-public List<Diagnostic> rechercheDiagnostics(String nomDiagnostic) {
-	// TODO Auto-generated method stub
-	return null;
-}
-
-@Override
-public List<Diagnostic> rechercheDiagnosticsErp(String nomERP) {
-	// TODO Auto-generated method stub
-	return null;
-}
-
->>>>>>> branch 'master' of https://github.com/dumii/AI93_Projet3_Diagnostic6.git
-
-import javax.ejb.Remote;
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-
-import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoDiagnostic;
-import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
-
-@Stateless
-@Remote(IDaoDiagnostic.class)
-public class DaoDiagnosticImpl implements IDaoDiagnostic {
-
-	@PersistenceContext(unitName="Malak_Diag_Data")
-	private EntityManager em;
-	
-	@Override
-	public List<Diagnostic> recupereToutDiagnostic() {
-		Query query = em.createQuery("SELECT d FROM Diagnostic d");
-		List<Diagnostic> liste = query.getResultList();
-		return liste;
-	}
 
 	@Override
 	public void ajouterDiagnostic(Diagnostic diagnostic) {
