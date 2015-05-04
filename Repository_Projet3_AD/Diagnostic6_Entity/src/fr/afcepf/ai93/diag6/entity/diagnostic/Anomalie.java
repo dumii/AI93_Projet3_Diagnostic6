@@ -73,7 +73,7 @@ public class Anomalie implements Serializable{
 	private List<HistoriqueAnomalie> listeHistoriqueAnomalie;
 	
 	@OneToOne(mappedBy="anomalie")
-	private Intervention listeInterventions;
+	private Intervention intervention;
 	
 
 	public Integer getIdAnomalie() {

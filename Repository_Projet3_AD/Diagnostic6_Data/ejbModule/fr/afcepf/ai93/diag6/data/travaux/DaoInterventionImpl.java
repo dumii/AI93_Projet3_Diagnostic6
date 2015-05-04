@@ -8,8 +8,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoDiagnostic;
 import fr.afcepf.ai93.diag6.api.data.travaux.IDaoIntervention;
+import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
+
 
 @Stateless
 @Remote(IDaoIntervention.class)
@@ -67,4 +70,6 @@ public class DaoInterventionImpl implements IDaoIntervention {
 			return false;
 		}
 	}
+	
 }
+
