@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:rich="http://richfaces.org/rich" 
+      xmlns:a4j="http://richfaces.org/a4j">
+
+<h:head></h:head> 
+<body> 
+
+<f:view>
+		<h:form>
+			<rich:panel>
+				<f:facet name="header">
+				Nom diagnostic	</f:facet>
+				<h:inputText value="#{mbDonneesGenerales.idDiag}" />
+				<a4j:commandLink 
+					value="Recuperer diagnostic"
+					action="#{mbDonneesGenerales.recupererDiagnostic()}" 
+					render="lblReponseAjax" />
+				<h:panelGroup id="lblReponseAjax" layout="block">
+					<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.nomErp}"/> <br />
+					<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.categorieErp.denominationCategorieErp}" /><br />
+					<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.intituleDiagnostic}" /><br />
+					<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.nomExpert}" />
+					<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.prenomExpert}" 	/>
+				</h:panelGroup>
+			</rich:panel>
+		</h:form>
+</f:view>
+</body> 
+</html>

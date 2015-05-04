@@ -55,6 +55,8 @@ public class BusinessInterventionImpl implements IBusinessIntervention {
 	public String modifierIntervention(Intervention intervention) {
 		
 		Intervention interventionInitiale = proxyIntervention.recupereIntervention(intervention.getIdIntervention());
+		
+		
 		int idAvancementInitial = interventionInitiale.getEtatAvancementTravaux().getIdEtatAvancement();
 		int idAvancementNouveau = intervention.getEtatAvancementTravaux().getIdEtatAvancement();
 		

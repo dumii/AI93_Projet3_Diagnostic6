@@ -10,7 +10,6 @@ import javax.persistence.Query;
 
 import fr.afcepf.ai93.diag6.api.data.autres.IDaoArtisan;
 import fr.afcepf.ai93.diag6.entity.autres.Artisan;
-import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
 
 @Stateless
 @Remote(IDaoArtisan.class)
@@ -25,6 +24,7 @@ public class DaoArtisanImpl implements IDaoArtisan {
 		List<Artisan> liste = query.getResultList();
 		return liste;
 	}
+	
 
 	@Override
 	public void ajouterArtisant(Artisan artisan) {
@@ -55,5 +55,4 @@ public class DaoArtisanImpl implements IDaoArtisan {
 		return liste;
 	}
 	*/
-
 }

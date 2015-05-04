@@ -95,8 +95,7 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 
 	@Override
 	public Diagnostic recupereDiagnostic(int idDiagnostic) {
-		// TODO Auto-generated method stub
-		return null;
+		return proxyDiagnostic.recupereDiagnostic(idDiagnostic);
 	}
 
 	@Override
