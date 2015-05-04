@@ -2,67 +2,83 @@ package fr.afcepf.ai93.diag6.data.diagnostic;
 
 import java.util.List;
 
+import javax.ejb.EJB;
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
+import javax.persistence.Entity;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoAnomalie;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
 
+@Stateless
+@Remote(IDaoAnomalie.class)
 public class DaoAnomalieImpl implements IDaoAnomalie {
+
+	@PersistenceContext(unitName="Malak_Diag_Data")
 	private EntityManager em;
-	
+
 	@Override
 	public List<Anomalie> recupereToutAnomalie() {
-		Query requete = em.createQuery("SELECT a FROM Anomalie a");
-		List<Anomalie> listeAnomalie = requete.getResultList();
-		
-		return listeAnomalie;
+		Query query = em.createQuery("SELECT a FROM Anomalie a");
+		List<Anomalie> liste = query.getResultList();
+		return liste;
 	}
 
 	@Override
 	public void ajouterAnomalie(Anomalie anomalie) {
-		Anomalie a = new Anomalie();
-		Query requete = em.createQuery("INSERT a IN Diagnostic");
-		Anomalie Anomalie = (Anomalie)requete.getSingleResult();
-		
-		
-		
+		em.persist(anomalie);
 	}
 
 	@Override
-	public void modifierAnomalie(Anomalie anomalie) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void historiserAnomalie(Anomalie anomalie) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean supprimerAnomalie(Anomalie anomalie) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean modifierAnomalie(Anomalie anomalie) {
+		em.merge(anomalie);
+		return true;
 	}
 
 	@Override
 	public Anomalie recupereAnomalie(int idAnomalie) {
-		// TODO Auto-generated method stub
-		return null;
+		Query query = em.createQuery("SELECT a FROM Anomalie WHERE a.id = :pid");
+		query.setParameter("pid", idAnomalie);
+		Anomalie anomalie = (Anomalie) query.getSingleResult();
+		return anomalie;
+	}
+
+	@Override
+	public List<Anomalie> rechercheAnomaliesErp(int no-ERP) {
+		Query query = em.createQuery("SELECT a FROM Anomalie WHERE a.id = :pid");
+		query.setParameter("pid", no-ERP);
+		List<Anomalie> liste = query.getResultList();
+		
+		if (liste.size() > 0) {
+			return true;
+		}
+		else {
+			return false;
+		// je me suis inspiré de ce qu'a fait Elsa pour la rechercheInterventionSurAnomalie()
+		// mais je ne suis pas sur de mon coup ;)
+		}
+	}
+
+	@Override
+	public void historiserAnomalie(Anomalie anomalie) {
+		// l'historisation est automatique, la methode n'est pas utile
+	}
+
+	@Override
+	public boolean supprimerAnomalie(Anomalie anomalie) {
+		em.merge(anomalie);
+		return true;
 	}
 
 	@Override
 	public List<Anomalie> rechercheAnomalies(String nomAnomalie) {
-		// TODO Auto-generated method stub
-		return null;
+		Query query = em.createQuery("SELECT a FROM Anomalie a Where a.nomAnomalie = :pid");
+		query.setParameter("pid", nomAnomalie);
+		List <Anomalie> liste = query.getResultList();
+		return liste;
 	}
-
-	@Override
-	public List<Anomalie> rechercheAnomaliesErp(String nomERP) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 }
+
