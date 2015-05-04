@@ -11,17 +11,23 @@
 
 	<link rel="stylesheet"
 		href="//code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css" />
-	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
 </h:head>
 <ui:composition template="/WEB-INF/Template2Diagnostic6.xhtml">
 	<ui:define name="title">Diagnostic 6 - Consultation diagnostic</ui:define>
 	<ui:define name="content">
-
+<f:view>
+		<h:form>
 		<div id="content">
+		<h:inputText value="#{mbDonneesGenerales.idDiag}" />
+				<a4j:commandLink 
+					value="Recuperer diagnostic"
+					action="#{mbDonneesGenerales.recupererDiagnostic()}" 
+					render="lblReponseAjax" />
+			<h:panelGroup id="lblReponseAjax" layout="block">
 			<div class="mini-barreEtat">
-				#{o.intituleDiagnostic}
+				<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.intituleDiagnostic}"/>
 				<div id="mini-barreEtat-boutons">
 					<a href=""><img class="boutons-mini-barreEtat"
 						id="boutonModifier" name="boutonModifier"
@@ -42,83 +48,80 @@
 						class="boutons-mini-barreEtat" id="favoriteJaune" name="favorite"
 						src="images/consultationDiagnostic/FavoriteIcon.26.26.png"
 						onClick="defavorisation(this.src)" /></a>
-
 				</div>
 			</div>
 			<div id="InfoErpDiagnostic">
 				<div id="ErpDiagGeneral">
 					<div id="ErpDiagTitre">
 						<h3>
-							<span>Informations Générales</span>
+							<span>Informations générales</span>
 						</h3>
 					</div>
 					<div class="tableErpDiagGeneral">
 						<table>
 							<tr>
 								<th class="ErpGeneral" width="180px" style="text-align: right">ERPconcerné
-									:</th>
+									:  </th>
 								<th id="ErpDiag" class="ErpGeneral" width="180px"
-									style="text-align: right">#{o.nomErp}</th>
+									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.nomErp}" /></th>
 								<th class="ErpGeneral" width="230px" style="text-align: right">Date
 									de réalisation du diagnostic :</th>
 								<th id="DateErpDiag" class="ErpGeneral" width="180px"
-									style="text-align: right">#{o.dateRealisationDiagnostic}</th>
+									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.dateRealisationDiagnostic.toLocaleString()}"/></th>
 							</tr>
 							<tr>
 								<th class="ErpGeneral" width="180px" style="text-align: right">Catégorie
 									:</th>
 								<th id="CategErpDiag" class="ErpGeneral" width="180px"
-									style="text-align: right">#{o.denominationCategorieErp}</th>
+									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.categorieErp.denominationCategorieErp}" /></th>
 								<th class="ErpGeneral" width="230px" style="text-align: right">Date
 									d'enregistrement diagnostic :</th>
 								<th id="DateErpDiag" class="ErpGeneral" width="180px"
-									style="text-align: right">#{o.dateSaisieDiagnostic}</th>
+									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.dateSaisieDiagnostic.toLocaleString()}" /></th>
 
 							</tr>
 							<tr>
 								<th class="ErpGeneral" width="180px" style="text-align: right">Fonction
 									:</th>
 								<th id="FoncErpDiag" class="ErpGeneral" width="180px"
-									style="text-align: right">#{o.typeErp}</th>
+									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.typeErp.denominationTypeErp} #{mbDonneesGenerales.diagnosticSelectionne.erp.typeErp.typeErp}" /></th>
 								<th class="ErpGeneral" width="230px" style="text-align: right">Expert
 									:</th>
 								<th id="expertDiag" class="ErpGeneral" width="180px"
-									style="text-align: right">#{o.prenomExpert}#{o.nomExpert}</th>
+									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.prenomExpert} #{mbDonneesGenerales.diagnosticSelectionne.expert.nomExpert}"/></th>
 							</tr>
 							<tr>
 								<th class="ErpGeneral" width="180px" style="text-align: right">Adresse
 									:</th>
 								<th id="AdressErpDiag" class="ErpGeneral" width="180px"
-									style="text-align: right">#{o.numVoieErp}#{o.numVoieErp}</th>
+									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.numVoieErp} #{mbDonneesGenerales.diagnosticSelectionne.erp.nomVoieErp}"/></th>
 								<th class="ErpGeneral" width="230px" style="text-align: right">Coordonées
 									:</th>
 								<th id="telExpDiag" class="ErpGeneral" width="180px"
-									style="text-align: right">#{o.telExpert}</th>
+									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.telExpert}"/></th>
 
 							</tr>
 							<tr>
 								<th class="ErpGeneral" width="180px" style="text-align: right"></th>
 								<th id="cpVillExpDiag" class="ErpGeneral" width="180px"
-									style="text-align: right">#{o.codePostal}#{o.ville}</th>
+									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.localisation.codePostal} #{mbDonneesGenerales.diagnosticSelectionne.erp.localisation.ville}" /></th>
 								<th class="ErpGeneral" width="230px" style="text-align: right"></th>
 								<th id="emailExpErpDiag" class="ErpGeneral" width="180px"
-									style="text-align: right">#{o.mailExpert}</th>
-
-
+									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.mailExpert}"/></th>
 							</tr>
 							<tr>
 								<th class="accordErp" width="180px" style="text-align: right"></th>
 								<th class="accordErp" width="180px" style="text-align: right"></th>
 								<th class="ErpGeneral" width="230px" style="text-align: right"></th>
 								<th id="adrExpDiag" class="ErpGeneral" width="180px"
-									style="text-align: right">#{o.numVoieExpert}#{o.nomVoieExpert}</th>
+									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.numVoieExpert} #{mbDonneesGenerales.diagnosticSelectionne.expert.nomVoieExpert}"/></th>
 							</tr>
 							<tr>
 								<th class="ErpGeneral" width="180px" style="text-align: right"></th>
 								<th class="ErpGeneral" width="180px" style="text-align: right"></th>
 								<th class="ErpGeneral" width="230px" style="text-align: right"></th>
-								<th id="adrExpDiag" class="ErpGeneral" width="180px"
-									style="text-align: right">#{o.codePostal}#{o.ville}</th>
+								<th id="cpVillExpDiag" class="ErpGeneral" width="180px"
+									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.localisation.codePostal} #{mbDonneesGenerales.diagnosticSelectionne.expert.localisation.ville}"/></th>
 							</tr>
 						</table>
 					</div>
@@ -126,33 +129,63 @@
 				<div id="infoDetaille">
 					<div id="buttShowEDD">
 						<h3>
-							<span>Informations Détaillées</span>
+							<span>Informations détaillées</span>
 						</h3>
 					</div>
 
 					<div id="ErpDiagDetaille">
 						<div id="nbBatimentErp">
-							<span>Nombres de Batiments constituans l'ERP : </span><span
-								id="nbBatimentErpRecherche">#Résultat de Recherche#</span>
+							<span>Nombres de bâtiments constituant l'ERP : </span><span
+								id="nbBatimentErpRecherche"><h:outputText value="#{mbDonneesGenerales.erpSelectionne.listeBatimentsErp.size()}" /></span>
 						</div>
 						<div class="tableErpDetaille">
+						
+						<h:panelGrid columns="1">
+           			 	<a4j:outputPanel id="panel" layout="block">
+               					 <a4j:repeat value="#{mbDonneesGenerales.erpSelectionne.listeBatimentsErp}" var="o" rows="20" id="repeat">
+                    			<rich:panel style="float:left; width:200px; padding:1px; background-color:#f7f7f7; border-display:none;  ">
+                       
+                        <h:panelGrid columns="2">
+                            <h:outputText value="Intitulé : " style="font-weight:bold" />
+                            <h:outputText value="#{o.intituleBatiment}" style="font-weight:bold" />
+                            <h:outputText value="Nombre d'étages" style="font-weight:bold" />
+                            <h:outputText value="#{o.listeEtagesBatiment.size()}" />
+                            <h:outputText value="State TimeZone" style="font-weight:bold" />
+                            <h:outputText value="#{o.listeEtagesBatiment.size()}" />
+                        </h:panelGrid>
+                    </rich:panel>
+                </a4j:repeat>
+           				 </a4j:outputPanel>
+
+        </h:panelGrid>
+							
 							<table>
 								<tr>
+									
+									
+									<h:dataTable>
 									<th class="ErpDetaille" width="180px" style="text-align: right">Intitulé
 										:</th>
-									<ui:repeat var="o" value="#{order.orderList}"
+									<ui:repeat var="o" value="#{mbDonneesGenerales.erpSelectionne.listeBatimentsErp}"
 										varStatus="status">
+										 <h:column id="batIntileErp" class="ErpDetaille" width="160px"
+											style="text-align: right">
+       											 <h:outputText value="#{o.intituleBatiment}"/>
+    									</h:column>
 										<th id="batIntileErp" class="ErpDetaille" width="160px"
 											style="text-align: right">#{o.intituleBatiment}</th>
+										<th id="batIntileErp" class="ErpDetaille" width="160px"
+											style="text-align: right">#{o.listeEtagesBatiment.size()}</th>
 									</ui:repeat>
+									</h:dataTable>
 								</tr>
 								<tr>
 									<th class="ErpDetaille" width="180px" style="text-align: right">Nombre
 										d'étages :</th>
-									<ui:repeat var="o" value="#{order.orderList}"
+									<ui:repeat var="o" value="#{mbDonneesGenerales.erpSelectionne.listeBatimentsErp}"
 										varStatus="status">
 										<th id="nbEtagesBatErp" class="ErpDetaille" width="160px"
-											style="text-align: right">#Résultat de Recherche#</th>
+											style="text-align: right">#{o.listeEtagesBatiment.size()}</th>
 									</ui:repeat>
 								</tr>
 								<tr>
@@ -213,6 +246,7 @@
 					</div>
 				</div>
 			</div>
+			</h:panelGroup>
 			<div id="diagAnomalieSection">
 				<div id="diagnosticFiche">
 					<div id="ficheDiagTitre">
@@ -278,17 +312,19 @@
 						</div>
 					</ui:repeat>
 				</div>
-			</div>
-
+			</div>			
 		</div>
+		</h:form>
 
 		<script>
-  $( "#radio" ).buttonset();
-  $( "#accordion" ).accordion();
-  $("button").button();
+		jQuery.noConflict();
+		
+		$( "#radio" ).buttonset();
+		$( "#accordion" ).accordion();
+		$("button").button();
 
-  $( "#buttShowEDD" ).click(function() {
-	  $( "#ErpDiagDetaille" ).toggle( "blind", 500 );
+		$( "#buttShowEDD" ).click(function() {
+			$( "#ErpDiagDetaille" ).toggle( "blind", 500 );
 	});
 
   function notification() 
@@ -317,7 +353,7 @@
   }
 	
 </script>
+</f:view>
 	</ui:define>
-
 </ui:composition>
 </html>

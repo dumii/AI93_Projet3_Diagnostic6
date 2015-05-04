@@ -2,7 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+      xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"> 
 
 <h:head>
 	<title>
@@ -112,7 +114,9 @@
 	<ui:insert name="content" />
 		
 <script>
-  $( "#radio" ).buttonset();
+jQuery.noConflict();
+
+  $( "#radio" ).buttonset(); 
   $( "#accordion" ).accordion();
   $("button").button();
 </script>
