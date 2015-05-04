@@ -24,13 +24,13 @@ public class DaoArtisanImpl implements IDaoArtisan {
 		List<Artisan> liste = query.getResultList();
 		return liste;
 	}
-	
 
 	@Override
 	public void ajouterArtisant(Artisan artisan) {
-		em.persist(artisan);		
+		em.persist(artisan);
+		
 	}
-
+	
 	@Override
 	public boolean supprimerArtisan(Artisan artisan) {
 		em.merge(artisan);

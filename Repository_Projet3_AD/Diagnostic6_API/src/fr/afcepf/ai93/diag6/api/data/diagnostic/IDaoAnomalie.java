@@ -21,5 +21,4 @@ public interface IDaoAnomalie {
     public List<Anomalie> rechercheAnomalies(String nomAnomalie);
 
     public List<Anomalie> rechercheAnomaliesErp(String nomERP);
-
 }
