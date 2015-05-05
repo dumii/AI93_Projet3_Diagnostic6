@@ -148,7 +148,7 @@ $(document).ready(function(){
 	    ['En attente', #{mbPublic.nbInterventionDiagnostiquees}]
 	  ];
 	  var plot1 = jQuery.jqplot ('chart1', [data], 
-	    { 
+	    { title:'Avancée des travaux',
 	      seriesDefaults: {
 	        // Make this a pie chart.
 	        renderer: jQuery.jqplot.PieRenderer, 
@@ -160,6 +160,7 @@ $(document).ready(function(){
 	      }, 
 	      legend: { show:true, location: 'e' }
 	    }
+	    
 	  );
 	});
 $(document).ready(function(){
@@ -187,11 +188,12 @@ $(document).ready(function(){
 	});
 
 $(document).ready(function(){
-    var s1 = [2, 6, 7, 10];
-    var s2 = [7, 5, 3, 2];
-    var ticks = ['a', 'b', 'c', 'd'];
+    var s1 = [#{mbPublic.nbDiagnosticAccessibilitéTraites}, #{mbPublic.nbDiagnosticEnergieTraites},#{ mbPublic.nbDiagnosticSecuriteTraites}, #{mbPublic.nbDiagnosticHygieneTraites}];
+    var s2 = [#{mbPublic.nbDiagnosticAccessibilitéTotal}, #{mbPublic.nbDiagnosticEnergieTotal}, #{mbPublic.nbDiagnosticSecuriteTotal}, #{mbPublic.nbDiagnosticHygieneTotal}];
+    var ticks = ['Accessibilité', 'Energie', 'Sécurité', 'Hygiène'];
      
     plot2 = $.jqplot('chart3', [s1, s2], {
+        title:'Rapport par type',
         seriesDefaults: {
             renderer:$.jqplot.BarRenderer,
             pointLabels: { show: true }

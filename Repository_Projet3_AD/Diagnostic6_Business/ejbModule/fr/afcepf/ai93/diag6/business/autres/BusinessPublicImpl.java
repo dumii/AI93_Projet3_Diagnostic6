@@ -89,4 +89,52 @@ public class BusinessPublicImpl implements IBusinessPublic {
 		return proxyDaoPublic.nbInterventionsDiagnostiquees();
 	}
 
+	@Override
+	public Integer nbDiagnosticAccessibilitéTotal() {
+		// TODO Auto-generated method stub
+		return proxyDaoPublic.nbDiagnosticAccessibilitéTotal();
+	}
+
+	@Override
+	public Integer nbDiagnosticEnergieTotal() {
+		// TODO Auto-generated method stub
+		return proxyDaoPublic.nbDiagnosticEnergieTotal();
+	}
+
+	@Override
+	public Integer nbDiagnosticSecuriteTotal() {
+		// TODO Auto-generated method stub
+		return proxyDaoPublic.nbDiagnosticSecuriteTotal();
+	}
+
+	@Override
+	public Integer nbDiagnosticHygieneTotal() {
+		// TODO Auto-generated method stub
+		return proxyDaoPublic.nbDiagnosticHygieneTotal();
+	}
+
+	@Override
+	public Integer nbDiagnosticAccessibilitéTraites() {
+		// TODO Auto-generated method stub
+		return proxyDaoPublic.nbDiagnosticAccessibilitéTraites();
+	}
+
+	@Override
+	public Integer nbDiagnosticEnergieTraites() {
+		// TODO Auto-generated method stub
+		return proxyDaoPublic.nbDiagnosticEnergieTraites();
+	}
+
+	@Override
+	public Integer nbDiagnosticSecuriteTraites() {
+		// TODO Auto-generated method stub
+		return proxyDaoPublic.nbDiagnosticSecuriteTraites();
+	}
+
+	@Override
+	public Integer nbDiagnosticHygieneTraites() {
+		// TODO Auto-generated method stub
+		return proxyDaoPublic.nbDiagnosticHygieneTraites();
+	}
+
 }

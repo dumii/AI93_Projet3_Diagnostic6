@@ -20,6 +20,8 @@ public interface IDaoPublic {
 	 
 	 
 	 
+	 /* Methodes statistique graph1   */
+	 /* ***************************** */
 	 
 	 public Integer nbInterventionsTerminees();
 	 public Integer nbInterventionsEnCours();
@@ -27,6 +29,17 @@ public interface IDaoPublic {
 	 public Integer nbInterventionsDiagnostiquees();
 	 
 	 
+	 /* Methodes statistique graph2 */
+	 /* *****************************/
 	 
+	 public Integer nbDiagnosticAccessibilitéTotal();
+	 public Integer nbDiagnosticEnergieTotal();
+	 public Integer nbDiagnosticSecuriteTotal();
+	 public Integer nbDiagnosticHygieneTotal();
+	 
+	 public Integer nbDiagnosticAccessibilitéTraites();
+	 public Integer nbDiagnosticEnergieTraites();
+	 public Integer nbDiagnosticSecuriteTraites();
+	 public Integer nbDiagnosticHygieneTraites();
 	 
 }

@@ -21,6 +21,82 @@ public class PublicManagedBean{
 	private Integer nbInterventionPlanifiees;
 	private Integer nbInterventionDiagnostiquees;
 	
+	private Integer nbDiagnosticAccessibilitéTotal;
+	private Integer nbDiagnosticEnergieTotal;
+	private Integer nbDiagnosticSecuriteTotal;
+	private Integer nbDiagnosticHygieneTotal;
+	 
+	private Integer nbDiagnosticAccessibilitéTraites;
+	private Integer nbDiagnosticEnergieTraites;
+	private Integer nbDiagnosticSecuriteTraites;
+	private Integer nbDiagnosticHygieneTraites;
+	
+	public Integer getNbDiagnosticAccessibilitéTotal() {
+		return nbDiagnosticAccessibilitéTotal;
+	}
+
+	public void setNbDiagnosticAccessibilitéTotal(
+			Integer nbDiagnosticAccessibilitéTotal) {
+		this.nbDiagnosticAccessibilitéTotal = nbDiagnosticAccessibilitéTotal;
+	}
+
+	public Integer getNbDiagnosticEnergieTotal() {
+		return nbDiagnosticEnergieTotal;
+	}
+
+	public void setNbDiagnosticEnergieTotal(Integer nbDiagnosticEnergieTotal) {
+		this.nbDiagnosticEnergieTotal = nbDiagnosticEnergieTotal;
+	}
+
+	public Integer getNbDiagnosticSecuriteTotal() {
+		return nbDiagnosticSecuriteTotal;
+	}
+
+	public void setNbDiagnosticSecuriteTotal(Integer nbDiagnosticSecuriteTotal) {
+		this.nbDiagnosticSecuriteTotal = nbDiagnosticSecuriteTotal;
+	}
+
+	public Integer getNbDiagnosticHygieneTotal() {
+		return nbDiagnosticHygieneTotal;
+	}
+
+	public void setNbDiagnosticHygieneTotal(Integer nbDiagnosticHygieneTotal) {
+		this.nbDiagnosticHygieneTotal = nbDiagnosticHygieneTotal;
+	}
+
+	public Integer getNbDiagnosticAccessibilitéTraites() {
+		return nbDiagnosticAccessibilitéTraites;
+	}
+
+	public void setNbDiagnosticAccessibilitéTraites(
+			Integer nbDiagnosticAccessibilitéTraites) {
+		this.nbDiagnosticAccessibilitéTraites = nbDiagnosticAccessibilitéTraites;
+	}
+
+	public Integer getNbDiagnosticEnergieTraites() {
+		return nbDiagnosticEnergieTraites;
+	}
+
+	public void setNbDiagnosticEnergieTraites(Integer nbDiagnosticEnergieTraites) {
+		this.nbDiagnosticEnergieTraites = nbDiagnosticEnergieTraites;
+	}
+
+	public Integer getNbDiagnosticSecuriteTraites() {
+		return nbDiagnosticSecuriteTraites;
+	}
+
+	public void setNbDiagnosticSecuriteTraites(Integer nbDiagnosticSecuriteTraites) {
+		this.nbDiagnosticSecuriteTraites = nbDiagnosticSecuriteTraites;
+	}
+
+	public Integer getNbDiagnosticHygieneTraites() {
+		return nbDiagnosticHygieneTraites;
+	}
+
+	public void setNbDiagnosticHygieneTraites(Integer nbDiagnosticHygieneTraites) {
+		this.nbDiagnosticHygieneTraites = nbDiagnosticHygieneTraites;
+	}
+
 	public IBusinessPublic getProxyBusinessPublic() {
 		return proxyBusinessPublic;
 	}
@@ -63,12 +139,26 @@ public class PublicManagedBean{
 
 	@PostConstruct
 	public void init(){
+		
+		/*Graph1 ************************/
+		
 		nbInterventionTerminees = proxyBusinessPublic.nbInterventionsTerminees();
 		nbInterventionEnCours = proxyBusinessPublic.nbInterventionsEnCours();
 		nbInterventionPlanifiees = proxyBusinessPublic.nbInterventionsPlanifiess();
 		nbInterventionDiagnostiquees = proxyBusinessPublic.nbInterventionsDiagnostiquees();
-				
 		
+		
+		/*Graph3 ************************/
+		
+		nbDiagnosticAccessibilitéTotal = proxyBusinessPublic.nbDiagnosticAccessibilitéTotal();
+		nbDiagnosticEnergieTotal = proxyBusinessPublic.nbDiagnosticEnergieTotal();
+		nbDiagnosticSecuriteTotal = proxyBusinessPublic.nbDiagnosticSecuriteTotal();
+		nbDiagnosticHygieneTotal = proxyBusinessPublic.nbDiagnosticHygieneTotal();
+		
+		nbDiagnosticAccessibilitéTraites= proxyBusinessPublic.nbDiagnosticAccessibilitéTraites();
+		nbDiagnosticEnergieTraites= proxyBusinessPublic.nbDiagnosticEnergieTraites();
+		nbDiagnosticSecuriteTraites= proxyBusinessPublic.nbDiagnosticSecuriteTraites();
+		nbDiagnosticHygieneTraites= proxyBusinessPublic.nbDiagnosticHygieneTraites();
 	}
 	
 }
