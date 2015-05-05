@@ -79,6 +79,4 @@ public class DaoErpImpl implements IDaoErp {
 		List<Escalier> listeEscalier = requete.getResultList(); 
 		return listeEscalier;
 	}
-
-
 }

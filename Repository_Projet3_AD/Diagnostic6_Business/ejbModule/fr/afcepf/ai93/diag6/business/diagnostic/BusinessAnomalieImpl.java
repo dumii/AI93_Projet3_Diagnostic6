@@ -12,8 +12,6 @@ import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
 import fr.afcepf.ai93.diag6.entity.diagnostic.HistoriqueAnomalie;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Indicateur;
 
-
-
 @Stateless
 @Remote(IBusinessAnomalie.class)
 public class BusinessAnomalieImpl implements IBusinessAnomalie {
@@ -27,8 +25,15 @@ public class BusinessAnomalieImpl implements IBusinessAnomalie {
 	}
 
 	@Override
-	public void ajouterAnomalie(Anomalie anomalie) {
-		// TODO Auto-generated method stub
+	public String ajouterAnomalie(Anomalie anomalie) {
+		// L'on peut avoir plusieurs anomalies du même indicateur
+		// et il n'est pas possible de proposer la création d'une anomalie sur un diagnostic déjà traite
+		// à ce point la cette conditions a déjà été traitée.
+		
+		System.out.println("on est dans le business");
+		System.out.println("2222222222222222222222222222222222222");
+		proxyDaoAnomalie.ajouterAnomalie(anomalie);
+		return "Intervention enregristrée avec succès";
 		
 	}
 
@@ -91,6 +96,7 @@ public class BusinessAnomalieImpl implements IBusinessAnomalie {
 
 	public void setProxyDaoAnomalie(IDaoAnomalie proxyDaoAnomalie) {
 		this.proxyDaoAnomalie = proxyDaoAnomalie;
+
 	}
 
 }

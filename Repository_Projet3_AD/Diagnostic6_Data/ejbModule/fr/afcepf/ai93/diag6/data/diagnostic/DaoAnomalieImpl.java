@@ -15,10 +15,11 @@ import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
 
 @Stateless
 @Remote(IDaoAnomalie.class)
-public class DaoAnomalieImpl implements IDaoAnomalie {
 
+public class DaoAnomalieImpl implements IDaoAnomalie{
+	
 	@PersistenceContext(unitName="Malak_Diag_Data")
-	private EntityManager em;
+	private EntityManager em; 
 
 	@Override
 	public List<Anomalie> recupereToutAnomalie() {
@@ -30,6 +31,7 @@ public class DaoAnomalieImpl implements IDaoAnomalie {
 	@Override
 	public void ajouterAnomalie(Anomalie anomalie) {
 		em.persist(anomalie);
+		
 	}
 
 	@Override
@@ -63,7 +65,7 @@ public class DaoAnomalieImpl implements IDaoAnomalie {
 
 	@Override
 	public void historiserAnomalie(Anomalie anomalie) {
-		
+
 	}
 
 	@Override
@@ -80,6 +82,7 @@ public class DaoAnomalieImpl implements IDaoAnomalie {
 		return liste;
 	}
 
+
 	@Override
 	public List<Anomalie> recupereAnomalieParDiagnostic(int idDiagnostic) {
 		Query requete = em.createQuery("select a from Anomalie a where diagnostic.idDiagnostic = :pif"); 
@@ -87,5 +90,5 @@ public class DaoAnomalieImpl implements IDaoAnomalie {
 		List<Anomalie> listeAnomParDiag = requete.getResultList(); 
 		return listeAnomParDiag; 
 	}
-}
 
+}

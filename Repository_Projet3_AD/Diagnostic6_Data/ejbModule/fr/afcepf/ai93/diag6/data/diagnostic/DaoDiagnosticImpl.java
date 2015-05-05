@@ -10,25 +10,28 @@ import javax.persistence.Query;
 import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoDiagnostic;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
+import fr.afcepf.ai93.diag6.entity.erp.Erp;
 import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
 
 @Stateless
 @Remote(IDaoDiagnostic.class)
 public class DaoDiagnosticImpl implements IDaoDiagnostic {
+@PersistenceContext(unitName="Malak_Diag_Data")
+private EntityManager em; 
 
-	@PersistenceContext(unitName="Malak_Diag_Data")
-	private EntityManager em;
-	
-	@Override
-	public List<Diagnostic> recupereToutDiagnostic() {
-		Query query = em.createQuery("SELECT d FROM Diagnostic d");
-		List<Diagnostic> liste = query.getResultList();
-		return liste;
-	}
+@Override
+public List<Diagnostic> recupereToutDiagnostic() {
+	Query requete = em.createQuery("SELECT d FROM Diagnostic d"); 
+	List<Diagnostic> listeToutDiag = requete.getResultList(); 
+	return listeToutDiag;
+}
+
+
 
 	@Override
 	public void ajouterDiagnostic(Diagnostic diagnostic) {
 		em.persist(diagnostic);
+
 	}
 
 	@Override
@@ -38,12 +41,14 @@ public class DaoDiagnosticImpl implements IDaoDiagnostic {
 
 	@Override
 	public void notifierDiagnostic() {
-		// la notification se fait automatiquement. une methode est-elle utile?
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
 	public void historiserDiagnostic(Diagnostic diagnostic) {
-		// l'historisation est automatique, la methode n'est pas utile
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
@@ -67,8 +72,18 @@ public class DaoDiagnosticImpl implements IDaoDiagnostic {
 		return null;
 	}
 
+
+	
+	public List<Diagnostic> recupereDiagnosticParErp(Erp erp) {
+		//et where traite = 0
+		Query requete = em.createQuery("SELECT a.listeDiagnosticErp from Erp a WHERE a.idErp = :pid");
+		requete.setParameter("pid", erp.getIdErp());
+		List<Diagnostic> liste = requete.getResultList();
+		return liste;
+	}
+
 	@Override
-public boolean recupereSiIntervEnCoursParDiag(int idDiag) {
+	public boolean recupereSiIntervEnCoursParDiag(int idDiag) {
 	Query requete = em.createQuery("SELECT a from Anomalie a inner join fetch a.intervention where a.diagnostic.idDiagnostic = :id");
 	requete.setParameter("id", idDiag);
 	List<Anomalie> listeAnomaliesAvecIntervention = requete.getResultList();
@@ -78,7 +93,6 @@ public boolean recupereSiIntervEnCoursParDiag(int idDiag) {
 	{
 		return true;
 	}
-	return false;
-}
-	
+	return false; 
+	}
 }
