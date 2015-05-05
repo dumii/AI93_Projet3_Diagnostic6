@@ -3,47 +3,121 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:rich="http://richfaces.org/rich"
-      xmlns:a4j="http://richfaces.org/a4j">
+	  xmlns:a4j="http://richfaces.org/a4j"
+	  xmlns:rich="http://richfaces.org/rich"> 
 
-<h:head></h:head> 
-<body>
-	<f:view>
-		<h:form>
-			<rich:calendar id="date" value="#{mbTestTravaux.dateChoisie}"></rich:calendar>
-			<h:commandButton value="Ajouter une intervention" action="#{mbTestTravaux.ajouter()}" />
+<h:head>
+	<title>
+		<ui:insert name="title"></ui:insert>
+	</title>
+	
+	<link href="css/style.css" rel="stylesheet" type="text/css" />
+ 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css"/>
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<ui:insert name="head"></ui:insert>
+
+</h:head> 
+<body> 
+	<div id="enTete">
+	
+		<a href=""><img id="logoAccueil" src="images/Logo2.png" /></a>
 			
-			<h:selectOneMenu value="#{mbTestTravaux.idEtat}">
-					<f:selectItem itemLabel="-- Sélectionnez un état d'intervention --" itemValue="0"/>
-					<f:selectItems value="#{mbTestTravaux.listeEtats}"
-								   var="unType"
-								   itemLabel="#{unType.intituleEtatAvancement}"
-								   itemValue="#{unType.idEtatAvancement}"/>
-			</h:selectOneMenu>
-			
-			<rich:dataTable var="intervention" id="maTable"
-							value="#{mbTestTravaux.travaux}">					
-				<rich:column>
-					<f:facet name="header">ID</f:facet>
-					#{intervention.idIntervention}
-				</rich:column>
-						
-				<rich:column>
-					<f:facet name="header">Coût d'intervention</f:facet>
-					#{intervention.coutIntervention}
-				</rich:column>
-				<rich:column>
-					<f:facet name="header">Type d'intervention</f:facet>
-					#{intervention.typeIntervention.typeIntervention}
-				</rich:column>
-				<rich:column>
-							<a4j:commandLink value="Modifier"
-											 action="#{mbTestTravaux.modifier(intervention)}"
-											 render="maTable">
-							</a4j:commandLink>
-				</rich:column>			
-			</rich:dataTable>		
+		<h:form id="rechercheBandeau" action="">
+			<input type="text" value="Entrez votre recherche ici ..."/>
+			<input type="image" src="images/Loupe.png"/>
+			<div id="resultatRecherche">blabla</div>
 		</h:form>
-	</f:view>
-</body> 
+		
+		<a href=""><img class="logoMenu" id="logoErp" src="images/ERPIconeBleue2.png" /></a>
+		
+		<a href=""><img class="logoMenu" id="logoDiag" src="images/DiagnosticIconeBleue.png" /></a>
+		
+		<a href=""><img class="logoMenu" id="logoTrav" src="images/BuildingConstruction_icon.png" /></a>
+		
+		<a href=""><img class="logoMenu" id="logoTabBord" src="images/TableauBordIconeOrange.png" /></a>
+		
+	</div>
+	
+	<div id="bandeauGauche">	
+		<div>
+			<button id="boutonAjouter">Ajouter <ui:insert name="ajout"/></button>
+		</div>
+		
+		<div id="radio">
+			<input type="radio" id="radio1" name="radio"/><label for="radio1">Date</label>
+			<input type="radio" id="radio2" name="radio"/><label for="radio2"><ui:insert name="radiofiltre2"/></label>
+			<input type="radio" id="radio3" name="radio"/><label for="radio3"><ui:insert name="radiofiltre3"/></label>
+		</div>
+  	
+  		<div id="accordion">
+			<h3><ui:insert name="accordeon1"/></h3>
+			<div>
+				<p>
+					<ul>
+						<li><ui:insert name="arborescence1"/></li>
+					</ul>
+				</p>
+			</div>
+ 
+			<h3><ui:insert name="accordeon2"/></h3>
+			<div>
+				<p>
+					<ul>
+						<li><ui:insert name="arborescence2"/></li>
+					</ul>
+				</p>
+			</div>
+
+			<h3><ui:insert name="accordeon3"/></h3>
+			<div>
+				<p>
+					<ul>
+						<li><ui:insert name="arborescence3"/></li>
+					</ul>
+				</p>
+			</div>			
+		</div>
+			
+	</div>
+		
+		
+	<div id="bandeauDroite">
+		<fieldset id="connection">
+			<legend>Bonjour <ui:insert name="nomUtilisateur"/></legend>
+			<ui:insert name="roleUtilisateur"/>
+		</fieldset>
+		
+		<fieldset id="favoris">
+			<legend>Mes favoris</legend>
+		</fieldset>
+		
+		<fieldset id="notification">
+			<legend>Dernières actualités</legend>
+			
+			<article>
+				<header><ui:insert name="motifNotification"/></header>
+				<time><ui:insert name="dateNotification"/></time>
+				<section><ui:insert name="notification"/></section>
+			</article>
+			
+			<article>
+				<header><ui:insert name="motifNotification"/></header>
+				<time><ui:insert name="dateNotification"/></time>
+				<section><ui:insert name="notification"/></section>
+			</article>
+			
+		</fieldset>
+	</div>
+
+	<ui:insert name="content" />
+		
+<script>
+jQuery.noConflict();
+
+  $( "#radio" ).buttonset(); 
+  $( "#accordion" ).accordion();
+  $("button").button();
+</script>
+</body>
 </html>

@@ -80,6 +80,7 @@ public List<Diagnostic> recupereToutDiagnostic() {
 		requete.setParameter("pid", erp.getIdErp());
 		List<Diagnostic> liste = requete.getResultList();
 		return liste;
+	}
 
 	@Override
 public boolean recupereSiIntervEnCoursParDiag(int idDiag) {
@@ -92,5 +93,6 @@ public boolean recupereSiIntervEnCoursParDiag(int idDiag) {
 	{
 		return true;
 	}
-}
+	return false; 
 	}
+}
