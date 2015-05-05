@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+<ui:composition template="/WEB-INF/Template1Diagnostic6.xhtml">
+	<ui:define name="title">Diagnostic 6 - Planing travaux</ui:define>
+	<ui:define name="head">
+		<link href="css/planningTravaux.css" rel="stylesheet" type="text/css" />
+	</ui:define>
+	<ui:define name="content">
+
+		<div id="content">
+		
+		<table>
+			<tr id="table-header1">
+				<th colspan="11">Nom de l'ERP + Numéro de chantier</th>
+			</tr>
+			
+			<tr id="table-header2">
+				<th class="NomIntervention"></th>
+				<th colspan="2">2 colonnes fusionnées + flèche?</th>
+				<th colspan="2">2 colonnes fusionnées</th>
+				<th colspan="2">ici l'année</th>
+				<th colspan="2">2 colonnes fusionnées</th>
+				<th colspan="2">2 colonnes fusionnées + flèche?</th>
+			</tr>
+			
+			<tr id="table-header3">
+				<th class="NomIntervention">ici la liste des interventions</th>
+				<th colspan="2">Mars + flèche?</th>
+				<th colspan="2">Avril</th>
+				<th colspan="2">Mai</th>
+				<th colspan="2">Juin</th>
+				<th colspan="2">Juillet + flèche?</th>
+			</tr>
+			
+			<ui:repeat var="intervention" value="#{mbTestTravaux.travaux}">
+				<tr>
+					<td>#{intervention.idIntervention}</td>
+					<td>#{intervention.coutIntervention}</td>
+					<td>#{intervention.typeIntervention.typeIntervention}</td>
+				</tr>
+							
+			</ui:repeat>
+		
+		</table>
+		</div>
+
+		<script>
+  function favorisation() 
+  { 
+	  $( "#favoritesGrisee" ).toggle();
+	  $( "#favoriteJaune" ).toggle();
+	  document.getElementById(favoritesGrisee).src = url;
+  }
+  function defavorisation() 
+  { 
+	  $( "#favoriteJaune" ).toggle();
+	  $( "#favoritesGrisee" ).toggle();
+	  document.getElementById(favoriteJaune).src = url;
+  }
+	
+</script>
+	</ui:define>
+
+</ui:composition>
+</html>
