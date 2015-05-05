@@ -44,6 +44,10 @@ public class TestTravauxManagedBean {
 	{
 		travaux = proxyBusiness.recupereToutesIntervention();
 		listeTypes = proxyBusiness.recupererTousTypesIntervention();
+		for (TypeIntervention t : listeTypes)
+		{
+			t.setListeInterventionTypeIntervention(proxyBusiness.recupereInterventionParType(t));
+		}
 		listeEtats = proxyBusiness.recupererTousEtats();
 		
 		type = new TypeIntervention();

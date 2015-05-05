@@ -14,8 +14,8 @@
 	<ui:define name="content">
 
 		<div id="content">
-		
-		<table>
+
+		<table id="monTableau">
 			<tr id="table-header1">
 				<th colspan="11">Nom de l'ERP + Numéro de chantier</th>
 			</tr>
@@ -38,33 +38,35 @@
 				<th colspan="2">Juillet + flèche?</th>
 			</tr>
 			
-			<ui:repeat var="intervention" value="#{mbTestTravaux.travaux}">
-				<tr>
-					<td>#{intervention.idIntervention}</td>
-					<td>#{intervention.coutIntervention}</td>
-					<td>#{intervention.typeIntervention.typeIntervention}</td>
+			<ui:repeat var="item" value="#{mbTestTravaux.listeTypes}">
+				<tr id="ligneBlanche">
+					<td onclick="afficherMasquer(T#{item.idTypeIntervention})">#{item.typeIntervention}</td>
+					<td colspan="10"></td>
 				</tr>
+				
+				<ui:repeat var="intervention" value="#{item.listeInterventionTypeIntervention}">
+					<tr id="ligneBleue">
+						<td class="T#{item.idTypeIntervention}"><span>Intervention #{intervention.idIntervention}</span></td>
+						<td colspan="10"></td>
+					</tr>
+				</ui:repeat>
+
 							
 			</ui:repeat>
 		
 		</table>
 		</div>
 
-		<script>
-  function favorisation() 
-  { 
-	  $( "#favoritesGrisee" ).toggle();
-	  $( "#favoriteJaune" ).toggle();
-	  document.getElementById(favoritesGrisee).src = url;
-  }
-  function defavorisation() 
-  { 
-	  $( "#favoriteJaune" ).toggle();
-	  $( "#favoritesGrisee" ).toggle();
-	  document.getElementById(favoriteJaune).src = url;
-  }
+		<script type="text/javascript"> 
+
+		function afficherMasquer(classeToggle) 
+ 		 { 
+			document.getElementsByClass("."classeToggle).each(function() {
+				  $( this ).toggle();
+			});)
+ 		 }
 	
-</script>
+		</script>
 	</ui:define>
 
 </ui:composition>
