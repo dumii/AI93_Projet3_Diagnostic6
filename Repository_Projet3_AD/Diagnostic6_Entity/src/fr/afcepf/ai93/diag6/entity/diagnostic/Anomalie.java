@@ -41,6 +41,9 @@ public class Anomalie implements Serializable{
 	@Column(name="cout_estime_anomalie")
 	private Double coutEstimeAnomalie;
 	
+	@Column(name="TRAITE")
+	private int traite;
+	
 	@ManyToOne
 	@JoinColumn(name="id_indicateur")
 	private Indicateur indicateur;
@@ -169,16 +172,44 @@ public class Anomalie implements Serializable{
 		super();
 	}
 
+	public Indicateur getIndicateur() {
+		return indicateur;
+	}
+
+	public void setIndicateur(Indicateur indicateur) {
+		this.indicateur = indicateur;
+	}
+
+	public Intervention getListeInterventions() {
+		return listeInterventions;
+	}
+
+	public void setListeInterventions(Intervention listeInterventions) {
+		this.listeInterventions = listeInterventions;
+	}
+
+	public int getTraite() {
+		return traite;
+	}
+
+	public void setTraite(int traite) {
+		this.traite = traite;
+	}
+
 	public Anomalie(Integer idAnomalie, String descriptionAnomalie,
 			String preconisationAnomalie, Double coutEstimeAnomalie,
-			Ascenceur ascenceur, Voirie voirie, Acces acces, Escalier escalier,
-			Piece piece, Diagnostic diagnostic,
-			List<HistoriqueAnomalie> listeHistoriqueAnomalie) {
+			int traite, Indicateur indicateur, Ascenceur ascenceur,
+			Voirie voirie, Acces acces, Escalier escalier, Piece piece,
+			Diagnostic diagnostic,
+			List<HistoriqueAnomalie> listeHistoriqueAnomalie,
+			Intervention listeInterventions) {
 		super();
 		this.idAnomalie = idAnomalie;
 		this.descriptionAnomalie = descriptionAnomalie;
 		this.preconisationAnomalie = preconisationAnomalie;
 		this.coutEstimeAnomalie = coutEstimeAnomalie;
+		this.traite = traite;
+		this.indicateur = indicateur;
 		this.ascenceur = ascenceur;
 		this.voirie = voirie;
 		this.acces = acces;
@@ -186,7 +217,7 @@ public class Anomalie implements Serializable{
 		this.piece = piece;
 		this.diagnostic = diagnostic;
 		this.listeHistoriqueAnomalie = listeHistoriqueAnomalie;
+		this.listeInterventions = listeInterventions;
 	}
-	
-	
+
 }

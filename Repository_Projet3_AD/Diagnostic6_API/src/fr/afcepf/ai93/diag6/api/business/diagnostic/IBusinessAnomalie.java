@@ -11,7 +11,7 @@ public interface IBusinessAnomalie {
 	
 	public List<Anomalie> recupereToutAnomalie();
 
-    public void ajouterAnomalie(Anomalie anomalie);
+    public String ajouterAnomalie(Anomalie anomalie);
 
     public void modifierAnomalie(Anomalie anomalie);
 
