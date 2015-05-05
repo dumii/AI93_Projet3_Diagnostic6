@@ -40,9 +40,25 @@ public class BusinessInterventionImpl implements IBusinessIntervention {
 		return proxyIntervention.recupereToutesIntervention();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see fr.afcepf.ai93.diag6.api.data.travaux.IDaoIntervention#rechercherInterventionSurAnomalie(int)
+	 * Recherche des interventions pour une anomalie
+	 * ==> Règle de gestion
+	 */
+	
 	@Override
 	public String ajouterIntervention(Intervention intervention) {
-		boolean ajoutAutorise = proxyIntervention.rechercherInterventionSurAnomalie(intervention.getAnomalie().getIdAnomalie());
+		
+		//Vérification de l'existence ou non d'intervention sur l'anomalie (une seule intervention par anomalie autorisée)
+		boolean ajoutAutorise = true;
+		List<Intervention> liste = proxyIntervention.rechercherInterventionSurAnomalie(intervention.getAnomalie().getIdAnomalie());
+		if (liste.size() > 0)
+		{
+			ajoutAutorise = false;
+		}
+		
+		//Ajout de l'intervention si l'ajout est autorisé
 		if (ajoutAutorise)
 		{		
 			proxyIntervention.ajouterIntervention(intervention);
@@ -58,6 +74,8 @@ public class BusinessInterventionImpl implements IBusinessIntervention {
 	public String modifierIntervention(Intervention intervention, Utilisateur user) {
 		
 		Intervention interventionInitiale = proxyIntervention.recupereIntervention(intervention.getIdIntervention());
+		
+		
 		int idAvancementInitial = interventionInitiale.getEtatAvancementTravaux().getIdEtatAvancement();
 		int idAvancementNouveau = intervention.getEtatAvancementTravaux().getIdEtatAvancement();
 		
@@ -71,6 +89,11 @@ public class BusinessInterventionImpl implements IBusinessIntervention {
 		{		
 			return "Modification illégale de l'état d'avancement des travaux";
 		}
+	}
+	
+	@Override
+	public List<Intervention> rechercherInterventionSurAnomalie(int idAnomalie) {
+		return proxyIntervention.rechercherInterventionSurAnomalie(idAnomalie);
 	}
 
 	@Override
@@ -86,6 +109,11 @@ public class BusinessInterventionImpl implements IBusinessIntervention {
 	@Override
 	public List<EtatAvancementTravaux> recupererTousEtats() {
 		return proxyEtatAvancement.recupererTousEtats();
+	}
+	
+	@Override
+	public List<Intervention> recupereInterventionParType(TypeIntervention type) {
+		return proxyIntervention.recupereInterventionparType(type);
 	}
 
 	public IDaoIntervention getProxyIntervention() {
@@ -112,5 +140,4 @@ public class BusinessInterventionImpl implements IBusinessIntervention {
 			IDaoAvancementIntervention proxyEtatAvancement) {
 		this.proxyEtatAvancement = proxyEtatAvancement;
 	}
-
 }

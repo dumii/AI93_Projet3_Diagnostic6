@@ -6,10 +6,18 @@
 
 <h:head>
 	<title>
-		Diagnostic 6
+		<ui:insert name="title"></ui:insert>
 	</title>
+	
+	<link href="css/style.css" rel="stylesheet" type="text/css" />
+ 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css"/>
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<ui:insert name="head"></ui:insert>
+
 </h:head> 
 <body> 
+
 	<div id="enTete">
 	
 		<a href=""><img id="logoAccueil" src="images/Logo2.png" /></a>
@@ -29,5 +37,7 @@
 		<a href=""><img class="logoMenu" id="logoTabBord" src="images/TableauBordIconeOrange.png" /></a>
 		
 	</div>
+
+	<ui:insert name="content" />
 </body>
 </html>

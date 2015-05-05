@@ -5,6 +5,7 @@ import java.util.List;
 
 import fr.afcepf.ai93.diag6.entity.travaux.HistoriqueIntervention;
 import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
+import fr.afcepf.ai93.diag6.entity.travaux.TypeIntervention;
 
 public interface IDaoIntervention {
 
@@ -16,5 +17,7 @@ public interface IDaoIntervention {
 
     public Intervention recupereIntervention(int idIntervention);
     
-    public boolean rechercherInterventionSurAnomalie(int idAnomalie);
+    public List<Intervention> rechercherInterventionSurAnomalie(int idAnomalie);
+    
+    public List<Intervention> recupereInterventionparType(TypeIntervention type);
 }

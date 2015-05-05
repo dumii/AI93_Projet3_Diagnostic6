@@ -1,0 +1,88 @@
+/*********************************/
+/*    Style de la page / div     */
+/*********************************/
+
+#content
+{
+	margin-top : 5%;
+	margin-left: 1%;
+	margin-right: 1%;
+}
+
+/******************************************/
+/*Style générale du tableau et des entêtes*/
+/******************************************/
+
+table {
+    border-collapse: collapse;
+    border:#cccccc solid 1px;
+    width: 100%;
+}
+
+th, td 
+{
+	border-top:#cccccc solid 1px;
+	border-bottom:#cccccc solid 1px;
+}
+
+/******************************************/
+/*  Mise en forme du contenue du tableau  */
+/******************************************/
+
+#table-header1, #table-header2, #table-header3
+{
+	background-image:linear-gradient(#fAfAfA, #f2f2f2);
+	border:#cccccc solid 1px;
+}
+
+#table-header1
+{
+	font-size: 1.1em;
+	text-align:left;	
+	border-bottom-width:2px;
+	height: 40px;
+}
+
+#table-header3
+{
+	height: 45px;
+}
+
+#table-header2, #table-header3
+{
+	font-size: 0.9em;
+	color: #424242;
+}
+
+.NomIntervention
+{
+	width: 20%;
+}
+
+#table-header2 > :not(.NomIntervention)
+{
+	width: 16%;
+}
+
+.NomIntervention, #ligneBlanche > td:first-of-type, #ligneBleue > td:first-of-type
+{
+	border-right: #3399ff solid 1px;
+}
+
+
+#ligneBlanche
+{
+	background-color: #E9EFF8;
+	height: 30px;
+}
+
+#ligneBleue
+{
+	background-color: #FFFFFF ;
+	height: 30px;
+}
+
+span
+{
+	margin-left:50px;
+}

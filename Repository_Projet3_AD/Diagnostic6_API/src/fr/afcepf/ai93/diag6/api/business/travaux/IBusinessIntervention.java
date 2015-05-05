@@ -15,12 +15,16 @@ public interface IBusinessIntervention {
 	public List<HistoriqueIntervention> recupereToutHistoriqueIntervention();
 	
 	public List<Intervention> recupereToutesIntervention();
+	
+	public List<Intervention> recupereInterventionParType(TypeIntervention type);
 
     public String ajouterIntervention(Intervention intervention);
 
     public String modifierIntervention(Intervention intervention, Utilisateur user);
 
     public Intervention recupereIntervention(int idIntervention);
+    
+    public List<Intervention> rechercherInterventionSurAnomalie(int idAnomalie);
     
     //Type d'intervention
     public List<TypeIntervention> recupererTousTypesIntervention();

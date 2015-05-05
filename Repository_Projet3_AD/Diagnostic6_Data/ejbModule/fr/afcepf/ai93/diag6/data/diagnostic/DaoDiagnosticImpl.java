@@ -26,12 +26,23 @@ public List<Diagnostic> recupereToutDiagnostic() {
 	return listeToutDiag;
 }
 
-
+@Override
+public boolean recupereSiIntervEnCoursParDiag(int idDiag) {
+	Query requete = em.createQuery("SELECT a from Anomalie a inner join fetch a.listeInterventions where a.diagnostic.idDiagnostic = :id");
+	requete.setParameter("id", idDiag);
+	List<Anomalie> listeAnomaliesAvecIntervention = requete.getResultList();
+	for (Anomalie a : listeAnomaliesAvecIntervention)
+	
+	if (listeAnomaliesAvecIntervention.size() > 0)
+	{
+		return true;
+	}
+	return false;
+}
 
 	@Override
 	public void ajouterDiagnostic(Diagnostic diagnostic) {
 		em.persist(diagnostic);
-
 	}
 
 	@Override
@@ -68,10 +79,9 @@ public List<Diagnostic> recupereToutDiagnostic() {
 
 	@Override
 	public List<Diagnostic> rechercheDiagnosticsErp(String nomERP) {
-		
+		//TO DO GENERATED
 		return null;
 	}
-
 
 	
 	public List<Diagnostic> recupereDiagnosticParErp(Erp erp) {
@@ -80,19 +90,5 @@ public List<Diagnostic> recupereToutDiagnostic() {
 		requete.setParameter("pid", erp.getIdErp());
 		List<Diagnostic> liste = requete.getResultList();
 		return liste;
-	}
-
-	@Override
-public boolean recupereSiIntervEnCoursParDiag(int idDiag) {
-	Query requete = em.createQuery("SELECT a from Anomalie a inner join fetch a.intervention where a.diagnostic.idDiagnostic = :id");
-	requete.setParameter("id", idDiag);
-	List<Anomalie> listeAnomaliesAvecIntervention = requete.getResultList();
-	for (Anomalie a : listeAnomaliesAvecIntervention)
-	
-	if (listeAnomaliesAvecIntervention.size() > 0)
-	{
-		return true;
-	}
-	return false; 
 	}
 }

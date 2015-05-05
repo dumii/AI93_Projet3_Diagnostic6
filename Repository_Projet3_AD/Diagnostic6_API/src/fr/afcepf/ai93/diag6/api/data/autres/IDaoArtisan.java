@@ -3,6 +3,7 @@ package fr.afcepf.ai93.diag6.api.data.autres;
 import java.util.List;
 
 import fr.afcepf.ai93.diag6.entity.autres.Artisan;
+import fr.afcepf.ai93.diag6.entity.travaux.TypeIntervention;
 
 public interface IDaoArtisan {
 
@@ -12,5 +13,5 @@ public interface IDaoArtisan {
 	
 	public boolean supprimerArtisan(Artisan artisan);
 	
-	public List<Artisan> recupererArtisanParTypeIntervention(int idTypeIntervention);
+	public List<Artisan> recupererArtisansParTypeIntervention(TypeIntervention type);
 }
