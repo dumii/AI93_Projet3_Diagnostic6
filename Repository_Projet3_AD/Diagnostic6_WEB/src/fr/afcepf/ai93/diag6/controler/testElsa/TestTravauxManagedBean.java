@@ -8,6 +8,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import fr.afcepf.ai93.diag6.api.business.diagnostic.IBusinessAnomalie;
 import fr.afcepf.ai93.diag6.api.business.travaux.IBusinessIntervention;
 import fr.afcepf.ai93.diag6.entity.autres.Artisan;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
@@ -21,13 +22,18 @@ public class TestTravauxManagedBean {
 
 	@EJB
 	private IBusinessIntervention proxyBusiness;
+	@EJB
+	private IBusinessAnomalie proxyAnomalie;
+	
 	private List<Intervention> travaux;
 	private List<TypeIntervention> listeTypes;
 	private List<EtatAvancementTravaux> listeEtats;
+	private List<Anomalie> listeAnomalies;
 	private Intervention intervention;
 	private int idIntervention;
 	private int idType;
 	private int idEtat;
+	private int idAnomalie;
 	private String resultat;
 	private Date dateChoisie;
 	
@@ -40,6 +46,13 @@ public class TestTravauxManagedBean {
 		travaux = proxyBusiness.recupereToutesIntervention();
 		listeTypes = proxyBusiness.recupererTousTypesIntervention();
 		listeEtats = proxyBusiness.recupererTousEtats();
+		listeAnomalies = proxyAnomalie.recupereToutAnomalie();
+	}
+	
+	public String rechercheInterventionParAnomalie()
+	{
+		travaux = proxyBusiness.rechercherInterventionSurAnomalie(idAnomalie);
+		return "";
 	}
 	
 	//Recherche d'une intervention via son id
@@ -186,5 +199,29 @@ public class TestTravauxManagedBean {
 
 	public void setIdEtat(int idEtat) {
 		this.idEtat = idEtat;
+	}
+
+	public int getIdAnomalie() {
+		return idAnomalie;
+	}
+
+	public IBusinessAnomalie getProxyAnomalie() {
+		return proxyAnomalie;
+	}
+
+	public void setProxyAnomalie(IBusinessAnomalie proxyAnomalie) {
+		this.proxyAnomalie = proxyAnomalie;
+	}
+
+	public List<Anomalie> getListeAnomalies() {
+		return listeAnomalies;
+	}
+
+	public void setListeAnomalies(List<Anomalie> listeAnomalies) {
+		this.listeAnomalies = listeAnomalies;
+	}
+
+	public void setIdAnomalie(int idAnomalie) {
+		this.idAnomalie = idAnomalie;
 	}
 }

@@ -22,6 +22,8 @@ public interface IBusinessIntervention {
 
     public Intervention recupereIntervention(int idIntervention);
     
+    public List<Intervention> rechercherInterventionSurAnomalie(int idAnomalie);
+    
     //Type d'intervention
     public List<TypeIntervention> recupererTousTypesIntervention();
     

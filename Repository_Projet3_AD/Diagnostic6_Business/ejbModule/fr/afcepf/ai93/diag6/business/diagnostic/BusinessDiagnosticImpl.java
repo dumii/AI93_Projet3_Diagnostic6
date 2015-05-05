@@ -117,8 +117,4 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 	public void setProxyDiagnostic(IDaoDiagnostic proxyDiagnostic) {
 		this.proxyDiagnostic = proxyDiagnostic;
 	}
-
-
-
-
 }
