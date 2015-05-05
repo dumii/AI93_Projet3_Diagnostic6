@@ -15,6 +15,7 @@ import fr.afcepf.ai93.diag6.entity.erp.Erp;
 import fr.afcepf.ai93.diag6.entity.erp.Escalier;
 import fr.afcepf.ai93.diag6.entity.erp.Etage;
 import fr.afcepf.ai93.diag6.entity.erp.Piece;
+import fr.afcepf.ai93.diag6.entity.erp.Voirie;
 
 @Stateless
 @Remote(IBusinessErp.class)
@@ -64,5 +65,11 @@ public class BusinessErp implements IBusinessErp {
 	public List<Ascenceur> recupererAscenceursParBat(int idBatiment) {
 		return proxyErp.recupererAscenceursParBat(idBatiment);
 	}
+
+	@Override
+	public List<Voirie> recupererVoirieParErp(int idErp) {
+		return proxyErp.recupererVoirieParErp(idErp);
+	}
+
 
 }

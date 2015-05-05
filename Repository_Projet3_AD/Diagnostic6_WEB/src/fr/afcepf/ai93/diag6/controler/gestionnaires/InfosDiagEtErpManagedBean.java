@@ -23,6 +23,7 @@ import fr.afcepf.ai93.diag6.entity.erp.Erp;
 import fr.afcepf.ai93.diag6.entity.erp.Escalier;
 import fr.afcepf.ai93.diag6.entity.erp.Etage;
 import fr.afcepf.ai93.diag6.entity.erp.Piece;
+import fr.afcepf.ai93.diag6.entity.erp.Voirie;
 
 @ManagedBean(name="mbDonneesGenerales")
 @SessionScoped
@@ -58,7 +59,10 @@ public class InfosDiagEtErpManagedBean implements Serializable {
 		List<Batiment> listeBatimentsErpSel = new ArrayList<Batiment>();
 		listeBatimentsErpSel = proxyBusinessErp.recupererBatParErp(erpSelectionne.getIdErp());
 		erpSelectionne.setListeBatimentsErp(listeBatimentsErpSel);
-	
+		
+		List<Voirie> listeVoiriesParErp = new ArrayList<Voirie>(); 
+		listeVoiriesParErp = proxyBusinessErp.recupererVoirieParErp(erpSelectionne.getIdErp()); 
+		erpSelectionne.setListeVoiriesErp(listeVoiriesParErp);	
 		
 		listeEtagesBatSel = new ArrayList<Etage>();
 		List<Acces> listeAccesBatSel = new ArrayList<Acces>(); 
@@ -94,6 +98,43 @@ public class InfosDiagEtErpManagedBean implements Serializable {
 	public void recupererAnomaliesParDiagnostic(){
 		listeAnomaliesParDiagnostic = proxyBusinessAnomalie.recupereAnomalieParDiagnostic(idDiag); 
 	}
+	
+	public String localisationAnomalie(){
+		for(Anomalie a : listeAnomaliesParDiagnostic){
+			if(a.getDiagnostic().getIdDiagnostic() == idDiag){
+				if(a.getPiece() != null){
+					return "Etage : " +a.getPiece().getEtage().getNomEtage()+ " "+a.getPiece().getEtage().getNumeroEtage()+" "
+							+ a.getPiece().getFonctionPiece().getLibelleFonctionPiece()+" "+a.getPiece().getDenominationPiece()+" " +a.getPiece().getNumeroPiece(); 
+				}
+				else{
+					if(a.getVoirie() !=null) {
+						return a.getVoirie().getTypeVoirie().getLibelleTypeVoirie()+" "+a.getVoirie().getDesignationVoirie()+" " +a.getVoirie().getIntituleVoirie(); 
+					}
+					else{
+						if(a.getAcces() != null){
+							return "Accès " + a.getAcces().getTypeAcces().getLibelleTypeAcces(); 
+						}
+						else{
+							if(a.getEscalier() != null){
+								return "Escalier "+a.getEscalier().getDenominationEscalier();
+							}
+							else{
+								if(a.getAscenceur() !=null){
+									return "Ascenceur "+a.getAscenceur().getDenominationAscenceur(); 
+								}
+								else {
+									return "Localisation non définie"; 
+								}
+							}
+						}
+					}
+					
+				}
+			}
+		}
+		return "Il n'y a pas d'anomalie définie sur ce diagnostic"; 
+	}
+	
 
 	////////////////////////getters et setters ////////////////////
 	
