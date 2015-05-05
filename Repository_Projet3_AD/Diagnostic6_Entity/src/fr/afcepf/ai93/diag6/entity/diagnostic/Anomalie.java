@@ -76,7 +76,7 @@ public class Anomalie implements Serializable{
 	private List<HistoriqueAnomalie> listeHistoriqueAnomalie;
 	
 	@OneToOne(mappedBy="anomalie")
-	private Intervention listeInterventions;
+	private Intervention intervention;
 	
 
 	public Integer getIdAnomalie() {
@@ -180,12 +180,13 @@ public class Anomalie implements Serializable{
 		this.indicateur = indicateur;
 	}
 
-	public Intervention getListeInterventions() {
-		return listeInterventions;
+
+	public Intervention getIntervention() {
+		return intervention;
 	}
 
-	public void setListeInterventions(Intervention listeInterventions) {
-		this.listeInterventions = listeInterventions;
+	public void setIntervention(Intervention intervention) {
+		this.intervention = intervention;
 	}
 
 	public int getTraite() {
@@ -202,7 +203,7 @@ public class Anomalie implements Serializable{
 			Voirie voirie, Acces acces, Escalier escalier, Piece piece,
 			Diagnostic diagnostic,
 			List<HistoriqueAnomalie> listeHistoriqueAnomalie,
-			Intervention listeInterventions) {
+			Intervention intervention) {
 		super();
 		this.idAnomalie = idAnomalie;
 		this.descriptionAnomalie = descriptionAnomalie;
@@ -217,7 +218,9 @@ public class Anomalie implements Serializable{
 		this.piece = piece;
 		this.diagnostic = diagnostic;
 		this.listeHistoriqueAnomalie = listeHistoriqueAnomalie;
-		this.listeInterventions = listeInterventions;
+		this.intervention = intervention;
 	}
+
+
 
 }
