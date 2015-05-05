@@ -8,19 +8,17 @@
 
 <h:head>
 
-	<title>Diagnostic 6</title>
-
-
-	<link href="css/style.css" rel="stylesheet" type="text/css" />
-	<link href="css/consultationDiagnostic.css" rel="stylesheet"
-		type="text/css" />
 	<link rel="stylesheet"
 		href="//code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css" />
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	
 </h:head>
+
 <ui:composition template="/WEB-INF/Template2Diagnostic6.xhtml">
 	<ui:define name="title">Diagnostic 6 - Consultation diagnostic</ui:define>
+	<ui:define name="head">
+	<link href="css/consultationDiagnostic.css" rel="stylesheet" type="text/css" />
+	</ui:define>
 	<ui:define name="content">
 <f:view>
 		<h:form>
@@ -55,7 +53,6 @@
 						onClick="defavorisation(this.src)" /></a>
 				</div>
 			</div>
-
 			<div id="InfoErpDiagnostic">
 				<div id="ErpDiagGeneral">
 					<div id="ErpDiagTitre">
@@ -265,14 +262,8 @@
 				</div>
 			</div>		
 			</h:panelGroup>	
-
 		</div>
 		</h:form>
-
-
-		
-
-
 
 		<script>
 		jQuery.noConflict();
@@ -280,7 +271,6 @@
 		$( "#radio" ).buttonset();
 		$( "#accordion" ).accordion();
 		$("button").button();
-
 
 		$( "#buttShowEDD" ).click(function() {
 			$( "#ErpDiagDetaille" ).toggle( "blind", 500 );
@@ -312,11 +302,7 @@
   }
 	
 </script>
-
-</body>
-
 </f:view>
 	</ui:define>
 </ui:composition>
-
 </html>
