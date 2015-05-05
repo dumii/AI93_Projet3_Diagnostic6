@@ -10,13 +10,19 @@ import javax.faces.bean.SessionScoped;
 
 import org.richfaces.resource.PostConstructResource;
 
+import fr.afcepf.ai93.diag6.api.business.diagnostic.IBusinessAnomalie;
 import fr.afcepf.ai93.diag6.api.business.diagnostic.IBusinessDiagnostic;
 import fr.afcepf.ai93.diag6.api.business.erp.IBusinessErp;
 import fr.afcepf.ai93.diag6.api.data.erp.IDaoErp;
+import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
+import fr.afcepf.ai93.diag6.entity.erp.Acces;
+import fr.afcepf.ai93.diag6.entity.erp.Ascenceur;
 import fr.afcepf.ai93.diag6.entity.erp.Batiment;
 import fr.afcepf.ai93.diag6.entity.erp.Erp;
+import fr.afcepf.ai93.diag6.entity.erp.Escalier;
 import fr.afcepf.ai93.diag6.entity.erp.Etage;
+import fr.afcepf.ai93.diag6.entity.erp.Piece;
 
 @ManagedBean(name="mbDonneesGenerales")
 @SessionScoped
@@ -24,25 +30,26 @@ public class InfosDiagEtErpManagedBean implements Serializable {
 	@EJB 
 	private IBusinessErp proxyBusinessErp; 
 	@EJB
-	private IBusinessDiagnostic proxyBusinessDiagnostic; 
+	private IBusinessDiagnostic proxyBusinessDiagnostic;
+	@EJB
+	private IBusinessAnomalie proxyBusinessAnomalie; 
 	
-	private Erp erpDiagnosticSelectionne; 
+	private Erp erpDiagnosticSelectionne;  
 	private Diagnostic diagnosticSelectionne;
 	private int idDiag; 
 	private Erp erpSelectionne; 
-	
+	List<Etage> listeEtagesBatSel;   
+	List<Anomalie> listeAnomaliesParDiagnostic; 
 	
 	@PostConstructResource
 	private void init() {
-
 	}
 
 	public void recupererDiagnostic(){
 		diagnosticSelectionne = proxyBusinessDiagnostic.recupereDiagnostic(idDiag); 
-		recupErp();
-		
+		recupErp();	
+		recupererAnomaliesParDiagnostic();
 	}
-
 
 	public void recupErp(){
 		erpSelectionne = new Erp(); 
@@ -52,17 +59,44 @@ public class InfosDiagEtErpManagedBean implements Serializable {
 		listeBatimentsErpSel = proxyBusinessErp.recupererBatParErp(erpSelectionne.getIdErp());
 		erpSelectionne.setListeBatimentsErp(listeBatimentsErpSel);
 	
-		List<Etage> listeEtagesBatSel = new ArrayList<Etage>();
+		
+		listeEtagesBatSel = new ArrayList<Etage>();
+		List<Acces> listeAccesBatSel = new ArrayList<Acces>(); 
+		List<Escalier> listeEscaliersBatSel = new ArrayList<Escalier>(); 
+		List<Ascenceur> listeAscenceursBatSel = new ArrayList<Ascenceur>(); 
 		for (Batiment b : listeBatimentsErpSel){
+			
 			listeEtagesBatSel = proxyBusinessErp.recupererEtagesParBat(b.getIdBatiment());
 			b.setListeEtagesBatiment(listeEtagesBatSel);
-		}
+			
+			listeAccesBatSel = proxyBusinessErp.recupererAccesParBat(b.getIdBatiment());
+			b.setListeAccesBatiment(listeAccesBatSel);
+	
+			listeEscaliersBatSel = proxyBusinessErp.recupererEscaliersParBat(b.getIdBatiment());
+			b.setListeEscaliersBatiment(listeEscaliersBatSel);
 		
-		
+			listeAscenceursBatSel = proxyBusinessErp.recupererAscenceursParBat(b.getIdBatiment());
+			b.setListeAscenceursBatiment(listeAscenceursBatSel);
+		}	
 	}
 	
+	public int calculNbPiecesBat(){
+		int nbPiecesParBat = 0; 
+		List<Piece> listePiecesParEtage = new ArrayList<Piece>();
+		for(Etage e : listeEtagesBatSel){
+			listePiecesParEtage = proxyBusinessErp.recupererPiecesParEtage(e.getIdEtage());
+			e.setListePieces(listePiecesParEtage);
+			nbPiecesParBat++; 
+		}
+		return nbPiecesParBat; 
+	}
+	
+	public void recupererAnomaliesParDiagnostic(){
+		listeAnomaliesParDiagnostic = proxyBusinessAnomalie.recupereAnomalieParDiagnostic(idDiag); 
+	}
 
 	////////////////////////getters et setters ////////////////////
+	
 	public int getIdDiag() {
 		return idDiag;
 	}
@@ -104,4 +138,30 @@ public class InfosDiagEtErpManagedBean implements Serializable {
 			IBusinessDiagnostic proxyBusinessDiagnostic) {
 		this.proxyBusinessDiagnostic = proxyBusinessDiagnostic;
 	}
+
+	public List<Etage> getListeEtagesBatSel() {
+		return listeEtagesBatSel;
+	}
+
+	public void setListeEtagesBatSel(List<Etage> listeEtagesBatSel) {
+		this.listeEtagesBatSel = listeEtagesBatSel;
+	}
+							 
+	public List<Anomalie> getListeAnomaliesParDiagnostic() {
+		return listeAnomaliesParDiagnostic;
+	}
+
+	public void setListeAnomaliesParDiagnostic(
+			List<Anomalie> listeAnomaliesParDiagnostic) {
+		this.listeAnomaliesParDiagnostic = listeAnomaliesParDiagnostic;
+	}
+
+	public IBusinessAnomalie getProxyBusinessAnomalie() {
+		return proxyBusinessAnomalie;
+	}
+
+	public void setProxyBusinessAnomalie(IBusinessAnomalie proxyBusinessAnomalie) {
+		this.proxyBusinessAnomalie = proxyBusinessAnomalie;
+	}
+	
 }

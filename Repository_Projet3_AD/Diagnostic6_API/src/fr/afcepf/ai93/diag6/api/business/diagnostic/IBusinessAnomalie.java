@@ -28,5 +28,7 @@ public interface IBusinessAnomalie {
     public List<Anomalie> rechercheAnomalies(String nomAnomalie);
 
     public List<Anomalie> rechercheAnomaliesErp(String nomERP);
+
+	public List<Anomalie> recupereAnomalieParDiagnostic(int idDiagnostic);
     
 }

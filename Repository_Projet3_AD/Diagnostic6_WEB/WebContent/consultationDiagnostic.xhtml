@@ -7,15 +7,18 @@
 	xmlns:rich="http://richfaces.org/rich">
 
 <h:head>
-	
 
 	<link rel="stylesheet"
 		href="//code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css" />
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-
+	
 </h:head>
+
 <ui:composition template="/WEB-INF/Template2Diagnostic6.xhtml">
 	<ui:define name="title">Diagnostic 6 - Consultation diagnostic</ui:define>
+	<ui:define name="head">
+	<link href="css/consultationDiagnostic.css" rel="stylesheet" type="text/css" />
+	</ui:define>
 	<ui:define name="content">
 <f:view>
 		<h:form>
@@ -142,90 +145,32 @@
 						
 						<h:panelGrid columns="1">
            			 	<a4j:outputPanel id="panel" layout="block">
-               					 <a4j:repeat value="#{mbDonneesGenerales.erpSelectionne.listeBatimentsErp}" var="o" rows="20" id="repeat">
-                    			<rich:panel style="float:left; width:200px; padding:1px; background-color:#f7f7f7; border-display:none;  ">
+               			<a4j:repeat value="#{mbDonneesGenerales.erpSelectionne.listeBatimentsErp}" var="o" rows="20" id="repeat">
+                    	<rich:panel style="float:left; width:200px; padding:1px; background-color:#f7f7f7; border-display:none;  ">
                        
-                        <h:panelGrid columns="2">
-                            <h:outputText value="Intitulé : " style="font-weight:bold" />
-                            <h:outputText value="#{o.intituleBatiment}" style="font-weight:bold" />
-                            <h:outputText value="Nombre d'étages" style="font-weight:bold" />
-                            <h:outputText value="#{o.listeEtagesBatiment.size()}" />
-                            <h:outputText value="State TimeZone" style="font-weight:bold" />
-                            <h:outputText value="#{o.listeEtagesBatiment.size()}" />
-                        </h:panelGrid>
-                    </rich:panel>
-                </a4j:repeat>
-           				 </a4j:outputPanel>
-
-        </h:panelGrid>
+                        	<h:panelGrid columns="2">
+                            	<h:outputText value="Intitulé : " style="font-weight:bold" />
+                           		<h:outputText value="#{o.intituleBatiment}" style="font-weight:bold" />
+                            	<h:outputText value="Nombre d'étages : " style="font-weight:bold" />
+                            	<h:outputText value="#{o.listeEtagesBatiment.size()}" />
+                            	<h:outputText value="Nombre de pièces : " style="font-weight:bold" />
+                            	<h:outputText value="#{mbDonneesGenerales.calculNbPiecesBat()}" id="nbPieces"  /> 
+                            	<h:outputText value="Nombre d'accès : " style="font-weight:bold" />
+                            	<h:outputText value="#{o.listeAccesBatiment.size()}" />
+                            	<h:outputText value="Nombre d'escaliers : " style="font-weight:bold" />
+                            	<h:outputText value="#{o.listeEscaliersBatiment.size()}" />
+                            	<h:outputText value="Nombre d'ascenseurs : " style="font-weight:bold" />
+                            	<h:outputText value="#{o.listeAscenceursBatiment.size()}" />
+                        	</h:panelGrid>
+                    	</rich:panel>
+                		</a4j:repeat>
+           				</a4j:outputPanel>
+       				 	</h:panelGrid>
 							
-							<table>
-								<tr>
-									
-									
-									<h:dataTable>
-									<th class="ErpDetaille" width="180px" style="text-align: right">Intitulé
-										:</th>
-									<ui:repeat var="o" value="#{mbDonneesGenerales.erpSelectionne.listeBatimentsErp}"
-										varStatus="status">
-										 <h:column id="batIntileErp" class="ErpDetaille" width="160px"
-											style="text-align: right">
-       											 <h:outputText value="#{o.intituleBatiment}"/>
-    									</h:column>
-										<th id="batIntileErp" class="ErpDetaille" width="160px"
-											style="text-align: right">#{o.intituleBatiment}</th>
-										<th id="batIntileErp" class="ErpDetaille" width="160px"
-											style="text-align: right">#{o.listeEtagesBatiment.size()}</th>
-									</ui:repeat>
-									</h:dataTable>
-								</tr>
-								<tr>
-									<th class="ErpDetaille" width="180px" style="text-align: right">Nombre
-										d'étages :</th>
-									<ui:repeat var="o" value="#{mbDonneesGenerales.erpSelectionne.listeBatimentsErp}"
-										varStatus="status">
-										<th id="nbEtagesBatErp" class="ErpDetaille" width="160px"
-											style="text-align: right">#{o.listeEtagesBatiment.size()}</th>
-									</ui:repeat>
-								</tr>
-								<tr>
-									<th class="ErpDetaille" width="180px" style="text-align: right">Nombre
-										de pièces :</th>
-									<ui:repeat var="o" value="#{order.orderList}"
-										varStatus="status">
-										<th id="nbPiecesBatErp" class="ErpDetaille" width="160px"
-											style="text-align: right">#Résultat de Recherche#</th>
-									</ui:repeat>
-								</tr>
-								<tr>
-									<th class="ErpDetaille" width="180px" style="text-align: right">Nombre
-										d'accès :</th>
-									<ui:repeat var="o" value="#{order.orderList}"
-										varStatus="status">
-										<th id="nbAccesBatErp" class="ErpDetaille" width="160px"
-											style="text-align: right">#Résultat de Recherche#</th>
-									</ui:repeat>
-								</tr>
-								<tr>
-									<th class="ErpDetaille" width="180px" style="text-align: right">Nombre
-										d'escaliers :</th>
-									<ui:repeat var="o" value="#{order.orderList}"
-										varStatus="status">
-										<th id="nbEscaliersBatErp" class="ErpDetaille" width="160px"
-											style="text-align: right">#Résultat de Recherche#</th>
-									</ui:repeat>
-								</tr>
-								<tr>
-									<th class="ErpDetaille" width="180px" style="text-align: right">Nombre
-										d'ascenseurs :</th>
-									<ui:repeat var="o" value="#{order.orderList}"
-										varStatus="status">
-										<th id="nbAscenseursBatErp" class="ErpDetaille" width="160px"
-											style="text-align: right">#Résultat de Recherche#</th>
-									</ui:repeat>
-								</tr>
-							</table>
 						</div>
+						
+						<!-- ce bloc sera pas ajouté car il n'y a pas d'intérêt à afficher tous les TYPES des pièces exitents dans le batiment. Eventuellement completer l'affichage actuel avec d'autres informations, mais l'interface graphique est à définir. -->
+						
 						<ui:repeat var="o" value="#{order.orderList}" varStatus="status">
 							<div id="foncPiecesErp">
 								<span> Fonctions des pièces dont dispose le batiment : </span><span
@@ -240,18 +185,20 @@
 												style="text-align: right">#{o.libelleFonctionPiece}</th>
 										</tr>
 									</ui:repeat>
+								
 								</table>
 							</div>
 						</ui:repeat>
 					</div>
 				</div>
 			</div>
-			</h:panelGroup>
+			
 			<div id="diagAnomalieSection">
 				<div id="diagnosticFiche">
 					<div id="ficheDiagTitre">
 						<h3>
-							<span>Diagnostic portant sur les conditions #{o.nomType}</span>
+							<span>Diagnostic portant sur </span>
+							<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.typeDiagnostic.nomType}" />
 						</h3>
 						<a href=""><img class="ficheDiagTitreImage"
 							id="boutonModifier"
@@ -259,9 +206,10 @@
 					</div>
 					<div id="ficheAnomTitre">
 						<h3>
-							<span>Nombre d'anomalies recencées #Résultat de Recherche#</span>
+							<span>Nombre d'anomalies recencées : </span>
+							<h:outputText value="#{mbDonneesGenerales.listeAnomaliesParDiagnostic.size()}" id="nbAnomalies"  /> 
 						</h3>
-					</div>
+					</div> 
 				</div>
 				<div id="anomaliesFiche">
 					<ui:repeat var="o" value="#{order.orderList}" varStatus="status">
@@ -312,7 +260,8 @@
 						</div>
 					</ui:repeat>
 				</div>
-			</div>			
+			</div>		
+			</h:panelGroup>	
 		</div>
 		</h:form>
 

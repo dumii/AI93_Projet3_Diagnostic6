@@ -39,7 +39,7 @@ public class DaoAnomalieImpl implements IDaoAnomalie {
 
 	@Override
 	public Anomalie recupereAnomalie(int idAnomalie) {
-		Query query = em.createQuery("SELECT a FROM Anomalie WHERE a.id = :pid");
+		Query query = em.createQuery("SELECT a FROM Anomalie WHERE a.idAnomalie = :pid");
 		query.setParameter("pid", idAnomalie);
 		Anomalie anomalie = (Anomalie) query.getSingleResult();
 		return anomalie;
@@ -47,7 +47,7 @@ public class DaoAnomalieImpl implements IDaoAnomalie {
 
 	@Override
 	public List<Anomalie> rechercheAnomaliesErp(String nomERP) {
-		Query query = em.createQuery("SELECT a FROM Anomalie WHERE a.id = :pid");
+		Query query = em.createQuery("SELECT a FROM Anomalie WHERE a.idAnomalie = :pid");
 		query.setParameter("pid", nomERP);
 		List<Anomalie> liste = query.getResultList();
 		
@@ -63,7 +63,7 @@ public class DaoAnomalieImpl implements IDaoAnomalie {
 
 	@Override
 	public void historiserAnomalie(Anomalie anomalie) {
-		// l'historisation est automatique, la methode n'est pas utile
+		
 	}
 
 	@Override
@@ -78,6 +78,14 @@ public class DaoAnomalieImpl implements IDaoAnomalie {
 		query.setParameter("pid", nomAnomalie);
 		List <Anomalie> liste = query.getResultList();
 		return liste;
+	}
+
+	@Override
+	public List<Anomalie> recupereAnomalieParDiagnostic(int idDiagnostic) {
+		Query requete = em.createQuery("select a from Anomalie a where diagnostic.idDiagnostic = :pif"); 
+		requete.setParameter("pif", idDiagnostic); 
+		List<Anomalie> listeAnomParDiag = requete.getResultList(); 
+		return listeAnomParDiag; 
 	}
 }
 

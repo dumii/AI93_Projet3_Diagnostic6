@@ -33,6 +33,50 @@ public class Ascenceur implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="id_batiment")
 	private Batiment batiment;
+
+	public Integer getIdAscenceur() {
+		return idAscenceur;
+	}
+
+	public void setIdAscenceur(Integer idAscenceur) {
+		this.idAscenceur = idAscenceur;
+	}
+
+	public String getDenominationAscenceur() {
+		return denominationAscenceur;
+	}
+
+	public void setDenominationAscenceur(String denominationAscenceur) {
+		this.denominationAscenceur = denominationAscenceur;
+	}
+
+	public List<Anomalie> getListeAnomaliesAscenceur() {
+		return listeAnomaliesAscenceur;
+	}
+
+	public void setListeAnomaliesAscenceur(List<Anomalie> listeAnomaliesAscenceur) {
+		this.listeAnomaliesAscenceur = listeAnomaliesAscenceur;
+	}
+
+	public Batiment getBatiment() {
+		return batiment;
+	}
+
+	public void setBatiment(Batiment batiment) {
+		this.batiment = batiment;
+	}
+
+	public Ascenceur(){
+		super();
+	}
+	public Ascenceur(Integer idAscenceur, String denominationAscenceur,
+			List<Anomalie> listeAnomaliesAscenceur, Batiment batiment) {
+		super();
+		this.idAscenceur = idAscenceur;
+		this.denominationAscenceur = denominationAscenceur;
+		this.listeAnomaliesAscenceur = listeAnomaliesAscenceur;
+		this.batiment = batiment;
+	}
 	
 	
 }

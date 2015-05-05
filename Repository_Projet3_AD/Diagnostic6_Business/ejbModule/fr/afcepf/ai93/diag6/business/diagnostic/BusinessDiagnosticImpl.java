@@ -118,7 +118,4 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 		this.proxyDiagnostic = proxyDiagnostic;
 	}
 
-
-
-
 }

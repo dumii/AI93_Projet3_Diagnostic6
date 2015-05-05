@@ -37,11 +37,4 @@ public interface IBusinessDiagnostic {
 
 	    public List<TypeDiagnostic> recupereTypeDiagnostic();
 
-	 
-
-	   
-
-
-
-
 }
