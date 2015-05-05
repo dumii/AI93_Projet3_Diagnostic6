@@ -53,7 +53,7 @@ public List<Diagnostic> recupereToutDiagnostic() {
 
 	@Override
 	public Diagnostic recupereDiagnostic(int idDiagnostic) {
-		Query query = em.createQuery("SELECT d FROM Diagnostic d WHERE d.id = :pid");
+		Query query = em.createQuery("SELECT d FROM Diagnostic d WHERE d.idDiagnostic = :pid");
 		query.setParameter("pid", idDiagnostic);
 		Diagnostic diagnostic = (Diagnostic) query.getSingleResult();
 		return diagnostic;

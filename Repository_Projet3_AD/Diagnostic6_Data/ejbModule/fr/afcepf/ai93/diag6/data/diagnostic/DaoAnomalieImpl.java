@@ -74,14 +74,6 @@ public class DaoAnomalieImpl implements IDaoAnomalie{
 		return true;
 	}
 
-	@Override
-	public List<Anomalie> rechercheAnomalies(String nomAnomalie) {
-		Query query = em.createQuery("SELECT a FROM Anomalie a Where a.nomAnomalie = :pid");
-		query.setParameter("pid", nomAnomalie);
-		List <Anomalie> liste = query.getResultList();
-		return liste;
-	}
-
 
 	@Override
 	public List<Anomalie> recupereAnomalieParDiagnostic(int idDiagnostic) {
