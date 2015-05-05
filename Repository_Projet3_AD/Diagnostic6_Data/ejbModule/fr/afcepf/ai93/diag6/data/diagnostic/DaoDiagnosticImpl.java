@@ -80,10 +80,9 @@ public List<Diagnostic> recupereToutDiagnostic() {
 		requete.setParameter("pid", erp.getIdErp());
 		List<Diagnostic> liste = requete.getResultList();
 		return liste;
-	}
 
 	@Override
-	public boolean recupereSiIntervEnCoursParDiag(int idDiag) {
+public boolean recupereSiIntervEnCoursParDiag(int idDiag) {
 	Query requete = em.createQuery("SELECT a from Anomalie a inner join fetch a.intervention where a.diagnostic.idDiagnostic = :id");
 	requete.setParameter("id", idDiag);
 	List<Anomalie> listeAnomaliesAvecIntervention = requete.getResultList();
@@ -93,6 +92,5 @@ public List<Diagnostic> recupereToutDiagnostic() {
 	{
 		return true;
 	}
-	return false; 
-	}
 }
+	}
