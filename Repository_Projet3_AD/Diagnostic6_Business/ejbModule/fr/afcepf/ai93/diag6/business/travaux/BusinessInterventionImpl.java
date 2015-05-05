@@ -110,6 +110,11 @@ public class BusinessInterventionImpl implements IBusinessIntervention {
 	public List<EtatAvancementTravaux> recupererTousEtats() {
 		return proxyEtatAvancement.recupererTousEtats();
 	}
+	
+	@Override
+	public List<Intervention> recupereInterventionParType(TypeIntervention type) {
+		return proxyIntervention.recupereInterventionparType(type);
+	}
 
 	public IDaoIntervention getProxyIntervention() {
 		return proxyIntervention;

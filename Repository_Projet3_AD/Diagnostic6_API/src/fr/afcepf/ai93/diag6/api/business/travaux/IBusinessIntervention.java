@@ -15,6 +15,8 @@ public interface IBusinessIntervention {
 	public List<HistoriqueIntervention> recupereToutHistoriqueIntervention();
 	
 	public List<Intervention> recupereToutesIntervention();
+	
+	public List<Intervention> recupereInterventionParType(TypeIntervention type);
 
     public String ajouterIntervention(Intervention intervention);
 
