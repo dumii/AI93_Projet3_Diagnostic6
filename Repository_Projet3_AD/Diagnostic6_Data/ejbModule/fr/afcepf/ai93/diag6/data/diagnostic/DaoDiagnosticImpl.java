@@ -74,6 +74,7 @@ public class DaoDiagnosticImpl implements IDaoDiagnostic {
 		requete.setParameter("pid", erp.getIdErp());
 		List<Diagnostic> liste = requete.getResultList();
 		return liste;
+	}
 
 	@Override
 public boolean recupereSiIntervEnCoursParDiag(int idDiag) {

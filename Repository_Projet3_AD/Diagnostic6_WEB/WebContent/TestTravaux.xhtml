@@ -19,7 +19,6 @@
     
 			<h:selectOneMenu value="#{mbTestTravaux.idType}">
 					<a4j:ajax event="change"
-							  listener="#{mbTestTravaux.rechercheInterventionParAnomalie()}"
 							  listener="#{mbTestTravaux.avoirListeArtisans()}"
 							  render="maTable1"/>
 					<f:selectItem itemLabel="-- Sélectionnez un id --" itemValue="0"/>
@@ -35,9 +34,7 @@
 			<a4j:commandLink value="Afficher"
 											 action="#{mbTestTravaux.avoirListeArtisans()}"
 											 render="maTable1">
-			</a4j:commandLink>
-					<rich:dataTable var="intervention" id="maTable1"
-									value="#{mbTestTravaux.travaux}"> 					
+			</a4j:commandLink>				
 					<rich:dataTable var="artisan" id="maTable1"
 									value="#{mbTestTravaux.listeArtisans}">					
 						<rich:column>
