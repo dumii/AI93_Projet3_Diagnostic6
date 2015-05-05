@@ -1,7 +1,6 @@
 package fr.afcepf.ai93.diag6.data.diagnostic;
 
 import java.util.List;
-
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -27,19 +26,7 @@ public List<Diagnostic> recupereToutDiagnostic() {
 	return listeToutDiag;
 }
 
-@Override
-public boolean recupereSiIntervEnCoursParDiag(int idDiag) {
-	Query requete = em.createQuery("SELECT a from Anomalie a inner join fetch a.listeInterventions where a.diagnostic.idDiagnostic = :id");
-	requete.setParameter("id", idDiag);
-	List<Anomalie> listeAnomaliesAvecIntervention = requete.getResultList();
-	for (Anomalie a : listeAnomaliesAvecIntervention)
-	
-	if (listeAnomaliesAvecIntervention.size() > 0)
-	{
-		return true;
-	}
-	return false;
-}
+
 
 	@Override
 	public void ajouterDiagnostic(Diagnostic diagnostic) {
@@ -85,6 +72,7 @@ public boolean recupereSiIntervEnCoursParDiag(int idDiag) {
 		return null;
 	}
 
+
 	
 	public List<Diagnostic> recupereDiagnosticParErp(Erp erp) {
 		//et where traite = 0
@@ -92,6 +80,17 @@ public boolean recupereSiIntervEnCoursParDiag(int idDiag) {
 		requete.setParameter("pid", erp.getIdErp());
 		List<Diagnostic> liste = requete.getResultList();
 		return liste;
-	}
 
+	@Override
+public boolean recupereSiIntervEnCoursParDiag(int idDiag) {
+	Query requete = em.createQuery("SELECT a from Anomalie a inner join fetch a.intervention where a.diagnostic.idDiagnostic = :id");
+	requete.setParameter("id", idDiag);
+	List<Anomalie> listeAnomaliesAvecIntervention = requete.getResultList();
+	for (Anomalie a : listeAnomaliesAvecIntervention)
+	
+	if (listeAnomaliesAvecIntervention.size() > 0)
+	{
+		return true;
+	}
 }
+	}

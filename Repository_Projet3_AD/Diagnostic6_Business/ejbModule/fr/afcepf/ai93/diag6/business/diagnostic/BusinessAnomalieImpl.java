@@ -14,14 +14,14 @@ import fr.afcepf.ai93.diag6.entity.diagnostic.Indicateur;
 
 @Stateless
 @Remote(IBusinessAnomalie.class)
-public class BusinessAnomalieImpl implements IBusinessAnomalie{
-	@EJB
-	private IDaoAnomalie proxyAnomalie;
+public class BusinessAnomalieImpl implements IBusinessAnomalie {
 
+	@EJB
+	private IDaoAnomalie proxyDaoAnomalie; 
+	
 	@Override
 	public List<Anomalie> recupereToutAnomalie() {
-		// TODO Auto-generated method stub
-		return null;
+		return proxyDaoAnomalie.recupereToutAnomalie();
 	}
 
 	@Override
@@ -41,14 +41,6 @@ public class BusinessAnomalieImpl implements IBusinessAnomalie{
 	public void modifierAnomalie(Anomalie anomalie) {
 		// TODO Auto-generated method stub
 		
-	}
-
-	public IDaoAnomalie getProxyAnomalie() {
-		return proxyAnomalie;
-	}
-
-	public void setProxyAnomalie(IDaoAnomalie proxyAnomalie) {
-		this.proxyAnomalie = proxyAnomalie;
 	}
 
 	@Override
@@ -91,6 +83,20 @@ public class BusinessAnomalieImpl implements IBusinessAnomalie{
 	public List<Anomalie> rechercheAnomaliesErp(String nomERP) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<Anomalie> recupereAnomalieParDiagnostic(int idDiagnostic) {
+		return proxyDaoAnomalie.recupereAnomalieParDiagnostic(idDiagnostic);
+	}
+
+	public IDaoAnomalie getProxyDaoAnomalie() {
+		return proxyDaoAnomalie;
+	}
+
+	public void setProxyDaoAnomalie(IDaoAnomalie proxyDaoAnomalie) {
+		this.proxyDaoAnomalie = proxyDaoAnomalie;
+
 	}
 
 }
