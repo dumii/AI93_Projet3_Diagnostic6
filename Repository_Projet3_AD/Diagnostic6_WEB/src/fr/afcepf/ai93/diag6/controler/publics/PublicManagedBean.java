@@ -1,6 +1,6 @@
 package fr.afcepf.ai93.diag6.controler.publics;
 
-import java.io.Serializable;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -8,6 +8,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import fr.afcepf.ai93.diag6.api.business.publics.IBusinessPublic;
+import fr.afcepf.ai93.diag6.entity.diagnostic.TypeDiagnostic;
+import fr.afcepf.ai93.diag6.entity.erp.TypeErp;
 
 @ManagedBean(name="mbPublic")
 @SessionScoped
@@ -31,6 +33,72 @@ public class PublicManagedBean{
 	private Integer nbDiagnosticSecuriteTraites;
 	private Integer nbDiagnosticHygieneTraites;
 	
+	private Integer nbERpAuxNormes;
+	private Integer nbErpEnCoursDeNormalité;
+	
+	private List<TypeErp> listeTypeErp;
+	private List<TypeDiagnostic> listeTypeDiagnostic;
+	
+	private int idErpSelect;
+	
+	private int idDiagSelect;
+	
+	public int getIdErpSelect() {
+		return idErpSelect;
+	}
+
+	public void setIdErpSelect(int idErpSelect) {
+		this.idErpSelect = idErpSelect;
+	}
+
+	public int getIdDiagSelect() {
+		return idDiagSelect;
+	}
+
+	public void setIdDiagSelect(int idDiagSelect) {
+		this.idDiagSelect = idDiagSelect;
+	}
+
+	public int getIdSelect() {
+		return idErpSelect;
+	}
+
+	public void setIdSelect(int idSelect) {
+		this.idErpSelect = idSelect;
+	}
+
+	public List<TypeErp> getListeTypeErp() {
+		return listeTypeErp;
+	}
+
+	public void setListeTypeErp(List<TypeErp> listeTypeErp) {
+		this.listeTypeErp = listeTypeErp;
+	}
+
+	public List<TypeDiagnostic> getListeTypeDiagnostic() {
+		return listeTypeDiagnostic;
+	}
+
+	public void setListeTypeDiagnostic(List<TypeDiagnostic> listeTypeDiagnostic) {
+		this.listeTypeDiagnostic = listeTypeDiagnostic;
+	}
+
+	public Integer getNbERpAuxNormes() {
+		return nbERpAuxNormes;
+	}
+
+	public void setNbERpAuxNormes(Integer nbERpAuxNormes) {
+		this.nbERpAuxNormes = nbERpAuxNormes;
+	}
+
+	public Integer getNbErpEnCoursDeNormalité() {
+		return nbErpEnCoursDeNormalité;
+	}
+
+	public void setNbErpEnCoursDeNormalité(Integer nbErpEnCoursDeNormalité) {
+		this.nbErpEnCoursDeNormalité = nbErpEnCoursDeNormalité;
+	}
+
 	public Integer getNbDiagnosticAccessibilitéTotal() {
 		return nbDiagnosticAccessibilitéTotal;
 	}
@@ -159,6 +227,17 @@ public class PublicManagedBean{
 		nbDiagnosticEnergieTraites= proxyBusinessPublic.nbDiagnosticEnergieTraites();
 		nbDiagnosticSecuriteTraites= proxyBusinessPublic.nbDiagnosticSecuriteTraites();
 		nbDiagnosticHygieneTraites= proxyBusinessPublic.nbDiagnosticHygieneTraites();
+		
+		/*Graph2 ************************/
+		
+		nbERpAuxNormes = proxyBusinessPublic.nbERpAuxNormes();
+		nbErpEnCoursDeNormalité = proxyBusinessPublic.nbErpEnCoursDeNormalité();
+		
+		
+		/*Bandeau Recherche **************/
+		
+		listeTypeErp = proxyBusinessPublic.listerTypeErp();
+		listeTypeDiagnostic = proxyBusinessPublic.listerTypeDiagnostic();
 	}
 	
 }

@@ -11,9 +11,13 @@ import javax.persistence.Query;
 
 
 
+
+
 import fr.afcepf.ai93.diag6.api.data.publics.IDaoPublic;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
+import fr.afcepf.ai93.diag6.entity.diagnostic.TypeDiagnostic;
 import fr.afcepf.ai93.diag6.entity.erp.Erp;
+import fr.afcepf.ai93.diag6.entity.erp.TypeErp;
 import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
 
 @Stateless
@@ -68,15 +72,15 @@ public class DaoPublicImpl implements IDaoPublic {
 		Integer nbInterventionsTerminees = 0;
 		
 		
-		Query query = em.createQuery("Select Count(Intervention) where Intervention.etatAvancementTravaux = 1");
-		//List<Intervention> liste = query.getResultList();
-		Integer nb = (Integer)query.getSingleResult();
-		/*for(Intervention i : liste){
+		Query query = em.createQuery("Select e from Intervention e where e.etatAvancementTravaux = 1");
+		List<Intervention> liste = query.getResultList();
+		
+		for(Intervention i : liste){
 			nbInterventionsTerminees++;
 			System.out.println(i.getIdIntervention());
 		}
-		*/
-		return nb;
+		
+		return nbInterventionsTerminees;
 	}
 	
 
@@ -248,6 +252,52 @@ public class DaoPublicImpl implements IDaoPublic {
 		}
 		
 		return nbDiagnosticHygieneTraites;
+	}
+
+	@Override
+	public Integer nbERpAuxNormes() {
+
+		Integer nbERpAuxNormes = 0;
+		
+		Query query = em.createQuery("SELECT distinct e.erp FROM Diagnostic e where e.traite =1");
+		List<Erp> liste = query.getResultList();
+		
+		for(Erp i : liste){
+			nbERpAuxNormes++;
+		}
+		
+		return nbERpAuxNormes;
+	}
+
+	@Override
+	public Integer nbErpEnCoursDeNormalité() {
+
+		Integer nbErpEnCoursDeNormalité = 0;
+		
+		Query query = em.createQuery("SELECT distinct e.erp FROM Diagnostic e where e.traite =0");
+		List<Erp> liste = query.getResultList();
+		
+		for(Erp i : liste){
+			nbErpEnCoursDeNormalité++;
+		}
+		
+		return nbErpEnCoursDeNormalité;
+	}
+
+	@Override
+	public List<TypeErp> listerTypeErp() {
+		
+		Query query = em.createQuery("SELECT e FROM TypeErp e");
+		List<TypeErp> liste = query.getResultList();
+		return liste;
+	}
+
+	@Override
+	public List<TypeDiagnostic> listerTypeDiagnostic() {
+		
+		Query query = em.createQuery("SELECT e FROM TypeDiagnostic e");
+		List<TypeDiagnostic> liste = query.getResultList();
+		return liste;
 	}
 
 }

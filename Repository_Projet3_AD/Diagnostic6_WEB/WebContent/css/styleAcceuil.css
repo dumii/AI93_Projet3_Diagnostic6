@@ -1,4 +1,8 @@
-
+html
+{
+	overflow: scroll;
+	
+}
 .fixEntete{
  z-index: 9999;
  position: fixed;
@@ -15,7 +19,18 @@
 /* Div générale          */
 /*************************/
 
-
+#divMap
+{
+	border: #BDBDBD solid 1px;
+	width: 75%;
+	height: auto;
+	float: left;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 20px;
+	border-radius: 7px;
+	display: none;
+}
 
 #DivPrincipale
 {
@@ -39,11 +54,15 @@
 #statistiques
 {
 	border: #BDBDBD solid 1px;
-	height: 220px;
+	height: 280px;
 	width: auto;
 	margin: 2px;
 	border-radius: 7px;
-	background-image:linear-gradient(#E0ECF8, #5D7A8C);
+	background: #F9FAFA;
+ 	background-size: contain;
+	
+	
+	/*background-image:linear-gradient(#E0ECF8, #5D7A8C);
 	/*opacity: 0.5;*/
 }
 
@@ -55,7 +74,9 @@
 	border: #BDBDBD solid 1px;
 	margin-left: 7%;
 	margin-right: 7%;
-	background-image:linear-gradient(#E0ECF8, #5D7A8C);
+	/*background-image:linear-gradient(#E0ECF8, #5D7A8C);*/
+	background: url("../images/barreDeMenu4.png");
+ 	background-size: contain;
 	padding: 2px;
 	margin-top: 10px;
 }
@@ -87,7 +108,9 @@
 	width:49%;
 	margin-top:15px;
 	border-radius: 7px;
-	background-image:linear-gradient(#E0ECF8, #5D7A8C);
+	/*background-image:linear-gradient(#E0ECF8, #5D7A8C);*/
+	background: url("../images/barreDeMenu4.png");
+ 	background-size: contain;
 	
 }
 .ajoutCommentaires
@@ -97,7 +120,9 @@
 	border-radius: 7px;
 	margin-top: 15px;
 	width: 49%;
-	background-image:linear-gradient(#E0ECF8, #5D7A8C);
+	/*background-image:linear-gradient(#E0ECF8, #5D7A8C);*/
+	background: url("../images/barreDeMenu4.png");
+ 	background-size: contain;
 	float: right;
 }
 
@@ -128,8 +153,10 @@
 	float: left;
 	margin-top: 20px;
 	border-radius: 7px;
-	background-image:linear-gradient(#E0ECF8, #5D7A8C);
+	/*background-image:linear-gradient(#E0ECF8, #5D7A8C);
 	/*opacity: 0.5;*/
+	background: #F9FAFA;
+ 	background-size: contain;
 }
 
 #divEnteteRecherche
@@ -140,7 +167,9 @@
 	text-align:center;
 	margin-left: 7%;
 	margin-right: 7%;	
-	background-image:linear-gradient(#E0ECF8, #5D7A8C);
+	/*background-image:linear-gradient(#E0ECF8, #5D7A8C);*/
+	background: url("../images/barreDeMenu4.png");
+ 	background-size: contain;
 	color: black;
 	font-size: 20px; 
 	border-radius: 7px;
@@ -201,7 +230,9 @@
 	float: left;
 	margin-top: 20px;
 	border-radius: 7px;
-	background-image:linear-gradient(#E0ECF8, #5D7A8C);
+	/*background-image:linear-gradient(#E0ECF8, #5D7A8C);*/
+	background: #F9FAFA;
+ 	background-size: contain;
 }
 
 
@@ -214,7 +245,9 @@
 	text-align:center;
 	margin-left: 7%;
 	margin-right: 7%;	
-	background-image:linear-gradient(#E0ECF8, #5D7A8C);
+	/*background-image:linear-gradient(#E0ECF8, #5D7A8C);*/
+	background: url("../images/barreDeMenu4.png");
+ 	background-size: contain;
 	color: black;
 	font-size: 20px; 
 	border-radius: 5px;
@@ -223,7 +256,9 @@
 .boutonConnexion
 {
 	border: #BDBDBD solid 1px;
-	background-image:linear-gradient(#E0ECF8, #5D7A8C);
+	/*background-image:linear-gradient(#E0ECF8, #5D7A8C);*/
+	background: url("../images/barreDeMenu4.png");
+ 	background-size: contain;
 	color: black;
 	font-size: 20px; 
 	vertical-align: middle;
@@ -246,7 +281,9 @@
 .boutonTrouver
 {
 	border: #BDBDBD solid 1px;
-	background-image:linear-gradient(#E0ECF8, #5D7A8C);
+	/*background-image:linear-gradient(#E0ECF8, #5D7A8C);*/
+	background: url("../images/barreDeMenu4.png");
+ 	background-size: contain;
 	color: black;
 	font-size: 20px;
 
@@ -322,6 +359,7 @@ body
 	margin-left: 7%;
 	height: 73%;
 	margin-bottom: 2%;
+	cursor: pointer;
 }
 
 #logoErp {

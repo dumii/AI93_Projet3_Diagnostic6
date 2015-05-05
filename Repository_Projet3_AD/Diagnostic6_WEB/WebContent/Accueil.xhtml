@@ -30,7 +30,7 @@
 <body> 
 	<div id="enTete">
 	
-		<a href=""><img id="logoAccueil" src="images/Logo2.png" /></a>
+		<img id="logoAccueil" src="images/Logo2.png" onclick="javascript:location.reload();" />
 			
 		
 		
@@ -41,17 +41,17 @@
 			<div id="statistiques">
 				<div>
 					<div>
-					<h:outputLabel value="Statistique du moi de mai" id="enteteStatistiques" />
+					<h:outputLabel value="Statistique du mois de mai" id="enteteStatistiques" />
 					</div>
 				</div>
 				<div id="graphs">
-					<div id="chart1" style="height:200px;width:33%;float:left; margin-left: 1px">
+					<div id="chart1" style="height:250px;width:33%;float:left; margin-left: 1px; margin-top:4px;">
 						
 					</div>
-					<div id="chart2" style="height:200px;width:33%;float:left; ">
+					<div id="chart2" style="height:250px;width:33%;float:left;margin-top:4px; ">
 						
 					</div>
-					<div id="chart3" style="height:200px;width:33%;float:left; ">
+					<div id="chart3" style="height:250px;width:33%;float:left;margin-top:4px; ">
 						
 					</div>
 				</div>
@@ -59,14 +59,14 @@
 			<div class="lesPublications">
 				<div id="publications">
 					<div>
-						<img src="images/acceuil/flechegauche2.png" alt="Publication suivante" style="float:left; width: 10%; cursor: pointer;position: absolute; z-index:1"/>
+						<img src="images/acceuil/flechegauche2.png" alt="Publication suivante" style="float:left; width: 8%; cursor: pointer;position: absolute; z-index:1"/>
 						<img src="http://media.topito.com/wp-content/uploads/2013/04/Animal12.jpg" alt="Image publication1" style="width: 100%;position: relative; z-index:0"/>
 						<h:outputLabel value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
 					</div>
 				</div>
 				<div id="publications">
 					<div>
-						<img src="images/acceuil/flechedroite2.png" alt="Publication Précédente" style="float:right; width: 10%; cursor: pointer;position: absolute; z-index:1; margin-left: 27%"/>
+						<img src="images/acceuil/flechedroite2.png" alt="Publication Précédente" style="float:right; width: 8%; cursor: pointer;position: absolute; z-index:1; margin-left: 29%"/>
 						<img src="http://flepi.net/images/animaux-etrange-560x373.jpg" alt="Publication suivante" style="width: 100%;position: relative; z-index:0" />
 						<h:outputLabel value="Sed ut perspiciatis  dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?" />
 					
@@ -89,6 +89,7 @@
 				</div>	
 			</div>		
 		</div>
+		<div id="divMap"><img src="images/louis/IMG_20150505_173225.jpg" alt="Youpla" style="width: 100%" /></div>
 	<div id="login">
 		<input type="button" value="Espace professionel" class="boutonOuvertureLogin" onclick="ouvertureLogin('login2')"/>
 		
@@ -113,16 +114,28 @@
 			</div>
 			<div >
 				<div id="champDeRecherche">
-				
+					<h:form>
+						<f:view>
 					<div id="champsDeRecherche"><h:outputLabel value="Type d'ERP:" /></div>
-					<div id="champsDeRecherche"><h:selectOneListbox value="Coucou" id="listBox2" style="width:75%"></h:selectOneListbox></div>
-					<div id="champsDeRecherche"><h:outputLabel value="Diagnostic recherché:" /></div>
-					<div id="champsDeRecherche"><h:selectOneListbox value="Coucou2" id="listBox3" style="width:75%"></h:selectOneListbox></div>
-					<div id="champsDeRecherche"><h:selectManyCheckbox value=""><f:selectItem itemValue="Coche" itemLabel="travauxEnCours" /></h:selectManyCheckbox></div>
-					
+					<div id="champsDeRecherche"><h:selectOneMenu  value="#{mbPublic.idErpSelect}" id="listBox1" style="width:75%" >
+					<f:selectItems value="#{mbPublic.listeTypeErp}" var="listeErp"
+						itemLabel="#{listeErp.typeErpCourt}"
+						itemValue="#{listeErp.idTypeErp}"
+						></f:selectItems>
+					</h:selectOneMenu></div>
+					<div id="champsDeRecherche"><h:outputLabel value="Type de diagnostic recherché:" /></div>
+					<div id="champsDeRecherche"><h:selectOneMenu  value="#{mbPublic.idDiagSelect}" id="listBox2" style="width:75%; margin-bottom: 2px" >
+					<f:selectItems value="#{mbPublic.listeTypeDiagnostic}" var="listeDiag"
+						itemLabel="#{listeDiag.nomType}"
+						itemValue="#{listeDiag.idTypeDiagnostic}"
+						></f:selectItems>
+					</h:selectOneMenu>
+					</div>
+						</f:view>
+					</h:form>
 				</div>
 				<div id="resultatsDeRecherche">
-					<input type="button" value="Trouver" class="boutonTrouver"/>		
+					<input type="button" value="Trouver" class="boutonTrouver" onclick="changementDivPrincipale('divMap','DivPrincipale')"/>		
 				</div>
 			
 			</div>
@@ -165,12 +178,14 @@ $(document).ready(function(){
 	});
 $(document).ready(function(){
 	  var data = [
-	    ['Terminées', #{mbPublic.nbInterventionTerminees}],['Planifiées', #{mbPublic.nbInterventionPlanifiees}], ['En cours', #{mbPublic.nbInterventionEnCours}], 
-	    ['En attente', #{mbPublic.nbInterventionDiagnostiquees}],
+	    ['Aux normes', #{mbPublic.nbERpAuxNormes}],['En cours', #{mbPublic.nbErpEnCoursDeNormalité}],
 	  ];
 	  var plot2 = jQuery.jqplot ('chart2', [data], 
 	    {
-	      seriesDefaults: {
+		    title:'Erp aux normes',
+		    
+	      	seriesDefaults: {
+		      
 	        renderer: jQuery.jqplot.PieRenderer, 
 	        rendererOptions: {
 	          // Turn off filling of slices.
@@ -179,7 +194,8 @@ $(document).ready(function(){
 	          // Add a margin to seperate the slices.
 	          sliceMargin: 4, 
 	          // stroke the slices with a little thicker line.
-	          lineWidth: 5
+	          lineWidth: 5,
+	          
 	        }
 	      }, 
 	      legend: { show:true, location: 'e' }
@@ -194,15 +210,21 @@ $(document).ready(function(){
      
     plot2 = $.jqplot('chart3', [s1, s2], {
         title:'Rapport par type',
+        
         seriesDefaults: {
+        	
             renderer:$.jqplot.BarRenderer,
-            pointLabels: { show: true }
+            pointLabels: { show: true },
+            
         },
         axes: {
+        	
             xaxis: {
+            	tickOptions: {textColor: '#394241'},
                 renderer: $.jqplot.CategoryAxisRenderer,
                 ticks: ticks
             }
+        	
         }
     });
  
@@ -232,6 +254,21 @@ function ouvertureLogin(id)
 }
 
 
+function changementDivPrincipale(div1,div2)
+{
+   d1 = document.getElementById(div1);
+   d2 = document.getElementById(div2);
+   if( d2.style.display == "none" )
+   {
+      d1.style.display = "none";
+      d2.style.display = "block";
+   }
+   else
+   {
+      d1.style.display = "block";
+      d2.style.display = "none";
+   }
+}
 </script>
 </body>
 </html>

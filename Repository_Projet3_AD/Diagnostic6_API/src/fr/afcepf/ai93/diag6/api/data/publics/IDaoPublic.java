@@ -2,7 +2,9 @@ package fr.afcepf.ai93.diag6.api.data.publics;
 
 import java.util.List;
 
+import fr.afcepf.ai93.diag6.entity.diagnostic.TypeDiagnostic;
 import fr.afcepf.ai93.diag6.entity.erp.Erp;
+import fr.afcepf.ai93.diag6.entity.erp.TypeErp;
 
 public interface IDaoPublic {
 
@@ -29,7 +31,7 @@ public interface IDaoPublic {
 	 public Integer nbInterventionsDiagnostiquees();
 	 
 	 
-	 /* Methodes statistique graph2 */
+	 /* Methodes statistique graph3 */
 	 /* *****************************/
 	 
 	 public Integer nbDiagnosticAccessibilitéTotal();
@@ -41,5 +43,19 @@ public interface IDaoPublic {
 	 public Integer nbDiagnosticEnergieTraites();
 	 public Integer nbDiagnosticSecuriteTraites();
 	 public Integer nbDiagnosticHygieneTraites();
+	 
+	 
+	 /* Methodes statistique graph2 */
+	 /* *****************************/
+	 
+	 public Integer nbERpAuxNormes();
+	 public Integer nbErpEnCoursDeNormalité();
+	 
+	 
+	 /* Méthodes bandeau recherche */
+	 /* ****************************/
+		
+	 public List<TypeErp> listerTypeErp();
+	 public List<TypeDiagnostic> listerTypeDiagnostic();
 	 
 }

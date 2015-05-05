@@ -11,6 +11,7 @@ import fr.afcepf.ai93.diag6.api.data.publics.IDaoPublic;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
 import fr.afcepf.ai93.diag6.entity.diagnostic.TypeDiagnostic;
 import fr.afcepf.ai93.diag6.entity.erp.Erp;
+import fr.afcepf.ai93.diag6.entity.erp.TypeErp;
 
 @Stateless
 @Remote(IBusinessPublic.class)
@@ -135,6 +136,30 @@ public class BusinessPublicImpl implements IBusinessPublic {
 	public Integer nbDiagnosticHygieneTraites() {
 		// TODO Auto-generated method stub
 		return proxyDaoPublic.nbDiagnosticHygieneTraites();
+	}
+
+	@Override
+	public Integer nbERpAuxNormes() {
+		// TODO Auto-generated method stub
+		return proxyDaoPublic.nbERpAuxNormes();
+	}
+
+	@Override
+	public Integer nbErpEnCoursDeNormalité() {
+		// TODO Auto-generated method stub
+		return proxyDaoPublic.nbErpEnCoursDeNormalité();
+	}
+
+	@Override
+	public List<TypeErp> listerTypeErp() {
+		// TODO Auto-generated method stub
+		return proxyDaoPublic.listerTypeErp();
+	}
+
+	@Override
+	public List<TypeDiagnostic> listerTypeDiagnostic() {
+		// TODO Auto-generated method stub
+		return proxyDaoPublic.listerTypeDiagnostic();
 	}
 
 }
