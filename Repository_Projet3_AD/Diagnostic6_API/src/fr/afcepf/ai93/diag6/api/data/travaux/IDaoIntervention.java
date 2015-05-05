@@ -16,5 +16,5 @@ public interface IDaoIntervention {
 
     public Intervention recupereIntervention(int idIntervention);
     
-    public boolean rechercherInterventionSurAnomalie(int idAnomalie);
+    public List<Intervention> rechercherInterventionSurAnomalie(int idAnomalie);
 }

@@ -13,7 +13,6 @@ import fr.afcepf.ai93.diag6.api.data.travaux.IDaoIntervention;
 import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
 
-
 @Stateless
 @Remote(IDaoIntervention.class)
 public class DaoInterventionImpl implements IDaoIntervention {
@@ -47,32 +46,16 @@ public class DaoInterventionImpl implements IDaoIntervention {
 		Intervention intervention = (Intervention) query.getSingleResult();
 		return intervention;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see fr.afcepf.ai93.diag6.api.data.travaux.IDaoIntervention#rechercherInterventionSurAnomalie(int)
-	 * Recherche des interventions pour une anomalie
-	 * ==> Règle de gestion
-	 */
 	
 	@Override
-	public boolean rechercherInterventionSurAnomalie(int idAnomalie) {
-		Query query = em.createQuery("SELECT e from Intervention e WHERE e.id = :pid");
+	public List<Intervention> rechercherInterventionSurAnomalie(int idAnomalie) {
+		Query query = em.createQuery("SELECT e from Intervention e WHERE e.anomalie.idAnomalie = :pid");
 		query.setParameter("pid", idAnomalie);
 		List<Intervention> liste = query.getResultList();
-		
-		if (liste.size() > 0)
-		{
-			return false;
-		}
-		else
-		{
-			return true;
-		}
-
+		return liste;
 	}
+}
 
-	}
 
 
 
