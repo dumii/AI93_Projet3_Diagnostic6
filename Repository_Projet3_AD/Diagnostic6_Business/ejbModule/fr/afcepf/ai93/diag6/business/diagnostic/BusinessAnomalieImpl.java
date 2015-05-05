@@ -32,7 +32,7 @@ public class BusinessAnomalieImpl implements IBusinessAnomalie {
 		
 		System.out.println("on est dans le business");
 		System.out.println("2222222222222222222222222222222222222");
-		proxyDaoAnomalie.ajouterAnomalie(anomalie);
+		proxyAnomalie.ajouterAnomalie(anomalie);
 		return "Intervention enregristrée avec succès";
 		
 	}
