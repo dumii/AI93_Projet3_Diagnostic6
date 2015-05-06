@@ -109,4 +109,36 @@ public class BusinessAnomalieImpl implements IBusinessAnomalie {
 	public List<Anomalie> recupereToutAnomalie() {
 		return proxyAnomalie.recupereToutAnomalie();
 	}
+
+	public IDaoAnomalie getProxyAnomalie() {
+		return proxyAnomalie;
+	}
+
+	public void setProxyAnomalie(IDaoAnomalie proxyAnomalie) {
+		this.proxyAnomalie = proxyAnomalie;
+	}
+
+	public IDaoHistoriqueAnomalie getProxyHistorique() {
+		return proxyHistorique;
+	}
+
+	public void setProxyHistorique(IDaoHistoriqueAnomalie proxyHistorique) {
+		this.proxyHistorique = proxyHistorique;
+	}
+
+	public IDaoDiagnostic getProxyDiagnostic() {
+		return proxyDiagnostic;
+	}
+
+	public void setProxyDiagnostic(IDaoDiagnostic proxyDiagnostic) {
+		this.proxyDiagnostic = proxyDiagnostic;
+	}
+
+	public IDaoIndicateur getProxyIndicateur() {
+		return proxyIndicateur;
+	}
+
+	public void setProxyIndicateur(IDaoIndicateur proxyIndicateur) {
+		this.proxyIndicateur = proxyIndicateur;
+	}
 }
