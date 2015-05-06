@@ -146,11 +146,11 @@
 						<h:panelGrid columns="1">
            			 	<a4j:outputPanel id="panel" layout="block">
                			<a4j:repeat value="#{mbDonneesGenerales.erpSelectionne.listeBatimentsErp}" var="o" rows="20" id="repeat">
-                    	<rich:panel style="float:left; width:200px; padding:1px; background-color:#f7f7f7; border-display:none;  ">
-                       
+                    	<rich:panel style="float:left; width:300px; padding:1px; background-color:#f7f7f7; border-display:none;  ">
+                      		<h:outputText value="Intitulé : " style="font-weight:bold" />
+                           	<h:outputText value="#{o.intituleBatiment}" style="font-weight:bold" />
                         	<h:panelGrid columns="2">
-                            	<h:outputText value="Intitulé : " style="font-weight:bold" />
-                           		<h:outputText value="#{o.intituleBatiment}" style="font-weight:bold" />
+                            	
                             	<h:outputText value="Nombre d'étages : " style="font-weight:bold" />
                             	<h:outputText value="#{o.listeEtagesBatiment.size()}" />
                             	<h:outputText value="Nombre de pièces : " style="font-weight:bold" />
@@ -212,53 +212,33 @@
 					</div> 
 				</div>
 				<div id="anomaliesFiche">
-					<ui:repeat var="o" value="#{order.orderList}" varStatus="status">
-						<div id="titreAnomelie">
-							<h4>
-								<span> Anomalie n°</span> #{o.idAnomalie} #{o.valeurIndicateur}
-							</h4>
-						</div>
-						<div id="batErpAnomalie">
-							<span>Batiment : </span> #{o.numBatiment} #{o.intituleBatiment}
-						</div>
-						<div id="localisationAnomalie">
-							<span>Localisation : </span> #{o.intituleVoirie} #{o.idAcces}
-							#{o.denominationEscalier} #{o.denominationAscenceur} <span>Type
-								: </span> #{o.libelleTypeVoirie} #{o.libelleTypeAcces}
-						</div>
-						<div id="pieceAnomalie">
-							<span>Pièce : </span> #{o.denominationPiece} <span>
-								Fonction : </span> #{o.libelleFonctionPiece} <span>Etage : </span>
-							#{o.numeroEtage} #{o.nomEtage}
-						</div>
-						<div id="descriptionPreconisation">
-							<table id="tableDescPreco">
-								<tr>
-									<th class="tableDesc" width="770px" style="text-align: left">Description :</th>
-								</tr>
-								<tr>
-									<th id="descriptionAnom" class="tableDesc" width="770px"
-										style="text-align: left">#{o.descriptionAnomalie}</th>
-								</tr>
-								<tr>
-									<th class="tablePreco" width="770px" style="text-align: left">Preconisation :</th>
-								</tr>
-								<tr>
-									<th id="preconisationAnom" class="tablePreco" width="770px"
-										style="text-align: left">#{o.preconisationAnomalie}</th>
-								</tr>
-							</table>
-							<span>Coût estimé : </span> #{o.coutEstimeAnomalie}
-							<div id="interEnCoursOuPas">
-								<span id="pasInterAno">Aucune Intervention en cours sur
-									cette Anomalie</span> <a href="" id="interEnCoursAno">Une
-									Intervention est en cours sur cette Anomalie depuis le
-									#{o.dateDebutIntervention}</a> <span id="interFinitAno">Une
-									Intervention a été effectuée sur cette Anomalie à la date du
-									#{o.dateFinIntervention}</span>
-							</div>
-						</div>
-					</ui:repeat>
+       									<h:panelGrid columns="1">
+           			 	<a4j:outputPanel id="panel2" layout="block">
+               			<a4j:repeat value="#{mbDonneesGenerales.diagnosticSelectionne.listeAnomaliesDiagnostic}" var="o" rows="20" id="repeatAnomalies">
+                    	<rich:panel style="float:left; width:800px; padding:1px; background-color:#f7f7f7; border-display:none;  ">
+                       
+                        	<h:panelGrid columns="2">
+                            	<h:outputText value="Anomalie n° : " style="font-weight:bold" />
+                           		<h:outputText value="#{o.idAnomalie}" style="font-weight:bold" />
+                            	<h:outputText value="Niveau indicateur : " style="font-weight:bold" />
+                            	<h:outputText value="#{o.indicateur.libelleIndicateur}" />
+                            	<h:outputText value="Bâtiment : " style="font-weight:bold" />
+                            	<h:outputText value="" id="test"  /> 
+                            	<h:outputText value="Localisation : " style="font-weight:bold" />
+                            	<h:outputText value="#{mbDonneesGenerales.localisationAnomalie()}" />
+                            	<h:outputText value="Description : " style="font-weight:bold" />
+                            	<h:outputText value="#{o.descriptionAnomalie}" />
+                            	<h:outputText value="Preconisation :" style="font-weight:bold" />
+                            	<h:outputText value="#{o.preconisationAnomalie}" />
+                            	<h:outputText value="Coût estimé :" style="font-weight:bold" />
+                            	<h:outputText value="#{o.coutEstimeAnomalie}" />
+                            	<h:outputText value="Intervention :" style="font-weight:bold" />
+                            	<h:outputText value="" />
+                        	</h:panelGrid>
+                    	</rich:panel>
+                		</a4j:repeat>
+           				</a4j:outputPanel>
+       				 	</h:panelGrid>
 				</div>
 			</div>		
 			</h:panelGroup>	
