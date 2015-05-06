@@ -8,7 +8,7 @@ public interface IBusinessExpert {
 	
 	public List<Expert> recupereToutExpert();
 
-    public void ajouterExpert(Expert expert );
+    public String ajouterExpert(Expert expert);
 
-    public boolean supprimerExpert(Expert expert);
+    public String supprimerExpert(Expert expert);
 }

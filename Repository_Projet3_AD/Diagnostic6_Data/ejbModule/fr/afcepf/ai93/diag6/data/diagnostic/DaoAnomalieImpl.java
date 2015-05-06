@@ -6,9 +6,10 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoAnomalie;
-import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoDiagnostic;
+import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
 
 @Stateless
@@ -21,44 +22,35 @@ public class DaoAnomalieImpl implements IDaoAnomalie{
 
 	@Override
 	public List<Anomalie> recupereToutAnomalie() {
-		// TODO Auto-generated method stub
-		return null;
+		Query query = em.createQuery("SELECT e from Anomalie e");
+		List<Anomalie> liste = query.getResultList();
+		return liste;
 	}
 
 	@Override
 	public void ajouterAnomalie(Anomalie anomalie) {
-		em.persist(anomalie);
-		
+		em.persist(anomalie);		
+	}
+	
+	@Override
+	public boolean modifierAnomalie(Anomalie anomalie, Utilisateur user) {
+		// Merges changes to the database
+		em.merge(anomalie);
+		return true;
 	}
 
 	@Override
-	public void modifierAnomalie(Anomalie anomalie) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void historiserAnomalie(Anomalie anomalie) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean supprimerAnomalie(Anomalie anomalie) {
-		// TODO Auto-generated method stub
-		return false;
+	public String supprimerAnomalie(Anomalie anomalie) {
+		em.remove(anomalie);
+		return "L'anomalie a été supprimée";
 	}
 
 	@Override
 	public Anomalie recupereAnomalie(int idAnomalie) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Anomalie> rechercheAnomalies(String nomAnomalie) {
-		// TODO Auto-generated method stub
-		return null;
+		Query query = em.createQuery("SELECT e from Anomalie e WHERE e.idAnomalie = :pid");
+		query.setParameter("pid", idAnomalie);
+		Anomalie anomalie = (Anomalie) query.getSingleResult();
+		return anomalie;
 	}
 
 	@Override
@@ -66,5 +58,4 @@ public class DaoAnomalieImpl implements IDaoAnomalie{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

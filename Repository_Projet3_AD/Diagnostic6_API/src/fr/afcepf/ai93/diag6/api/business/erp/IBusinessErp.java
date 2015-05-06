@@ -5,5 +5,8 @@ import java.util.List;
 import fr.afcepf.ai93.diag6.entity.erp.Erp;
 
 public interface IBusinessErp {
+	
 	public List<Erp> recupereToutErp(); 
+	
+	public Erp recupererErpParId(int idErp);
 }

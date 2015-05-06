@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 
 import fr.afcepf.ai93.diag6.api.business.diagnostic.IBusinessDiagnostic;
 import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoDiagnostic;
+import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoTypeDiagnostic;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
 import fr.afcepf.ai93.diag6.entity.diagnostic.HistoriqueDiagnostic;
@@ -19,6 +20,8 @@ import fr.afcepf.ai93.diag6.entity.diagnostic.TypeDiagnostic;
 public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 	@EJB
 	private IDaoDiagnostic proxyDiagnostic; 
+	@EJB
+	private IDaoTypeDiagnostic proxyTypeDiagnostic; 
 	
 	private List<Diagnostic> listeDiag; 
 	List<Diagnostic> listeDiagIntervEnCours = new ArrayList<Diagnostic>(); 
@@ -115,8 +118,7 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 
 	@Override
 	public List<TypeDiagnostic> recupereTypeDiagnostic() {
-		// TODO Auto-generated method stub
-		return null;
+		return proxyTypeDiagnostic.recupereTypeDiagnostic();
 	}
 
 	@Override
