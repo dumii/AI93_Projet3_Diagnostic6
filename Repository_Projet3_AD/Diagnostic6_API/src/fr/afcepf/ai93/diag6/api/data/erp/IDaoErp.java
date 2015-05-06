@@ -12,6 +12,7 @@ import fr.afcepf.ai93.diag6.entity.erp.Piece;
 import fr.afcepf.ai93.diag6.entity.erp.Voirie;
 
 public interface IDaoErp {
+
 	public List<Erp> recupereToutErp();
 
 
@@ -33,5 +34,7 @@ public interface IDaoErp {
 
 
 	public List<Voirie> recupererVoirieParErp(int idErp);
+	
+	public Erp recupererErpParId(int idErp);
 	
 }

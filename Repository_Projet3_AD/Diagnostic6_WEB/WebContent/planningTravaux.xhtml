@@ -10,17 +10,18 @@
 	<ui:define name="title">Diagnostic 6 - Planing travaux</ui:define>
 	<ui:define name="head">
 		<link href="css/planningTravaux.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="JavaScript/planningTravaux.js"></script>
 	</ui:define>
 	<ui:define name="content">
 
 		<div id="content">
 
 		<table id="monTableau">
-			<tr id="table-header1">
+			<tr id="table-header1" class="maClasse">
 				<th colspan="11">Nom de l'ERP + Numéro de chantier</th>
 			</tr>
 			
-			<tr id="table-header2">
+			<tr id="table-header2" class="maClasse">
 				<th class="NomIntervention"></th>
 				<th colspan="2">2 colonnes fusionnées + flèche?</th>
 				<th colspan="2">2 colonnes fusionnées</th>
@@ -29,7 +30,7 @@
 				<th colspan="2">2 colonnes fusionnées + flèche?</th>
 			</tr>
 			
-			<tr id="table-header3">
+			<tr id="table-header3" class="maClasse">
 				<th class="NomIntervention">ici la liste des interventions</th>
 				<th colspan="2">Mars + flèche?</th>
 				<th colspan="2">Avril</th>
@@ -39,14 +40,14 @@
 			</tr>
 			
 			<ui:repeat var="item" value="#{mbTestTravaux.listeTypes}">
-				<tr id="ligneBlanche">
-					<td onclick="afficherMasquer(T#{item.idTypeIntervention})">#{item.typeIntervention}</td>
+				<tr id="ligneBlanche" class="maClasse">
+					<td onClick="afficherCacher('#{item.typeIntervention}')">#{item.typeIntervention}</td>
 					<td colspan="10"></td>
 				</tr>
 				
 				<ui:repeat var="intervention" value="#{item.listeInterventionTypeIntervention}">
-					<tr id="ligneBleue">
-						<td class="T#{item.idTypeIntervention}"><span>Intervention #{intervention.idIntervention}</span></td>
+					<tr class="#{item.typeIntervention}" id="ligneBleue">
+						<td><span>Intervention #{intervention.idIntervention}</span></td>
 						<td colspan="10"></td>
 					</tr>
 				</ui:repeat>
@@ -56,17 +57,6 @@
 		
 		</table>
 		</div>
-
-		<script type="text/javascript"> 
-
-		function afficherMasquer(classeToggle) 
- 		 { 
-			document.getElementsByClass("."classeToggle).each(function() {
-				  $( this ).toggle();
-			});)
- 		 }
-	
-		</script>
 	</ui:define>
 
 </ui:composition>

@@ -75,7 +75,8 @@ public class BusinessInterventionImpl implements IBusinessIntervention {
 		
 		Intervention interventionInitiale = proxyIntervention.recupereIntervention(intervention.getIdIntervention());
 		
-		
+		//L'état d'avancement d'une intervention ne peut passer que de "En attente" vers "Terminés"
+		//Soit l'idEtatAvancement ne peut passer que de 4 à 1
 		int idAvancementInitial = interventionInitiale.getEtatAvancementTravaux().getIdEtatAvancement();
 		int idAvancementNouveau = intervention.getEtatAvancementTravaux().getIdEtatAvancement();
 		
