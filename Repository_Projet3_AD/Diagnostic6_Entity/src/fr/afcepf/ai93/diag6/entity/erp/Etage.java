@@ -37,6 +37,14 @@ public class Etage implements Serializable {
 
 	
 	
+	public List<Piece> getListePiecesEtage() {
+		return listePiecesEtage;
+	}
+
+	public void setListePiecesEtage(List<Piece> listePiecesEtage) {
+		this.listePiecesEtage = listePiecesEtage;
+	}
+
 	public Integer getIdEtage() {
 		return idEtage;
 	}

@@ -4,6 +4,7 @@ import java.util.List;
 
 import fr.afcepf.ai93.diag6.entity.autres.Artisan;
 import fr.afcepf.ai93.diag6.entity.autres.TypeArtisan;
+import fr.afcepf.ai93.diag6.entity.travaux.TypeIntervention;
 
 public interface IBusinessArtisan {
 	
@@ -14,8 +15,7 @@ public interface IBusinessArtisan {
 	
 	public boolean supprimerArtisan(Artisan artisan);
 	
-	//!!!!Type artisan = type d'intervention (les deux tables sont cohérentes entre elles)!!!!
-	public List<Artisan> recupererArtisanParTypeIntervention(int idTypeIntervention);
+	public List<Artisan> recupererArtisansParTypeIntervention(TypeIntervention type);
 
 	//Type d'artisan
 	public List<TypeArtisan> recupererTypeArtisan();	

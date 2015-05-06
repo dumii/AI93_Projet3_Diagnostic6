@@ -11,7 +11,7 @@ public interface IBusinessAnomalie {
 	
 	public List<Anomalie> recupereToutAnomalie();
 
-    public void ajouterAnomalie(Anomalie anomalie);
+    public String ajouterAnomalie(Anomalie anomalie);
 
     public void modifierAnomalie(Anomalie anomalie);
 
@@ -28,5 +28,7 @@ public interface IBusinessAnomalie {
     public List<Anomalie> rechercheAnomalies(String nomAnomalie);
 
     public List<Anomalie> rechercheAnomaliesErp(String nomERP);
+
+	public List<Anomalie> recupereAnomalieParDiagnostic(int idDiagnostic);
     
 }

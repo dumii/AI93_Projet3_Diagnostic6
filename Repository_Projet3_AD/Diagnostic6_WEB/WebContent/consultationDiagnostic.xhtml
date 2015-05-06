@@ -7,336 +7,273 @@
 	xmlns:rich="http://richfaces.org/rich">
 
 <h:head>
-	<title>Diagnostic 6</title>
 
-	<link href="css/style.css" rel="stylesheet" type="text/css" />
-	<link href="css/consultationDiagnostic.css" rel="stylesheet"
-		type="text/css" />
 	<link rel="stylesheet"
 		href="//code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css" />
-	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-
-</h:head>
-<body>
-	<div id="enTete">
-
-		<a href=""><img id="logoAccueil" src="images/Logo2.png" /></a>
-
-		<h:form id="rechercheBandeau" action="">
-			<input type="text" value="Entrez votre recherche ici ..." />
-			<input type="image" src="images/Loupe.png" />
-			<div id="resultatRecherche">blabla</div>
-		</h:form>
-
-		<a href=""><img class="logoMenu" id="logoErp"
-			src="images/ERPIconeBleue2.png" /></a> <a href=""><img
-			class="logoMenu" id="logoDiag" src="images/DiagnosticIconeBleue.png" /></a>
-
-		<a href=""><img class="logoMenu" id="logoTrav"
-			src="images/BuildingConstruction_icon.png" /></a> <a href=""><img
-			class="logoMenu" id="logoTabBord"
-			src="images/TableauBordIconeOrange.png" /></a>
-
-	</div>
-
-	<div id="bandeauGauche">	
-		<div>
-			<button id="boutonAjouter">Ajouter</button>
-		</div>
-		
-		<div id="radio">
-			<input type="radio" id="radio1" name="radio"><label for="radio1">Filtre 1<span id="fleche">↓</span></label></input>
-			<input type="radio" id="radio2" name="radio"><label for="radio2">Filtre 2<span id="fleche"></span></label></input>
-			<input type="radio" id="radio3" name="radio"><label for="radio3">Filtre 3<span id="fleche"></span></label></input>
-		</div>
-  	
-  	<div id="accordion">
-			<h3>Accordéon 1</h3>
-			<div>
-				<p>
-					<ul>
-						<li>Cinéma Malakoff</li>
-						<li>MacDonald</li>
-						<li>Hopital Saint André</li>
-					</ul>
-				</p>
-			</div>
- 
-			<h3>Accordéon 2</h3>
-			<div>
-				<p>
-					<ul>
-						<li>Diagnostic Accès - Cinéma Malakoff</li>
-						<li>Diagnostic Energie - MacDonald</li>
-						<li>Diagnostic Sécurité - Hopital Saint André</li>
-					</ul>
-				</p>
-			</div>
-
-			<h3>Accordéon 3</h3>
-			<div>
-				<p>
-					<ul>
-						<li>Diagnostic Accès - Cinéma Malakoff</li>
-						<li>Diagnostic Energie - MacDonald</li>
-						<li>Diagnostic Sécurité - Hopital Saint André</li>
-					</ul>
-				</p>
-			</div>			
-		</div>	
-		</div>
-
-	<div id="bandeauDroite">
-		<fieldset id="connection">
-			<legend>Bonjour Toto</legend>
-			blablablablablablablabla
-		</fieldset>
-		
-		<fieldset id="favoris">
-			<legend>Mes favoris</legend>
-			blablablablablablablabla
-		</fieldset>
-		
-		<fieldset id="notification">
-			<legend>Dernières actualités</legend>
-			
-				<article>
-					<header>Motif notification</header>
-					<time>20/11/2056</time>
-				<section>Lorem ipsum dolor sit amet</section>
-			</article>
-			
-			<article>
-				<header>Motif notification</header>
-				<time>20/11/2056</time>
-				<section>Lorem ipsum dolor sit amet</section>
-			</article>
-			
-		</fieldset>
-	</div>
-
-	<div id="consultDiag">
-		<div class="mini-barreEtat">
-			#{o.intituleDiagnostic}
-			<div id="mini-barreEtat-boutons">
-				<a href=""><img class="boutons-mini-barreEtat"
-					id="boutonModifier" name="boutonModifier"
-					src="images/consultationDiagnostic/DiagnosticBoutonModifier.26.26.png" /></a>
-					
-				<a href=""><img class="boutons-mini-barreEtat"
-					id="notificationGrisee" name="notificationG" 
-					src="images/consultationDiagnostic/NotificationIconeDiagGrise.26.26.nette.png"  onClick="notification(this.src)"/></a>
-				<a href=""><img class="boutons-mini-barreEtat"
-					id="notificationRouge" name="notificationR" 
-					src="images/consultationDiagnostic/NotifIconeDiagRouge.26.26.png"  onClick="denotification(this.src)"/></a>
-					
-				<a href=""><img class="boutons-mini-barreEtat"
-					id="favoritesGrisee" name="favorite" 
-					src="images/consultationDiagnostic/NoFavoritesIcon.26.26.png"  onClick="favorisation(this.src)"/></a>
-				<a href=""><img class="boutons-mini-barreEtat"
-					id="favoriteJaune" name="favorite" 
-					src="images/consultationDiagnostic/FavoriteIcon.26.26.png"  onClick="defavorisation(this.src)"/></a>
-				
-			</div>
-		</div>
-		<div id="InfoErpDiagnostic">
-		<div id="ErpDiagGeneral">
-			<div id="ErpDiagTitre">
-				<h3>
-					<span>Informations Générales</span>
-				</h3>
-			</div>
-			<div class="tableErpDiagGeneral">
-				<table>
-					<tr>
-						<th class="ErpGeneral" width="180px" style="text-align: right">ERPconcerné :</th>
-						<th id="ErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.nomErp}</th>
-						<th class="ErpGeneral" width="230px" style="text-align: right">Date de réalisation du diagnostic :</th>
-						<th id="DateErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.dateRealisationDiagnostic}</th>
-						</tr>
-					<tr>
-						<th class="ErpGeneral" width="180px" style="text-align: right">Catégorie :</th>
-						<th id="CategErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.denominationCategorieErp}</th>
-						<th class="ErpGeneral" width="230px" style="text-align: right">Date d'enregistrement diagnostic :</th>
-						<th id="DateErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.dateSaisieDiagnostic}</th>
-						
-					</tr>
-					<tr>
-						<th class="ErpGeneral" width="180px" style="text-align: right">Fonction :</th>
-						<th id="FoncErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.typeErp}</th>
-						<th class="ErpGeneral" width="230px" style="text-align: right">Expert :</th>
-						<th id="expertDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.prenomExpert}#{o.nomExpert}</th>
-					</tr>
-					<tr>
-						<th class="ErpGeneral" width="180px" style="text-align: right">Adresse :</th>
-						<th id="AdressErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.numVoieErp}#{o.numVoieErp}</th>
-						<th class="ErpGeneral" width="230px" style="text-align: right">Coordonées :</th>
-						<th id="telExpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.telExpert}</th>
-						
-					</tr>
-					<tr>
-						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
-						<th id="cpVillExpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.codePostal}#{o.ville}</th>
-						<th class="ErpGeneral" width="230px" style="text-align: right"></th>
-						<th id="emailExpErpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.mailExpert}</th>
-						
-					
-					</tr>
-					<tr>
-						<th class="accordErp" width="180px" style="text-align: right"></th>
-						<th class="accordErp" width="180px" style="text-align: right"></th>
-						<th class="ErpGeneral" width="230px" style="text-align: right"></th>
-						<th id="adrExpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.numVoieExpert}#{o.nomVoieExpert}</th>
-					</tr>
-					<tr>
-						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
-						<th class="ErpGeneral" width="180px" style="text-align: right"></th>
-						<th class="ErpGeneral" width="230px" style="text-align: right"></th>
-						<th id="adrExpDiag" class="ErpGeneral" width="180px" style="text-align: right">#{o.codePostal}#{o.ville}</th>
-					</tr>
-				</table>
-			</div>
-		</div>
-		<div id="infoDetaille">
-			<div id="buttShowEDD">
-				<h3>
-					<span>Informations Détaillées</span>
-				</h3>
-			</div>
 	
-			<div id="ErpDiagDetaille">
-			<div id="nbBatimentErp" >
-				<span>Nombres de Batiments constituans l'ERP :  </span><span id="nbBatimentErpRecherche">#Résultat de Recherche#</span>
-			</div>
-			<div class="tableErpDetaille">
-				<table>
-					<tr>
-						<th class="ErpDetaille" width="180px" style="text-align: right">Intitulé :</th>
-						<ui:repeat var="o" value="#{order.orderList}" varStatus="status">
-						<th id="batIntileErp" class="ErpDetaille" width="160px" style="text-align: right">#{o.intituleBatiment}</th>
-						</ui:repeat>
-					</tr>
-					<tr>
-						<th class="ErpDetaille" width="180px" style="text-align: right">Nombre d'étages :</th>
-						<ui:repeat var="o" value="#{order.orderList}" varStatus="status">
-						<th id="nbEtagesBatErp" class="ErpDetaille" width="160px" style="text-align: right">#Résultat de Recherche#</th>
-						</ui:repeat>
-					</tr>
-					<tr>
-						<th class="ErpDetaille" width="180px" style="text-align: right">Nombre de pièces :</th>
-						<ui:repeat var="o" value="#{order.orderList}" varStatus="status">
-						<th id="nbPiecesBatErp" class="ErpDetaille" width="160px" style="text-align: right">#Résultat de Recherche#</th>
-						</ui:repeat>
-					</tr>
-					<tr>
-						<th class="ErpDetaille" width="180px" style="text-align: right">Nombre d'accès :</th>
-						<ui:repeat var="o" value="#{order.orderList}" varStatus="status">
-						<th id="nbAccesBatErp" class="ErpDetaille" width="160px" style="text-align: right">#Résultat de Recherche#</th>
-						</ui:repeat>
-					</tr>
-					<tr>
-						<th class="ErpDetaille" width="180px" style="text-align: right">Nombre d'escaliers :</th>
-						<ui:repeat var="o" value="#{order.orderList}" varStatus="status">
-						<th id="nbEscaliersBatErp" class="ErpDetaille" width="160px" style="text-align: right">#Résultat de Recherche#</th>
-						</ui:repeat>
-					</tr>
-					<tr>
-						<th class="ErpDetaille" width="180px" style="text-align: right">Nombre d'ascenseurs :</th>
-						<ui:repeat var="o" value="#{order.orderList}" varStatus="status">
-						<th id="nbAscenseursBatErp" class="ErpDetaille" width="160px" style="text-align: right">#Résultat de Recherche#</th>
-						</ui:repeat>
-					</tr>
-				</table>
-			</div>
-			<ui:repeat var="o" value="#{order.orderList}" varStatus="status">
-			<div id="foncPiecesErp" >
-				<span>	Fonctions des pièces dont dispose le batiment :  </span><span id="batIntileErp">#{o.intituleBatiment}</span>
-				<table id="tableFoncPiecesErp">
-					<ui:repeat var="o" value="#{order.orderList}" varStatus="status">
-						<tr>
-							<th id="nbPiecesBatErp" class="ErpDetaille" width="20px" style="text-align: right">#Résultat de Recherche#</th>
-							<th id="foncPiecesBatErp" class="ErpDetaille" width="160px" style="text-align: right">#{o.libelleFonctionPiece}</th>
-						</tr>
-					</ui:repeat>
-				</table>
-			</div>
-			</ui:repeat>
-		</div>
-		</div>
-	</div>
-		<div id="diagAnomalieSection">
-			<div id="diagnosticFiche">
-				<div id="ficheDiagTitre">
-					<h3>
-						<span>Diagnostic portant sur les conditions #{o.nomType}</span>
-					</h3>
-					<a href=""><img class="ficheDiagTitreImage"
-					id="boutonModifier" src="images/TypesDiagnosticIcones/TypeAcces.75.71.png" /></a>
-				</div>
-				<div id="ficheAnomTitre">
-					<h3>
-						<span>Nombre d'anomalies recencées #Résultat de Recherche#</span>
-					</h3>
+</h:head>
+
+<ui:composition template="/WEB-INF/Template2Diagnostic6.xhtml">
+	<ui:define name="title">Diagnostic 6 - Consultation diagnostic</ui:define>
+	<ui:define name="head">
+	<link href="css/consultationDiagnostic.css" rel="stylesheet" type="text/css" />
+	</ui:define>
+	<ui:define name="content">
+<f:view>
+		<h:form>
+		<div id="content">
+		<h:inputText value="#{mbDonneesGenerales.idDiag}" />
+				<a4j:commandLink 
+					value="Recuperer diagnostic"
+					action="#{mbDonneesGenerales.recupererDiagnostic()}" 
+					render="lblReponseAjax" />
+			<h:panelGroup id="lblReponseAjax" layout="block">
+			<div class="mini-barreEtat">
+				<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.intituleDiagnostic}"/>
+				<div id="mini-barreEtat-boutons">
+					<a href=""><img class="boutons-mini-barreEtat"
+						id="boutonModifier" name="boutonModifier"
+						src="images/consultationDiagnostic/DiagnosticBoutonModifier.26.26.png" /></a>
+
+					<a href=""><img class="boutons-mini-barreEtat"
+						id="notificationGrisee" name="notificationG"
+						src="images/consultationDiagnostic/NotificationIconeDiagGrise.26.26.nette.png"
+						onClick="notification(this.src)" /></a> <a href=""><img
+						class="boutons-mini-barreEtat" id="notificationRouge"
+						name="notificationR"
+						src="images/consultationDiagnostic/NotifIconeDiagRouge.26.26.png"
+						onClick="denotification(this.src)" /></a> <a href=""><img
+						class="boutons-mini-barreEtat" id="favoritesGrisee"
+						name="favorite"
+						src="images/consultationDiagnostic/NoFavoritesIcon.26.26.png"
+						onClick="favorisation(this.src)" /></a> <a href=""><img
+						class="boutons-mini-barreEtat" id="favoriteJaune" name="favorite"
+						src="images/consultationDiagnostic/FavoriteIcon.26.26.png"
+						onClick="defavorisation(this.src)" /></a>
 				</div>
 			</div>
-			<div id="anomaliesFiche">
-				<ui:repeat var="o" value="#{order.orderList}" varStatus="status">
-					<div id="titreAnomelie">
-						<h4>
-							<span> Anomalie n°</span> #{o.idAnomalie} #{o.valeurIndicateur}
-						</h4>
+			<div id="InfoErpDiagnostic">
+				<div id="ErpDiagGeneral">
+					<div id="ErpDiagTitre">
+						<h3>
+							<span>Informations générales</span>
+						</h3>
 					</div>
-					<div id="batErpAnomalie">
-						<span>Batiment : </span> #{o.numBatiment} #{o.intituleBatiment}
-					</div>
-					<div id="localisationAnomalie">
-						<span>Localisation : </span> #{o.intituleVoirie}
-													 #{o.idAcces}
-												 	 #{o.denominationEscalier}
-													 #{o.denominationAscenceur}
-						<span>Type : </span> #{o.libelleTypeVoirie}
-											 #{o.libelleTypeAcces}
-					</div>
-					<div id="pieceAnomalie">
-						<span>Pièce : </span> #{o.denominationPiece} <span>  Fonction : </span> #{o.libelleFonctionPiece}
-						<span>Etage : </span> #{o.numeroEtage} #{o.nomEtage}
-					</div>
-					<div id="descriptionPreconisation">
-						<table id="tableDescPreco">
+					<div class="tableErpDiagGeneral">
+						<table>
 							<tr>
-								<th class="tableDesc" width="770px" style="text-align: left">Description : </th>
+								<th class="ErpGeneral" width="180px" style="text-align: right">ERPconcerné
+									:  </th>
+								<th id="ErpDiag" class="ErpGeneral" width="180px"
+									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.nomErp}" /></th>
+								<th class="ErpGeneral" width="230px" style="text-align: right">Date
+									de réalisation du diagnostic :</th>
+								<th id="DateErpDiag" class="ErpGeneral" width="180px"
+									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.dateRealisationDiagnostic.toLocaleString()}"/></th>
 							</tr>
 							<tr>
-								<th id="descriptionAnom" class="tableDesc" width="770px" style="text-align: left">#{o.descriptionAnomalie}</th>
+								<th class="ErpGeneral" width="180px" style="text-align: right">Catégorie
+									:</th>
+								<th id="CategErpDiag" class="ErpGeneral" width="180px"
+									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.categorieErp.denominationCategorieErp}" /></th>
+								<th class="ErpGeneral" width="230px" style="text-align: right">Date
+									d'enregistrement diagnostic :</th>
+								<th id="DateErpDiag" class="ErpGeneral" width="180px"
+									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.dateSaisieDiagnostic.toLocaleString()}" /></th>
+
 							</tr>
 							<tr>
-								<th class="tablePreco" width="770px" style="text-align: left">Preconisation : </th>
+								<th class="ErpGeneral" width="180px" style="text-align: right">Fonction
+									:</th>
+								<th id="FoncErpDiag" class="ErpGeneral" width="180px"
+									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.typeErp.denominationTypeErp} #{mbDonneesGenerales.diagnosticSelectionne.erp.typeErp.typeErp}" /></th>
+								<th class="ErpGeneral" width="230px" style="text-align: right">Expert
+									:</th>
+								<th id="expertDiag" class="ErpGeneral" width="180px"
+									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.prenomExpert} #{mbDonneesGenerales.diagnosticSelectionne.expert.nomExpert}"/></th>
 							</tr>
 							<tr>
-								<th id="preconisationAnom" class="tablePreco" width="770px" style="text-align: left">#{o.preconisationAnomalie}</th>
+								<th class="ErpGeneral" width="180px" style="text-align: right">Adresse
+									:</th>
+								<th id="AdressErpDiag" class="ErpGeneral" width="180px"
+									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.numVoieErp} #{mbDonneesGenerales.diagnosticSelectionne.erp.nomVoieErp}"/></th>
+								<th class="ErpGeneral" width="230px" style="text-align: right">Coordonées
+									:</th>
+								<th id="telExpDiag" class="ErpGeneral" width="180px"
+									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.telExpert}"/></th>
+
+							</tr>
+							<tr>
+								<th class="ErpGeneral" width="180px" style="text-align: right"></th>
+								<th id="cpVillExpDiag" class="ErpGeneral" width="180px"
+									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.localisation.codePostal} #{mbDonneesGenerales.diagnosticSelectionne.erp.localisation.ville}" /></th>
+								<th class="ErpGeneral" width="230px" style="text-align: right"></th>
+								<th id="emailExpErpDiag" class="ErpGeneral" width="180px"
+									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.mailExpert}"/></th>
+							</tr>
+							<tr>
+								<th class="accordErp" width="180px" style="text-align: right"></th>
+								<th class="accordErp" width="180px" style="text-align: right"></th>
+								<th class="ErpGeneral" width="230px" style="text-align: right"></th>
+								<th id="adrExpDiag" class="ErpGeneral" width="180px"
+									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.numVoieExpert} #{mbDonneesGenerales.diagnosticSelectionne.expert.nomVoieExpert}"/></th>
+							</tr>
+							<tr>
+								<th class="ErpGeneral" width="180px" style="text-align: right"></th>
+								<th class="ErpGeneral" width="180px" style="text-align: right"></th>
+								<th class="ErpGeneral" width="230px" style="text-align: right"></th>
+								<th id="cpVillExpDiag" class="ErpGeneral" width="180px"
+									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.localisation.codePostal} #{mbDonneesGenerales.diagnosticSelectionne.expert.localisation.ville}"/></th>
 							</tr>
 						</table>
-						<span>Coût estimé : </span> #{o.coutEstimeAnomalie}
-						<div id="interEnCoursOuPas">
-							<span id="pasInterAno">Aucune Intervention en cours sur cette Anomalie</span>
-							<a href="" id="interEnCoursAno">Une Intervention est en cours sur cette Anomalie depuis le #{o.dateDebutIntervention}</a>
-							<span id="interFinitAno">Une Intervention a été effectuée sur cette Anomalie à la date du #{o.dateFinIntervention}</span> 
-						</div>
 					</div>
-				</ui:repeat>
+				</div>
+				<div id="infoDetaille">
+					<div id="buttShowEDD">
+						<h3>
+							<span>Informations détaillées</span>
+						</h3>
+					</div>
+
+					<div id="ErpDiagDetaille">
+						<div id="nbBatimentErp">
+							<span>Nombres de bâtiments constituant l'ERP : </span><span
+								id="nbBatimentErpRecherche"><h:outputText value="#{mbDonneesGenerales.erpSelectionne.listeBatimentsErp.size()}" /></span>
+						</div>
+						<div class="tableErpDetaille">
+						
+						<h:panelGrid columns="1">
+           			 	<a4j:outputPanel id="panel" layout="block">
+               			<a4j:repeat value="#{mbDonneesGenerales.erpSelectionne.listeBatimentsErp}" var="o" rows="20" id="repeat">
+                    	<rich:panel style="float:left; width:200px; padding:1px; background-color:#f7f7f7; border-display:none;  ">
+                       
+                        	<h:panelGrid columns="2">
+                            	<h:outputText value="Intitulé : " style="font-weight:bold" />
+                           		<h:outputText value="#{o.intituleBatiment}" style="font-weight:bold" />
+                            	<h:outputText value="Nombre d'étages : " style="font-weight:bold" />
+                            	<h:outputText value="#{o.listeEtagesBatiment.size()}" />
+                            	<h:outputText value="Nombre de pièces : " style="font-weight:bold" />
+                            	<h:outputText value="#{mbDonneesGenerales.calculNbPiecesBat()}" id="nbPieces"  /> 
+                            	<h:outputText value="Nombre d'accès : " style="font-weight:bold" />
+                            	<h:outputText value="#{o.listeAccesBatiment.size()}" />
+                            	<h:outputText value="Nombre d'escaliers : " style="font-weight:bold" />
+                            	<h:outputText value="#{o.listeEscaliersBatiment.size()}" />
+                            	<h:outputText value="Nombre d'ascenseurs : " style="font-weight:bold" />
+                            	<h:outputText value="#{o.listeAscenceursBatiment.size()}" />
+                        	</h:panelGrid>
+                    	</rich:panel>
+                		</a4j:repeat>
+           				</a4j:outputPanel>
+       				 	</h:panelGrid>
+							
+						</div>
+						
+						<!-- ce bloc sera pas ajouté car il n'y a pas d'intérêt à afficher tous les TYPES des pièces exitents dans le batiment. Eventuellement completer l'affichage actuel avec d'autres informations, mais l'interface graphique est à définir. -->
+						
+						<ui:repeat var="o" value="#{order.orderList}" varStatus="status">
+							<div id="foncPiecesErp">
+								<span> Fonctions des pièces dont dispose le batiment : </span><span
+									id="batIntileErp">#{o.intituleBatiment}</span>
+								<table id="tableFoncPiecesErp">
+									<ui:repeat var="o" value="#{order.orderList}"
+										varStatus="status">
+										<tr>
+											<th id="nbPiecesBatErp" class="ErpDetaille" width="20px"
+												style="text-align: right">#Résultat de Recherche#</th>
+											<th id="foncPiecesBatErp" class="ErpDetaille" width="160px"
+												style="text-align: right">#{o.libelleFonctionPiece}</th>
+										</tr>
+									</ui:repeat>
+								
+								</table>
+							</div>
+						</ui:repeat>
+					</div>
+				</div>
 			</div>
+			
+			<div id="diagAnomalieSection">
+				<div id="diagnosticFiche">
+					<div id="ficheDiagTitre">
+						<h3>
+							<span>Diagnostic portant sur </span>
+							<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.typeDiagnostic.nomType}" />
+						</h3>
+						<a href=""><img class="ficheDiagTitreImage"
+							id="boutonModifier"
+							src="images/TypesDiagnosticIcones/TypeAcces.75.71.png" /></a>
+					</div>
+					<div id="ficheAnomTitre">
+						<h3>
+							<span>Nombre d'anomalies recencées : </span>
+							<h:outputText value="#{mbDonneesGenerales.listeAnomaliesParDiagnostic.size()}" id="nbAnomalies"  /> 
+						</h3>
+					</div> 
+				</div>
+				<div id="anomaliesFiche">
+					<ui:repeat var="o" value="#{order.orderList}" varStatus="status">
+						<div id="titreAnomelie">
+							<h4>
+								<span> Anomalie n°</span> #{o.idAnomalie} #{o.valeurIndicateur}
+							</h4>
+						</div>
+						<div id="batErpAnomalie">
+							<span>Batiment : </span> #{o.numBatiment} #{o.intituleBatiment}
+						</div>
+						<div id="localisationAnomalie">
+							<span>Localisation : </span> #{o.intituleVoirie} #{o.idAcces}
+							#{o.denominationEscalier} #{o.denominationAscenceur} <span>Type
+								: </span> #{o.libelleTypeVoirie} #{o.libelleTypeAcces}
+						</div>
+						<div id="pieceAnomalie">
+							<span>Pièce : </span> #{o.denominationPiece} <span>
+								Fonction : </span> #{o.libelleFonctionPiece} <span>Etage : </span>
+							#{o.numeroEtage} #{o.nomEtage}
+						</div>
+						<div id="descriptionPreconisation">
+							<table id="tableDescPreco">
+								<tr>
+									<th class="tableDesc" width="770px" style="text-align: left">Description :</th>
+								</tr>
+								<tr>
+									<th id="descriptionAnom" class="tableDesc" width="770px"
+										style="text-align: left">#{o.descriptionAnomalie}</th>
+								</tr>
+								<tr>
+									<th class="tablePreco" width="770px" style="text-align: left">Preconisation :</th>
+								</tr>
+								<tr>
+									<th id="preconisationAnom" class="tablePreco" width="770px"
+										style="text-align: left">#{o.preconisationAnomalie}</th>
+								</tr>
+							</table>
+							<span>Coût estimé : </span> #{o.coutEstimeAnomalie}
+							<div id="interEnCoursOuPas">
+								<span id="pasInterAno">Aucune Intervention en cours sur
+									cette Anomalie</span> <a href="" id="interEnCoursAno">Une
+									Intervention est en cours sur cette Anomalie depuis le
+									#{o.dateDebutIntervention}</a> <span id="interFinitAno">Une
+									Intervention a été effectuée sur cette Anomalie à la date du
+									#{o.dateFinIntervention}</span>
+							</div>
+						</div>
+					</ui:repeat>
+				</div>
+			</div>		
+			</h:panelGroup>	
 		</div>
+		</h:form>
+
+		<script>
+		jQuery.noConflict();
 		
-	</div>
+		$( "#radio" ).buttonset();
+		$( "#accordion" ).accordion();
+		$("button").button();
 
-	<script>
-  $( "#radio" ).buttonset();
-  $( "#accordion" ).accordion();
-  $("button").button();
-
-  $( "#buttShowEDD" ).click(function() {
-	  $( "#ErpDiagDetaille" ).toggle( "blind", 500 );
+		$( "#buttShowEDD" ).click(function() {
+			$( "#ErpDiagDetaille" ).toggle( "blind", 500 );
 	});
 
   function notification() 
@@ -365,5 +302,7 @@
   }
 	
 </script>
-</body>
+</f:view>
+	</ui:define>
+</ui:composition>
 </html>

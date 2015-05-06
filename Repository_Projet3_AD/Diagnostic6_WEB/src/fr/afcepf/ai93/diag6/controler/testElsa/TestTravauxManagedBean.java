@@ -8,6 +8,8 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import fr.afcepf.ai93.diag6.api.business.diagnostic.IBusinessAnomalie;
+import fr.afcepf.ai93.diag6.api.business.autres.IBusinessArtisan;
 import fr.afcepf.ai93.diag6.api.business.travaux.IBusinessIntervention;
 import fr.afcepf.ai93.diag6.entity.autres.Artisan;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
@@ -21,13 +23,22 @@ public class TestTravauxManagedBean {
 
 	@EJB
 	private IBusinessIntervention proxyBusiness;
+	@EJB
+	private IBusinessAnomalie proxyAnomalie;
+	
+
+	private IBusinessArtisan proxyArtisan;
 	private List<Intervention> travaux;
 	private List<TypeIntervention> listeTypes;
 	private List<EtatAvancementTravaux> listeEtats;
+	private List<Anomalie> listeAnomalies;
+	private List<Artisan> listeArtisans;
 	private Intervention intervention;
+	private TypeIntervention type;
 	private int idIntervention;
 	private int idType;
 	private int idEtat;
+	private int idAnomalie;
 	private String resultat;
 	private Date dateChoisie;
 	
@@ -39,7 +50,30 @@ public class TestTravauxManagedBean {
 	{
 		travaux = proxyBusiness.recupereToutesIntervention();
 		listeTypes = proxyBusiness.recupererTousTypesIntervention();
+		for (TypeIntervention t : listeTypes)
+		{
+			t.setListeInterventionTypeIntervention(proxyBusiness.recupereInterventionParType(t));
+		}
 		listeEtats = proxyBusiness.recupererTousEtats();
+		listeAnomalies = proxyAnomalie.recupereToutAnomalie();
+	}
+	
+	public String rechercheInterventionParAnomalie()
+	{
+		travaux = proxyBusiness.rechercherInterventionSurAnomalie(idAnomalie);
+		
+		type = new TypeIntervention();
+		type.setIdTypeIntervention(2);
+		listeArtisans = proxyArtisan.recupererArtisansParTypeIntervention(type);
+		return "";
+	}
+	
+	public String avoirListeArtisans()
+	{
+		type.setIdTypeIntervention(idType);
+		System.out.println("ManagedBean, idType : " + idType);
+		listeArtisans = proxyArtisan.recupererArtisansParTypeIntervention(type);
+		return "";
 	}
 	
 	//Recherche d'une intervention via son id
@@ -101,7 +135,7 @@ public class TestTravauxManagedBean {
 	public String modifier(Intervention intervention)
 	{
 		intervention.setCoutIntervention(5555.55);
-		proxyBusiness.modifierIntervention(intervention);
+		//proxyBusiness.modifierIntervention(intervention);
 		init();
 		
 		return "";
@@ -186,5 +220,53 @@ public class TestTravauxManagedBean {
 
 	public void setIdEtat(int idEtat) {
 		this.idEtat = idEtat;
+	}
+
+	public int getIdAnomalie() {
+		return idAnomalie;
+	}
+
+	public IBusinessAnomalie getProxyAnomalie() {
+		return proxyAnomalie;
+	}
+
+	public void setProxyAnomalie(IBusinessAnomalie proxyAnomalie) {
+		this.proxyAnomalie = proxyAnomalie;
+	}
+
+	public List<Anomalie> getListeAnomalies() {
+		return listeAnomalies;
+	}
+
+	public void setListeAnomalies(List<Anomalie> listeAnomalies) {
+		this.listeAnomalies = listeAnomalies;
+	}
+
+	public void setIdAnomalie(int idAnomalie) {
+		this.idAnomalie = idAnomalie;
+	}
+	
+	public IBusinessArtisan getProxyArtisan() {
+		return proxyArtisan;
+	}
+
+	public void setProxyArtisan(IBusinessArtisan proxyArtisan) {
+		this.proxyArtisan = proxyArtisan;
+	}
+
+	public List<Artisan> getListeArtisans() {
+		return listeArtisans;
+	}
+
+	public void setListeArtisans(List<Artisan> listeArtisans) {
+		this.listeArtisans = listeArtisans;
+	}
+
+	public TypeIntervention getType() {
+		return type;
+	}
+
+	public void setType(TypeIntervention type) {
+		this.type = type;
 	}
 }

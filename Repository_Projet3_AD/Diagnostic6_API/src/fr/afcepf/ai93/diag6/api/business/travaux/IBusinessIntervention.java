@@ -3,6 +3,7 @@ package fr.afcepf.ai93.diag6.api.business.travaux;
 import java.util.Date;
 import java.util.List;
 
+import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 import fr.afcepf.ai93.diag6.entity.travaux.EtatAvancementTravaux;
 import fr.afcepf.ai93.diag6.entity.travaux.HistoriqueIntervention;
 import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
@@ -14,12 +15,16 @@ public interface IBusinessIntervention {
 	public List<HistoriqueIntervention> recupereToutHistoriqueIntervention();
 	
 	public List<Intervention> recupereToutesIntervention();
+	
+	public List<Intervention> recupereInterventionParType(TypeIntervention type);
 
     public String ajouterIntervention(Intervention intervention);
 
-    public String modifierIntervention(Intervention intervention);
+    public String modifierIntervention(Intervention intervention, Utilisateur user);
 
     public Intervention recupereIntervention(int idIntervention);
+    
+    public List<Intervention> rechercherInterventionSurAnomalie(int idAnomalie);
     
     //Type d'intervention
     public List<TypeIntervention> recupererTousTypesIntervention();
