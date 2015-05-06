@@ -41,7 +41,7 @@ public class DaoAnomalieImpl implements IDaoAnomalie{
 
 	@Override
 	public Anomalie recupereAnomalie(int idAnomalie) {
-		Query query = em.createQuery("SELECT a FROM Anomalie WHERE a.idAnomalie = :pid");
+		Query query = em.createQuery("SELECT a FROM Anomalie a WHERE a.idAnomalie = :pid");
 		query.setParameter("pid", idAnomalie);
 		Anomalie anomalie = (Anomalie) query.getSingleResult();
 		return anomalie;
@@ -49,18 +49,7 @@ public class DaoAnomalieImpl implements IDaoAnomalie{
 
 	@Override
 	public List<Anomalie> rechercheAnomaliesErp(String nomERP) {
-		Query query = em.createQuery("SELECT a FROM Anomalie WHERE a.idAnomalie = :pid");
-		query.setParameter("pid", nomERP);
-		List<Anomalie> liste = query.getResultList();
-		
-		if (liste.size() > 0) {
-			return null;
-		}
-		else {
-			return null;
-		// je me suis inspiré de ce qu'a fait Elsa pour la rechercheInterventionSurAnomalie()
-		// mais je ne suis pas sur de mon coup ;)
-		}
+		return null; 
 	}
 
 	@Override
