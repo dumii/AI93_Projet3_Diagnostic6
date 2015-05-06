@@ -54,6 +54,8 @@ public class InfosDiagEtErpManagedBean implements Serializable {
 
 	public void recupErp(){
 		erpSelectionne = new Erp(); 
+		System.out.println(diagnosticSelectionne);
+		System.out.println(diagnosticSelectionne.getErp());
 		erpSelectionne.setIdErp(diagnosticSelectionne.getErp().getIdErp());
 		
 		List<Batiment> listeBatimentsErpSel = new ArrayList<Batiment>();
