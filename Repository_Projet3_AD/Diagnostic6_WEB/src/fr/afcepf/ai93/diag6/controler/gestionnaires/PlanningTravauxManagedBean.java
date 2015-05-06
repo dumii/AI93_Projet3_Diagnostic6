@@ -15,9 +15,9 @@ import fr.afcepf.ai93.diag6.entity.travaux.TypeIntervention;
 public class PlanningTravauxManagedBean {
 
 	@EJB
-	private IBusinessIntervention proxyBusiness;
+	private IBusinessIntervention proxyIntervention;
 	
-	//La liste des types d'interventions 
+	//La liste des types d'interventions et des anomalies par interventions
 	private List<TypeIntervention> listeTypesInterventions;
 	
 	//L'ERP concerné par le chantier

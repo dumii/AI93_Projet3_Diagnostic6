@@ -11,27 +11,33 @@
 	<ui:define name="head">
 		<link href="css/planningTravaux.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="JavaScript/planningTravaux.js"></script>
+		
+	<link rel="stylesheet"
+		href="//code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css" />
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
 	</ui:define>
 	<ui:define name="content">
 
 		<div id="content">
-
+<h:form>
 		<table id="monTableau">
-			<tr id="table-header1" class="maClasse">
+			<tr class="ClasseBidon" id="table-header1">
 				<th colspan="11">Nom de l'ERP + Numéro de chantier</th>
 			</tr>
 			
-			<tr id="table-header2" class="maClasse">
+			<tr class="ClasseBidon" id="table-header2">
 				<th class="NomIntervention"></th>
-				<th colspan="2">2 colonnes fusionnées + flèche?</th>
-				<th colspan="2">2 colonnes fusionnées</th>
-				<th colspan="2">ici l'année</th>
-				<th colspan="2">2 colonnes fusionnées</th>
-				<th colspan="2">2 colonnes fusionnées + flèche?</th>
+				<th colspan="2">flèche?</th>
+				<th colspan="2"></th>
+				<th colspan="2">2015</th>
+				<th colspan="2"></th>
+				<th colspan="2"></th>
 			</tr>
 			
-			<tr id="table-header3" class="maClasse">
-				<th class="NomIntervention">ici la liste des interventions</th>
+			<tr class="ClasseBidon" id="table-header3">
+				<th class="NomIntervention">Interventions</th>
 				<th colspan="2">Mars + flèche?</th>
 				<th colspan="2">Avril</th>
 				<th colspan="2">Mai</th>
@@ -40,15 +46,58 @@
 			</tr>
 			
 			<ui:repeat var="item" value="#{mbTestTravaux.listeTypes}">
-				<tr id="ligneBlanche" class="maClasse">
-					<td onClick="afficherCacher('#{item.typeIntervention}')">#{item.typeIntervention}</td>
+				<tr class="ClasseBidon" id="ligneBlanche">
+					<td onClick="afficherCacher('T#{item.idTypeIntervention} -')">#{item.typeIntervention}</td>
 					<td colspan="10"></td>
 				</tr>
 				
 				<ui:repeat var="intervention" value="#{item.listeInterventionTypeIntervention}">
-					<tr class="#{item.typeIntervention}" id="ligneBleue">
-						<td><span>Intervention #{intervention.idIntervention}</span></td>
+					<tr class="T#{item.idTypeIntervention} -" id="ligneBleue">
+						<td onClick="afficherCacher('T#{item.idTypeIntervention} - A#{intervention.anomalie.idAnomalie}')">
+							<span class="spanAnomalie">Anomalie #{intervention.anomalie.idAnomalie}</span>
+						</td>
 						<td colspan="10"></td>
+					</tr>
+					
+					<tr class="T#{item.idTypeIntervention} - A#{intervention.anomalie.idAnomalie}" id="ligneBlanche">
+						<td>
+							<span class="spanIntervention">Intervention #{intervention.idIntervention}</span>
+						</td>
+						<td colspan="10">
+							<div class="rectangle" id="#{intervention.idIntervention}">
+								<time class="dateDebut">#{intervention.dateDebutIntervention.toString()}</time>
+								<time class="dateDebut">#{intervention.dateFinIntervention.date}</time>
+							</div>
+						</td>
+					</tr>
+					
+					<tr class="T#{item.idTypeIntervention} - A#{intervention.anomalie.idAnomalie}" id="ligneOrange">
+						
+							<td>
+								<h4>Informations sur l'intervention</h4>
+								<h:outputLabel value="Date de début :" />
+									<input type="text" 
+											id="datepickerDebut - #{intervention.idIntervention}" 
+											class="datepick"
+											value="#{intervention.dateDebutIntervention.date}"
+											disabled="disabled"/>
+								<h:outputLabel value="Date de fin :" /> 
+									<input type="text" id="datepickerFin - #{intervention.idIntervention}" class="datepick"/>
+								<h:outputLabel value="Coût :" />
+									<input type="number" step="0.01"/>	
+								<input class="boutonModifier" type="button" value="Modifier" onClick="disabledEnabled('datepickerDebut - #{intervention.idIntervention}')"/>
+								<input type="button" 
+									onclick="dessinerRectangle('#{intervention.dateDebutIntervention}','#{intervention.dateFinIntervention}','#{intervention.idIntervention}')"
+									value="Dessiner les rectangles"/>				
+							</td>
+							
+							<td>
+								<h4>Informations sur l'intervention</h4>
+								<h:outputLabel value="Date de début :" />
+								<h:outputLabel value="Date de fin :" /> 
+								<h:outputLabel value="Coût :" />					
+							</td>
+						
 					</tr>
 				</ui:repeat>
 
@@ -56,8 +105,18 @@
 			</ui:repeat>
 		
 		</table>
+			</h:form>
 		</div>
+		
+	<script>
+	jQuery.noConflict();
+	$('.datepick').each(function(){
+	    $(this).datepicker();
+	});
+  </script>
+
 	</ui:define>
 
 </ui:composition>
+
 </html>

@@ -22,7 +22,7 @@ import fr.afcepf.ai93.diag6.entity.travaux.TypeIntervention;
 public class TestTravauxManagedBean {
 
 	@EJB
-	private IBusinessIntervention proxyBusiness;
+	private IBusinessIntervention proxyIntervention;
 	@EJB
 	private IBusinessAnomalie proxyAnomalie;
 	
@@ -48,19 +48,24 @@ public class TestTravauxManagedBean {
 	@PostConstruct
 	public void init()
 	{
-		travaux = proxyBusiness.recupereToutesIntervention();
-		listeTypes = proxyBusiness.recupererTousTypesIntervention();
+		travaux = proxyIntervention.recupereToutesIntervention();
+		listeTypes = proxyIntervention.recupererTousTypesIntervention();
 		for (TypeIntervention t : listeTypes)
 		{
-			t.setListeInterventionTypeIntervention(proxyBusiness.recupereInterventionParType(t));
+			t.setListeInterventionTypeIntervention(proxyIntervention.recupereInterventionParType(t));
+			
+			for (Intervention i : t.getListeInterventionTypeIntervention())
+			{
+				i.setAnomalie(proxyAnomalie.recupereAnomalie(i.getAnomalie().getIdAnomalie()));
+			}
 		}
-		listeEtats = proxyBusiness.recupererTousEtats();
+		listeEtats = proxyIntervention.recupererTousEtats();
 		listeAnomalies = proxyAnomalie.recupereToutAnomalie();
 	}
 	
 	public String rechercheInterventionParAnomalie()
 	{
-		travaux = proxyBusiness.rechercherInterventionSurAnomalie(idAnomalie);
+		travaux = proxyIntervention.rechercherInterventionSurAnomalie(idAnomalie);
 		
 		type = new TypeIntervention();
 		type.setIdTypeIntervention(2);
@@ -79,7 +84,7 @@ public class TestTravauxManagedBean {
 	//Recherche d'une intervention via son id
 	public String rechercher()
 	{
-		intervention = proxyBusiness.recupereIntervention(idIntervention);		
+		intervention = proxyIntervention.recupereIntervention(idIntervention);		
 		resultat = "";
 		return "";
 	}
@@ -118,7 +123,7 @@ public class TestTravauxManagedBean {
 		try
 		{
 			//On ajoute dans la base de données et on rafraîchit la liste d'interventions à l'écran
-			resultat = proxyBusiness.ajouterIntervention(interventionAdd);			
+			resultat = proxyIntervention.ajouterIntervention(interventionAdd);			
 		}
 		catch (Exception e)
 		{
@@ -142,10 +147,10 @@ public class TestTravauxManagedBean {
 	}
 	
 	public IBusinessIntervention getProxyBusiness() {
-		return proxyBusiness;
+		return proxyIntervention;
 	}
 	public void setProxyBusiness(IBusinessIntervention proxyBusiness) {
-		this.proxyBusiness = proxyBusiness;
+		this.proxyIntervention = proxyBusiness;
 	}
 	public List<Intervention> getTravaux() {
 		return travaux;
