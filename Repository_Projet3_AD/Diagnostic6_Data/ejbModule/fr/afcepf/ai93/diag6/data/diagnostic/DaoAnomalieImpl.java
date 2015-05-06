@@ -2,10 +2,8 @@ package fr.afcepf.ai93.diag6.data.diagnostic;
 
 import java.util.List;
 
-import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
-import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -24,7 +22,6 @@ public class DaoAnomalieImpl implements IDaoAnomalie{
 
 	@Override
 	public List<Anomalie> recupereToutAnomalie() {
-		Query query = em.createQuery("SELECT a FROM Anomalie a");
 		Query query = em.createQuery("SELECT e from Anomalie e");
 		List<Anomalie> liste = query.getResultList();
 		return liste;
@@ -43,8 +40,6 @@ public class DaoAnomalieImpl implements IDaoAnomalie{
 	}
 
 	@Override
-	public void modifierAnomalie(Anomalie anomalie) {
-		em.merge(anomalie);
 	public String supprimerAnomalie(Anomalie anomalie) {
 		em.remove(anomalie);
 		return "L'anomalie a été supprimée";
@@ -52,7 +47,6 @@ public class DaoAnomalieImpl implements IDaoAnomalie{
 
 	@Override
 	public Anomalie recupereAnomalie(int idAnomalie) {
-		Query query = em.createQuery("SELECT a FROM Anomalie a WHERE a.idAnomalie = :pid");
 		Query query = em.createQuery("SELECT e from Anomalie e WHERE e.idAnomalie = :pid");
 		query.setParameter("pid", idAnomalie);
 		Anomalie anomalie = (Anomalie) query.getSingleResult();
@@ -61,26 +55,15 @@ public class DaoAnomalieImpl implements IDaoAnomalie{
 
 	@Override
 	public List<Anomalie> rechercheAnomaliesErp(String nomERP) {
-		return null; 
+		// TODO Auto-generated method stub
+		return null;
 	}
-
-	@Override
-	public void historiserAnomalie(Anomalie anomalie) {
-
-	}
-
-	@Override
-	public boolean supprimerAnomalie(Anomalie anomalie) {
-		em.merge(anomalie);
-		return true;
-	}
-
 
 	@Override
 	public List<Anomalie> recupereAnomalieParDiagnostic(int idDiagnostic) {
-		Query requete = em.createQuery("select a from Anomalie a where diagnostic.idDiagnostic = :pif"); 
-		requete.setParameter("pif", idDiagnostic); 
-		List<Anomalie> listeAnomParDiag = requete.getResultList(); 
-		return listeAnomParDiag; 
+		Query query = em.createQuery("SELECT e from Anomalie e WHERE e.Diagnostic.idDiagnostic = :pid");
+		query.setParameter("pid", idDiagnostic);
+		List<Anomalie> liste = query.getResultList();
+		return liste;
 	}
 }
