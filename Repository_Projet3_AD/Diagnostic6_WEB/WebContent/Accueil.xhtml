@@ -94,13 +94,17 @@
 		<input type="button" value="Espace professionel" class="boutonOuvertureLogin" onclick="ouvertureLogin('login2')"/>
 		
 		<div id="login2" style="display: none;"> 
-		
-		<div id="champIdentifiant"><h:outputLabel value="Identifiant:"/> </div>
-		<div id="champIdentifiant"><h:inputText value="" id="identifiant"/></div>
-		<div id="champIdentifiant"><h:outputLabel value="Mot de passe:" /></div>
-		<div id="champIdentifiant"><h:inputText value="" id="motDePasse" /></div>
-		<div id="champIdentifiant"><h:button value="Connexion" styleClass="boutonConnexion"></h:button></div>
-		
+		<f:view>
+			<h:form>
+				<h:outputText rendered="#{mbUtilisateur.utilisateur != null}" value="#{mbUtilisateur.utilisateur.nomUtilisateur}" />
+				<div id="champIdentifiant"><h:outputLabel value="Identifiant:"/> </div>
+				<div id="champIdentifiant"><h:inputText value="#{mbUtilisateur.login}" id="identifiant" /></div>
+				<div id="champIdentifiant"><h:outputLabel value="Mot de passe:" /></div>
+				<div id="champIdentifiant"><h:inputSecret value="#{mbUtilisateur.motDePasse}" id="motDePasse" /><h:outputLabel value="Identifiants invalides" styleClass="errorLogin"/></div>
+				<div id="champIdentifiant"><h:commandButton  value="Connexion" styleClass="boutonConnexion"  action="#{mbUtilisateur.seConnecter()}" type="submit" /></div>
+				<div id="champIdentifiant"><h:commandButton  value="Deconnexion" styleClass="boutonConnexion" action="#{mbUtilisateur.logout()}" /></div>
+			</h:form>
+		</f:view>
 		</div>
 	</div>
 	
@@ -131,6 +135,9 @@
 						></f:selectItems>
 					</h:selectOneMenu>
 					</div>
+					<div id="champsDeRecherche">
+						<h:selectBooleanCheckbox  value=""/><h:outputText value="Travaux en cours" />
+					</div >
 						</f:view>
 					</h:form>
 				</div>
@@ -144,6 +151,7 @@
 		
 	
 </div>
+	
 <script>
 $(function(){
 	   $(window).scroll(function () {//Au scroll dans la fenetre on déclenche la fonction
@@ -268,6 +276,22 @@ function changementDivPrincipale(div1,div2)
       d1.style.display = "block";
       d2.style.display = "none";
    }
+}
+
+
+
+</script>
+<script>
+function connection(idProfil)
+{
+		if(idProfil == 5){
+			
+		location.href="http://localhost:9090/Diagnostic6_WEB/consultationDiagnostic.jsf"
+			return false;
+		}
+
+			
+		
 }
 </script>
 </body>
