@@ -94,7 +94,9 @@
 								<th class="ErpGeneral" width="230px" style="text-align: right">Expert
 									:</th>
 								<th id="expertDiag" class="ErpGeneral" width="180px"
-									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.prenomExpert} #{mbDonneesGenerales.diagnosticSelectionne.expert.nomExpert}"/></th>
+									style="text-align: right">
+									<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.prenomExpert} #{mbDonneesGenerales.diagnosticSelectionne.expert.nomExpert}"/></th>
+
 							</tr>
 							<tr>
 								<th class="ErpGeneral" width="180px" style="text-align: right">Adresse
@@ -129,6 +131,14 @@
 								<th id="cpVillExpDiag" class="ErpGeneral" width="180px"
 									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.localisation.codePostal} #{mbDonneesGenerales.diagnosticSelectionne.expert.localisation.ville}"/></th>
 							</tr>
+							<tr>
+								<th class="ErpGeneral" width="180px" style="text-align: right"></th>
+								<th class="ErpGeneral" width="180px" style="text-align: right"></th>
+								<th class="ErpGeneral" width="230px" style="text-align: right"></th>
+								<th id="cpVillExpDiag" class="ErpGeneral" width="180px"
+									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.traiteDiagnostic()}"/></th>
+							</tr>
+
 						</table>
 					</div>
 				</div>

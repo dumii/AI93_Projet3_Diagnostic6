@@ -2,6 +2,7 @@ package fr.afcepf.ai93.diag6.controler.gestionnaires;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -10,15 +11,18 @@ import javax.faces.bean.SessionScoped;
 
 import org.richfaces.resource.PostConstructResource;
 
+import fr.afcepf.ai93.diag6.api.business.autres.IBusinessExpert;
 import fr.afcepf.ai93.diag6.api.business.diagnostic.IBusinessAnomalie;
 import fr.afcepf.ai93.diag6.api.business.diagnostic.IBusinessDiagnostic;
 import fr.afcepf.ai93.diag6.api.business.erp.IBusinessErp;
 import fr.afcepf.ai93.diag6.api.business.travaux.IBusinessIntervention;
 import fr.afcepf.ai93.diag6.api.data.erp.IDaoErp;
+import fr.afcepf.ai93.diag6.entity.autres.Expert;
 import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Indicateur;
+import fr.afcepf.ai93.diag6.entity.diagnostic.TypeDiagnostic;
 import fr.afcepf.ai93.diag6.entity.erp.Acces;
 import fr.afcepf.ai93.diag6.entity.erp.Ascenceur;
 import fr.afcepf.ai93.diag6.entity.erp.Batiment;
@@ -40,6 +44,8 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 	private IBusinessAnomalie proxyBusinessAnomalie; 
 	@EJB
 	private IBusinessIntervention proxyBusinessIntervention; 
+	@EJB
+	private IBusinessExpert proxyBusinessExpert; 
 
 	private Erp erpDiagnosticSelectionne;  
 	private Diagnostic diagnosticSelectionne;
@@ -49,6 +55,8 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 	List<Anomalie> listeAnomaliesParDiagnostic; 
 	private Anomalie amodif = new Anomalie();
 	private List<Indicateur> listeIndicateursParDiagnostic; 
+	private List<Expert> listeExperts;
+	private Diagnostic dmodif = new Diagnostic(); 
 
 	@PostConstructResource
 	private void init() {
@@ -59,7 +67,34 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 		recupErp();	
 		recupererAnomaliesParDiagnostic();
 		recupererIndicateurParTypeDiag(); 
+		recupererExperts(); 
 		amodif=new Anomalie(); 
+//		
+//		Diagnostic dtest;
+//		dtest = new Diagnostic(); 
+//		Utilisateur user = new Utilisateur();
+//		user.setIdUtilisateur(1);
+//		user.setNomUtilisateur("bambi");
+//		dtest.setIdDiagnostic(16);
+//		Erp erp = new Erp(); 
+//		erp.setIdErp(2);
+//		dtest.setErp(erp);
+//		Expert exp = new Expert();
+//		exp.setIdExpert(2);
+//		dtest.setExpert(exp);
+//		TypeDiagnostic tp = new TypeDiagnostic();
+//		tp.setIdTypeDiagnostic(1);
+//		dtest.setTypeDiagnostic(tp);
+//		dtest.setNomDiagnostiqueur(user.getNomUtilisateur());
+//		dtest.setDateRealisationDiagnostic(new Date());
+//		dtest.setDateSaisieDiagnostic(new Date());
+//		dtest.setIntituleDiagnostic("coucou");
+//		dtest.setTraite(0);
+//		modificationDiagnostic(dtest,user); 
+	}
+
+	private void recupererExperts() {
+		listeExperts = proxyBusinessExpert.recupereToutExpert(); 
 	}
 
 	private void recupererIndicateurParTypeDiag() {
@@ -177,8 +212,8 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 			return "Non traité"; 
 	}
 
-	public String traiteDiagnost(Diagnostic d){
-		if(d != null && d.getTraite()!=0)
+	public String traiteDiagnostic(){
+		if(diagnosticSelectionne != null && diagnosticSelectionne.getTraite()!=0)
 			return "Traité"; 
 		else
 			return "Non traité"; 
@@ -199,6 +234,10 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 		}
 	}
 	
+	public void modificationDiagnostic(Diagnostic d,Utilisateur user){
+		proxyBusinessDiagnostic.modifierDiagnostic(d,user); 
+	}
+	
 	public void annulerModifAnomalie(Anomalie a){
 		amodif=new Anomalie(); 
 		recupererDiagnostic();
@@ -210,6 +249,17 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 		}
 		return true;
 	}
+	
+	public boolean isEnableDiag() {
+		
+		System.out.println("*******************************diag modif : "+dmodif.getIdDiagnostic());
+		System.out.println("diagnostic selectionné++++++++++++++++++++++++++++++++++++++++++++++"+diagnosticSelectionne.getIdDiagnostic());
+		if(diagnosticSelectionne.getIdDiagnostic() == dmodif.getIdDiagnostic()) {
+			return false;
+		}
+		return true;
+	}
+	
 	public String clickChangeBouton(Anomalie a){
 		if(a.getIdAnomalie() == amodif.getIdAnomalie()) {
 			return "Valider";
@@ -337,6 +387,30 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 	public void setListeIndicateursParDiagnostic(
 			List<Indicateur> listeIndicateursParDiagnostic) {
 		this.listeIndicateursParDiagnostic = listeIndicateursParDiagnostic;
+	}
+
+	public List<Expert> getListeExperts() {
+		return listeExperts;
+	}
+
+	public void setListeExperts(List<Expert> listeExperts) {
+		this.listeExperts = listeExperts;
+	}
+
+	public IBusinessExpert getProxyBusinessExpert() {
+		return proxyBusinessExpert;
+	}
+
+	public void setProxyBusinessExpert(IBusinessExpert proxyBusinessExpert) {
+		this.proxyBusinessExpert = proxyBusinessExpert;
+	}
+
+	public Diagnostic getDmodif() {
+		return dmodif;
+	}
+
+	public void setDmodif(Diagnostic dmodif) {
+		this.dmodif = dmodif;
 	}
 	
 

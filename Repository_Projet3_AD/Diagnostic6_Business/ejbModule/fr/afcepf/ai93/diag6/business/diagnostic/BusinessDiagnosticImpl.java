@@ -9,8 +9,10 @@ import javax.ejb.Stateless;
 
 import fr.afcepf.ai93.diag6.api.business.diagnostic.IBusinessDiagnostic;
 import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoDiagnostic;
+import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoHistoriqueDiagnostic;
 import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoIndicateur;
 import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoTypeDiagnostic;
+import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
 import fr.afcepf.ai93.diag6.entity.diagnostic.HistoriqueDiagnostic;
@@ -26,6 +28,8 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 	private IDaoTypeDiagnostic proxyTypeDiagnostic; 
 	@EJB 
 	private IDaoIndicateur proxyIndicateur; 
+	@EJB
+	private IDaoHistoriqueDiagnostic proxyHistoDiag; 
 	
 	private List<Diagnostic> listeDiag; 
 	private List<Diagnostic> listeDiagIntervEnCours = new ArrayList<Diagnostic>(); 
@@ -97,9 +101,11 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 	}
 
 	@Override
-	public void modifierDiagnostic(Diagnostic diagnostic) {
-		// TODO Auto-generated method stub
-		
+	public String modifierDiagnostic(Diagnostic diagnostic, Utilisateur user) {
+		Diagnostic diagInitial = proxyDiagnostic.recupereDiagnostic(diagnostic.getIdDiagnostic());
+		proxyDiagnostic.modifierDiagnostic(diagnostic, user);
+		proxyHistoDiag.historiser(diagInitial, diagnostic, user);
+		return "Ok modif";
 	}
 
 	@Override
@@ -162,4 +168,6 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 		}
 		return listeIndicateursParDiag;
 	}
+
+
 }

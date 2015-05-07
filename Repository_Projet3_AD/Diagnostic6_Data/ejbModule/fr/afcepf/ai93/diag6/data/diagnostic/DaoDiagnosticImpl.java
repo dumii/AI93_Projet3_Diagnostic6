@@ -1,6 +1,7 @@
 package fr.afcepf.ai93.diag6.data.diagnostic;
 
 import java.util.List;
+
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -8,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoDiagnostic;
+import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
 import fr.afcepf.ai93.diag6.entity.erp.Erp;
@@ -46,7 +48,7 @@ public boolean recupereSiIntervEnCoursParDiag(int idDiag) {
 	}
 
 	@Override
-	public void modifierDiagnostic(Diagnostic diagnostic) {
+	public void modifierDiagnostic(Diagnostic diagnostic, Utilisateur user) {
 		em.merge(diagnostic);
 	}
 
@@ -91,4 +93,6 @@ public boolean recupereSiIntervEnCoursParDiag(int idDiag) {
 		List<Diagnostic> liste = requete.getResultList();
 		return liste;
 	}
+
+
 }
