@@ -4,6 +4,7 @@ import java.util.List;
 
 import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
 import fr.afcepf.ai93.diag6.entity.diagnostic.HistoriqueDiagnostic;
+import fr.afcepf.ai93.diag6.entity.diagnostic.Indicateur;
 import fr.afcepf.ai93.diag6.entity.diagnostic.TypeDiagnostic;
 
 public interface IBusinessDiagnostic {
@@ -36,6 +37,6 @@ public interface IBusinessDiagnostic {
 
 	    public List<Diagnostic> rechercheDiagnosticsErp(String nomERP);
 
-
+		public List<Indicateur> recupererIndicateursParDiag(Diagnostic diagEnCours);
 
 }

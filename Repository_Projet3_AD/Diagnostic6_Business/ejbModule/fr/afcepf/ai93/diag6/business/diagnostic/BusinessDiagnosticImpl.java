@@ -9,10 +9,12 @@ import javax.ejb.Stateless;
 
 import fr.afcepf.ai93.diag6.api.business.diagnostic.IBusinessDiagnostic;
 import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoDiagnostic;
+import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoIndicateur;
 import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoTypeDiagnostic;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
 import fr.afcepf.ai93.diag6.entity.diagnostic.HistoriqueDiagnostic;
+import fr.afcepf.ai93.diag6.entity.diagnostic.Indicateur;
 import fr.afcepf.ai93.diag6.entity.diagnostic.TypeDiagnostic;
 
 @Stateless
@@ -22,6 +24,8 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 	private IDaoDiagnostic proxyDiagnostic; 
 	@EJB
 	private IDaoTypeDiagnostic proxyTypeDiagnostic; 
+	@EJB 
+	private IDaoIndicateur proxyIndicateur; 
 	
 	private List<Diagnostic> listeDiag; 
 	private List<Diagnostic> listeDiagIntervEnCours = new ArrayList<Diagnostic>(); 
@@ -144,5 +148,18 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 
 	public void setProxyDiagnostic(IDaoDiagnostic proxyDiagnostic) {
 		this.proxyDiagnostic = proxyDiagnostic;
+	}
+	
+
+	@Override
+	public List<Indicateur> recupererIndicateursParDiag(Diagnostic diagEnCours) {
+		List<Indicateur> listeIndicateurs = proxyIndicateur.recupereIndicateur();
+		List<Indicateur> listeIndicateursParDiag = new ArrayList<Indicateur>(); 
+		for(Indicateur i : listeIndicateurs){
+			if(i.getTypeDiagnostic().getIdTypeDiagnostic() == diagEnCours.getTypeDiagnostic().getIdTypeDiagnostic()){
+				listeIndicateursParDiag.add(i); 
+			}
+		}
+		return listeIndicateursParDiag;
 	}
 }

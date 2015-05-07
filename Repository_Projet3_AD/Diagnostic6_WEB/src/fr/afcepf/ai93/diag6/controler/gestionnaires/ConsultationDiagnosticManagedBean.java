@@ -18,6 +18,7 @@ import fr.afcepf.ai93.diag6.api.data.erp.IDaoErp;
 import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
+import fr.afcepf.ai93.diag6.entity.diagnostic.Indicateur;
 import fr.afcepf.ai93.diag6.entity.erp.Acces;
 import fr.afcepf.ai93.diag6.entity.erp.Ascenceur;
 import fr.afcepf.ai93.diag6.entity.erp.Batiment;
@@ -46,6 +47,8 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 	private Erp erpSelectionne; 
 	List<Etage> listeEtagesBatSel;   
 	List<Anomalie> listeAnomaliesParDiagnostic; 
+	private Anomalie amodif = new Anomalie();
+	private List<Indicateur> listeIndicateursParDiagnostic; 
 
 	@PostConstructResource
 	private void init() {
@@ -55,6 +58,11 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 		diagnosticSelectionne = proxyBusinessDiagnostic.recupereDiagnostic(idDiag); 
 		recupErp();	
 		recupererAnomaliesParDiagnostic();
+		recupererIndicateurParTypeDiag(); 
+	}
+
+	private void recupererIndicateurParTypeDiag() {
+		listeIndicateursParDiagnostic=proxyBusinessDiagnostic.recupererIndicateursParDiag(diagnosticSelectionne); 
 	}
 
 	public void recupErp(){
@@ -168,7 +176,6 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 			return "Non traité"; 
 	}
 	
-	private Anomalie amodif = new Anomalie();
 	public void modificationAnomalie(Anomalie a){
 		System.out.println(amodif.getIdAnomalie() + " = " + a.getIdAnomalie());
 		if(amodif.getIdAnomalie() != a.getIdAnomalie()) {
@@ -176,9 +183,9 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 			amodif = a;
 		} else {
 			System.out.println("je passe ici");
-//			Utilisateur user = new Utilisateur();
-//			user.setIdUtilisateur(1);
-//			proxyBusinessAnomalie.modifierAnomalie(a, user); 
+			Utilisateur user = new Utilisateur();
+			user.setIdUtilisateur(1);
+			proxyBusinessAnomalie.modifierAnomalie(a, user); 
 			amodif=new Anomalie(); 
 		}
 	}
@@ -302,5 +309,15 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 	public void setAmodif(Anomalie amodif) {
 		this.amodif = amodif;
 	}
+
+	public List<Indicateur> getListeIndicateursParDiagnostic() {
+		return listeIndicateursParDiagnostic;
+	}
+
+	public void setListeIndicateursParDiagnostic(
+			List<Indicateur> listeIndicateursParDiagnostic) {
+		this.listeIndicateursParDiagnostic = listeIndicateursParDiagnostic;
+	}
+	
 
 }

@@ -227,7 +227,12 @@
                            		<h:outputText value="Etat anomalie : " style="font-weight:bold "  />
                            		<h:outputText value="#{mbDonneesGenerales.traiteAnomalie(o)}" disabled="#{mbDonneesGenerales.isEnable(o)}" />
                             	<h:outputText value="Niveau indicateur : " style="font-weight:bold" />
-                            	<h:outputText value="#{o.indicateur.libelleIndicateur}" class="inputTextAnomalieDisabled" />
+                            	<h:selectOneMenu value="#{o.indicateur.idIndicateur}">
+                            		<f:selectItems value="#{mbDonneesGenerales.listeIndicateursParDiagnostic}" var = "ind"
+                            						itemLabel="#{ind.libelleIndicateur}"
+                            						itemValue="#{ind.idIndicateur}" noSelectionValue="#{o.indicateur.idIndicateur}" ></f:selectItems>
+                            		<f:attribute name="disabled" value="#{mbDonneesGenerales.isEnable(o)}"></f:attribute>
+                            	</h:selectOneMenu>
                             	<h:outputText value="Localisation : " style="font-weight:bold" />
                             	<h:outputText value="#{mbDonneesGenerales.localisationAnomalie(o)}" />
                             	<h:outputText value="Description : " style="font-weight:bold" />
