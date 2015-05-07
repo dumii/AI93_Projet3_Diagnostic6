@@ -15,6 +15,7 @@ import fr.afcepf.ai93.diag6.api.business.diagnostic.IBusinessDiagnostic;
 import fr.afcepf.ai93.diag6.api.business.erp.IBusinessErp;
 import fr.afcepf.ai93.diag6.api.business.travaux.IBusinessIntervention;
 import fr.afcepf.ai93.diag6.api.data.erp.IDaoErp;
+import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
 import fr.afcepf.ai93.diag6.entity.erp.Acces;
@@ -159,7 +160,7 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 			}
 		}
 	}
-
+	
 	public String traiteAnomalie(Anomalie a){
 		if(a != null && a.getTraite()!=0)
 			return "Traité"; 
@@ -168,37 +169,52 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 	}
 	
 	private Anomalie amodif = new Anomalie();
-	public void activerModificationAnomalie(Anomalie a){
+	public void modificationAnomalie(Anomalie a){
 		System.out.println(amodif.getIdAnomalie() + " = " + a.getIdAnomalie());
 		if(amodif.getIdAnomalie() != a.getIdAnomalie()) {
 			System.out.println("Anomalie prise en compte pour la modification : " + a.getIdAnomalie());
 			amodif = a;
 		} else {
 			System.out.println("je passe ici");
-			// update
-			//amodif=null; 
+//			Utilisateur user = new Utilisateur();
+//			user.setIdUtilisateur(1);
+//			proxyBusinessAnomalie.modifierAnomalie(a, user); 
+			amodif=new Anomalie(); 
 		}
 	}
 	
 	public boolean isEnable(Anomalie a) {
-		if(a.getIdAnomalie() == amodif.getIdAnomalie() ) {
+		if(a.getIdAnomalie() == amodif.getIdAnomalie()) {
 			return false;
 		}
 		return true;
 	}
-	public String clickChangeBouton(){
-		if(amodif.getIdAnomalie()!=null) {
+	public String clickChangeBouton(Anomalie a){
+		if(a.getIdAnomalie() == amodif.getIdAnomalie()) {
 			return "Valider";
 		}
 		return "Modifier"; 
 	}
-
-	public void modificationAnomalie(Anomalie a){
-		
-	}
 	
 	public void suppressionAnomalie(Anomalie a){
 		System.out.println("delete");
+		Utilisateur user = new Utilisateur();
+		user.setIdUtilisateur(1);
+		proxyBusinessAnomalie.supprimerAnomalie(a, user); 
+		//amodif=new Anomalie(); 
+		//ici faire rafraichir la page en rappelant 
+		//recupererDiagnostic(); 
+	}
+	
+	public String etatSuppression(Anomalie a){
+		Intervention interventionAnomalieEnCours = null;
+		List<Intervention> listeInterventionAnomalieEnCours = proxyBusinessIntervention.rechercherInterventionSurAnomalie(a.getIdAnomalie()); 
+		if (listeInterventionAnomalieEnCours.size() != 0){
+			return "Vous ne pouvez pas supprimer une anomalie ayant une intervention dessous"; 
+		}
+		else{
+			return "Suppression réalisée"; 
+		}
 	}
 
 	////////////////////////getters et setters ////////////////////

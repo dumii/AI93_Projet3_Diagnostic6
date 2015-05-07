@@ -13,4 +13,7 @@ public interface IDaoHistoriqueAnomalie {
 	public List<HistoriqueAnomalie> recupereToutHistoriqueAnomalie();
 	
 	public void historiser(Anomalie anomalieInitiale, Anomalie anomalie, Utilisateur user);
+
+	public void historiserSuppression(Anomalie anomalieInitiale,
+			Anomalie anomalie, Utilisateur user);
 }

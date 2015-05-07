@@ -244,9 +244,11 @@
                             	</h:inputText>
                             	<h:outputText value="Intervention :" style="font-weight:bold" />
                             	<h:outputText value="#{mbDonneesGenerales.recupererEtatIntervention(o)}" disabled="true" class="inputTextAnomalieDisabled"/>
-                            	<h:commandButton action="#{mbDonneesGenerales.activerModificationAnomalie(o)}" value="#{mbDonneesGenerales.clickChangeBouton()}" id="modifAnom" > 
+                            	<h:commandButton action="#{mbDonneesGenerales.modificationAnomalie(o)}" value="#{mbDonneesGenerales.clickChangeBouton(o)}" id="modifAnom" > 
                             	</h:commandButton>
-                            	<h:commandButton action="#{mbDonneesGenerales.activerModificationAnomalie(o)}" value="Annuler modification" id="annulModif" style="display:none;"/>
+                            	<h:commandButton action="#{mbDonneesGenerales.modificationAnomalie(o)}" value="Annuler modification" id="annulModif" >
+                            		<f:attribute name="disabled" value="#{mbDonneesGenerales.isEnable(o)}"></f:attribute>
+                            	</h:commandButton>
                             	<h:commandButton action="#{mbDonneesGenerales.suppressionAnomalie(o)}" value="Suppression anomalie" />
                         	</h:panelGrid>
                         	

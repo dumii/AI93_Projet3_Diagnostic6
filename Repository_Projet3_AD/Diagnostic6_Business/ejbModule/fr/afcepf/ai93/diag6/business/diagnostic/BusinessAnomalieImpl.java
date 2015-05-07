@@ -74,8 +74,11 @@ public class BusinessAnomalieImpl implements IBusinessAnomalie {
 	}
 
 	@Override
-	public String supprimerAnomalie(Anomalie anomalie) {
-		return proxyAnomalie.supprimerAnomalie(anomalie);
+	public String supprimerAnomalie(Anomalie anomalie, Utilisateur user) {
+		Anomalie anomalieInitiale = proxyAnomalie.recupereAnomalie(anomalie.getIdAnomalie());		
+		proxyAnomalie.supprimerAnomalie(anomalie);
+		//proxyHistorique.historiserSuppression(anomalieInitiale, anomalie, user);
+		return "Suppression réalisée"; 
 	}
 
 	@Override
