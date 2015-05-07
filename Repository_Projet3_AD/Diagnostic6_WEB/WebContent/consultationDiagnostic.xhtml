@@ -64,82 +64,37 @@
 						</h3>
 					</div>
 					<div class="tableErpDiagGeneral">
-						<table>
-							<tr>
-								<th class="ErpGeneral" width="180px" style="text-align: right">ERPconcerné
-									:  </th>
-								<th id="ErpDiag" class="ErpGeneral" width="180px"
-									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.nomErp}" /></th>
-								<th class="ErpGeneral" width="230px" style="text-align: right">Date
-									de réalisation du diagnostic :</th>
-								<th id="DateErpDiag" class="ErpGeneral" width="180px"
-									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.dateRealisationDiagnostic.toLocaleString()}"/></th>
-							</tr>
-							<tr>
-								<th class="ErpGeneral" width="180px" style="text-align: right">Catégorie
-									:</th>
-								<th id="CategErpDiag" class="ErpGeneral" width="180px"
-									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.categorieErp.denominationCategorieErp}" /></th>
-								<th class="ErpGeneral" width="230px" style="text-align: right">Date
-									d'enregistrement diagnostic :</th>
-								<th id="DateErpDiag" class="ErpGeneral" width="180px"
-									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.dateSaisieDiagnostic.toLocaleString()}" /></th>
-
-							</tr>
-							<tr>
-								<th class="ErpGeneral" width="180px" style="text-align: right">Fonction
-									:</th>
-								<th id="FoncErpDiag" class="ErpGeneral" width="180px"
-									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.typeErp.denominationTypeErp} #{mbDonneesGenerales.diagnosticSelectionne.erp.typeErp.typeErp}" /></th>
-								<th class="ErpGeneral" width="230px" style="text-align: right">Expert
-									:</th>
-								<th id="expertDiag" class="ErpGeneral" width="180px"
-									style="text-align: right">
-									<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.prenomExpert} #{mbDonneesGenerales.diagnosticSelectionne.expert.nomExpert}"/></th>
-
-							</tr>
-							<tr>
-								<th class="ErpGeneral" width="180px" style="text-align: right">Adresse
-									:</th>
-								<th id="AdressErpDiag" class="ErpGeneral" width="180px"
-									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.numVoieErp} #{mbDonneesGenerales.diagnosticSelectionne.erp.nomVoieErp}"/></th>
-								<th class="ErpGeneral" width="230px" style="text-align: right">Coordonées
-									:</th>
-								<th id="telExpDiag" class="ErpGeneral" width="180px"
-									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.telExpert}"/></th>
-
-							</tr>
-							<tr>
-								<th class="ErpGeneral" width="180px" style="text-align: right"></th>
-								<th id="cpVillExpDiag" class="ErpGeneral" width="180px"
-									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.localisation.codePostal} #{mbDonneesGenerales.diagnosticSelectionne.erp.localisation.ville}" /></th>
-								<th class="ErpGeneral" width="230px" style="text-align: right"></th>
-								<th id="emailExpErpDiag" class="ErpGeneral" width="180px"
-									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.mailExpert}"/></th>
-							</tr>
-							<tr>
-								<th class="accordErp" width="180px" style="text-align: right"></th>
-								<th class="accordErp" width="180px" style="text-align: right"></th>
-								<th class="ErpGeneral" width="230px" style="text-align: right"></th>
-								<th id="adrExpDiag" class="ErpGeneral" width="180px"
-									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.numVoieExpert} #{mbDonneesGenerales.diagnosticSelectionne.expert.nomVoieExpert}"/></th>
-							</tr>
-							<tr>
-								<th class="ErpGeneral" width="180px" style="text-align: right"></th>
-								<th class="ErpGeneral" width="180px" style="text-align: right"></th>
-								<th class="ErpGeneral" width="230px" style="text-align: right"></th>
-								<th id="cpVillExpDiag" class="ErpGeneral" width="180px"
-									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.localisation.codePostal} #{mbDonneesGenerales.diagnosticSelectionne.expert.localisation.ville}"/></th>
-							</tr>
-							<tr>
-								<th class="ErpGeneral" width="180px" style="text-align: right"></th>
-								<th class="ErpGeneral" width="180px" style="text-align: right"></th>
-								<th class="ErpGeneral" width="230px" style="text-align: right"></th>
-								<th id="cpVillExpDiag" class="ErpGeneral" width="180px"
-									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.traiteDiagnostic()}"/></th>
-							</tr>
-
-						</table>
+					<rich:panel style="width:99.5%; background-color:#f7f7f7;border:none;">
+                        <h:panelGrid columns="2" style="float:left;" >
+                        	<h:outputText value="ERP concerné : " />
+                        	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.nomErp}" />
+                        	<h:outputText value="Catégorie : " />
+                        	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.categorieErp.denominationCategorieErp}" />
+                        	<h:outputText value="Fonction : " />
+                        	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.typeErp.denominationTypeErp} #{mbDonneesGenerales.diagnosticSelectionne.erp.typeErp.typeErp}" />	
+                        	<h:outputText value="Adresse : " />
+                        	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.numVoieErp} #{mbDonneesGenerales.diagnosticSelectionne.erp.nomVoieErp}"/>
+                        	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.localisation.codePostal} #{mbDonneesGenerales.diagnosticSelectionne.erp.localisation.ville}" />
+                        	<h:outputText value="Propriétaire ? " />
+                        	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.localisation.codePostal} #{mbDonneesGenerales.diagnosticSelectionne.erp.localisation.ville}" />
+                        </h:panelGrid>
+                        <h:panelGrid columns="2">
+                        	<h:outputText value="Etat diagnostic : " />
+                        	<h:outputText value="#{mbDonneesGenerales.traiteDiagnostic()}"/>
+                        	<h:outputText value="Date de réalisation du diagnostic : " />
+                        	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.dateRealisationDiagnostic.toLocaleString()}"/>
+                        	<h:outputText value="Date d'enregistrement diagnostic : " />
+                        	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.dateSaisieDiagnostic.toLocaleString()}" />
+                        	<h:outputText value="Expert : " />
+                        	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.prenomExpert} #{mbDonneesGenerales.diagnosticSelectionne.expert.nomExpert}"/>
+                        	<h:outputText value="Coordonées : " />
+                        	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.telExpert}"/>
+                        	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.mailExpert}"/>
+                        	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.numVoieExpert} #{mbDonneesGenerales.diagnosticSelectionne.expert.nomVoieExpert}"/>
+                        	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.localisation.codePostal} #{mbDonneesGenerales.diagnosticSelectionne.expert.localisation.ville}"/>
+                        </h:panelGrid>
+                    </rich:panel>
+		
 					</div>
 				</div>
 				<div id="infoDetaille">
@@ -229,7 +184,7 @@
            			 	<h:panelGroup id="panel2" layout="block">
                			
                			<ui:repeat value="#{mbDonneesGenerales.diagnosticSelectionne.listeAnomaliesDiagnostic}" var="o" rows="20" id="repeatAnomalies">
-                    	<rich:panel style="float:left; width:800px; padding:1px; background-color:#f7f7f7; border-display:none;  ">
+                    	<rich:panel style="float:left; width:97.5%; background-color:#f7f7f7; border-display:none;  ">
                        		
                         	<h:panelGrid columns="2">
                         		<h:outputText value="Anomalie n° : " style="font-weight:bold" /> 
