@@ -59,6 +59,7 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 		recupErp();	
 		recupererAnomaliesParDiagnostic();
 		recupererIndicateurParTypeDiag(); 
+		amodif=new Anomalie(); 
 	}
 
 	private void recupererIndicateurParTypeDiag() {
@@ -175,6 +176,13 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 		else
 			return "Non traité"; 
 	}
+
+	public String traiteDiagnost(Diagnostic d){
+		if(d != null && d.getTraite()!=0)
+			return "Traité"; 
+		else
+			return "Non traité"; 
+	}
 	
 	public void modificationAnomalie(Anomalie a){
 		System.out.println(amodif.getIdAnomalie() + " = " + a.getIdAnomalie());
@@ -187,7 +195,13 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 			user.setIdUtilisateur(1);
 			proxyBusinessAnomalie.modifierAnomalie(a, user); 
 			amodif=new Anomalie(); 
+			recupererDiagnostic(); 
 		}
+	}
+	
+	public void annulerModifAnomalie(Anomalie a){
+		amodif=new Anomalie(); 
+		recupererDiagnostic();
 	}
 	
 	public boolean isEnable(Anomalie a) {
@@ -214,7 +228,7 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 			user.setIdUtilisateur(1);
 			proxyBusinessAnomalie.supprimerAnomalie(a, user); 
 			//amodif=new Anomalie(); 
-			//ici faire rafraichir la page en rappelant recupererDiagnostic(); 
+			recupererDiagnostic(); 
 			return "Suppression réalisée"; 
 		}
 

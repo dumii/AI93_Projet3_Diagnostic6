@@ -57,7 +57,7 @@ public class BusinessAnomalieImpl implements IBusinessAnomalie {
 		Anomalie anomalieInitiale = proxyAnomalie.recupereAnomalie(anomalie.getIdAnomalie());		
 		
 		//l'indicateur d'une anomalie ne peut que être amélioré
-		//Soit la valeur de l'indicateur ne peut que augmenter
+		//Autrement dit, la valeur de l'indicateur ne peut que augmenter
 		int valeurIndicateurInitiale = anomalieInitiale.getIndicateur().getValeurIndicateur();
 		int valeurIndicateurNouvelle = anomalie.getIndicateur().getValeurIndicateur();
 		

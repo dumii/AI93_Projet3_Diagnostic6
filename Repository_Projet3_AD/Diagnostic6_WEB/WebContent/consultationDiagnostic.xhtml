@@ -251,7 +251,7 @@
                             	<h:outputText value="#{mbDonneesGenerales.recupererEtatIntervention(o)}" disabled="true" class="inputTextAnomalieDisabled"/>
                             	<h:commandButton action="#{mbDonneesGenerales.modificationAnomalie(o)}" value="#{mbDonneesGenerales.clickChangeBouton(o)}" id="modifAnom" > 
                             	</h:commandButton>
-                            	<h:commandButton action="#{mbDonneesGenerales.modificationAnomalie(o)}" value="Annuler modification" id="annulModif" >
+                            	<h:commandButton action="#{mbDonneesGenerales.annulerModifAnomalie(o)}"  value="Annuler modification" id="annulModif" >
                             		<f:attribute name="disabled" value="#{mbDonneesGenerales.isEnable(o)}"></f:attribute>
                             	</h:commandButton>
                             	<h:commandButton action="#{mbDonneesGenerales.suppressionAnomalie(o)}" value="Suppression anomalie" />
