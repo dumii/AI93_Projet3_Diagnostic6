@@ -1,5 +1,6 @@
 package fr.afcepf.ai93.diag6.data.travaux;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Remote;
@@ -27,5 +28,23 @@ public class DaoEtatAvancementImpl implements IDaoAvancementIntervention {
 		Query query = em.createQuery("SELECT e from EtatAvancementTravaux e");
 		List<EtatAvancementTravaux> liste = query.getResultList();
 		return liste;
+	}
+
+	@Override
+	public List<EtatAvancementTravaux> recupererEtatDisponibles(int idEtat) {
+		Query query = em.createQuery("SELECT e from EtatAvancementTravaux e WHERE e.idEtatAvancement = :pid");
+		query.setParameter("pid", idEtat);
+		
+		List<EtatAvancementTravaux> listeBrute = query.getResultList();
+		List<EtatAvancementTravaux> listeARetourner = new ArrayList<>();
+		
+		for (EtatAvancementTravaux etat : listeBrute)
+		{
+			if (etat.getIdEtatAvancement() <= idEtat)
+			{
+				listeARetourner.add(etat);
+			}
+		}				
+		return listeARetourner;
 	}
 }

@@ -60,6 +60,8 @@ public class Intervention implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="id_artisan")
 	private Artisan artisan;
+	
+	private List<EtatAvancementTravaux> listeEtatDisponibles;
 
 	
 	public Integer getIdIntervention() {
@@ -180,6 +182,17 @@ public class Intervention implements Serializable {
 		this.etatAvancementTravaux = etatAvancementTravaux;
 		this.typeIntervention = typeIntervention;
 		this.artisan = artisan;
+	}
+
+
+	public List<EtatAvancementTravaux> getListeEtatDisponibles() {
+		return listeEtatDisponibles;
+	}
+
+
+	public void setListeEtatDisponibles(
+			List<EtatAvancementTravaux> listeEtatDisponibles) {
+		this.listeEtatDisponibles = listeEtatDisponibles;
 	}
 	
 	

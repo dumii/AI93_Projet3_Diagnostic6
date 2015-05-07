@@ -93,6 +93,11 @@ public class BusinessInterventionImpl implements IBusinessIntervention {
 	}
 	
 	@Override
+	public List<EtatAvancementTravaux> recupererEtatDisponibles(int idEtat) {
+		return proxyEtatAvancement.recupererEtatDisponibles(idEtat);
+	}
+	
+	@Override
 	public List<Intervention> rechercherInterventionSurAnomalie(int idAnomalie) {
 		return proxyIntervention.rechercherInterventionSurAnomalie(idAnomalie);
 	}

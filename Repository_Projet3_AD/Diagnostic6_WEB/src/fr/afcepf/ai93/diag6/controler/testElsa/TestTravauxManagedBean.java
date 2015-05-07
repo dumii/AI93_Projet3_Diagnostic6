@@ -1,5 +1,6 @@
 package fr.afcepf.ai93.diag6.controler.testElsa;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -41,13 +42,18 @@ public class TestTravauxManagedBean {
 	private int idAnomalie;
 	private String resultat;
 	private Date dateChoisie;
-	
+	private SimpleDateFormat formater;
+	private SimpleDateFormat shortFormater;
+		
 	private Intervention interventionAdd;
 	
 	//Initialisation de la liste d'interventions au chargement de la page
 	@PostConstruct
 	public void init()
 	{
+		formater = new SimpleDateFormat("dd/MM/yyyy");
+		shortFormater = new SimpleDateFormat("dd/MM");
+		
 		travaux = proxyIntervention.recupereToutesIntervention();
 		listeTypes = proxyIntervention.recupererTousTypesIntervention();
 		for (TypeIntervention t : listeTypes)
@@ -57,6 +63,7 @@ public class TestTravauxManagedBean {
 			for (Intervention i : t.getListeInterventionTypeIntervention())
 			{
 				i.setAnomalie(proxyAnomalie.recupereAnomalie(i.getAnomalie().getIdAnomalie()));
+				i.setListeEtatDisponibles(proxyIntervention.recupererEtatDisponibles(i.getEtatAvancementTravaux().getIdEtatAvancement()));
 			}
 		}
 		listeEtats = proxyIntervention.recupererTousEtats();
@@ -273,5 +280,29 @@ public class TestTravauxManagedBean {
 
 	public void setType(TypeIntervention type) {
 		this.type = type;
+	}
+
+	public IBusinessIntervention getProxyIntervention() {
+		return proxyIntervention;
+	}
+
+	public void setProxyIntervention(IBusinessIntervention proxyIntervention) {
+		this.proxyIntervention = proxyIntervention;
+	}
+
+	public SimpleDateFormat getFormater() {
+		return formater;
+	}
+
+	public void setFormater(SimpleDateFormat formater) {
+		this.formater = formater;
+	}
+
+	public SimpleDateFormat getShortFormater() {
+		return shortFormater;
+	}
+
+	public void setShortFormater(SimpleDateFormat shortFormater) {
+		this.shortFormater = shortFormater;
 	}
 }

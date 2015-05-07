@@ -3,7 +3,7 @@
  * Note : la classe ClasseBidon sert uniquement à faire fonctionner le javascript pour éviter les exceptions nulles 
  */
 
-function afficherCacher(maClasse)
+function afficherCacher(monID)
 {
 	var elements = document.getElementById("monTableau").rows ;
 	/*
@@ -14,7 +14,7 @@ function afficherCacher(maClasse)
 	var indexFirstRow = 0;	
 	while (monBoolean == false)
 	{
-		if (elements[indexFirstRow].className.indexOf(maClasse) > -1)
+		if (elements[indexFirstRow].id.indexOf(monID) > -1)
 		{
 			monBoolean = true;
 		}
@@ -38,11 +38,14 @@ function afficherCacher(maClasse)
 	 */
 	for(var i=0; i<elements.length; i++)
 	{
-		if (elements[i].className.indexOf(maClasse) > -1)
+		if (elements[i].id.indexOf(monID) > -1)
 		{
 			if (firstRowAffichee == false)
 			{
-				elements[i].style.display = "";
+				if (elements[i].className != "ligneOrange")
+					{
+					elements[i].style.display = "";
+					}
 			}
 			else
 			{
@@ -58,13 +61,24 @@ function afficherCacher(maClasse)
 
 function disabledEnabled(monID)
 {
-	if (document.getElementById(monID).disabled == true)
+
+	if (document.getElementById("datepickerDebut - "+monID).disabled == true)
 		{
-			document.getElementById(monID).disabled = false;
+			document.getElementById("datepickerDebut - "+monID).disabled = false;
+			document.getElementById("datepickerFin - "+monID).disabled = false;
+			document.getElementById("cout - "+monID).disabled = false;
+			document.getElementById("cout - "+monID).style.color = "black";
+			document.getElementById("boutonModifier - "+monID).value = "Annuler";
+			document.getElementById("boutonValider - "+monID).style.display = "";
 		}
 	else
 		{
-			document.getElementById(monID).disabled = true;
+			document.getElementById("datepickerDebut - "+monID).disabled = true;
+			document.getElementById("datepickerFin - "+monID).disabled = true;
+			document.getElementById("cout - "+monID).disabled = true;
+			document.getElementById("cout - "+monID).style.color = "#CDC0B9";
+			document.getElementById("boutonModifier - "+monID).value = "Modifier";
+			document.getElementById("boutonValider - "+monID).style.display = "none";
 		}
 }
 
@@ -72,51 +86,71 @@ function disabledEnabled(monID)
  * Fonction 3 : dessiner et positionner les rectangles représentant les interventions
  */
 
-function dessinerRectangle(dateDebut, dateFin, idIntervention)
+function dessinerRectangle(element)
 {	
-	var debutIntervention = new Date(dateDebut);
-	var finIntervention = new Date(dateFin);
+	//Récupération des données liées à l'intervention (durées des interventions en jours)
+	var idIntervention = element.id;
+	var dateDebut = document.getElementById("datepickerDebut - "+idIntervention).value.split("/");
+	var debutIntervention = new Date(parseInt(dateDebut[2], 10),
+	                  				 parseInt(dateDebut[1], 10) - 1,
+	                  				 parseInt(dateDebut[0], 10));
 	
-	//La récupération des dates restera à définir le moment venu
-	var debutTableau = new Date (2015,03,01) ;
-	var finTableau = new Date (2015,07,31) ;
-	var dureeTableau = ((finTableau - debutTableau)/(24*3600*1000));
-
-	//durée de l’intervention en jours		
+	var dateFin = document.getElementById("datepickerFin - "+idIntervention).value.split("/");
+	var finIntervention = new Date(parseInt(dateFin[2], 10),
+				 				   parseInt(dateFin[1], 10) - 1,
+				 				   parseInt(dateFin[0], 10));		
+	
 	var dureeIntervention = parseInt(
 			(finIntervention - debutIntervention)/(24*3600*1000));
 	
-	var element = document.getElementById(idIntervention);
+	//La récupération des dates restera à définir le moment venu
+	var debutTableau = new Date (2015,04,15) ;
+	var finTableau = new Date (2015,04,31) ;
+	var dureeTableau = ((finTableau - debutTableau)/(24*3600*1000));
+
+	//Déclarations des variables margeGauche et Taille :
+	var margeGauche = 0;
+	var taille = 0;
 	
 	if ((finIntervention <= debutTableau)  || (finTableau <= debutIntervention))
 	{
-		document.getElementById(idIntervention).style.marginLeft = "0%" ;
-		document.getElementById(idIntervention).style.width = "0%" ;
+		element.style.display = "none";
 	}
 	else
 	{
-		if (debutIntervention <= debutTableau)
-		{
-			element.style.marginLeft = "0%" ;
-		}
-		else
-		{			
+		element.style.display = "";
+		
+		if (debutIntervention > debutTableau)
+		{		
 			//L’écart en jours
 			var ecart = parseInt(
 					(debutIntervention - debutTableau)/(24*3600*1000));
-			element.style.marginLeft = (ecart * 100 / dureeTableau)+"%";
+			margeGauche = (ecart * 100 / dureeTableau);
 		}
+		console.log("ID : "+idIntervention+" ecart : " + ecart);
 
 
 
 		if (finTableau <= finIntervention)
 		{
-			var marge = (100-document.getElementById(idIntervention).style.marginLeft) ;
-			document.getElementById(idIntervention).style.width = marge+"%" ;
+			taille = 100-margeGauche;
 		}
 		else
 		{
-			document.getElementById(idIntervention).style.width = (dureeIntervention*100 /dureeTableau)+"%" ;
+			if (debutIntervention < debutTableau)
+			{
+				var joursACacher = debutTableau - debutIntervention;
+				taille = ((dureeIntervention-joursACacher)*100 / dureeTableau) ;
+			}
+			else
+			{
+				taille = (dureeIntervention*100 / dureeTableau) ;
+			}
 		}
+		
+		//On applique la marge gauche et la taille au rectangle
+		element.style.marginLeft = margeGauche + "%" ;
+		element.style.width = taille + "%";
 	}
 }
+

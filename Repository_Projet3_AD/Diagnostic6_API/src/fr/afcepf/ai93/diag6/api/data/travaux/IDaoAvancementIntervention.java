@@ -7,5 +7,7 @@ import fr.afcepf.ai93.diag6.entity.travaux.EtatAvancementTravaux;
 public interface IDaoAvancementIntervention {
 	
 	public List<EtatAvancementTravaux> recupererTousEtats();
+	
+	public List<EtatAvancementTravaux> recupererEtatDisponibles(int idEtat);
 
 }

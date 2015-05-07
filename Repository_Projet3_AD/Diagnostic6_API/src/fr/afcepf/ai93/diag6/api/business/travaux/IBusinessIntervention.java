@@ -31,5 +31,7 @@ public interface IBusinessIntervention {
     
     //Etat d'avancement des travaux	
 	public List<EtatAvancementTravaux> recupererTousEtats();
+	
+	public List<EtatAvancementTravaux> recupererEtatDisponibles(int idEtat);
 
 }
