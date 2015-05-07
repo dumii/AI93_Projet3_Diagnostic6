@@ -203,24 +203,30 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 		return "Modifier"; 
 	}
 	
-	public void suppressionAnomalie(Anomalie a){
-		System.out.println("delete");
-		Utilisateur user = new Utilisateur();
-		user.setIdUtilisateur(1);
-		proxyBusinessAnomalie.supprimerAnomalie(a, user); 
-		//amodif=new Anomalie(); 
-		//ici faire rafraichir la page en rappelant 
-		//recupererDiagnostic(); 
-	}
-	
-	public String etatSuppression(Anomalie a){
-		Intervention interventionAnomalieEnCours = null;
-		List<Intervention> listeInterventionAnomalieEnCours = proxyBusinessIntervention.rechercherInterventionSurAnomalie(a.getIdAnomalie()); 
-		if (listeInterventionAnomalieEnCours.size() != 0){
+	public String suppressionAnomalie(Anomalie a){
+		System.out.println("delete debut");
+		if(verifInterventionSurAnomalie(a)==true){
+			System.out.println("Vous ne pouvez pas supprimer");
 			return "Vous ne pouvez pas supprimer une anomalie ayant une intervention dessous"; 
 		}
 		else{
+			Utilisateur user = new Utilisateur();
+			user.setIdUtilisateur(1);
+			proxyBusinessAnomalie.supprimerAnomalie(a, user); 
+			//amodif=new Anomalie(); 
+			//ici faire rafraichir la page en rappelant recupererDiagnostic(); 
 			return "Suppression réalisée"; 
+		}
+
+	}
+	
+	public boolean verifInterventionSurAnomalie(Anomalie a){
+		List<Intervention> listeInterventionAnomalieEnCours = proxyBusinessIntervention.rechercherInterventionSurAnomalie(a.getIdAnomalie()); 
+		if (listeInterventionAnomalieEnCours.size() != 0){
+			return true; //s'il y a une intervention sur l'anomalie, return true
+		}
+		else{
+			return false; 
 		}
 	}
 
