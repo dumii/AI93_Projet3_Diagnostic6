@@ -29,12 +29,12 @@ public interface IBusinessDiagnostic {
 
 	    public List<TypeDiagnostic> recupereTypeDiagnostic();
 
+
 	    public Diagnostic recupereDiagnostic(int idDiagnostic);
 
 	    public List<Diagnostic> rechercheDiagnostics(String nomDiagnostic);
 
 	    public List<Diagnostic> rechercheDiagnosticsErp(String nomERP);
-
 
 
 

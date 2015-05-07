@@ -20,7 +20,8 @@ import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
 
 @Stateless
 @Remote(IBusinessAnomalie.class)
-public class BusinessAnomalieImpl implements IBusinessAnomalie{
+
+public class BusinessAnomalieImpl implements IBusinessAnomalie {
 	
 	@EJB
 	private IDaoAnomalie proxyAnomalie;
@@ -30,11 +31,6 @@ public class BusinessAnomalieImpl implements IBusinessAnomalie{
 	private IDaoDiagnostic proxyDiagnostic;
 	@EJB
 	private IDaoIndicateur proxyIndicateur;
-
-	@Override
-	public List<Anomalie> recupereToutAnomalie() {
-		return proxyAnomalie.recupereToutAnomalie();
-	}
 
 	@Override
 	public String ajouterAnomalie(Anomalie anomalie) {
@@ -57,7 +53,7 @@ public class BusinessAnomalieImpl implements IBusinessAnomalie{
 
 	@Override
 	public String modifierAnomalie(Anomalie anomalie, Utilisateur user) {
-		
+
 		Anomalie anomalieInitiale = proxyAnomalie.recupereAnomalie(anomalie.getIdAnomalie());		
 		
 		//l'indicateur d'une anomalie ne peut que être amélioré
@@ -102,5 +98,47 @@ public class BusinessAnomalieImpl implements IBusinessAnomalie{
 	public List<Anomalie> rechercheAnomaliesErp(String nomERP) {
 		return proxyAnomalie.rechercheAnomaliesErp(nomERP);
 	}
-	
+
+
+	@Override
+	public List<Anomalie> recupereAnomalieParDiagnostic(int idDiagnostic) {
+		return proxyAnomalie.recupereAnomalieParDiagnostic(idDiagnostic);
+	}
+
+	@Override
+	public List<Anomalie> recupereToutAnomalie() {
+		return proxyAnomalie.recupereToutAnomalie();
+	}
+
+	public IDaoAnomalie getProxyAnomalie() {
+		return proxyAnomalie;
+	}
+
+	public void setProxyAnomalie(IDaoAnomalie proxyAnomalie) {
+		this.proxyAnomalie = proxyAnomalie;
+	}
+
+	public IDaoHistoriqueAnomalie getProxyHistorique() {
+		return proxyHistorique;
+	}
+
+	public void setProxyHistorique(IDaoHistoriqueAnomalie proxyHistorique) {
+		this.proxyHistorique = proxyHistorique;
+	}
+
+	public IDaoDiagnostic getProxyDiagnostic() {
+		return proxyDiagnostic;
+	}
+
+	public void setProxyDiagnostic(IDaoDiagnostic proxyDiagnostic) {
+		this.proxyDiagnostic = proxyDiagnostic;
+	}
+
+	public IDaoIndicateur getProxyIndicateur() {
+		return proxyIndicateur;
+	}
+
+	public void setProxyIndicateur(IDaoIndicateur proxyIndicateur) {
+		this.proxyIndicateur = proxyIndicateur;
+	}
 }

@@ -6,9 +6,6 @@ import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
 import fr.afcepf.ai93.diag6.entity.diagnostic.HistoriqueAnomalie;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Indicateur;
-import fr.afcepf.ai93.diag6.entity.travaux.HistoriqueIntervention;
-import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
-import fr.afcepf.ai93.diag6.entity.travaux.TypeIntervention;
 
 public interface IBusinessAnomalie {
 
@@ -24,6 +21,8 @@ public interface IBusinessAnomalie {
     public Anomalie recupereAnomalie(int idAnomalie);
 
     public List<Anomalie> rechercheAnomaliesErp(String nomERP);
+
+	public List<Anomalie> recupereAnomalieParDiagnostic(int idDiagnostic);
 
     //Historique d'anomalie
     public List<HistoriqueAnomalie> recupereToutHistoriqueAnomalie();

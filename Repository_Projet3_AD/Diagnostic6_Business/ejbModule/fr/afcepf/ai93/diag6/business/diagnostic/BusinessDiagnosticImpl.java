@@ -24,9 +24,9 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 	private IDaoTypeDiagnostic proxyTypeDiagnostic; 
 	
 	private List<Diagnostic> listeDiag; 
-	List<Diagnostic> listeDiagIntervEnCours = new ArrayList<Diagnostic>(); 
+	private List<Diagnostic> listeDiagIntervEnCours = new ArrayList<Diagnostic>(); 
 	private List<Diagnostic> listeDiagEnAttente = new ArrayList<Diagnostic>(); 
-	List<Diagnostic> listeDiagArchives = new ArrayList<Diagnostic>(); 
+	private List<Diagnostic> listeDiagArchives = new ArrayList<Diagnostic>(); 
 		
 	@Override
 	public List<Diagnostic> recupereToutDiagnostic() {
@@ -123,8 +123,7 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 
 	@Override
 	public Diagnostic recupereDiagnostic(int idDiagnostic) {
-		// TODO Auto-generated method stub
-		return null;
+		return proxyDiagnostic.recupereDiagnostic(idDiagnostic);
 	}
 
 	@Override

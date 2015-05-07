@@ -58,4 +58,12 @@ public class DaoAnomalieImpl implements IDaoAnomalie{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<Anomalie> recupereAnomalieParDiagnostic(int idDiagnostic) {
+		Query query = em.createQuery("SELECT e from Anomalie e WHERE e.diagnostic.idDiagnostic = :pid");
+		query.setParameter("pid", idDiagnostic);
+		List<Anomalie> liste = query.getResultList();
+		return liste;
+	}
 }

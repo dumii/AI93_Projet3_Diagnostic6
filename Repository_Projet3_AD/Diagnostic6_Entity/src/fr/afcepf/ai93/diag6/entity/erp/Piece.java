@@ -38,6 +38,9 @@ public class Piece implements Serializable{
 	@Column(name="DENOMINATION_PIECE")
 	private String denominationPiece;
 	
+	@Column(name="NUMERO_PIECE")
+	private String numeroPiece;
+	
 	@OneToMany(mappedBy="piece")
 	private List<Anomalie> listeAnomaliesPiece;
 
@@ -82,6 +85,14 @@ public class Piece implements Serializable{
 
 	public void setListeAnomaliesPiece(List<Anomalie> listeAnomaliesPiece) {
 		this.listeAnomaliesPiece = listeAnomaliesPiece;
+	}
+	
+	public String getNumeroPiece() {
+		return numeroPiece;
+	}
+
+	public void setNumeroPiece(String numeroPiece) {
+		this.numeroPiece = numeroPiece;
 	}
 
 	public Piece() {
