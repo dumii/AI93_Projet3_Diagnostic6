@@ -1,13 +1,19 @@
 package fr.afcepf.ai93.diag6.controler.testElsa;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+
+import org.jboss.resteasy.util.DateUtil;
 
 import fr.afcepf.ai93.diag6.api.business.diagnostic.IBusinessAnomalie;
 import fr.afcepf.ai93.diag6.api.business.autres.IBusinessArtisan;
@@ -25,10 +31,10 @@ public class TestTravauxManagedBean {
 	@EJB
 	private IBusinessIntervention proxyIntervention;
 	@EJB
-	private IBusinessAnomalie proxyAnomalie;
-	
-
+	private IBusinessAnomalie proxyAnomalie;	
+	@EJB
 	private IBusinessArtisan proxyArtisan;
+	
 	private List<Intervention> travaux;
 	private List<TypeIntervention> listeTypes;
 	private List<EtatAvancementTravaux> listeEtats;
@@ -41,16 +47,25 @@ public class TestTravauxManagedBean {
 	private int idEtat;
 	private int idAnomalie;
 	private String resultat;
+	
 	private Date dateChoisie;
+	
 	private SimpleDateFormat formater;
 	private SimpleDateFormat shortFormater;
+	
+	private Date dateDuJour;
+	private Date date1;
+	private Date date2;
+	private Date date3;
 		
 	private Intervention interventionAdd;
 	
 	//Initialisation de la liste d'interventions au chargement de la page
 	@PostConstruct
-	public void init()
+	public void init() throws ParseException
 	{
+		déterminerDates();
+
 		formater = new SimpleDateFormat("dd/MM/yyyy");
 		shortFormater = new SimpleDateFormat("dd/MM");
 		
@@ -63,12 +78,87 @@ public class TestTravauxManagedBean {
 			for (Intervention i : t.getListeInterventionTypeIntervention())
 			{
 				i.setAnomalie(proxyAnomalie.recupereAnomalie(i.getAnomalie().getIdAnomalie()));
-				i.setListeEtatDisponibles(proxyIntervention.recupererEtatDisponibles(i.getEtatAvancementTravaux().getIdEtatAvancement()));
+				i.setEtatAvancementTravaux(proxyIntervention.recupererEtatParIntervention(i));
 			}
 		}
 		listeEtats = proxyIntervention.recupererTousEtats();
 		listeAnomalies = proxyAnomalie.recupereToutAnomalie();
 	}
+	
+	private void déterminerDates() throws ParseException {
+		
+		Calendar c = Calendar.getInstance();
+		c.setTime(new Date());
+		
+		if (c.DATE >= 15)
+		{
+			c.set(Calendar.DAY_OF_MONTH, 15);
+			date1 = c.getTime();
+			
+			c.set(Calendar.DAY_OF_MONTH, 7);
+			date2 = c.getTime();
+			
+			c.set(Calendar.DAY_OF_MONTH, c.getActualMaximum(Calendar.DAY_OF_MONTH));
+			date3 = c.getTime();
+		}
+		else
+		{
+			c.set(Calendar.DAY_OF_MONTH, 1);
+			date1 = c.getTime();
+			
+			c.set(Calendar.DAY_OF_MONTH, 7);
+			date2 = c.getTime();
+			
+			c.set(Calendar.DAY_OF_MONTH, 15);
+			date3 = c.getTime();
+		}
+	}
+
+	public String localisationAnomalie(Anomalie a){
+		if(a.getPiece() != null)
+		{
+			return "Etage " + a.getPiece().getEtage().getNumeroEtage() + " - " + a.getPiece().getEtage().getNomEtage()+ "<br />" 
+					+ "Pièce " + a.getPiece().getNumeroPiece()+ " - " + a.getPiece().getFonctionPiece().getLibelleFonctionPiece()+ " - " + a.getPiece().getDenominationPiece(); 
+		}
+		else
+		{
+			if(a.getVoirie() !=null)
+			{
+				return a.getVoirie().getTypeVoirie().getLibelleTypeVoirie()+ "<br />" +
+						a.getVoirie().getDesignationVoirie()+ " - " + a.getVoirie().getIntituleVoirie(); 
+			}
+			else
+			{
+				if(a.getAcces() != null)
+				{
+					//return "Bâtiment "+a.getAcces().getBatiment().getNumBatiment()+ "<br />" +
+							//"Accès " + a.getAcces().getTypeAcces().getLibelleTypeAcces(); 
+					return "Accès " + a.getAcces().getTypeAcces().getLibelleTypeAcces(); 
+				}
+				else
+				{
+					if(a.getEscalier() != null){
+						//return "Bâtiment "+a.getAcces().getBatiment().getNumBatiment()+ "<br />" +
+								//"Escalier "+a.getEscalier().getDenominationEscalier();
+						return "Escalier "+a.getEscalier().getDenominationEscalier();
+					}
+					else
+					{
+						if(a.getAscenceur() !=null)
+						{
+							//return "Bâtiment "+a.getAcces().getBatiment().getNumBatiment()+ "<br />" +
+									//"Ascenceur "+a.getAscenceur().getDenominationAscenceur(); 
+							return "Ascenceur "+a.getAscenceur().getDenominationAscenceur(); 
+						}
+						else {
+							return "Localisation non définie"; 
+						}
+					}
+				}
+			}
+		}
+	}
+	
 	
 	public String rechercheInterventionParAnomalie()
 	{
@@ -80,12 +170,9 @@ public class TestTravauxManagedBean {
 		return "";
 	}
 	
-	public String avoirListeArtisans()
+	public List<Artisan> avoirListeArtisans(TypeIntervention typeInter)
 	{
-		type.setIdTypeIntervention(idType);
-		System.out.println("ManagedBean, idType : " + idType);
-		listeArtisans = proxyArtisan.recupererArtisansParTypeIntervention(type);
-		return "";
+		return proxyArtisan.recupererArtisansParTypeIntervention(typeInter);
 	}
 	
 	//Recherche d'une intervention via son id
@@ -96,7 +183,7 @@ public class TestTravauxManagedBean {
 		return "";
 	}
 	
-	public String ajouter()
+	public String ajouter() throws ParseException
 	{
 		//Comme il y a pas mal de clés étrangères dans la table intervention
 		//on est obligé de créer les objets correspondants à ces clés pour ajouter
@@ -144,13 +231,18 @@ public class TestTravauxManagedBean {
 		return "";
 	}
 	
-	public String modifier(Intervention intervention)
+	public String modifier(Intervention intervention) throws ParseException
 	{
 		intervention.setCoutIntervention(5555.55);
 		//proxyBusiness.modifierIntervention(intervention);
 		init();
 		
 		return "";
+	}
+	
+	public List<EtatAvancementTravaux> listeEtatDisponiblesParIntervention(Intervention intervention)
+	{
+		return proxyIntervention.recupererEtatDisponibles(intervention);
 	}
 	
 	public IBusinessIntervention getProxyBusiness() {
@@ -304,5 +396,37 @@ public class TestTravauxManagedBean {
 
 	public void setShortFormater(SimpleDateFormat shortFormater) {
 		this.shortFormater = shortFormater;
+	}
+
+	public Date getDateDuJour() {
+		return dateDuJour;
+	}
+
+	public void setDateDuJour(Date dateDuJour) {
+		this.dateDuJour = dateDuJour;
+	}
+
+	public Date getDate1() {
+		return date1;
+	}
+
+	public void setDate1(Date date1) {
+		this.date1 = date1;
+	}
+
+	public Date getDate2() {
+		return date2;
+	}
+
+	public void setDate2(Date date2) {
+		this.date2 = date2;
+	}
+
+	public Date getDate3() {
+		return date3;
+	}
+
+	public void setDate3(Date date3) {
+		this.date3 = date3;
 	}
 }

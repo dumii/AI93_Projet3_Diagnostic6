@@ -93,11 +93,6 @@ public class BusinessInterventionImpl implements IBusinessIntervention {
 	}
 	
 	@Override
-	public List<EtatAvancementTravaux> recupererEtatDisponibles(int idEtat) {
-		return proxyEtatAvancement.recupererEtatDisponibles(idEtat);
-	}
-	
-	@Override
 	public List<Intervention> rechercherInterventionSurAnomalie(int idAnomalie) {
 		return proxyIntervention.rechercherInterventionSurAnomalie(idAnomalie);
 	}
@@ -122,28 +117,21 @@ public class BusinessInterventionImpl implements IBusinessIntervention {
 		return proxyIntervention.recupereInterventionparType(type);
 	}
 
-	public IDaoIntervention getProxyIntervention() {
-		return proxyIntervention;
+	@Override
+	public TypeIntervention recupererTypeParIntervention(
+			Intervention intervention) {
+		return proxyTypeIntervention.recupererTypeParIntervention(intervention);
 	}
 
-	public void setProxyIntervention(IDaoIntervention proxyIntervention) {
-		this.proxyIntervention = proxyIntervention;
+	@Override
+	public List<EtatAvancementTravaux> recupererEtatDisponibles(
+			Intervention intervention) {
+		return proxyEtatAvancement.recupererEtatDisponibles(intervention);
 	}
 
-	public IDaoTypeIntervention getProxyTypeIntervention() {
-		return proxyTypeIntervention;
-	}
-
-	public void setProxyTypeIntervention(IDaoTypeIntervention proxyTypeIntervention) {
-		this.proxyTypeIntervention = proxyTypeIntervention;
-	}
-
-	public IDaoAvancementIntervention getProxyEtatAvancement() {
-		return proxyEtatAvancement;
-	}
-
-	public void setProxyEtatAvancement(
-			IDaoAvancementIntervention proxyEtatAvancement) {
-		this.proxyEtatAvancement = proxyEtatAvancement;
+	@Override
+	public EtatAvancementTravaux recupererEtatParIntervention(
+			Intervention intervention) {
+		return proxyEtatAvancement.recupererEtatParIntervention(intervention);
 	}
 }

@@ -100,12 +100,19 @@ function dessinerRectangle(element)
 				 				   parseInt(dateFin[1], 10) - 1,
 				 				   parseInt(dateFin[0], 10));		
 	
-	var dureeIntervention = parseInt(
-			(finIntervention - debutIntervention)/(24*3600*1000));
+	var dureeIntervention = parseInt((finIntervention - debutIntervention)/(24*3600*1000));
 	
 	//La récupération des dates restera à définir le moment venu
-	var debutTableau = new Date (2015,04,15) ;
-	var finTableau = new Date (2015,04,31) ;
+	var date1 = document.getElementById("date1").innerHTML.split("/");
+	var debutTableau = new Date(parseInt(date1[2], 10),
+								parseInt(date1[1], 10) - 1,
+								parseInt(date1[0], 10));
+	
+	var date2 = document.getElementById("date2").innerHTML.split("/");	
+	var finTableau =  new Date(parseInt(date2[2], 10),
+							   parseInt(date2[1], 10) - 1,
+							   parseInt(date2[0], 10));	
+	
 	var dureeTableau = ((finTableau - debutTableau)/(24*3600*1000));
 
 	//Déclarations des variables margeGauche et Taille :
@@ -127,8 +134,6 @@ function dessinerRectangle(element)
 					(debutIntervention - debutTableau)/(24*3600*1000));
 			margeGauche = (ecart * 100 / dureeTableau);
 		}
-		console.log("ID : "+idIntervention+" ecart : " + ecart);
-
 
 
 		if (finTableau <= finIntervention)
@@ -149,8 +154,32 @@ function dessinerRectangle(element)
 		}
 		
 		//On applique la marge gauche et la taille au rectangle
-		element.style.marginLeft = margeGauche + "%" ;
-		element.style.width = taille + "%";
+		element.style.marginLeft = margeGauche*10 + "%" ;
+		element.style.width = taille*10 + "%";
+	}
+}
+
+/**
+ * Fonction 4 : afficher ou masquer les icônes d'état d'avancement pour chaque interventions
+ */
+
+function afficherMasquerEtatAvancement(idIntervention, idEtat)
+{
+	
+	switch (idEtat) {
+	
+	case "1":
+		document.getElementById("iconeEtat - "+idIntervention).src = "images/iconeValider.26.26.png";
+		break;
+	case "2":
+		document.getElementById("iconeEtat - "+idIntervention).src = "images/consultationDiagnostic/NotifIconeDiagRouge.26.26.png";
+		break;		
+	case "3":
+		document.getElementById("iconeEtat - "+idIntervention).src = "images/iconeEnCours.26.26.png";
+		break;	
+	case "4":
+		document.getElementById("iconeEtat - "+idIntervention).src = "images/iconeEnAttente.26.26.png";
+		break;
 	}
 }
 

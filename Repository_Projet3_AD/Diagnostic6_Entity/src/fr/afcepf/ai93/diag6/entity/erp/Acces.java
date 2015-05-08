@@ -70,6 +70,14 @@ public class Acces implements Serializable {
 		this.typeAcces = typeAcces;
 		this.listeAnomaliesAcces = listeAnomaliesAcces;
 	}
+
+	public Batiment getBatiment() {
+		return batiment;
+	}
+
+	public void setBatiment(Batiment batiment) {
+		this.batiment = batiment;
+	}
 	
 	
 	

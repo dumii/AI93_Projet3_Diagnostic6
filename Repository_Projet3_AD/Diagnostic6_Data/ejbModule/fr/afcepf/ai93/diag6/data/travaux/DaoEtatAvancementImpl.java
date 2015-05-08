@@ -31,20 +31,34 @@ public class DaoEtatAvancementImpl implements IDaoAvancementIntervention {
 	}
 
 	@Override
-	public List<EtatAvancementTravaux> recupererEtatDisponibles(int idEtat) {
-		Query query = em.createQuery("SELECT e from EtatAvancementTravaux e WHERE e.idEtatAvancement = :pid");
-		query.setParameter("pid", idEtat);
+	public List<EtatAvancementTravaux> recupererEtatDisponibles(Intervention intervention) {
+		
+		int idEtatIntervention = intervention.getEtatAvancementTravaux().getIdEtatAvancement();
+		Query query = em.createQuery("SELECT e from EtatAvancementTravaux e");
 		
 		List<EtatAvancementTravaux> listeBrute = query.getResultList();
 		List<EtatAvancementTravaux> listeARetourner = new ArrayList<>();
 		
 		for (EtatAvancementTravaux etat : listeBrute)
 		{
-			if (etat.getIdEtatAvancement() <= idEtat)
+			if (etat.getIdEtatAvancement() <= idEtatIntervention)
 			{
 				listeARetourner.add(etat);
 			}
 		}				
 		return listeARetourner;
+	}
+
+	@Override
+	public EtatAvancementTravaux recupererEtatParIntervention(
+			Intervention intervention) {
+		
+		int idEtatIntervention = intervention.getEtatAvancementTravaux().getIdEtatAvancement();
+		Query query = em.createQuery("SELECT e from EtatAvancementTravaux e WHERE e.idEtatAvancement = :pid");
+		query.setParameter("pid", idEtatIntervention);
+		
+		EtatAvancementTravaux etat = (EtatAvancementTravaux) query.getSingleResult();
+		
+		return etat;
 	}
 }

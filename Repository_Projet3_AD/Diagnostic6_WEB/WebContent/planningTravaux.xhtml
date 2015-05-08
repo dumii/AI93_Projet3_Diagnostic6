@@ -20,7 +20,7 @@
 		<h:form>
 		<table id="monTableau">
 			<tr id="idBidon" class="table-header1">
-				<th colspan="11">Nom de l'ERP + Numéro de chantier</th>
+				<th colspan="12">Nom de l'ERP + Numéro de chantier</th>
 			</tr>
 			
 			<tr id="idBidon" class="table-header2">
@@ -36,18 +36,32 @@
 			<tr id="idBidon" class="table-header3">
 				<th class="NomIntervention">Interventions</th>
 				<th class="Etat">Etat</th>
-				<th class="Temps" colspan="2">Mars + flèche?</th>
-				<th class="Temps" colspan="2">Avril</th>
-				<th class="Temps" colspan="2">Mai</th>
-				<th class="Temps" colspan="2">Juin</th>
-				<th class="Temps" colspan="2">Juillet + flèche?</th>
+				<th class="Temps" id="date1" colspan="2">#{mbTestTravaux.formater.format(mbTestTravaux.date1)}</th>
+				<th class="Temps" colspan="2"></th>
+				<th class="Temps" id="date2" colspan="2">#{mbTestTravaux.formater.format(mbTestTravaux.date2)}</th>
+				<th class="Temps" colspan="2"></th>
+				<th class="Temps" id="date3" colspan="2">#{mbTestTravaux.formater.format(mbTestTravaux.date3)}</th>
 			</tr>
 			
 			<ui:repeat var="item" value="#{mbTestTravaux.listeTypes}">
 				<tr id="T#{item.idTypeIntervention}" class="ligneBleueType">
 					<td onClick="afficherCacher('T#{item.idTypeIntervention} -')">#{item.typeIntervention}</td>
 					<td></td>
-					<td colspan="10"></td>
+					
+					<td class="tiretsBleus"></td>
+					<td class="traitsGris"></td>
+					
+					<td class="tiretsBleus"></td>
+					<td class="traitsGris"></td>
+					
+					<td class="tiretsBleus"></td>
+					<td class="traitsGris"></td>
+					
+					<td class="tiretsBleus"></td>
+					<td class="traitsGris"></td>
+					
+					<td class="tiretsBleus"></td>
+					<td class="traitsGris"></td>
 				</tr>
 				
 				<ui:repeat var="intervention" value="#{item.listeInterventionTypeIntervention}">
@@ -59,10 +73,10 @@
 						</td>
 						
 						<td>
-							Etat
+							<img id="iconeEtat - #{intervention.idIntervention}" src=""/>
 						</td>
 						
-						<td colspan="11" style="padding-right:4px">
+						<td class="tiretsBleus" style="padding-right:4px">
 							<div class="rectangle" id="#{intervention.idIntervention}">
 								<span class="dateDebut">#{mbTestTravaux.shortFormater.format(
 											 intervention.dateDebutIntervention)
@@ -74,17 +88,31 @@
 								</span>
 							</div>
 						</td>
+					<td class="traitsGris"></td>
+					
+					<td class="tiretsBleus"></td>
+					<td class="traitsGris"></td>
+					
+					<td class="tiretsBleus"></td>
+					<td class="traitsGris"></td>
+					
+					<td class="tiretsBleus"></td>
+					<td class="traitsGris"></td>
+					
+					<td class="tiretsBleus"></td>
+					<td class="traitsGris"></td>
 					</tr>
 					
 					<tr id="T#{item.idTypeIntervention} - A#{intervention.anomalie.idAnomalie} - Description" class="ligneOrange">
-						
-							<td colspan="2">
+						<td colspan="12">
+							<div>
 								<h4>Informations sur l'intervention</h4>
 								
 								<h:outputLabel value="Etat d'avancement :" />
 								
-								<h:selectOneMenu value="#{intervention.etatAvancementTravaux.idEtatAvancement}">
-									<f:selectItems value="#{intervention.listeEtatDisponibles}"
+								<h:selectOneMenu 	id="S#{intervention.idIntervention}"
+													value="#{intervention.etatAvancementTravaux.idEtatAvancement}">
+									<f:selectItems	value="#{mbTestTravaux.listeEtatDisponiblesParIntervention(intervention)}"
 								   					var="var"
 								  					itemLabel="#{var.intituleEtatAvancement}"
 								  					itemValue="#{var.idEtatAvancement}"/>								
@@ -108,14 +136,7 @@
 											 intervention.dateFinIntervention)
 											}"
 										   class="datepick"
-										   disabled="disabled"/>
-								
-								<h:outputLabel value="Coût :" />
-									<input type="number"
-										   id="cout - #{intervention.idIntervention}"
-										   step="1.00"
-										   disabled="disabled"
-										   value="#{intervention.coutIntervention}"/>	
+										   disabled="disabled"/>	
 								
 								<input class="boutonModifier"
 									   type="button"
@@ -127,28 +148,49 @@
 									   value="Valider les modifications" 
 									   id="boutonValider - #{intervention.idIntervention}"
 									   style="display:none"/>				
-							</td>
+							</div>
 							
-							<td colspan="2">
-								Ici on peut mettre l'état d'avancement des travaux sous la forme d'une icône				
-							</td>
+							<div>
+								<h:outputLabel value="Type d'intervention :" />
+								
+								<h:selectOneMenu 	value="#{intervention.typeIntervention.idTypeIntervention}">
+									<f:selectItems	value="#{mbTestTravaux.listeTypes}"
+								   					var="var"
+								  					itemLabel="#{var.typeIntervention}"
+								  					itemValue="#{var.idTypeIntervention}"/>								
+								</h:selectOneMenu>
+								
+								<h:outputLabel value="Artisan :" />
+								
+								<h:selectOneMenu 	value="#{intervention.artisan.idArtisan}">
+									<f:selectItems	value="#{mbTestTravaux.avoirListeArtisans(item)}"
+								   					var="var"
+								  					itemLabel="#{var.nomArtisan}"
+								  					itemValue="#{var.idArtisan}"/>								
+								</h:selectOneMenu>	
+								
+								<h:outputLabel value="Coût :" />
+									<input type="number"
+										   id="cout - #{intervention.idIntervention}"
+										   step="1.00"
+										   disabled="disabled"
+										   value="#{intervention.coutIntervention}"/>	
+							</div>
 							
-							<td colspan="2">
-								Ici ce serais le type d'intervention ainsi que l'artisan sur l'intervention			
-							</td>
-							
-							<td colspan="2">
+							<div>
+								<h4>Informations sur l'anomalie</h4>
+								<h:outputLabel value="Localisation de l'anomalie :" />
+								<p class="localisationAnomalie">
+								<h:outputText value="#{mbTestTravaux.localisationAnomalie(intervention.anomalie)}"
+												escape="false"/>	
+								</p>
+							</div>
+													
+							<div class="preconisationAnomalie">								
 								<h:outputLabel value="Description de l'anomalie :" />
-								<p>#{intervention.anomalie.descriptionAnomalie}</p>			
-							</td>
+								<p>#{intervention.anomalie.preconisationAnomalie}</p>				
+							</div>							
 							
-							<td colspan="2">
-								<h:outputLabel value="Préconisation :" />
-								<p>#{intervention.anomalie.preconisationAnomalie}</p>			
-							</td>
-							
-							<td colspan="2">
-								Et pour finir la localisation de l'anomalie dans l'erp			
 							</td>
 						
 					</tr>
@@ -170,8 +212,14 @@
 	
 	jQuery('.rectangle').each(function(){
 		dessinerRectangle(this);
+		
 	});
 
+	jQuery('select').each(function(){
+		var id = jQuery(this).closest('tr').prev().find('.rectangle').attr('id');
+		afficherMasquerEtatAvancement(id, this.value);
+	});
+	
 	jQuery('.ligneBleueIntervention').click(function(){
 		jQuery(this).closest('tr').next().fadeToggle('medium');
 	});
