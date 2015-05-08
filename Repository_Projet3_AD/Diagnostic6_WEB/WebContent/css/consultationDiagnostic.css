@@ -2,11 +2,26 @@
 /* Bordure à supprimer  */
 /*************************************/
 
-
-
 /*************************************/
 /* Mini Barre d'état Consultation Diagnostic */
 /*************************************/
+
+h2{
+  	background-size: 100%;
+  	margin: 0 0 0 0;
+  	padding-left: 11px;
+  	font-family: Arial, Verdana, sans-serif;
+	background-attachment: fixed;
+  	color: #D90000;
+  	display: block;
+  	font-size: 1.17em;
+  	-webkit-margin-before: 1em;
+  	-webkit-margin-after: 1em;
+  	-webkit-margin-start: 0px;
+  	-webkit-margin-end: 0px;
+  	font-weight: bold;
+  	margin: 0px;
+}
 
 html
 {
@@ -18,6 +33,8 @@ html
 	margin-top : 7%;
 	margin-left: 19%;
 	width: 55%;
+	background-color: white;
+  	border: #cccccc solid 1px;
 	
 	
 }
@@ -30,7 +47,7 @@ html
 	/*position: fixed;*/
 }
 
-#mini-barreEtat-boutons
+.mini-barreEtat-boutons
 {
 	float:right;
 }
@@ -44,7 +61,6 @@ html
 {
 	display : none;
 }
-
 
 /*************************************/
 /* Erp Diagnostic Infos Générales */
@@ -106,6 +122,12 @@ html
 {
 	font-size: small; 
 	font-weight: bolder;
+	text-align: left;
+	color: CornflowerBlue;
+	font-size: small;
+	font-weight: bold;
+	padding-bottom: 2%;
+	padding-top: 2%;
 }
 #foncPiecesErp
 {
@@ -138,19 +160,19 @@ html
 	margin-top: -2%;
 }
 
-.ficheDiagTitreImage
-{
-	margin-top: 0%;
-  	margin-left: 48%;
-  	position: absolute;
+.ficheDiagTitreImage {
+   	margin-top: -3.5%;
+  	margin-left: 94%;
 }
 
-#diagAnomalieSection > #diagnosticFiche > #ficheAnomTitre
+#diagAnomalieSection > #diagnosticFiche > #ficheAnomTitre 
 {
 	text-align: left;
 	color: CornflowerBlue;
 	font-size: small;
-	font-weight: bold
+	font-weight: bold;
+	padding-bottom: 2%;
+	padding-top: 2%;
 }
 
 /*************************************/
@@ -175,4 +197,9 @@ html
 #interFinitAno
 {
 	display: none;
+}
+.inputTextAnomalieDisabled{
+    width: 100%;
+    font-family: Arial, Verdana, sans-serif; 
+    font-weight: normal;
 }

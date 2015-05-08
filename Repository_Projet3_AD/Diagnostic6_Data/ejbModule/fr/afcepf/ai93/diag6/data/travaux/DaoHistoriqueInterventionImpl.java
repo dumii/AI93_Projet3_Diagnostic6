@@ -24,10 +24,10 @@ import fr.afcepf.ai93.diag6.entity.travaux.TypeIntervention;
 public class DaoHistoriqueInterventionImpl implements IDaoHistoriqueIntervention {
 
 	
-	private final static String MODIF_ETAT_AVANCEMENT = "etatAvancementTravaux";
-	private final static String MODIF_DATE_DEBUT = "dateDebutIntervention";
-	private final static String MODIF_DATE_FIN = "dateFinIntervention";
-	private final static String MODIF_COUT_INTERVENTION = "coutIntervention";
+	private final static String MODIF_ETAT_AVANCEMENT = "Etat avancement travaux";
+	private final static String MODIF_DATE_DEBUT = "Date début intervention";
+	private final static String MODIF_DATE_FIN = "Date fin intervention";
+	private final static String MODIF_COUT_INTERVENTION = "Coût intervention";
 	
 	@PersistenceContext(unitName="Malak_Diag_Data")
 	private EntityManager em;
