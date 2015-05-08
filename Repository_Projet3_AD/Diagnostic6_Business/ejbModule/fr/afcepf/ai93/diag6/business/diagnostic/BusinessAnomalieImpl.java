@@ -8,51 +8,77 @@ import javax.ejb.Stateless;
 
 import fr.afcepf.ai93.diag6.api.business.diagnostic.IBusinessAnomalie;
 import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoAnomalie;
+import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoDiagnostic;
+import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoHistoriqueAnomalie;
+import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoIndicateur;
+import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
+import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
 import fr.afcepf.ai93.diag6.entity.diagnostic.HistoriqueAnomalie;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Indicateur;
+import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
 
 @Stateless
 @Remote(IBusinessAnomalie.class)
-public class BusinessAnomalieImpl implements IBusinessAnomalie {
 
-	@EJB
-	private IDaoAnomalie proxyDaoAnomalie; 
+public class BusinessAnomalieImpl implements IBusinessAnomalie {
 	
-	@Override
-	public List<Anomalie> recupereToutAnomalie() {
-		return proxyDaoAnomalie.recupereToutAnomalie();
-	}
+	@EJB
+	private IDaoAnomalie proxyAnomalie;
+	@EJB
+	private IDaoHistoriqueAnomalie proxyHistorique;
+	@EJB
+	private IDaoDiagnostic proxyDiagnostic;
+	@EJB
+	private IDaoIndicateur proxyIndicateur;
 
 	@Override
 	public String ajouterAnomalie(Anomalie anomalie) {
-		// L'on peut avoir plusieurs anomalies du même indicateur
-		// et il n'est pas possible de proposer la création d'une anomalie sur un diagnostic déjà traite
-		// à ce point la cette conditions a déjà été traitée.
+		//Récupération du diagnostic sur lequel l'utilisateur souhaite ajouter l'anomalie
+		Diagnostic diagnostic = proxyDiagnostic.recupereDiagnostic(anomalie.getDiagnostic().getIdDiagnostic());
 		
-		System.out.println("on est dans le business");
-		System.out.println("2222222222222222222222222222222222222");
-		proxyDaoAnomalie.ajouterAnomalie(anomalie);
-		return "Intervention enregristrée avec succès";
-		
+		//Ajout autorisé uniquement si le statut du diagnostic n'est pas traité
+		//0 : non traité
+		//1 : traité
+		if (diagnostic.getTraite() != 1)
+		{
+			proxyAnomalie.ajouterAnomalie(anomalie);
+			return "Anomalie ajoutée avec succès";
+		}
+		else
+		{
+			return "L'ajout n'est pas autorisé sur un diagnostic traité";
+		}		
 	}
 
 	@Override
-	public void modifierAnomalie(Anomalie anomalie) {
-		// TODO Auto-generated method stub
+	public String modifierAnomalie(Anomalie anomalie, Utilisateur user) {
+
+		Anomalie anomalieInitiale = proxyAnomalie.recupereAnomalie(anomalie.getIdAnomalie());		
 		
+		//l'indicateur d'une anomalie ne peut que être amélioré
+		//Autrement dit, la valeur de l'indicateur ne peut que augmenter
+		int valeurIndicateurInitiale = anomalieInitiale.getIndicateur().getValeurIndicateur();
+		int valeurIndicateurNouvelle = anomalie.getIndicateur().getValeurIndicateur();
+		
+		if (valeurIndicateurInitiale <= valeurIndicateurNouvelle)
+		{
+			proxyAnomalie.modifierAnomalie(anomalie, user);
+			proxyHistorique.historiser(anomalieInitiale, anomalie, user);
+			return "Modification enregistrée avec succès";
+		}
+		else
+		{		
+			return "Modification illégale de l'indicateur de l'anomalie";
+		}
 	}
 
 	@Override
-	public void historiserAnomalie(Anomalie anomalie) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean supprimerAnomalie(Anomalie anomalie) {
-		// TODO Auto-generated method stub
-		return false;
+	public String supprimerAnomalie(Anomalie anomalie, Utilisateur user) {
+		Anomalie anomalieInitiale = proxyAnomalie.recupereAnomalie(anomalie.getIdAnomalie());		
+		proxyAnomalie.supprimerAnomalie(anomalie);
+		//proxyHistorique.historiserSuppression(anomalieInitiale, anomalie, user);
+		return "Suppression réalisée"; 
 	}
 
 	@Override
@@ -63,40 +89,59 @@ public class BusinessAnomalieImpl implements IBusinessAnomalie {
 
 	@Override
 	public List<Indicateur> recupereIndicateur() {
-		// TODO Auto-generated method stub
-		return null;
+		return proxyIndicateur.recupereIndicateur();
 	}
 
 	@Override
 	public Anomalie recupereAnomalie(int idAnomalie) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Anomalie> rechercheAnomalies(String nomAnomalie) {
-		// TODO Auto-generated method stub
-		return null;
+		return proxyAnomalie.recupereAnomalie(idAnomalie);
 	}
 
 	@Override
 	public List<Anomalie> rechercheAnomaliesErp(String nomERP) {
-		// TODO Auto-generated method stub
-		return null;
+		return proxyAnomalie.rechercheAnomaliesErp(nomERP);
 	}
+
 
 	@Override
 	public List<Anomalie> recupereAnomalieParDiagnostic(int idDiagnostic) {
-		return proxyDaoAnomalie.recupereAnomalieParDiagnostic(idDiagnostic);
+		return proxyAnomalie.recupereAnomalieParDiagnostic(idDiagnostic);
 	}
 
-	public IDaoAnomalie getProxyDaoAnomalie() {
-		return proxyDaoAnomalie;
+	@Override
+	public List<Anomalie> recupereToutAnomalie() {
+		return proxyAnomalie.recupereToutAnomalie();
 	}
 
-	public void setProxyDaoAnomalie(IDaoAnomalie proxyDaoAnomalie) {
-		this.proxyDaoAnomalie = proxyDaoAnomalie;
-
+	public IDaoAnomalie getProxyAnomalie() {
+		return proxyAnomalie;
 	}
 
+	public void setProxyAnomalie(IDaoAnomalie proxyAnomalie) {
+		this.proxyAnomalie = proxyAnomalie;
+	}
+
+	public IDaoHistoriqueAnomalie getProxyHistorique() {
+		return proxyHistorique;
+	}
+
+	public void setProxyHistorique(IDaoHistoriqueAnomalie proxyHistorique) {
+		this.proxyHistorique = proxyHistorique;
+	}
+
+	public IDaoDiagnostic getProxyDiagnostic() {
+		return proxyDiagnostic;
+	}
+
+	public void setProxyDiagnostic(IDaoDiagnostic proxyDiagnostic) {
+		this.proxyDiagnostic = proxyDiagnostic;
+	}
+
+	public IDaoIndicateur getProxyIndicateur() {
+		return proxyIndicateur;
+	}
+
+	public void setProxyIndicateur(IDaoIndicateur proxyIndicateur) {
+		this.proxyIndicateur = proxyIndicateur;
+	}
 }

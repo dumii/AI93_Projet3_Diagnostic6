@@ -17,6 +17,7 @@ import fr.afcepf.ai93.diag6.entity.erp.Escalier;
 import fr.afcepf.ai93.diag6.entity.erp.Etage;
 import fr.afcepf.ai93.diag6.entity.erp.Piece;
 import fr.afcepf.ai93.diag6.entity.erp.Voirie;
+import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
 
 @Stateless
 @Remote(IDaoErp.class)
@@ -87,5 +88,12 @@ public class DaoErpImpl implements IDaoErp {
 		requete.setParameter("pid", idErp);
 		List<Voirie> listeVoiries = requete.getResultList(); 
 		return listeVoiries;
+	}
+	
+	public Erp recupererErpParId(int idErp) {
+		Query query = em.createQuery("SELECT e from Erp e WHERE e.idErp = :pid");
+		query.setParameter("pid", idErp);
+		Erp erp = (Erp) query.getSingleResult();
+		return erp;
 	}
 }

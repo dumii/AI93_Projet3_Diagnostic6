@@ -24,6 +24,11 @@ public class BusinessErp implements IBusinessErp {
 	private IDaoErp proxyErp; 
 	
 	@Override
+	public Erp recupererErpParId(int idErp) {
+		return proxyErp.recupererErpParId(idErp);
+	}
+	
+	@Override
 	public List<Erp> recupereToutErp() {
 		return proxyErp.recupereToutErp();
 	}
@@ -70,6 +75,4 @@ public class BusinessErp implements IBusinessErp {
 	public List<Voirie> recupererVoirieParErp(int idErp) {
 		return proxyErp.recupererVoirieParErp(idErp);
 	}
-
-
 }

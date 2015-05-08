@@ -48,7 +48,6 @@ public class DaoInterventionImpl implements IDaoIntervention {
 		return intervention;
 	}
 	
-	//Méthode à modifier lors du push
 	@Override
 	public List<Intervention> rechercherInterventionSurAnomalie(int idAnomalie) {
 		Query query = em.createQuery("SELECT e from Intervention e WHERE e.anomalie.idAnomalie = :pid");

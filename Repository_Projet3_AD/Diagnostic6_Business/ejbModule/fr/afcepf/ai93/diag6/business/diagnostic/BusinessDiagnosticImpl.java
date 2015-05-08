@@ -9,9 +9,14 @@ import javax.ejb.Stateless;
 
 import fr.afcepf.ai93.diag6.api.business.diagnostic.IBusinessDiagnostic;
 import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoDiagnostic;
+import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoHistoriqueDiagnostic;
+import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoIndicateur;
+import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoTypeDiagnostic;
+import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
 import fr.afcepf.ai93.diag6.entity.diagnostic.HistoriqueDiagnostic;
+import fr.afcepf.ai93.diag6.entity.diagnostic.Indicateur;
 import fr.afcepf.ai93.diag6.entity.diagnostic.TypeDiagnostic;
 
 @Stateless
@@ -19,11 +24,17 @@ import fr.afcepf.ai93.diag6.entity.diagnostic.TypeDiagnostic;
 public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 	@EJB
 	private IDaoDiagnostic proxyDiagnostic; 
+	@EJB
+	private IDaoTypeDiagnostic proxyTypeDiagnostic; 
+	@EJB 
+	private IDaoIndicateur proxyIndicateur; 
+	@EJB
+	private IDaoHistoriqueDiagnostic proxyHistoDiag; 
 	
 	private List<Diagnostic> listeDiag; 
-	List<Diagnostic> listeDiagIntervEnCours = new ArrayList<Diagnostic>(); 
+	private List<Diagnostic> listeDiagIntervEnCours = new ArrayList<Diagnostic>(); 
 	private List<Diagnostic> listeDiagEnAttente = new ArrayList<Diagnostic>(); 
-	List<Diagnostic> listeDiagArchives = new ArrayList<Diagnostic>(); 
+	private List<Diagnostic> listeDiagArchives = new ArrayList<Diagnostic>(); 
 		
 	@Override
 	public List<Diagnostic> recupereToutDiagnostic() {
@@ -90,9 +101,11 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 	}
 
 	@Override
-	public void modifierDiagnostic(Diagnostic diagnostic) {
-		// TODO Auto-generated method stub
-		
+	public String modifierDiagnostic(Diagnostic diagnostic, Utilisateur user) {
+		Diagnostic diagInitial = proxyDiagnostic.recupereDiagnostic(diagnostic.getIdDiagnostic());
+		proxyDiagnostic.modifierDiagnostic(diagnostic, user);
+		proxyHistoDiag.historiser(diagInitial, diagnostic, user);
+		return "Ok modif";
 	}
 
 	@Override
@@ -115,14 +128,12 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 
 	@Override
 	public List<TypeDiagnostic> recupereTypeDiagnostic() {
-		// TODO Auto-generated method stub
-		return null;
+		return proxyTypeDiagnostic.recupereTypeDiagnostic();
 	}
 
 	@Override
 	public Diagnostic recupereDiagnostic(int idDiagnostic) {
-		// TODO Auto-generated method stub
-		return null;
+		return proxyDiagnostic.recupereDiagnostic(idDiagnostic);
 	}
 
 	@Override
@@ -144,8 +155,19 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 	public void setProxyDiagnostic(IDaoDiagnostic proxyDiagnostic) {
 		this.proxyDiagnostic = proxyDiagnostic;
 	}
+	
 
-
+	@Override
+	public List<Indicateur> recupererIndicateursParDiag(Diagnostic diagEnCours) {
+		List<Indicateur> listeIndicateurs = proxyIndicateur.recupereIndicateur();
+		List<Indicateur> listeIndicateursParDiag = new ArrayList<Indicateur>(); 
+		for(Indicateur i : listeIndicateurs){
+			if(i.getTypeDiagnostic().getIdTypeDiagnostic() == diagEnCours.getTypeDiagnostic().getIdTypeDiagnostic()){
+				listeIndicateursParDiag.add(i); 
+			}
+		}
+		return listeIndicateursParDiag;
+	}
 
 
 }

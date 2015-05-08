@@ -12,6 +12,7 @@ import fr.afcepf.ai93.diag6.entity.erp.Piece;
 import fr.afcepf.ai93.diag6.entity.erp.Voirie;
 
 public interface IBusinessErp {
+
 	public List<Erp> recupereToutErp();
 
 	public List<Batiment> recupererBatParErp(int idErp);
@@ -27,6 +28,7 @@ public interface IBusinessErp {
 	public List<Ascenceur> recupererAscenceursParBat(int idBatiment);
 
 	public List<Voirie> recupererVoirieParErp(int idErp);
-
+	
+	public Erp recupererErpParId(int idErp);
 
 }
