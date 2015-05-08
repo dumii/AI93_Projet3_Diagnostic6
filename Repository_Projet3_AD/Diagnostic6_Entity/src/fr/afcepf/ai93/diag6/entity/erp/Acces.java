@@ -63,12 +63,22 @@ public class Acces implements Serializable {
 		super();
 	}
 
+
 	public Acces(Integer idAcces, TypeAcces typeAcces,
-			List<Anomalie> listeAnomaliesAcces) {
+			List<Anomalie> listeAnomaliesAcces, Batiment batiment) {
 		super();
 		this.idAcces = idAcces;
 		this.typeAcces = typeAcces;
 		this.listeAnomaliesAcces = listeAnomaliesAcces;
+		this.batiment = batiment;
+	}
+
+	public Batiment getBatiment() {
+		return batiment;
+	}
+
+	public void setBatiment(Batiment batiment) {
+		this.batiment = batiment;
 	}
 	
 	

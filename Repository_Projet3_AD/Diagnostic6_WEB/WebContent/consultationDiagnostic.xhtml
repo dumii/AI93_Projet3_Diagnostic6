@@ -75,7 +75,7 @@
 					</div>
 					<div class="tableErpDiagGeneral">
 					<rich:panel style="width:99.5%; background-color:#f7f7f7;border:none; font-weight: bold;" id="panelInfosGen" >
-                        <h:panelGrid columns="2" style="float:left; width:50%; vertical-align: top; align:top;" >
+                        <h:panelGrid columns="2" style="float:left; width:50%;" >
                         	<h:outputText value="ERP concerné : " />
                         	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.nomErp}" />
                         	<h:outputText value="Catégorie : " />
@@ -84,10 +84,16 @@
                         	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.typeErp.denominationTypeErp} #{mbDonneesGenerales.diagnosticSelectionne.erp.typeErp.typeErp}" />	
                         	<h:outputText value="Adresse : " />
                         	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.numVoieErp} #{mbDonneesGenerales.diagnosticSelectionne.erp.nomVoieErp}
-                        	&lt;br /&gt; #{mbDonneesGenerales.diagnosticSelectionne.erp.localisation.codePostal} #{mbDonneesGenerales.diagnosticSelectionne.erp.localisation.ville}" 
+                        	 #{mbDonneesGenerales.diagnosticSelectionne.erp.localisation.codePostal} #{mbDonneesGenerales.diagnosticSelectionne.erp.localisation.ville}" 
                         	escape="false" />
                         	<h:outputText value="Propriétaire : " />
-                        	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.localisation.codePostal} #{mbDonneesGenerales.diagnosticSelectionne.erp.localisation.ville}" />
+                        	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.proprietaire.prenomProprietaire} #{mbDonneesGenerales.diagnosticSelectionne.erp.proprietaire.nomProprietaire}" />
+                        	<h:outputText value="Coordonées : " />
+                        	<h:outputText value="Tél : #{mbDonneesGenerales.diagnosticSelectionne.erp.proprietaire.telProprietaire} 
+                        	&lt;br /&gt; Mail : #{mbDonneesGenerales.diagnosticSelectionne.erp.proprietaire.mailProprietaire}
+                        	&lt;br /&gt; #{mbDonneesGenerales.diagnosticSelectionne.erp.proprietaire.numVoieProprietaire} #{mbDonneesGenerales.diagnosticSelectionne.erp.proprietaire.nomVoieProprietaire} 
+                        	 #{mbDonneesGenerales.diagnosticSelectionne.erp.proprietaire.localisation.codePostal} #{mbDonneesGenerales.diagnosticSelectionne.erp.proprietaire.localisation.ville}" 
+                        	escape="false"/>
                         </h:panelGrid>
                         <h:panelGrid columns="2">
                         	<h:outputText value="Etat diagnostic : " />
@@ -99,8 +105,8 @@
                         	<h:outputText value="Expert : " />
                         	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.prenomExpert} #{mbDonneesGenerales.diagnosticSelectionne.expert.nomExpert}"/>
                         	<h:outputText value="Coordonées : " />
-                        	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.telExpert}
-                        	&lt;br /&gt;  #{mbDonneesGenerales.diagnosticSelectionne.expert.mailExpert}
+                        	<h:outputText value="Tél : #{mbDonneesGenerales.diagnosticSelectionne.expert.telExpert}
+                        	&lt;br /&gt; Mail :  #{mbDonneesGenerales.diagnosticSelectionne.expert.mailExpert}
                         	&lt;br /&gt;  #{mbDonneesGenerales.diagnosticSelectionne.expert.numVoieExpert} #{mbDonneesGenerales.diagnosticSelectionne.expert.nomVoieExpert}
                         	&lt;br /&gt;  #{mbDonneesGenerales.diagnosticSelectionne.expert.localisation.codePostal} #{mbDonneesGenerales.diagnosticSelectionne.expert.localisation.ville}"
                         	escape="false"/>
@@ -175,7 +181,7 @@
                			<ui:repeat value="#{mbDonneesGenerales.diagnosticSelectionne.listeAnomaliesDiagnostic}" var="o" rows="20" id="repeatAnomalies"
                			style="width: 100%; font-family: Arial, Verdana, sans-serif; font-size: 13px; font-weight: normal;">
                     	<rich:panel style="float:left; width:100%; background-color:#f7f7f7; border-display:none; border-bottom: 0px;
-						  border-left: 0px; border-right: 0px; background-color: #f7f7f7;">
+						  border-left: 0px; border-right: 0px;">
                         	<div>
                         	<h:outputText value="Anomalie n° : " style="font-weight:bold; margin-left:4px;" /> 
                             	<h:outputText value="#{o.idAnomalie}" style="font-weight:bold; border:none; font-color:black; margin-left: 88px;" id="idAnom"/>
@@ -188,7 +194,8 @@
                             	<h:commandButton action="#{mbDonneesGenerales.suppressionAnomalie(o)}" value="Suppression" />
                             	</div>
                         	</div>
-                        	<h:panelGrid columns="2" style="width: 100%; font-family: Arial, Verdana, sans-serif; color=gray; font-weight: normal;">                           		<h:outputText value="Etat anomalie : " style="font-weight:bold "  />
+                        	<h:panelGrid columns="2" style="width: 100%; font-family: Arial, Verdana, sans-serif; color=gray; font-weight: normal; ">                           		<h:outputText value="Etat anomalie : " style="font-weight:bold "  />
+                           		                        	<f:attribute name="align" value="left"/>
                            		<h:outputText value="#{mbDonneesGenerales.traiteAnomalie(o)}" disabled="#{mbDonneesGenerales.isEnable(o)}" />
                             	<h:outputText value="Localisation : " style="font-weight:bold" />
                             	<h:outputText value="#{mbDonneesGenerales.localisationAnomalie(o)}" />
@@ -196,17 +203,17 @@
                             	<h:selectOneMenu value="#{o.indicateur.idIndicateur}">
                             		<f:selectItems value="#{mbDonneesGenerales.listeIndicateursParDiagnostic}" var = "ind"
                             						itemLabel="#{ind.libelleIndicateur}"
-                            						itemValue="#{ind.idIndicateur}" noSelectionValue="#{o.indicateur.idIndicateur}" ></f:selectItems>
+                            						itemValue="#{ind.idIndicateur}" ></f:selectItems>
                             		<f:attribute name="disabled" value="#{mbDonneesGenerales.isEnable(o)}"></f:attribute>
                             	</h:selectOneMenu>
                             	<h:outputText value="Description : " style="font-weight:bold" />
-                            	<h:inputText value="#{o.descriptionAnomalie}" class="inputTextAnomalieDisabled">
+                            	<h:inputTextarea value="#{o.descriptionAnomalie}" class="inputTextAnomalieDisabled">
                             		<f:attribute name="disabled" value="#{mbDonneesGenerales.isEnable(o)}"></f:attribute>
-                            	</h:inputText>
+                            	</h:inputTextarea>
                             	<h:outputText value="Preconisation :" style="font-weight:bold" />
-                            	<h:inputText value="#{o.preconisationAnomalie}" class="inputTextAnomalieDisabled">
+                            	<h:inputTextarea value="#{o.preconisationAnomalie}" class="inputTextAnomalieDisabled">
                             		<f:attribute name="disabled" value="#{mbDonneesGenerales.isEnable(o)}"></f:attribute>
-                            	</h:inputText>
+                            	</h:inputTextarea>
                             	<h:outputText value="Coût estimé :" style="font-weight:bold" />
                             	<h:inputText value="#{o.coutEstimeAnomalie}"   class="inputTextAnomalieDisabled">
                             		<f:attribute name="disabled" value="#{mbDonneesGenerales.isEnable(o)}"></f:attribute>

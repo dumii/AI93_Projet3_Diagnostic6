@@ -161,15 +161,15 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 			}
 			else{
 				if(a.getAcces() != null){
-					return "Accès : " + a.getAcces().getTypeAcces().getLibelleTypeAcces(); 
+					return a.getAcces().getBatiment().getIntituleBatiment()+" "+a.getAcces().getBatiment().getNumBatiment() +", Accès : " + a.getAcces().getTypeAcces().getLibelleTypeAcces(); 
 				}
 				else{
 					if(a.getEscalier() != null){
-						return "Escalier : "+a.getEscalier().getDenominationEscalier();
+						return a.getEscalier().getBatiment().getIntituleBatiment()+" "+a.getEscalier().getBatiment().getNumBatiment() +", Escalier : "+a.getEscalier().getDenominationEscalier();
 					}
 					else{
 						if(a.getAscenceur() !=null){
-							return "Ascenceur : "+a.getAscenceur().getDenominationAscenceur(); 
+							return a.getAscenceur().getBatiment().getIntituleBatiment()+" "+a.getAscenceur().getBatiment().getNumBatiment()+", Ascenceur : "+a.getAscenceur().getDenominationAscenceur(); 
 						}
 						else {
 							return "Localisation non définie"; 
