@@ -28,6 +28,8 @@ public class DaoHistoriqueInterventionImpl implements IDaoHistoriqueIntervention
 	private final static String MODIF_DATE_DEBUT = "dateDebutIntervention";
 	private final static String MODIF_DATE_FIN = "dateFinIntervention";
 	private final static String MODIF_COUT_INTERVENTION = "coutIntervention";
+	private final static String MODIF_ARTISAN = "artisan";
+	private final static String MODIF_TYPE_INTERVENTION = "typeIntervention";
 	
 	@PersistenceContext(unitName="Malak_Diag_Data")
 	private EntityManager em;
@@ -61,7 +63,7 @@ public class DaoHistoriqueInterventionImpl implements IDaoHistoriqueIntervention
 		Date dateDebutInitiale = interventionInitiale.getDateDebutIntervention();
 		Date dateDebutNouvelle = intervention.getDateDebutIntervention();
 		
-		if (dateDebutInitiale != dateDebutNouvelle)
+		if (dateDebutInitiale.compareTo(dateDebutNouvelle) != 0)
 		{
 			historique.setTypeModification(MODIF_DATE_DEBUT);
 			historique.setAncienneDonnee(""+dateDebutInitiale);
@@ -72,7 +74,7 @@ public class DaoHistoriqueInterventionImpl implements IDaoHistoriqueIntervention
 		Date dateFinInitiale = interventionInitiale.getDateFinIntervention();
 		Date dateFinNouvelle = intervention.getDateFinIntervention();
 		
-		if (dateFinInitiale != dateFinNouvelle)
+		if (dateFinInitiale.compareTo(dateFinNouvelle) != 0)
 		{
 			historique.setTypeModification(MODIF_DATE_FIN);
 			historique.setAncienneDonnee(""+dateFinInitiale);
@@ -90,5 +92,30 @@ public class DaoHistoriqueInterventionImpl implements IDaoHistoriqueIntervention
 			historique.setNouvelleDonnee(""+coutNouveauIntervention);
 			em.persist(historique);
 		}
+		
+		int idArtisanInitial = interventionInitiale.getArtisan().getIdArtisan();
+		System.out.println("id artisan 1 : " + idArtisanInitial);
+		int idArtisanNouveau = intervention.getArtisan().getIdArtisan();
+		System.out.println("id artisan 2 : " + idArtisanNouveau);
+		
+		if (idArtisanInitial != idArtisanNouveau)
+		{
+			System.out.println("entrée dans le if");
+			historique.setTypeModification(MODIF_ARTISAN);
+			historique.setAncienneDonnee(""+idArtisanInitial);
+			historique.setNouvelleDonnee(""+idArtisanNouveau);
+			em.persist(historique);
+		}
+		
+		int idTypeInterventionInitial = interventionInitiale.getTypeIntervention().getIdTypeIntervention();
+		int idTypeInterventionNouveau = intervention.getTypeIntervention().getIdTypeIntervention();
+		
+		if (idTypeInterventionInitial != idTypeInterventionNouveau)
+		{
+			historique.setTypeModification(MODIF_TYPE_INTERVENTION);
+			historique.setAncienneDonnee(""+idTypeInterventionInitial);
+			historique.setNouvelleDonnee(""+idTypeInterventionNouveau);
+			em.persist(historique);
+		}		
 	}
 }

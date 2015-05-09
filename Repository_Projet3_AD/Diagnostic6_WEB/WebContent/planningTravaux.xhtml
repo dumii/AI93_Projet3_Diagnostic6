@@ -110,7 +110,7 @@
 								
 								<h:outputLabel value="Etat d'avancement :" />
 								
-								<h:selectOneMenu 	
+								<h:selectOneMenu 	id="Etat#{intervention.idIntervention}"
 													value="#{intervention.etatAvancementTravaux.idEtatAvancement}">
 									<f:selectItems	value="#{mbTestTravaux.listeEtatDisponiblesParIntervention(intervention)}"
 								   					var="var"
@@ -118,39 +118,30 @@
 								  					itemValue="#{var.idEtatAvancement}"/>								
 								</h:selectOneMenu>
 		
-								
-								
-								<h:outputLabel value="Date de début :" />
-									<input type="text" 
-											id="datepickerDebut - #{intervention.idIntervention}" 
-											class="datepick"
-											value="#{mbTestTravaux.formater.format(
-											 intervention.dateDebutIntervention)
-											}"
-											disabled="disabled"/>
-								
+								<h:outputLabel value="Date de début :" />									
+									<rich:calendar value="#{intervention.dateDebutIntervention}"
+												   datePattern="dd/MM/yyyy"
+												   popup="true"
+												   inputStyle="width:45.5%"/>
+												   
+									<input type="text" id="DateDebut - #{intervention.idIntervention}"
+									value="#{mbTestTravaux.formater.format(intervention.dateDebutIntervention)}"
+									style="display:none"/>
+									
 								<h:outputLabel value="Date de fin :" /> 
-									<input type="text"
-										   id="datepickerFin - #{intervention.idIntervention}"
-										   value="#{mbTestTravaux.formater.format(
-											 intervention.dateFinIntervention)
-											}"
-										   class="datepick"
-										   disabled="disabled"/>	
-								
-								<input class="boutonModifier"
-									   type="button"
-									   id="boutonModifier - #{intervention.idIntervention}"
-									   value="Modifier"
-									   onClick="disabledEnabled('#{intervention.idIntervention}')"/>
-								
-								<input type="button" 
-									   value="Valider les modifications" 
-									   id="boutonValider - #{intervention.idIntervention}"
-									   style="display:none"/>
-									   
-									   <h:commandButton action="#{mbTestTravaux.testModifier(intervention)}"
-									   					value="Valider2 les modifications" />				
+									<rich:calendar value="#{intervention.dateFinIntervention}"
+												   datePattern="dd/MM/yyyy"
+												   popup="true"
+												   inputStyle="width:45.5%"/>
+												   
+									<input type="text" id="DateFin - #{intervention.idIntervention}"
+									value="#{mbTestTravaux.formater.format(intervention.dateFinIntervention)}"
+									style="display:none"/>
+							   
+								<h:commandButton action="#{mbTestTravaux.modifier(intervention)}"
+									   					value="Modifier" />	
+								<h:commandButton action="#{mbTestTravaux.testModifier(intervention)}"
+									   					value="Méthode test" />			
 							</div>
 							
 							<div>
@@ -163,6 +154,8 @@
 								  					itemValue="#{var.idTypeIntervention}"/>								
 								</h:selectOneMenu>
 								
+								
+								
 								<h:outputLabel value="Artisan :" />
 								
 								<h:selectOneMenu 	value="#{intervention.artisan.idArtisan}">
@@ -173,11 +166,7 @@
 								</h:selectOneMenu>	
 								
 								<h:outputLabel value="Coût :" />
-									<input type="number"
-										   id="cout - #{intervention.idIntervention}"
-										   step="1.00"
-										   disabled="disabled"
-										   value="#{intervention.coutIntervention}"/>	
+								<h:inputText value="#{intervention.coutIntervention}" />	
 							</div>
 							
 							<div>
@@ -197,45 +186,133 @@
 							</td>
 						
 					</tr>
-				</ui:repeat>
-
-							
-			</ui:repeat>
+				</ui:repeat>							
+			</ui:repeat>		
+		</table>
 		
+		<table id="monTableauAnomalie">
+			<tr class="table2-header1">
+				<th>Liste des anomalies sans interventions</th>
+			</tr>
+			
+			<ui:repeat var="anom" value="#{mbTestTravaux.listeAnomalies}">
+			
+			<tr class="ligneBleueIntervention2">
+				<td>
+					#{anom.diagnostic.intituleDiagnostic} - anomalie #{anom.idAnomalie}
+				</td>
+			</tr>
+			
+			<tr class="ligneOrange2">
+						<td>
+							<div>
+								<h4>Informations sur l'intervention</h4>
+								
+								<h:outputLabel value="Etat d'avancement :" />
+								
+								<h:selectOneMenu 	id="Etat#{intervention.idIntervention}"
+													value="#{anom.intervention.etatAvancementTravaux.idEtatAvancement}">
+									<f:selectItems	value="#{mbTestTravaux.listeEtats}"
+								   					var="var"
+								  					itemLabel="#{var.intituleEtatAvancement}"
+								  					itemValue="#{var.idEtatAvancement}"/>								
+								</h:selectOneMenu>
+		
+								<h:outputLabel value="Date de début :" />									
+									<rich:calendar value="#{anom.intervention.dateDebutIntervention}"
+												   datePattern="dd/MM/yyyy"
+												   popup="true"
+												   inputStyle="width:45.5%"/>
+									
+								<h:outputLabel value="Date de fin :" /> 
+									<rich:calendar value="#{anom.intervention.dateFinIntervention}"
+												   datePattern="dd/MM/yyyy"
+												   popup="true"
+												   inputStyle="width:45.5%"/>
+							   
+								<h:commandButton action="#{mbTestTravaux.modifier(intervention)}"
+									   					value="Modifier" />	
+								<h:commandButton action="#{mbTestTravaux.testModifier(intervention)}"
+									   					value="Méthode test" />			
+							</div>
+							
+							<div>
+								<h:outputLabel value="Type d'intervention :" />
+								
+								<h:selectOneMenu 	value="#{anom.intervention.typeIntervention.idTypeIntervention}">
+									<f:selectItems	value="#{mbTestTravaux.listeTypes}"
+								   					var="var"
+								  					itemLabel="#{var.typeIntervention}"
+								  					itemValue="#{var.idTypeIntervention}"/>								
+								</h:selectOneMenu>
+								
+								
+								
+								<h:outputLabel value="Artisan :" />
+								
+								<h:selectOneMenu 	value="#{intervention.artisan.idArtisan}">
+									<f:selectItems	value="#{mbTestTravaux.listeArtisans}"
+								   					var="var"
+								  					itemLabel="#{var.nomArtisan}"
+								  					itemValue="#{var.idArtisan}"/>								
+								</h:selectOneMenu>	
+								
+								<h:outputLabel value="Coût :" />
+								<h:inputText value="#{anom.intervention.coutIntervention}" />	
+							</div>
+							
+							<div>
+								<h4>Informations sur l'anomalie</h4>
+								<h:outputLabel value="Localisation de l'anomalie :" />
+								<p class="localisationAnomalie">
+								<h:outputText value="#{mbTestTravaux.localisationAnomalie(anom)}"
+												escape="false"/>	
+								</p>
+							</div>
+													
+							<div class="preconisationAnomalie">								
+								<h:outputLabel value="Description de l'anomalie :" />
+								<p>#{anom.preconisationAnomalie}</p>				
+							</div>							
+							
+						</td>
+						
+					</tr>
+			
+			</ui:repeat>
 		</table>
 			</h:form>
 		</div>
 		
 	<script>
-	jQuery.noConflict();
 	
-	jQuery('.datepick').each(function(){
-		jQuery(this).datepicker();
-	});
-	
-	jQuery('.rectangle').each(function(){
+	$('.rectangle').each(function(){
 		dessinerRectangle(this);
 	});
 
-	jQuery('.ligneOrange div:first-of-type select').each(function(){
-		var id = jQuery(this).closest('tr').prev().find('.rectangle').attr('id');
+	$('.ligneOrange div:first-of-type select').each(function(){
+		var id = $(this).closest('tr').prev().find('.rectangle').attr('id');
 		afficherMasquerEtatAvancement(id, this.value);
 	});
 	
-	jQuery('.ligneBleueIntervention').click(function(){
-		jQuery(this).closest('tr').next().fadeToggle('medium');
+	$('.ligneBleueIntervention').click(function(){
+		$(this).closest('tr').next().fadeToggle('medium');
 	});
 
-	jQuery('#reculer').click(function(){
+	$('.ligneBleueIntervention2').click(function(){
+		$(this).closest('tr').next().fadeToggle('medium');
+	});
+
+	$('#reculer').click(function(){
 		reculerQuinzeJours();
-		jQuery('.rectangle').each(function(){
+		$('.rectangle').each(function(){
 			dessinerRectangle(this);
 		});
 	});
 
-	jQuery('#avancer').click(function(){
+	$('#avancer').click(function(){
 		avancerQuinzeJours();
-		jQuery('.rectangle').each(function(){
+		$('.rectangle').each(function(){
 			dessinerRectangle(this);
 		});
 	});

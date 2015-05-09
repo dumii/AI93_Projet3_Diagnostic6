@@ -62,21 +62,13 @@ function afficherCacher(monID)
 function disabledEnabled(monID)
 {
 
-	if (document.getElementById("datepickerDebut - "+monID).disabled == true)
+	if (document.getElementById("boutonValider - "+monID).style.display == "none")
 		{
-			document.getElementById("datepickerDebut - "+monID).disabled = false;
-			document.getElementById("datepickerFin - "+monID).disabled = false;
-			document.getElementById("cout - "+monID).disabled = false;
-			document.getElementById("cout - "+monID).style.color = "black";
 			document.getElementById("boutonModifier - "+monID).value = "Annuler";
 			document.getElementById("boutonValider - "+monID).style.display = "";
 		}
 	else
 		{
-			document.getElementById("datepickerDebut - "+monID).disabled = true;
-			document.getElementById("datepickerFin - "+monID).disabled = true;
-			document.getElementById("cout - "+monID).disabled = true;
-			document.getElementById("cout - "+monID).style.color = "#CDC0B9";
 			document.getElementById("boutonModifier - "+monID).value = "Modifier";
 			document.getElementById("boutonValider - "+monID).style.display = "none";
 		}
@@ -90,18 +82,21 @@ function dessinerRectangle(element)
 {	
 	//Récupération des données liées à l'intervention (durées des interventions en jours)
 	var idIntervention = element.id;
-	var dateDebut = document.getElementById("datepickerDebut - "+idIntervention).value.split("/");
+
+	var dateDebut = document.getElementById("DateDebut - "+idIntervention).value.split("/");
 	var debutIntervention = new Date(parseInt(dateDebut[2], 10),
-	                  				 parseInt(dateDebut[1], 10) - 1,
-	                  				 parseInt(dateDebut[0], 10));
+			parseInt(dateDebut[1], 10) - 1,
+			parseInt(dateDebut[0], 10));
 	
-	var dateFin = document.getElementById("datepickerFin - "+idIntervention).value.split("/");
+	var dateFin = document.getElementById("DateFin - "+idIntervention).value.split("/");
 	var finIntervention = new Date(parseInt(dateFin[2], 10),
-				 				   parseInt(dateFin[1], 10) - 1,
-				 				   parseInt(dateFin[0], 10));		
+			parseInt(dateFin[1], 10) - 1,
+			parseInt(dateFin[0], 10));
+	
+	//var finIntervention = new Date(document.getElementById("DateFin - "+idIntervention).value);	
 	
 	var dureeIntervention = parseInt((finIntervention - debutIntervention)/(24*3600*1000));
-	
+
 	//La récupération des dates restera à définir le moment venu
 	var date1 = document.getElementById("date1").innerHTML.split("/");
 	var debutTableau = new Date(parseInt(date1[2], 10),
@@ -133,6 +128,7 @@ function dessinerRectangle(element)
 			var ecart = parseInt(
 					(debutIntervention - debutTableau)/(24*3600*1000));
 			margeGauche = (ecart * 100 / dureeTableau);
+			console.log("Ecart : " + ecart);
 		}
 
 
@@ -172,13 +168,13 @@ function afficherMasquerEtatAvancement(idIntervention, idEtat)
 		document.getElementById("iconeEtat - "+idIntervention).src = "images/iconeValider.26.26.png";
 		break;
 	case "2":
-		document.getElementById("iconeEtat - "+idIntervention).src = "images/consultationDiagnostic/NotifIconeDiagRouge.26.26.png";
+		document.getElementById("iconeEtat - "+idIntervention).src = "images/iconeEnCours.26.26.png";
 		break;		
 	case "3":
-		document.getElementById("iconeEtat - "+idIntervention).src = "images/iconeEnCours.26.26.png";
+		document.getElementById("iconeEtat - "+idIntervention).src = "images/iconeEnAttente.26.26.png";
 		break;	
 	case "4":
-		document.getElementById("iconeEtat - "+idIntervention).src = "images/iconeEnAttente.26.26.png";
+		document.getElementById("iconeEtat - "+idIntervention).src = "images/bird.26.26.png";		
 		break;
 	}
 }

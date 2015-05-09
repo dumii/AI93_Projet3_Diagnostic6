@@ -1,5 +1,6 @@
 package fr.afcepf.ai93.diag6.data.diagnostic;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Remote;
@@ -87,12 +88,18 @@ public class DaoDiagnosticImpl implements IDaoDiagnostic {
 
 
 	public List<Diagnostic> recupereDiagnosticParErp(Erp erp) {
-		//et where traite = 0
 		Query requete = em.createQuery("SELECT a.listeDiagnosticErp from Erp a WHERE a.idErp = :pid");
 		requete.setParameter("pid", erp.getIdErp());
 		List<Diagnostic> liste = requete.getResultList();
-		return liste;
+		List<Diagnostic> listeARetourner = new ArrayList<>();
+		
+		for (Diagnostic diag : liste)
+		{
+			if (diag.getTraite() != 0)
+			{
+				listeARetourner.add(diag);
+			}
+		}
+		return listeARetourner;
 	}
-
-
 }

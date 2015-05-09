@@ -18,6 +18,7 @@ import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
 import fr.afcepf.ai93.diag6.entity.diagnostic.HistoriqueDiagnostic;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Indicateur;
 import fr.afcepf.ai93.diag6.entity.diagnostic.TypeDiagnostic;
+import fr.afcepf.ai93.diag6.entity.erp.Erp;
 
 @Stateless
 @Remote(IBusinessDiagnostic.class)
@@ -87,11 +88,8 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 				System.out.println(diag2.getTraite() + diag2.getTypeDiagnostic().getIdTypeDiagnostic());
 			}	
 		} 
-		if (ajoutAutorise == true) {
-			System.out.println("on est dans le business");
-			System.out.println("2222222222222222222222222222222222222");	
+		if (ajoutAutorise == true) {	
 			proxyDiagnostic.ajouterDiagnostic(diagnostic);
-			System.out.println(ajoutAutorise);
 			return "Intervention enregristrée avec succès";
 				
 		}else
@@ -169,5 +167,8 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 		return listeIndicateursParDiag;
 	}
 
-
+	@Override
+	public List<Diagnostic> recupereDiagnosticParErp(Erp erp) {
+		return proxyDiagnostic.recupereDiagnosticParErp(erp);
+	}
 }

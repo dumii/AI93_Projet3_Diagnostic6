@@ -19,6 +19,7 @@ import fr.afcepf.ai93.diag6.api.business.diagnostic.IBusinessAnomalie;
 import fr.afcepf.ai93.diag6.api.business.autres.IBusinessArtisan;
 import fr.afcepf.ai93.diag6.api.business.travaux.IBusinessIntervention;
 import fr.afcepf.ai93.diag6.entity.autres.Artisan;
+import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
 import fr.afcepf.ai93.diag6.entity.travaux.EtatAvancementTravaux;
 import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
@@ -87,9 +88,18 @@ public class TestTravauxManagedBean {
 		listeAnomalies = proxyAnomalie.recupereToutAnomalie();
 	}
 	
-	public void testModifier(Intervention item)
+	public void testModifier(Intervention item) throws ParseException
 	{
-		System.out.println(item.getCoutIntervention());
+		System.out.println("ID : " + item.getIdIntervention());
+		System.out.println("Cout : " + item.getCoutIntervention());
+		String test = formater.format(item.getDateDebutIntervention());
+		Date dateTest = formater.parse(test);
+		System.out.println("Date test : " + dateTest);
+		System.out.println("Date début : " + item.getDateDebutIntervention());
+		System.out.println("Date fin : " + item.getDateFinIntervention());
+		System.out.println("Type intervention : " + item.getTypeIntervention().getTypeIntervention());
+		System.out.println("Artisan : " + item.getArtisan().getNomArtisan());
+		System.out.println("Type etat avancement : " + item.getEtatAvancementTravaux().getIntituleEtatAvancement());
 	}
 	
 	private void déterminerDates() throws ParseException {
@@ -268,8 +278,9 @@ public class TestTravauxManagedBean {
 	
 	public String modifier(Intervention intervention) throws ParseException
 	{
-		intervention.setCoutIntervention(5555.55);
-		//proxyBusiness.modifierIntervention(intervention);
+		Utilisateur user = new Utilisateur();
+		user.setIdUtilisateur(2);
+		proxyIntervention.modifierIntervention(intervention, user);
 		init();
 		
 		return "";

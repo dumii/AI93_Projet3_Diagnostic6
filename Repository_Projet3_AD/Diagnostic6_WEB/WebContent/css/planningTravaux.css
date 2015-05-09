@@ -15,10 +15,22 @@
 /*Style général du tableau et des entêtes*/
 /******************************************/
 
-table {
+#monTableau, #monTableauAnomalie
+{
     border-collapse: collapse;
     width: 100%;
 }
+
+#monTableauAnomalie
+{
+	margin-top:30px;
+}
+
+#monTableauAnomalie tr:nth-child(4n)
+{
+	background-color: #E9EFF8 ;
+}
+
 
 th, td 
 {
@@ -28,12 +40,14 @@ th, td
 
 .table-header1, 
 .table-header2, 
-.table-header3
+.table-header3,
+.table2-header1
 {
 	background-image:linear-gradient(#fAfAfA, #f2f2f2);
 }
 
-.table-header1
+.table-header1,
+.table2-header1
 {
 	font-size: 1.1em;
 	text-align:left;	
@@ -100,7 +114,11 @@ tr:not(.ligneOrange) > td:nth-of-type(2)
 	border-right: #3399ff solid 1px;
 }
 
-tr:not(.ligneOrange) td:first-of-type:hover,
+.NomIntervention:hover,
+.Etat:hover,
+.ligneBleueType td:first-of-type:hover,
+.ligneBleueIntervention td:first-of-type:hover,
+.ligneBleueIntervention2 td:first-of-type:hover,
 #reculer:hover,
 #avancer:hover
 {
@@ -146,7 +164,8 @@ tr:not(.ligneOrange) td:first-of-type:hover,
 	height: 30px;
 }
 
-.ligneBleueIntervention
+.ligneBleueIntervention,
+.ligneBleueIntervention2
 {
 	height: 30px;
 }
@@ -159,12 +178,16 @@ tr:not(.ligneOrange) td:first-of-type:hover,
 
 /*  Description Intervention   */
 
-.ligneOrange
+.ligneOrange,
+.ligneOrange2
 {
 	display:none;
+	background-color: #FFE6D5 ;
+	height: 80px;
 }
 
-.ligneOrange div
+.ligneOrange div,
+.ligneOrange2 div
 {
 	width:19%;
 	float:left;
@@ -172,60 +195,57 @@ tr:not(.ligneOrange) td:first-of-type:hover,
 	margin-bottom:5px;
 }
 
-.ligneOrange div:nth-of-type(4)
+.ligneOrange div:nth-of-type(4),
+.ligneOrange2 div:nth-of-type(4)
 {
 	width:43%;
 }
 
-.ligneOrange div:nth-of-type(3)
+.ligneOrange div:nth-of-type(3),
+.ligneOrange2 div:nth-of-type(3)
 {
 	width:15%;
 }
 
-.ligneOrange h4
+.ligneOrange h4,
+.ligneOrange2 h4
 {
 	margin-top:5px;
 }
 
-.ligneOrange
-{
-	background-color: #FFE6D5 ;
-	height: 80px;
-}
-
-.ligneOrange input
+.ligneOrange input,
+.ligneOrange2 input
 {
 	width:49%;
 }
 
-.ligneOrange select 
+.ligneOrange select, 
+.ligneOrange2 select 
 {
-	margin-left: 4.5px;
 	width:49.5%;
 }
 
-.ligneOrange label
+.ligneOrange label,
+.ligneOrange2 label
 {
 	display:inline-block;
 	width:49%;
 }
 
-.ligneOrange input[type="number"]
+.ligneOrange input[type="number"],
+.ligneOrange2 input[type="number"]
 {
 	background-image:linear-gradient(#f2f2f2, white);
 }
 
-.ligneOrange input[disabled="disabled"]
-{
-	color:#CDC0B9;
-}
-
-.ligneOrange input[type="button"]
+.ligneOrange input[type="button"],
+.ligneOrange2 input[type="button"]
 {
 	font-size: 0.8em;
 }
 
-.ligneOrange p
+.ligneOrange p,
+.ligneOrange2 p
 {
 	font-size:small;
 	background-image:linear-gradient(#f2f2f2, white);
@@ -247,14 +267,19 @@ tr:not(.ligneOrange) td:first-of-type:hover,
 }
 
 .ligneOrange div:nth-of-type(2),
-.ligneOrange div:nth-of-type(5)
+.ligneOrange div:nth-of-type(5),
+.ligneOrange2 div:nth-of-type(2),
+.ligneOrange2 div:nth-of-type(5)
 {
 	padding-top:45px;
 }
 
 .ligneOrange div:nth-of-type(3) label,
 .ligneOrange div:nth-of-type(4) label,
-.ligneOrange div:nth-of-type(5) label
+.ligneOrange div:nth-of-type(5) label,
+.ligneOrange2 div:nth-of-type(3) label,
+.ligneOrange2 div:nth-of-type(4) label,
+.ligneOrange2 div:nth-of-type(5) label
 {
 	width:100%;
 }

@@ -41,23 +41,21 @@ public class PlanningTravauxManagedBean {
 	private Utilisateur user;
 	
 	//Informations relatives à l'ERP
-	private Erp monERP;
-	private List<Diagnostic> listeDiagnosticERP;
-	private List<Anomalie> listeAnomalieAvecInterventionERP;
-	private List<Anomalie> listeAnomalieSansInterventionERP;
-	private List<Intervention> interventionsERP;
+	private Erp monERP; //OK
+	private List<Anomalie> listeAnomalieAvecInterventionERP; //OK
+	private List<Anomalie> listeAnomalieSansInterventionERP; //OK
+	private List<TypeIntervention> listeTypesERP; //OK
 	
-	//Informations générales
-	private List<TypeIntervention> listeTousTypes;
+	//Autres données
+	private List<TypeIntervention> listeTousTypes; //OK
 	
-	private SimpleDateFormat formater;
-	private SimpleDateFormat shortFormater;
+	private SimpleDateFormat formater; //OK
+	private SimpleDateFormat shortFormater; //OK
 	
-	private Date dateDuJour;
-	private Date date1;
-	private Date date2;
-	private Date date3;
-	private String moisAnnee;
+	private Date date1; //OK
+	private Date date2; //OK
+	private Date date3; //OK
+	private String moisAnnee; //OK
 	
 	
 	//Initialisation de la liste d'interventions au chargement de la page
@@ -68,16 +66,76 @@ public class PlanningTravauxManagedBean {
 		monERP = new Erp();
 		monERP.setIdErp(1);
 		
-		déterminerDates();	
+		formater = new SimpleDateFormat("dd/MM/yyyy");
+		shortFormater = new SimpleDateFormat("dd/MM");
 		
-		chargerListeAnomalieEtIntervention();
+		déterminerDates();
 
+		chargerListeAnomalieEtIntervention();
+		
+		chargerTypesInterventionEtIntervention();
+
+	}
+	
+	//Méthodes
+	
+	public void chargerTypesInterventionEtIntervention() {
+		
+		listeTousTypes = proxyIntervention.recupererTousTypesIntervention();
+		
+		for (Anomalie anom : listeAnomalieAvecInterventionERP)
+		{
+			int idTypeIntervention = anom.getIntervention().getTypeIntervention().getIdTypeIntervention();
+			
+			for (TypeIntervention type : listeTousTypes)
+			{
+				int idType = type.getIdTypeIntervention();
+				
+				if (idTypeIntervention == idType)
+				{
+					type.getListeInterventionTypeIntervention().add(anom.getIntervention());
+				}
+			}
+		}
+		
+		for (TypeIntervention type : listeTousTypes)
+		{
+			int nombreIntervention = type.getListeInterventionTypeIntervention().size();
+			
+			if (nombreIntervention > 0)
+			{
+				listeTypesERP.add(type);
+			}
+		}		
 	}
 
 	public void chargerListeAnomalieEtIntervention() {
 
-		monERP.setListeDiagnosticErp(proxyDiagnostic.);
+		monERP.setListeDiagnosticErp(proxyDiagnostic.recupereDiagnosticParErp(monERP));
 		
+		for (Diagnostic diag : monERP.getListeDiagnosticErp())
+		{
+			diag.setListeAnomaliesDiagnostic(proxyAnomalie.recupereAnomalieParDiagnostic(diag.getIdDiagnostic()));
+			
+			for (Anomalie anom : diag.getListeAnomaliesDiagnostic())
+			{
+				//Liste 1 : recherche d'intervention(s) sur l'anomalie, le nombre d'intervention dans la liste peut varier de 0 à *
+				
+				List<Intervention> liste1 = proxyIntervention.rechercherInterventionSurAnomalie(anom.getIdAnomalie());
+				
+				if (liste1.size() > 0)
+				{
+					//Au moins une intervention est enregistrée sur cette anomalie
+					listeAnomalieAvecInterventionERP.add(anom);
+				}
+				else
+				{
+					//Aucune intervention d'enregistrée sur cette anomalie
+					listeAnomalieSansInterventionERP.add(anom);
+					anom.setIntervention(liste1.get(0));
+				}
+			}
+		}		
 	}
 
 	public void déterminerDates() throws ParseException {
@@ -180,4 +238,150 @@ public class PlanningTravauxManagedBean {
 			}
 		}
 	}
+
+	public List<Artisan> avoirListeArtisans(TypeIntervention typeInter)
+	{
+		return proxyArtisan.recupererArtisansParTypeIntervention(typeInter);
+	}
+
+	public List<EtatAvancementTravaux> listeEtatDisponiblesParIntervention(Intervention intervention)
+	{
+		return proxyIntervention.recupererEtatDisponibles(intervention);
+	}
+
+	
+	
+	//Getters et Setters
+	
+	public IBusinessIntervention getProxyIntervention() {
+		return proxyIntervention;
+	}
+
+	public void setProxyIntervention(IBusinessIntervention proxyIntervention) {
+		this.proxyIntervention = proxyIntervention;
+	}
+
+	public IBusinessDiagnostic getProxyDiagnostic() {
+		return proxyDiagnostic;
+	}
+
+	public void setProxyDiagnostic(IBusinessDiagnostic proxyDiagnostic) {
+		this.proxyDiagnostic = proxyDiagnostic;
+	}
+
+	public IBusinessAnomalie getProxyAnomalie() {
+		return proxyAnomalie;
+	}
+
+	public void setProxyAnomalie(IBusinessAnomalie proxyAnomalie) {
+		this.proxyAnomalie = proxyAnomalie;
+	}
+
+	public IBusinessArtisan getProxyArtisan() {
+		return proxyArtisan;
+	}
+
+	public void setProxyArtisan(IBusinessArtisan proxyArtisan) {
+		this.proxyArtisan = proxyArtisan;
+	}
+
+	public Utilisateur getUser() {
+		return user;
+	}
+
+	public void setUser(Utilisateur user) {
+		this.user = user;
+	}
+
+	public Erp getMonERP() {
+		return monERP;
+	}
+
+	public void setMonERP(Erp monERP) {
+		this.monERP = monERP;
+	}
+
+	public List<Anomalie> getListeAnomalieAvecInterventionERP() {
+		return listeAnomalieAvecInterventionERP;
+	}
+
+	public void setListeAnomalieAvecInterventionERP(
+			List<Anomalie> listeAnomalieAvecInterventionERP) {
+		this.listeAnomalieAvecInterventionERP = listeAnomalieAvecInterventionERP;
+	}
+
+	public List<Anomalie> getListeAnomalieSansInterventionERP() {
+		return listeAnomalieSansInterventionERP;
+	}
+
+	public void setListeAnomalieSansInterventionERP(
+			List<Anomalie> listeAnomalieSansInterventionERP) {
+		this.listeAnomalieSansInterventionERP = listeAnomalieSansInterventionERP;
+	}
+
+	public List<TypeIntervention> getListeTypesERP() {
+		return listeTypesERP;
+	}
+
+	public void setListeTypesERP(List<TypeIntervention> listeTypesERP) {
+		this.listeTypesERP = listeTypesERP;
+	}
+
+	public List<TypeIntervention> getListeTousTypes() {
+		return listeTousTypes;
+	}
+
+	public void setListeTousTypes(List<TypeIntervention> listeTousTypes) {
+		this.listeTousTypes = listeTousTypes;
+	}
+
+	public SimpleDateFormat getFormater() {
+		return formater;
+	}
+
+	public void setFormater(SimpleDateFormat formater) {
+		this.formater = formater;
+	}
+
+	public SimpleDateFormat getShortFormater() {
+		return shortFormater;
+	}
+
+	public void setShortFormater(SimpleDateFormat shortFormater) {
+		this.shortFormater = shortFormater;
+	}
+
+	public Date getDate1() {
+		return date1;
+	}
+
+	public void setDate1(Date date1) {
+		this.date1 = date1;
+	}
+
+	public Date getDate2() {
+		return date2;
+	}
+
+	public void setDate2(Date date2) {
+		this.date2 = date2;
+	}
+
+	public Date getDate3() {
+		return date3;
+	}
+
+	public void setDate3(Date date3) {
+		this.date3 = date3;
+	}
+
+	public String getMoisAnnee() {
+		return moisAnnee;
+	}
+
+	public void setMoisAnnee(String moisAnnee) {
+		this.moisAnnee = moisAnnee;
+	}
+
+
 }
