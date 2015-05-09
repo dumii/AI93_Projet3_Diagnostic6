@@ -108,10 +108,10 @@ function dessinerRectangle(element)
 								parseInt(date1[1], 10) - 1,
 								parseInt(date1[0], 10));
 	
-	var date2 = document.getElementById("date2").innerHTML.split("/");	
-	var finTableau =  new Date(parseInt(date2[2], 10),
-							   parseInt(date2[1], 10) - 1,
-							   parseInt(date2[0], 10));	
+	var date3 = document.getElementById("date3").innerHTML.split("/");	
+	var finTableau =  new Date(parseInt(date3[2], 10),
+							   parseInt(date3[1], 10) - 1,
+							   parseInt(date3[0], 10));	
 	
 	var dureeTableau = ((finTableau - debutTableau)/(24*3600*1000));
 
@@ -183,3 +183,160 @@ function afficherMasquerEtatAvancement(idIntervention, idEtat)
 	}
 }
 
+/**
+ * Fonction 5 : avancer le diagramme de Gantt de 15 jours
+ */
+
+function avancerQuinzeJours()
+{	
+	//Récupération des dates en millisecondes
+	var date1 = document.getElementById("date1").innerHTML.split("/");
+	var debutTableau = new Date(parseInt(date1[2], 10),
+								parseInt(date1[1], 10) - 1,
+								parseInt(date1[0], 10));
+	
+	var date2 = document.getElementById("date2").innerHTML.split("/");
+	var milieuTableau = new Date(parseInt(date2[2], 10),
+								parseInt(date2[1], 10) - 1,
+								parseInt(date2[0], 10));
+	
+	var date3 = document.getElementById("date3").innerHTML.split("/");	
+	var finTableau =  new Date(parseInt(date3[2], 10),
+							   parseInt(date3[1], 10) - 1,
+							   parseInt(date3[0], 10));	
+	
+	//Calcul des nouvelles dates en ajoutant 15 jours (en millisecondes)
+	var newDate1 = new Date(debutTableau);
+	var newDate2 = new Date(milieuTableau);
+	var newDate3 = new Date(finTableau);
+	
+	var lastDay = parseInt(date3[0], 10);
+	
+	if (lastDay == 15)
+	{
+		newDate1.setDate(15);
+		newDate2.setDate(22);
+		newDate3 = new Date(newDate3.getFullYear(), newDate3.getMonth() + 1, 0, 23, 59, 59);
+	}
+	else
+	{
+		newDate1.setDate(1);
+		newDate1.setMonth(finTableau.getMonth()+1);
+		newDate2.setDate(7);
+		newDate2.setMonth(finTableau.getMonth()+1);
+		newDate3.setDate(15);
+		newDate3.setMonth(finTableau.getMonth()+1);
+	}
+	document.getElementById("date1").innerHTML = dateToString(newDate1);
+	document.getElementById("date2").innerHTML = dateToString(newDate2);
+	document.getElementById("date3").innerHTML = dateToString(newDate3);
+	monthToString(newDate1);
+}
+
+function reculerQuinzeJours()
+{	
+	//Récupération des dates en millisecondes
+	var date1 = document.getElementById("date1").innerHTML.split("/");
+	var debutTableau = new Date(parseInt(date1[2], 10),
+								parseInt(date1[1], 10) - 1,
+								parseInt(date1[0], 10));
+	
+	var date2 = document.getElementById("date2").innerHTML.split("/");
+	var milieuTableau = new Date(parseInt(date2[2], 10),
+								parseInt(date2[1], 10) - 1,
+								parseInt(date2[0], 10));
+	
+	var date3 = document.getElementById("date3").innerHTML.split("/");	
+	var finTableau =  new Date(parseInt(date3[2], 10),
+							   parseInt(date3[1], 10) - 1,
+							   parseInt(date3[0], 10));	
+	
+	//Calcul des nouvelles dates en enlevant 15 jours (en millisecondes)
+	var newDate1 = new Date(debutTableau);
+	var newDate2 = new Date(milieuTableau);
+	var newDate3 = new Date(finTableau);
+	
+	var firstDay = parseInt(date1[0], 10);
+	
+	if (firstDay == 1)
+	{
+		newDate1.setDate(15);
+		newDate1.setMonth(finTableau.getMonth()-1);
+		newDate2.setDate(22);
+		newDate2.setMonth(finTableau.getMonth()-1);
+		newDate3 = new Date(newDate3.getFullYear(), finTableau.getMonth(), 0, 23, 59, 59);
+	}
+	else
+	{
+		newDate1.setDate(1);
+		newDate2.setDate(7);
+		newDate3.setDate(15);
+	}
+	document.getElementById("date1").innerHTML = dateToString(newDate1);
+	document.getElementById("date2").innerHTML = dateToString(newDate2);
+	document.getElementById("date3").innerHTML = dateToString(newDate3);
+	monthToString(newDate1);
+}
+
+/**
+ * Fonction 6 : convertir une date Javascript au format jj/mm/yyyy
+ */
+
+function dateToString(date) {
+	   
+	var yyyy = date.getFullYear();
+	var mm = date.getMonth()+1; // getMonth() is zero-based
+	var dd  = date.getDate();
+	
+	if (mm < 10)
+	{
+		if (dd < 10)
+		{
+			return String("0" + dd + "/0" + mm + "/" + yyyy);
+		}
+		else
+		{
+			return String(dd + "/0" + mm + "/" + yyyy);
+		}
+	}
+	else
+	{
+		if (dd < 10)
+		{
+			return String("0" + dd + "/" + mm + "/" + yyyy);
+		}
+		else
+		{
+			return String(dd + "/" + mm + "/" + yyyy);
+		}
+	}
+}
+
+/**
+ * Fonction 7 : modifier l'entête du tableau (ex: Mars 2015)
+ */
+
+function monthToString(date) {
+	   
+	var yyyy = date.getFullYear();
+	var mm = date.getMonth()+1;
+	
+	var monthString;
+	
+	switch (mm) {
+		case 1:  monthString = "Janvier";      break;
+		case 2:  monthString = "Février";      break;
+		case 3:  monthString = "Mars";         break;
+		case 4:  monthString = "Avril";         break;
+		case 5:  monthString = "Mai";           break;
+		case 6:  monthString = "Juin";          break;
+		case 7:  monthString = "Juillet";          break;
+		case 8:  monthString = "Août";        break;
+		case 9:  monthString = "Septembre";     break;
+		case 10: monthString = "Octobre";       break;
+		case 11: monthString = "Novembre";      break;
+		case 12: monthString = "Décembre";      break;
+		default: monthString = "Invalid month"; break;
+	}
+	document.getElementById("moisAffiche").innerHTML = monthString + " " + yyyy;
+}

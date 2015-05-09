@@ -26,11 +26,11 @@
 			<tr id="idBidon" class="table-header2">
 				<th class="NomIntervention"></th>
 				<th class="Etat"></th>
-				<th colspan="2">flèche?</th>
+				<th colspan="2"><img id="reculer" src="images/flecheGauche.png"/></th>
 				<th colspan="2"></th>
-				<th colspan="2">2015</th>
+				<th colspan="2" id="moisAffiche">#{mbTestTravaux.moisAnnee}</th>
 				<th colspan="2"></th>
-				<th colspan="2"></th>
+				<th colspan="2"><img id="avancer" src="images/flecheDroite.png"/></th>
 			</tr>
 			
 			<tr id="idBidon" class="table-header3">
@@ -76,7 +76,7 @@
 							<img id="iconeEtat - #{intervention.idIntervention}" src=""/>
 						</td>
 						
-						<td class="tiretsBleus" style="padding-right:4px">
+						<td class="tiretsBleus">
 							<div class="rectangle" id="#{intervention.idIntervention}">
 								<span class="dateDebut">#{mbTestTravaux.shortFormater.format(
 											 intervention.dateDebutIntervention)
@@ -110,7 +110,7 @@
 								
 								<h:outputLabel value="Etat d'avancement :" />
 								
-								<h:selectOneMenu 	id="S#{intervention.idIntervention}"
+								<h:selectOneMenu 	
 													value="#{intervention.etatAvancementTravaux.idEtatAvancement}">
 									<f:selectItems	value="#{mbTestTravaux.listeEtatDisponiblesParIntervention(intervention)}"
 								   					var="var"
@@ -147,7 +147,10 @@
 								<input type="button" 
 									   value="Valider les modifications" 
 									   id="boutonValider - #{intervention.idIntervention}"
-									   style="display:none"/>				
+									   style="display:none"/>
+									   
+									   <h:commandButton action="#{mbTestTravaux.testModifier(intervention)}"
+									   					value="Valider2 les modifications" />				
 							</div>
 							
 							<div>
@@ -212,16 +215,29 @@
 	
 	jQuery('.rectangle').each(function(){
 		dessinerRectangle(this);
-		
 	});
 
-	jQuery('select').each(function(){
+	jQuery('.ligneOrange div:first-of-type select').each(function(){
 		var id = jQuery(this).closest('tr').prev().find('.rectangle').attr('id');
 		afficherMasquerEtatAvancement(id, this.value);
 	});
 	
 	jQuery('.ligneBleueIntervention').click(function(){
 		jQuery(this).closest('tr').next().fadeToggle('medium');
+	});
+
+	jQuery('#reculer').click(function(){
+		reculerQuinzeJours();
+		jQuery('.rectangle').each(function(){
+			dessinerRectangle(this);
+		});
+	});
+
+	jQuery('#avancer').click(function(){
+		avancerQuinzeJours();
+		jQuery('.rectangle').each(function(){
+			dessinerRectangle(this);
+		});
 	});
 	
   </script>

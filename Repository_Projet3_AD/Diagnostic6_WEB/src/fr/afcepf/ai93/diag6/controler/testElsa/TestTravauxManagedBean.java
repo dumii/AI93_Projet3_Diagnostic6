@@ -57,6 +57,8 @@ public class TestTravauxManagedBean {
 	private Date date1;
 	private Date date2;
 	private Date date3;
+	private String mois;
+	private String moisAnnee;
 		
 	private Intervention interventionAdd;
 	
@@ -85,9 +87,18 @@ public class TestTravauxManagedBean {
 		listeAnomalies = proxyAnomalie.recupereToutAnomalie();
 	}
 	
+	public void testModifier(Intervention item)
+	{
+		System.out.println(item.getCoutIntervention());
+	}
+	
 	private void déterminerDates() throws ParseException {
 		
 		Calendar c = Calendar.getInstance();
+		int mois = c.get(Calendar.MONTH)+1;
+		int annee = c.get(Calendar.YEAR);
+		moisAnnee = getMonth(mois)+" "+annee;
+		
 		c.setTime(new Date());
 		
 		if (c.DATE >= 15)
@@ -113,6 +124,30 @@ public class TestTravauxManagedBean {
 			date3 = c.getTime();
 		}
 	}
+	
+	public String getMonth (int month)
+	{
+		String monthString;
+		
+		switch (month) {
+			case 1:  monthString = "Janvier";      break;
+			case 2:  monthString = "Février";      break;
+			case 3:  monthString = "Mars";         break;
+			case 4:  monthString = "Avril";         break;
+			case 5:  monthString = "Mai";           break;
+			case 6:  monthString = "Juin";          break;
+			case 7:  monthString = "Juillet";          break;
+			case 8:  monthString = "Août";        break;
+			case 9:  monthString = "Septembre";     break;
+			case 10: monthString = "Octobre";       break;
+			case 11: monthString = "Novembre";      break;
+			case 12: monthString = "Décembre";      break;
+			default: monthString = "Invalid month"; break;
+		}
+		
+		return monthString;
+	}
+	    
 
 	public String localisationAnomalie(Anomalie a){
 		if(a.getPiece() != null)
@@ -428,5 +463,21 @@ public class TestTravauxManagedBean {
 
 	public void setDate3(Date date3) {
 		this.date3 = date3;
+	}
+
+	public String getMois() {
+		return mois;
+	}
+
+	public void setMois(String mois) {
+		this.mois = mois;
+	}
+
+	public String getMoisAnnee() {
+		return moisAnnee;
+	}
+
+	public void setMoisAnnee(String moisAnnee) {
+		this.moisAnnee = moisAnnee;
 	}
 }
