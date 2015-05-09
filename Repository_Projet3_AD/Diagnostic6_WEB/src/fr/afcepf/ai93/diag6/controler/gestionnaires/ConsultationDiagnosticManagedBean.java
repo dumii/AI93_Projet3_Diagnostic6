@@ -60,6 +60,7 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 
 	@PostConstructResource
 	private void init() {
+		idDiag=0;
 	}
 
 	public void recupererDiagnostic(){
@@ -253,7 +254,7 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 			System.out.println("je passe ici");
 			Utilisateur user = new Utilisateur();
 			user.setIdUtilisateur(1);
-			//proxyBusinessDiagnostic.modifierDiagnostic(d,user);
+			proxyBusinessDiagnostic.modifierDiagnostic(diagnosticSelectionne,user);
 			dmodif=new Diagnostic(); 
 			recupererDiagnostic(); 
 		}
@@ -261,6 +262,11 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 	
 	public void annulerModifAnomalie(Anomalie a){
 		amodif=new Anomalie(); 
+		recupererDiagnostic();
+	}
+	
+	public void annulerModifDiagnostic(){
+		dmodif=new Diagnostic(); 
 		recupererDiagnostic();
 	}
 	
