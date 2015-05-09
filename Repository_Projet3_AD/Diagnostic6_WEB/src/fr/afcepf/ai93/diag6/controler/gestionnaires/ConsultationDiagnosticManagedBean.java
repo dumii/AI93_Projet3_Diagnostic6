@@ -69,6 +69,7 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 		recupererIndicateurParTypeDiag(); 
 		recupererExperts(); 
 		amodif=new Anomalie(); 
+	
 //		
 //		Diagnostic dtest;
 //		dtest = new Diagnostic(); 
@@ -219,6 +220,13 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 			return "Non traité"; 
 	}
 	
+	public void changerEtatDiagnostic(){
+		if(diagnosticSelectionne.getTraite()==0)
+				diagnosticSelectionne.setTraite(1);
+		else
+			diagnosticSelectionne.setTraite(0);
+	}
+	
 	public void modificationAnomalie(Anomalie a){
 		System.out.println(amodif.getIdAnomalie() + " = " + a.getIdAnomalie());
 		if(amodif.getIdAnomalie() != a.getIdAnomalie()) {
@@ -234,8 +242,21 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 		}
 	}
 	
-	public void modificationDiagnostic(Diagnostic d,Utilisateur user){
-		proxyBusinessDiagnostic.modifierDiagnostic(d,user); 
+	public void modificationDiagnostic(){
+		
+		System.out.println("je modifie le diagnostic");
+		System.out.println(dmodif.getIdDiagnostic() + " = " + diagnosticSelectionne.getIdDiagnostic());
+		if(dmodif.getIdDiagnostic() != diagnosticSelectionne.getIdDiagnostic()) {
+			System.out.println("Diag pris en compte pour la modification : " + diagnosticSelectionne.getIdDiagnostic());
+			dmodif = diagnosticSelectionne;
+		} else {
+			System.out.println("je passe ici");
+			Utilisateur user = new Utilisateur();
+			user.setIdUtilisateur(1);
+			//proxyBusinessDiagnostic.modifierDiagnostic(d,user);
+			dmodif=new Diagnostic(); 
+			recupererDiagnostic(); 
+		}
 	}
 	
 	public void annulerModifAnomalie(Anomalie a){
@@ -267,6 +288,13 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 		return "Modifier"; 
 	}
 	
+	public String clickChangeBouton(){
+		if(diagnosticSelectionne.getIdDiagnostic() == dmodif.getIdDiagnostic()) {
+			return "Valider";
+		}
+		return "Modifier"; 
+	}
+	
 	public String suppressionAnomalie(Anomalie a){
 		System.out.println("delete debut");
 		if(verifInterventionSurAnomalie(a)==true){
@@ -292,6 +320,15 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 		else{
 			return false; 
 		}
+	}
+	
+	public boolean isSelected(){
+		if(diagnosticSelectionne != null){
+			System.out.println("il a été sélectionné");
+			return true;
+		}
+		System.out.println("pas sélectionné");
+		return false; 
 	}
 
 	////////////////////////getters et setters ////////////////////
