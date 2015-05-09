@@ -24,10 +24,15 @@ import fr.afcepf.ai93.diag6.entity.travaux.TypeIntervention;
 public class DaoHistoriqueInterventionImpl implements IDaoHistoriqueIntervention {
 
 	
+
 	private final static String MODIF_ETAT_AVANCEMENT = "Etat avancement travaux";
 	private final static String MODIF_DATE_DEBUT = "Date début intervention";
 	private final static String MODIF_DATE_FIN = "Date fin intervention";
 	private final static String MODIF_COUT_INTERVENTION = "Coût intervention";
+
+	private final static String MODIF_ARTISAN = "Artisan";
+	private final static String MODIF_TYPE_INTERVENTION = "Type intervention";
+
 	
 	@PersistenceContext(unitName="Malak_Diag_Data")
 	private EntityManager em;
@@ -61,7 +66,7 @@ public class DaoHistoriqueInterventionImpl implements IDaoHistoriqueIntervention
 		Date dateDebutInitiale = interventionInitiale.getDateDebutIntervention();
 		Date dateDebutNouvelle = intervention.getDateDebutIntervention();
 		
-		if (dateDebutInitiale != dateDebutNouvelle)
+		if (dateDebutInitiale.compareTo(dateDebutNouvelle) != 0)
 		{
 			historique.setTypeModification(MODIF_DATE_DEBUT);
 			historique.setAncienneDonnee(""+dateDebutInitiale);
@@ -72,7 +77,7 @@ public class DaoHistoriqueInterventionImpl implements IDaoHistoriqueIntervention
 		Date dateFinInitiale = interventionInitiale.getDateFinIntervention();
 		Date dateFinNouvelle = intervention.getDateFinIntervention();
 		
-		if (dateFinInitiale != dateFinNouvelle)
+		if (dateFinInitiale.compareTo(dateFinNouvelle) != 0)
 		{
 			historique.setTypeModification(MODIF_DATE_FIN);
 			historique.setAncienneDonnee(""+dateFinInitiale);
@@ -90,5 +95,30 @@ public class DaoHistoriqueInterventionImpl implements IDaoHistoriqueIntervention
 			historique.setNouvelleDonnee(""+coutNouveauIntervention);
 			em.persist(historique);
 		}
+		
+		int idArtisanInitial = interventionInitiale.getArtisan().getIdArtisan();
+		System.out.println("id artisan 1 : " + idArtisanInitial);
+		int idArtisanNouveau = intervention.getArtisan().getIdArtisan();
+		System.out.println("id artisan 2 : " + idArtisanNouveau);
+		
+		if (idArtisanInitial != idArtisanNouveau)
+		{
+			System.out.println("entrée dans le if");
+			historique.setTypeModification(MODIF_ARTISAN);
+			historique.setAncienneDonnee(""+idArtisanInitial);
+			historique.setNouvelleDonnee(""+idArtisanNouveau);
+			em.persist(historique);
+		}
+		
+		int idTypeInterventionInitial = interventionInitiale.getTypeIntervention().getIdTypeIntervention();
+		int idTypeInterventionNouveau = intervention.getTypeIntervention().getIdTypeIntervention();
+		
+		if (idTypeInterventionInitial != idTypeInterventionNouveau)
+		{
+			historique.setTypeModification(MODIF_TYPE_INTERVENTION);
+			historique.setAncienneDonnee(""+idTypeInterventionInitial);
+			historique.setNouvelleDonnee(""+idTypeInterventionNouveau);
+			em.persist(historique);
+		}		
 	}
 }

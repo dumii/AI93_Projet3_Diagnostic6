@@ -29,7 +29,13 @@ public interface IBusinessIntervention {
     //Type d'intervention
     public List<TypeIntervention> recupererTousTypesIntervention();
     
+    public TypeIntervention recupererTypeParIntervention(Intervention intervention);
+    
     //Etat d'avancement des travaux	
 	public List<EtatAvancementTravaux> recupererTousEtats();
+	
+	public List<EtatAvancementTravaux> recupererEtatDisponibles(Intervention intervention);
+	
+	public EtatAvancementTravaux recupererEtatParIntervention (Intervention intervention);
 
 }

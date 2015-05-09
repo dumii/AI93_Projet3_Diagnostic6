@@ -80,6 +80,14 @@ public class Acces implements Serializable {
 	public void setBatiment(Batiment batiment) {
 		this.batiment = batiment;
 	}
+
+	public Batiment getBatiment() {
+		return batiment;
+	}
+
+	public void setBatiment(Batiment batiment) {
+		this.batiment = batiment;
+	}
 	
 	
 	

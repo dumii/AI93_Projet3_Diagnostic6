@@ -1,6 +1,11 @@
 package fr.afcepf.ai93.diag6.controler.testElsa;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -8,10 +13,13 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import org.jboss.resteasy.util.DateUtil;
+
 import fr.afcepf.ai93.diag6.api.business.diagnostic.IBusinessAnomalie;
 import fr.afcepf.ai93.diag6.api.business.autres.IBusinessArtisan;
 import fr.afcepf.ai93.diag6.api.business.travaux.IBusinessIntervention;
 import fr.afcepf.ai93.diag6.entity.autres.Artisan;
+import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
 import fr.afcepf.ai93.diag6.entity.travaux.EtatAvancementTravaux;
 import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
@@ -22,12 +30,12 @@ import fr.afcepf.ai93.diag6.entity.travaux.TypeIntervention;
 public class TestTravauxManagedBean {
 
 	@EJB
-	private IBusinessIntervention proxyBusiness;
+	private IBusinessIntervention proxyIntervention;
 	@EJB
-	private IBusinessAnomalie proxyAnomalie;
-	
-
+	private IBusinessAnomalie proxyAnomalie;	
+	@EJB
 	private IBusinessArtisan proxyArtisan;
+	
 	private List<Intervention> travaux;
 	private List<TypeIntervention> listeTypes;
 	private List<EtatAvancementTravaux> listeEtats;
@@ -40,27 +48,166 @@ public class TestTravauxManagedBean {
 	private int idEtat;
 	private int idAnomalie;
 	private String resultat;
+	
 	private Date dateChoisie;
 	
+	private SimpleDateFormat formater;
+	private SimpleDateFormat shortFormater;
+	
+	private Date dateDuJour;
+	private Date date1;
+	private Date date2;
+	private Date date3;
+	private String mois;
+	private String moisAnnee;
+		
 	private Intervention interventionAdd;
 	
 	//Initialisation de la liste d'interventions au chargement de la page
 	@PostConstruct
-	public void init()
+	public void init() throws ParseException
 	{
-		travaux = proxyBusiness.recupereToutesIntervention();
-		listeTypes = proxyBusiness.recupererTousTypesIntervention();
+		déterminerDates();
+
+		formater = new SimpleDateFormat("dd/MM/yyyy");
+		shortFormater = new SimpleDateFormat("dd/MM");
+		
+		travaux = proxyIntervention.recupereToutesIntervention();
+		listeTypes = proxyIntervention.recupererTousTypesIntervention();
 		for (TypeIntervention t : listeTypes)
 		{
-			t.setListeInterventionTypeIntervention(proxyBusiness.recupereInterventionParType(t));
+			t.setListeInterventionTypeIntervention(proxyIntervention.recupereInterventionParType(t));
+			
+			for (Intervention i : t.getListeInterventionTypeIntervention())
+			{
+				i.setAnomalie(proxyAnomalie.recupereAnomalie(i.getAnomalie().getIdAnomalie()));
+				i.setEtatAvancementTravaux(proxyIntervention.recupererEtatParIntervention(i));
+			}
 		}
-		listeEtats = proxyBusiness.recupererTousEtats();
+		listeEtats = proxyIntervention.recupererTousEtats();
 		listeAnomalies = proxyAnomalie.recupereToutAnomalie();
 	}
 	
+	public void testModifier(Intervention item) throws ParseException
+	{
+		System.out.println("ID : " + item.getIdIntervention());
+		System.out.println("Cout : " + item.getCoutIntervention());
+		String test = formater.format(item.getDateDebutIntervention());
+		Date dateTest = formater.parse(test);
+		System.out.println("Date test : " + dateTest);
+		System.out.println("Date début : " + item.getDateDebutIntervention());
+		System.out.println("Date fin : " + item.getDateFinIntervention());
+		System.out.println("Type intervention : " + item.getTypeIntervention().getTypeIntervention());
+		System.out.println("Artisan : " + item.getArtisan().getNomArtisan());
+		System.out.println("Type etat avancement : " + item.getEtatAvancementTravaux().getIntituleEtatAvancement());
+	}
+	
+	private void déterminerDates() throws ParseException {
+		
+		Calendar c = Calendar.getInstance();
+		int mois = c.get(Calendar.MONTH)+1;
+		int annee = c.get(Calendar.YEAR);
+		moisAnnee = getMonth(mois)+" "+annee;
+		
+		c.setTime(new Date());
+		
+		if (c.DATE >= 15)
+		{
+			c.set(Calendar.DAY_OF_MONTH, 15);
+			date1 = c.getTime();
+			
+			c.set(Calendar.DAY_OF_MONTH, 7);
+			date2 = c.getTime();
+			
+			c.set(Calendar.DAY_OF_MONTH, c.getActualMaximum(Calendar.DAY_OF_MONTH));
+			date3 = c.getTime();
+		}
+		else
+		{
+			c.set(Calendar.DAY_OF_MONTH, 1);
+			date1 = c.getTime();
+			
+			c.set(Calendar.DAY_OF_MONTH, 7);
+			date2 = c.getTime();
+			
+			c.set(Calendar.DAY_OF_MONTH, 15);
+			date3 = c.getTime();
+		}
+	}
+	
+	public String getMonth (int month)
+	{
+		String monthString;
+		
+		switch (month) {
+			case 1:  monthString = "Janvier";      break;
+			case 2:  monthString = "Février";      break;
+			case 3:  monthString = "Mars";         break;
+			case 4:  monthString = "Avril";         break;
+			case 5:  monthString = "Mai";           break;
+			case 6:  monthString = "Juin";          break;
+			case 7:  monthString = "Juillet";          break;
+			case 8:  monthString = "Août";        break;
+			case 9:  monthString = "Septembre";     break;
+			case 10: monthString = "Octobre";       break;
+			case 11: monthString = "Novembre";      break;
+			case 12: monthString = "Décembre";      break;
+			default: monthString = "Invalid month"; break;
+		}
+		
+		return monthString;
+	}
+	    
+
+	public String localisationAnomalie(Anomalie a){
+		if(a.getPiece() != null)
+		{
+			return "Etage " + a.getPiece().getEtage().getNumeroEtage() + " - " + a.getPiece().getEtage().getNomEtage()+ "<br />" 
+					+ "Pièce " + a.getPiece().getNumeroPiece()+ " - " + a.getPiece().getFonctionPiece().getLibelleFonctionPiece()+ " - " + a.getPiece().getDenominationPiece(); 
+		}
+		else
+		{
+			if(a.getVoirie() !=null)
+			{
+				return a.getVoirie().getTypeVoirie().getLibelleTypeVoirie()+ "<br />" +
+						a.getVoirie().getDesignationVoirie()+ " - " + a.getVoirie().getIntituleVoirie(); 
+			}
+			else
+			{
+				if(a.getAcces() != null)
+				{
+					//return "Bâtiment "+a.getAcces().getBatiment().getNumBatiment()+ "<br />" +
+							//"Accès " + a.getAcces().getTypeAcces().getLibelleTypeAcces(); 
+					return "Accès " + a.getAcces().getTypeAcces().getLibelleTypeAcces(); 
+				}
+				else
+				{
+					if(a.getEscalier() != null){
+						//return "Bâtiment "+a.getAcces().getBatiment().getNumBatiment()+ "<br />" +
+								//"Escalier "+a.getEscalier().getDenominationEscalier();
+						return "Escalier "+a.getEscalier().getDenominationEscalier();
+					}
+					else
+					{
+						if(a.getAscenceur() !=null)
+						{
+							//return "Bâtiment "+a.getAcces().getBatiment().getNumBatiment()+ "<br />" +
+									//"Ascenceur "+a.getAscenceur().getDenominationAscenceur(); 
+							return "Ascenceur "+a.getAscenceur().getDenominationAscenceur(); 
+						}
+						else {
+							return "Localisation non définie"; 
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	
 	public String rechercheInterventionParAnomalie()
 	{
-		travaux = proxyBusiness.rechercherInterventionSurAnomalie(idAnomalie);
+		travaux = proxyIntervention.rechercherInterventionSurAnomalie(idAnomalie);
 		
 		type = new TypeIntervention();
 		type.setIdTypeIntervention(2);
@@ -68,23 +215,20 @@ public class TestTravauxManagedBean {
 		return "";
 	}
 	
-	public String avoirListeArtisans()
+	public List<Artisan> avoirListeArtisans(TypeIntervention typeInter)
 	{
-		type.setIdTypeIntervention(idType);
-		System.out.println("ManagedBean, idType : " + idType);
-		listeArtisans = proxyArtisan.recupererArtisansParTypeIntervention(type);
-		return "";
+		return proxyArtisan.recupererArtisansParTypeIntervention(typeInter);
 	}
 	
 	//Recherche d'une intervention via son id
 	public String rechercher()
 	{
-		intervention = proxyBusiness.recupereIntervention(idIntervention);		
+		intervention = proxyIntervention.recupereIntervention(idIntervention);		
 		resultat = "";
 		return "";
 	}
 	
-	public String ajouter()
+	public String ajouter() throws ParseException
 	{
 		//Comme il y a pas mal de clés étrangères dans la table intervention
 		//on est obligé de créer les objets correspondants à ces clés pour ajouter
@@ -118,7 +262,7 @@ public class TestTravauxManagedBean {
 		try
 		{
 			//On ajoute dans la base de données et on rafraîchit la liste d'interventions à l'écran
-			resultat = proxyBusiness.ajouterIntervention(interventionAdd);			
+			resultat = proxyIntervention.ajouterIntervention(interventionAdd);			
 		}
 		catch (Exception e)
 		{
@@ -132,20 +276,26 @@ public class TestTravauxManagedBean {
 		return "";
 	}
 	
-	public String modifier(Intervention intervention)
+	public String modifier(Intervention intervention) throws ParseException
 	{
-		intervention.setCoutIntervention(5555.55);
-		//proxyBusiness.modifierIntervention(intervention);
+		Utilisateur user = new Utilisateur();
+		user.setIdUtilisateur(2);
+		proxyIntervention.modifierIntervention(intervention, user);
 		init();
 		
 		return "";
 	}
 	
+	public List<EtatAvancementTravaux> listeEtatDisponiblesParIntervention(Intervention intervention)
+	{
+		return proxyIntervention.recupererEtatDisponibles(intervention);
+	}
+	
 	public IBusinessIntervention getProxyBusiness() {
-		return proxyBusiness;
+		return proxyIntervention;
 	}
 	public void setProxyBusiness(IBusinessIntervention proxyBusiness) {
-		this.proxyBusiness = proxyBusiness;
+		this.proxyIntervention = proxyBusiness;
 	}
 	public List<Intervention> getTravaux() {
 		return travaux;
@@ -268,5 +418,77 @@ public class TestTravauxManagedBean {
 
 	public void setType(TypeIntervention type) {
 		this.type = type;
+	}
+
+	public IBusinessIntervention getProxyIntervention() {
+		return proxyIntervention;
+	}
+
+	public void setProxyIntervention(IBusinessIntervention proxyIntervention) {
+		this.proxyIntervention = proxyIntervention;
+	}
+
+	public SimpleDateFormat getFormater() {
+		return formater;
+	}
+
+	public void setFormater(SimpleDateFormat formater) {
+		this.formater = formater;
+	}
+
+	public SimpleDateFormat getShortFormater() {
+		return shortFormater;
+	}
+
+	public void setShortFormater(SimpleDateFormat shortFormater) {
+		this.shortFormater = shortFormater;
+	}
+
+	public Date getDateDuJour() {
+		return dateDuJour;
+	}
+
+	public void setDateDuJour(Date dateDuJour) {
+		this.dateDuJour = dateDuJour;
+	}
+
+	public Date getDate1() {
+		return date1;
+	}
+
+	public void setDate1(Date date1) {
+		this.date1 = date1;
+	}
+
+	public Date getDate2() {
+		return date2;
+	}
+
+	public void setDate2(Date date2) {
+		this.date2 = date2;
+	}
+
+	public Date getDate3() {
+		return date3;
+	}
+
+	public void setDate3(Date date3) {
+		this.date3 = date3;
+	}
+
+	public String getMois() {
+		return mois;
+	}
+
+	public void setMois(String mois) {
+		this.mois = mois;
+	}
+
+	public String getMoisAnnee() {
+		return moisAnnee;
+	}
+
+	public void setMoisAnnee(String moisAnnee) {
+		this.moisAnnee = moisAnnee;
 	}
 }
