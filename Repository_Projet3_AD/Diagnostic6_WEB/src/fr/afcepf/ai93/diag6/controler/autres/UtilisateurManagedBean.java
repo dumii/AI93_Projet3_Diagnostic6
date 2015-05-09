@@ -19,12 +19,21 @@ public class UtilisateurManagedBean {
 
 	private String login;
 	private String motDePasse;
-	
+
+	private String message = "";
 	private Utilisateur utilisateur;
-	
+
 	@EJB
 	private IBusinessUtilisateur proxyBusinessUtilisateur;
-	
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
 	public String getLogin() {
 		return login;
 	}
@@ -58,29 +67,36 @@ public class UtilisateurManagedBean {
 		this.proxyBusinessUtilisateur = proxyBusinessUtilisateur;
 	}
 
-	public void seConnecter(){
-		
+	public String seConnecter(){
+
 		utilisateur = proxyBusinessUtilisateur.seConnecter(login, motDePasse);
-		int idProfil = utilisateur.getProfilUtilisateur().getIdProfil(); 
 		
-		if (idProfil == 5){
+
+		if (this.utilisateur != null){ 
 			
+			int idProfil = this.utilisateur.getProfilUtilisateur().getIdProfil(); 
+			
+			if (idProfil == 5){
+
 				ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 				try {
-					ec.redirect(ec.getRequestContextPath() + "/consultationDiagnostic.jsf");
+					ec.redirect(ec.getRequestContextPath() + "/TestTravaux.jsf");
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			
-		};
-		
+			}
+		}else{
+			 message = "Identifiants invalides";
+		}
+		return message;
+
 	}
-	
+
 	public void logout() throws IOException {
-	    ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-	    ec.invalidateSession();
-	    ec.redirect(ec.getRequestContextPath() + "/Accueil.jsf");
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		ec.invalidateSession();
+		ec.redirect(ec.getRequestContextPath() + "/Accueil.jsf");
 	}
-	
+
 }

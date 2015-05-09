@@ -1,158 +1,227 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
 
 <h:head>
-	<title>
-		Accueil
-	</title>
-	
+	<title>Accueil</title>
+
 	<link href="css/styleAcceuil.css" rel="stylesheet" type="text/css" />
-	
- 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css"/>
+
+	<link rel="stylesheet"
+		href="//code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css" />
 	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-	<script type="jqplot/jquery.jqplot.js"></script>
-
+	
+	<script type="jqplot/jquery.jqplot.js"/>
 	<link rel="stylesheet" type="text/css" href="css/jquery.jqplot.css" />
-	<script language="javascript" type="text/javascript" src="jqplot/excanvas.js"/>
-	<script language="javascript" type="text/javascript" src="jqplot/jquery.jqplot.min.js"></script>
-	<script type="text/javascript" src="jqplot/jquery.jqplot.min.js"></script>
-	<script type="text/javascript" src="jqplot/jqplot.pieRenderer.min.js"></script>
-	<script type="text/javascript" src="jqplot/jqplot.donutRenderer.min.js"></script>
-	<script type="text/javascript" src="jqplot/jqplot.barRenderer.min.js"></script>
-	<script type="text/javascript" src="jqplot/jqplot.categoryAxisRenderer.min.js"></script>
-	<script type="text/javascript" src="jqplot/jqplot.pointLabels.min.js"></script>
+	<script language="javascript" type="text/javascript" src="jqplot/excanvas.js" />
+	<script language="javascript" type="text/javascript" src="jqplot/jquery.jqplot.min.js"/>
+	<script type="text/javascript" src="jqplot/jquery.jqplot.min.js"/>
+	<script type="text/javascript" src="jqplot/jqplot.pieRenderer.min.js"/>
+	<script type="text/javascript" src="jqplot/jqplot.donutRenderer.min.js"/>
+	<script type="text/javascript" src="jqplot/jqplot.barRenderer.min.js"/>
+	<script type="text/javascript" src="jqplot/jqplot.categoryAxisRenderer.min.js"/>
+	<script type="text/javascript" src="jqplot/jqplot.pointLabels.min.js"/>
 
-</h:head> 
-<body> 
+</h:head>
+<body>
 	<div id="enTete">
-	
-		<img id="logoAccueil" src="images/Logo2.png" onclick="javascript:location.reload();" />
-			
-		
-		
+
+		<img id="logoAccueil" src="images/Logo2.png"
+			onclick="javascript:location.reload();" />
+
 	</div>
-	
-	
-		<div id="DivPrincipale">
-			<div id="statistiques">
+
+
+	<div id="DivPrincipale">
+		<div id="statistiques">
+			<div>
 				<div>
-					<div>
-					<h:outputLabel value="Statistique du mois de mai" id="enteteStatistiques" />
-					</div>
-				</div>
-				<div id="graphs">
-					<div id="chart1" style="height:250px;width:33%;float:left; margin-left: 1px; margin-top:4px;">
-						
-					</div>
-					<div id="chart2" style="height:250px;width:33%;float:left;margin-top:4px; ">
-						
-					</div>
-					<div id="chart3" style="height:250px;width:33%;float:left;margin-top:4px; ">
-						
-					</div>
+					<h:outputLabel value="Statistique du mois de mai"
+						id="enteteStatistiques" />
 				</div>
 			</div>
-			<div class="lesPublications">
-				<div id="publications">
-					<div>
-						<img src="images/acceuil/flechegauche2.png" alt="Publication suivante" style="float:left; width: 8%; cursor: pointer;position: absolute; z-index:1"/>
-						<img src="http://media.topito.com/wp-content/uploads/2013/04/Animal12.jpg" alt="Image publication1" style="width: 100%;position: relative; z-index:0"/>
-						<h:outputLabel value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
-					</div>
+			<div id="graphs">
+				<div id="chart1"
+					style="height: 250px; width: 33%; float: left; margin-left: 1px; margin-top: 4px;">
+
 				</div>
-				<div id="publications">
-					<div>
-						<img src="images/acceuil/flechedroite2.png" alt="Publication Précédente" style="float:right; width: 8%; cursor: pointer;position: absolute; z-index:1; margin-left: 29%"/>
-						<img src="http://flepi.net/images/animaux-etrange-560x373.jpg" alt="Publication suivante" style="width: 100%;position: relative; z-index:0" />
-						<h:outputLabel value="Sed ut perspiciatis  dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?" />
-					
-					</div>
+				<div id="chart2"
+					style="height: 250px; width: 33%; float: left; margin-top: 4px;">
+
+				</div>
+				<div id="chart3"
+					style="height: 250px; width: 33%; float: left; margin-top: 4px;">
+
 				</div>
 			</div>
-			<div id="commentaireAll">
-				<div id="commentaires">
-						<ui:repeat var="" value="">
-							<span><h:outputText value="John" /> le <h:outputText value="21/04/2015" /></span>
-							<div style="border: #BDBDBD solid 1px;border-radius: 7px; "><h:outputText value="Ce site est vraiment génial!"/></div>
-						</ui:repeat>
-				</div>
-				<div class="ajoutCommentaires">
-					<span>Commentaire de <h:inputText value="" id="commentateur"/><input type="button" value="Envoyer" style="border-radius:5px"/></span>
-						
-						<div>
-						<h:inputTextarea value="" styleClass="zoneCommentaire" />				
-						</div>
-				</div>	
-			</div>		
 		</div>
-		<div id="divMap"><img src="images/louis/IMG_20150505_173225.jpg" alt="Youpla" style="width: 100%" /></div>
+		<div class="lesPublications">
+			<div id="publications">
+				<div>
+					<img src="images/acceuil/flechegauche2.png"
+						alt="Publication suivante"
+						style="float: left; width: 8%; cursor: pointer; position: absolute; z-index: 1" />
+					<img
+						src="http://media.topito.com/wp-content/uploads/2013/04/Animal12.jpg"
+						alt="Image publication1"
+						style="width: 100%; position: relative; z-index: 0" />
+					<h:outputLabel
+						value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
+				</div>
+			</div>
+			<div id="publications">
+				<div>
+					<img src="images/acceuil/flechedroite2.png"
+						alt="Publication Précédente"
+						style="float: right; width: 8%; cursor: pointer; position: absolute; z-index: 1; margin-left: 29%" />
+					<img src="http://flepi.net/images/animaux-etrange-560x373.jpg"
+						alt="Publication suivante"
+						style="width: 100%; position: relative; z-index: 0" />
+					<h:outputLabel
+						value="Sed ut perspiciatis  dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?" />
+
+				</div>
+			</div>
+		</div>
+		<div id="commentaireAll">
+			<div id="commentaires">
+				<ui:repeat var="" value="">
+					<span><h:outputText value="John" /> le <h:outputText
+							value="21/04/2015" /></span>
+					<div style="border: #BDBDBD solid 1px; border-radius: 7px;">
+						<h:outputText value="Ce site est vraiment génial!" />
+					</div>
+				</ui:repeat>
+			</div>
+			<div class="ajoutCommentaires">
+				<span>Commentaire de <h:inputText value="" id="commentateur" /><input
+					type="button" value="Envoyer" style="border-radius: 5px" /></span>
+
+				<div>
+					<h:inputTextarea value="" styleClass="zoneCommentaire" />
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+	<div id="divMap"></div>
 	<div id="login">
-		<input type="button" value="Espace professionel" class="boutonOuvertureLogin" onclick="ouvertureLogin('login2')"/>
-		
-		<div id="login2" style="display: none;"> 
-		<f:view>
-			<h:form>
-				<h:outputText rendered="#{mbUtilisateur.utilisateur != null}" value="#{mbUtilisateur.utilisateur.nomUtilisateur}" />
-				<div id="champIdentifiant"><h:outputLabel value="Identifiant:"/> </div>
-				<div id="champIdentifiant"><h:inputText value="#{mbUtilisateur.login}" id="identifiant" /></div>
-				<div id="champIdentifiant"><h:outputLabel value="Mot de passe:" /></div>
-				<div id="champIdentifiant"><h:inputSecret value="#{mbUtilisateur.motDePasse}" id="motDePasse" /><h:outputLabel value="Identifiants invalides" styleClass="errorLogin"/></div>
-				<div id="champIdentifiant"><h:commandButton  value="Connexion" styleClass="boutonConnexion"  action="#{mbUtilisateur.seConnecter()}" type="submit" /></div>
-				<div id="champIdentifiant"><h:commandButton  value="Deconnexion" styleClass="boutonConnexion" action="#{mbUtilisateur.logout()}" /></div>
-			</h:form>
-		</f:view>
+		<input type="button" value="Espace professionel"
+			class="boutonOuvertureLogin" onclick="ouvertureLogin('login2')" />
+
+		<div id="login2" style="display: none;">
+			<f:view>
+				<h:form>
+					<div id="champIdentifiant">
+						<h:outputText rendered="#{mbUtilisateur.utilisateur != null}"
+							value="#{mbUtilisateur.utilisateur.nomUtilisateur}" />
+					</div>
+					<div id="champIdentifiant">
+						<h:outputLabel value="Identifiant:" />
+					</div>
+					<div id="champIdentifiant">
+						<h:inputText value="#{mbUtilisateur.login}" id="identifiant" />
+					</div>
+					<div id="champIdentifiant">
+						<h:outputLabel value="Mot de passe:" />
+					</div>
+					<div id="champIdentifiant">
+						<h:inputSecret value="#{mbUtilisateur.motDePasse}" id="motDePasse" />
+						<h:outputLabel value="#{mbUtilisateur.message}"
+							styleClass="errorLogin" />
+					</div>
+					<div id="champIdentifiant">
+						<h:commandButton value="Connexion" styleClass="boutonConnexion"
+							action="#{mbUtilisateur.seConnecter()}" type="submit" />
+					</div>
+					<div id="champIdentifiant">
+						<h:commandButton value="Deconnexion" styleClass="boutonConnexion"
+							action="#{mbUtilisateur.logout()}" />
+					</div>
+				</h:form>
+			</f:view>
 		</div>
 	</div>
-	
+
 	<div id="BandeauRecherche">
-		
-		
+
+
 		<div>
-		<h:form>
+
 			<div id="divEnteteRecherche">
 				<h:outputText value="Recherche" />
 			</div>
-			<div >
+			<div>
 				<div id="champDeRecherche">
 					<h:form>
 						<f:view>
-					<div id="champsDeRecherche"><h:outputLabel value="Type d'ERP:" /></div>
-					<div id="champsDeRecherche"><h:selectOneMenu  value="#{mbPublic.idErpSelect}" id="listBox1" style="width:75%" >
-					<f:selectItems value="#{mbPublic.listeTypeErp}" var="listeErp"
-						itemLabel="#{listeErp.typeErpCourt}"
-						itemValue="#{listeErp.idTypeErp}"
-						></f:selectItems>
-					</h:selectOneMenu></div>
-					<div id="champsDeRecherche"><h:outputLabel value="Type de diagnostic recherché:" /></div>
-					<div id="champsDeRecherche"><h:selectOneMenu  value="#{mbPublic.idDiagSelect}" id="listBox2" style="width:75%; margin-bottom: 2px" >
-					<f:selectItems value="#{mbPublic.listeTypeDiagnostic}" var="listeDiag"
-						itemLabel="#{listeDiag.nomType}"
-						itemValue="#{listeDiag.idTypeDiagnostic}"
-						></f:selectItems>
-					</h:selectOneMenu>
-					</div>
-					<div id="champsDeRecherche">
-						<h:selectBooleanCheckbox  value=""/><h:outputText value="Travaux en cours" />
-					</div >
+							<div id="champsDeRecherche">
+								<h:outputLabel value="Type d'ERP:" />
+							</div>
+							<div id="champsDeRecherche">
+								<h:selectOneMenu value="#{mbPublic.idTypeErpSelect}"
+									id="listBox1" style="width:75%">
+									<f:selectItem itemLabel="Sélectionnez ..." />
+									<f:selectItems value="#{mbPublic.listeTypeErp}" var="listeErp2"
+										itemLabel="#{listeErp2.typeErpCourt}"
+										itemValue="#{listeErp2.idTypeErp}">
+									</f:selectItems>
+									<a4j:ajax event="change"
+										listener="#{mbPublic.retourListeTypeErp()}" render="listBox1" />
+								</h:selectOneMenu>
+							</div>
+							<div id="champsDeRecherche">
+								<h:outputLabel value="Type de diagnostic recherché:" />
+							</div>
+							<div id="champsDeRecherche">
+								<h:selectOneMenu value="#{mbPublic.idTypeDiagSelect}"
+									id="listBox2" style="width:75%; margin-bottom: 2px">
+									<f:selectItem itemLabel="Sélectionnez ..." />
+									<f:selectItems value="#{mbPublic.listeTypeDiagnostic}"
+										var="listeDiag" itemLabel="#{listeDiag.nomType}"
+										itemValue="#{listeDiag.idTypeDiagnostic}">
+									</f:selectItems>
+									<a4j:ajax event="change"
+										listener="#{mbPublic.retourListeTypeDiag()}" render="listBox2" />
+
+								</h:selectOneMenu>
+							</div>
+							<div id="champsDeRecherche">
+								<h:selectBooleanCheckbox value="#{mbPublic.booleenTravaux}" />
+								<h:outputText value="Travaux en cours" />
+							</div>
+							<div id="resultatsDeRecherche">
+
+								<a4j:commandButton event="click" listener="#{mbPublic.recup2()}"
+									render="resultatErp" value="Trouver" />
+
+								<h:selectOneMenu value="#{mbPublic.idTypeErpRecherche}"
+									id="resultatErp">
+									<f:selectItems value="#{mbPublic.recup2()}" var="listeErp3"
+										itemLabel="#{listeErp3.nomErp}" itemValue="#{listeErp3.idErp}"></f:selectItems>
+
+								</h:selectOneMenu>
+							</div>
 						</f:view>
 					</h:form>
 				</div>
-				<div id="resultatsDeRecherche">
-					<input type="button" value="Trouver" class="boutonTrouver" onclick="changementDivPrincipale('divMap','DivPrincipale')"/>		
-				</div>
-			
+
+
 			</div>
-		</h:form>
+
 		</div>
-		
-	
-</div>
-	
-<script>
+
+
+	</div>
+
+	<script>
+jQuery.noConflict();
 $(function(){
 	   $(window).scroll(function () {//Au scroll dans la fenetre on déclenche la fonction
 	      if ($(this).scrollTop() > 0) { //si on a défilé de plus de 150px du haut vers le bas
@@ -162,7 +231,9 @@ $(function(){
 	      }
 	   });
 	 });
-
+</script>
+<script>
+jQuery.noConflict();
 $(document).ready(function(){ 
 	  var data = [
 	    ['Terminées', #{mbPublic.nbInterventionTerminees}],['Planifiées', #{mbPublic.nbInterventionPlanifiees}], ['En cours', #{mbPublic.nbInterventionEnCours}], 
@@ -225,14 +296,12 @@ $(document).ready(function(){
             pointLabels: { show: true },
             
         },
-        axes: {
-        	
+        axes: {    	
             xaxis: {
             	tickOptions: {textColor: '#394241'},
                 renderer: $.jqplot.CategoryAxisRenderer,
                 ticks: ticks
-            }
-        	
+            }  	
         }
     });
  
@@ -250,7 +319,8 @@ $(document).ready(function(){
 });
 
 </script>
-<script>
+	<script>
+	jQuery.noConflict();
 function ouvertureLogin(id)
 {
   if (document.getElementById(id).style.display == 'none') {
@@ -261,15 +331,12 @@ function ouvertureLogin(id)
   }
 }
 
-
 function changementDivPrincipale(div1,div2)
 {
    d1 = document.getElementById(div1);
    d2 = document.getElementById(div2);
-   if( d2.style.display == "none" )
-   {
-      d1.style.display = "none";
-      d2.style.display = "block";
+   if( d1.style.display == "none" )
+   {  
    }
    else
    {
@@ -278,10 +345,9 @@ function changementDivPrincipale(div1,div2)
    }
 }
 
-
-
 </script>
-<script>
+	<script>
+	jQuery.noConflict();
 function connection(idProfil)
 {
 		if(idProfil == 5){
@@ -289,9 +355,6 @@ function connection(idProfil)
 		location.href="http://localhost:9090/Diagnostic6_WEB/consultationDiagnostic.jsf"
 			return false;
 		}
-
-			
-		
 }
 </script>
 </body>

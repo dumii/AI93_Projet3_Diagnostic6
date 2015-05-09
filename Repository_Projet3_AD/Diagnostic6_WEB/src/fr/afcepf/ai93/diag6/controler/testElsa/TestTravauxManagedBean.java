@@ -6,12 +6,15 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import fr.afcepf.ai93.diag6.api.business.diagnostic.IBusinessAnomalie;
 import fr.afcepf.ai93.diag6.api.business.autres.IBusinessArtisan;
 import fr.afcepf.ai93.diag6.api.business.travaux.IBusinessIntervention;
+import fr.afcepf.ai93.diag6.controler.autres.UtilisateurManagedBean;
 import fr.afcepf.ai93.diag6.entity.autres.Artisan;
+import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
 import fr.afcepf.ai93.diag6.entity.travaux.EtatAvancementTravaux;
 import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
@@ -26,6 +29,11 @@ public class TestTravauxManagedBean {
 	@EJB
 	private IBusinessAnomalie proxyAnomalie;
 	
+	//récupération de la valeur "login" de la session utilisateur 
+	@ManagedProperty(value="#{mbUtilisateur}")
+	private UtilisateurManagedBean mbUtilisateur;
+
+	private String login;
 
 	private IBusinessArtisan proxyArtisan;
 	private List<Intervention> travaux;
@@ -42,12 +50,15 @@ public class TestTravauxManagedBean {
 	private String resultat;
 	private Date dateChoisie;
 	
+
 	private Intervention interventionAdd;
 	
 	//Initialisation de la liste d'interventions au chargement de la page
 	@PostConstruct
 	public void init()
 	{
+		login = mbUtilisateur.getUtilisateur().getLoginUtilisateur();
+		
 		travaux = proxyBusiness.recupereToutesIntervention();
 		listeTypes = proxyBusiness.recupererTousTypesIntervention();
 		for (TypeIntervention t : listeTypes)
@@ -185,6 +196,21 @@ public class TestTravauxManagedBean {
 	public Date getDateChoisie() {
 		return dateChoisie;
 	}
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public UtilisateurManagedBean getMbUtilisateur() {
+		return mbUtilisateur;
+	}
+
+	public void setMbUtilisateur(UtilisateurManagedBean mbUtilisateur) {
+		this.mbUtilisateur = mbUtilisateur;
+	}
 
 	public void setDateChoisie(Date dateChoisie) {
 		this.dateChoisie = dateChoisie;
@@ -269,4 +295,6 @@ public class TestTravauxManagedBean {
 	public void setType(TypeIntervention type) {
 		this.type = type;
 	}
+	
+
 }
