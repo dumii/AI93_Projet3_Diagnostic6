@@ -11,7 +11,6 @@
 	<link rel="stylesheet"
 		href="//code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css" />
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-	
 </h:head>
 
 <ui:composition template="/WEB-INF/Template2Diagnostic6.xhtml">
@@ -29,8 +28,9 @@
 					value="Recuperer diagnostic"
 					action="#{mbDonneesGenerales.recupererDiagnostic()}" 
 					render="lblReponseAjax" />
-		
-			<h:panelGroup id="lblReponseAjax" layout="block">
+		</h:form>
+		<h:form>
+			<h:panelGroup id="lblReponseAjax" layout="block" >
 		
 			<div class="mini-barreEtat">
 				<h2>#{mbDonneesGenerales.diagnosticSelectionne.intituleDiagnostic}
@@ -66,15 +66,21 @@
 					<div id="ErpDiagTitre" >
 						<h3>
 							<span>Informations générales</span>
-						<div class="mini-barreEtat-boutons">
-						<a href=""><img class="boutons-mini-barreEtat"
-						id="boutonModifier" name="boutonModifier"
-						src="images/consultationDiagnostic/DiagnosticBoutonModifier.26.26.png" /></a>
-						</div>
+						<h:panelGroup style="float:right; margin-top: 5px;" >
+						 <f:attribute name="rendered" value="#{mbDonneesGenerales.isSelected()}"></f:attribute>
+						
+                            	<h:commandButton action="#{mbDonneesGenerales.modificationDiagnostic()}" value="#{mbDonneesGenerales.clickChangeBouton()}" id="modifAnom"> 
+                            	</h:commandButton>
+                            	<h:commandButton action="#{mbDonneesGenerales.annulerModifDiagnostic()}"  value="Annuler" id="annulModif" oncomplete="ouverture()">
+                            		<f:attribute name="disabled" value="#{mbDonneesGenerales.isEnableDiag()}"></f:attribute>
+                            	</h:commandButton>
+                         
+                        </h:panelGroup>
 						</h3>
 					</div>
 					<div class="tableErpDiagGeneral">
 					<rich:panel style="width:99.5%; background-color:#f7f7f7;border:none; font-weight: bold;" id="panelInfosGen" >
+                        <f:attribute name="rendered" value="#{mbDonneesGenerales.isSelected()}"></f:attribute>
                         <h:panelGrid columns="2" style="float:left; width:50%;" >
                         	<h:outputText value="ERP concerné : " />
                         	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.nomErp}" />
@@ -97,19 +103,35 @@
                         </h:panelGrid>
                         <h:panelGrid columns="2">
                         	<h:outputText value="Etat diagnostic : " />
-                        	<h:outputText value="#{mbDonneesGenerales.traiteDiagnostic()}"/>
+							<h:selectOneMenu value="#{mbDonneesGenerales.diagnosticSelectionne.traite}">
+                            		<f:selectItem itemLabel="Traité" itemValue="1"/>
+                            		<f:selectItem itemLabel="Non traité" itemValue="0"/>
+                            		<f:attribute name="disabled" value="#{mbDonneesGenerales.isEnableDiag()}"></f:attribute>
+                            </h:selectOneMenu>
                         	<h:outputText value="Date de réalisation : " />
-                        	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.dateRealisationDiagnostic.toLocaleString()}"/>
+                        	<rich:calendar value="#{mbDonneesGenerales.diagnosticSelectionne.dateRealisationDiagnostic}"
+                        		locale="#{calendarBean.locale}"
+                       			datePattern="#{calendarBean.pattern}"
+                        		showApplyButton="#{calendarBean.showApply}" cellWidth="24px" cellHeight="22px" style="width:200px">
+                        		<f:attribute name="disabled" value="#{mbDonneesGenerales.isEnableDiag()}"></f:attribute>
+                        		</rich:calendar>
                         	<h:outputText value="Date d'enregistrement : " />
                         	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.dateSaisieDiagnostic.toLocaleString()}" />
-                        	<h:outputText value="Expert : " />
-                        	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.prenomExpert} #{mbDonneesGenerales.diagnosticSelectionne.expert.nomExpert}"/>
-                        	<h:outputText value="Coordonées : " />
+							<h:outputText value="Expert : " />
+							<h:selectOneMenu value="#{mbDonneesGenerales.diagnosticSelectionne.expert.idExpert}">
+                            		<f:selectItems value="#{mbDonneesGenerales.listeExperts}" var = "ind"
+                            						itemLabel="#{ind.prenomExpert} #{ind.nomExpert}"
+                            						itemValue="#{ind.idExpert}" ></f:selectItems>
+                            		<f:attribute name="disabled" value="#{mbDonneesGenerales.isEnableDiag()}"></f:attribute>
+                            </h:selectOneMenu>
+                            
+                        	<h:outputText value="Coordonées : "  />
                         	<h:outputText value="Tél : #{mbDonneesGenerales.diagnosticSelectionne.expert.telExpert}
                         	&lt;br /&gt; Mail :  #{mbDonneesGenerales.diagnosticSelectionne.expert.mailExpert}
                         	&lt;br /&gt;  #{mbDonneesGenerales.diagnosticSelectionne.expert.numVoieExpert} #{mbDonneesGenerales.diagnosticSelectionne.expert.nomVoieExpert}
                         	&lt;br /&gt;  #{mbDonneesGenerales.diagnosticSelectionne.expert.localisation.codePostal} #{mbDonneesGenerales.diagnosticSelectionne.expert.localisation.ville}"
                         	escape="false"/>
+
                         </h:panelGrid>
                     </rich:panel>
                     
@@ -200,7 +222,7 @@
                             	<h:outputText value="Localisation : " style="font-weight:bold" />
                             	<h:outputText value="#{mbDonneesGenerales.localisationAnomalie(o)}" />
                             	<h:outputText value="Niveau indicateur : " style="font-weight:bold" />
-                            	<h:selectOneMenu value="#{o.indicateur.idIndicateur}">
+                            	<h:selectOneMenu value="#{o.indicateur.idIndicateur}" >
                             		<f:selectItems value="#{mbDonneesGenerales.listeIndicateursParDiagnostic}" var = "ind"
                             						itemLabel="#{ind.libelleIndicateur}"
                             						itemValue="#{ind.idIndicateur}" ></f:selectItems>
@@ -245,8 +267,11 @@
 		$( "#buttShowEDD" ).click(function() {
 			$( "#ErpDiagDetaille" ).toggle( "blind", 500 );
 		});
- 
-	
+
+
+	function ouverture(){
+		$( ".tableErpDiagGeneral" ).toggle();
+		}
 
   function notification() 
   { 
