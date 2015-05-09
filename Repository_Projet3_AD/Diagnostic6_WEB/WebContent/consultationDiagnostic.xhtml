@@ -21,14 +21,17 @@
 	</ui:define>
 	<ui:define name="content">
 <f:view>
-		<h:form>
+		
 		<div id="content">
+			<h:form>
 		<h:inputText value="#{mbDonneesGenerales.idDiag}" />
 				<a4j:commandLink 
 					value="Recuperer diagnostic"
 					action="#{mbDonneesGenerales.recupererDiagnostic()}" 
 					render="lblReponseAjax" />
+		
 			<h:panelGroup id="lblReponseAjax" layout="block">
+		
 			<div class="mini-barreEtat">
 				<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.intituleDiagnostic}"/>
 				<div id="mini-barreEtat-boutons">
@@ -61,72 +64,37 @@
 						</h3>
 					</div>
 					<div class="tableErpDiagGeneral">
-						<table>
-							<tr>
-								<th class="ErpGeneral" width="180px" style="text-align: right">ERPconcerné
-									:  </th>
-								<th id="ErpDiag" class="ErpGeneral" width="180px"
-									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.nomErp}" /></th>
-								<th class="ErpGeneral" width="230px" style="text-align: right">Date
-									de réalisation du diagnostic :</th>
-								<th id="DateErpDiag" class="ErpGeneral" width="180px"
-									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.dateRealisationDiagnostic.toLocaleString()}"/></th>
-							</tr>
-							<tr>
-								<th class="ErpGeneral" width="180px" style="text-align: right">Catégorie
-									:</th>
-								<th id="CategErpDiag" class="ErpGeneral" width="180px"
-									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.categorieErp.denominationCategorieErp}" /></th>
-								<th class="ErpGeneral" width="230px" style="text-align: right">Date
-									d'enregistrement diagnostic :</th>
-								<th id="DateErpDiag" class="ErpGeneral" width="180px"
-									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.dateSaisieDiagnostic.toLocaleString()}" /></th>
-
-							</tr>
-							<tr>
-								<th class="ErpGeneral" width="180px" style="text-align: right">Fonction
-									:</th>
-								<th id="FoncErpDiag" class="ErpGeneral" width="180px"
-									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.typeErp.denominationTypeErp} #{mbDonneesGenerales.diagnosticSelectionne.erp.typeErp.typeErp}" /></th>
-								<th class="ErpGeneral" width="230px" style="text-align: right">Expert
-									:</th>
-								<th id="expertDiag" class="ErpGeneral" width="180px"
-									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.prenomExpert} #{mbDonneesGenerales.diagnosticSelectionne.expert.nomExpert}"/></th>
-							</tr>
-							<tr>
-								<th class="ErpGeneral" width="180px" style="text-align: right">Adresse
-									:</th>
-								<th id="AdressErpDiag" class="ErpGeneral" width="180px"
-									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.numVoieErp} #{mbDonneesGenerales.diagnosticSelectionne.erp.nomVoieErp}"/></th>
-								<th class="ErpGeneral" width="230px" style="text-align: right">Coordonées
-									:</th>
-								<th id="telExpDiag" class="ErpGeneral" width="180px"
-									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.telExpert}"/></th>
-
-							</tr>
-							<tr>
-								<th class="ErpGeneral" width="180px" style="text-align: right"></th>
-								<th id="cpVillExpDiag" class="ErpGeneral" width="180px"
-									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.localisation.codePostal} #{mbDonneesGenerales.diagnosticSelectionne.erp.localisation.ville}" /></th>
-								<th class="ErpGeneral" width="230px" style="text-align: right"></th>
-								<th id="emailExpErpDiag" class="ErpGeneral" width="180px"
-									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.mailExpert}"/></th>
-							</tr>
-							<tr>
-								<th class="accordErp" width="180px" style="text-align: right"></th>
-								<th class="accordErp" width="180px" style="text-align: right"></th>
-								<th class="ErpGeneral" width="230px" style="text-align: right"></th>
-								<th id="adrExpDiag" class="ErpGeneral" width="180px"
-									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.numVoieExpert} #{mbDonneesGenerales.diagnosticSelectionne.expert.nomVoieExpert}"/></th>
-							</tr>
-							<tr>
-								<th class="ErpGeneral" width="180px" style="text-align: right"></th>
-								<th class="ErpGeneral" width="180px" style="text-align: right"></th>
-								<th class="ErpGeneral" width="230px" style="text-align: right"></th>
-								<th id="cpVillExpDiag" class="ErpGeneral" width="180px"
-									style="text-align: right"><h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.localisation.codePostal} #{mbDonneesGenerales.diagnosticSelectionne.expert.localisation.ville}"/></th>
-							</tr>
-						</table>
+					<rich:panel style="width:99.5%; background-color:#f7f7f7;border:none;">
+                        <h:panelGrid columns="2" style="float:left;" >
+                        	<h:outputText value="ERP concerné : " />
+                        	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.nomErp}" />
+                        	<h:outputText value="Catégorie : " />
+                        	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.categorieErp.denominationCategorieErp}" />
+                        	<h:outputText value="Fonction : " />
+                        	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.typeErp.denominationTypeErp} #{mbDonneesGenerales.diagnosticSelectionne.erp.typeErp.typeErp}" />	
+                        	<h:outputText value="Adresse : " />
+                        	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.numVoieErp} #{mbDonneesGenerales.diagnosticSelectionne.erp.nomVoieErp}"/>
+                        	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.localisation.codePostal} #{mbDonneesGenerales.diagnosticSelectionne.erp.localisation.ville}" />
+                        	<h:outputText value="Propriétaire ? " />
+                        	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.localisation.codePostal} #{mbDonneesGenerales.diagnosticSelectionne.erp.localisation.ville}" />
+                        </h:panelGrid>
+                        <h:panelGrid columns="2">
+                        	<h:outputText value="Etat diagnostic : " />
+                        	<h:outputText value="#{mbDonneesGenerales.traiteDiagnostic()}"/>
+                        	<h:outputText value="Date de réalisation du diagnostic : " />
+                        	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.dateRealisationDiagnostic.toLocaleString()}"/>
+                        	<h:outputText value="Date d'enregistrement diagnostic : " />
+                        	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.dateSaisieDiagnostic.toLocaleString()}" />
+                        	<h:outputText value="Expert : " />
+                        	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.prenomExpert} #{mbDonneesGenerales.diagnosticSelectionne.expert.nomExpert}"/>
+                        	<h:outputText value="Coordonées : " />
+                        	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.telExpert}"/>
+                        	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.mailExpert}"/>
+                        	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.numVoieExpert} #{mbDonneesGenerales.diagnosticSelectionne.expert.nomVoieExpert}"/>
+                        	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.expert.localisation.codePostal} #{mbDonneesGenerales.diagnosticSelectionne.expert.localisation.ville}"/>
+                        </h:panelGrid>
+                    </rich:panel>
+		
 					</div>
 				</div>
 				<div id="infoDetaille">
@@ -213,39 +181,59 @@
 				</div>
 				<div id="anomaliesFiche">
        									<h:panelGrid columns="1">
-           			 	<a4j:outputPanel id="panel2" layout="block">
-               			<a4j:repeat value="#{mbDonneesGenerales.diagnosticSelectionne.listeAnomaliesDiagnostic}" var="o" rows="20" id="repeatAnomalies">
-                    	<rich:panel style="float:left; width:800px; padding:1px; background-color:#f7f7f7; border-display:none;  ">
-                       
+           			 	<h:panelGroup id="panel2" layout="block">
+               			
+               			<ui:repeat value="#{mbDonneesGenerales.diagnosticSelectionne.listeAnomaliesDiagnostic}" var="o" rows="20" id="repeatAnomalies">
+                    	<rich:panel style="float:left; width:97.5%; background-color:#f7f7f7; border-display:none;  ">
+                       		
                         	<h:panelGrid columns="2">
-                            	<h:outputText value="Anomalie n° : " style="font-weight:bold" />
-                           		<h:outputText value="#{o.idAnomalie}" style="font-weight:bold" />
+                        		<h:outputText value="Anomalie n° : " style="font-weight:bold" /> 
+                            	<h:outputText value="#{o.idAnomalie}" style="font-weight:bold; border:none; font-color:black" id="idAnom"/>
+                           		<h:outputText value="Etat anomalie : " style="font-weight:bold "  />
+                           		<h:outputText value="#{mbDonneesGenerales.traiteAnomalie(o)}" disabled="#{mbDonneesGenerales.isEnable(o)}" />
                             	<h:outputText value="Niveau indicateur : " style="font-weight:bold" />
-                            	<h:outputText value="#{o.indicateur.libelleIndicateur}" />
-                            	<h:outputText value="Bâtiment : " style="font-weight:bold" />
-                            	<h:outputText value="" id="test"  /> 
+                            	<h:selectOneMenu value="#{o.indicateur.idIndicateur}">
+                            		<f:selectItems value="#{mbDonneesGenerales.listeIndicateursParDiagnostic}" var = "ind"
+                            						itemLabel="#{ind.libelleIndicateur}"
+                            						itemValue="#{ind.idIndicateur}" noSelectionValue="#{o.indicateur.idIndicateur}" ></f:selectItems>
+                            		<f:attribute name="disabled" value="#{mbDonneesGenerales.isEnable(o)}"></f:attribute>
+                            	</h:selectOneMenu>
                             	<h:outputText value="Localisation : " style="font-weight:bold" />
-                            	<h:outputText value="#{mbDonneesGenerales.localisationAnomalie()}" />
+                            	<h:outputText value="#{mbDonneesGenerales.localisationAnomalie(o)}" />
                             	<h:outputText value="Description : " style="font-weight:bold" />
-                            	<h:outputText value="#{o.descriptionAnomalie}" />
+                            	<h:inputText value="#{o.descriptionAnomalie}" class="inputTextAnomalieDisabled">
+                            		<f:attribute name="disabled" value="#{mbDonneesGenerales.isEnable(o)}"></f:attribute>
+                            	</h:inputText>
                             	<h:outputText value="Preconisation :" style="font-weight:bold" />
-                            	<h:outputText value="#{o.preconisationAnomalie}" />
+                            	<h:inputText value="#{o.preconisationAnomalie}" class="inputTextAnomalieDisabled">
+                            		<f:attribute name="disabled" value="#{mbDonneesGenerales.isEnable(o)}"></f:attribute>
+                            	</h:inputText>
                             	<h:outputText value="Coût estimé :" style="font-weight:bold" />
-                            	<h:outputText value="#{o.coutEstimeAnomalie}" />
+                            	<h:inputText value="#{o.coutEstimeAnomalie}"   class="inputTextAnomalieDisabled">
+                            		<f:attribute name="disabled" value="#{mbDonneesGenerales.isEnable(o)}"></f:attribute>
+                            	</h:inputText>
                             	<h:outputText value="Intervention :" style="font-weight:bold" />
-                            	<h:outputText value="" />
+                            	<h:outputText value="#{mbDonneesGenerales.recupererEtatIntervention(o)}" disabled="true" class="inputTextAnomalieDisabled"/>
+                            	<h:commandButton action="#{mbDonneesGenerales.modificationAnomalie(o)}" value="#{mbDonneesGenerales.clickChangeBouton(o)}" id="modifAnom" > 
+                            	</h:commandButton>
+                            	<h:commandButton action="#{mbDonneesGenerales.annulerModifAnomalie(o)}"  value="Annuler modification" id="annulModif" >
+                            		<f:attribute name="disabled" value="#{mbDonneesGenerales.isEnable(o)}"></f:attribute>
+                            	</h:commandButton>
+                            	<h:commandButton action="#{mbDonneesGenerales.suppressionAnomalie(o)}" value="Suppression anomalie" />
                         	</h:panelGrid>
+                        	
                     	</rich:panel>
-                		</a4j:repeat>
-           				</a4j:outputPanel>
+                		</ui:repeat>
+                		
+           				</h:panelGroup>
        				 	</h:panelGrid>
 				</div>
 			</div>		
 			</h:panelGroup>	
+			</h:form>
 		</div>
-		</h:form>
 
-		<script>
+<script>
 		jQuery.noConflict();
 		
 		$( "#radio" ).buttonset();
@@ -254,7 +242,9 @@
 
 		$( "#buttShowEDD" ).click(function() {
 			$( "#ErpDiagDetaille" ).toggle( "blind", 500 );
-	});
+		});
+ 
+	
 
   function notification() 
   { 

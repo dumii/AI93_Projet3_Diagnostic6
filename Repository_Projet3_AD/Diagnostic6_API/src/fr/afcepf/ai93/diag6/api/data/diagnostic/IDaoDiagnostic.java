@@ -2,6 +2,7 @@ package fr.afcepf.ai93.diag6.api.data.diagnostic;
 
 import java.util.List;
 
+import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
 import fr.afcepf.ai93.diag6.entity.erp.Erp;
 
@@ -12,7 +13,7 @@ public interface IDaoDiagnostic {
 
     public void ajouterDiagnostic(Diagnostic diagnostic);
 
-    public void modifierDiagnostic(Diagnostic diagnostic);
+    public void modifierDiagnostic(Diagnostic diagnostic, Utilisateur user);
 
     public void notifierDiagnostic();
 

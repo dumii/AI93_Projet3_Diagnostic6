@@ -41,7 +41,8 @@ public class DaoAnomalieImpl implements IDaoAnomalie{
 
 	@Override
 	public String supprimerAnomalie(Anomalie anomalie) {
-		em.remove(anomalie);
+		Anomalie a = em.getReference(Anomalie.class, anomalie.getIdAnomalie()); 
+		em.remove(a);
 		return "L'anomalie a été supprimée";
 	}
 

@@ -16,7 +16,7 @@ public interface IBusinessAnomalie {
 
     public String modifierAnomalie(Anomalie anomalie, Utilisateur user);
 
-    public String supprimerAnomalie(Anomalie anomalie);
+    public String supprimerAnomalie(Anomalie anomalie, Utilisateur user);
     
     public Anomalie recupereAnomalie(int idAnomalie);
 
