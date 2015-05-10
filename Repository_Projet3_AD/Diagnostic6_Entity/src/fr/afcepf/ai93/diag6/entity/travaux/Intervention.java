@@ -60,7 +60,6 @@ public class Intervention implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="id_artisan")
 	private Artisan artisan;
-
 	
 	public Integer getIdIntervention() {
 		return idIntervention;
@@ -180,7 +179,5 @@ public class Intervention implements Serializable {
 		this.etatAvancementTravaux = etatAvancementTravaux;
 		this.typeIntervention = typeIntervention;
 		this.artisan = artisan;
-	}
-	
-	
+	}	
 }

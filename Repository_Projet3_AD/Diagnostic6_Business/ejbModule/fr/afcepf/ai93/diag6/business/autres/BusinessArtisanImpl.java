@@ -12,6 +12,7 @@ import fr.afcepf.ai93.diag6.api.data.autres.IDaoTypeArtisan;
 import fr.afcepf.ai93.diag6.api.data.travaux.IDaoIntervention;
 import fr.afcepf.ai93.diag6.entity.autres.Artisan;
 import fr.afcepf.ai93.diag6.entity.autres.TypeArtisan;
+import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
 import fr.afcepf.ai93.diag6.entity.travaux.TypeIntervention;
 
 @Stateless
@@ -46,6 +47,12 @@ public class BusinessArtisanImpl implements IBusinessArtisan {
 	@Override
 	public List<Artisan> recupererArtisansParTypeIntervention(TypeIntervention type) {
 		return proxyArtisan.recupererArtisansParTypeIntervention(type);
+	}
+
+	@Override
+	public Artisan recupererArtisansParIntervention(
+			Intervention intervention) {
+		return proxyArtisan.recupererArtisansParIntervention(intervention);
 	}
 
 }

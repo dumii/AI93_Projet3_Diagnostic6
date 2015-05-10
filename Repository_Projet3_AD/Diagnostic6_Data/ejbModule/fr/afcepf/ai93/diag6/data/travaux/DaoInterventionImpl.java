@@ -1,5 +1,6 @@
 package fr.afcepf.ai93.diag6.data.travaux;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Remote;
@@ -52,7 +53,8 @@ public class DaoInterventionImpl implements IDaoIntervention {
 	public List<Intervention> rechercherInterventionSurAnomalie(int idAnomalie) {
 		Query query = em.createQuery("SELECT e from Intervention e WHERE e.anomalie.idAnomalie = :pid");
 		query.setParameter("pid", idAnomalie);
-		List<Intervention> liste = query.getResultList();
+		List<Intervention> liste = new ArrayList<>();
+		liste = query.getResultList();
 		return liste;
 	}
 

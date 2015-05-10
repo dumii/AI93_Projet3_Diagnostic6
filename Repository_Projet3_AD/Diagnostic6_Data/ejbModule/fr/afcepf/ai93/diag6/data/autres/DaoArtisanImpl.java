@@ -49,4 +49,13 @@ public class DaoArtisanImpl implements IDaoArtisan {
 		List<Artisan> listeArtisan = query.getResultList();
 		return listeArtisan;
 	}
+
+	@Override
+	public Artisan recupererArtisansParIntervention(
+			Intervention intervention) {
+		Query query = em.createQuery("SELECT a from Artisan a WHERE a.idArtisan = :pid");
+		query.setParameter("pid", intervention.getArtisan().getIdArtisan());
+		Artisan artisan = (Artisan)query.getSingleResult();
+		return artisan;
+	}
 }

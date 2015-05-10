@@ -8,56 +8,324 @@
 
 <ui:composition template="/WEB-INF/Template1Diagnostic6.xhtml">
 	<ui:define name="title">Diagnostic 6 - Planing travaux</ui:define>
+	
 	<ui:define name="head">
 		<link href="css/planningTravaux.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="JavaScript/planningTravaux.js"></script>
 	</ui:define>
+	
 	<ui:define name="content">
 
 		<div id="content">
-
+		<h:form>
+		
+		<br/>
+		<a class="btn">Fiche de consultation</a>
+		<br/>
+		<br/>
+		
 		<table id="monTableau">
-			<tr id="table-header1" class="maClasse">
-				<th colspan="11">Nom de l'ERP + Numéro de chantier</th>
+			<tr id="idBidon" class="table-header1">
+				<th colspan="12">Chantier - #{mbPlanningTravaux.monERP.nomErp}</th>
 			</tr>
 			
-			<tr id="table-header2" class="maClasse">
+			<tr id="idBidon" class="table-header2">
 				<th class="NomIntervention"></th>
-				<th colspan="2">2 colonnes fusionnées + flèche?</th>
-				<th colspan="2">2 colonnes fusionnées</th>
-				<th colspan="2">ici l'année</th>
-				<th colspan="2">2 colonnes fusionnées</th>
-				<th colspan="2">2 colonnes fusionnées + flèche?</th>
+				<th class="Etat"></th>
+				<th colspan="2"><img id="reculer" src="images/flecheGauche.png"/></th>
+				<th colspan="2"></th>
+				<th colspan="2" id="moisAffiche">#{mbPlanningTravaux.moisAnnee}</th>
+				<th colspan="2"></th>
+				<th colspan="2"><img id="avancer" src="images/flecheDroite.png"/></th>
 			</tr>
 			
-			<tr id="table-header3" class="maClasse">
-				<th class="NomIntervention">ici la liste des interventions</th>
-				<th colspan="2">Mars + flèche?</th>
-				<th colspan="2">Avril</th>
-				<th colspan="2">Mai</th>
-				<th colspan="2">Juin</th>
-				<th colspan="2">Juillet + flèche?</th>
+			<tr id="idBidon" class="table-header3">
+				<th class="NomIntervention">Liste des interventions (#{mbPlanningTravaux.listeAnomalieAvecInterventionERP.size()})</th>
+				<th class="Etat">Etat</th>
+				<th class="Temps" id="date1" colspan="2">#{mbPlanningTravaux.formater.format(mbTestTravaux.date1)}</th>
+				<th class="Temps" colspan="2"></th>
+				<th class="Temps" id="date2" colspan="2">#{mbPlanningTravaux.formater.format(mbTestTravaux.date2)}</th>
+				<th class="Temps" colspan="2"></th>
+				<th class="Temps" id="date3" colspan="2">#{mbPlanningTravaux.formater.format(mbTestTravaux.date3)}</th>
 			</tr>
 			
-			<ui:repeat var="item" value="#{mbTestTravaux.listeTypes}">
-				<tr id="ligneBlanche" class="maClasse">
-					<td onClick="afficherCacher('#{item.typeIntervention}')">#{item.typeIntervention}</td>
-					<td colspan="10"></td>
+			<ui:repeat var="item" value="#{mbPlanningTravaux.listeTypesERP}">
+			
+				<tr id="T#{item.idTypeIntervention}" class="ligneBleueType">
+				
+					<td onClick="afficherCacher('T#{item.idTypeIntervention} -')">#{item.typeIntervention}</td>
+					<td></td>
+					
+					<td class="tiretsBleus"></td>
+					<td class="traitsGris"></td>
+					
+					<td class="tiretsBleus"></td>
+					<td class="traitsGris"></td>
+					
+					<td class="tiretsBleus"></td>
+					<td class="traitsGris"></td>
+					
+					<td class="tiretsBleus"></td>
+					<td class="traitsGris"></td>
+					
+					<td class="tiretsBleus"></td>
+					<td class="traitsGris"></td>
 				</tr>
 				
 				<ui:repeat var="intervention" value="#{item.listeInterventionTypeIntervention}">
-					<tr class="#{item.typeIntervention}" id="ligneBleue">
-						<td><span>Intervention #{intervention.idIntervention}</span></td>
-						<td colspan="10"></td>
+					
+					
+					<tr id="T#{item.idTypeIntervention} - A#{intervention.anomalie.idAnomalie}" class="ligneBleueIntervention">
+						<td>
+							<span class="spanIntervention">Intervention #{intervention.idIntervention}</span>
+						</td>
+						
+						<td>
+							<img id="iconeEtat - #{intervention.idIntervention}" src=""/>
+						</td>
+						
+						<td class="tiretsBleus">
+							<div class="rectangle" id="#{intervention.idIntervention}">
+								<span class="dateDebut">#{mbPlanningTravaux.shortFormater.format(
+											 intervention.dateDebutIntervention)
+											}
+								</span>
+								<span class="dateFin">#{mbPlanningTravaux.shortFormater.format(
+											 intervention.dateFinIntervention)
+											}
+								</span>
+							</div>
+						</td>
+					<td class="traitsGris"></td>
+					
+					<td class="tiretsBleus"></td>
+					<td class="traitsGris"></td>
+					
+					<td class="tiretsBleus"></td>
+					<td class="traitsGris"></td>
+					
+					<td class="tiretsBleus"></td>
+					<td class="traitsGris"></td>
+					
+					<td class="tiretsBleus"></td>
+					<td class="traitsGris"></td>
 					</tr>
-				</ui:repeat>
-
-							
-			</ui:repeat>
+					
+					<tr id="T#{item.idTypeIntervention} - A#{intervention.anomalie.idAnomalie} - Description" class="ligneOrange">
+						<td colspan="12">
+							<div>
+								<h4>Informations sur l'intervention</h4>
+								
+								<h:outputLabel value="Etat d'avancement :" />
+								
+								<h:selectOneMenu 	value="#{intervention.etatAvancementTravaux.idEtatAvancement}">
+									<f:selectItems	value="#{mbPlanningTravaux.listeEtatDisponiblesParIntervention(intervention)}"
+								   					var="var"
+								  					itemLabel="#{var.intituleEtatAvancement}"
+								  					itemValue="#{var.idEtatAvancement}"/>								
+								</h:selectOneMenu>
 		
+								<h:outputLabel value="Date de début :" />									
+									<rich:calendar value="#{intervention.dateDebutIntervention}"
+												   datePattern="dd/MM/yyyy"
+												   popup="true"
+												   inputStyle="width:45.5%"/>
+												   
+									<input type="text" id="DateDebut - #{intervention.idIntervention}"
+									value="#{mbPlanningTravaux.formater.format(intervention.dateDebutIntervention)}"
+									style="display:none"/>
+									
+								<h:outputLabel value="Date de fin :" /> 
+									<rich:calendar value="#{intervention.dateFinIntervention}"
+												   datePattern="dd/MM/yyyy"
+												   popup="true"
+												   inputStyle="width:45.5%"/>
+												   
+									<input type="text" id="DateFin - #{intervention.idIntervention}"
+									value="#{mbTestTravaux.formater.format(intervention.dateFinIntervention)}"
+									style="display:none"/>
+							   
+								<h:commandButton action="#{mbPlanningTravaux.modifier(intervention)}"
+									   					value="Modifier" />	
+								<h:commandButton action="#{mbTestTravaux.testModifier(intervention)}"
+									   					value="Méthode test" />			
+							</div>
+							
+							<div>
+								<h:outputLabel value="Type d'intervention :" />
+								
+								<h:selectOneMenu 	value="#{intervention.typeIntervention.idTypeIntervention}">
+									<f:selectItems	value="#{mbPlanningTravaux.listeTousTypes}"
+								   					var="var"
+								  					itemLabel="#{var.typeIntervention}"
+								  					itemValue="#{var.idTypeIntervention}"/>								
+								</h:selectOneMenu>						
+								
+								
+								<h:outputLabel value="Artisan :" />
+								
+								<h:selectOneMenu 	value="#{intervention.artisan.idArtisan}">
+									<f:selectItems	value="#{mbPlanningTravaux.avoirListeArtisans(item)}"
+								   					var="var"
+								  					itemLabel="#{var.nomArtisan}"
+								  					itemValue="#{var.idArtisan}"/>								
+								</h:selectOneMenu>	
+								
+								<h:outputLabel value="Coût :" />
+								<h:inputText value="#{intervention.coutIntervention}" />	
+							</div>
+							
+							<div>
+								<h4>Informations sur l'anomalie</h4>
+								<h:outputLabel value="Localisation de l'anomalie :" />
+								<p class="localisationAnomalie">
+								<h:outputText value="#{mbPlanningTravaux.localisationAnomalie(intervention.anomalie)}"
+												escape="false"/>	
+								</p>
+							</div>
+													
+							<div class="preconisationAnomalie">								
+								<h:outputLabel value="Description de l'anomalie :" />
+								<p>#{intervention.anomalie.preconisationAnomalie}</p>				
+							</div>							
+							
+							</td>
+						
+					</tr>
+				</ui:repeat>							
+			</ui:repeat>		
 		</table>
+		
+		<table id="monTableauAnomalie">
+			<tr class="table2-header1">
+				<th>Liste des anomalies sans interventions (#{mbPlanningTravaux.listeAnomalieSansInterventionERP.size()})</th>
+			</tr>
+			
+			<ui:repeat var="anom" value="#{mbPlanningTravaux.listeAnomalieSansInterventionERP}">
+			
+			<tr class="ligneBleueIntervention2">
+				<td>
+					#{anom.diagnostic.intituleDiagnostic} - Anomalie #{anom.idAnomalie}
+				</td>
+			</tr>
+			
+			<tr class="ligneOrange2">
+						<td>
+							<div>
+								<h4>Informations sur l'intervention</h4>
+								
+								<h:outputLabel value="Etat d'avancement :" />
+								
+								<h:selectOneMenu 	id="Etat#{intervention.idIntervention}"
+													value="#{anom.intervention.etatAvancementTravaux.idEtatAvancement}">
+									<f:selectItems	value="#{mbTestTravaux.listeEtats}"
+								   					var="var"
+								  					itemLabel="#{var.intituleEtatAvancement}"
+								  					itemValue="#{var.idEtatAvancement}"/>								
+								</h:selectOneMenu>
+		
+								<h:outputLabel value="Date de début :" />									
+									<rich:calendar value="#{anom.intervention.dateDebutIntervention}"
+												   datePattern="dd/MM/yyyy"
+												   popup="true"
+												   inputStyle="width:45.5%"/>
+									
+								<h:outputLabel value="Date de fin :" /> 
+									<rich:calendar value="#{anom.intervention.dateFinIntervention}"
+												   datePattern="dd/MM/yyyy"
+												   popup="true"
+												   inputStyle="width:45.5%"/>
+							   
+								<h:commandButton value="Ajouter"
+												 action="#{mbPlanningTravaux.ajouterIntervention(anom.intervention, anom)}" />			
+							</div>
+							
+							<div>
+								<h:outputLabel value="Type d'intervention :" />
+								
+								<h:selectOneMenu 	value="#{anom.intervention.typeIntervention.idTypeIntervention}">
+									<f:selectItems	value="#{mbPlanningTravaux.listeTousTypes}"
+								   					var="var"
+								  					itemLabel="#{var.typeIntervention}"
+								  					itemValue="#{var.idTypeIntervention}"/>								
+								</h:selectOneMenu>
+								
+								
+								
+								<h:outputLabel value="Artisan :" />
+								
+								<h:selectOneMenu 	value="#{anom.intervention.artisan.idArtisan}">
+									<f:selectItems	value="#{mbPlanningTravaux.listeArtisans}"
+								   					var="var"
+								  					itemLabel="#{var.nomArtisan}"
+								  					itemValue="#{var.idArtisan}"/>								
+								</h:selectOneMenu>	
+								
+								<h:outputLabel value="Coût :" />
+								<h:inputText value="#{anom.intervention.coutIntervention}" />	
+							</div>
+							
+							<div>
+								<h4>Informations sur l'anomalie</h4>
+								<h:outputLabel value="Localisation de l'anomalie :" />
+								<p class="localisationAnomalie">
+								<h:outputText value="#{mbPlanningTravaux.localisationAnomalie(anom)}"
+												escape="false"/>	
+								</p>
+							</div>
+													
+							<div class="preconisationAnomalie">								
+								<h:outputLabel value="Description de l'anomalie :" />
+								<p>#{anom.preconisationAnomalie}</p>				
+							</div>							
+							
+						</td>
+						
+					</tr>
+			
+			</ui:repeat>
+		</table>
+		
+			</h:form>
 		</div>
+		
+	<script>
+	
+	$('.rectangle').each(function(){
+		dessinerRectangle(this);
+	});
+
+	$('.ligneOrange div:first-of-type select').each(function(){
+		var id = $(this).closest('tr').prev().find('.rectangle').attr('id');
+		afficherMasquerEtatAvancement(id, this.value);
+	});
+	
+	$('.ligneBleueIntervention').click(function(){
+		$(this).closest('tr').next().fadeToggle('medium');
+	});
+
+	$('.ligneBleueIntervention2').click(function(){
+		$(this).closest('tr').next().fadeToggle('medium');
+	});
+
+	$('#reculer').click(function(){
+		reculerQuinzeJours();
+		$('.rectangle').each(function(){
+			dessinerRectangle(this);
+		});
+	});
+
+	$('#avancer').click(function(){
+		avancerQuinzeJours();
+		$('.rectangle').each(function(){
+			dessinerRectangle(this);
+		});
+	});
+	
+  </script>
+
 	</ui:define>
 
 </ui:composition>
+
 </html>

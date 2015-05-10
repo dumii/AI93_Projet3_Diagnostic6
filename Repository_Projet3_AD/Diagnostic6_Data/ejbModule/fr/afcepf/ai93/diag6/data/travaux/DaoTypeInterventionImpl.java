@@ -26,4 +26,16 @@ public class DaoTypeInterventionImpl implements IDaoTypeIntervention {
 		List<TypeIntervention> liste = query.getResultList();
 		return liste;
 	}
+
+	@Override
+	public TypeIntervention recupererTypeParIntervention(
+			Intervention intervention) {
+		
+		Query query = em.createQuery("SELECT e from TypeIntervention e WHERE e.idTypeIntervention = :pid");
+		query.setParameter("pid", intervention.getTypeIntervention().getIdTypeIntervention());
+		
+		TypeIntervention type = (TypeIntervention) query.getSingleResult();
+		
+		return type;
+	}
 }
