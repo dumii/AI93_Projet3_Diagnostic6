@@ -82,10 +82,13 @@ public class TestTravauxManagedBean {
 			{
 				i.setAnomalie(proxyAnomalie.recupereAnomalie(i.getAnomalie().getIdAnomalie()));
 				i.setEtatAvancementTravaux(proxyIntervention.recupererEtatParIntervention(i));
+				i.setArtisan(proxyArtisan.recupererArtisansParIntervention(i));
+				i.setTypeIntervention(proxyIntervention.recupererTypeParIntervention(i));
 			}
 		}
 		listeEtats = proxyIntervention.recupererTousEtats();
 		listeAnomalies = proxyAnomalie.recupereToutAnomalie();
+		listeArtisans = proxyArtisan.recupererToutArtisan();
 	}
 	
 	public void testModifier(Intervention item) throws ParseException
@@ -97,9 +100,9 @@ public class TestTravauxManagedBean {
 		System.out.println("Date test : " + dateTest);
 		System.out.println("Date début : " + item.getDateDebutIntervention());
 		System.out.println("Date fin : " + item.getDateFinIntervention());
-		System.out.println("Type intervention : " + item.getTypeIntervention().getTypeIntervention());
-		System.out.println("Artisan : " + item.getArtisan().getNomArtisan());
-		System.out.println("Type etat avancement : " + item.getEtatAvancementTravaux().getIntituleEtatAvancement());
+		System.out.println("Type intervention : " + item.getTypeIntervention().getIdTypeIntervention());
+		System.out.println("Artisan : " + item.getArtisan().getIdArtisan());
+		System.out.println("Type etat avancement : " + item.getEtatAvancementTravaux().getIdEtatAvancement());
 	}
 	
 	private void déterminerDates() throws ParseException {
@@ -262,7 +265,7 @@ public class TestTravauxManagedBean {
 		try
 		{
 			//On ajoute dans la base de données et on rafraîchit la liste d'interventions à l'écran
-			resultat = proxyIntervention.ajouterIntervention(interventionAdd);			
+			resultat = proxyIntervention.ajouterIntervention(interventionAdd, anom);			
 		}
 		catch (Exception e)
 		{
