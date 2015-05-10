@@ -102,4 +102,12 @@ public class DaoDiagnosticImpl implements IDaoDiagnostic {
 		}
 		return listeARetourner;
 	}
+
+	@Override
+	public List<Diagnostic> recupereToutDiagnosticParErp(Erp e) {
+		Query requete = em.createQuery("SELECT a.listeDiagnosticErp from Erp a WHERE a.idErp = :pid");
+		requete.setParameter("pid", e.getIdErp());
+		List<Diagnostic> liste = requete.getResultList();
+		return liste;
+	}
 }

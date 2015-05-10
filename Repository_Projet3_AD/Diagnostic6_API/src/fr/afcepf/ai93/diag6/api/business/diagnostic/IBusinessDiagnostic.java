@@ -43,4 +43,6 @@ public interface IBusinessDiagnostic {
 
 		public List<Indicateur> recupererIndicateursParDiag(Diagnostic diagEnCours);
 
+		public List<Diagnostic> recupereToutDiagnosticParErp(Erp e);
+
 }

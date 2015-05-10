@@ -38,8 +38,9 @@ public class TableauDeBordManagedBean {
 	private List<TypeDiagnostic> listeTypesDiagnosticComplete; 
 	private List<TypeErp> listeTypesErpComplete; 
 	private List<CategorieErp> listeCategoriesErpComplete; 
-	private List<Indicateur> listeIndicateursParDiag; 
 	private List<EtatAvancementTravaux> listeEtatsComplete; 
+	private int niveauMoyen; 
+	private List<Erp> listeErpFiltree; 
 	private int nbInterventions; 
 	
 	@PostConstruct
@@ -47,13 +48,17 @@ public class TableauDeBordManagedBean {
 		recupererTousLesErp();
 		recupererTypesDiagnostic();
 		recupererTypesErp(); 
-		recupererCategorieErp(); 
+		recupererEtatsAvancementTravaux();
 	}
 	
 	private void recupererTousLesErp(){
 		listeErpComplete = proxyBusinessErp.recupereToutErp();
-		for (Erp e : listeErpComplete)
-			System.out.println(e.getNomErp());
+		for(Erp e : listeErpComplete){
+			List<Diagnostic> listDiag = proxyBusinessDiagnostic.recupereToutDiagnosticParErp(e); 
+			e.setListeDiagnosticErp(listDiag);
+			System.out.println("erp " + e.getNomErp()+" nb diag "+e.getListeDiagnosticErp().size());
+		}
+		listeErpFiltree = listeErpComplete;
 	}
 	
 	private void recupererTypesDiagnostic(){
@@ -68,13 +73,12 @@ public class TableauDeBordManagedBean {
 		listeCategoriesErpComplete = proxyBusinessErp.recupererToutCategorieErp();
 	}
 	
-	private void recupererIndicateursParDiag(Diagnostic diag){
-		listeIndicateursParDiag = proxyBusinessDiagnostic.recupererIndicateursParDiag(diag);
-	}
-	
 	private void recupererEtatsAvancementTravaux(){
 		listeEtatsComplete = proxyBusinessIntervention.recupererTousEtats(); 
-		listeEtatsComplete.add(new EtatAvancementTravaux(10, "Sans intervention")); 
+		listeEtatsComplete.add(new EtatAvancementTravaux(5, "Sans intervention")); 
+		System.out.println("je passe ici");
+		for (EtatAvancementTravaux e : listeEtatsComplete)
+			System.out.println(e.getIntituleEtatAvancement());
 	}
 	
 	private int calculAnomaliesParDiag(Diagnostic d){
@@ -96,7 +100,6 @@ public class TableauDeBordManagedBean {
 	}
 	
 	private int calculerMoyenneParDiag(Diagnostic d){
-		int niveauMoyen = 0; 
 		List<Anomalie> listeAnomaliesParDiag = proxyBusinessAnomalie.recupereAnomalieParDiagnostic(d.getIdDiagnostic());
 		int sommeValeurs =0; 
 		for (Anomalie a : listeAnomaliesParDiag){
@@ -211,14 +214,6 @@ public class TableauDeBordManagedBean {
 		this.listeCategoriesErpComplete = listeCategoriesErpComplete;
 	}
 
-	public List<Indicateur> getListeIndicateursParDiag() {
-		return listeIndicateursParDiag;
-	}
-
-	public void setListeIndicateursParDiag(List<Indicateur> listeIndicateursParDiag) {
-		this.listeIndicateursParDiag = listeIndicateursParDiag;
-	}
-
 	public List<EtatAvancementTravaux> getListeEtatsComplete() {
 		return listeEtatsComplete;
 	}
@@ -233,7 +228,23 @@ public class TableauDeBordManagedBean {
 
 	public void setNbInterventions(int nbInterventions) {
 		this.nbInterventions = nbInterventions;
-	} 
-	
+	}
+
+	public List<Erp> getListeErpFiltree() {
+		return listeErpFiltree;
+	}
+
+	public void setListeErpFiltree(List<Erp> listeErpFiltree) {
+		this.listeErpFiltree = listeErpFiltree;
+	}
+
+	public int getNiveauMoyen() {
+		return niveauMoyen;
+	}
+
+	public void setNiveauMoyen(int niveauMoyen) {
+		this.niveauMoyen = niveauMoyen;
+	}
+
 
 }
