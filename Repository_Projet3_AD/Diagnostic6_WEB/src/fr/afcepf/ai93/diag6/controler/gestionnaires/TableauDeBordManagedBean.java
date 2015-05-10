@@ -18,6 +18,7 @@ import fr.afcepf.ai93.diag6.entity.erp.CategorieErp;
 import fr.afcepf.ai93.diag6.entity.erp.Erp;
 import fr.afcepf.ai93.diag6.entity.erp.TypeErp;
 import fr.afcepf.ai93.diag6.entity.travaux.EtatAvancementTravaux;
+import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
 
 @ManagedBean(name="mbTableauDeBord")
 @SessionScoped
@@ -38,6 +39,7 @@ public class TableauDeBordManagedBean {
 	private List<CategorieErp> listeCategoriesErpComplete; 
 	private List<Indicateur> listeIndicateursParDiag; 
 	private List<EtatAvancementTravaux> listeEtatsComplete; 
+	private int nbInterventions; 
 	
 	private void recupererTousLesErp(){
 		listeErpComplete = proxyBusinessErp.recupereToutErp(); 
@@ -66,15 +68,75 @@ public class TableauDeBordManagedBean {
 	
 	private int calculAnomaliesParDiag(Diagnostic d){
 		List<Anomalie> listeAnomaliesParDiag = proxyBusinessAnomalie.recupereAnomalieParDiagnostic(d.getIdDiagnostic());
+		//dans la meme methode, on calcule aussi le nombre d'interventions sur le diagnostic
+		nbInterventions = 0; 
+		for (Anomalie a : listeAnomaliesParDiag){
+			List<Intervention> liste = proxyBusinessIntervention.rechercherInterventionSurAnomalie(a.getIdAnomalie()); 
+			if(liste.size()>0) {
+				nbInterventions++; 
+			}
+		}
+		//fin du calcul du nb interventions
 		return listeAnomaliesParDiag.size(); 
 	}
 	
-	private void calculInterventionsParDiag(Diagnostic d){
-		
+	private int calculInterventionsParDiag(Diagnostic d){
+		return nbInterventions; 
 	}
 	
-	private void calculerMoyenneParDiag(Diagnostic d){
-		
+	private int calculerMoyenneParDiag(Diagnostic d){
+		int niveauMoyen = 0; 
+		List<Anomalie> listeAnomaliesParDiag = proxyBusinessAnomalie.recupereAnomalieParDiagnostic(d.getIdDiagnostic());
+		int sommeValeurs =0; 
+		for (Anomalie a : listeAnomaliesParDiag){
+			sommeValeurs+=a.getIndicateur().getValeurIndicateur(); 
+		}
+		switch (d.getTypeDiagnostic().getIdTypeDiagnostic()){
+			case(1): niveauMoyen = calculMoyAccessibilite(sommeValeurs, listeAnomaliesParDiag.size()); 
+					 break; 
+			case(2): niveauMoyen = calculMoyEnergie(sommeValeurs, listeAnomaliesParDiag.size()); 
+					break; 
+			case(3): niveauMoyen = calculMoySecurite(sommeValeurs, listeAnomaliesParDiag.size()); 
+					break; 
+			case(4): niveauMoyen = calculMoyHygiene(sommeValeurs, listeAnomaliesParDiag.size()); 
+					break; 
+		}
+		return niveauMoyen; 
+	}
+	
+	private int calculMoyAccessibilite(int somme, int nombre){
+		double moy = somme/1.0*nombre; 
+		return (int)moy; 
+	}
+	private int calculMoyEnergie(int somme, int nombre){
+		double moy = somme/1.0*nombre; 
+		if(moy>0&&moy<=2)
+			return 1;
+		if(moy>2&&moy<=4)
+			return 2;
+		if(moy>4&&moy<=6)
+			return 3;
+		return 4; 
+	}
+	private int calculMoySecurite(int somme, int nombre){
+		double moy = somme/1.0*nombre; 
+		if(moy>0&&moy<1)
+			return 1;
+		if(moy>=1&&moy<2)
+			return 2;
+		if(moy>=24&&moy<2.5)
+			return 3;
+		return 4; 
+	}
+	private int calculMoyHygiene(int somme, int nombre){
+		double moy = somme/1.0*nombre; 
+		if(moy>0&&moy<0.5)
+			return 1;
+		if(moy>=0.5&&moy<1)
+			return 2;
+		if(moy>=1&&moy<1.5)
+			return 3;
+		return 4;  
 	}
 	
 ////////////////////////getters et setters ////////////////////
