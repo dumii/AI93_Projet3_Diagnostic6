@@ -4,13 +4,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.servlet.http.HttpServletRequest;
 
 import fr.afcepf.ai93.diag6.api.data.autres.IDaoUtilisateur;
+import fr.afcepf.ai93.diag6.api.data.publics.IDaoPublic;
 import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 
-public class DaoUtilisateurImpl implements IDaoUtilisateur{
+@Stateless
+@Remote(IDaoUtilisateur.class)
+public class DaoUtilisateurImpl implements IDaoUtilisateur {
 
+	@PersistenceContext(unitName="Malak_Diag_Data")
+	EntityManager em;
+	
 	@Override
 	public List<Utilisateur> recupereToutUtilisateur() {
 		// TODO Auto-generated method stub
@@ -45,6 +56,22 @@ public class DaoUtilisateurImpl implements IDaoUtilisateur{
 	public List<Utilisateur> trouverUtilisateur(String nom) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Utilisateur seConnecter(String login, String motDePasse) {
+		
+		Utilisateur utilisateur = null;
+		
+		Query query = em.createQuery("Select u from Utilisateur u where u.loginUtilisateur = :pid and u.motDePasseUtilisateur = :pid2");
+		query.setParameter("pid", login);
+		query.setParameter("pid2", motDePasse);
+		
+		List<Utilisateur> result = (List<Utilisateur>)query.getResultList();
+		if(result.size() == 1) {
+			utilisateur = result.get(0);
+		}
+		return utilisateur;
 	}
 	
 	

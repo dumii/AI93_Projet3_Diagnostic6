@@ -35,4 +35,6 @@ public interface IBusinessUtilisateur {
     public Utilisateur recupereUtilisateur(int idUtilisateur);
 
     public List<Utilisateur> trouverUtilisateur(String nom);
+    
+    public Utilisateur seConnecter(String login, String motDePasse);
 }

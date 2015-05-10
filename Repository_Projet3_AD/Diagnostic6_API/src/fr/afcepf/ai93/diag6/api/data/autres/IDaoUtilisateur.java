@@ -20,4 +20,7 @@ public interface IDaoUtilisateur {
 
     public List<Utilisateur> trouverUtilisateur(String nom);
     
+    
+    public Utilisateur seConnecter(String login, String motDePasse);
+    
 }
