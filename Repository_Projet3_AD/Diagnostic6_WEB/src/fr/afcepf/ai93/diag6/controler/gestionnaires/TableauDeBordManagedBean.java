@@ -2,6 +2,7 @@ package fr.afcepf.ai93.diag6.controler.gestionnaires;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -41,8 +42,18 @@ public class TableauDeBordManagedBean {
 	private List<EtatAvancementTravaux> listeEtatsComplete; 
 	private int nbInterventions; 
 	
+	@PostConstruct
+	private void init() {
+		recupererTousLesErp();
+		recupererTypesDiagnostic();
+		recupererTypesErp(); 
+		recupererCategorieErp(); 
+	}
+	
 	private void recupererTousLesErp(){
-		listeErpComplete = proxyBusinessErp.recupereToutErp(); 
+		listeErpComplete = proxyBusinessErp.recupereToutErp();
+		for (Erp e : listeErpComplete)
+			System.out.println(e.getNomErp());
 	}
 	
 	private void recupererTypesDiagnostic(){
@@ -206,6 +217,22 @@ public class TableauDeBordManagedBean {
 
 	public void setListeIndicateursParDiag(List<Indicateur> listeIndicateursParDiag) {
 		this.listeIndicateursParDiag = listeIndicateursParDiag;
+	}
+
+	public List<EtatAvancementTravaux> getListeEtatsComplete() {
+		return listeEtatsComplete;
+	}
+
+	public void setListeEtatsComplete(List<EtatAvancementTravaux> listeEtatsComplete) {
+		this.listeEtatsComplete = listeEtatsComplete;
+	}
+
+	public int getNbInterventions() {
+		return nbInterventions;
+	}
+
+	public void setNbInterventions(int nbInterventions) {
+		this.nbInterventions = nbInterventions;
 	} 
 	
 
