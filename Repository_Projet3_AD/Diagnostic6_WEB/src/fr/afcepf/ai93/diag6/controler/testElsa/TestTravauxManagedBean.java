@@ -55,6 +55,22 @@ public class TestTravauxManagedBean {
 	private String resultat;
 	private Date dateChoisie;
 	
+	public UtilisateurManagedBean getMbUtilisateur() {
+		return mbUtilisateur;
+	}
+
+	public void setMbUtilisateur(UtilisateurManagedBean mbUtilisateur) {
+		this.mbUtilisateur = mbUtilisateur;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
 	private Intervention interventionAdd;
 	
 	//Initialisation de la liste d'interventions au chargement de la page

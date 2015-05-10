@@ -42,11 +42,11 @@
 			<tr id="idBidon" class="table-header3">
 				<th class="NomIntervention">Liste des interventions (#{mbPlanningTravaux.listeAnomalieAvecInterventionERP.size()})</th>
 				<th class="Etat">Etat</th>
-				<th class="Temps" id="date1" colspan="2">#{mbPlanningTravaux.formater.format(mbTestTravaux.date1)}</th>
+				<th class="Temps" id="date1" colspan="2">#{mbPlanningTravaux.formater.format(mbPlanningTravaux.date1)}</th>
 				<th class="Temps" colspan="2"></th>
-				<th class="Temps" id="date2" colspan="2">#{mbPlanningTravaux.formater.format(mbTestTravaux.date2)}</th>
+				<th class="Temps" id="date2" colspan="2">#{mbPlanningTravaux.formater.format(mbPlanningTravaux.date2)}</th>
 				<th class="Temps" colspan="2"></th>
-				<th class="Temps" id="date3" colspan="2">#{mbPlanningTravaux.formater.format(mbTestTravaux.date3)}</th>
+				<th class="Temps" id="date3" colspan="2">#{mbPlanningTravaux.formater.format(mbPlanningTravaux.date3)}</th>
 			</tr>
 			
 			<ui:repeat var="item" value="#{mbPlanningTravaux.listeTypesERP}">
@@ -142,7 +142,7 @@
 												   inputStyle="width:45.5%"/>
 												   
 									<input type="text" id="DateFin - #{intervention.idIntervention}"
-									value="#{mbTestTravaux.formater.format(intervention.dateFinIntervention)}"
+									value="#{mbPlanningTravaux.formater.format(intervention.dateFinIntervention)}"
 									style="display:none"/>
 							   
 								<h:commandButton action="#{mbPlanningTravaux.modifier(intervention)}"
