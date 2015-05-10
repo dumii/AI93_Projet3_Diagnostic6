@@ -27,6 +27,72 @@
 	<script type="text/javascript" src="jqplot/jqplot.categoryAxisRenderer.min.js"/>
 	<script type="text/javascript" src="jqplot/jqplot.pointLabels.min.js"/>
 
+
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart","bar"]});
+      google.setOnLoadCallback(drawChart);
+      
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Type', 'Nombre'],
+          ['Terminées',#{mbPublic.nbInterventionTerminees}],
+          ['Planifiées',#{mbPublic.nbInterventionPlanifiees}],
+          ['En cours', #{mbPublic.nbInterventionEnCours}],
+          ['En attente',  #{mbPublic.nbInterventionDiagnostiquees}]          
+        ]);
+
+        var options = {
+
+          legend:{textStyle:{fontSize:'14', fontName:'Corbel'}}, 
+          title: 'Avancée des travaux de mise aux normes des ERP',
+          titleTextStyle:{fontSize:'15', fontName:'Corbel'},
+          is3D: true
+          
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+      }
+    </script>
+	
+	<script type="text/javascript">
+      
+		
+
+
+		google.setOnLoadCallback(drawChart);
+	      function drawChart() {
+	        var data = google.visualization.arrayToDataTable([
+				['Diagnostics', 'Total', 'Aux normes'],
+				['Accessibilité', #{mbPublic.nbDiagnosticAccessibilitéTotal}, #{mbPublic.nbDiagnosticAccessibilitéTraites}],
+				['Energie', #{mbPublic.nbDiagnosticEnergieTotal}, #{mbPublic.nbDiagnosticEnergieTraites}],
+				['Sécurité', #{mbPublic.nbDiagnosticSecuriteTotal}, #{ mbPublic.nbDiagnosticSecuriteTraites}],
+				['Hygiène', #{mbPublic.nbDiagnosticHygieneTotal}, #{mbPublic.nbDiagnosticHygieneTraites}]
+				]);
+
+	        var options = {    
+	    	        
+	        	width: '100%',
+	  	        heigh: 150,
+
+	          chart: {
+	            title: 'Etat des diagnostics',
+	            
+	          },
+	          bars: 'horizontal' // Required for Material Bar Charts.
+	        };
+
+	        var chart = new google.charts.Bar(document.getElementById('barchart_material'));
+
+	        chart.draw(data, options);
+	      }
+
+	      
+	      
+    </script>
+
 </h:head>
 <body>
 	<div id="enTete">
@@ -41,22 +107,21 @@
 		<div id="statistiques">
 			<div>
 				<div>
-					<h:outputLabel value="Statistique du mois de mai"
+					<h:outputLabel value="Ville de Malakoff : situation des ERP "
 						id="enteteStatistiques" />
 				</div>
+				
 			</div>
 			<div id="graphs">
-				<div id="chart1"
-					style="height: 250px; width: 33%; float: left; margin-left: 1px; margin-top: 4px;">
+				
+				<div class = "conteneur1" >
+				<div id="piechart_3d" style="height: 210px; width: auto">
+				</div>
+				</div>
+				<div class = "conteneur2" >
+				<div id="barchart_material" style="height:  210px; width: 0 auto">
 
 				</div>
-				<div id="chart2"
-					style="height: 250px; width: 33%; float: left; margin-top: 4px;">
-
-				</div>
-				<div id="chart3"
-					style="height: 250px; width: 33%; float: left; margin-top: 4px;">
-
 				</div>
 			</div>
 		</div>
@@ -201,12 +266,12 @@
 								<a4j:commandButton event="click" listener="#{mbPublic.recup2()}"
 									render="resultatErp" value="Trouver" />
 
-								<h:selectOneMenu value="#{mbPublic.idTypeErpRecherche}"
-									id="resultatErp">
+								<h:selectManyMenu value="#{mbPublic.idTypeErpRecherche}"
+									id="resultatErp" styleClass="resultatErp">
 									<f:selectItems value="#{mbPublic.recup2()}" var="listeErp3"
-										itemLabel="#{listeErp3.nomErp}" itemValue="#{listeErp3.idErp}"></f:selectItems>
+										itemLabel="#{listeErp3.nomErp}" itemValue="#{listeErp3.idErp}" ></f:selectItems>
 
-								</h:selectOneMenu>
+								</h:selectManyMenu>
 							</div>
 						</f:view>
 					</h:form>
@@ -232,93 +297,7 @@ $(function(){
 	   });
 	 });
 </script>
-<script>
-jQuery.noConflict();
-$(document).ready(function(){ 
-	  var data = [
-	    ['Terminées', #{mbPublic.nbInterventionTerminees}],['Planifiées', #{mbPublic.nbInterventionPlanifiees}], ['En cours', #{mbPublic.nbInterventionEnCours}], 
-	    ['En attente', #{mbPublic.nbInterventionDiagnostiquees}]
-	  ];
-	  var plot1 = jQuery.jqplot ('chart1', [data], 
-	    { title:'Avancée des travaux',
-	      seriesDefaults: {
-	        // Make this a pie chart.
-	        renderer: jQuery.jqplot.PieRenderer, 
-	        rendererOptions: {
-	          // Put data labels on the pie slices.
-	          // By default, labels show the percentage of the slice.
-	          showDataLabels: true
-	        }
-	      }, 
-	      legend: { show:true, location: 'e' }
-	    }
-	    
-	  );
-	});
-$(document).ready(function(){
-	  var data = [
-	    ['Aux normes', #{mbPublic.nbERpAuxNormes}],['En cours', #{mbPublic.nbErpEnCoursDeNormalité}],
-	  ];
-	  var plot2 = jQuery.jqplot ('chart2', [data], 
-	    {
-		    title:'Erp aux normes',
-		    
-	      	seriesDefaults: {
-		      
-	        renderer: jQuery.jqplot.PieRenderer, 
-	        rendererOptions: {
-	          // Turn off filling of slices.
-	          fill: false,
-	          showDataLabels: true, 
-	          // Add a margin to seperate the slices.
-	          sliceMargin: 4, 
-	          // stroke the slices with a little thicker line.
-	          lineWidth: 5,
-	          
-	        }
-	      }, 
-	      legend: { show:true, location: 'e' }
-	    }
-	  );
-	});
 
-$(document).ready(function(){
-    var s1 = [#{mbPublic.nbDiagnosticAccessibilitéTraites}, #{mbPublic.nbDiagnosticEnergieTraites},#{ mbPublic.nbDiagnosticSecuriteTraites}, #{mbPublic.nbDiagnosticHygieneTraites}];
-    var s2 = [#{mbPublic.nbDiagnosticAccessibilitéTotal}, #{mbPublic.nbDiagnosticEnergieTotal}, #{mbPublic.nbDiagnosticSecuriteTotal}, #{mbPublic.nbDiagnosticHygieneTotal}];
-    var ticks = ['Accessibilité', 'Energie', 'Sécurité', 'Hygiène'];
-     
-    plot2 = $.jqplot('chart3', [s1, s2], {
-        title:'Rapport par type',
-        
-        seriesDefaults: {
-        	
-            renderer:$.jqplot.BarRenderer,
-            pointLabels: { show: true },
-            
-        },
-        axes: {    	
-            xaxis: {
-            	tickOptions: {textColor: '#394241'},
-                renderer: $.jqplot.CategoryAxisRenderer,
-                ticks: ticks
-            }  	
-        }
-    });
- 
-    $('#chart3').bind('jqplotDataHighlight', 
-        function (ev, seriesIndex, pointIndex, data) {
-            $('#info2').html('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
-        }
-    );
-         
-    $('#chart2').bind('jqplotDataUnhighlight', 
-        function (ev) {
-            $('#info2').html('Nothing');
-        }
-    );
-});
-
-</script>
 	<script>
 	jQuery.noConflict();
 function ouvertureLogin(id)

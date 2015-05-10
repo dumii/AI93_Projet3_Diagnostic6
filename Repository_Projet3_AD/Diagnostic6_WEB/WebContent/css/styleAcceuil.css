@@ -49,13 +49,13 @@ html
 #graphs
 {
 	width: auto;
-	height: auto;
+	height: 0  auto;
 }
 
 #statistiques
 {
 	border: #BDBDBD solid 1px;
-	height: 280px;
+	height: 237px;
 	width: auto;
 	margin: 2px;
 	border-radius: 7px;
@@ -94,6 +94,35 @@ html
 	/*background-image:linear-gradient(#E0ECF8, #5D7A8C);*/
 	display: table;
 }
+
+
+.conteneur1{
+	
+height: 210px; 
+width: 49.5%; 
+float: left; 
+margin-left: 2px; 
+margin-top: 4px; 
+margin-bottom: 4px;
+border : #BDBDBD solid 1px;
+
+}
+
+.conteneur2{
+	
+height: 210px; 
+width:49.5%; 
+float: right; 
+margin-right: 2px; 
+margin-top: 4px; 
+margin-bottom: 4px; 
+border : #BDBDBD solid 1px;
+
+}
+				
+
+
+
 
 #commentaireAll
 {
@@ -210,6 +239,10 @@ html
 	margin-bottom: 10px;
 }
 
+.resultatErp
+{
+	height: 145px;
+}
 .listBox4
 {
 	width:75%; 
