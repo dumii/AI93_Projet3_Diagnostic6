@@ -99,7 +99,7 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 		} 
 		if (ajoutAutorise == true) {	
 			proxyDiagnostic.ajouterDiagnostic(diagnostic);
-			return "Intervention enregristrée avec succès";
+			return "Intervention enregistrée avec succès";
 				
 		}else
 		{
@@ -179,5 +179,10 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 	@Override
 	public List<Diagnostic> recupereDiagnosticParErp(Erp erp) {
 		return proxyDiagnostic.recupereDiagnosticParErp(erp);
+	}
+
+	@Override
+	public List<Diagnostic> recupereToutDiagnosticParErp(Erp e) {
+		return proxyDiagnostic.recupereToutDiagnosticParErp(e);
 	}
 }

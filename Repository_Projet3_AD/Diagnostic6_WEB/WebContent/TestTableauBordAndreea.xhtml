@@ -18,16 +18,66 @@
 		
 <div id="content">
     <h:form>
-klhgdfgfg
-        <h:selectOneMenu value="#{selectsBean.currentType}" valueChangeListener="#{selectsBean.valueChanged}">
-            <f:selectItems value="#{selectsBean.firstList}" />
-            <a4j:ajax event="valueChange" render="second" execute="@this" />
-        </h:selectOneMenu>
-        <a4j:outputPanel id="second" layout="block">
-            <h:selectOneMenu value="#{selectsBean.currentType}" rendered="#{not empty selectsBean.currentType}">
-                <f:selectItems value="#{selectsBean.secondList}" />
-            </h:selectOneMenu>
+        <rich:panel style="width:220px; border:none;">
+            <rich:select enableManualInput="true" defaultLabel="Taper pour sélection">
+                <f:selectItems value="#{mbTableauDeBord.listeErpComplete}"  var = "lst"
+                	 itemLabel="#{lst.nomErp}"
+                     itemValue="#{lst.idErp}" >
+                </f:selectItems>
+            </rich:select>
+        </rich:panel>
+		
+		<rich:panel style="width:220px; border:none;">
+            <rich:select enableManualInput="true" defaultLabel="Taper pour sélection">
+                <f:selectItems value="#{mbTableauDeBord.listeTypesErpComplete}"  var = "lst"
+                	 itemLabel="#{lst.typeErpCourt}"
+                     itemValue="#{lst.idTypeErp}" >
+                </f:selectItems>
+            </rich:select>
+        </rich:panel>
+        
+        <rich:panel style="width:220px; border:none;">
+            <rich:select enableManualInput="true" defaultLabel="Taper pour sélection">
+                <f:selectItems value="#{mbTableauDeBord.listeTypesDiagnosticComplete}"  var = "lst"
+                	 itemLabel="#{lst.nomType}"
+                     itemValue="#{lst.idTypeDiagnostic}" >
+                </f:selectItems>
+            </rich:select>
+        </rich:panel>
+        
+        <rich:panel style="width:220px; border:none;">
+            <rich:select enableManualInput="true" defaultLabel="Taper pour sélection" value="niveau">
+                <f:selectItem itemValue="1" itemLabel="1 Priorité faible"/>
+                <f:selectItem itemValue="2" itemLabel="2 Acceptable"/>
+                <f:selectItem itemValue="3" itemLabel="3 Prioritaire"/>
+                <f:selectItem itemValue="4" itemLabel="4 Critique"/>
+            </rich:select>
+        </rich:panel>
+        
+        <rich:panel style="width:220px; border:none;">
+            <rich:select enableManualInput="true" defaultLabel="Taper pour sélection">
+                <f:selectItems value="#{mbTableauDeBord.listeEtatsComplete}"  var = "lst"
+                	 itemLabel="#{lst.intituleEtatAvancement}"
+                     itemValue="#{lst.idEtatAvancement}" >
+                </f:selectItems>
+            </rich:select>
+        </rich:panel>
+		
+		<a4j:outputPanel id="panel" layout="block">
+               	<a4j:repeat value="#{mbTableauDeBord.listeErpFiltree}" var="o" rows="20" id="repeat">
+                    	<rich:panel header="#{o.nomErp}" style="float:left; width:100%; padding:1px; background-color:#f7f7f7; border-display:none;  ">
+                      		<a4j:repeat value="#{o.listeDiagnosticErp}" var="d" rows="20" id="repeat">
+                      		<h:outputText value="#{d.intituleDiagnostic}" />
+                      		<br />
+                      		</a4j:repeat>
+                        	<h:panelGrid columns="2">
+                            	
+                        	</h:panelGrid>
+                    	</rich:panel>
+                		</a4j:repeat>
         </a4j:outputPanel>
+    
+    
     </h:form>
 </div>
 </f:view>
