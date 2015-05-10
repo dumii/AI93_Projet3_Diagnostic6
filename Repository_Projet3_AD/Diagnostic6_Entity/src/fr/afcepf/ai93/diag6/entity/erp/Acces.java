@@ -80,4 +80,5 @@ public class Acces implements Serializable {
 	public void setBatiment(Batiment batiment) {
 		this.batiment = batiment;
 	}
+
 }

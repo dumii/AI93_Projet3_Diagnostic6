@@ -7,11 +7,13 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 import fr.afcepf.ai93.diag6.api.business.erp.IBusinessErp;
+import fr.afcepf.ai93.diag6.api.data.erp.IDaoCategorieErp;
 import fr.afcepf.ai93.diag6.api.data.erp.IDaoErp;
-import fr.afcepf.ai93.diag6.api.data.erp.IDaoTypeERP;
+import fr.afcepf.ai93.diag6.api.data.erp.IDaoTypeErp;
 import fr.afcepf.ai93.diag6.entity.erp.Acces;
 import fr.afcepf.ai93.diag6.entity.erp.Ascenceur;
 import fr.afcepf.ai93.diag6.entity.erp.Batiment;
+import fr.afcepf.ai93.diag6.entity.erp.CategorieErp;
 import fr.afcepf.ai93.diag6.entity.erp.Erp;
 import fr.afcepf.ai93.diag6.entity.erp.Escalier;
 import fr.afcepf.ai93.diag6.entity.erp.Etage;
@@ -25,9 +27,16 @@ public class BusinessErp implements IBusinessErp {
 	
 	@EJB
 	private IDaoErp proxyErp; 
+
 	
 	@EJB
-	private IDaoTypeERP proxyTypeErp;
+	private IDaoTypeErp proxyTypeErp;
+
+	@EJB
+	private IDaoCategorieErp proxyCategorieErp;
+	
+	
+
 	
 	@Override
 	public Erp recupererErpParId(int idErp) {
@@ -86,4 +95,31 @@ public class BusinessErp implements IBusinessErp {
 	public List<TypeErp> recupererListeTypeERP() {
 		return proxyTypeErp.recupererListeTypeERP();
 	}
+
+	public IDaoTypeErp getProxyTypeErp() {
+		return proxyTypeErp;
+	}
+
+	public void setProxyTypeErp(IDaoTypeErp proxyTypeErp) {
+		this.proxyTypeErp = proxyTypeErp;
+	}
+
+	public IDaoCategorieErp getProxyCategorieErp() {
+		return proxyCategorieErp;
+	}
+
+	public void setProxyCategorieErp(IDaoCategorieErp proxyCategorieErp) {
+		this.proxyCategorieErp = proxyCategorieErp;
+	}
+
+	@Override
+	public List<TypeErp> recupererToutTypeErp() {
+		return proxyTypeErp.recupererToutTypeErp();
+	}
+
+	@Override
+	public List<CategorieErp> recupererToutCategorieErp() {
+		return proxyCategorieErp.recupererToutCategorieErp();
+	}
+
 }

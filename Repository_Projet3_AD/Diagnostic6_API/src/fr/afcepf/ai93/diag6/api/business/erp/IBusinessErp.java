@@ -5,6 +5,7 @@ import java.util.List;
 import fr.afcepf.ai93.diag6.entity.erp.Acces;
 import fr.afcepf.ai93.diag6.entity.erp.Ascenceur;
 import fr.afcepf.ai93.diag6.entity.erp.Batiment;
+import fr.afcepf.ai93.diag6.entity.erp.CategorieErp;
 import fr.afcepf.ai93.diag6.entity.erp.Erp;
 import fr.afcepf.ai93.diag6.entity.erp.Escalier;
 import fr.afcepf.ai93.diag6.entity.erp.Etage;
@@ -33,7 +34,16 @@ public interface IBusinessErp {
 	public List<Ascenceur> recupererAscenceursParBat(int idBatiment);
 
 	public List<Voirie> recupererVoirieParErp(int idErp);
-	
+
 	//Type d'ERP
 	public List<TypeErp> recupererListeTypeERP();
+
+
+	
+	public List<TypeErp> recupererToutTypeErp();
+	
+	public List<CategorieErp> recupererToutCategorieErp();
+	
+
+
 }
