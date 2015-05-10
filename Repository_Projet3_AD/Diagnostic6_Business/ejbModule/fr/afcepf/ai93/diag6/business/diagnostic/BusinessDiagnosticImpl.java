@@ -40,10 +40,11 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 	@Override
 	public List<Diagnostic> recupereToutDiagnostic() {
 	
-		listeDiag = proxyDiagnostic.recupereToutDiagnostic(); 
-		for (Diagnostic d : listeDiag)
+		List<Diagnostic> liste = proxyDiagnostic.recupereToutDiagnostic(); 
+		
+		for (Diagnostic d : liste)
 		{
-			if(d.getTraite()!=0)
+			if(d.getTraite()!= 0)
 			{
 				listeDiagArchives.add(d); 
 			}
@@ -59,7 +60,7 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 				}
 			}
 		}
-		return listeDiag;
+		return liste;
 	}
 	
 	@Override

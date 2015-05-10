@@ -8,6 +8,7 @@ import javax.ejb.Stateless;
 
 import fr.afcepf.ai93.diag6.api.business.erp.IBusinessErp;
 import fr.afcepf.ai93.diag6.api.data.erp.IDaoErp;
+import fr.afcepf.ai93.diag6.api.data.erp.IDaoTypeERP;
 import fr.afcepf.ai93.diag6.entity.erp.Acces;
 import fr.afcepf.ai93.diag6.entity.erp.Ascenceur;
 import fr.afcepf.ai93.diag6.entity.erp.Batiment;
@@ -15,13 +16,18 @@ import fr.afcepf.ai93.diag6.entity.erp.Erp;
 import fr.afcepf.ai93.diag6.entity.erp.Escalier;
 import fr.afcepf.ai93.diag6.entity.erp.Etage;
 import fr.afcepf.ai93.diag6.entity.erp.Piece;
+import fr.afcepf.ai93.diag6.entity.erp.TypeErp;
 import fr.afcepf.ai93.diag6.entity.erp.Voirie;
 
 @Stateless
 @Remote(IBusinessErp.class)
 public class BusinessErp implements IBusinessErp {
+	
 	@EJB
 	private IDaoErp proxyErp; 
+	
+	@EJB
+	private IDaoTypeERP proxyTypeErp;
 	
 	@Override
 	public Erp recupererErpParId(int idErp) {
@@ -74,5 +80,10 @@ public class BusinessErp implements IBusinessErp {
 	@Override
 	public List<Voirie> recupererVoirieParErp(int idErp) {
 		return proxyErp.recupererVoirieParErp(idErp);
+	}
+
+	@Override
+	public List<TypeErp> recupererListeTypeERP() {
+		return proxyTypeErp.recupererListeTypeERP();
 	}
 }

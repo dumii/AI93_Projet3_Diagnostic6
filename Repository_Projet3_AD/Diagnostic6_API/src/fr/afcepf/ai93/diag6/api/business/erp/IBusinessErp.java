@@ -9,12 +9,17 @@ import fr.afcepf.ai93.diag6.entity.erp.Erp;
 import fr.afcepf.ai93.diag6.entity.erp.Escalier;
 import fr.afcepf.ai93.diag6.entity.erp.Etage;
 import fr.afcepf.ai93.diag6.entity.erp.Piece;
+import fr.afcepf.ai93.diag6.entity.erp.TypeErp;
 import fr.afcepf.ai93.diag6.entity.erp.Voirie;
 
 public interface IBusinessErp {
 
+	//ERP
 	public List<Erp> recupereToutErp();
+	
+	public Erp recupererErpParId(int idErp);
 
+	//Elements de l'ERP
 	public List<Batiment> recupererBatParErp(int idErp);
 
 	public List<Etage> recupererEtagesParBat(int idBatiment);
@@ -29,6 +34,6 @@ public interface IBusinessErp {
 
 	public List<Voirie> recupererVoirieParErp(int idErp);
 	
-	public Erp recupererErpParId(int idErp);
-
+	//Type d'ERP
+	public List<TypeErp> recupererListeTypeERP();
 }

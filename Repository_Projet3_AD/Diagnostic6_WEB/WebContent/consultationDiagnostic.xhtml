@@ -18,6 +18,79 @@
 	<ui:define name="head">
 	<link href="css/consultationDiagnostic.css" rel="stylesheet" type="text/css" />
 	</ui:define>
+	
+	<ui:define name="accordeon1">
+		Diagnostics avec des interventions en cours (#{mbArborescence.listeDiagnosticsIntervEnCours.size()})
+	</ui:define>
+
+	<ui:define name="arborescence1">
+		<h:form>
+			<rich:tree id="tree1" nodeType="#{node.type}" var="node"
+				value="#{mbArborescence.rootNodes1}" toggleType="client"
+				selectionType="ajax"
+				selectionChangeListener="#{mbArborescence.selectionChanged}">
+				<rich:treeNode type="typeErp">
+                    #{node.name}
+                </rich:treeNode>
+				<rich:treeNode type="erp">
+                    #{node.name}
+                </rich:treeNode>
+				<rich:treeNode type="diagnostic">
+                    #{node.intitule} - #{node.name} - #{node.traite}
+                </rich:treeNode>
+			</rich:tree>
+		</h:form>
+	</ui:define>
+	
+	<ui:define name="accordeon2">
+		Diagnostics avec des interventions en attente (#{mbArborescence.listeDiagnosticsIntervAttente.size()})
+	</ui:define>
+
+	<ui:define name="arborescence2">
+		<h:form>
+			<rich:tree id="tree2" nodeType="#{node.type}" var="node"
+				value="#{mbArborescence.rootNodes2}" toggleType="client"
+				selectionType="ajax"
+				selectionChangeListener="#{mbArborescence.selectionChanged}">
+				<rich:treeNode type="typeErp">
+                    #{node.name}
+                </rich:treeNode>
+				<rich:treeNode type="erp">
+                    #{node.name}
+                </rich:treeNode>
+				<rich:treeNode type="diagnostic">
+                    #{node.intitule} - #{node.name} - #{node.traite}
+                </rich:treeNode>
+			</rich:tree>
+		</h:form>
+	</ui:define>
+	
+	<ui:define name="accordeon3">
+		Diagnostics archivés (#{mbArborescence.listeDiagnosticsIntervArchive.size()})
+	</ui:define>
+
+	<ui:define name="arborescence3">
+		<h:form>
+			<rich:tree id="tree3" nodeType="#{node.type}" var="node"
+				value="#{mbArborescence.rootNodes3}" toggleType="client"
+				selectionType="ajax"
+				selectionChangeListener="#{mbArborescence.selectionChanged}">
+				<rich:treeNode type="typeErp">
+                    #{node.name}
+                </rich:treeNode>
+				<rich:treeNode type="erp">
+                    #{node.name}
+                </rich:treeNode>
+				<rich:treeNode type="diagnostic">
+                    #{node.intitule} - #{node.name} - #{node.traite}
+                </rich:treeNode>
+			</rich:tree>
+		</h:form>
+	</ui:define>
+
+
+
+
 	<ui:define name="content">
 <f:view>
 		
