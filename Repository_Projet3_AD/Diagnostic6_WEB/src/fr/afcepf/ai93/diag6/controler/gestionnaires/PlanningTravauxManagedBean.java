@@ -54,6 +54,7 @@ public class PlanningTravauxManagedBean {
 	//Autres données
 	private List<TypeIntervention> listeTousTypes;
 	private List<Artisan> listeArtisans;
+	private List<EtatAvancementTravaux> listeTousEtats;
 	
 	private SimpleDateFormat formater;
 	private SimpleDateFormat shortFormater;
@@ -80,6 +81,7 @@ public class PlanningTravauxManagedBean {
 		listeAnomalieSansInterventionERP = new ArrayList<Anomalie>();
 		listeTypesERP = new ArrayList<>();
 		listeArtisans = proxyArtisan.recupererToutArtisan();
+		listeTousEtats = proxyIntervention.recupererTousEtats();
 		
 		chargerListeAnomalieEtIntervention();
 		
@@ -448,6 +450,14 @@ public class PlanningTravauxManagedBean {
 
 	public void setListeArtisans(List<Artisan> listeArtisans) {
 		this.listeArtisans = listeArtisans;
+	}
+
+	public List<EtatAvancementTravaux> getListeTousEtats() {
+		return listeTousEtats;
+	}
+
+	public void setListeTousEtats(List<EtatAvancementTravaux> listeTousEtats) {
+		this.listeTousEtats = listeTousEtats;
 	}
 
 
