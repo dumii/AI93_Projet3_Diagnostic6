@@ -43,13 +43,21 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 		listeDiag = proxyDiagnostic.recupereToutDiagnostic(); 
 		for (Diagnostic d : listeDiag)
 		{
-			if(d.getTraite()!=0) 
+			if(d.getTraite()!=0)
+			{
 				listeDiagArchives.add(d); 
+			}
 			else
+			{
 				if(proxyDiagnostic.recupereSiIntervEnCoursParDiag(d.getIdDiagnostic())) 
-						listeDiagIntervEnCours.add(d); 
-					else 
-						listeDiagEnAttente.add(d);				
+				{
+					listeDiagIntervEnCours.add(d); 
+				}
+				else 
+				{
+					listeDiagEnAttente.add(d);	
+				}
+			}
 		}
 		return listeDiag;
 	}

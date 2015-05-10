@@ -19,6 +19,7 @@ import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
 @Stateless
 @Remote(IDaoDiagnostic.class)
 public class DaoDiagnosticImpl implements IDaoDiagnostic {
+	
 	@PersistenceContext(unitName="Malak_Diag_Data")
 	private EntityManager em; 
 
@@ -31,7 +32,7 @@ public class DaoDiagnosticImpl implements IDaoDiagnostic {
 
 	@Override
 	public boolean recupereSiIntervEnCoursParDiag(int idDiag) {
-		Query requete = em.createQuery("SELECT a from Anomalie a inner join fetch a.listeInterventions where a.diagnostic.idDiagnostic = :id");
+		Query requete = em.createQuery("SELECT a from Anomalie a inner join fetch a.intervention where a.diagnostic.idDiagnostic = :id");
 		requete.setParameter("id", idDiag);
 		List<Anomalie> listeAnomaliesAvecIntervention = requete.getResultList();
 		for (Anomalie a : listeAnomaliesAvecIntervention)
@@ -88,11 +89,14 @@ public class DaoDiagnosticImpl implements IDaoDiagnostic {
 
 
 	public List<Diagnostic> recupereDiagnosticParErp(Erp erp) {
-		Query requete = em.createQuery("SELECT a.listeDiagnosticErp from Erp a WHERE a.idErp = :pid");
+
+		Query requete = em.createQuery("SELECT a.listeDiagnosticErp FROM Erp a WHERE a.idErp = :pid");
+		
 		requete.setParameter("pid", erp.getIdErp());
 		List<Diagnostic> liste = requete.getResultList();
+
 		List<Diagnostic> listeARetourner = new ArrayList<>();
-		
+
 		for (Diagnostic diag : liste)
 		{
 			if (diag.getTraite() != 0)

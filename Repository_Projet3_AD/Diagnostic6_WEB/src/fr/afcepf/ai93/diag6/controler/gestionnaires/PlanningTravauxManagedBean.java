@@ -2,6 +2,7 @@ package fr.afcepf.ai93.diag6.controler.gestionnaires;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -14,6 +15,7 @@ import javax.faces.bean.SessionScoped;
 import fr.afcepf.ai93.diag6.api.business.autres.IBusinessArtisan;
 import fr.afcepf.ai93.diag6.api.business.diagnostic.IBusinessAnomalie;
 import fr.afcepf.ai93.diag6.api.business.diagnostic.IBusinessDiagnostic;
+import fr.afcepf.ai93.diag6.api.business.erp.IBusinessErp;
 import fr.afcepf.ai93.diag6.api.business.travaux.IBusinessIntervention;
 import fr.afcepf.ai93.diag6.entity.autres.Artisan;
 import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
@@ -36,103 +38,144 @@ public class PlanningTravauxManagedBean {
 	private IBusinessAnomalie proxyAnomalie;	
 	@EJB
 	private IBusinessArtisan proxyArtisan;
+	@EJB
+	private IBusinessErp proxyERP;
 	
 	//Utilisateur connecté
 	private Utilisateur user;
 	
 	//Informations relatives à l'ERP
-	private Erp monERP; //OK
-	private List<Anomalie> listeAnomalieAvecInterventionERP; //OK
-	private List<Anomalie> listeAnomalieSansInterventionERP; //OK
-	private List<TypeIntervention> listeTypesERP; //OK
+	private Erp monERP;
+	private List<Diagnostic> listeDiagnosticERP;
+	private List<Anomalie> listeAnomalieAvecInterventionERP;
+	private List<Anomalie> listeAnomalieSansInterventionERP;
+	private List<TypeIntervention> listeTypesERP;
 	
 	//Autres données
-	private List<TypeIntervention> listeTousTypes; //OK
+	private List<TypeIntervention> listeTousTypes;
+	private List<Artisan> listeArtisans;
 	
-	private SimpleDateFormat formater; //OK
-	private SimpleDateFormat shortFormater; //OK
+	private SimpleDateFormat formater;
+	private SimpleDateFormat shortFormater;
 	
-	private Date date1; //OK
-	private Date date2; //OK
-	private Date date3; //OK
-	private String moisAnnee; //OK
+	private Date date1;
+	private Date date2;
+	private Date date3;
+	private String moisAnnee;
 	
 	
 	//Initialisation de la liste d'interventions au chargement de la page
 	@PostConstruct
 	public void init() throws ParseException
 	{
-		//Initialisation de l'ERP à modifier par la suite
-		monERP = new Erp();
-		monERP.setIdErp(1);
-		
 		formater = new SimpleDateFormat("dd/MM/yyyy");
 		shortFormater = new SimpleDateFormat("dd/MM");
 		
 		déterminerDates();
+		//Initialisation de l'ERP à modifier par la suite
+		monERP = proxyERP.recupererErpParId(10);
 
+		listeDiagnosticERP = proxyDiagnostic.recupereDiagnosticParErp(monERP);
+		listeAnomalieAvecInterventionERP = new ArrayList<Anomalie>();
+		listeAnomalieSansInterventionERP = new ArrayList<Anomalie>();
+		listeTypesERP = new ArrayList<>();
+		listeArtisans = proxyArtisan.recupererToutArtisan();
+		
 		chargerListeAnomalieEtIntervention();
 		
 		chargerTypesInterventionEtIntervention();
-
 	}
 	
 	//Méthodes
+	
+	public String ajouterIntervention (Intervention intervention, Anomalie anom) throws ParseException
+	{
+		if (intervention.getCoutIntervention() != 0)
+		{
+			if (intervention.getDateDebutIntervention() != null)
+			{
+				if (intervention.getDateFinIntervention() != null)
+				{
+					intervention.setAnomalie(anom);
+					proxyIntervention.ajouterIntervention(intervention, anom);
+				}
+			}
+		}	
+		init();
+		return "Ajout effectué avec succès";
+	}
+	
+	public String modifier(Intervention intervention) throws ParseException
+	{
+		Utilisateur user = new Utilisateur();
+		user.setIdUtilisateur(2);
+		proxyIntervention.modifierIntervention(intervention, user);
+		init();
+		
+		return "";
+	}
 	
 	public void chargerTypesInterventionEtIntervention() {
 		
 		listeTousTypes = proxyIntervention.recupererTousTypesIntervention();
 		
-		for (Anomalie anom : listeAnomalieAvecInterventionERP)
-		{
-			int idTypeIntervention = anom.getIntervention().getTypeIntervention().getIdTypeIntervention();
-			
-			for (TypeIntervention type : listeTousTypes)
-			{
-				int idType = type.getIdTypeIntervention();
-				
-				if (idTypeIntervention == idType)
-				{
-					type.getListeInterventionTypeIntervention().add(anom.getIntervention());
-				}
-			}
-		}
-		
 		for (TypeIntervention type : listeTousTypes)
 		{
-			int nombreIntervention = type.getListeInterventionTypeIntervention().size();
-			
-			if (nombreIntervention > 0)
+			List<Intervention> liste = new ArrayList<>();
+
+			int idType = type.getIdTypeIntervention();
+
+			for (Anomalie anom : listeAnomalieAvecInterventionERP)
+			{
+				int idTypeIntervention = anom.getIntervention().getTypeIntervention().getIdTypeIntervention();
+
+				if (idTypeIntervention == idType)
+				{
+					liste.add(anom.getIntervention());
+				}
+			}
+
+			if (liste.size() > 0)
 			{
 				listeTypesERP.add(type);
+				type.setListeInterventionTypeIntervention(liste);
 			}
 		}		
 	}
 
 	public void chargerListeAnomalieEtIntervention() {
 
-		monERP.setListeDiagnosticErp(proxyDiagnostic.recupereDiagnosticParErp(monERP));
-		
-		for (Diagnostic diag : monERP.getListeDiagnosticErp())
+		for (Diagnostic diag : listeDiagnosticERP)
 		{
 			diag.setListeAnomaliesDiagnostic(proxyAnomalie.recupereAnomalieParDiagnostic(diag.getIdDiagnostic()));
-			
+
 			for (Anomalie anom : diag.getListeAnomaliesDiagnostic())
 			{
 				//Liste 1 : recherche d'intervention(s) sur l'anomalie, le nombre d'intervention dans la liste peut varier de 0 à *
+
+				List<Intervention> liste1 = new ArrayList<>();
+				liste1 = proxyIntervention.rechercherInterventionSurAnomalie(anom.getIdAnomalie());
 				
-				List<Intervention> liste1 = proxyIntervention.rechercherInterventionSurAnomalie(anom.getIdAnomalie());
-				
-				if (liste1.size() > 0)
+				if (liste1.size() != 0)
 				{
 					//Au moins une intervention est enregistrée sur cette anomalie
 					listeAnomalieAvecInterventionERP.add(anom);
+					Intervention intervention = liste1.get(0);
+					
+					anom.setIntervention(intervention);
+					anom.getIntervention().setEtatAvancementTravaux(proxyIntervention.recupererEtatParIntervention(anom.getIntervention()));
+					anom.getIntervention().setArtisan(proxyArtisan.recupererArtisansParIntervention(anom.getIntervention()));
+					anom.getIntervention().setTypeIntervention(proxyIntervention.recupererTypeParIntervention(anom.getIntervention()));
 				}
 				else
 				{
 					//Aucune intervention d'enregistrée sur cette anomalie
 					listeAnomalieSansInterventionERP.add(anom);
-					anom.setIntervention(liste1.get(0));
+					
+					anom.setIntervention(new Intervention());
+					anom.getIntervention().setEtatAvancementTravaux(new EtatAvancementTravaux());
+					anom.getIntervention().setArtisan(new Artisan());
+					anom.getIntervention().setTypeIntervention(new TypeIntervention());
 				}
 			}
 		}		
@@ -381,6 +424,30 @@ public class PlanningTravauxManagedBean {
 
 	public void setMoisAnnee(String moisAnnee) {
 		this.moisAnnee = moisAnnee;
+	}
+
+	public IBusinessErp getProxyERP() {
+		return proxyERP;
+	}
+
+	public void setProxyERP(IBusinessErp proxyERP) {
+		this.proxyERP = proxyERP;
+	}
+
+	public List<Diagnostic> getListeDiagnosticERP() {
+		return listeDiagnosticERP;
+	}
+
+	public void setListeDiagnosticERP(List<Diagnostic> listeDiagnosticERP) {
+		this.listeDiagnosticERP = listeDiagnosticERP;
+	}
+
+	public List<Artisan> getListeArtisans() {
+		return listeArtisans;
+	}
+
+	public void setListeArtisans(List<Artisan> listeArtisans) {
+		this.listeArtisans = listeArtisans;
 	}
 
 
