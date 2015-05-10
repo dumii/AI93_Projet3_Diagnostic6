@@ -13,6 +13,8 @@ body
 }
 
 
+
+
 /****************************/
 /* Barre de menu principale */
 /****************************/
@@ -76,6 +78,7 @@ body
 	width: auto;
 }
 
+
 #logoTabBord
 {
 	margin-left: 5%;
@@ -85,6 +88,8 @@ body
 	height: 87px;
 	width: 287px;
 }
+
+
 
 /**************************/
 /* Barre de menu latérale */

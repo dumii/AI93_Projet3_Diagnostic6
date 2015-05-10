@@ -14,6 +14,13 @@
 </h:head>
 
 <ui:composition template="/WEB-INF/Template2Diagnostic6.xhtml">
+	<ui:define name="boutonDeconnexion">
+		<h:form>
+		<h:commandButton value="Deconnexion" styleClass="logoDeconnexion"
+							action="#{mbUtilisateur.logout()}" image="images/iconeDeconnexion2.png" 
+							title="Deconnexion" />
+		</h:form>
+	</ui:define>
 	<ui:define name="title">Diagnostic 6 - Consultation diagnostic</ui:define>
 	<ui:define name="head">
 	<link href="css/consultationDiagnostic.css" rel="stylesheet" type="text/css" />

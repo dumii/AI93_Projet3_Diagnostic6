@@ -6,6 +6,15 @@
 /* Mini Barre d'état Consultation Diagnostic */
 /*************************************/
 
+.logoDeconnexion{
+	margin-top: -68px;
+	height: 55px;
+	width: auto;
+	float: right;
+	margin-right: 30px;
+
+}
+
 h2{
   	background-size: 100%;
   	margin: 0 0 0 0;

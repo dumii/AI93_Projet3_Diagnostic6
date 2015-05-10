@@ -86,6 +86,26 @@ public class UtilisateurManagedBean {
 					e.printStackTrace();
 				}
 			}
+			if (idProfil == 3){
+
+				ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+				try {
+					ec.redirect(ec.getRequestContextPath() + "/planningTravaux.jsf");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (idProfil == 2){
+
+				ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+				try {
+					ec.redirect(ec.getRequestContextPath() + "/consultationDiagnostic.jsf");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}else{
 			 message = "Identifiants invalides";
 		}
@@ -94,9 +114,10 @@ public class UtilisateurManagedBean {
 	}
 
 	public void logout() throws IOException {
+		
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 		ec.invalidateSession();
-		ec.redirect(ec.getRequestContextPath() + "/Accueil.jsf");
+		ec.redirect("http://localhost:9090/Diagnostic6_WEB/Accueil.jsf");
 	}
 
 }

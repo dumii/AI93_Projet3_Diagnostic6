@@ -208,7 +208,7 @@
 					</div>
 					<div id="champIdentifiant">
 						<h:commandButton value="Deconnexion" styleClass="boutonConnexion"
-							action="#{mbUtilisateur.logout()}" />
+							action="#{mbUtilisateur.logout()}"/>
 					</div>
 				</h:form>
 			</f:view>
@@ -301,6 +301,7 @@ $(function(){
 
 	<script>
 	jQuery.noConflict();
+	
 function ouvertureLogin(id)
 {
   if (document.getElementById(id).style.display == 'none') {
@@ -330,7 +331,7 @@ function changementDivPrincipale(div1,div2)
 	jQuery.noConflict();
 function connection(idProfil)
 {
-		if(idProfil == 5){
+		if(idProfil == 2){
 			
 		location.href="http://localhost:9090/Diagnostic6_WEB/consultationDiagnostic.jsf"
 			return false;
