@@ -18,63 +18,96 @@
 		
 <div id="content">
     <h:form>
-        <rich:panel style="width:220px; border:none;">
-            <rich:select enableManualInput="true" defaultLabel="Taper pour sélection">
-                <f:selectItems value="#{mbTableauDeBord.listeErpComplete}"  var = "lst"
-                	 itemLabel="#{lst.nomErp}"
-                     itemValue="#{lst.idErp}" >
-                </f:selectItems>
-            </rich:select>
-        </rich:panel>
-		
-		<rich:panel style="width:220px; border:none;">
-            <rich:select enableManualInput="true" defaultLabel="Taper pour sélection">
-                <f:selectItems value="#{mbTableauDeBord.listeTypesErpComplete}"  var = "lst"
-                	 itemLabel="#{lst.typeErpCourt}"
-                     itemValue="#{lst.idTypeErp}" >
-                </f:selectItems>
-            </rich:select>
-        </rich:panel>
-        
-        <rich:panel style="width:220px; border:none;">
-            <rich:select enableManualInput="true" defaultLabel="Taper pour sélection">
-                <f:selectItems value="#{mbTableauDeBord.listeTypesDiagnosticComplete}"  var = "lst"
-                	 itemLabel="#{lst.nomType}"
-                     itemValue="#{lst.idTypeDiagnostic}" >
-                </f:selectItems>
-            </rich:select>
-        </rich:panel>
-        
-        <rich:panel style="width:220px; border:none;">
-            <rich:select enableManualInput="true" defaultLabel="Taper pour sélection" value="niveau">
-                <f:selectItem itemValue="1" itemLabel="1 Priorité faible"/>
-                <f:selectItem itemValue="2" itemLabel="2 Acceptable"/>
-                <f:selectItem itemValue="3" itemLabel="3 Prioritaire"/>
-                <f:selectItem itemValue="4" itemLabel="4 Critique"/>
-            </rich:select>
-        </rich:panel>
-        
-        <rich:panel style="width:220px; border:none;">
-            <rich:select enableManualInput="true" defaultLabel="Taper pour sélection">
-                <f:selectItems value="#{mbTableauDeBord.listeEtatsComplete}"  var = "lst"
-                	 itemLabel="#{lst.intituleEtatAvancement}"
-                     itemValue="#{lst.idEtatAvancement}" >
-                </f:selectItems>
-            </rich:select>
-        </rich:panel>
-		
-		<a4j:outputPanel id="panel" layout="block">
+			
+			<rich:panel style="width:220px; border:none;">
+				<f:facet name="header">
+					<h:outputText value="Nom ERP : "></h:outputText>
+				</f:facet>
+				 <rich:select enableManualInput="true" defaultLabel="Rechercher ou sélectionner" value="#{mbTableauDeBord.idErpSelectionne}" 
+				 id="choixNomErp" style="width:75%" >
+					<f:selectItems value="#{mbTableauDeBord.listeErpComplete}"
+						var="lst" itemLabel="#{lst.nomErp}" itemValue="#{lst.idErp}">
+					</f:selectItems>
+					<a4j:ajax event="change"
+						listener="#{mbTableauDeBord.filtrerParErpNom()}" reRender="panel" />
+				</rich:select>
+			</rich:panel>
+
+			<rich:panel style="width:220px; border:none;">
+				<f:facet name="header">
+					<h:outputText value="Type ERP :"></h:outputText>
+				</f:facet>
+				<rich:select enableManualInput="true"
+					defaultLabel="Rechercher ou sélectionner"
+					value="#{mbTableauDeBord.idTypeErp}" id="choixTypeErp"
+					style="width:75%">
+					<f:selectItems value="#{mbTableauDeBord.listeTypesErpComplete}"
+						var="lst" itemLabel="#{lst.typeErpCourt}" itemValue="#{lst.idTypeErp}">
+					</f:selectItems>
+					<a4j:ajax event="change"
+						listener="#{mbTableauDeBord.filtrerParTypeErp()}" reRender="panel" />
+				</rich:select>
+			</rich:panel>
+
+			<rich:panel style="width:220px; border:none;">
+				<f:facet name="header">
+					<h:outputText value="Type de diagnostic :"></h:outputText>
+				</f:facet>
+				<rich:select enableManualInput="true"
+					defaultLabel="Rechercher ou sélectionner"
+					value="#{mbTableauDeBord.idTypeDiagnostic}" id="choixTypeDiag"
+					style="width:75%">
+					<f:selectItems value="#{mbTableauDeBord.listeTypesDiagnosticComplete}"
+						var="lst" itemLabel="#{lst.nomType}" itemValue="#{lst.idTypeDiagnostic}">
+					</f:selectItems>
+					<a4j:ajax event="change"
+						listener="#{mbTableauDeBord.filtrerParTypeDiagnostic()}" reRender="panel" />
+				</rich:select>
+			</rich:panel>
+
+			<rich:panel style="width:220px; border:none;">
+				<f:facet name="header">
+					<h:outputText value="Niveau moyen de l'indicateur :"></h:outputText>
+				</f:facet>
+				<rich:select enableManualInput="true"
+					defaultLabel="Rechercher ou sélectionner" value="#{mbTableauDeBord.idNiveau}" id="choixNiveau">
+					<f:selectItem itemValue="1" itemLabel="1 Priorité faible" />
+					<f:selectItem itemValue="2" itemLabel="2 Acceptable" />
+					<f:selectItem itemValue="3" itemLabel="3 Prioritaire" />
+					<f:selectItem itemValue="4" itemLabel="4 Critique" />
+					<a4j:ajax event="change"
+						listener="#{mbTableauDeBord.filtrerParNiveau()}" reRender="panel" />
+				</rich:select>
+			</rich:panel>
+
+			<rich:panel style="width:220px; border:none;">
+				<f:facet name="header">
+					<h:outputText value="Etat d'avancement des travaux :"></h:outputText>
+				</f:facet>
+				<rich:select enableManualInput="true"
+					defaultLabel="Rechercher ou sélectionner"
+					value="#{mbTableauDeBord.idEtatAvancementSelectionne}"
+					id="choixEtatInterv" style="width:75%">
+					<f:selectItems value="#{mbTableauDeBord.listeEtatsComplete}"
+						var="lst" itemLabel="#{lst.intituleEtatAvancement}" itemValue="#{lst.idEtatAvancement}">
+					</f:selectItems>
+					<a4j:ajax event="change"
+						listener="#{mbTableauDeBord.filtrerParEtatIntervention()}" reRender="panel" />
+				</rich:select>
+			</rich:panel>
+
+			<a4j:outputPanel id="panel" layout="block" ajaxRendered="true">
                	<a4j:repeat value="#{mbTableauDeBord.listeErpFiltree}" var="o" rows="20" id="repeat">
                     	<rich:panel header="#{o.nomErp}" style="float:left; width:100%; padding:1px; background-color:#f7f7f7; border-display:none;  ">
                       		<a4j:repeat value="#{o.listeDiagnosticErp}" var="d" rows="20" id="repeat">
-                      		<h:outputText value="#{d.intituleDiagnostic}" />
-                      		<br />
-                      		</a4j:repeat>
-                        	<h:panelGrid columns="2">
-                            	
+                      		<h:panelGrid columns="5">
+                            	<h:outputText value="#{d.intituleDiagnostic}" />
+                      			<br />
+                      			<h:outputText value="ce diagnostic a l'état d'avancement sélectionné" />
                         	</h:panelGrid>
+                      		</a4j:repeat>
                     	</rich:panel>
-                		</a4j:repeat>
+                </a4j:repeat>
         </a4j:outputPanel>
     
     

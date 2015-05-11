@@ -45,4 +45,6 @@ public interface IBusinessDiagnostic {
 
 		public List<Diagnostic> recupereToutDiagnosticParErp(Erp e);
 
+		public boolean recupererDiagSansInterv(Integer idDiag);
+
 }
