@@ -67,7 +67,15 @@
                	<a4j:repeat value="#{mbTableauDeBord.listeErpFiltree}" var="o" rows="20" id="repeat">
                     	<rich:panel header="#{o.nomErp}" style="float:left; width:100%; padding:1px; background-color:#f7f7f7; border-display:none;  ">
                       		<a4j:repeat value="#{o.listeDiagnosticErp}" var="d" rows="20" id="repeat">
-                      		<h:outputText value="#{d.intituleDiagnostic}" />
+                      		<span><h:outputText value="coucou" /></span>
+                      		<span><h:outputText value="coucou" /></span>
+                      		<span><h:outputText value="coucou" /></span>
+                      		<span><h:outputText value="coucou" /></span>
+                      		<span><h:outputText value="coucou" /></span>
+                      		<div>
+                      		<div><h:outputText value="coucou" /></div>
+                      		<div><h:outputText value="coucou" /></div>
+                      		</div>
                       		<br />
                       		</a4j:repeat>
                         	<h:panelGrid columns="2">

@@ -239,7 +239,7 @@
 										itemValue="#{listeErp2.idTypeErp}">
 									</f:selectItems>
 									<a4j:ajax event="change"
-										listener="#{mbPublic.retourListeTypeErp()}" render="listBox1" />
+										listener="#{mbPublic.recup2()}" render="resultatErp" />
 								</h:selectOneMenu>
 							</div>
 							<div id="champsDeRecherche">
@@ -254,7 +254,7 @@
 										itemValue="#{listeDiag.idTypeDiagnostic}">
 									</f:selectItems>
 									<a4j:ajax event="change"
-										listener="#{mbPublic.retourListeTypeDiag()}" render="listBox2" />
+										listener="#{mbPublic.recup2()}" render="resultatErp" />
 
 								</h:selectOneMenu>
 							</div>
@@ -267,12 +267,12 @@
 								<a4j:commandButton event="click" listener="#{mbPublic.recup2()}"
 									render="resultatErp" value="Trouver" />
 
-								<h:selectManyMenu value="#{mbPublic.idTypeErpRecherche}"
+								<h:selectOneListbox    value="#{mbPublic.idTypeErpRecherche}"
 									id="resultatErp" styleClass="resultatErp">
 									<f:selectItems value="#{mbPublic.recup2()}" var="listeErp3"
 										itemLabel="#{listeErp3.nomErp}" itemValue="#{listeErp3.idErp}" ></f:selectItems>
 
-								</h:selectManyMenu>
+								</h:selectOneListbox>
 							</div>
 						</f:view>
 					</h:form>

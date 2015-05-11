@@ -309,20 +309,20 @@ public class PublicManagedBean{
 
 		listeTypeDiagnostic = proxyBusinessPublic.listerTypeDiagnostic();
 	}
-	
+
 
 	public List<Erp> recup2(){
 
-		
+
 		listeErp = new ArrayList<>();
 		listeErp = proxyBusinessErp.recupereToutErp();
-		
+
 		List<Erp> listeTempByTypeErp = new ArrayList<>();
 		List<Erp> listeTempByTypeDiag = new ArrayList<>();
 
-	
-		
-		if(idTypeErpSelect != null){
+
+
+		if(idTypeErpSelect != null && idTypeErpSelect != 0){
 			for (Erp e : listeErp){
 				if(e.getTypeErp().getIdTypeErp() == idTypeErpSelect){
 					listeTempByTypeErp.add(e);
@@ -331,37 +331,45 @@ public class PublicManagedBean{
 			System.out.println("liste erpSelect  + valeur = " + idTypeErpSelect);
 		}
 		else System.out.println("ici idTypeErp est null");
-		
-		if(idTypeDiagSelect != null){
+
+		if(idTypeDiagSelect != null && idTypeDiagSelect != 0){
 
 			listeTempByTypeDiag= proxyBusinessPublic.recupererErpParTypeDiagnostic(idTypeDiagSelect);
 			System.out.println("liste DiagSlect  + valeur = " + idTypeDiagSelect);
-		}else System.out.println("ici idTypeDiag est null");
+		}
+		else System.out.println("ici idTypeDiag est null");
 
 
-		if(idTypeErpSelect == null && idTypeDiagSelect == null){
+		if((idTypeErpSelect == null || idTypeErpSelect == 0) && (idTypeDiagSelect == null || idTypeDiagSelect == 0)){
 			listeErp = proxyBusinessErp.recupereToutErp();
 			System.out.println("vide vide");
 		}
-		if(idTypeErpSelect != null  && idTypeDiagSelect != null){
+		if((idTypeErpSelect != null && idTypeErpSelect != 0) && (idTypeDiagSelect != null && idTypeDiagSelect != 0)){
+
+			List<Erp> liste = new ArrayList<>();
+
 			for (Erp e: listeTempByTypeErp){
 				for(Erp e2 : listeTempByTypeDiag){
-					if (e2.getIdErp() == e.getIdErp()){
-						listeErp.add(e);
+					
+					if (e2.getIdErp() == idTypeDiagSelect && e.getIdErp() == idTypeErpSelect){
+
+						liste.add(e2);
+
 					}
 				}
 			}
+			listeErp = liste;
 			System.out.println("plein plein");
 		}
-		if(idTypeErpSelect == null && idTypeDiagSelect != null){
+		if((idTypeErpSelect == null || idTypeErpSelect == 0) && (idTypeDiagSelect != null && idTypeDiagSelect != 0)){
 			listeErp = listeTempByTypeDiag;
 			System.out.println("vide plein");
 		}
-		if(idTypeErpSelect != null && idTypeDiagSelect == null){
+		if((idTypeErpSelect != null && idTypeErpSelect != 0) && ( idTypeDiagSelect == null || idTypeDiagSelect == 0)){
 			listeErp = listeTempByTypeErp;
 			System.out.println("plein vide");
 		}
 
-	return listeErp;
+		return listeErp;
 	}
 }
