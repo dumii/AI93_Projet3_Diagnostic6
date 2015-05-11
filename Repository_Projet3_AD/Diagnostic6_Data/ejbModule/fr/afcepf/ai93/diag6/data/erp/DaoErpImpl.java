@@ -16,6 +16,7 @@ import fr.afcepf.ai93.diag6.entity.erp.Erp;
 import fr.afcepf.ai93.diag6.entity.erp.Escalier;
 import fr.afcepf.ai93.diag6.entity.erp.Etage;
 import fr.afcepf.ai93.diag6.entity.erp.Piece;
+import fr.afcepf.ai93.diag6.entity.erp.TypeErp;
 import fr.afcepf.ai93.diag6.entity.erp.Voirie;
 import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
 

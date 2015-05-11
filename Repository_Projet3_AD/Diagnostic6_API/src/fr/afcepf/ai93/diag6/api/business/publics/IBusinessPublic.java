@@ -60,6 +60,9 @@ public interface IBusinessPublic {
 	public List<TypeErp> listerTypeErp();
 	public List<TypeDiagnostic> listerTypeDiagnostic();
 	
+	public List<Erp> recupererErpParTypeDiagnostic(Integer idTypeDiagSelect);
+	public List<Erp> recupererErpParTravauxEnCours(boolean booleenTravaux);
+	
 	
 	
 }

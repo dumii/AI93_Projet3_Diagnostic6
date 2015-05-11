@@ -27,4 +27,6 @@ public interface IDaoDiagnostic {
     
     public List<Diagnostic> recupereDiagnosticParErp(Erp erp);
     
+	public List<Diagnostic> recupereToutDiagnosticParErp(Erp e);
+    
 }

@@ -1,14 +1,25 @@
 package fr.afcepf.ai93.diag6.controler.publics;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import com.sun.org.apache.bcel.internal.generic.Select;
+
+import sun.awt.image.SurfaceManager.ProxiedGraphicsConfig;
+import fr.afcepf.ai93.diag6.api.business.diagnostic.IBusinessDiagnostic;
+import fr.afcepf.ai93.diag6.api.business.erp.IBusinessErp;
 import fr.afcepf.ai93.diag6.api.business.publics.IBusinessPublic;
+import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
 import fr.afcepf.ai93.diag6.entity.diagnostic.TypeDiagnostic;
+import fr.afcepf.ai93.diag6.entity.erp.Erp;
 import fr.afcepf.ai93.diag6.entity.erp.TypeErp;
 
 @ManagedBean(name="mbPublic")
@@ -17,55 +28,99 @@ public class PublicManagedBean{
 
 	@EJB
 	private IBusinessPublic proxyBusinessPublic;
-	
+
+	@EJB
+	private IBusinessErp proxyBusinessErp;
+
+	@EJB
+	private IBusinessDiagnostic proxyBusinessDiagnostic;
+
 	private Integer nbInterventionTerminees;
 	private Integer nbInterventionEnCours;
 	private Integer nbInterventionPlanifiees;
 	private Integer nbInterventionDiagnostiquees;
-	
+
 	private Integer nbDiagnosticAccessibilitéTotal;
 	private Integer nbDiagnosticEnergieTotal;
 	private Integer nbDiagnosticSecuriteTotal;
 	private Integer nbDiagnosticHygieneTotal;
-	 
+
 	private Integer nbDiagnosticAccessibilitéTraites;
 	private Integer nbDiagnosticEnergieTraites;
 	private Integer nbDiagnosticSecuriteTraites;
 	private Integer nbDiagnosticHygieneTraites;
-	
+
 	private Integer nbERpAuxNormes;
 	private Integer nbErpEnCoursDeNormalité;
-	
+
 	private List<TypeErp> listeTypeErp;
 	private List<TypeDiagnostic> listeTypeDiagnostic;
-	
-	private int idErpSelect;
-	
-	private int idDiagSelect;
-	
-	public int getIdErpSelect() {
-		return idErpSelect;
+
+	private List<Erp> listeErp;
+	private Integer idTypeErpSelect;
+	private Integer idTypeDiagSelect;
+	private boolean booleenTravaux;
+	private Integer idTypeErpRecherche;
+
+
+	public Integer getIdTypeErpSelect() {
+		return idTypeErpSelect;
 	}
 
-	public void setIdErpSelect(int idErpSelect) {
-		this.idErpSelect = idErpSelect;
+	public void setIdTypeErpSelect(Integer idTypeErpSelect) {
+		this.idTypeErpSelect = idTypeErpSelect;
 	}
 
-	public int getIdDiagSelect() {
-		return idDiagSelect;
+	public Integer getIdTypeDiagSelect() {
+		return idTypeDiagSelect;
 	}
 
-	public void setIdDiagSelect(int idDiagSelect) {
-		this.idDiagSelect = idDiagSelect;
+	public void setIdTypeDiagSelect(Integer idTypeDiagSelect) {
+		this.idTypeDiagSelect = idTypeDiagSelect;
 	}
 
-	public int getIdSelect() {
-		return idErpSelect;
+	public Integer getIdTypeErpRecherche() {
+		return idTypeErpRecherche;
 	}
 
-	public void setIdSelect(int idSelect) {
-		this.idErpSelect = idSelect;
+	public void setIdTypeErpRecherche(Integer idTypeErpRecherche) {
+		this.idTypeErpRecherche = idTypeErpRecherche;
 	}
+
+	public List<Erp> getListeErp() {
+		return listeErp;
+	}
+
+	public void setListeErp(List<Erp> listeErp) {
+		this.listeErp = listeErp;
+	}
+
+	public boolean isBooleenTravaux() {
+		return booleenTravaux;
+	}
+
+	public void setBooleenTravaux(boolean booleenTravaux) {
+		this.booleenTravaux = booleenTravaux;
+	}
+
+	public IBusinessErp getProxyBusinessErp() {
+		return proxyBusinessErp;
+	}
+
+	public void setProxyBusinessErp(IBusinessErp proxyBusinessErp) {
+		this.proxyBusinessErp = proxyBusinessErp;
+	}
+
+	public IBusinessDiagnostic getProxyBusinessDiagnostic() {
+		return proxyBusinessDiagnostic;
+	}
+
+	public void setProxyBusinessDiagnostic(
+			IBusinessDiagnostic proxyBusinessDiagnostic) {
+		this.proxyBusinessDiagnostic = proxyBusinessDiagnostic;
+	}
+
+
 
 	public List<TypeErp> getListeTypeErp() {
 		return listeTypeErp;
@@ -207,37 +262,106 @@ public class PublicManagedBean{
 
 	@PostConstruct
 	public void init(){
-		
+
 		/*Graph1 ************************/
-		
+
 		nbInterventionTerminees = proxyBusinessPublic.nbInterventionsTerminees();
 		nbInterventionEnCours = proxyBusinessPublic.nbInterventionsEnCours();
 		nbInterventionPlanifiees = proxyBusinessPublic.nbInterventionsPlanifiess();
 		nbInterventionDiagnostiquees = proxyBusinessPublic.nbInterventionsDiagnostiquees();
-		
-		
+
+
 		/*Graph3 ************************/
-		
+
 		nbDiagnosticAccessibilitéTotal = proxyBusinessPublic.nbDiagnosticAccessibilitéTotal();
 		nbDiagnosticEnergieTotal = proxyBusinessPublic.nbDiagnosticEnergieTotal();
 		nbDiagnosticSecuriteTotal = proxyBusinessPublic.nbDiagnosticSecuriteTotal();
 		nbDiagnosticHygieneTotal = proxyBusinessPublic.nbDiagnosticHygieneTotal();
-		
+
 		nbDiagnosticAccessibilitéTraites= proxyBusinessPublic.nbDiagnosticAccessibilitéTraites();
 		nbDiagnosticEnergieTraites= proxyBusinessPublic.nbDiagnosticEnergieTraites();
 		nbDiagnosticSecuriteTraites= proxyBusinessPublic.nbDiagnosticSecuriteTraites();
 		nbDiagnosticHygieneTraites= proxyBusinessPublic.nbDiagnosticHygieneTraites();
-		
+
 		/*Graph2 ************************/
-		
+
 		nbERpAuxNormes = proxyBusinessPublic.nbERpAuxNormes();
 		nbErpEnCoursDeNormalité = proxyBusinessPublic.nbErpEnCoursDeNormalité();
-		
-		
+
+
 		/*Bandeau Recherche **************/
-		
+
 		listeTypeErp = proxyBusinessPublic.listerTypeErp();
+
+		listeTypeDiagnostic = proxyBusinessPublic.listerTypeDiagnostic();
+
+		listeErp= proxyBusinessErp.recupereToutErp();
+
+	}
+
+	public void retourListeTypeErp(){
+
+		listeTypeErp = proxyBusinessPublic.listerTypeErp();
+
+	}
+
+	public void retourListeTypeDiag(){
+
 		listeTypeDiagnostic = proxyBusinessPublic.listerTypeDiagnostic();
 	}
 	
+
+	public List<Erp> recup2(){
+
+		
+		listeErp = new ArrayList<>();
+		listeErp = proxyBusinessErp.recupereToutErp();
+		
+		List<Erp> listeTempByTypeErp = new ArrayList<>();
+		List<Erp> listeTempByTypeDiag = new ArrayList<>();
+
+	
+		
+		if(idTypeErpSelect != null){
+			for (Erp e : listeErp){
+				if(e.getTypeErp().getIdTypeErp() == idTypeErpSelect){
+					listeTempByTypeErp.add(e);
+				}
+			}
+			System.out.println("liste erpSelect  + valeur = " + idTypeErpSelect);
+		}
+		else System.out.println("ici idTypeErp est null");
+		
+		if(idTypeDiagSelect != null){
+
+			listeTempByTypeDiag= proxyBusinessPublic.recupererErpParTypeDiagnostic(idTypeDiagSelect);
+			System.out.println("liste DiagSlect  + valeur = " + idTypeDiagSelect);
+		}else System.out.println("ici idTypeDiag est null");
+
+
+		if(idTypeErpSelect == null && idTypeDiagSelect == null){
+			listeErp = proxyBusinessErp.recupereToutErp();
+			System.out.println("vide vide");
+		}
+		if(idTypeErpSelect != null  && idTypeDiagSelect != null){
+			for (Erp e: listeTempByTypeErp){
+				for(Erp e2 : listeTempByTypeDiag){
+					if (e2.getIdErp() == e.getIdErp()){
+						listeErp.add(e);
+					}
+				}
+			}
+			System.out.println("plein plein");
+		}
+		if(idTypeErpSelect == null && idTypeDiagSelect != null){
+			listeErp = listeTempByTypeDiag;
+			System.out.println("vide plein");
+		}
+		if(idTypeErpSelect != null && idTypeDiagSelect == null){
+			listeErp = listeTempByTypeErp;
+			System.out.println("plein vide");
+		}
+
+	return listeErp;
+	}
 }

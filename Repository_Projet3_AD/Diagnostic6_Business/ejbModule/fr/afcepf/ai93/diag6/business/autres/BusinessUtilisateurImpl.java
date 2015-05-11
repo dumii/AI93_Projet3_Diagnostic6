@@ -1,14 +1,27 @@
 package fr.afcepf.ai93.diag6.business.autres;
 
+
 import java.util.List;
 
+import javax.ejb.EJB;
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
+
 import fr.afcepf.ai93.diag6.api.business.autres.IBusinessUtilisateur;
+import fr.afcepf.ai93.diag6.api.business.publics.IBusinessPublic;
+import fr.afcepf.ai93.diag6.api.data.autres.IDaoUtilisateur;
 import fr.afcepf.ai93.diag6.entity.autres.Favoris;
 import fr.afcepf.ai93.diag6.entity.autres.ProfilUtilisateur;
 import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 
-public class BusinessUtilisateurImpl implements IBusinessUtilisateur{
 
+@Stateless
+@Remote(IBusinessUtilisateur.class)
+public class BusinessUtilisateurImpl implements IBusinessUtilisateur {
+
+	@EJB
+	public IDaoUtilisateur proxiDaoUtilisateur;
+	
 	@Override
 	public List<Utilisateur> recupereToutUtilisateur() {
 		// TODO Auto-generated method stub
@@ -93,4 +106,11 @@ public class BusinessUtilisateurImpl implements IBusinessUtilisateur{
 		return null;
 	}
 
+	@Override
+	public Utilisateur seConnecter(String login, String motDePasse) {
+		// TODO Auto-generated method stub
+		return proxiDaoUtilisateur.seConnecter(login, motDePasse);
+	}
+
+	
 }

@@ -6,6 +6,7 @@ import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
+import sun.awt.image.SurfaceManager.ProxiedGraphicsConfig;
 import fr.afcepf.ai93.diag6.api.business.publics.IBusinessPublic;
 import fr.afcepf.ai93.diag6.api.data.publics.IDaoPublic;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
@@ -160,6 +161,18 @@ public class BusinessPublicImpl implements IBusinessPublic {
 	public List<TypeDiagnostic> listerTypeDiagnostic() {
 		// TODO Auto-generated method stub
 		return proxyDaoPublic.listerTypeDiagnostic();
+	}
+
+	@Override
+	public List<Erp> recupererErpParTypeDiagnostic(Integer idTypeDiagSelect) {
+		// TODO Auto-generated method stub
+		return proxyDaoPublic.recupererErpParTypeDiagnostic(idTypeDiagSelect);
+	}
+
+	@Override
+	public List<Erp> recupererErpParTravauxEnCours(boolean booleenTravaux) {
+		// TODO Auto-generated method stub
+		return proxyDaoPublic.recupererErpParTravauxEnCours(booleenTravaux);
 	}
 
 }

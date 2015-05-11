@@ -1,9 +1,10 @@
-package fr.afcepf.ai93.diag6.controler.tree;
+package fr.afcepf.ai93.diag6.controler.arborescenceDiagnostic;
 
 import java.io.Serializable;
 
 public class NamedNode implements Serializable {
-    protected String type;
+    
+	protected String type;
     protected String name;
  
     public String getName() {

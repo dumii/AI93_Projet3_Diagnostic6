@@ -1,4 +1,4 @@
-package fr.afcepf.ai93.diag6.controler.tree;
+package fr.afcepf.ai93.diag6.controler.arborescenceDiagnostic;
 import java.util.Enumeration;
 
 import javax.swing.tree.TreeNode;
