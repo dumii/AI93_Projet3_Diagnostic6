@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+<h:head>
+
+	<link rel="stylesheet"
+		href="//code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css" />
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+</h:head>
+
+<ui:composition template="/WEB-INF/Template4Diagnostic6.xhtml">
+	<ui:define name="title">Diagnostic 6 - Profil</ui:define>
+	<ui:define name="head">
+	<link href="css/profil.css" rel="stylesheet" type="text/css" />
+	</ui:define>
+	<ui:define name="content">
+		<f:view>
+		
+		
+			<div id="content">
+			<h:form>
+			
+			
+				<div id="contenuProfil">
+				<!-- <f:attribute name="rendered" value="#{mbUtilisateur}"></f:attribute> -->
+					<div id="titreProfil">
+						<h3>
+							Profil Personnel
+							<!-- <h:outputText value="#{mbUtilisateur.nomProfil}" /> -->
+						</h3>
+					</div>
+					<h:panelGrid columns="3">
+					
+					
+						<h:panelGrid columns="2" id="donneeCoordonnee">
+							<h:outputText value="Nom : " />
+							<!-- <h:outputText value="#{mbUtilisateur.nomUtilisateur} " /> -->
+							<h:outputText value="Prénom : " />
+							<!--<h:outputText value="#{mbUtilisateur.prenomUtilisateur} " /> -->
+							<h:outputText value="Téléphone : " />
+							<!--<h:outputText value="#{mbUtilisateur.telUtilisateur} " /> -->
+							<h:outputText value="Mail : " />
+							<!--<h:outputText value="#{mbUtilisateur.emailUtilsateur} " /> -->
+						</h:panelGrid>
+						
+						<h:panelGrid columns="2" id="donneeCompte">
+						<h:outputText value="Login : " />
+						<!-- <h:outputText value="#{mbUtilisateur.loginUtilisateur} " /> -->
+						<h:outputText value="Mot de Passe : " />
+						<!-- <h:outputText value="#{mbUtilisateur.motDePasseUtilisateur} " /> -->
+						<h:outputText value="Nouveaux Mot de Passe : " />
+						<!-- <h:inputText  /> -->
+						<h:outputText value="Confirmer Nouveaux Mot de Passe : " />
+						<!-- <h:inputText  /> -->
+						</h:panelGrid>
+						
+						<h:panelGrid columns="2" id="donneeNote">
+						<h:outputText value="Enregistré depuis le : " />
+						<!-- <h:outputText value="#{mbUtilisateur.dateEnregistrement} " /> -->
+						<h:outputText value="Notes Personnelles : " />
+						<!-- <h:inputText  /> -->
+						</h:panelGrid>
+			
+					</h:panelGrid>
+				</div>
+			
+			
+			</h:form>
+			</div>
+
+<script>
+$( "#radio" ).buttonset();
+$( "#accordion" ).accordion();
+$("button").button();
+
+
+</script>
+		</f:view>
+</ui:define>
+</ui:composition>
+</html>

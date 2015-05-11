@@ -1,0 +1,35 @@
+/*************************************/
+/* Bordure à supprimer  */
+/*************************************/
+
+/***********/
+/* Content */
+/***********/
+
+#content
+{
+	margin-top : 10%;
+	margin-left: 10%;
+	width: 63%;
+	/*
+	background-color: white;
+  	border: #cccccc solid 1px;
+  	*/
+}
+
+/**********************/
+/*  contenu du Profil */
+/**********************/
+
+#contenuProfil
+{
+	background-image:linear-gradient(#FEFEE2, #f1f1f1);
+	border:#cccccc solid 1px;
+	
+}
+
+#titreProfil
+{
+	color: #000063;
+	font-family: Corbel;
+}
