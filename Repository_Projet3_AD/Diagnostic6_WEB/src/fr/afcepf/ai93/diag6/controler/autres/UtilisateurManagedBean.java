@@ -2,13 +2,15 @@ package fr.afcepf.ai93.diag6.controler.autres;
 
 
 import java.io.Serializable;
-
 import java.io.IOException;
 
+
+import java.util.Date;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+
 
 
 import fr.afcepf.ai93.diag6.api.business.autres.IBusinessUtilisateur;
@@ -30,6 +32,13 @@ public class UtilisateurManagedBean implements Serializable {
 	private IBusinessUtilisateur proxyBusinessUtilisateur;
 	
 	
+	private String nomUtilisateur;
+	private String prenomUtilisateur;
+	private String emailUtilisateur;
+	private int telUtilisateur;
+	private Date dateEnregistrement;
+	
+	private String nomProfil;
 
 	private String login;
 	private String motDePasse;
@@ -37,8 +46,6 @@ public class UtilisateurManagedBean implements Serializable {
 	private String message = "";
 	private Utilisateur utilisateur;
 
-	@EJB
-	private IBusinessUtilisateur proxyBusinessUtilisateur;
 
 	public String getMessage() {
 		return message;
@@ -133,5 +140,55 @@ public class UtilisateurManagedBean implements Serializable {
 		ec.invalidateSession();
 		ec.redirect("http://localhost:9090/Diagnostic6_WEB/Accueil.jsf");
 	}
+
+	public String getNomUtilisateur() {
+		return nomUtilisateur;
+	}
+
+	public void setNomUtilisateur(String nomUtilisateur) {
+		this.nomUtilisateur = nomUtilisateur;
+	}
+
+	public String getPrenomUtilisateur() {
+		return prenomUtilisateur;
+	}
+
+	public void setPrenomUtilisateur(String prenomUtilisateur) {
+		this.prenomUtilisateur = prenomUtilisateur;
+	}
+
+	public String getEmailUtilisateur() {
+		return emailUtilisateur;
+	}
+
+	public void setEmailUtilisateur(String emailUtilisateur) {
+		this.emailUtilisateur = emailUtilisateur;
+	}
+
+	public int getTelUtilisateur() {
+		return telUtilisateur;
+	}
+
+	public void setTelUtilisateur(int telUtilisateur) {
+		this.telUtilisateur = telUtilisateur;
+	}
+
+	public Date getDateEnregistrement() {
+		return dateEnregistrement;
+	}
+
+	public void setDateEnregistrement(Date dateEnregistrement) {
+		this.dateEnregistrement = dateEnregistrement;
+	}
+
+	public String getNomProfil() {
+		return nomProfil;
+	}
+
+	public void setNomProfil(String nomProfil) {
+		this.nomProfil = nomProfil;
+	}
+
+	
 
 }

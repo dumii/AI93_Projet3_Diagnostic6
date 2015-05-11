@@ -39,7 +39,7 @@ public class Utilisateur implements Serializable {
 	private String prenomUtilisateur;
 	
 	@Column(name="email")
-	private String emailUtilsateur;
+	private String emailUtilisateur;
 	
 	@Column(name="telephone")
 	private Integer telUtilisateur;
@@ -112,12 +112,12 @@ public class Utilisateur implements Serializable {
 
 
 	public String getEmailUtilsateur() {
-		return emailUtilsateur;
+		return emailUtilisateur;
 	}
 
 
 	public void setEmailUtilsateur(String emailUtilsateur) {
-		this.emailUtilsateur = emailUtilsateur;
+		this.emailUtilisateur = emailUtilsateur;
 	}
 
 
@@ -235,7 +235,7 @@ public class Utilisateur implements Serializable {
 		this.loginUtilisateur = loginUtilisateur;
 		this.nomUtilisateur = nomUtilisateur;
 		this.prenomUtilisateur = prenomUtilisateur;
-		this.emailUtilsateur = emailUtilsateur;
+		this.emailUtilisateur = emailUtilsateur;
 		this.telUtilisateur = telUtilisateur;
 		this.motDePasseUtilisateur = motDePasseUtilisateur;
 		this.dateEnregistrement = dateEnregistrement;

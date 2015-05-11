@@ -17,19 +17,119 @@
   	*/
 }
 
-/**********************/
-/*  contenu du Profil */
-/**********************/
+/***********************/
+/*  contenu du Profil  */
+/***********************/
 
 #contenuProfil
 {
 	background-image:linear-gradient(#FEFEE2, #f1f1f1);
 	border:#cccccc solid 1px;
-	
+	border-radius: 10px;
+	padding-bottom: 1%;
 }
 
 #titreProfil
 {
+	background:#FEFEE2 ;
+	margin-top:-1%;
 	color: #000063;
 	font-family: Corbel;
+	padding-left:1%;
+}
+
+.enrNewCoor
+{
+	background:#FEFEE2 ;
+	background-color:#FEFEE2;
+	width:193px;
+	height:20px;
+	color: #000063;
+	font-family: Corbel;
+	background-image: none;
+	font-size: 15px;
+}
+
+.enrNewMdP
+{
+	background-color:#FEFEE2 ;
+	background:#FEFEE2;
+	width:193px;
+	height:20px;
+	color: #000063;
+	font-family: Corbel;
+	background-image: none;
+	font-size: 15px;
+}
+
+.saveNotes
+{
+	background:#FEFEE2 ;
+	background-color:#FEFEE2;
+	width:193px;
+	height:20px;
+	color: #000063;
+	font-family: Corbel;
+	background-image: none;
+	font-size: 15px;
+}
+
+#buttContenuProfil
+{
+	width: 100%;
+	
+}
+
+/*************************/
+/*  Gestion Notification */
+/*************************/
+.gestionNotifFavoris
+{
+	/*float:left;*/
+	width: 100%;
+	margin-top:2%;
+}
+
+#gestionNotification
+{
+	background-image:linear-gradient(#FEFEE2, #f1f1f1);
+	border:#cccccc solid 1px;
+	width: 384px;
+	/* width: 97%; */
+	
+	border-radius: 10px;
+	
+}
+
+#titreNotif
+{
+	background:#FEFEE2 ;
+	margin-top:-1%;
+	color: #000063;
+	font-family: Corbel;
+	padding-left:1%;
+}
+
+/********************/
+/*  Gestion Favoris */
+/********************/
+
+#gestionFavoris
+{
+	background-image:linear-gradient(#FEFEE2, #f1f1f1);
+	border:#cccccc solid 1px;
+	/*margin-left:3%;*/
+	width: 384px;
+	/* width: 97%; */
+	
+	border-radius: 10px;
+}
+
+#titreFavoris
+{
+	background:#FEFEE2 ;
+	margin-top:-1%;
+	color: #000063;
+	font-family: Corbel;
+	padding-left:1%;
 }

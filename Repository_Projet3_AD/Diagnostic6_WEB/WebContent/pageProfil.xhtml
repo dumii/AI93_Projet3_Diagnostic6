@@ -16,7 +16,7 @@
 <ui:composition template="/WEB-INF/Template4Diagnostic6.xhtml">
 	<ui:define name="title">Diagnostic 6 - Profil</ui:define>
 	<ui:define name="head">
-	<link href="css/profil.css" rel="stylesheet" type="text/css" />
+	
 	</ui:define>
 	<ui:define name="content">
 		<f:view>
@@ -34,45 +34,91 @@
 							<!-- <h:outputText value="#{mbUtilisateur.nomProfil}" /> -->
 						</h3>
 					</div>
-					<h:panelGrid columns="3">
+					<h:panelGrid columns="3" style="width:100%;">
 					
 					
-						<h:panelGrid columns="2" id="donneeCoordonnee">
+						<h:panelGrid columns="2" id="donneeCoordonnee" style="text-align:right;">
 							<h:outputText value="Nom : " />
 							<!-- <h:outputText value="#{mbUtilisateur.nomUtilisateur} " /> -->
 							<h:outputText value="Prénom : " />
 							<!--<h:outputText value="#{mbUtilisateur.prenomUtilisateur} " /> -->
 							<h:outputText value="Téléphone : " />
-							<!--<h:outputText value="#{mbUtilisateur.telUtilisateur} " /> -->
+							<!--<h:inputText value="#{mbUtilisateur.telUtilisateur} " /> -->
 							<h:outputText value="Mail : " />
-							<!--<h:outputText value="#{mbUtilisateur.emailUtilsateur} " /> -->
+							<!--<h:inputText value="#{mbUtilisateur.emailUtilisateur} " /> -->
 						</h:panelGrid>
-						
-						<h:panelGrid columns="2" id="donneeCompte">
-						<h:outputText value="Login : " />
-						<!-- <h:outputText value="#{mbUtilisateur.loginUtilisateur} " /> -->
-						<h:outputText value="Mot de Passe : " />
-						<!-- <h:outputText value="#{mbUtilisateur.motDePasseUtilisateur} " /> -->
-						<h:outputText value="Nouveaux Mot de Passe : " />
-						<!-- <h:inputText  /> -->
-						<h:outputText value="Confirmer Nouveaux Mot de Passe : " />
-						<!-- <h:inputText  /> -->
+							<h:panelGrid columns="2" id="donneeCompte" style="text-align:right;">
+								<h:outputText value="Login : " />
+								<!-- <h:outputText value="#{mbUtilisateur.login} " /> -->
+								<h:outputText value="Mot de Passe : " />
+								<!-- <h:outputText value="#{mbUtilisateur.motDePasse} " /> -->
+								<h:outputText value="Nouveaux MdP : " />
+								<!-- <h:inputText  /> -->
+								<h:outputText value="Confirmer MdP : " />
+								<!-- <h:inputText  /> -->
+							</h:panelGrid>
+
+							<h:panelGrid columns="2" id="donneeNote" style="text-align:right;">
+								<h:outputText value="Enregistré depuis le : " />
+								<!-- <h:outputText value="#{mbUtilisateur.dateEnregistrement} " /> -->
+								<h:outputText value="Notes Personnelles : " />
+								<!-- <Textarea  /> -->
+							</h:panelGrid>
+
 						</h:panelGrid>
-						
-						<h:panelGrid columns="2" id="donneeNote">
-						<h:outputText value="Enregistré depuis le : " />
-						<!-- <h:outputText value="#{mbUtilisateur.dateEnregistrement} " /> -->
-						<h:outputText value="Notes Personnelles : " />
-						<!-- <h:inputText  /> -->
+						<h:panelGrid columns="3" style="width:100%; text-align:center; margin-top:1%;" styleClass="buttContenuProfil">
+							<h:commandButton value="Enregistrer Nouvelles Coordonnées" styleClass="enrNewCoor"/>
+							<h:commandButton value="Enregistrer Nouveaux Mot de Passe"  styleClass="enrNewMdP"/>
+							<h:commandButton value="Sauvegarder"  styleClass="saveNotes"/>
 						</h:panelGrid>
-			
-					</h:panelGrid>
 				</div>
+				
+				<h:panelGrid columns="2" styleClass="gestionNotifFavoris" style="width:100%;">
+					<h:panelGrid style="width:100%;">
+						<div id="gestionNotification">
+							<div id="titreNotif">
+								<h3>
+									Gestion des Notifications :
+								</h3>
+							</div>
+							<table>
+								<tr>
+									<td>Nombre d'Erp diagnostiqué</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>Nombre de Diagnostics</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>Nombre d'Anomalies</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>Nombre d'Interventions</td>
+									<td></td>
+								</tr>
+							</table>
+						
+						</div>
+					</h:panelGrid>
+					<h:panelGrid style="width:100%;">
+						<div id="gestionFavoris">
+							<div id="titreFavoris">
+								<h3>
+									Gestion des Favoris :
+								</h3>
+							</div>
+						
+						</div>
+					</h:panelGrid>
+				</h:panelGrid>
+				
 			
 			
 			</h:form>
 			</div>
-
+<link href="css/profil.css" rel="stylesheet" type="text/css" />
 <script>
 $( "#radio" ).buttonset();
 $( "#accordion" ).accordion();
