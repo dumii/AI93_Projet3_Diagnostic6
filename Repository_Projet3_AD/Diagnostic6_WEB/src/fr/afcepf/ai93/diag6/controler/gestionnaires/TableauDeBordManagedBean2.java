@@ -1,11 +1,18 @@
 package fr.afcepf.ai93.diag6.controler.gestionnaires;
 
 import java.util.ArrayList;
+
+import java.util.Collection;
+
+import java.util.Date;
+
 import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+
 import fr.afcepf.ai93.diag6.api.business.diagnostic.IBusinessAnomalie;
 import fr.afcepf.ai93.diag6.api.business.diagnostic.IBusinessDiagnostic;
 import fr.afcepf.ai93.diag6.api.business.erp.IBusinessErp;
@@ -13,14 +20,15 @@ import fr.afcepf.ai93.diag6.api.business.travaux.IBusinessIntervention;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
 import fr.afcepf.ai93.diag6.entity.diagnostic.TypeDiagnostic;
+import fr.afcepf.ai93.diag6.entity.erp.CategorieErp;
 import fr.afcepf.ai93.diag6.entity.erp.Erp;
 import fr.afcepf.ai93.diag6.entity.erp.TypeErp;
 import fr.afcepf.ai93.diag6.entity.travaux.EtatAvancementTravaux;
 import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
 
-@ManagedBean(name="mbTableauDeBord")
+@ManagedBean(name="mbTableauDeBordTest")
 @SessionScoped
-public class TableauDeBordManagedBean {
+public class TableauDeBordManagedBean2 {
 
 	@EJB 
 	private IBusinessErp proxyBusinessErp; 
@@ -34,6 +42,7 @@ public class TableauDeBordManagedBean {
 	private List<Erp> listeErpComplete; 
 	private List<TypeDiagnostic> listeTypesDiagnosticComplete; 
 	private List<TypeErp> listeTypesErpComplete; 
+	private List<CategorieErp> listeCategoriesErpComplete; 
 	private List<EtatAvancementTravaux> listeEtatsComplete; 
 	List<Anomalie> listeAnomaliesParDiagTmp;
 	private int niveauMoyen; 
@@ -80,13 +89,17 @@ public class TableauDeBordManagedBean {
 		listeTypesErpComplete = proxyBusinessErp.recupererToutTypeErp(); 
 	}
 
+	private void recupererCategorieErp(){
+		listeCategoriesErpComplete = proxyBusinessErp.recupererToutCategorieErp();
+	}
+
 	private void recupererEtatsAvancementTravaux(){
 		listeEtatsComplete = proxyBusinessIntervention.recupererTousEtats(); 
 		listeEtatsComplete.add(new EtatAvancementTravaux(5, "Sans intervention")); 
 	}
 
 	public int calculAnomaliesParDiag(Erp e, Diagnostic d){
-		return proxyBusinessAnomalie.recupereAnomalieParDiagnostic(d.getIdDiagnostic()).size();
+		return e.getListeDiagnosticErp().size();
 	}
 
 	public int calculInterventionsParDiag(Diagnostic d){
@@ -155,23 +168,24 @@ public class TableauDeBordManagedBean {
 	}
 	
 	public int calculEtatAvancement(Diagnostic d){
-		for(Anomalie a : listeAnomaliesParDiagTmp){
+		List<Anomalie> listAnom = proxyBusinessAnomalie.recupereAnomalieParDiagnostic(d.getIdDiagnostic());
+		for(Anomalie a : listAnom){
 			List<Intervention> listeBidon = proxyBusinessIntervention.rechercherInterventionSurAnomalie(a.getIdAnomalie()); 
 			a.setIntervention(listeBidon.get(0));
 		}
-		d.setListeAnomaliesDiagnostic(listeAnomaliesParDiagTmp);
+		d.setListeAnomaliesDiagnostic(listAnom);
 		List<Intervention> listeInterv = new ArrayList<>(); 
 		for(Anomalie a : d.getListeAnomaliesDiagnostic()){
 			listeInterv.add(a.getIntervention()); 
 			if(a.getIntervention().getEtatAvancementTravaux().getIdEtatAvancement()==3){
-				etatTmp = 3; //="En cours", car si une seule intervention de ce diagnostic est en cours, tout le diagnostic est en cours
-				return etatTmp; 
+				etatTmp = 3;
+				return etatTmp; //="En cours", car si une seule intervention de ce diagnostic est en cours, tout le diagnostic est en cours
 			}
 		}
 		int tailleListeInterv = listeInterv.size(); 
 		if(tailleListeInterv==0){
-			etatTmp = 5; //= "Sans intervention", car il n'y a aucune intervention sur les anomalies de ce diagnostic
-			return etatTmp;
+			etatTmp=5;
+			return etatTmp; //= "Sans intervention", car il n'y a aucune intervention sur les anomalies de ce diagnostic
 		}
 		int nbIntervTerminees = 0;
 		for(Intervention i : listeInterv){
@@ -180,12 +194,11 @@ public class TableauDeBordManagedBean {
 			}
 		}
 		if(nbIntervTerminees==tailleListeInterv){
-			etatTmp = 1; //"Terminé", car si toutes les interventions ont l'état 1=terminé, alors tout le diagnostic prend cet état
-			return etatTmp;
+			etatTmp=1;
+			return etatTmp;//"Terminé", car si toutes les interventions ont l'état 1=terminé, alors tout le diagnostic prend cet état
 		}
-		etatTmp = 2; //"Suspendu ou planifié", ça peut etre aussi return 4, attention à prendre les deux en compte;
-
-		return etatTmp;
+		etatTmp =2; 
+		return etatTmp; //"Suspendu ou planifié", ça peut etre aussi return 4, attention à prendre les deux en compte; 
 	}
 	
 	public void filtrer(){
@@ -200,6 +213,10 @@ public class TableauDeBordManagedBean {
 		System.out.println("oui, je rentre bien dans la méthode filtrer par ERP nom");
 		if(idErpSelectionne!=0){
 			List<Erp> listE = new ArrayList<>();
+			//recupererTousLesErp();
+			//listeErpFiltree = new ArrayList<>(listeErpComplete); 
+//			System.out.println(listeErpFiltree);
+//			System.out.println(listeErpComplete);
 			for(Erp e : listeErpFiltree){
 				if(e.getIdErp()==idErpSelectionne)
 					listE.add(e);
@@ -210,12 +227,20 @@ public class TableauDeBordManagedBean {
 			listeErpFiltree = new ArrayList<>(listE); 
 			//idErpSelectionne = 0;
 		}
+		else {
+			//listeErpFiltree = new ArrayList<>(listeErpComplete); 
+			//listeErpFiltree=listeErpComplete;
+		}
+//		System.out.println(listeErpFiltree);
+//		System.out.println(listeErpComplete);
 	}
 	
 	public void filtrerParTypeErp(){
 		System.out.println("oui, je rentre bien dans la méthode filtrer par Type ERP");
 		if(idTypeErp!=0){
 			List<Erp> listE = new ArrayList<>();
+//			listeErpFiltree = new ArrayList<>(listeErpComplete); 
+			//listeErpFiltree = listeErpComplete; 
 			for(Erp e : listeErpFiltree){
 				if(e.getTypeErp().getIdTypeErp()==idTypeErp)
 					listE.add(e);
@@ -224,6 +249,11 @@ public class TableauDeBordManagedBean {
 				System.out.println("Erp "+f.getNomErp());
 			}
 			listeErpFiltree = new ArrayList<>(listE); 
+			//idTypeErp = 0;
+		}
+		else {
+			//listeErpFiltree = new ArrayList<>(listeErpComplete); 
+			//listeErpFiltree=listeErpComplete;
 		}
 	}
 
@@ -231,6 +261,8 @@ public class TableauDeBordManagedBean {
 		System.out.println("oui, je rentre bien dans la méthode filtrer par Niveau");
 		if(idNiveau!=0){
 			List<Erp> listE = new ArrayList<>();
+			//listeErpFiltree = new ArrayList<>(listeErpComplete); 
+			//listeErpFiltree = listeErpComplete; 
 			for(Erp e : listeErpFiltree){
 				List<Diagnostic> listeDiag = new ArrayList<>(); 
 				for(Diagnostic d : e.getListeDiagnosticErp()){
@@ -246,6 +278,11 @@ public class TableauDeBordManagedBean {
 				System.out.println("Erp "+f.getNomErp());
 			}
 			listeErpFiltree = new ArrayList<>(listE); 
+			//idNiveau = 0;
+		}
+		else {
+			//listeErpFiltree = new ArrayList<>(listeErpComplete); 
+			//listeErpFiltree=listeErpComplete;
 		}
 	}
 	
@@ -253,6 +290,8 @@ public class TableauDeBordManagedBean {
 		System.out.println("oui, je rentre bien dans la méthode filtrer par Etat intervention");
 		if(idTypeDiagnostic!=0){
 			List<Erp> listE = new ArrayList<>();
+//			listeErpFiltree = new ArrayList<>(listeErpComplete); 
+			//listeErpFiltree = listeErpComplete; 
 			for(Erp e : listeErpFiltree){
 				List<Diagnostic> listDiagTypeSel = new ArrayList<>(); 
 				for(Diagnostic d : e.getListeDiagnosticErp()){
@@ -269,6 +308,11 @@ public class TableauDeBordManagedBean {
 				System.out.println("Erp "+f.getNomErp());
 			}
 			listeErpFiltree = new ArrayList<>(listE); 
+			//idTypeDiagnostic = 0;
+		}
+		else {
+//			recupererTousLesErp();
+			//listeErpFiltree=listeErpComplete;
 		}
 	}
 	
@@ -276,6 +320,8 @@ public class TableauDeBordManagedBean {
 		System.out.println("oui, je rentre bien dans la méthode filtrer par Etat intervention");
 		if(idEtatAvancementSelectionne!=0){
 			List<Erp> listE = new ArrayList<>();
+			//listeErpFiltree = new ArrayList<>(listeErpComplete); 
+			//listeErpFiltree = listeErpComplete; 
 			if(idEtatAvancementSelectionne==1)
 				listE = recupererLesErpInterventionsTerminees(); 
 			if((idEtatAvancementSelectionne==2)||(idEtatAvancementSelectionne==4))
@@ -288,6 +334,10 @@ public class TableauDeBordManagedBean {
 				System.out.println("Erp "+f.getNomErp());
 			}
 			listeErpFiltree = new ArrayList<>(listE); 
+		}
+		else {
+			 //listeErpFiltree = new ArrayList<>(listeErpComplete); 
+			 //idEtatAvancementSelectionne = 0;
 		}
 	}
 	
@@ -410,6 +460,15 @@ public class TableauDeBordManagedBean {
 
 	public void setListeTypesErpComplete(List<TypeErp> listeTypesErpComplete) {
 		this.listeTypesErpComplete = listeTypesErpComplete;
+	}
+
+	public List<CategorieErp> getListeCategoriesErpComplete() {
+		return listeCategoriesErpComplete;
+	}
+
+	public void setListeCategoriesErpComplete(
+			List<CategorieErp> listeCategoriesErpComplete) {
+		this.listeCategoriesErpComplete = listeCategoriesErpComplete;
 	}
 
 	public List<EtatAvancementTravaux> getListeEtatsComplete() {

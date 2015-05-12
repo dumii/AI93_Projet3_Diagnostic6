@@ -185,4 +185,11 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 	public List<Diagnostic> recupereToutDiagnosticParErp(Erp e) {
 		return proxyDiagnostic.recupereToutDiagnosticParErp(e);
 	}
+
+
+	@Override
+	public boolean recupererDiagSansInterv(Integer idDiag) {
+		//si la methode du Dao retourne false, c'est qu'il n'y a aucune intervention dessous
+		return proxyDiagnostic.recupereSiIntervEnCoursParDiag(idDiag); 
+	}
 }
