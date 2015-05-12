@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:a4j="http://richfaces.org/a4j"
+	  xmlns:rich="http://richfaces.org/rich"> 
+
+<h:head>
+	<title>
+		<ui:insert name="title"></ui:insert>
+	</title>
+	
+	
+	<link href="css/style.css" rel="stylesheet" type="text/css" />
+	
+ 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css"/>
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<ui:insert name="head"></ui:insert>
+
+</h:head> 
+<body> 
+	<div id="enTete">
+	
+		<a href=""><img id="logoAccueil" src="images/Logo2.png" /></a>
+			
+		<h:form id="rechercheBandeau" action="">
+			<input type="text" value="Entrez votre recherche ici ..."/>
+			<input type="image" src="images/Loupe.png"/>
+			<div id="resultatRecherche">blabla</div>
+			<div class="boutonDeconnexion"></div>
+		</h:form>
+		
+		<a href=""><img class="logoMenu" id="logoErp" src="images/ERPIconeBleue2.png" /></a>
+		
+		<a href=""><img class="logoMenu" id="logoDiag" src="images/DiagnosticIconeBleue.png" /></a>
+		
+		<a href=""><img class="logoMenu" id="logoTrav" src="images/BuildingConstruction_icon.png" /></a>
+		
+		<a href="http://localhost:9090/Diagnostic6_WEB/planningTravaux.jsf"><img class="logoMenu" id="logoTabBord" src="images/TableauBordIconeOrange.png" /></a>
+		
+		
+		<ui:insert name="boutonDeconnexion" />
+		
+	</div>
+	
+	
+		
+		
+	<div id="bandeauDroite">
+		<fieldset id="connection">
+			<legend>Bonjour <ui:insert name="nomUtilisateur"/></legend>
+			<ui:insert name="roleUtilisateur"/>
+		</fieldset>
+		
+		<fieldset id="favoris">
+			<legend>Mes favoris</legend>
+		</fieldset>
+		
+		<fieldset id="notification">
+			<legend>Dernières actualités</legend>
+			
+			<article>
+				<header><ui:insert name="motifNotification"/></header>
+				<time><ui:insert name="dateNotification"/></time>
+				<section><ui:insert name="notification"/></section>
+			</article>
+			
+			<article>
+				<header><ui:insert name="motifNotification"/></header>
+				<time><ui:insert name="dateNotification"/></time>
+				<section><ui:insert name="notification"/></section>
+			</article>
+			
+		</fieldset>
+	</div>
+
+	<ui:insert name="content" />
+		
+<script>
+jQuery.noConflict();
+
+  $( "#radio" ).buttonset(); 
+  $( "#accordion" ).accordion();
+  $("button").button();
+</script>
+</body>
+</html>

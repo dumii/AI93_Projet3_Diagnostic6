@@ -100,10 +100,11 @@
                	<a4j:repeat value="#{mbTableauDeBord.listeErpFiltree}" var="o" rows="20" id="repeat">
                     	<rich:panel header="#{o.nomErp}" style="float:left; width:100%; padding:1px; background-color:#f7f7f7; border-display:none;  ">
                       		<a4j:repeat value="#{o.listeDiagnosticErp}" var="d" rows="20" id="repeat">
-                      		<h:panelGrid columns="5">
-                            	<h:outputText value="#{d.intituleDiagnostic}" />
-                      			<br />
-                      			<h:outputText value="ce diagnostic a l'état d'avancement sélectionné" />
+                      		<h:outputText value="#{d.intituleDiagnostic}" />
+                      		<br />
+                      		</a4j:repeat>
+                        	<h:panelGrid columns="2">
+                            	
                         	</h:panelGrid>
                       		</a4j:repeat>
                     	</rich:panel>

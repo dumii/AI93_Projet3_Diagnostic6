@@ -1,5 +1,6 @@
 package fr.afcepf.ai93.diag6.data.travaux;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,5 +65,14 @@ public class DaoInterventionImpl implements IDaoIntervention {
 		query.setParameter("pid", type.getIdTypeIntervention());
 		List<Intervention> liste = query.getResultList();
 		return liste;
+	}
+
+	@Override
+	public int nombreInterventionDiag(int idDiag) {
+		Query sql = em.createNativeQuery(
+				"select count(intervention.id_intervention) from  anomalie, intervention WHERE anomalie.no_diagnostic = 1 "
+				+ " and anomalie.id_anomalie = intervention.id_anomalie");
+		BigInteger retour = (BigInteger) sql.getSingleResult();
+		return retour.intValue();
 	}
 }

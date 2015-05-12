@@ -135,4 +135,10 @@ public class BusinessInterventionImpl implements IBusinessIntervention {
 			Intervention intervention) {
 		return proxyEtatAvancement.recupererEtatParIntervention(intervention);
 	}
+
+	@Override
+	public int nombreInterventionDiag(int idDiag) {
+		// TODO Auto-generated method stub
+		return proxyIntervention.nombreInterventionDiag(idDiag);
+	}
 }

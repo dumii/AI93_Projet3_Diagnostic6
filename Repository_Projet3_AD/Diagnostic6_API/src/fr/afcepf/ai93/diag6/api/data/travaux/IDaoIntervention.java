@@ -20,4 +20,6 @@ public interface IDaoIntervention {
     public List<Intervention> rechercherInterventionSurAnomalie(int idAnomalie);
     
     public List<Intervention> recupereInterventionparType(TypeIntervention type);
+    
+    int nombreInterventionDiag(int idDiag);
 }

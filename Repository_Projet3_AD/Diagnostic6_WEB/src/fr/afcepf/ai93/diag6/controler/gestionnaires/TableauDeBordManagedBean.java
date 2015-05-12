@@ -1,7 +1,11 @@
 package fr.afcepf.ai93.diag6.controler.gestionnaires;
 
 import java.util.ArrayList;
+
 import java.util.Collection;
+
+import java.util.Date;
+
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -26,7 +30,7 @@ import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
 @ManagedBean(name="mbTableauDeBord")
 @SessionScoped
 public class TableauDeBordManagedBean {
-	
+
 	@EJB 
 	private IBusinessErp proxyBusinessErp; 
 	@EJB
@@ -35,7 +39,7 @@ public class TableauDeBordManagedBean {
 	private IBusinessAnomalie proxyBusinessAnomalie; 
 	@EJB
 	private IBusinessIntervention proxyBusinessIntervention;
-	
+
 	private List<Erp> listeErpComplete; 
 	private List<TypeDiagnostic> listeTypesDiagnosticComplete; 
 	private List<TypeErp> listeTypesErpComplete; 
@@ -45,6 +49,7 @@ public class TableauDeBordManagedBean {
 	private int niveauMoyen; 
 	private List<Erp> listeErpFiltree; 
 	private int nbInterventions; 
+
 	private int idErpSelectionne; 
 	private int idTypeErp; 
 	private int idEtatAvancementSelectionne; 
@@ -59,7 +64,7 @@ public class TableauDeBordManagedBean {
 		recupererTypesErp(); 
 		recupererEtatsAvancementTravaux();
 	}
-	
+
 	private void recupererTousLesErp(){
 		listeErpComplete = proxyBusinessErp.recupereToutErp();
 		for(Erp e : listeErpComplete){
@@ -76,63 +81,55 @@ public class TableauDeBordManagedBean {
 		}
 		listeErpFiltree = listeErpComplete;
 	}
-	
+
 	private void recupererTypesDiagnostic(){
 		listeTypesDiagnosticComplete = proxyBusinessDiagnostic.recupereTypeDiagnostic();
 	}
-	
+
 	private void recupererTypesErp(){
 		listeTypesErpComplete = proxyBusinessErp.recupererToutTypeErp(); 
 	}
-	
+
 	private void recupererCategorieErp(){
 		listeCategoriesErpComplete = proxyBusinessErp.recupererToutCategorieErp();
 	}
-	
+
 	private void recupererEtatsAvancementTravaux(){
 		listeEtatsComplete = proxyBusinessIntervention.recupererTousEtats(); 
 		listeEtatsComplete.add(new EtatAvancementTravaux(5, "Sans intervention")); 
-		for (EtatAvancementTravaux e : listeEtatsComplete)
-			System.out.println(e.getIntituleEtatAvancement());
+	
+
+	public int calculAnomaliesParDiag(Erp e, Diagnostic d){
+		return e.getListeDiagnosticErp().size();
+
 	}
 	
-	public int calculAnomaliesParDiag(Diagnostic d){
-		List<Anomalie> listeAnomaliesParDiag = proxyBusinessAnomalie.recupereAnomalieParDiagnostic(d.getIdDiagnostic());
-		//dans la meme methode, on calcule aussi le nombre d'interventions sur le diagnostic
-		nbInterventions = 0; 
-		for (Anomalie a : listeAnomaliesParDiag){
-			List<Intervention> liste = proxyBusinessIntervention.rechercherInterventionSurAnomalie(a.getIdAnomalie()); 
-			if(liste.size()>0) {
-				nbInterventions++; 
-			}
-		}
-		//fin du calcul du nb interventions
-		return listeAnomaliesParDiag.size(); 
-	}
-	
+
+
 	public int calculInterventionsParDiag(Diagnostic d){
-		return nbInterventions; 
+		return proxyBusinessIntervention.nombreInterventionDiag(d.getIdDiagnostic()); 
+
 	}
 	
 	public int calculerMoyenneParDiag(Diagnostic d){
 		List<Anomalie> listeAnomaliesParDiag = proxyBusinessAnomalie.recupereAnomalieParDiagnostic(d.getIdDiagnostic());
 		int sommeValeurs =0; 
-		for (Anomalie a : listeAnomaliesParDiag){
+		for (Anomalie a : listeAnomaliesParDiagTmp){
 			sommeValeurs+=a.getIndicateur().getValeurIndicateur(); 
 		}
 		switch (d.getTypeDiagnostic().getIdTypeDiagnostic()){
-			case(1): niveauMoyen = calculMoyAccessibilite(sommeValeurs, listeAnomaliesParDiag.size()); 
-					 break; 
-			case(2): niveauMoyen = calculMoyEnergie(sommeValeurs, listeAnomaliesParDiag.size()); 
-					break; 
-			case(3): niveauMoyen = calculMoySecurite(sommeValeurs, listeAnomaliesParDiag.size()); 
-					break; 
-			case(4): niveauMoyen = calculMoyHygiene(sommeValeurs, listeAnomaliesParDiag.size()); 
-					break; 
+		case(1): niveauMoyen = calculMoyAccessibilite(sommeValeurs, listeAnomaliesParDiagTmp.size()); 
+		break; 
+		case(2): niveauMoyen = calculMoyEnergie(sommeValeurs, listeAnomaliesParDiagTmp.size()); 
+		break; 
+		case(3): niveauMoyen = calculMoySecurite(sommeValeurs, listeAnomaliesParDiagTmp.size()); 
+		break; 
+		case(4): niveauMoyen = calculMoyHygiene(sommeValeurs, listeAnomaliesParDiagTmp.size()); 
+		break; 
 		}
 		return niveauMoyen; 
 	}
-	
+
 	private int calculMoyAccessibilite(int somme, int nombre){
 		return somme/nombre; 
 	}
