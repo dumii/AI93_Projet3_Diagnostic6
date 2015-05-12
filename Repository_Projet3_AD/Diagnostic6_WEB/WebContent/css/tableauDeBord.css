@@ -1,4 +1,9 @@
 
+html
+{
+	overflow: scroll;
+}
+
 #panel{
 	font-family: Corbel;
 }
@@ -36,7 +41,7 @@
 	float: left;
 	width: 8%;
 	text-align: center;
-	margin-top: 3%;
+	margin-top: 1%;
 }
 .boutonsActions{
 	float: right;

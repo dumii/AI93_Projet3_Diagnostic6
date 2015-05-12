@@ -14,6 +14,8 @@
 
 		<ui:define name="head">
 			<link href="css/tableauDeBord.css" rel="stylesheet" type="text/css" />
+
+
 		</ui:define>
 		<ui:define name="content">
 			<h:form>
@@ -56,27 +58,65 @@
 									</div>
 									<div class="nbInterDiag">
 										<h:outputText
-											value="#{mbTableauDeBord.calculInterventionsParDiag(d)}" />
-										<h:outputText value=" interventions" />
+											value="#{mbTableauDeBord.calculAnomaliesParDiag(o, d)}" />
+										<h:outputText value=" anomalies" />
 										<br />
 										<h:outputText
-											value="#{mbTableauDeBord.calculAnomaliesParDiag(d)}" />
-										<h:outputText value=" anomalies" />
+											value="#{mbTableauDeBord.calculInterventionsParDiag(d)}" />
+										<h:outputText value=" interventions" />
 									</div>
 									<div class="logoIndicateur">
 										<h:panelGroup layout="block"
-											rendered="#{mb}">
-											<img src="images/tableauDeBord/TypeAcces.75.71.png" alt=""
-												id="iconeTypeDiag" />
+											rendered="#{mbTableauDeBord.calculerMoyenneParDiag(d) == 1}">
+											<img
+												src="images/tableauDeBord/Indicateur Vert 1 - 153.75.png"
+												alt="" id="iconeIndicateur" />
 										</h:panelGroup>
-									
-										<img
-											src="images/tableauDeBord/Indicateur Jaune 2 - 153.75.png"
-											alt="" />
+										<h:panelGroup layout="block"
+											rendered="#{mbTableauDeBord.niveauMoyen == 2}">
+											<img
+												src="images/tableauDeBord/Indicateur Jaune 2 - 153.75.png"
+												alt="" id="iconeIndicateur" />
+										</h:panelGroup>
+										<h:panelGroup layout="block"
+											rendered="#{mbTableauDeBord.niveauMoyen == 3}">
+											<img
+												src="images/tableauDeBord/Indicateur Orange 3 - 152.75.png"
+												alt="" id="iconeIndicateur" />
+										</h:panelGroup>
+										<h:panelGroup layout="block"
+											rendered="#{mbTableauDeBord.niveauMoyen == 4}">
+											<img
+												src="images/tableauDeBord/Indicateur Rouge 4 - 153.75.png"
+												alt="" id="iconeIndicateur" />
+										</h:panelGroup>
 									</div>
 									<div class="logoEtatAvancement">
-										<img src="images/tableauDeBord/iconeEnAttente.26.26.png"
-											alt="" style="vertical-align: middle" />
+										<h:panelGroup layout="block"
+											rendered="#{mbTableauDeBord.calculEtatAvancement(d) == 1}">
+											<img src="images/tableauDeBord/iconeValider5.png" alt=""
+												id="iconeEtatAvancement" />
+										</h:panelGroup>
+										<h:panelGroup layout="block"
+											rendered="#{mbTableauDeBord.etatTmp == 2}">
+											<img src="images/tableauDeBord/iconeSuspendue5.png" alt=""
+												id="iconeEtatAvancement" />
+										</h:panelGroup>
+										<h:panelGroup layout="block"
+											rendered="#{mbTableauDeBord.etatTmp == 3}">
+											<img src="images/tableauDeBord/iconeEnCours5.png" alt=""
+												id="iconeEtatAvancement" />
+										</h:panelGroup>
+										<h:panelGroup layout="block"
+											rendered="#{mbTableauDeBord.etatTmp == 4}">
+											<img src="images/tableauDeBord/iconeSuspendue5.png" alt=""
+												id="iconeEtatAvancement" />
+										</h:panelGroup>
+										<h:panelGroup layout="block"
+											rendered="#{mbTableauDeBord.etatTmp == 5}">
+											<img src="images/tableauDeBord/iconeEnAttente5.png" alt=""
+												id="iconeEtatAvancement" />
+										</h:panelGroup>
 									</div>
 									<div class="boutonsActions">
 										<div>
@@ -98,7 +138,18 @@
 			</h:form>
 
 		</ui:define>
-
+		<script>
+			jQuery.noConflict();
+			$(function(){
+	  			$(window).scroll(function () {//Au scroll dans la fenetre on déclenche la fonction
+	      			if ($(this).scrollTop() > 0) { //si on a défilé de plus de 150px du haut vers le bas
+	          		$('#enTete').addClass("fixEntete"); 
+	      			} else {
+	      				$('#enTete').removeClass("fixEntete");
+	      			}
+	  			});
+	 		});
+</script>
 	</ui:composition>
 
 

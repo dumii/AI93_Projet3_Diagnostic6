@@ -28,7 +28,8 @@ body
   	background-repeat: no-repeat, no-repeat;
 	background-color: white;
 	position: fixed;
-	margin-top: -6em;
+	margin-top: 2em;
+	z-index: 9999;
 }
 
 #rechercheBandeau {
