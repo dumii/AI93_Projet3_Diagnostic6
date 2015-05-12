@@ -5,9 +5,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import org.richfaces.resource.PostConstructResource;
 
@@ -36,6 +39,7 @@ import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
 @ManagedBean(name="mbDonneesGenerales")
 @SessionScoped
 public class ConsultationDiagnosticManagedBean implements Serializable {
+	
 	@EJB 
 	private IBusinessErp proxyBusinessErp; 
 	@EJB
@@ -57,12 +61,29 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 	private List<Indicateur> listeIndicateursParDiagnostic; 
 	private List<Expert> listeExperts;
 	private Diagnostic dmodif = new Diagnostic(); 
+	
+	@PostConstruct
+	public void init()
+	{
 
-	@PostConstructResource
-	private void init() {
-		idDiag=0;
+	}
+	
+	//Sélection de l'ERP ou chargement de l'ERP en paramètres
+	public void loadDiagnostic(){
+		String param = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
+		if (param != null && !param.equals(""))
+		{
+			idDiag = Integer.parseInt(param);
+			recupererDiagnostic();
+		}
 	}
 
+	public void clickNode (int idDiag)
+	{
+		this.idDiag = idDiag;
+		recupererDiagnostic();
+	}
+	
 	public void recupererDiagnostic(){
 		diagnosticSelectionne = proxyBusinessDiagnostic.recupereDiagnostic(idDiag); 
 		recupErp();	
@@ -70,29 +91,6 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 		recupererIndicateurParTypeDiag(); 
 		recupererExperts(); 
 		amodif=new Anomalie(); 
-	
-//		
-//		Diagnostic dtest;
-//		dtest = new Diagnostic(); 
-//		Utilisateur user = new Utilisateur();
-//		user.setIdUtilisateur(1);
-//		user.setNomUtilisateur("bambi");
-//		dtest.setIdDiagnostic(16);
-//		Erp erp = new Erp(); 
-//		erp.setIdErp(2);
-//		dtest.setErp(erp);
-//		Expert exp = new Expert();
-//		exp.setIdExpert(2);
-//		dtest.setExpert(exp);
-//		TypeDiagnostic tp = new TypeDiagnostic();
-//		tp.setIdTypeDiagnostic(1);
-//		dtest.setTypeDiagnostic(tp);
-//		dtest.setNomDiagnostiqueur(user.getNomUtilisateur());
-//		dtest.setDateRealisationDiagnostic(new Date());
-//		dtest.setDateSaisieDiagnostic(new Date());
-//		dtest.setIntituleDiagnostic("coucou");
-//		dtest.setTraite(0);
-//		modificationDiagnostic(dtest,user); 
 	}
 
 	private void recupererExperts() {

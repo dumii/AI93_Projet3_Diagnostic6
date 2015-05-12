@@ -11,6 +11,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import fr.afcepf.ai93.diag6.api.business.autres.IBusinessArtisan;
 import fr.afcepf.ai93.diag6.api.business.diagnostic.IBusinessAnomalie;
@@ -69,14 +70,29 @@ public class PlanningTravauxManagedBean {
 	@PostConstruct
 	public void init() throws ParseException
 	{
+
+	}
+	
+	//Sélection de l'ERP ou chargement de l'ERP en paramètres
+	public void loadChantier() throws ParseException{
+		String param = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
+		if (param != null && !param.equals(""))
+		{
+			int idERP = Integer.parseInt(param);
+			monERP = proxyERP.recupererErpParId(idERP);
+			initialisationDesDonnees();
+		}
+	}
+	
+	//Méthodes
+	public void initialisationDesDonnees() throws ParseException
+	{
 		formater = new SimpleDateFormat("dd/MM/yyyy");
 		shortFormater = new SimpleDateFormat("dd/MM");
 		
 		déterminerDates();
-		//Initialisation de l'ERP à modifier par la suite
-		monERP = proxyERP.recupererErpParId(10);
 
-		listeDiagnosticERP = proxyDiagnostic.recupereDiagnosticParErp(monERP);
+		listeDiagnosticERP = proxyDiagnostic.recupereDiagnosticNonTraitesParErp(monERP);
 		listeAnomalieAvecInterventionERP = new ArrayList<Anomalie>();
 		listeAnomalieSansInterventionERP = new ArrayList<Anomalie>();
 		listeTypesERP = new ArrayList<>();
@@ -88,7 +104,6 @@ public class PlanningTravauxManagedBean {
 		chargerTypesInterventionEtIntervention();
 	}
 	
-	//Méthodes
 	
 	public String ajouterIntervention (Intervention intervention, Anomalie anom) throws ParseException
 	{
@@ -287,6 +302,12 @@ public class PlanningTravauxManagedBean {
 	public List<Artisan> avoirListeArtisans(TypeIntervention typeInter)
 	{
 		return proxyArtisan.recupererArtisansParTypeIntervention(typeInter);
+	}
+	
+	public List<Artisan> changerListeArtisans(int idtypeIntervention)
+	{
+		TypeIntervention type = proxyIntervention.recupererTypeParID(idtypeIntervention);
+		return proxyArtisan.recupererArtisansParTypeIntervention(type);
 	}
 
 	public List<EtatAvancementTravaux> listeEtatDisponiblesParIntervention(Intervention intervention)

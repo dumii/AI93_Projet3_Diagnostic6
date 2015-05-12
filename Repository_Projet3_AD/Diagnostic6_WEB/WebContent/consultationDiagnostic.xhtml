@@ -6,36 +6,32 @@
 	xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich">
 
-<h:head>
-
-	<link rel="stylesheet"
-		href="//code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css" />
-	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-</h:head>
-
 <ui:composition template="/WEB-INF/Template2Diagnostic6.xhtml">
 	<ui:define name="boutonDeconnexion">
+		<f:event listener="#{mbDonneesGenerales.loadDiagnostic()}"
+			type="preRenderView" />
 		<h:form>
-		<h:commandButton value="Deconnexion" styleClass="logoDeconnexion"
-							action="#{mbUtilisateur.logout()}" image="images/iconeDeconnexion2.png" 
-							title="Deconnexion" />
+			<h:commandButton value="Deconnexion" styleClass="logoDeconnexion"
+				action="#{mbUtilisateur.logout()}"
+				image="images/iconeDeconnexion2.png" title="Deconnexion" />
 		</h:form>
 	</ui:define>
 	<ui:define name="title">Diagnostic 6 - Consultation diagnostic</ui:define>
 	<ui:define name="head">
-	<link href="css/consultationDiagnostic.css" rel="stylesheet" type="text/css" />
+		<link href="css/consultationDiagnostic.css" rel="stylesheet"
+			type="text/css" />
 	</ui:define>
-	
+
 	<ui:define name="accordeon1">
-		Diagnostics avec des interventions en cours (#{mbArborescence.listeDiagnosticsIntervEnCours.size()})
+		Diagnostics avec des interventions en cours (#{mbArborescenceDiagnostic.listeDiagnosticsIntervEnCours.size()})
 	</ui:define>
 
 	<ui:define name="arborescence1">
 		<h:form>
 			<rich:tree id="tree1" nodeType="#{node.type}" var="node"
-				value="#{mbArborescence.rootNodes1}" toggleType="client"
+				value="#{mbArborescenceDiagnostic.rootNodes1}" toggleType="client"
 				selectionType="ajax"
-				selectionChangeListener="#{mbArborescence.selectionChanged}">
+				selectionChangeListener="#{mbArborescenceDiagnostic.selectionChanged}">
 				<rich:treeNode type="typeErp">
                     #{node.name}
                 </rich:treeNode>
@@ -43,22 +39,27 @@
                     #{node.name}
                 </rich:treeNode>
 				<rich:treeNode type="diagnostic">
-                    #{node.intitule} - #{node.name} - #{node.traite}
-                </rich:treeNode>
+					<h:outputLabel
+						value="#{node.intitule} - #{node.name} - #{node.idDiag}">
+						<f:ajax event="click"
+							listener="#{mbDonneesGenerales.clickNode(mbArborescenceDiagnostic.currentSelection.idDiag)}"
+							render=":toto:lblReponseAjax" />
+					</h:outputLabel>
+				</rich:treeNode>
 			</rich:tree>
 		</h:form>
 	</ui:define>
-	
+
 	<ui:define name="accordeon2">
-		Diagnostics avec des interventions en attente (#{mbArborescence.listeDiagnosticsIntervAttente.size()})
+		Diagnostics avec des interventions en attente (#{mbArborescenceDiagnostic.listeDiagnosticsIntervAttente.size()})
 	</ui:define>
 
 	<ui:define name="arborescence2">
 		<h:form>
 			<rich:tree id="tree2" nodeType="#{node.type}" var="node"
-				value="#{mbArborescence.rootNodes2}" toggleType="client"
+				value="#{mbArborescenceDiagnostic.rootNodes2}" toggleType="client"
 				selectionType="ajax"
-				selectionChangeListener="#{mbArborescence.selectionChanged}">
+				selectionChangeListener="#{mbArborescenceDiagnostic.selectionChanged}">
 				<rich:treeNode type="typeErp">
                     #{node.name}
                 </rich:treeNode>
@@ -66,22 +67,27 @@
                     #{node.name}
                 </rich:treeNode>
 				<rich:treeNode type="diagnostic">
-                    #{node.intitule} - #{node.name} - #{node.traite}
-                </rich:treeNode>
+					<h:outputLabel
+						value="#{node.intitule} - #{node.name} - #{node.idDiag}">
+						<f:ajax event="click"
+							listener="#{mbDonneesGenerales.clickNode(mbArborescenceDiagnostic.currentSelection.idDiag)}"
+							render=":toto:lblReponseAjax" />
+					</h:outputLabel>
+				</rich:treeNode>
 			</rich:tree>
 		</h:form>
 	</ui:define>
-	
+
 	<ui:define name="accordeon3">
-		Diagnostics archivés (#{mbArborescence.listeDiagnosticsIntervArchive.size()})
+		Diagnostics archivés (#{mbArborescenceDiagnostic.listeDiagnosticsIntervArchive.size()})
 	</ui:define>
 
 	<ui:define name="arborescence3">
 		<h:form>
 			<rich:tree id="tree3" nodeType="#{node.type}" var="node"
-				value="#{mbArborescence.rootNodes3}" toggleType="client"
+				value="#{mbArborescenceDiagnostic.rootNodes3}" toggleType="client"
 				selectionType="ajax"
-				selectionChangeListener="#{mbArborescence.selectionChanged}">
+				selectionChangeListener="#{mbArborescenceDiagnostic.selectionChanged}">
 				<rich:treeNode type="typeErp">
                     #{node.name}
                 </rich:treeNode>
@@ -89,8 +95,13 @@
                     #{node.name}
                 </rich:treeNode>
 				<rich:treeNode type="diagnostic">
-                    #{node.intitule} - #{node.name} - #{node.traite}
-                </rich:treeNode>
+					<h:outputLabel
+						value="#{node.intitule} - #{node.name} - #{node.idDiag}">
+						<f:ajax event="click"
+							listener="#{mbDonneesGenerales.clickNode(mbArborescenceDiagnostic.currentSelection.idDiag)}"
+							render=":toto:lblReponseAjax" />
+					</h:outputLabel>
+				</rich:treeNode>
 			</rich:tree>
 		</h:form>
 	</ui:define>
@@ -99,257 +110,313 @@
 
 
 	<ui:define name="content">
-<f:view>
-		
-		<div id="content">
-		<h:form>
-		<h:inputText value="#{mbDonneesGenerales.idDiag}" />
-				<a4j:commandLink 
-					value="Recuperer diagnostic"
-					action="#{mbDonneesGenerales.recupererDiagnostic()}" 
-					render="lblReponseAjax" />
-		</h:form>
-		<h:form>
-			<h:panelGroup id="lblReponseAjax" layout="block" >
-		
-			<div class="mini-barreEtat">
-				<h2>#{mbDonneesGenerales.diagnosticSelectionne.intituleDiagnostic}
-				<div class="mini-barreEtat-boutons">
-					<a href="">
-						<img class="boutons-mini-barreEtat"
-						id="notificationGrisee" name="notificationG"
-						src="images/consultationDiagnostic/NotificationIconeDiagGrise.26.26.nette.png"
-						onClick="notification(this.src)" /></a> 
-					<a href="">
-						<img
-						class="boutons-mini-barreEtat" id="notificationRouge"
-						name="notificationR"
-						src="images/consultationDiagnostic/NotifIconeDiagRouge.26.26.png"
-						onClick="denotification(this.src)" /></a> 
-					<a href="">
-						<img
-						class="boutons-mini-barreEtat" id="favoritesGrisee"
-						name="favorite"
-						src="images/consultationDiagnostic/NoFavoritesIcon.26.26.png"
-						onClick="favorisation(this.src)" /></a> 
-					<a href="">
-						<img
-						class="boutons-mini-barreEtat" id="favoriteJaune" name="favorite"
-						src="images/consultationDiagnostic/FavoriteIcon.26.26.png"
-						onClick="defavorisation(this.src)" /></a>
-				</div>
-				</h2>
-			</div>
-<!-- Section INFORMATIONS GENERALES -->
-			<div id="InfoErpDiagnostic">
-				<div id="ErpDiagGeneral">
-					<div id="ErpDiagTitre" >
-						<h3>
-							<span>Informations générales</span>
-						<h:panelGroup style="float:right; margin-top: 5px;" >
-						 <f:attribute name="rendered" value="#{mbDonneesGenerales.isSelected()}"></f:attribute>
-						
-                            	<h:commandButton action="#{mbDonneesGenerales.modificationDiagnostic()}" value="#{mbDonneesGenerales.clickChangeBouton()}" id="modifAnom"> 
-                            	</h:commandButton>
-                            	<h:commandButton action="#{mbDonneesGenerales.annulerModifDiagnostic()}"  value="Annuler" id="annulModif" oncomplete="ouverture()">
-                            		<f:attribute name="disabled" value="#{mbDonneesGenerales.isEnableDiag()}"></f:attribute>
-                            	</h:commandButton>
-                         
-                        </h:panelGroup>
-						</h3>
-					</div>
-					<div class="tableErpDiagGeneral">
-					<rich:panel style="width:99.5%; background-color:#f7f7f7;border:none; font-weight: bold;" id="panelInfosGen" >
-                        <f:attribute name="rendered" value="#{mbDonneesGenerales.isSelected()}"></f:attribute>
-                        <h:panelGrid columns="2" style="float:left; width:50%;" >
-                        	<h:outputText value="ERP concerné : " />
-                        	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.nomErp}" />
-                        	<h:outputText value="Catégorie : " />
-                        	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.categorieErp.denominationCategorieErp}" />
-                        	<h:outputText value="Fonction : " />
-                        	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.typeErp.denominationTypeErp} #{mbDonneesGenerales.diagnosticSelectionne.erp.typeErp.typeErp}" />	
-                        	<h:outputText value="Adresse : " />
-                        	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.numVoieErp} #{mbDonneesGenerales.diagnosticSelectionne.erp.nomVoieErp}
-                        	 #{mbDonneesGenerales.diagnosticSelectionne.erp.localisation.codePostal} #{mbDonneesGenerales.diagnosticSelectionne.erp.localisation.ville}" 
-                        	escape="false" />
-                        	<h:outputText value="Propriétaire : " />
-                        	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.erp.proprietaire.prenomProprietaire} #{mbDonneesGenerales.diagnosticSelectionne.erp.proprietaire.nomProprietaire}" />
-                        	<h:outputText value="Coordonées : " />
-                        	<h:outputText value="Tél : #{mbDonneesGenerales.diagnosticSelectionne.erp.proprietaire.telProprietaire} 
+		<f:view>
+
+			<div id="content">
+
+				<h:form id="toto">
+					<h:panelGroup id="lblReponseAjax" layout="block">
+
+						<div class="mini-barreEtat">
+							<h2>
+								#{mbDonneesGenerales.diagnosticSelectionne.intituleDiagnostic}
+								<div class="mini-barreEtat-boutons">
+									<a href=""> <img class="boutons-mini-barreEtat"
+										id="notificationGrisee" name="notificationG"
+										src="images/consultationDiagnostic/NotificationIconeDiagGrise.26.26.nette.png"
+										onClick="notification(this.src)" /></a> <a href=""> <img
+										class="boutons-mini-barreEtat" id="notificationRouge"
+										name="notificationR"
+										src="images/consultationDiagnostic/NotifIconeDiagRouge.26.26.png"
+										onClick="denotification(this.src)" /></a> <a href=""> <img
+										class="boutons-mini-barreEtat" id="favoritesGrisee"
+										name="favorite"
+										src="images/consultationDiagnostic/NoFavoritesIcon.26.26.png"
+										onClick="favorisation(this.src)" /></a> <a href=""> <img
+										class="boutons-mini-barreEtat" id="favoriteJaune"
+										name="favorite"
+										src="images/consultationDiagnostic/FavoriteIcon.26.26.png"
+										onClick="defavorisation(this.src)" /></a>
+								</div>
+							</h2>
+						</div>
+						<!-- Section INFORMATIONS GENERALES -->
+						<div id="InfoErpDiagnostic">
+							<div id="ErpDiagGeneral">
+								<div id="ErpDiagTitre">
+									<h3>
+										<span>Informations générales</span>
+										<h:panelGroup style="float:right; margin-top: 5px;">
+											<f:attribute name="rendered"
+												value="#{mbDonneesGenerales.isSelected()}"></f:attribute>
+
+											<h:commandButton
+												action="#{mbDonneesGenerales.modificationDiagnostic()}"
+												value="#{mbDonneesGenerales.clickChangeBouton()}"
+												id="modifAnom">
+											</h:commandButton>
+											<h:commandButton
+												action="#{mbDonneesGenerales.annulerModifDiagnostic()}"
+												value="Annuler" id="annulModif" oncomplete="ouverture()">
+												<f:attribute name="disabled"
+													value="#{mbDonneesGenerales.isEnableDiag()}"></f:attribute>
+											</h:commandButton>
+
+										</h:panelGroup>
+									</h3>
+								</div>
+								<div class="tableErpDiagGeneral">
+									<rich:panel
+										style="width:99.5%; background-color:#f7f7f7;border:none; font-weight: bold;"
+										id="panelInfosGen">
+										<f:attribute name="rendered"
+											value="#{mbDonneesGenerales.isSelected()}"></f:attribute>
+										<h:panelGrid columns="2" style="float:left; width:50%;">
+											<h:outputText value="ERP concerné : " />
+											<h:outputText
+												value="#{mbDonneesGenerales.diagnosticSelectionne.erp.nomErp}" />
+											<h:outputText value="Catégorie : " />
+											<h:outputText
+												value="#{mbDonneesGenerales.diagnosticSelectionne.erp.categorieErp.denominationCategorieErp}" />
+											<h:outputText value="Fonction : " />
+											<h:outputText
+												value="#{mbDonneesGenerales.diagnosticSelectionne.erp.typeErp.denominationTypeErp} #{mbDonneesGenerales.diagnosticSelectionne.erp.typeErp.typeErp}" />
+											<h:outputText value="Adresse : " />
+											<h:outputText
+												value="#{mbDonneesGenerales.diagnosticSelectionne.erp.numVoieErp} #{mbDonneesGenerales.diagnosticSelectionne.erp.nomVoieErp}
+                        	 #{mbDonneesGenerales.diagnosticSelectionne.erp.localisation.codePostal} #{mbDonneesGenerales.diagnosticSelectionne.erp.localisation.ville}"
+												escape="false" />
+											<h:outputText value="Propriétaire : " />
+											<h:outputText
+												value="#{mbDonneesGenerales.diagnosticSelectionne.erp.proprietaire.prenomProprietaire} #{mbDonneesGenerales.diagnosticSelectionne.erp.proprietaire.nomProprietaire}" />
+											<h:outputText value="Coordonées : " />
+											<h:outputText
+												value="Tél : #{mbDonneesGenerales.diagnosticSelectionne.erp.proprietaire.telProprietaire} 
                         	&lt;br /&gt; Mail : #{mbDonneesGenerales.diagnosticSelectionne.erp.proprietaire.mailProprietaire}
                         	&lt;br /&gt; #{mbDonneesGenerales.diagnosticSelectionne.erp.proprietaire.numVoieProprietaire} #{mbDonneesGenerales.diagnosticSelectionne.erp.proprietaire.nomVoieProprietaire} 
-                        	 #{mbDonneesGenerales.diagnosticSelectionne.erp.proprietaire.localisation.codePostal} #{mbDonneesGenerales.diagnosticSelectionne.erp.proprietaire.localisation.ville}" 
-                        	escape="false"/>
-                        </h:panelGrid>
-                        <h:panelGrid columns="2">
-                        	<h:outputText value="Etat diagnostic : " />
-							<h:selectOneMenu value="#{mbDonneesGenerales.diagnosticSelectionne.traite}">
-                            		<f:selectItem itemLabel="Traité" itemValue="1"/>
-                            		<f:selectItem itemLabel="Non traité" itemValue="0"/>
-                            		<f:attribute name="disabled" value="#{mbDonneesGenerales.isEnableDiag()}"></f:attribute>
-                            </h:selectOneMenu>
-                        	<h:outputText value="Date de réalisation : " />
-                        	<rich:calendar value="#{mbDonneesGenerales.diagnosticSelectionne.dateRealisationDiagnostic}"
-                        		locale="#{calendarBean.locale}"
-                       			datePattern="#{calendarBean.pattern}"
-                        		showApplyButton="#{calendarBean.showApply}" cellWidth="24px" cellHeight="22px" style="width:200px">
-                        		<f:attribute name="disabled" value="#{mbDonneesGenerales.isEnableDiag()}"></f:attribute>
-                        		</rich:calendar>
-                        	<h:outputText value="Date d'enregistrement : " />
-                        	<h:outputText value="#{mbDonneesGenerales.diagnosticSelectionne.dateSaisieDiagnostic.toLocaleString()}" />
-							<h:outputText value="Expert : " />
-							<h:selectOneMenu value="#{mbDonneesGenerales.diagnosticSelectionne.expert.idExpert}">
-                            		<f:selectItems value="#{mbDonneesGenerales.listeExperts}" var = "ind"
-                            						itemLabel="#{ind.prenomExpert} #{ind.nomExpert}"
-                            						itemValue="#{ind.idExpert}" ></f:selectItems>
-                            		<f:attribute name="disabled" value="#{mbDonneesGenerales.isEnableDiag()}"></f:attribute>
-                            </h:selectOneMenu>
-                            
-                        	<h:outputText value="Coordonées : "  />
-                        	<h:outputText value="Tél : #{mbDonneesGenerales.diagnosticSelectionne.expert.telExpert}
+                        	 #{mbDonneesGenerales.diagnosticSelectionne.erp.proprietaire.localisation.codePostal} #{mbDonneesGenerales.diagnosticSelectionne.erp.proprietaire.localisation.ville}"
+												escape="false" />
+										</h:panelGrid>
+										<h:panelGrid columns="2">
+											<h:outputText value="Etat diagnostic : " />
+											<h:selectOneMenu
+												value="#{mbDonneesGenerales.diagnosticSelectionne.traite}">
+												<f:selectItem itemLabel="Traité" itemValue="1" />
+												<f:selectItem itemLabel="Non traité" itemValue="0" />
+												<f:attribute name="disabled"
+													value="#{mbDonneesGenerales.isEnableDiag()}"></f:attribute>
+											</h:selectOneMenu>
+											<h:outputText value="Date de réalisation : " />
+											<rich:calendar
+												value="#{mbDonneesGenerales.diagnosticSelectionne.dateRealisationDiagnostic}"
+												locale="#{calendarBean.locale}"
+												datePattern="#{calendarBean.pattern}"
+												showApplyButton="#{calendarBean.showApply}" cellWidth="24px"
+												cellHeight="22px" style="width:200px">
+												<f:attribute name="disabled"
+													value="#{mbDonneesGenerales.isEnableDiag()}"></f:attribute>
+											</rich:calendar>
+											<h:outputText value="Date d'enregistrement : " />
+											<h:outputText
+												value="#{mbDonneesGenerales.diagnosticSelectionne.dateSaisieDiagnostic.toLocaleString()}" />
+											<h:outputText value="Expert : " />
+											<h:selectOneMenu
+												value="#{mbDonneesGenerales.diagnosticSelectionne.expert.idExpert}">
+												<f:selectItems value="#{mbDonneesGenerales.listeExperts}"
+													var="ind" itemLabel="#{ind.prenomExpert} #{ind.nomExpert}"
+													itemValue="#{ind.idExpert}"></f:selectItems>
+												<f:attribute name="disabled"
+													value="#{mbDonneesGenerales.isEnableDiag()}"></f:attribute>
+											</h:selectOneMenu>
+
+											<h:outputText value="Coordonées : " />
+											<h:outputText
+												value="Tél : #{mbDonneesGenerales.diagnosticSelectionne.expert.telExpert}
                         	&lt;br /&gt; Mail :  #{mbDonneesGenerales.diagnosticSelectionne.expert.mailExpert}
                         	&lt;br /&gt;  #{mbDonneesGenerales.diagnosticSelectionne.expert.numVoieExpert} #{mbDonneesGenerales.diagnosticSelectionne.expert.nomVoieExpert}
                         	&lt;br /&gt;  #{mbDonneesGenerales.diagnosticSelectionne.expert.localisation.codePostal} #{mbDonneesGenerales.diagnosticSelectionne.expert.localisation.ville}"
-                        	escape="false"/>
+												escape="false" />
 
-                        </h:panelGrid>
-                    </rich:panel>
-                    
-		
-					</div>
-				</div>
-			</div>
-<!-- Section INFORMATIONS DETAILLEES ERP -->
-				<div id="infoDetaille">
-					<div id="buttShowEDD">
-						<h3>
-							<span>Informations détaillées ERP</span>
-						</h3>
-					</div>
+										</h:panelGrid>
+									</rich:panel>
 
-					<div id="ErpDiagDetaille">
-						<div id="nbBatimentErp">
-							Nombres de bâtiments constituant l'ERP : #{mbDonneesGenerales.erpSelectionne.listeBatimentsErp.size()}
+
+								</div>
+							</div>
 						</div>
-						<h:panelGrid columns="1">
-           			 	<a4j:outputPanel id="panel" layout="block">
-               			<a4j:repeat value="#{mbDonneesGenerales.erpSelectionne.listeBatimentsErp}" var="o" rows="20" id="repeat">
-                    	<rich:panel style="float:left; width:200px; padding:1px; background-color:#f7f7f7; border-display:none;  ">
-                      		<h:outputText value="Intitulé : " style="font-weight:bold; margin-left:3px" />
-                           	<h:outputText value="#{o.intituleBatiment}" style="font-weight:bold" />
-                        	<h:panelGrid columns="2">
-                            	<h:outputText value="Nombre d'étages : " style="font-weight:bold" />
-                            	<h:outputText value="#{o.listeEtagesBatiment.size()}" />
-                            	<h:outputText value="Nombre de pièces : " style="font-weight:bold" />
-                            	<h:outputText value="#{mbDonneesGenerales.calculNbPiecesBat()}" id="nbPieces"  /> 
-                            	<h:outputText value="Nombre d'accès : " style="font-weight:bold" />
-                            	<h:outputText value="#{o.listeAccesBatiment.size()}" />
-                            	<h:outputText value="Nombre d'escaliers : " style="font-weight:bold" />
-                            	<h:outputText value="#{o.listeEscaliersBatiment.size()}" />
-                            	<h:outputText value="Nombre d'ascenseurs : " style="font-weight:bold" />
-                            	<h:outputText value="#{o.listeAscenceursBatiment.size()}" />
-                        	</h:panelGrid>
-                    	</rich:panel>
-                		</a4j:repeat>
-           				</a4j:outputPanel>
-       				 	</h:panelGrid>
-					</div>
-					
-					
-				</div>
-			
-			
-<!-- Section INFORMATIONS DETAILLEES DIAGNOSTIC AVEC ANOMALIES -->		
-			<div id="diagAnomalieSection">
-				<div id="diagnosticFiche">
-					<div id="ficheDiagTitre">
-						<h3>
-							<span>Informations détaillées diagnostic</span>
-						</h3>
-						
-					</div>
-					<div id="ficheAnomTitre">
-							Nombre d'anomalies recencées : 
-							#{mbDonneesGenerales.listeAnomaliesParDiagnostic.size()}  
-							<img class="ficheDiagTitreImage"
-							id="boutonModifier"
-							src="images/TypesDiagnosticIcones/TypeAcces.38.36.png" />
-					</div> 
-				</div>
-				<div id="anomaliesFiche">
-       									<h:panelGrid columns="1">
-           			 	<h:panelGroup id="panel2" layout="block">
-               			
-               			<ui:repeat value="#{mbDonneesGenerales.diagnosticSelectionne.listeAnomaliesDiagnostic}" var="o" rows="20" id="repeatAnomalies"
-               			style="width: 100%; font-family: Arial, Verdana, sans-serif; font-size: 13px; font-weight: normal;">
-                    	<rich:panel style="float:left; width:100%; background-color:#f7f7f7; border-display:none; border-bottom: 0px;
-						  border-left: 0px; border-right: 0px;">
-                        	<div>
-                        	<h:outputText value="Anomalie n° : " style="font-weight:bold; margin-left:4px;" /> 
-                            	<h:outputText value="#{o.idAnomalie}" style="font-weight:bold; border:none; font-color:black; margin-left: 88px;" id="idAnom"/>
-                            	<div style="float:right">
-                            	<h:commandButton action="#{mbDonneesGenerales.modificationAnomalie(o)}" value="#{mbDonneesGenerales.clickChangeBouton(o)}" id="modifAnom" > 
-                            	</h:commandButton>
-                            	<h:commandButton action="#{mbDonneesGenerales.annulerModifAnomalie(o)}"  value="Annuler" id="annulModif" >
-                            		<f:attribute name="disabled" value="#{mbDonneesGenerales.isEnable(o)}"></f:attribute>
-                            	</h:commandButton>
-                            	<h:commandButton action="#{mbDonneesGenerales.suppressionAnomalie(o)}" value="Suppression" />
-                            	</div>
-                        	</div>
-                        	<h:panelGrid columns="2" style="width: 100%; font-family: Arial, Verdana, sans-serif; color=gray; font-weight: normal; ">                           		<h:outputText value="Etat anomalie : " style="font-weight:bold "  />
-                           		                        	<f:attribute name="align" value="left"/>
-                           		<h:outputText value="#{mbDonneesGenerales.traiteAnomalie(o)}" disabled="#{mbDonneesGenerales.isEnable(o)}" />
-                            	<h:outputText value="Localisation : " style="font-weight:bold" />
-                            	<h:outputText value="#{mbDonneesGenerales.localisationAnomalie(o)}" />
-                            	<h:outputText value="Niveau indicateur : " style="font-weight:bold" />
-                            	<h:selectOneMenu value="#{o.indicateur.idIndicateur}" >
-                            		<f:selectItems value="#{mbDonneesGenerales.listeIndicateursParDiagnostic}" var = "ind"
-                            						itemLabel="#{ind.libelleIndicateur}"
-                            						itemValue="#{ind.idIndicateur}" ></f:selectItems>
-                            		<f:attribute name="disabled" value="#{mbDonneesGenerales.isEnable(o)}"></f:attribute>
-                            	</h:selectOneMenu>
-                            	<h:outputText value="Description : " style="font-weight:bold" />
-                            	<h:inputTextarea value="#{o.descriptionAnomalie}" class="inputTextAnomalieDisabled">
-                            		<f:attribute name="disabled" value="#{mbDonneesGenerales.isEnable(o)}"></f:attribute>
-                            	</h:inputTextarea>
-                            	<h:outputText value="Preconisation :" style="font-weight:bold" />
-                            	<h:inputTextarea value="#{o.preconisationAnomalie}" class="inputTextAnomalieDisabled">
-                            		<f:attribute name="disabled" value="#{mbDonneesGenerales.isEnable(o)}"></f:attribute>
-                            	</h:inputTextarea>
-                            	<h:outputText value="Coût estimé :" style="font-weight:bold" />
-                            	<h:inputText value="#{o.coutEstimeAnomalie}"   class="inputTextAnomalieDisabled">
-                            		<f:attribute name="disabled" value="#{mbDonneesGenerales.isEnable(o)}"></f:attribute>
-                            	</h:inputText>
-                            	<h:outputText value="Intervention :" style="font-weight:bold" />
-                            	<h:outputText value="#{mbDonneesGenerales.recupererEtatIntervention(o)}" disabled="true" class="inputTextAnomalieDisabled"/>
-                            	
-                        	</h:panelGrid>
-                        	
-                    	</rich:panel>
-                		</ui:repeat>
-                		
-           				</h:panelGroup>
-       				 	</h:panelGrid>
-				</div>
-			
-			</div>		
-			</h:panelGroup>	
-			</h:form>
-		</div>
+						<!-- Section INFORMATIONS DETAILLEES ERP -->
+						<div id="infoDetaille">
+							<div id="buttShowEDD">
+								<h3>
+									<span>Informations détaillées ERP</span>
+								</h3>
+							</div>
 
-<script>
-		jQuery.noConflict();
-		
-		$( "#radio" ).buttonset();
-		$( "#accordion" ).accordion();
-		$("button").button();
+							<div id="ErpDiagDetaille">
+								<div id="nbBatimentErp">Nombres de bâtiments constituant
+									l'ERP :
+									#{mbDonneesGenerales.erpSelectionne.listeBatimentsErp.size()}</div>
+								<h:panelGrid columns="1">
+									<a4j:outputPanel id="panel" layout="block">
+										<a4j:repeat
+											value="#{mbDonneesGenerales.erpSelectionne.listeBatimentsErp}"
+											var="o" rows="20" id="repeat">
+											<rich:panel
+												style="float:left; width:200px; padding:1px; background-color:#f7f7f7; border-display:none;  ">
+												<h:outputText value="Intitulé : "
+													style="font-weight:bold; margin-left:3px" />
+												<h:outputText value="#{o.intituleBatiment}"
+													style="font-weight:bold" />
+												<h:panelGrid columns="2">
+													<h:outputText value="Nombre d'étages : "
+														style="font-weight:bold" />
+													<h:outputText value="#{o.listeEtagesBatiment.size()}" />
+													<h:outputText value="Nombre de pièces : "
+														style="font-weight:bold" />
+													<h:outputText
+														value="#{mbDonneesGenerales.calculNbPiecesBat()}"
+														id="nbPieces" />
+													<h:outputText value="Nombre d'accès : "
+														style="font-weight:bold" />
+													<h:outputText value="#{o.listeAccesBatiment.size()}" />
+													<h:outputText value="Nombre d'escaliers : "
+														style="font-weight:bold" />
+													<h:outputText value="#{o.listeEscaliersBatiment.size()}" />
+													<h:outputText value="Nombre d'ascenseurs : "
+														style="font-weight:bold" />
+													<h:outputText value="#{o.listeAscenceursBatiment.size()}" />
+												</h:panelGrid>
+											</rich:panel>
+										</a4j:repeat>
+									</a4j:outputPanel>
+								</h:panelGrid>
+							</div>
+
+
+						</div>
+
+
+						<!-- Section INFORMATIONS DETAILLEES DIAGNOSTIC AVEC ANOMALIES -->
+						<div id="diagAnomalieSection">
+							<div id="diagnosticFiche">
+								<div id="ficheDiagTitre">
+									<h3>
+										<span>Informations détaillées diagnostic</span>
+									</h3>
+
+								</div>
+								<div id="ficheAnomTitre">
+									Nombre d'anomalies recencées :
+									#{mbDonneesGenerales.listeAnomaliesParDiagnostic.size()} <img
+										class="ficheDiagTitreImage" id="boutonModifier"
+										src="images/TypesDiagnosticIcones/TypeAcces.38.36.png" />
+								</div>
+							</div>
+							<div id="anomaliesFiche">
+								<h:panelGrid columns="1">
+									<h:panelGroup id="panel2" layout="block">
+
+										<ui:repeat
+											value="#{mbDonneesGenerales.diagnosticSelectionne.listeAnomaliesDiagnostic}"
+											var="o" rows="20" id="repeatAnomalies"
+											style="width: 100%; font-family: Arial, Verdana, sans-serif; font-size: 13px; font-weight: normal;">
+											<rich:panel
+												style="float:left; width:100%; background-color:#f7f7f7; border-display:none; border-bottom: 0px;
+						  border-left: 0px; border-right: 0px;">
+												<div>
+													<h:outputText value="Anomalie n° : "
+														style="font-weight:bold; margin-left:4px;" />
+													<h:outputText value="#{o.idAnomalie}"
+														style="font-weight:bold; border:none; font-color:black; margin-left: 88px;"
+														id="idAnom" />
+													<div style="float: right">
+														<h:commandButton
+															action="#{mbDonneesGenerales.modificationAnomalie(o)}"
+															value="#{mbDonneesGenerales.clickChangeBouton(o)}"
+															id="modifAnom">
+														</h:commandButton>
+														<h:commandButton
+															action="#{mbDonneesGenerales.annulerModifAnomalie(o)}"
+															value="Annuler" id="annulModif">
+															<f:attribute name="disabled"
+																value="#{mbDonneesGenerales.isEnable(o)}"></f:attribute>
+														</h:commandButton>
+														<h:commandButton
+															action="#{mbDonneesGenerales.suppressionAnomalie(o)}"
+															value="Suppression" />
+													</div>
+												</div>
+												<h:panelGrid columns="2"
+													style="width: 100%; font-family: Arial, Verdana, sans-serif; color=gray; font-weight: normal; ">
+													<h:outputText value="Etat anomalie : "
+														style="font-weight:bold " />
+													<f:attribute name="align" value="left" />
+													<h:outputText
+														value="#{mbDonneesGenerales.traiteAnomalie(o)}"
+														disabled="#{mbDonneesGenerales.isEnable(o)}" />
+													<h:outputText value="Localisation : "
+														style="font-weight:bold" />
+													<h:outputText
+														value="#{mbDonneesGenerales.localisationAnomalie(o)}" />
+													<h:outputText value="Niveau indicateur : "
+														style="font-weight:bold" />
+													<h:selectOneMenu value="#{o.indicateur.idIndicateur}">
+														<f:selectItems
+															value="#{mbDonneesGenerales.listeIndicateursParDiagnostic}"
+															var="ind" itemLabel="#{ind.libelleIndicateur}"
+															itemValue="#{ind.idIndicateur}"></f:selectItems>
+														<f:attribute name="disabled"
+															value="#{mbDonneesGenerales.isEnable(o)}"></f:attribute>
+													</h:selectOneMenu>
+													<h:outputText value="Description : "
+														style="font-weight:bold" />
+													<h:inputTextarea value="#{o.descriptionAnomalie}"
+														class="inputTextAnomalieDisabled">
+														<f:attribute name="disabled"
+															value="#{mbDonneesGenerales.isEnable(o)}"></f:attribute>
+													</h:inputTextarea>
+													<h:outputText value="Preconisation :"
+														style="font-weight:bold" />
+													<h:inputTextarea value="#{o.preconisationAnomalie}"
+														class="inputTextAnomalieDisabled">
+														<f:attribute name="disabled"
+															value="#{mbDonneesGenerales.isEnable(o)}"></f:attribute>
+													</h:inputTextarea>
+													<h:outputText value="Coût estimé :"
+														style="font-weight:bold" />
+													<h:inputText value="#{o.coutEstimeAnomalie}"
+														class="inputTextAnomalieDisabled">
+														<f:attribute name="disabled"
+															value="#{mbDonneesGenerales.isEnable(o)}"></f:attribute>
+													</h:inputText>
+													<h:outputText value="Intervention :"
+														style="font-weight:bold" />
+													<h:outputText
+														value="#{mbDonneesGenerales.recupererEtatIntervention(o)}"
+														disabled="true" class="inputTextAnomalieDisabled" />
+
+												</h:panelGrid>
+
+											</rich:panel>
+										</ui:repeat>
+
+									</h:panelGroup>
+								</h:panelGrid>
+							</div>
+
+						</div>
+					</h:panelGroup>
+				</h:form>
+			</div>
+
+			<script>
 
 		$( "#buttShowEDD" ).click(function() {
 			$( "#ErpDiagDetaille" ).toggle( "blind", 500 );
 		});
 
 
-	function ouverture(){
+  function ouverture(){
 		$( ".tableErpDiagGeneral" ).toggle();
 		}
 
@@ -379,7 +446,7 @@
   }
 	
 </script>
-</f:view>
+		</f:view>
 	</ui:define>
 </ui:composition>
 </html>

@@ -15,12 +15,14 @@
 	</ui:define>
 	
 	<ui:define name="content">
-
+	<f:event listener="#{mbPlanningTravaux.loadChantier()}" type="preRenderView"/>
 		<div id="content">
+		<f:view>
 		<h:form>
-		
 		<br/>
-		<a class="btn">Fiche de consultation</a>
+		<h:commandLink action="consultationTravaux" class="btn" value="Retour vers la fiche de consultation">
+      			<f:param name="id" value="#{mbPlanningTravaux.monERP.idErp}" />
+   		</h:commandLink>
 		<br/>
 		<br/>
 		
@@ -48,7 +50,7 @@
 				<th class="Temps" colspan="2"></th>
 				<th class="Temps" id="date3" colspan="2">#{mbPlanningTravaux.formater.format(mbPlanningTravaux.date3)}</th>
 			</tr>
-			
+			<h:panelGroup id="toto">
 			<ui:repeat var="item" value="#{mbPlanningTravaux.listeTypesERP}">
 			
 				<tr id="T#{item.idTypeIntervention}" class="ligneBleueType">
@@ -72,7 +74,7 @@
 					<td class="traitsGris"></td>
 				</tr>
 				
-				<ui:repeat var="intervention" value="#{item.listeInterventionTypeIntervention}">
+				<a4j:repeat var="intervention" value="#{item.listeInterventionTypeIntervention}">
 					
 					
 					<tr id="T#{item.idTypeIntervention} - A#{intervention.anomalie.idAnomalie}" class="ligneBleueIntervention">
@@ -113,6 +115,8 @@
 					
 					<tr id="T#{item.idTypeIntervention} - A#{intervention.anomalie.idAnomalie} - Description" class="ligneOrange">
 						<td colspan="12">
+							
+		
 							<div>
 								<h4>Informations sur l'intervention</h4>
 								
@@ -129,7 +133,8 @@
 									<rich:calendar value="#{intervention.dateDebutIntervention}"
 												   datePattern="dd/MM/yyyy"
 												   popup="true"
-												   inputStyle="width:45.5%"/>
+												   inputStyle="width:45.5%"
+												   styleClass="troll"/> 
 												   
 									<input type="text" id="DateDebut - #{intervention.idIntervention}"
 									value="#{mbPlanningTravaux.formater.format(intervention.dateDebutIntervention)}"
@@ -152,24 +157,26 @@
 							<div>
 								<h:outputLabel value="Type d'intervention :" />
 								
-								<h:selectOneMenu 	value="#{intervention.typeIntervention.idTypeIntervention}">
+								<h:selectOneMenu 	id="Type#{intervention.idIntervention}"
+													value="#{intervention.typeIntervention.idTypeIntervention}">
 									<f:selectItems	value="#{mbPlanningTravaux.listeTousTypes}"
 								   					var="var"
 								  					itemLabel="#{var.typeIntervention}"
-								  					itemValue="#{var.idTypeIntervention}"/>								
-								</h:selectOneMenu>						
+								  					itemValue="#{var.idTypeIntervention}"/>	
+								</h:selectOneMenu>														
 								
 								
 								<h:outputLabel value="Artisan :" />
 								
-								<h:selectOneMenu 	value="#{intervention.artisan.idArtisan}">
-									<f:selectItems	value="#{mbPlanningTravaux.avoirListeArtisans(item)}"
+								<h:selectOneMenu 	id="Artisan#{intervention.idIntervention}"
+													value="#{intervention.artisan.idArtisan}">
+									<f:selectItems	value="#{mbPlanningTravaux.listeArtisans}"
 								   					var="var"
 								  					itemLabel="#{var.nomArtisan}"
 								  					itemValue="#{var.idArtisan}"/>								
 								</h:selectOneMenu>	
 								
-								<h:outputLabel value="Coût :" />
+								<h:outputLabel value="Coût (€):" />
 								<h:inputText value="#{intervention.coutIntervention}" />	
 							</div>
 							
@@ -187,11 +194,13 @@
 								<p>#{intervention.anomalie.preconisationAnomalie}</p>				
 							</div>							
 							
+		
 							</td>
 						
 					</tr>
-				</ui:repeat>							
+				</a4j:repeat>							
 			</ui:repeat>		
+			</h:panelGroup>
 		</table>
 		
 		<table id="monTableauAnomalie">
@@ -259,7 +268,7 @@
 								  					itemValue="#{var.idArtisan}"/>								
 								</h:selectOneMenu>	
 								
-								<h:outputLabel value="Coût :" />
+								<h:outputLabel value="Coût (€):" />
 								<h:inputText value="#{anom.intervention.coutIntervention}" />	
 							</div>
 							
@@ -283,8 +292,8 @@
 			
 			</ui:repeat>
 		</table>
-		
-			</h:form>
+		</h:form>
+			</f:view>
 		</div>
 		
 	<script>

@@ -9,19 +9,19 @@ public class Diagnostic_Tree extends NamedNode implements TreeNode {
 	private ERP_Tree erp;
 	//Les attributs du diagnostic car c'est le dernier noeud ainsi que plein de méthodes ci-dessous :
     private String intitule;
-    private int traite;
+    private int idDiag;
  
     public Diagnostic_Tree() {
         this.setType("diagnostic");
     }
  
-    public Diagnostic_Tree(String name, String intitule, ERP_Tree erp, int traite) {
+    public Diagnostic_Tree(String name, String intitule, ERP_Tree erp, int idDiag) {
         super();
         this.setType("diagnostic");
         this.erp = erp;
         this.intitule = intitule;
         this.name = name;
-        this.traite = traite;
+        this.idDiag = idDiag;
     }
     
     public TreeNode getChildAt(int childIndex) {
@@ -76,11 +76,11 @@ public class Diagnostic_Tree extends NamedNode implements TreeNode {
 		this.intitule = intitule;
 	}
 
-	public int getTraite() {
-		return traite;
+	public int getIdDiag() {
+		return idDiag;
 	}
 
-	public void setTraite(int traite) {
-		this.traite = traite;
+	public void setIdDiag(int idDiag) {
+		this.idDiag = idDiag;
 	}
 }

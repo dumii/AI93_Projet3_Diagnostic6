@@ -32,6 +32,8 @@ public interface IBusinessIntervention {
     
     public TypeIntervention recupererTypeParIntervention(Intervention intervention);
     
+    public TypeIntervention recupererTypeParID(int idType);
+    
     //Etat d'avancement des travaux	
 	public List<EtatAvancementTravaux> recupererTousEtats();
 	

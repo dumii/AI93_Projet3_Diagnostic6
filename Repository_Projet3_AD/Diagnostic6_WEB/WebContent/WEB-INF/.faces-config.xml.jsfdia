@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#consultationDiagnostic.jsf"
+  PATH="/consultationDiagnostic.jsf" SHAPE="240,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#consultationTravaux.jsf"
+  PATH="/consultationTravaux.jsf" SHAPE="328,288,50,57" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#consultationTravaux.jsf:0" NAME="item"
+   PATH="/consultationTravaux.jsf" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="consultationDiagnostic::#consultationDiagnostic.jsf"
+    NAME="output" PATH="/consultationDiagnostic.jsf"
+    TARGET="rules:#consultationDiagnostic.jsf"
+    TITLE="consultationDiagnostic" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="planningTravaux::#planningTravaux.jsf"
+    NAME="output1" PATH="/planningTravaux.jsf"
+    TARGET="rules:#planningTravaux.jsf" TITLE="planningTravaux" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#accueilTravaux.jsf"
+  PATH="/accueilTravaux.jsf" SHAPE="32,129,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#accueilTravaux.jsf:0" NAME="item"
+   PATH="/accueilTravaux.jsf" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="consultationTravaux::#consultationTravaux.jsf" NAME="output"
+    PATH="/consultationTravaux.jsf"
+    TARGET="rules:#consultationTravaux.jsf" TITLE="consultationTravaux" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#planningTravaux.jsf"
+  PATH="/planningTravaux.jsf" SHAPE="32,241,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#planningTravaux.jsf:0" NAME="item"
+   PATH="/planningTravaux.jsf" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="consultationTravaux::#consultationTravaux.jsf" NAME="output"
+    PATH="/consultationTravaux.jsf"
+    TARGET="rules:#consultationTravaux.jsf" TITLE="consultationTravaux" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#accueilDiagnostic.jsf"
+  PATH="/accueilDiagnostic.jsf" SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#accueilDiagnostic.jsf:0" NAME="item"
+   PATH="/accueilDiagnostic.jsf" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="consultationDiagnostic::#consultationDiagnostic.jsf"
+    NAME="output" PATH="/consultationDiagnostic.jsf"
+    TARGET="rules:#consultationDiagnostic.jsf"
+    TITLE="consultationDiagnostic" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+</PROCESS>

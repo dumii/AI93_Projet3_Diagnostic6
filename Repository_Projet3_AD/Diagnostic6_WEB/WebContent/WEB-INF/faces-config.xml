@@ -1,9 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<faces-config
-    xmlns="http://java.sun.com/xml/ns/javaee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
-    version="2.1">
-
+<faces-config version="2.1" xmlns="http://java.sun.com/xml/ns/javaee"
+ xmlns:xi="http://www.w3.org/2001/XInclude"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd">
+ <navigation-rule>
+  <from-view-id>/consultationTravaux.jsf</from-view-id>
+  <navigation-case>
+   <description>Lien vers la fiche diagnostic</description>
+   <from-outcome>consultationDiagnostic</from-outcome>
+   <to-view-id>/consultationDiagnostic.jsf</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>planningTravaux</from-outcome>
+   <to-view-id>/planningTravaux.jsf</to-view-id>
+  </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+  <from-view-id>/accueilTravaux.jsf</from-view-id>
+  <navigation-case>
+   <from-outcome>consultationTravaux</from-outcome>
+   <to-view-id>/consultationTravaux.jsf</to-view-id>
+  </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+  <from-view-id>/planningTravaux.jsf</from-view-id>
+  <navigation-case>
+   <from-outcome>consultationTravaux</from-outcome>
+   <to-view-id>/consultationTravaux.jsf</to-view-id>
+  </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+  <from-view-id>/accueilDiagnostic.jsf</from-view-id>
+  <navigation-case>
+   <from-outcome>consultationDiagnostic</from-outcome>
+   <to-view-id>/consultationDiagnostic.jsf</to-view-id>
+  </navigation-case>
+ </navigation-rule>
 </faces-config>

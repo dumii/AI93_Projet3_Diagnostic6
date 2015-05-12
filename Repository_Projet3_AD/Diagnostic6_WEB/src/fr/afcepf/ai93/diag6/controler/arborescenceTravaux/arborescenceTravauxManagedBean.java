@@ -1,4 +1,4 @@
-package fr.afcepf.ai93.diag6.controler.arborescenceDiagnostic;
+package fr.afcepf.ai93.diag6.controler.arborescenceTravaux;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -22,34 +22,28 @@ import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
 import fr.afcepf.ai93.diag6.entity.erp.Erp;
 import fr.afcepf.ai93.diag6.entity.erp.TypeErp;
 
-@ManagedBean(name="mbArborescence")
+@ManagedBean(name="mbArborescenceTravaux")
 @SessionScoped
-public class arborescenceManagedBean implements Serializable {
+public class arborescenceTravauxManagedBean implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
 	//Accordéon 1
 	private List<TreeNode> rootNodes1 = new ArrayList<TreeNode>();
 	
-	private Map<String, Diagnostic_Tree> diagnosticCache1 = new HashMap<String, Diagnostic_Tree>();
 	private Map<String, ERP_Tree> erpCache1 = new HashMap<String, ERP_Tree>();
-	private Map<String, TypeDiagnostic_Tree> typeDiagnosticCache1 = new HashMap<String, TypeDiagnostic_Tree>();
 	private Map<String, TypeERP_Tree> typeERPCache1 = new HashMap<String, TypeERP_Tree>();
 	
 	//Accordéon 2
 	private List<TreeNode> rootNodes2 = new ArrayList<TreeNode>();
 	
-	private Map<String, Diagnostic_Tree> diagnosticCache2 = new HashMap<String, Diagnostic_Tree>();
 	private Map<String, ERP_Tree> erpCache2 = new HashMap<String, ERP_Tree>();
-	private Map<String, TypeDiagnostic_Tree> typeDiagnosticCache2 = new HashMap<String, TypeDiagnostic_Tree>();
 	private Map<String, TypeERP_Tree> typeERPCache2 = new HashMap<String, TypeERP_Tree>();
 	
 	//Accordéon 3
 	private List<TreeNode> rootNodes3 = new ArrayList<TreeNode>();
 	
-	private Map<String, Diagnostic_Tree> diagnosticCache3 = new HashMap<String, Diagnostic_Tree>();
 	private Map<String, ERP_Tree> erpCache3 = new HashMap<String, ERP_Tree>();
-	private Map<String, TypeDiagnostic_Tree> typeDiagnosticCache3 = new HashMap<String, TypeDiagnostic_Tree>();
 	private Map<String, TypeERP_Tree> typeERPCache3 = new HashMap<String, TypeERP_Tree>();
 	
 	private TreeNode currentSelection = null;
@@ -61,10 +55,9 @@ public class arborescenceManagedBean implements Serializable {
 
 	private List<TypeErp> listeTypeERP;
 	private List<Erp> listeERP; 
-	private List<Diagnostic> listeDiagnostic; 
-	private List<Diagnostic> listeDiagnosticsIntervEnCours; 
-	private List<Diagnostic> listeDiagnosticsIntervAttente;
-	private List<Diagnostic> listeDiagnosticsIntervArchive; 
+	private List<Erp> listeERPIntervEnCours; 
+	private List<Erp> listeERPIntervAttente;
+	private List<Erp> listeERPIntervArchive; 
 	
 	//On doit définir le type et le nom pour chaque élément (class NamedNode)	
 	@PostConstruct
@@ -72,16 +65,46 @@ public class arborescenceManagedBean implements Serializable {
 
 		listeTypeERP = proxyERP.recupererListeTypeERP();
 		listeERP = proxyERP.recupereToutErp();
-		listeDiagnostic = proxyDiagnostic.recupereToutDiagnostic();
-		listeDiagnosticsIntervEnCours = proxyDiagnostic.recupereToutDiagnosticIntervEnCours();
-		listeDiagnosticsIntervAttente = proxyDiagnostic.recupereToutDiagnosticEnAttente();
-		listeDiagnosticsIntervArchive = proxyDiagnostic.recupereToutDiagnosticArchives();
 
+		initialisationListesERP();
+		
 		chargerArborescence1();
 		chargerArborescence2();
 		chargerArborescence3();
 	}
 
+	//Méthodes	
+	public void initialisationListesERP()
+	{
+		listeERPIntervEnCours = new ArrayList<>(); 
+		listeERPIntervAttente = new ArrayList<>();
+		listeERPIntervArchive = new ArrayList<>();
+		
+		for (Erp erp : listeERP)
+		{
+			proxyDiagnostic.recupereToutDiagnosticParErp(erp);
+			boolean enCours = proxyDiagnostic.interventionEnCoursSurERP();
+			boolean enAttente = proxyDiagnostic.interventionEnAttenteSurERP();
+			boolean archives = proxyDiagnostic.interventionArchivesSurERP();
+			
+			if (enCours)
+			{
+				listeERPIntervEnCours.add(erp);
+			}
+			else
+			{
+				if (enAttente)
+				{
+					listeERPIntervAttente.add(erp);
+				}
+				else
+				{
+					listeERPIntervArchive.add(erp);
+				}
+			}
+		}
+	}
+	
 	public void chargerArborescence1() {
 		
 		for (TypeErp type : listeTypeERP)
@@ -95,40 +118,27 @@ public class arborescenceManagedBean implements Serializable {
 			typeERPCache1.put(typeTree.getName(), typeTree);
 			rootNodes1.add(typeTree);
 
-			for(Erp erp : listeERP)
+			for(Erp erp : listeERPIntervEnCours)
 			{
-				List<Diagnostic> listeDiag = listerDiagnosticParErp(erp, listeDiagnosticsIntervEnCours);
 
 				int idTypeERP = erp.getTypeErp().getIdTypeErp();
 
-				if (idTypeERP == type.getIdTypeErp() && listeDiag.size() > 0)
+				if (idTypeERP == type.getIdTypeErp())
 				{
 					enfants++;
-
-					ERP_Tree erpTree = new ERP_Tree();
-					erpTree.setName(erp.getNomErp() + " (" + listeDiag.size() + ")");
-					erpTree.setType("erp");
-
-					erpTree.setParent(typeTree);
-					erpTree.setTypeErp(typeTree);				
-
+					ERP_Tree erpTree = new ERP_Tree(erp.getNomErp(),
+								erp.getNomErp(), typeTree, erp.getIdErp());
 					typeTree.getERPs().add(erpTree);
-
-					erpCache1.put(erpTree.getName(), erpTree);
-
-					for(Diagnostic diag : listeDiag)
-					{
-						Diagnostic_Tree diagnostic = new Diagnostic_Tree(diag.getNomDiagnostiqueur(),
-								diag.getIntituleDiagnostic(), erpTree, diag.getTraite());
-						erpTree.getDiagnostics().add(diagnostic);
-					}
 				}
-			}
-
+			}			
 			if (enfants == 0)
 			{
 				typeERPCache1.remove(typeTree.getName());
 				rootNodes1.remove(typeTree);
+			}
+			else
+			{
+				typeTree.setName(type.getTypeErpCourt()+ " (" + enfants + ")");
 			}
 		}
 	}
@@ -146,33 +156,17 @@ public class arborescenceManagedBean implements Serializable {
 			typeERPCache2.put(typeTree.getName(), typeTree);
 			rootNodes2.add(typeTree);
 
-			for(Erp erp : listeERP)
+			for(Erp erp : listeERPIntervAttente)
 			{
-				List<Diagnostic> listeDiag = listerDiagnosticParErp(erp, listeDiagnosticsIntervAttente);
 
 				int idTypeERP = erp.getTypeErp().getIdTypeErp();
 
-				if (idTypeERP == type.getIdTypeErp() && listeDiag.size() > 0)
+				if (idTypeERP == type.getIdTypeErp())
 				{
 					enfants++;
-
-					ERP_Tree erpTree = new ERP_Tree();
-					erpTree.setName(erp.getNomErp() + " (" + listeDiag.size() + ")");
-					erpTree.setType("erp");
-
-					erpTree.setParent(typeTree);
-					erpTree.setTypeErp(typeTree);				
-
+					ERP_Tree erpTree = new ERP_Tree(erp.getNomErp(),
+								erp.getNomErp(), typeTree, erp.getIdErp());
 					typeTree.getERPs().add(erpTree);
-
-					erpCache1.put(erpTree.getName(), erpTree);
-
-					for(Diagnostic diag : listeDiag)
-					{
-						Diagnostic_Tree diagnostic = new Diagnostic_Tree(diag.getNomDiagnostiqueur(),
-								diag.getIntituleDiagnostic(), erpTree, diag.getTraite());
-						erpTree.getDiagnostics().add(diagnostic);
-					}
 				}
 			}
 
@@ -180,6 +174,10 @@ public class arborescenceManagedBean implements Serializable {
 			{
 				typeERPCache2.remove(typeTree.getName());
 				rootNodes2.remove(typeTree);
+			}
+			else
+			{
+				typeTree.setName(type.getTypeErpCourt()+ " (" + enfants + ")");
 			}
 		}
 	}
@@ -197,33 +195,17 @@ public class arborescenceManagedBean implements Serializable {
 			typeERPCache3.put(typeTree.getName(), typeTree);
 			rootNodes3.add(typeTree);
 
-			for(Erp erp : listeERP)
+			for(Erp erp : listeERPIntervArchive)
 			{
-				List<Diagnostic> listeDiag = listerDiagnosticParErp(erp, listeDiagnosticsIntervArchive);
 
 				int idTypeERP = erp.getTypeErp().getIdTypeErp();
 
-				if (idTypeERP == type.getIdTypeErp() && listeDiag.size() > 0)
+				if (idTypeERP == type.getIdTypeErp())
 				{
 					enfants++;
-
-					ERP_Tree erpTree = new ERP_Tree();
-					erpTree.setName(erp.getNomErp() + " (" + listeDiag.size() + ")");
-					erpTree.setType("erp");
-
-					erpTree.setParent(typeTree);
-					erpTree.setTypeErp(typeTree);				
-
+					ERP_Tree erpTree = new ERP_Tree(erp.getNomErp(),
+								erp.getNomErp(), typeTree, erp.getIdErp());
 					typeTree.getERPs().add(erpTree);
-
-					erpCache3.put(erpTree.getName(), erpTree);
-
-					for(Diagnostic diag : listeDiag)
-					{
-						Diagnostic_Tree diagnostic = new Diagnostic_Tree(diag.getNomDiagnostiqueur(),
-								diag.getIntituleDiagnostic(), erpTree, diag.getTraite());
-						erpTree.getDiagnostics().add(diagnostic);
-					}
 				}
 			}
 
@@ -232,19 +214,11 @@ public class arborescenceManagedBean implements Serializable {
 				typeERPCache3.remove(typeTree.getName());
 				rootNodes3.remove(typeTree);
 			}
-		}
-	}
-
-	public List<Diagnostic> listerDiagnosticParErp(Erp erp, List<Diagnostic> listeBrute){
-		List<Diagnostic> listeResultat = new ArrayList<Diagnostic>();
-		for (Diagnostic d : listeBrute)
-		{
-			if(d.getErp().getIdErp() == erp.getIdErp())
+			else
 			{
-				listeResultat.add(d);
+				typeTree.setName(type.getTypeErpCourt()+ " (" + enfants + ")");
 			}
 		}
-		return listeResultat; 
 	}
 	
 	public void selectionChanged(TreeSelectionChangeEvent selectionChangeEvent) {
@@ -259,6 +233,8 @@ public class arborescenceManagedBean implements Serializable {
 		tree.setRowKey(storedKey);
 	}
 
+	
+	//Getters et Setters
 	public List<TreeNode> getRootNodes() {
 		return rootNodes1;
 	}
@@ -275,29 +251,12 @@ public class arborescenceManagedBean implements Serializable {
 		this.currentSelection = currentSelection;
 	}
 
-	public Map<String, Diagnostic_Tree> getDiagnosticCache() {
-		return diagnosticCache1;
-	}
-
-	public void setDiagnosticCache(Map<String, Diagnostic_Tree> diagnosticCache) {
-		this.diagnosticCache1 = diagnosticCache;
-	}
-
 	public Map<String, ERP_Tree> getErpCache() {
 		return erpCache1;
 	}
 
 	public void setErpCache(Map<String, ERP_Tree> erpCache) {
 		this.erpCache1 = erpCache;
-	}
-
-	public Map<String, TypeDiagnostic_Tree> getTypeDiagnosticCache() {
-		return typeDiagnosticCache1;
-	}
-
-	public void setTypeDiagnosticCache(
-			Map<String, TypeDiagnostic_Tree> typeDiagnosticCache) {
-		this.typeDiagnosticCache1 = typeDiagnosticCache;
 	}
 
 	public Map<String, TypeERP_Tree> getTypeERPCache() {
@@ -340,23 +299,6 @@ public class arborescenceManagedBean implements Serializable {
 		this.listeERP = listeERP;
 	}
 
-	public List<Diagnostic> getListeDiag() {
-		return listeDiagnostic;
-	}
-
-	public void setListeDiag(List<Diagnostic> listeDiag) {
-		this.listeDiagnostic = listeDiag;
-	}
-
-	public List<Diagnostic> getListeDiagnosticsIntervEnCours() {
-		return listeDiagnosticsIntervEnCours;
-	}
-
-	public void setListeDiagnosticsIntervEnCours(
-			List<Diagnostic> listeDiagnosticsIntervEnCours) {
-		this.listeDiagnosticsIntervEnCours = listeDiagnosticsIntervEnCours;
-	}
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -385,29 +327,27 @@ public class arborescenceManagedBean implements Serializable {
 		this.rootNodes3 = rootNodes3;
 	}
 
-	public List<Diagnostic> getListeDiagnostic() {
-		return listeDiagnostic;
+	public List<Erp> getListeERPIntervEnCours() {
+		return listeERPIntervEnCours;
 	}
 
-	public void setListeDiagnostic(List<Diagnostic> listeDiagnostic) {
-		this.listeDiagnostic = listeDiagnostic;
+	public void setListeERPIntervEnCours(List<Erp> listeERPIntervEnCours) {
+		this.listeERPIntervEnCours = listeERPIntervEnCours;
 	}
 
-	public List<Diagnostic> getListeDiagnosticsIntervAttente() {
-		return listeDiagnosticsIntervAttente;
+	public List<Erp> getListeERPIntervAttente() {
+		return listeERPIntervAttente;
 	}
 
-	public void setListeDiagnosticsIntervAttente(
-			List<Diagnostic> listeDiagnosticsIntervAttente) {
-		this.listeDiagnosticsIntervAttente = listeDiagnosticsIntervAttente;
+	public void setListeERPIntervAttente(List<Erp> listeERPIntervAttente) {
+		this.listeERPIntervAttente = listeERPIntervAttente;
 	}
 
-	public List<Diagnostic> getListeDiagnosticsIntervArchive() {
-		return listeDiagnosticsIntervArchive;
+	public List<Erp> getListeERPIntervArchive() {
+		return listeERPIntervArchive;
 	}
 
-	public void setListeDiagnosticsIntervArchive(
-			List<Diagnostic> listeDiagnosticsIntervArchive) {
-		this.listeDiagnosticsIntervArchive = listeDiagnosticsIntervArchive;
+	public void setListeERPIntervArchive(List<Erp> listeERPIntervArchive) {
+		this.listeERPIntervArchive = listeERPIntervArchive;
 	}
 }

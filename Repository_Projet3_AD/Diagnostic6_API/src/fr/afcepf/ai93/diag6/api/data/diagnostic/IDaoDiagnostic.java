@@ -25,7 +25,7 @@ public interface IDaoDiagnostic {
 
     public List<Diagnostic> rechercheDiagnosticsErp(String nomERP);
     
-    public List<Diagnostic> recupereDiagnosticParErp(Erp erp);
+    public List<Diagnostic> recupereDiagnosticNonTraitesParErp(Erp erp);
     
 	public List<Diagnostic> recupereToutDiagnosticParErp(Erp e);
     

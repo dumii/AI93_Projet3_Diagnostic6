@@ -27,7 +27,6 @@ public class BusinessErp implements IBusinessErp {
 	
 	@EJB
 	private IDaoErp proxyErp; 
-
 	
 	@EJB
 	private IDaoTypeErp proxyTypeErp;

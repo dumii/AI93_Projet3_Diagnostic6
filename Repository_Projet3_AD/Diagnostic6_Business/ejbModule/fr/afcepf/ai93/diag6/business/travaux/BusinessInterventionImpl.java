@@ -138,7 +138,10 @@ public class BusinessInterventionImpl implements IBusinessIntervention {
 
 	@Override
 	public int nombreInterventionDiag(int idDiag) {
-		// TODO Auto-generated method stub
 		return proxyIntervention.nombreInterventionDiag(idDiag);
+	}
+
+	public TypeIntervention recupererTypeParID(int idType) {
+		return proxyTypeIntervention.recupererTypeParID(idType);
 	}
 }
