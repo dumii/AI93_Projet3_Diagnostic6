@@ -20,6 +20,7 @@ import fr.afcepf.ai93.diag6.api.business.diagnostic.IBusinessDiagnostic;
 import fr.afcepf.ai93.diag6.api.business.erp.IBusinessErp;
 import fr.afcepf.ai93.diag6.api.business.travaux.IBusinessIntervention;
 import fr.afcepf.ai93.diag6.api.data.erp.IDaoErp;
+import fr.afcepf.ai93.diag6.controler.autres.UtilisateurManagedBean;
 import fr.afcepf.ai93.diag6.entity.autres.Expert;
 import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
@@ -50,6 +51,8 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 	private IBusinessIntervention proxyBusinessIntervention; 
 	@EJB
 	private IBusinessExpert proxyBusinessExpert; 
+	@ManagedProperty(value = "#{mbUtilisateur}")
+	private UtilisateurManagedBean user; 
 
 	private Erp erpDiagnosticSelectionne;  
 	private Diagnostic diagnosticSelectionne;
@@ -91,6 +94,7 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 		recupererIndicateurParTypeDiag(); 
 		recupererExperts(); 
 		amodif=new Anomalie(); 
+		System.out.println("utilisateur connecté : "+user.getUtilisateur().getNomUtilisateur());
 	}
 
 	private void recupererExperts() {
@@ -233,9 +237,9 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 			amodif = a;
 		} else {
 			System.out.println("je passe ici");
-			Utilisateur user = new Utilisateur();
-			user.setIdUtilisateur(1);
-			proxyBusinessAnomalie.modifierAnomalie(a, user); 
+//			Utilisateur user = new Utilisateur();
+//			user.setIdUtilisateur(1);
+			proxyBusinessAnomalie.modifierAnomalie(a, user.getUtilisateur()); 
 			amodif=new Anomalie(); 
 			recupererDiagnostic(); 
 		}
@@ -249,10 +253,7 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 			System.out.println("Diag pris en compte pour la modification : " + diagnosticSelectionne.getIdDiagnostic());
 			dmodif = diagnosticSelectionne;
 		} else {
-			System.out.println("je passe ici");
-			Utilisateur user = new Utilisateur();
-			user.setIdUtilisateur(1);
-			proxyBusinessDiagnostic.modifierDiagnostic(diagnosticSelectionne,user);
+			proxyBusinessDiagnostic.modifierDiagnostic(diagnosticSelectionne,user.getUtilisateur());
 			dmodif=new Diagnostic(); 
 			recupererDiagnostic(); 
 		}
@@ -285,6 +286,14 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 		return true;
 	}
 	
+	public String isGestConnected(){
+		System.out.println("id gest connecté"+user.getUtilisateur().getProfilUtilisateur().getIdProfil());
+		if(user.getUtilisateur().getProfilUtilisateur().getIdProfil()==2){
+			return "";
+		}
+		return "none";
+	}
+	
 	public String clickChangeBouton(Anomalie a){
 		if(a.getIdAnomalie() == amodif.getIdAnomalie()) {
 			return "Valider";
@@ -306,9 +315,9 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 			return "Vous ne pouvez pas supprimer une anomalie ayant une intervention dessous"; 
 		}
 		else{
-			Utilisateur user = new Utilisateur();
-			user.setIdUtilisateur(1);
-			proxyBusinessAnomalie.supprimerAnomalie(a, user); 
+//			Utilisateur user = new Utilisateur();
+//			user.setIdUtilisateur(1);
+			proxyBusinessAnomalie.supprimerAnomalie(a, user.getUtilisateur()); 
 			//amodif=new Anomalie(); 
 			recupererDiagnostic(); 
 			return "Suppression réalisée"; 
@@ -453,6 +462,12 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 	public void setDmodif(Diagnostic dmodif) {
 		this.dmodif = dmodif;
 	}
-	
 
+	public UtilisateurManagedBean getUser() {
+		return user;
+	}
+
+	public void setUser(UtilisateurManagedBean user) {
+		this.user = user;
+	}
 }
