@@ -41,6 +41,7 @@ public class TableauDeBordManagedBean {
 	private List<TypeErp> listeTypesErpComplete; 
 	private List<CategorieErp> listeCategoriesErpComplete; 
 	private List<EtatAvancementTravaux> listeEtatsComplete; 
+	List<Anomalie> listeAnomaliesParDiagTmp;
 	private int niveauMoyen; 
 	private List<Erp> listeErpFiltree; 
 	private int nbInterventions; 
@@ -49,6 +50,7 @@ public class TableauDeBordManagedBean {
 	private int idEtatAvancementSelectionne; 
 	private int idTypeDiagnostic;
 	private int idNiveau; 
+	private int etatTmp;
 	
 	@PostConstruct
 	private void init() {
@@ -92,6 +94,105 @@ public class TableauDeBordManagedBean {
 		listeEtatsComplete.add(new EtatAvancementTravaux(5, "Sans intervention")); 
 		for (EtatAvancementTravaux e : listeEtatsComplete)
 			System.out.println(e.getIntituleEtatAvancement());
+	}
+	
+	public int calculAnomaliesParDiag(Diagnostic d){
+		List<Anomalie> listeAnomaliesParDiag = proxyBusinessAnomalie.recupereAnomalieParDiagnostic(d.getIdDiagnostic());
+		//dans la meme methode, on calcule aussi le nombre d'interventions sur le diagnostic
+		nbInterventions = 0; 
+		for (Anomalie a : listeAnomaliesParDiag){
+			List<Intervention> liste = proxyBusinessIntervention.rechercherInterventionSurAnomalie(a.getIdAnomalie()); 
+			if(liste.size()>0) {
+				nbInterventions++; 
+			}
+		}
+		//fin du calcul du nb interventions
+		return listeAnomaliesParDiag.size(); 
+	}
+	
+	public int calculInterventionsParDiag(Diagnostic d){
+		return nbInterventions; 
+	}
+	
+	public int calculerMoyenneParDiag(Diagnostic d){
+		List<Anomalie> listeAnomaliesParDiag = proxyBusinessAnomalie.recupereAnomalieParDiagnostic(d.getIdDiagnostic());
+		int sommeValeurs =0; 
+		for (Anomalie a : listeAnomaliesParDiag){
+			sommeValeurs+=a.getIndicateur().getValeurIndicateur(); 
+		}
+		switch (d.getTypeDiagnostic().getIdTypeDiagnostic()){
+			case(1): niveauMoyen = calculMoyAccessibilite(sommeValeurs, listeAnomaliesParDiag.size()); 
+					 break; 
+			case(2): niveauMoyen = calculMoyEnergie(sommeValeurs, listeAnomaliesParDiag.size()); 
+					break; 
+			case(3): niveauMoyen = calculMoySecurite(sommeValeurs, listeAnomaliesParDiag.size()); 
+					break; 
+			case(4): niveauMoyen = calculMoyHygiene(sommeValeurs, listeAnomaliesParDiag.size()); 
+					break; 
+		}
+		return niveauMoyen; 
+	}
+	
+	private int calculMoyAccessibilite(int somme, int nombre){
+		return somme/nombre; 
+	}
+	private int calculMoyEnergie(int somme, int nombre){
+		double moy = somme/1.0*nombre; 
+		if(moy>0&&moy<=2)
+			return 1;
+		if(moy>2&&moy<=4)
+			return 2;
+		if(moy>4&&moy<=6)
+			return 3;
+		return 4; 
+	}
+	private int calculMoySecurite(int somme, int nombre){
+		double moy = somme/1.0*nombre; 
+		if(moy>0&&moy<1)
+			return 1;
+		if(moy>=1&&moy<2)
+			return 2;
+		if(moy>=24&&moy<2.5)
+			return 3;
+		return 4; 
+	}
+	private int calculMoyHygiene(int somme, int nombre){
+		double moy = somme/1.0*nombre; 
+		if(moy>0&&moy<0.5)
+			return 1;
+		if(moy>=0.5&&moy<1)
+			return 2;
+		if(moy>=1&&moy<1.5)
+			return 3;
+		return 4;  
+	}
+	
+	public int calculEtatAvancement(Diagnostic d){
+		List<Anomalie> listAnom = proxyBusinessAnomalie.recupereAnomalieParDiagnostic(d.getIdDiagnostic());
+		for(Anomalie a : listAnom){
+			List<Intervention> listeBidon = proxyBusinessIntervention.rechercherInterventionSurAnomalie(a.getIdAnomalie()); 
+			a.setIntervention(listeBidon.get(0));
+		}
+		d.setListeAnomaliesDiagnostic(listAnom);
+		List<Intervention> listeInterv = new ArrayList<>(); 
+		for(Anomalie a : d.getListeAnomaliesDiagnostic()){
+			listeInterv.add(a.getIntervention()); 
+			if(a.getIntervention().getEtatAvancementTravaux().getIdEtatAvancement()==3)
+				return 3; //="En cours", car si une seule intervention de ce diagnostic est en cours, tout le diagnostic est en cours
+		}
+		int tailleListeInterv = listeInterv.size(); 
+		if(tailleListeInterv==0)
+			return 5; //= "Sans intervention", car il n'y a aucune intervention sur les anomalies de ce diagnostic
+		int nbIntervTerminees = 0;
+		for(Intervention i : listeInterv){
+			if(i.getEtatAvancementTravaux().getIdEtatAvancement()==1){
+				nbIntervTerminees++;
+			}
+		}
+		if(nbIntervTerminees==tailleListeInterv)
+			return 1; //"Terminé", car si toutes les interventions ont l'état 1=terminé, alors tout le diagnostic prend cet état
+		
+		return 2; //"Suspendu ou planifié", ça peut etre aussi return 4, attention à prendre les deux en compte; 
 	}
 	
 	public void filtrerParErpNom(){
@@ -205,7 +306,9 @@ public class TableauDeBordManagedBean {
 			//listeErpFiltree = listeErpComplete; 
 			if(idEtatAvancementSelectionne==1)
 				listE = recupererLesErpInterventionsTerminees(); 
-			if((idEtatAvancementSelectionne==2)||(idEtatAvancementSelectionne==3)||(idEtatAvancementSelectionne==4))
+			if((idEtatAvancementSelectionne==2)||(idEtatAvancementSelectionne==4))
+				listE = recupererLesErpInterventionsPlanifSuspendus(); 
+			if(idEtatAvancementSelectionne==3)
 				listE = recupererLesErpInterventionsEnCours(); 
 			if(idEtatAvancementSelectionne==5)
 				listE = recupererLesErpSansIntervention(); 
@@ -220,98 +323,35 @@ public class TableauDeBordManagedBean {
 		}
 	}
 	
-	public int calculAnomaliesParDiag(Diagnostic d){
-		List<Anomalie> listeAnomaliesParDiag = proxyBusinessAnomalie.recupereAnomalieParDiagnostic(d.getIdDiagnostic());
-		//dans la meme methode, on calcule aussi le nombre d'interventions sur le diagnostic
-		nbInterventions = 0; 
-		for (Anomalie a : listeAnomaliesParDiag){
-			List<Intervention> liste = proxyBusinessIntervention.rechercherInterventionSurAnomalie(a.getIdAnomalie()); 
-			if(liste.size()>0) {
-				nbInterventions++; 
+	private List<Erp> recupererLesErpInterventionsPlanifSuspendus() {
+		List<Erp> liste = new ArrayList<>();
+		for(Erp e : listeErpFiltree){
+			List<Diagnostic> listD = new ArrayList<>(); 
+			for(Diagnostic d : e.getListeDiagnosticErp()){
+				if((calculEtatAvancement(d)==2)||(calculEtatAvancement(d)==4)){
+					listD.add(d);
+				}
+			}
+			e.setListeDiagnosticErp(listD);
+			if(listD.size()>0){
+				liste.add(e); 
 			}
 		}
-		//fin du calcul du nb interventions
-		return listeAnomaliesParDiag.size(); 
+		return liste;
 	}
-	
-	public int calculInterventionsParDiag(Diagnostic d){
-		return nbInterventions; 
-	}
-	
-	public int calculerMoyenneParDiag(Diagnostic d){
-		List<Anomalie> listeAnomaliesParDiag = proxyBusinessAnomalie.recupereAnomalieParDiagnostic(d.getIdDiagnostic());
-		int sommeValeurs =0; 
-		for (Anomalie a : listeAnomaliesParDiag){
-			sommeValeurs+=a.getIndicateur().getValeurIndicateur(); 
-		}
-		switch (d.getTypeDiagnostic().getIdTypeDiagnostic()){
-			case(1): niveauMoyen = calculMoyAccessibilite(sommeValeurs, listeAnomaliesParDiag.size()); 
-					 break; 
-			case(2): niveauMoyen = calculMoyEnergie(sommeValeurs, listeAnomaliesParDiag.size()); 
-					break; 
-			case(3): niveauMoyen = calculMoySecurite(sommeValeurs, listeAnomaliesParDiag.size()); 
-					break; 
-			case(4): niveauMoyen = calculMoyHygiene(sommeValeurs, listeAnomaliesParDiag.size()); 
-					break; 
-		}
-		return niveauMoyen; 
-	}
-	
-	private int calculMoyAccessibilite(int somme, int nombre){
-		double moy = somme/1.0*nombre; 
-		return (int)moy; 
-	}
-	private int calculMoyEnergie(int somme, int nombre){
-		double moy = somme/1.0*nombre; 
-		if(moy>0&&moy<=2)
-			return 1;
-		if(moy>2&&moy<=4)
-			return 2;
-		if(moy>4&&moy<=6)
-			return 3;
-		return 4; 
-	}
-	private int calculMoySecurite(int somme, int nombre){
-		double moy = somme/1.0*nombre; 
-		if(moy>0&&moy<1)
-			return 1;
-		if(moy>=1&&moy<2)
-			return 2;
-		if(moy>=24&&moy<2.5)
-			return 3;
-		return 4; 
-	}
-	private int calculMoyHygiene(int somme, int nombre){
-		double moy = somme/1.0*nombre; 
-		if(moy>0&&moy<0.5)
-			return 1;
-		if(moy>=0.5&&moy<1)
-			return 2;
-		if(moy>=1&&moy<1.5)
-			return 3;
-		return 4;  
-	}
-	
+
 	private List<Erp> recupererLesErpInterventionsTerminees(){
 		List<Erp> liste = new ArrayList<>();
 		for(Erp e : listeErpFiltree){
-			List<Diagnostic> listeDiagIntervEnCours = new ArrayList<>();
-			boolean b = true; 
+			List<Diagnostic> listD = new ArrayList<>(); 
 			for(Diagnostic d : e.getListeDiagnosticErp()){
-				for(Anomalie a : d.getListeAnomaliesDiagnostic()){
-					if((a.getIntervention().getEtatAvancementTravaux().getIdEtatAvancement()==2)||
-							(a.getIntervention().getEtatAvancementTravaux().getIdEtatAvancement()==3)||
-							(a.getIntervention().getEtatAvancementTravaux().getIdEtatAvancement()==4)){
-								b = false; 
-					}
-				}
-				if(b==true){
-					listeDiagIntervEnCours.add(d); 
+				if(calculEtatAvancement(d)==1){
+					listD.add(d);
 				}
 			}
-			e.setListeDiagnosticErp(listeDiagIntervEnCours);
-			if(e.getListeDiagnosticErp().size()>0){
-				liste.add(e);
+			e.setListeDiagnosticErp(listD);
+			if(listD.size()>0){
+				liste.add(e); 
 			}
 		}
 		return liste;
@@ -320,23 +360,15 @@ public class TableauDeBordManagedBean {
 	private List<Erp> recupererLesErpInterventionsEnCours(){
 		List<Erp> liste = new ArrayList<>();
 		for(Erp e : listeErpFiltree){
-			List<Diagnostic> listeDiagIntervEnCours = new ArrayList<>();
-			boolean b = false; 
+			List<Diagnostic> listD = new ArrayList<>(); 
 			for(Diagnostic d : e.getListeDiagnosticErp()){
-				for(Anomalie a : d.getListeAnomaliesDiagnostic()){
-					if((a.getIntervention().getEtatAvancementTravaux().getIdEtatAvancement()==2)||
-							(a.getIntervention().getEtatAvancementTravaux().getIdEtatAvancement()==3)||
-							(a.getIntervention().getEtatAvancementTravaux().getIdEtatAvancement()==4)){
-								b = true; 
-					}
-				}
-				if(b==true){
-					listeDiagIntervEnCours.add(d); 
+				if(calculEtatAvancement(d)==3){
+					listD.add(d);
 				}
 			}
-			e.setListeDiagnosticErp(listeDiagIntervEnCours);
-			if(e.getListeDiagnosticErp().size()>0){
-				liste.add(e);
+			e.setListeDiagnosticErp(listD);
+			if(listD.size()>0){
+				liste.add(e); 
 			}
 		}
 		return liste;
@@ -345,14 +377,15 @@ public class TableauDeBordManagedBean {
 	private List<Erp> recupererLesErpSansIntervention(){
 		List<Erp> liste = new ArrayList<>();
 		for(Erp e : listeErpFiltree){
-			List<Diagnostic> listeDiagSansInterv = new ArrayList<>();
+			List<Diagnostic> listD = new ArrayList<>(); 
 			for(Diagnostic d : e.getListeDiagnosticErp()){
-				if(!proxyBusinessDiagnostic.recupererDiagSansInterv(d.getIdDiagnostic()))
-					listeDiagSansInterv.add(d);
+				if(calculEtatAvancement(d)==5){
+					listD.add(d);
+				}
 			}
-			e.setListeDiagnosticErp(listeDiagSansInterv);
-			if(e.getListeDiagnosticErp().size()>0){
-				liste.add(e);
+			e.setListeDiagnosticErp(listD);
+			if(listD.size()>0){
+				liste.add(e); 
 			}
 		}
 		return liste;
@@ -490,6 +523,22 @@ public class TableauDeBordManagedBean {
 
 	public void setIdNiveau(int idNiveau) {
 		this.idNiveau = idNiveau;
+	}
+
+	public List<Anomalie> getListeAnomaliesParDiagTmp() {
+		return listeAnomaliesParDiagTmp;
+	}
+
+	public void setListeAnomaliesParDiagTmp(List<Anomalie> listeAnomaliesParDiagTmp) {
+		this.listeAnomaliesParDiagTmp = listeAnomaliesParDiagTmp;
+	}
+
+	public int getEtatTmp() {
+		return etatTmp;
+	}
+
+	public void setEtatTmp(int etatTmp) {
+		this.etatTmp = etatTmp;
 	}
 	
 }
