@@ -1,4 +1,4 @@
-package fr.afcepf.ai93.diag6.controler.gestionnaires;
+package fr.afcepf.ai93.diag6.controler.diagnostic;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -102,9 +102,7 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 	}
 
 	public void recupErp(){
-		erpSelectionne = new Erp(); 
-		System.out.println(diagnosticSelectionne);
-		System.out.println(diagnosticSelectionne.getErp());
+		erpSelectionne = new Erp(); ;
 		erpSelectionne.setIdErp(diagnosticSelectionne.getErp().getIdErp());
 
 		List<Batiment> listeBatimentsErpSel = new ArrayList<Batiment>();

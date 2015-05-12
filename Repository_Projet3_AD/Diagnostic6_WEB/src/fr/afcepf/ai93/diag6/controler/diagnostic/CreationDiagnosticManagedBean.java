@@ -1,4 +1,4 @@
-package fr.afcepf.ai93.diag6.controler.gestionnaires;
+package fr.afcepf.ai93.diag6.controler.diagnostic;
 
 import java.util.Date;
 import java.util.List;

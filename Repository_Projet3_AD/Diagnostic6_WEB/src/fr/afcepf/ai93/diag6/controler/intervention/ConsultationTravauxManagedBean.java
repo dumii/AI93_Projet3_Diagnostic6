@@ -1,9 +1,6 @@
-package fr.afcepf.ai93.diag6.controler.gestionnaires;
+package fr.afcepf.ai93.diag6.controler.intervention;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -18,14 +15,11 @@ import fr.afcepf.ai93.diag6.api.business.diagnostic.IBusinessAnomalie;
 import fr.afcepf.ai93.diag6.api.business.diagnostic.IBusinessDiagnostic;
 import fr.afcepf.ai93.diag6.api.business.erp.IBusinessErp;
 import fr.afcepf.ai93.diag6.api.business.travaux.IBusinessIntervention;
-import fr.afcepf.ai93.diag6.entity.autres.Artisan;
 import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
 import fr.afcepf.ai93.diag6.entity.erp.Erp;
-import fr.afcepf.ai93.diag6.entity.travaux.EtatAvancementTravaux;
 import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
-import fr.afcepf.ai93.diag6.entity.travaux.TypeIntervention;
 
 @ManagedBean(name="mbConsultationTravaux")
 @SessionScoped
@@ -90,6 +84,7 @@ public class ConsultationTravauxManagedBean {
 	
 	public void clickNode (int idERP)
 	{
+		this.idERP = idERP;
 		monERP = proxyERP.recupererErpParId(idERP);
 		initialisationDesDonnees();
 	}
