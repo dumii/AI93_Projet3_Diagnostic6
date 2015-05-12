@@ -31,8 +31,9 @@ public class DaoUtilisateurImpl implements IDaoUtilisateur {
 	
 	@Override
 	public List<Utilisateur> recupereToutUtilisateur() {
-		// TODO Auto-generated method stub
-		return null;
+		Query requete = em.createQuery("SELECT u FROM Utilisateur u"); 
+		List<Utilisateur> listeToutUtili = requete.getResultList(); 
+		return listeToutUtili;
 	}
 
 	@Override
@@ -48,9 +49,8 @@ public class DaoUtilisateurImpl implements IDaoUtilisateur {
 	}
 
 	@Override
-	public boolean modifierUtilisateur(Utilisateur utilisateur) {
-		// TODO Auto-generated method stub
-		return false;
+	public void modifierUtilisateur(Utilisateur utilisateur) {
+		em.merge(utilisateur);
 	}
 
 	@Override

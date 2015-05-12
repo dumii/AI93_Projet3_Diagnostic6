@@ -13,6 +13,7 @@ import fr.afcepf.ai93.diag6.api.data.autres.IDaoUtilisateur;
 import fr.afcepf.ai93.diag6.entity.autres.Favoris;
 import fr.afcepf.ai93.diag6.entity.autres.ProfilUtilisateur;
 import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
+import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
 
 
 @Stateless
@@ -24,8 +25,10 @@ public class BusinessUtilisateurImpl implements IBusinessUtilisateur {
 	
 	@Override
 	public List<Utilisateur> recupereToutUtilisateur() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<Utilisateur> liste = proxiDaoUtilisateur.recupereToutUtilisateur();
+		
+		return liste;
 	}
 
 	@Override
@@ -41,9 +44,10 @@ public class BusinessUtilisateurImpl implements IBusinessUtilisateur {
 	}
 
 	@Override
-	public boolean modifierUtilisateur(Utilisateur utilisateur) {
-		// TODO Auto-generated method stub
-		return false;
+	public String modifierUtilisateur(Utilisateur utilisateur) {
+		Utilisateur utiliInitial = proxiDaoUtilisateur.recupereUtilisateur(utilisateur.getIdUtilisateur());
+		proxiDaoUtilisateur.modifierUtilisateur(utilisateur);
+		return "Ok modif";
 	}
 
 	@Override
@@ -97,7 +101,7 @@ public class BusinessUtilisateurImpl implements IBusinessUtilisateur {
 	@Override
 	public Utilisateur recupereUtilisateur(int idUtilisateur) {
 		// TODO Auto-generated method stub
-		return null;
+		return proxiDaoUtilisateur.recupereUtilisateur(idUtilisateur);
 	}
 
 	@Override

@@ -23,10 +23,12 @@
 
 #contenuProfil
 {
+	
 	background-image:linear-gradient(#FEFEE2, #f1f1f1);
 	border:#cccccc solid 1px;
 	border-radius: 10px;
 	padding-bottom: 1%;
+	font-size: small;
 }
 
 #titreProfil
@@ -36,8 +38,15 @@
 	color: #000063;
 	font-family: Corbel;
 	padding-left:1%;
+	font-size: 17px;
 }
 
+.ligne_verticale
+{
+    width:5px;
+    border-left:1px solid #cccccc;
+    height:130px;
+}
 .enrNewCoor
 {
 	background:#FEFEE2 ;
