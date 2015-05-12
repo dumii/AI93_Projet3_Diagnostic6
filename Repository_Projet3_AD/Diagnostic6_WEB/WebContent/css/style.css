@@ -12,12 +12,25 @@ body
 	background-attachment: fixed;
 }
 
-
+.content
+{
+	margin-top:100px;
+}
 
 
 /****************************/
 /* Barre de menu principale */
 /****************************/
+
+.fixEntete{
+ z-index: 9999;
+ position: fixed;
+ top: 0;
+ /* Mise en forme */
+ width: 100%; /* <-- Largeur de votre site */
+ height: 75px;
+ 
+ }
 
 #enTete {
 	height: 75px;
@@ -28,7 +41,7 @@ body
   	background-repeat: no-repeat, no-repeat;
 	background-color: white;
 	position: fixed;
-	margin-top: 2em;
+	margin-top: -6.3em;
 	z-index: 9999;
 }
 

@@ -75,9 +75,21 @@
 			
 		</fieldset>
 	</div>
-
-	<ui:insert name="content" />
-		
+	<div class="content">
+		<ui:insert name="content"/>
+	</div>
+<script>
+			jQuery.noConflict();
+			$(function(){
+	  			$(window).scroll(function () {//Au scroll dans la fenetre on déclenche la fonction
+	      			if ($(this).scrollTop() > 0) { //si on a défilé de plus de 150px du haut vers le bas
+	          		$('#enTete').addClass("fixEntete"); 
+	      			} else {
+	      				$('#enTete').removeClass("fixEntete");
+	      			}
+	  			});
+	 		});
+</script>		
 <script>
 jQuery.noConflict();
 

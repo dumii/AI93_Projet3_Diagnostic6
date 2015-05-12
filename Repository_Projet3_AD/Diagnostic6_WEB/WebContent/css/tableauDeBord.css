@@ -1,4 +1,6 @@
 
+
+
 html
 {
 	overflow: scroll;
@@ -12,6 +14,7 @@ html
 	float: left;
 	width: 13%;
 }
+
 .intituleDiag{
 	float: left;
 	width: 18%;
@@ -23,6 +26,7 @@ html
 	font-size: 14px;
 	
 }
+
 .nbInterDiag{
 	float: left;
 	width: 18%;
@@ -33,16 +37,19 @@ html
 	font-weight: bold;
 	
 }
+
 .logoIndicateur{
 	float: left;
 	width: 27%;
 }
+
 .logoEtatAvancement{
 	float: left;
 	width: 8%;
 	text-align: center;
 	margin-top: 1%;
 }
+
 .boutonsActions{
 	float: right;
 	width: 12%;
@@ -54,7 +61,8 @@ html
 	bottom: 0;
 }
 
-.bouton{
+.bouton
+{
 	width: 75px;
 	border-radius: 5px;
 	margin-top: 10%;

@@ -54,16 +54,16 @@
 										</h:panelGroup>
 									</div>
 									<div class="intituleDiag">
-										<h:outputText value="#{d.typeDiagnostic.nomType}" />
+										<h:outputText value="#{d.typeDiagnostic.nomType}"  />
 									</div>
 									<div class="nbInterDiag">
 										<h:outputText
 											value="#{mbTableauDeBord.calculAnomaliesParDiag(o, d)}" />
 										<h:outputText value=" anomalies" />
 										<br />
-										<h:outputText
+										<!-- <h:outputText
 											value="#{mbTableauDeBord.calculInterventionsParDiag(d)}" />
-										<h:outputText value=" interventions" />
+										<h:outputText value=" interventions" /> -->
 									</div>
 									<div class="logoIndicateur">
 										<h:panelGroup layout="block"
@@ -138,18 +138,7 @@
 			</h:form>
 
 		</ui:define>
-		<script>
-			jQuery.noConflict();
-			$(function(){
-	  			$(window).scroll(function () {//Au scroll dans la fenetre on déclenche la fonction
-	      			if ($(this).scrollTop() > 0) { //si on a défilé de plus de 150px du haut vers le bas
-	          		$('#enTete').addClass("fixEntete"); 
-	      			} else {
-	      				$('#enTete').removeClass("fixEntete");
-	      			}
-	  			});
-	 		});
-</script>
+		
 	</ui:composition>
 
 
