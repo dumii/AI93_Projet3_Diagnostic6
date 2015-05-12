@@ -39,7 +39,7 @@ public class Utilisateur implements Serializable {
 	private String prenomUtilisateur;
 	
 	@Column(name="email")
-	private String emailUtilsateur;
+	private String emailUtilisateur;
 	
 	@Column(name="telephone")
 	private Integer telUtilisateur;
@@ -111,14 +111,7 @@ public class Utilisateur implements Serializable {
 	}
 
 
-	public String getEmailUtilsateur() {
-		return emailUtilsateur;
-	}
 
-
-	public void setEmailUtilsateur(String emailUtilsateur) {
-		this.emailUtilsateur = emailUtilsateur;
-	}
 
 
 	public Integer getTelUtilisateur() {
@@ -222,7 +215,7 @@ public class Utilisateur implements Serializable {
 
 	public Utilisateur(Integer idUtilisateur, String loginUtilisateur,
 			String nomUtilisateur, String prenomUtilisateur,
-			String emailUtilsateur, Integer telUtilisateur,
+			String emailUtilisateur, Integer telUtilisateur,
 			String motDePasseUtilisateur, Date dateEnregistrement,
 			ProfilUtilisateur profilUtilisateur,
 			List<HistoriqueErp> listeHistoriqueErpUtilisateur,
@@ -235,7 +228,7 @@ public class Utilisateur implements Serializable {
 		this.loginUtilisateur = loginUtilisateur;
 		this.nomUtilisateur = nomUtilisateur;
 		this.prenomUtilisateur = prenomUtilisateur;
-		this.emailUtilsateur = emailUtilsateur;
+		this.emailUtilisateur = emailUtilisateur;
 		this.telUtilisateur = telUtilisateur;
 		this.motDePasseUtilisateur = motDePasseUtilisateur;
 		this.dateEnregistrement = dateEnregistrement;
@@ -245,6 +238,16 @@ public class Utilisateur implements Serializable {
 		this.listeHistoriqueInterventioUtilisateur = listeHistoriqueInterventioUtilisateur;
 		this.listeHistoriqueDiagnosticUtilisateur = listeHistoriqueDiagnosticUtilisateur;
 		this.listeFavorisUtilisateur = listeFavorisUtilisateur;
+	}
+
+
+	public String getEmailUtilisateur() {
+		return emailUtilisateur;
+	}
+
+
+	public void setEmailUtilisateur(String emailUtilisateur) {
+		this.emailUtilisateur = emailUtilisateur;
 	}
 	
 	
