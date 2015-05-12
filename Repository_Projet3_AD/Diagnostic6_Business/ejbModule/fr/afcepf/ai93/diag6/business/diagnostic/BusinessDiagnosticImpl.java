@@ -222,4 +222,11 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 	{
 		return ERPinterventionArchives;
 	}
+
+
+	@Override
+	public boolean recupererDiagSansInterv(Integer idDiag) {
+		//si la methode du Dao retourne false, c'est qu'il n'y a aucune intervention dessous
+		return proxyDiagnostic.recupereSiIntervEnCoursParDiag(idDiag); 
+	}
 }

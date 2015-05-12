@@ -52,4 +52,6 @@ public interface IBusinessDiagnostic {
 		
 		public boolean interventionArchivesSurERP();
 
+		public boolean recupererDiagSansInterv(Integer idDiag);
+
 }

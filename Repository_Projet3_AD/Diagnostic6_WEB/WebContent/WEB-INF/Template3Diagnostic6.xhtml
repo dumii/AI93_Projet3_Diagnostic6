@@ -23,7 +23,7 @@
 <body> 
 	<div id="enTete">
 	
-		<a href=""><img id="logoAccueil" src="images/Logo2.png" /></a>
+		<a href=""><img id="logoAccueil" src="images/Logo2.png" onclick="javascript:document.location.href='../Diagnostic6_WEB/Accueil.jsf'"/></a>
 			
 		<h:form id="rechercheBandeau" action="">
 			<input type="text" value="Entrez votre recherche ici ..."/>
@@ -39,7 +39,6 @@
 		<a href=""><img class="logoMenu" id="logoTrav" src="images/BuildingConstruction_icon.png" /></a>
 		
 		<a href="http://localhost:9090/Diagnostic6_WEB/planningTravaux.jsf"><img class="logoMenu" id="logoTabBord" src="images/TableauBordIconeOrange.png" /></a>
-		
 		
 		<ui:insert name="boutonDeconnexion" />
 		
@@ -72,9 +71,21 @@
 			
 		</fieldset>
 	</div>
-
-	<ui:insert name="content" />
-		
+	<div class="content">
+		<ui:insert name="content"/>
+	</div>
+<script>
+			jQuery.noConflict();
+			$(function(){
+	  			$(window).scroll(function () {//Au scroll dans la fenetre on déclenche la fonction
+	      			if ($(this).scrollTop() > 0) { //si on a défilé de plus de 150px du haut vers le bas
+	          		$('#enTete').addClass("fixEntete"); 
+	      			} else {
+	      				$('#enTete').removeClass("fixEntete");
+	      			}
+	  			});
+	 		});
+</script>		
 <script>
 jQuery.noConflict();
 

@@ -23,13 +23,12 @@
 					<a4j:repeat value="#{mbTableauDeBord.listeErpFiltree}" var="o"
 						rows="20" id="repeat" styleClass="border-radius: 5px;">
 						<rich:panel header="#{o.nomErp}"
-							style="border-radius: 5px; position:relative;
-							float:left; width:60%; padding:1px; background-color:#f7f7f7; border-display:none;margin-left: 14%"
-							styleClass="richpanel">
+							style="border-radius: 5px; position:relative;float:left; width:60%; padding:1px; background-color:#f7f7f7; border-display:none;margin-left: 14%;" styleClass="richpanel">
+							<h:button clas="bouton" value="Planning" />
 							<a4j:repeat value="#{o.listeDiagnosticErp}" var="d" rows="20"
 								id="repeat" styleClass="height: 75px; border-radius: 5px;">
 								<rich:panel
-									style="height: 100px; margin-top: 3px; border-radius: 5px; background-color: #EFF2FB"
+									style="height: 95px; margin-top: 3px; border-radius: 5px; background-color: #EFF2FB"
 									id="repeater">
 									<div class="logoTypeDiag">
 										<h:panelGroup layout="block"
@@ -54,16 +53,16 @@
 										</h:panelGroup>
 									</div>
 									<div class="intituleDiag">
-										<h:outputText value="#{d.typeDiagnostic.nomType}" />
+										<h:outputText value="#{d.typeDiagnostic.nomType}"  />
 									</div>
 									<div class="nbInterDiag">
 										<h:outputText
 											value="#{mbTableauDeBord.calculAnomaliesParDiag(o, d)}" />
 										<h:outputText value=" anomalies" />
 										<br />
-										<h:outputText
+										<!-- <h:outputText
 											value="#{mbTableauDeBord.calculInterventionsParDiag(d)}" />
-										<h:outputText value=" interventions" />
+										<h:outputText value=" interventions" /> -->
 									</div>
 									<div class="logoIndicateur">
 										<h:panelGroup layout="block"
@@ -122,7 +121,7 @@
 										<div>
 											<h:button class="bouton" value="Diagnostic" />
 											<br />
-											<h:button class="bouton" value="Planning" />
+											
 										</div>
 									</div>
 								</rich:panel>
@@ -138,18 +137,7 @@
 			</h:form>
 
 		</ui:define>
-		<script>
-			jQuery.noConflict();
-			$(function(){
-	  			$(window).scroll(function () {//Au scroll dans la fenetre on déclenche la fonction
-	      			if ($(this).scrollTop() > 0) { //si on a défilé de plus de 150px du haut vers le bas
-	          		$('#enTete').addClass("fixEntete"); 
-	      			} else {
-	      				$('#enTete').removeClass("fixEntete");
-	      			}
-	  			});
-	 		});
-</script>
+		
 	</ui:composition>
 
 
