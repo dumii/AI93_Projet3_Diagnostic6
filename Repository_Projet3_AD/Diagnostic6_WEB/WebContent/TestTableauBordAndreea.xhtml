@@ -28,8 +28,8 @@
 					<f:selectItems value="#{mbTableauDeBord.listeErpComplete}"
 						var="lst" itemLabel="#{lst.nomErp}" itemValue="#{lst.idErp}">
 					</f:selectItems>
-					<a4j:ajax event="change"
-						listener="#{mbTableauDeBord.filtrerParErpNom()}" reRender="panel" />
+					<a4j:ajax event="change" onbegin="charger()" oncomplete="fini()"
+						listener="#{mbTableauDeBord.filtrer()}" reRender="panel" />
 				</rich:select>
 			</rich:panel>
 
@@ -44,8 +44,8 @@
 					<f:selectItems value="#{mbTableauDeBord.listeTypesErpComplete}"
 						var="lst" itemLabel="#{lst.typeErpCourt}" itemValue="#{lst.idTypeErp}">
 					</f:selectItems>
-					<a4j:ajax event="change"
-						listener="#{mbTableauDeBord.filtrerParTypeErp()}" reRender="panel" />
+					<a4j:ajax event="change" onbegin="charger()" oncomplete="fini()"
+						listener="#{mbTableauDeBord.filtrer()}" reRender="panel" />
 				</rich:select>
 			</rich:panel>
 
@@ -60,8 +60,8 @@
 					<f:selectItems value="#{mbTableauDeBord.listeTypesDiagnosticComplete}"
 						var="lst" itemLabel="#{lst.nomType}" itemValue="#{lst.idTypeDiagnostic}">
 					</f:selectItems>
-					<a4j:ajax event="change"
-						listener="#{mbTableauDeBord.filtrerParTypeDiagnostic()}" reRender="panel" />
+					<a4j:ajax event="change" onbegin="charger()" oncomplete="fini()"
+						listener="#{mbTableauDeBord.filtrer()}" reRender="panel" />
 				</rich:select>
 			</rich:panel>
 
@@ -75,8 +75,8 @@
 					<f:selectItem itemValue="2" itemLabel="2 Acceptable" />
 					<f:selectItem itemValue="3" itemLabel="3 Prioritaire" />
 					<f:selectItem itemValue="4" itemLabel="4 Critique" />
-					<a4j:ajax event="change"
-						listener="#{mbTableauDeBord.filtrerParNiveau()}" reRender="panel" />
+					<a4j:ajax event="change" onbegin="charger()" oncomplete="fini()"
+						listener="#{mbTableauDeBord.filtrer()}" reRender="panel" />
 				</rich:select>
 			</rich:panel>
 
@@ -91,8 +91,8 @@
 					<f:selectItems value="#{mbTableauDeBord.listeEtatsComplete}"
 						var="lst" itemLabel="#{lst.intituleEtatAvancement}" itemValue="#{lst.idEtatAvancement}">
 					</f:selectItems>
-					<a4j:ajax event="change"
-						listener="#{mbTableauDeBord.filtrerParEtatIntervention()}" reRender="panel" />
+					<a4j:ajax event="change" onbegin="charger()" oncomplete="fini()"
+						listener="#{mbTableauDeBord.filtrer()}" reRender="panel" />
 				</rich:select>
 			</rich:panel>
 
@@ -106,7 +106,7 @@
                         	<h:panelGrid columns="2">
                             	
                         	</h:panelGrid>
-                      		</a4j:repeat>
+
                     	</rich:panel>
                 </a4j:repeat>
         </a4j:outputPanel>
@@ -114,6 +114,23 @@
     
     </h:form>
 </div>
+<div id="chargement" style="display:none"><img src="images/721.GIF" /></div>
 </f:view>
-
+<script type="text/javascript">
+function charger() {
+	with(document.getElementById("chargement")) {
+		style.display = "block";
+		style.position = "absolute";
+		style.top = "0px";
+		style.right = "0px";
+		style.width = "800px";
+		style.height = "800px";
+	}
+}
+function fini () {
+	with(document.getElementById("chargement")) {
+		style.display = "none";
+	}	
+}
+</script>
 </html>
