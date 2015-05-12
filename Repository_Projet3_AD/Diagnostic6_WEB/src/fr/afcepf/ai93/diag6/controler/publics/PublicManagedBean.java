@@ -350,11 +350,12 @@ public class PublicManagedBean{
 
 			for (Erp e: listeTempByTypeErp){
 				for(Erp e2 : listeTempByTypeDiag){
-					
-					if (e2.getIdErp() == idTypeDiagSelect && e.getIdErp() == idTypeErpSelect){
 
-						liste.add(e2);
+					if (e.getTypeErp().getIdTypeErp() == e2.getTypeErp().getIdTypeErp()){
 
+						if(!liste.contains(e)){
+							liste.add(e);
+						}
 					}
 				}
 			}

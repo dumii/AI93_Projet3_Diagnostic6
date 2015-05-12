@@ -43,6 +43,7 @@ public class TableauDeBordManagedBean {
 	private List<Erp> listeErpFiltree; 
 	private int nbInterventions; 
 	
+	
 	@PostConstruct
 	private void init() {
 		recupererTousLesErp();
@@ -81,7 +82,7 @@ public class TableauDeBordManagedBean {
 			System.out.println(e.getIntituleEtatAvancement());
 	}
 	
-	private int calculAnomaliesParDiag(Diagnostic d){
+	public int calculAnomaliesParDiag(Diagnostic d){
 		List<Anomalie> listeAnomaliesParDiag = proxyBusinessAnomalie.recupereAnomalieParDiagnostic(d.getIdDiagnostic());
 		//dans la meme methode, on calcule aussi le nombre d'interventions sur le diagnostic
 		nbInterventions = 0; 
@@ -95,11 +96,11 @@ public class TableauDeBordManagedBean {
 		return listeAnomaliesParDiag.size(); 
 	}
 	
-	private int calculInterventionsParDiag(Diagnostic d){
+	public int calculInterventionsParDiag(Diagnostic d){
 		return nbInterventions; 
 	}
 	
-	private int calculerMoyenneParDiag(Diagnostic d){
+	public int calculerMoyenneParDiag(Diagnostic d){
 		List<Anomalie> listeAnomaliesParDiag = proxyBusinessAnomalie.recupereAnomalieParDiagnostic(d.getIdDiagnostic());
 		int sommeValeurs =0; 
 		for (Anomalie a : listeAnomaliesParDiag){
@@ -152,6 +153,7 @@ public class TableauDeBordManagedBean {
 			return 3;
 		return 4;  
 	}
+	
 	
 ////////////////////////getters et setters ////////////////////
 
