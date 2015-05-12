@@ -88,7 +88,7 @@ public class DaoDiagnosticImpl implements IDaoDiagnostic {
 	}
 
 
-	public List<Diagnostic> recupereDiagnosticParErp(Erp erp) {
+	public List<Diagnostic> recupereDiagnosticNonTraitesParErp(Erp erp) {
 
 		Query requete = em.createQuery("SELECT a.listeDiagnosticErp FROM Erp a WHERE a.idErp = :pid");
 		
@@ -99,7 +99,8 @@ public class DaoDiagnosticImpl implements IDaoDiagnostic {
 
 		for (Diagnostic diag : liste)
 		{
-			if (diag.getTraite() != 0)
+			//On ne récupère que les diagnostics non traités
+			if (diag.getTraite() == 0)
 			{
 				listeARetourner.add(diag);
 			}

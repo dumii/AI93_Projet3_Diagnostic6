@@ -128,7 +128,6 @@ function dessinerRectangle(element)
 			var ecart = parseInt(
 					(debutIntervention - debutTableau)/(24*3600*1000));
 			margeGauche = (ecart * 100 / dureeTableau);
-			console.log("Ecart : " + ecart);
 		}
 
 
@@ -167,13 +166,13 @@ function afficherMasquerEtatAvancement(idIntervention, idEtat)
 	case "1":
 		document.getElementById("iconeEtat - "+idIntervention).src = "images/iconeValider.26.26.png";
 		break;
-	case "2":
+	case "3":
 		document.getElementById("iconeEtat - "+idIntervention).src = "images/iconeEnCours.26.26.png";
 		break;		
-	case "3":
+	case "4":
 		document.getElementById("iconeEtat - "+idIntervention).src = "images/iconeEnAttente.26.26.png";
 		break;	
-	case "4":
+	case "2":
 		document.getElementById("iconeEtat - "+idIntervention).src = "images/bird.26.26.png";		
 		break;
 	}

@@ -44,6 +44,11 @@
   color: #ffffff;
 }
 
+a:visited 
+{
+	color: #ffffff !important;
+}
+
 /******************************************/
 /*Style général du tableau et des entêtes*/
 /******************************************/
@@ -340,3 +345,4 @@ tr:not(.ligneOrange) > td:nth-of-type(2)
 {
 	font-size:smaller;
 }
+.troll span input{width:45.5% !important;}

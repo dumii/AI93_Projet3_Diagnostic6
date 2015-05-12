@@ -135,4 +135,9 @@ public class BusinessInterventionImpl implements IBusinessIntervention {
 			Intervention intervention) {
 		return proxyEtatAvancement.recupererEtatParIntervention(intervention);
 	}
+
+	@Override
+	public TypeIntervention recupererTypeParID(int idType) {
+		return proxyTypeIntervention.recupererTypeParID(idType);
+	}
 }

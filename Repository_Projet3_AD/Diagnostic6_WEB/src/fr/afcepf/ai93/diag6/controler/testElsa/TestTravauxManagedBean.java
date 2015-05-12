@@ -147,7 +147,7 @@ public class TestTravauxManagedBean {
 		try
 		{
 			//On ajoute dans la base de données et on rafraîchit la liste d'interventions à l'écran
-			resultat = proxyBusiness.ajouterIntervention(interventionAdd);			
+			resultat = proxyBusiness.ajouterIntervention(interventionAdd, anom);			
 		}
 		catch (Exception e)
 		{

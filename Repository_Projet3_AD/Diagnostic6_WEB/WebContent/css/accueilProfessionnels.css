@@ -1,0 +1,61 @@
+/*************************************/
+/* Mini Barre d'�tat Consultation Diagnostic */
+/*************************************/
+
+.logoDeconnexion{
+	margin-top: -68px;
+	height: 30px;
+	width: auto;
+	float: right;
+	margin-right: 30px;
+
+}
+
+h2{
+  	background-size: 100%;
+  	padding-left: 11px;
+  	font-family: Arial, Verdana, sans-serif;
+	background-attachment: fixed;
+  	color: #D90000;
+  	display: block;
+  	font-size: 1.17em;
+  	-webkit-margin-before: 1em;
+  	-webkit-margin-after: 1em;
+  	-webkit-margin-start: 0px;
+  	-webkit-margin-end: 0px;
+  	font-weight: bold;
+
+  	margin:0px;
+  	margin-top:3px;
+}
+
+#content
+{
+	margin-top : 7%;
+	margin-left: 19%;
+	padding-bottom:5px;
+
+	width: 55%;
+	height:300px;
+
+	background-color: white;
+  	border: #cccccc solid 1px;
+  	border-radius:4px;  	
+  	
+  	font-size:smaller;
+}
+
+.italique
+{
+	font-style:italic;
+}
+
+a:visited !important
+{
+	color: black;
+}
+
+a
+{
+	text-decoration: none;
+}

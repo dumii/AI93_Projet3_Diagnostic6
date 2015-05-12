@@ -10,5 +10,7 @@ public interface IDaoTypeIntervention {
 	public List<TypeIntervention> recupererTousTypesIntervention();
 	
 	public TypeIntervention recupererTypeParIntervention(Intervention intervention);
+	
+	 public TypeIntervention recupererTypeParID(int idType);
 
 }

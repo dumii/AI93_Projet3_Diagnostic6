@@ -3,6 +3,7 @@
 	<name>Diagnostic6_Data</name>
 	<comment></comment>
 	<projects>
+		<project>Diagnostic6_Entity</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

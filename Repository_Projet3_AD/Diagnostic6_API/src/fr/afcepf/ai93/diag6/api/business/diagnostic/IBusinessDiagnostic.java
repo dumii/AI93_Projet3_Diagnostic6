@@ -39,10 +39,17 @@ public interface IBusinessDiagnostic {
 
 	    public List<Diagnostic> rechercheDiagnosticsErp(String nomERP);
 	    
-	    public List<Diagnostic> recupereDiagnosticParErp(Erp erp);
+	    public List<Diagnostic> recupereDiagnosticNonTraitesParErp(Erp erp);
 
 		public List<Indicateur> recupererIndicateursParDiag(Diagnostic diagEnCours);
 
 		public List<Diagnostic> recupereToutDiagnosticParErp(Erp e);
+		
+		
+		public boolean interventionEnCoursSurERP();
+		
+		public boolean interventionEnAttenteSurERP();
+		
+		public boolean interventionArchivesSurERP();
 
 }

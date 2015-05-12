@@ -4,10 +4,6 @@
         <dependent-module archiveName="Diagnostic6_Entity.jar" deploy-path="/lib" handle="module:/resource/Diagnostic6_Entity/Diagnostic6_Entity">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="Diagnostic6_Data.jar" deploy-path="/" handle="module:/resource/Diagnostic6_Data/Diagnostic6_Data">
-            <dependent-object/>
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <dependent-module archiveName="Diagnostic6_Business.jar" deploy-path="/" handle="module:/resource/Diagnostic6_Business/Diagnostic6_Business">
             <dependent-object/>
             <dependency-type>uses</dependency-type>
@@ -17,6 +13,10 @@
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="Diagnostic6_API.jar" deploy-path="/lib" handle="module:/resource/Diagnostic6_API/Diagnostic6_API">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="Diagnostic6_Data.jar" deploy-path="/" handle="module:/resource/Diagnostic6_Data/Diagnostic6_Data">
+            <dependent-object/>
             <dependency-type>uses</dependency-type>
         </dependent-module>
     </wb-module>

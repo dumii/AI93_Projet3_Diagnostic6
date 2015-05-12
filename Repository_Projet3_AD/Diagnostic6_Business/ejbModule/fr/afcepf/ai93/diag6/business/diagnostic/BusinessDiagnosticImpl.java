@@ -35,7 +35,11 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 	private List<Diagnostic> listeDiag; 
 	private List<Diagnostic> listeDiagIntervEnCours = new ArrayList<Diagnostic>(); 
 	private List<Diagnostic> listeDiagEnAttente = new ArrayList<Diagnostic>(); 
-	private List<Diagnostic> listeDiagArchives = new ArrayList<Diagnostic>(); 
+	private List<Diagnostic> listeDiagArchives = new ArrayList<Diagnostic>();
+	
+	private boolean ERPinterventionEnCours = false;
+	private boolean ERPinterventionEnAttente = false;
+	private boolean ERPinterventionArchives = false;
 		
 	@Override
 	public List<Diagnostic> recupereToutDiagnostic() {
@@ -87,14 +91,11 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 		int typeDiag = diagnostic.getTypeDiagnostic().getIdTypeDiagnostic();
 		
 		//on affiche les Erp avec leurs diags avec leurs Type de diag
-		List<Diagnostic> liste =  proxyDiagnostic.recupereDiagnosticParErp(diagnostic.getErp());
+		List<Diagnostic> liste =  proxyDiagnostic.recupereDiagnosticNonTraitesParErp(diagnostic.getErp());
 		for (Diagnostic diag2 : liste) {
 			if(diag2.getTraite() == 0 && diag2.getTypeDiagnostic().getIdTypeDiagnostic() == typeDiag)
 			{
 				ajoutAutorise = false;
-				System.out.println(diag2.getErp().getIdErp() + "/" + diag2.getIdDiagnostic() + "/" + diag2.getTypeDiagnostic().getNomType());
-				System.out.println(ajoutAutorise);
-				System.out.println(diag2.getTraite() + diag2.getTypeDiagnostic().getIdTypeDiagnostic());
 			}	
 		} 
 		if (ajoutAutorise == true) {	
@@ -177,12 +178,48 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 	}
 
 	@Override
-	public List<Diagnostic> recupereDiagnosticParErp(Erp erp) {
-		return proxyDiagnostic.recupereDiagnosticParErp(erp);
+	public List<Diagnostic> recupereDiagnosticNonTraitesParErp(Erp erp) {
+		return proxyDiagnostic.recupereDiagnosticNonTraitesParErp(erp);
 	}
 
 	@Override
-	public List<Diagnostic> recupereToutDiagnosticParErp(Erp e) {
-		return proxyDiagnostic.recupereToutDiagnosticParErp(e);
+	public List<Diagnostic> recupereToutDiagnosticParErp(Erp erp) {
+		
+		List<Diagnostic> liste = proxyDiagnostic.recupereToutDiagnosticParErp(erp); 
+		
+		for (Diagnostic d : liste)
+		{
+			if(d.getTraite()!= 0)
+			{
+				ERPinterventionArchives = true;
+			}
+			else
+			{
+				if(proxyDiagnostic.recupereSiIntervEnCoursParDiag(d.getIdDiagnostic())) 
+				{
+					ERPinterventionEnCours = true;
+				}
+				else 
+				{
+					ERPinterventionEnAttente = true;
+				}
+			}
+		}		
+		return liste;
+	}
+
+	public boolean interventionEnCoursSurERP()
+	{
+		return ERPinterventionEnCours;
+	}
+	
+	public boolean interventionEnAttenteSurERP()
+	{
+		return ERPinterventionEnAttente;
+	}
+	
+	public boolean interventionArchivesSurERP()
+	{
+		return ERPinterventionArchives;
 	}
 }
