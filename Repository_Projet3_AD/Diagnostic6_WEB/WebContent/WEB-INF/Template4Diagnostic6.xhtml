@@ -10,9 +10,8 @@
 	<title>
 		<ui:insert name="title"></ui:insert>
 	</title>
-	
-	
-	<link href="css/style.css" rel="stylesheet" type="text/css" />
+
+	<link href="css/styleTemplate4.css" rel="stylesheet" type="text/css" />
 	
  	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css"/>
 	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
@@ -29,7 +28,6 @@
 			<input type="text" value="Entrez votre recherche ici ..."/>
 			<input type="image" src="images/Loupe.png"/>
 			<div id="resultatRecherche">blabla</div>
-			<div class="boutonDeconnexion"></div>
 		</h:form>
 		
 		<a href=""><img class="logoMenu" id="logoErp" src="images/ERPIconeBleue2.png" /></a>
@@ -38,34 +36,9 @@
 		
 		<a href=""><img class="logoMenu" id="logoTrav" src="images/BuildingConstruction_icon.png" /></a>
 		
-		<a href="http://localhost:9090/Diagnostic6_WEB/planningTravaux.jsf"><img class="logoMenu" id="logoTabBord" src="images/TableauBordIconeOrange.png" /></a>
+		<a href=""><img class="logoMenu" id="logoTabBord" src="images/TableauBordIconeOrange.png" /></a>
 		
-		
-		<ui:insert name="boutonDeconnexion" />
-		
-	</div>
-	
-	<div id="bandeauGauche">			
-	
-  		<div id="accordion">
-			<h3><ui:insert name="accordeon1"/></h3>
-			<div>
-				<ui:insert name="arborescence1"/>
-			</div>
- 
-			<h3><ui:insert name="accordeon2"/></h3>
-			<div>
-				<ui:insert name="arborescence2"/>
-			</div>
-
-			<h3><ui:insert name="accordeon3"/></h3>
-			<div>
-				<ui:insert name="arborescence3"/>
-			</div>			
-		</div>
-			
-	</div>
-		
+	</div>	
 		
 	<div id="bandeauDroite">
 		<fieldset id="connection">
@@ -106,3 +79,4 @@ jQuery.noConflict();
 </script>
 </body>
 </html>
+

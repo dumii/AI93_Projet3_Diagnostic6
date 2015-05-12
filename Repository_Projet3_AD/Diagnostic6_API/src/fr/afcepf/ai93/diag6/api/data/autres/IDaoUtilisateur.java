@@ -14,7 +14,7 @@ public interface IDaoUtilisateur {
 
     public boolean supprimerUtilisateur(Utilisateur utilisateur);
 
-    public boolean modifierUtilisateur(Utilisateur utilisateur);
+    public void modifierUtilisateur(Utilisateur utilisateur);
 
     public Utilisateur recupereUtilisateur(int idUtilisateur);
 
