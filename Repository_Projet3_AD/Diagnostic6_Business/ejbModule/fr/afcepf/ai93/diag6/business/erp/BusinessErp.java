@@ -93,7 +93,7 @@ public class BusinessErp implements IBusinessErp {
 
 	@Override
 	public List<TypeErp> recupererListeTypeERP() {
-		return proxyTypeErp.recupererListeTypeERP();
+		return proxyTypeErp.recupererToutTypeErp();
 	}
 
 	public IDaoTypeErp getProxyTypeErp() {

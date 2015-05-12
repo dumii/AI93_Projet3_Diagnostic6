@@ -28,7 +28,8 @@ body
   	background-repeat: no-repeat, no-repeat;
 	background-color: white;
 	position: fixed;
-	margin-top: -6em;
+	margin-top: 2em;
+	z-index: 9999;
 }
 
 #rechercheBandeau {
@@ -139,7 +140,7 @@ body
 
 #bandeauDroite
 {
-	margin-left: 75%;
+	margin-left: 80%;
  	margin-top: 7%;
  	width: 200px;
  	background-color: white;
