@@ -82,7 +82,7 @@ public class TableauDeBordManagedBean {
 	}
 
 	public int calculAnomaliesParDiag(Erp e, Diagnostic d){
-		return e.getListeDiagnosticErp().size();
+		return proxyBusinessAnomalie.recupereAnomalieParDiagnostic(d.getIdDiagnostic()).size();
 	}
 
 	public int calculInterventionsParDiag(Diagnostic d){
@@ -144,6 +144,7 @@ public class TableauDeBordManagedBean {
 	}
 
 	public int calculEtatAvancement(Diagnostic d){
+
 		for(Anomalie a : listeAnomaliesParDiagTmp){
 			List<Intervention> listeBidon = proxyBusinessIntervention.rechercherInterventionSurAnomalie(a.getIdAnomalie()); 
 			a.setIntervention(listeBidon.get(0));
@@ -152,23 +153,30 @@ public class TableauDeBordManagedBean {
 		List<Intervention> listeInterv = new ArrayList<>(); 
 		for(Anomalie a : d.getListeAnomaliesDiagnostic()){
 			listeInterv.add(a.getIntervention()); 
-			if(a.getIntervention().getEtatAvancementTravaux().getIdEtatAvancement()==3)
+			if(a.getIntervention().getEtatAvancementTravaux().getIdEtatAvancement()==3){
 				etatTmp = 3; //="En cours", car si une seule intervention de ce diagnostic est en cours, tout le diagnostic est en cours
+				return etatTmp; 
+			}
 		}
 		int tailleListeInterv = listeInterv.size(); 
-		if(tailleListeInterv==0)
+		if(tailleListeInterv==0){
 			etatTmp = 5; //= "Sans intervention", car il n'y a aucune intervention sur les anomalies de ce diagnostic
+			return etatTmp;
+		}
 		int nbIntervTerminees = 0;
 		for(Intervention i : listeInterv){
 			if(i.getEtatAvancementTravaux().getIdEtatAvancement()==1){
 				nbIntervTerminees++;
 			}
 		}
-		if(nbIntervTerminees==tailleListeInterv)
+		if(nbIntervTerminees==tailleListeInterv){
 			etatTmp = 1; //"Terminé", car si toutes les interventions ont l'état 1=terminé, alors tout le diagnostic prend cet état
-
+			return etatTmp;
+		}
 		etatTmp = 2; //"Suspendu ou planifié", ça peut etre aussi return 4, attention à prendre les deux en compte;
+
 		return etatTmp;
+
 	}
 	////////////////////////getters et setters ////////////////////
 

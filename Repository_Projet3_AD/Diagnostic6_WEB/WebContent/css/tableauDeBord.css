@@ -11,6 +11,7 @@ html
 }
 
 .logoTypeDiag{
+
 	float: left;
 	width: 13%;
 }
@@ -21,7 +22,7 @@ html
 	color: #2E2EFE;
 	font-weight: bold;
 	text-align: middle;
-	line-height: 53px;
+	line-height: 75px;
 	font-family: Corbel;
 	font-size: 14px;
 	
@@ -31,7 +32,7 @@ html
 	float: left;
 	width: 18%;
 	text-align: middle;
-	line-height: 30px;
+	line-height: 75px;
 	font-family: Corbel;
 	font-size: 12px;
 	font-weight: bold;
@@ -47,7 +48,7 @@ html
 	float: left;
 	width: 8%;
 	text-align: center;
-	margin-top: 1%;
+	margin-top: 0.7%;
 }
 
 .boutonsActions{
