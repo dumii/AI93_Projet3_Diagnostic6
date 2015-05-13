@@ -41,9 +41,9 @@
 				<rich:treeNode type="diagnostic">
 					<h:outputLabel
 						value="#{node.intitule} - #{node.name} - #{node.idDiag}">
-						<f:ajax event="click"
+						<a4j:ajax event="click"
 							listener="#{mbDonneesGenerales.clickNode(mbArborescenceDiagnostic.currentSelection.idDiag)}"
-							render=":toto:lblReponseAjax" />
+							render=":toto:lblReponseAjax" oncomplete="ouvrirAccordeon()"/>
 					</h:outputLabel>
 				</rich:treeNode>
 			</rich:tree>
@@ -171,11 +171,11 @@
 								</div>
 								<div class="tableErpDiagGeneral">
 									<rich:panel
-										style="width:99.5%; background-color:#f7f7f7;border:none; font-weight: bold;"
+										style="width:99.5%; background-color:#f7f7f7;border:none; font-weight: bold; display:table;"
 										id="panelInfosGen">
 										<f:attribute name="rendered"
 											value="#{mbDonneesGenerales.isSelected()}"></f:attribute>
-										<h:panelGrid columns="2" style="float:left; width:50%;">
+										<h:panelGrid columns="2" style="float:left; width:50%;" columnClasses="forty-percent top-alignment, sixty-percent top-alignment" >
 											<h:outputText value="ERP concerné : " />
 											<h:outputText
 												value="#{mbDonneesGenerales.diagnosticSelectionne.erp.nomErp}" />
@@ -201,7 +201,7 @@
                         	 #{mbDonneesGenerales.diagnosticSelectionne.erp.proprietaire.localisation.codePostal} #{mbDonneesGenerales.diagnosticSelectionne.erp.proprietaire.localisation.ville}"
 												escape="false" />
 										</h:panelGrid>
-										<h:panelGrid columns="2">
+										<h:panelGrid columns="2" columnClasses="top-alignment">
 											<h:outputText value="Etat diagnostic : " />
 											<h:selectOneMenu
 												value="#{mbDonneesGenerales.diagnosticSelectionne.traite}">
@@ -311,9 +311,27 @@
 								</div>
 								<div id="ficheAnomTitre">
 									Nombre d'anomalies recencées :
-									#{mbDonneesGenerales.listeAnomaliesParDiagnostic.size()} <img
-										class="ficheDiagTitreImage" id="boutonModifier"
-										src="images/TypesDiagnosticIcones/TypeAcces.38.36.png" />
+									#{mbDonneesGenerales.listeAnomaliesParDiagnostic.size()} 
+										<h:panelGroup
+											rendered="#{mbDonneesGenerales.diagnosticSelectionne.typeDiagnostic.idTypeDiagnostic==1}">
+											<img src="images/TypesDiagnosticIcones/TypeAcces.38.36.png" alt=""
+												id="boutonModifier" class="ficheDiagTitreImage"/>
+										</h:panelGroup>
+										<h:panelGroup
+											rendered="#{mbDonneesGenerales.diagnosticSelectionne.typeDiagnostic.idTypeDiagnostic==2}">
+											<img src="images/TypesDiagnosticIcones/TypeEnergie.38.36.png" alt=""
+												id="boutonModifier" class="ficheDiagTitreImage"/>
+										</h:panelGroup>
+										<h:panelGroup
+											rendered="#{mbDonneesGenerales.diagnosticSelectionne.typeDiagnostic.idTypeDiagnostic==3}">
+											<img src="images/TypesDiagnosticIcones/TypeSecurite.38.36.png" alt=""
+												id="boutonModifier" class="ficheDiagTitreImage"/>
+										</h:panelGroup>
+										<h:panelGroup
+											rendered="#{mbDonneesGenerales.diagnosticSelectionne.typeDiagnostic.idTypeDiagnostic==4}">
+											<img src="images/TypesDiagnosticIcones/TypeHygiene.38.36.png" alt=""
+												id="boutonModifier" class="ficheDiagTitreImage"/>
+										</h:panelGroup>
 								</div>
 							</div>
 							<div id="anomaliesFiche">
@@ -327,11 +345,14 @@
 											<rich:panel
 												style="float:left; width:100%; background-color:#f7f7f7; border-display:none; border-bottom: 0px;
 						  border-left: 0px; border-right: 0px;">
-												<div>
-													<h:outputText value="Anomalie n° : "
+												<h:panelGrid columns="2"
+													style="width: 100%; font-family: Arial, Verdana, sans-serif; color=gray; font-weight: normal; "
+													columnClasses="forty-percent top-alignment, sixty-percent top-alignment">
+												<h:outputText value="Anomalie n° : "
 														style="font-weight:bold; margin-left:4px;" />
+												<h:panelGroup>
 													<h:outputText value="#{o.idAnomalie}"
-														style="font-weight:bold; border:none; font-color:black; margin-left: 88px;"
+														style="font-weight:bold; border:none; font-color:black;"
 														id="idAnom" />
 													<div style="float: right">
 														<h:commandButton
@@ -356,9 +377,7 @@
 																value="display:#{mbDonneesGenerales.isGestConnected()};"></f:attribute> 
 														</h:commandButton>
 													</div>
-												</div>
-												<h:panelGrid columns="2"
-													style="width: 100%; font-family: Arial, Verdana, sans-serif; color=gray; font-weight: normal; ">
+												</h:panelGroup>
 													<h:outputText value="Etat anomalie : "
 														style="font-weight:bold " />
 													<f:attribute name="align" value="left" />
@@ -426,7 +445,12 @@
 			$( "#ErpDiagDetaille" ).toggle( "blind", 500 );
 		});
 
+  function ouvrirAccordeon() {
+		$( "#buttShowEDD" ).click(function() {
+			$( "#ErpDiagDetaille" ).toggle( "blind", 500 );
+		});
 
+  }	
   function ouverture(){
 		$( ".tableErpDiagGeneral" ).toggle();
 		}
