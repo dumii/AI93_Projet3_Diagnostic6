@@ -1,5 +1,6 @@
 package fr.afcepf.ai93.diag6.data.autres;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Remote;
@@ -10,6 +11,9 @@ import javax.persistence.Query;
 
 import fr.afcepf.ai93.diag6.api.data.autres.IDaoArtisan;
 import fr.afcepf.ai93.diag6.entity.autres.Artisan;
+import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
+import fr.afcepf.ai93.diag6.entity.autres.TypeArtisan;
+import fr.afcepf.ai93.diag6.entity.travaux.TypeIntervention;
 
 @Stateless
 @Remote(IDaoArtisan.class)
@@ -38,21 +42,11 @@ public class DaoArtisanImpl implements IDaoArtisan {
 	}
 
 	@Override
-	public List<Artisan> recupererArtisanParTypeIntervention(
-			int idTypeIntervention) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Artisan> recupererArtisansParTypeIntervention(
+			TypeIntervention type) {
+		Query query = em.createQuery("SELECT a.artisan from TypeArtisan a WHERE a.typeIntervention.idTypeIntervention = :pid");
+		query.setParameter("pid", type.getIdTypeIntervention());
+		List<Artisan> listeArtisan = query.getResultList();
+		return listeArtisan;
 	}
-
-	//Méthode à modifier
-	/*
-	@Override
-	public List<Artisan> recupererArtisanParTypeIntervention(
-			int idTypeIntervention) {
-		Query query = em.createQuery("SELECT Artisan e from TypeArtisan e WHERE e.idTypeIntervention = :pid");
-		query.setParameter("pid", idTypeIntervention);
-		List<Artisan> liste = query.getResultList();
-		return liste;
-	}
-	*/
 }

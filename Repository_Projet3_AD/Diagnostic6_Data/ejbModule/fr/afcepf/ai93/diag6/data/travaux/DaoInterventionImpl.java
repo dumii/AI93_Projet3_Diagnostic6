@@ -10,8 +10,14 @@ import javax.persistence.Query;
 
 import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoDiagnostic;
 import fr.afcepf.ai93.diag6.api.data.travaux.IDaoIntervention;
+<<<<<<< HEAD
 import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
+=======
+import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
+import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
+import fr.afcepf.ai93.diag6.entity.travaux.TypeIntervention;
+>>>>>>> branch 'master' of https://github.com/dumii/AI93_Projet3_Diagnostic6.git
 
 @Stateless
 @Remote(IDaoIntervention.class)
@@ -46,15 +52,9 @@ public class DaoInterventionImpl implements IDaoIntervention {
 		Intervention intervention = (Intervention) query.getSingleResult();
 		return intervention;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see fr.afcepf.ai93.diag6.api.data.travaux.IDaoIntervention#rechercherInterventionSurAnomalie(int)
-	 * Recherche des interventions pour une anomalie
-	 * ==> Règle de gestion
-	 */
 	
 	@Override
+<<<<<<< HEAD
 	public boolean rechercherInterventionSurAnomalie(int idAnomalie) {
 		Query query = em.createQuery("SELECT e from Intervention e WHERE e.id = :pid");
 		query.setParameter("pid", idAnomalie);
@@ -68,6 +68,24 @@ public class DaoInterventionImpl implements IDaoIntervention {
 		{
 			return true;
 		}
+=======
+	public List<Intervention> rechercherInterventionSurAnomalie(int idAnomalie) {
+		Query query = em.createQuery("SELECT e from Intervention e WHERE e.anomalie.idAnomalie = :pid");
+		query.setParameter("pid", idAnomalie);
+		List<Intervention> liste = query.getResultList();
+		return liste;
+>>>>>>> branch 'master' of https://github.com/dumii/AI93_Projet3_Diagnostic6.git
+	}
+<<<<<<< HEAD
+}
+=======
+>>>>>>> branch 'master' of https://github.com/dumii/AI93_Projet3_Diagnostic6.git
+
+	@Override
+	public List<Intervention> recupereInterventionparType(TypeIntervention type) {
+		Query query = em.createQuery("SELECT e from Intervention e WHERE e.typeIntervention.idTypeIntervention = :pid");
+		query.setParameter("pid", type.getIdTypeIntervention());
+		List<Intervention> liste = query.getResultList();
+		return liste;
 	}
 }
-

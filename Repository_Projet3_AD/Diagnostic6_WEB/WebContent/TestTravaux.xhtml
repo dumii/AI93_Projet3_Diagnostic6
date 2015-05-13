@@ -10,35 +10,45 @@
 <body>
 	<f:view>
 		<h:form>
-			<h:selectOneMenu value="#{mbTestTravaux.idIntervention}">
+			<h:outputLabel value="Enter your name: " />
+    <h:inputText value="Hello 1" />
+    <h:outputLabel value="Enter your name: " />
+    <h:inputText value="Hello 2" />
+    
+    
+			<h:selectOneMenu value="#{mbTestTravaux.idType}">
 					<a4j:ajax event="change"
-							  listener="#{mbTestTravaux.rechercher()}"
+							  listener="#{mbTestTravaux.avoirListeArtisans()}"
 							  render="maTable1"/>
 					<f:selectItem itemLabel="-- Sélectionnez un id --" itemValue="0"/>
-					<f:selectItems value="#{mbTestTravaux.travaux}"
-								   var="uneIntervention"
-								   itemLabel="#{uneIntervention.idIntervention}"
-								   itemValue="#{uneIntervention.idIntervention}"/>
+					<f:selectItems value="#{mbTestTravaux.listeAnomalies}"
+								   var="item"
+								   itemLabel="#{item.descriptionAnomalie}"
+								   itemValue="#{item.idAnomalie}"/>
+					<f:selectItems value="#{mbTestTravaux.listeTypes}"
+								   var="var"
+								   itemLabel="#{var.typeIntervention}"
+								   itemValue="#{var.idTypeIntervention}"/>
 			</h:selectOneMenu>
 			<a4j:commandLink value="Afficher"
-											 action="#{mbTestTravaux.rechercher()}"
+											 action="#{mbTestTravaux.avoirListeArtisans()}"
 											 render="maTable1">
-			</a4j:commandLink>
-					<rich:dataTable var="intervention" id="maTable1"
-									value="#{mbTestTravaux.intervention}">					
+			</a4j:commandLink>				
+					<rich:dataTable var="artisan" id="maTable1"
+									value="#{mbTestTravaux.listeArtisans}">					
 						<rich:column>
-							<f:facet name="header">ID</f:facet>
-							#{intervention.idIntervention}
+							<f:facet name="header">Nom</f:facet>
+							#{artisan.nomArtisan}
 						</rich:column>
 						
 						<rich:column>
-							<f:facet name="header">Coût d'intervention</f:facet>
-							#{intervention.coutIntervention}
+							<f:facet name="header">Prénom</f:facet>
+							#{artisan.prenomArtisan}
 						</rich:column>			
 					</rich:dataTable>
 		
 			<rich:tree toggleType="ajax" var="item">
-            <rich:treeModelRecursiveAdaptor roots="#{mbTestTravaux.travaux}" nodes="#{item.idIntervention}">
+            <rich:treeModelRecursiveAdaptor roots="#{mbTestTravaux.travaux}" nodes="#{item.etatAvancementTravaux}">
                 <rich:treeNode>
                     #{item.etatAvancementTravaux.intituleEtatAvancement}
                 </rich:treeNode>
@@ -47,6 +57,7 @@
                 </rich:treeModelAdaptor>
             </rich:treeModelRecursiveAdaptor>
         </rich:tree>
+        
 		</h:form>
 		</f:view>
 </body> 

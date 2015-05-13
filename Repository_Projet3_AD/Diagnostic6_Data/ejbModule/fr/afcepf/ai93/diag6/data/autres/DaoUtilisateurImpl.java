@@ -1,56 +1,51 @@
 package fr.afcepf.ai93.diag6.data.autres;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.servlet.http.HttpServletRequest;
 
 import fr.afcepf.ai93.diag6.api.data.autres.IDaoUtilisateur;
 import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
-import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
 
-public class DaoUtilisateurImpl implements IDaoUtilisateur {
-
-	@PersistenceContext(unitName="Malak_Diag_Data")
-	private EntityManager em;
+public class DaoUtilisateurImpl implements IDaoUtilisateur{
 
 	@Override
 	public List<Utilisateur> recupereToutUtilisateur() {
-		Query query = em.createQuery("SELECT u FROM Utilisateur");
-		List <Utilisateur> liste = query.getResultList();
-		return liste;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public void ajouterUtilisateur(Utilisateur utilisateur) {
-		em.persist(utilisateur);	
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public boolean supprimerUtilisateur(Utilisateur utilisateur) {
-		em.merge(utilisateur);
-		return true;
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
 	public boolean modifierUtilisateur(Utilisateur utilisateur) {
-		em.merge(utilisateur);
-		return true;
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
 	public Utilisateur recupereUtilisateur(int idUtilisateur) {
-		Query query = em.createQuery("SELECT u FROM Anomalie WHERE u.id = :pid");
-		query.setParameter("pid", idUtilisateur);
-		Utilisateur utilisateur = (Utilisateur) query.getSingleResult();
-		return utilisateur;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public List<Utilisateur> trouverUtilisateur(String nom) {
-		Query query = em.createQuery("SELECT u FROM Utilisateur");
-		List <Utilisateur> liste = query.getResultList();
-		return liste;
+		// TODO Auto-generated method stub
+		return null;
 	}
+	
+	
 }

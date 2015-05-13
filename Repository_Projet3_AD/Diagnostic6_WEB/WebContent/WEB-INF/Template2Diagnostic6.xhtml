@@ -2,19 +2,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+      xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:a4j="http://richfaces.org/a4j"
+	  xmlns:rich="http://richfaces.org/rich"> 
 
 <h:head>
 	<title>
 		<ui:insert name="title"></ui:insert>
 	</title>
 	
+	
 	<link href="css/style.css" rel="stylesheet" type="text/css" />
-	<link href="css/consultationDiagnostic.css" rel="stylesheet"
-		type="text/css" />
+	
  	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css"/>
 	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<ui:insert name="head"></ui:insert>
 
 </h:head> 
 <body> 
@@ -112,7 +115,9 @@
 	<ui:insert name="content" />
 		
 <script>
-  $( "#radio" ).buttonset();
+jQuery.noConflict();
+
+  $( "#radio" ).buttonset(); 
   $( "#accordion" ).accordion();
   $("button").button();
 </script>

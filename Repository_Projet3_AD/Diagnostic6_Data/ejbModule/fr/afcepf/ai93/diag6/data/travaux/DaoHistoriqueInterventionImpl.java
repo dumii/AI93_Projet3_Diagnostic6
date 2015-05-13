@@ -21,7 +21,7 @@ import fr.afcepf.ai93.diag6.entity.travaux.TypeIntervention;
 
 @Stateless
 @Remote(IDaoHistoriqueIntervention.class)
-public class DaoHistoriqueImpl implements IDaoHistoriqueIntervention {
+public class DaoHistoriqueInterventionImpl implements IDaoHistoriqueIntervention {
 
 	
 	private final static String MODIF_ETAT_AVANCEMENT = "etatAvancementTravaux";

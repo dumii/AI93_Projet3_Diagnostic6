@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 
 import fr.afcepf.ai93.diag6.api.business.diagnostic.IBusinessDiagnostic;
 import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoDiagnostic;
+import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoTypeDiagnostic;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
 import fr.afcepf.ai93.diag6.entity.diagnostic.HistoriqueDiagnostic;
@@ -19,11 +20,13 @@ import fr.afcepf.ai93.diag6.entity.diagnostic.TypeDiagnostic;
 public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 	@EJB
 	private IDaoDiagnostic proxyDiagnostic; 
+	@EJB
+	private IDaoTypeDiagnostic proxyTypeDiagnostic; 
 	
 	private List<Diagnostic> listeDiag; 
-	List<Diagnostic> listeDiagIntervEnCours = new ArrayList<Diagnostic>(); 
+	private List<Diagnostic> listeDiagIntervEnCours = new ArrayList<Diagnostic>(); 
 	private List<Diagnostic> listeDiagEnAttente = new ArrayList<Diagnostic>(); 
-	List<Diagnostic> listeDiagArchives = new ArrayList<Diagnostic>(); 
+	private List<Diagnostic> listeDiagArchives = new ArrayList<Diagnostic>(); 
 		
 	@Override
 	public List<Diagnostic> recupereToutDiagnostic() {
@@ -58,9 +61,35 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 	}
 
 	@Override
-	public void ajouterDiagnostic(Diagnostic diagnostic) {
-		// TODO Auto-generated method stub
+	public String ajouterDiagnostic(Diagnostic diagnostic) {
 		
+		//en premier lieu on vérifie si le diagnostic lié à cet Erp n'est pas déjà traité
+		boolean ajoutAutorise = true;
+		
+		int typeDiag = diagnostic.getTypeDiagnostic().getIdTypeDiagnostic();
+		
+		//on affiche les Erp avec leurs diags avec leurs Type de diag
+		List<Diagnostic> liste =  proxyDiagnostic.recupereDiagnosticParErp(diagnostic.getErp());
+		for (Diagnostic diag2 : liste) {
+			if(diag2.getTraite() == 0 && diag2.getTypeDiagnostic().getIdTypeDiagnostic() == typeDiag)
+			{
+				ajoutAutorise = false;
+				System.out.println(diag2.getErp().getIdErp() + "/" + diag2.getIdDiagnostic() + "/" + diag2.getTypeDiagnostic().getNomType());
+				System.out.println(ajoutAutorise);
+				System.out.println(diag2.getTraite() + diag2.getTypeDiagnostic().getIdTypeDiagnostic());
+			}	
+		} 
+		if (ajoutAutorise == true) {
+			System.out.println("on est dans le business");
+			System.out.println("2222222222222222222222222222222222222");	
+			proxyDiagnostic.ajouterDiagnostic(diagnostic);
+			System.out.println(ajoutAutorise);
+			return "Intervention enregristrée avec succès";
+				
+		}else
+		{
+			return "Un diagnostic de ce type est déjà actif sur cet Erp, un seul diagnostic de chaque type peut-être attribué à un Erp.";
+		}
 	}
 
 	@Override
@@ -89,8 +118,7 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 
 	@Override
 	public List<TypeDiagnostic> recupereTypeDiagnostic() {
-		// TODO Auto-generated method stub
-		return null;
+		return proxyTypeDiagnostic.recupereTypeDiagnostic();
 	}
 
 	@Override
@@ -117,8 +145,4 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 	public void setProxyDiagnostic(IDaoDiagnostic proxyDiagnostic) {
 		this.proxyDiagnostic = proxyDiagnostic;
 	}
-
-
-
-
 }

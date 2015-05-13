@@ -2,18 +2,12 @@
 /* Mise en forme générale de la page */
 /*************************************/
 
-html
-{
-	overflow: scroll;
-}
-
 body
 {
 	background-image: url("../images/ArrierePlan.png");
 	background-size: 100%;
 	margin: 0 0 0 0;
 	padding: 0 0 0 0;
-	overflow-y: auto;
 	font-family: sans-serif;
 	background-attachment: fixed;
 }
@@ -32,6 +26,7 @@ body
   	background-repeat: no-repeat, no-repeat;
 	background-color: white;
 	position: fixed;
+	margin-top: -6em;
 }
 
 #rechercheBandeau {
@@ -146,59 +141,7 @@ body
  	border: #BDBDBD solid 1px;
 	border-radius: 1px;
 	position: fixed;
-	
 }
-
-/***************************/
-/* Accordion intervention  */
-/**************************
-
-
-
-#accordionIntervention > div
-{
-	position: fixed;
-	height: 200px;
-  	width: 200px;
-  	margin-left: 5%;
-  	margin-top: 7%;
-	
-}
-*/
-#boutonChantier
-{
-	width: 100%;
-}
-
-
-/***************************/
-/* CentrePage  */
-/***************************/
-
-
-#contenu
-{
-	
-	border: #BDBDBD solid 1px;
-	border-radius: 1px;
-	height: auto;
-	margin:auto;
-    width: 860px; 
-    margin-top: 110px;
-    margin-left: 300px;
-    margin-right: 0 auto;
-    
-}
-
-
-
-.TitreNomChantier
-{
-	color:#0060D0; 
-	font-size: 30px;
-
-}
-/***********************/
 
 fieldset
 {
