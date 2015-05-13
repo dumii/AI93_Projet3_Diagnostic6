@@ -57,7 +57,7 @@ public class BusinessAnomalieImpl implements IBusinessAnomalie {
 		Anomalie anomalieInitiale = proxyAnomalie.recupereAnomalie(anomalie.getIdAnomalie());		
 		
 		//l'indicateur d'une anomalie ne peut que être amélioré
-		//Soit la valeur de l'indicateur ne peut que augmenter
+		//Autrement dit, la valeur de l'indicateur ne peut que augmenter
 		int valeurIndicateurInitiale = anomalieInitiale.getIndicateur().getValeurIndicateur();
 		int valeurIndicateurNouvelle = anomalie.getIndicateur().getValeurIndicateur();
 		
@@ -74,8 +74,11 @@ public class BusinessAnomalieImpl implements IBusinessAnomalie {
 	}
 
 	@Override
-	public String supprimerAnomalie(Anomalie anomalie) {
-		return proxyAnomalie.supprimerAnomalie(anomalie);
+	public String supprimerAnomalie(Anomalie anomalie, Utilisateur user) {
+		Anomalie anomalieInitiale = proxyAnomalie.recupereAnomalie(anomalie.getIdAnomalie());		
+		proxyAnomalie.supprimerAnomalie(anomalie);
+		//proxyHistorique.historiserSuppression(anomalieInitiale, anomalie, user);
+		return "Suppression réalisée"; 
 	}
 
 	@Override

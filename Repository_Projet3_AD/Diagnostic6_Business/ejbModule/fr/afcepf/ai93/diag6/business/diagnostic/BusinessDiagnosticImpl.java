@@ -9,11 +9,16 @@ import javax.ejb.Stateless;
 
 import fr.afcepf.ai93.diag6.api.business.diagnostic.IBusinessDiagnostic;
 import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoDiagnostic;
+import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoHistoriqueDiagnostic;
+import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoIndicateur;
 import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoTypeDiagnostic;
+import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
 import fr.afcepf.ai93.diag6.entity.diagnostic.HistoriqueDiagnostic;
+import fr.afcepf.ai93.diag6.entity.diagnostic.Indicateur;
 import fr.afcepf.ai93.diag6.entity.diagnostic.TypeDiagnostic;
+import fr.afcepf.ai93.diag6.entity.erp.Erp;
 
 @Stateless
 @Remote(IBusinessDiagnostic.class)
@@ -22,27 +27,44 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 	private IDaoDiagnostic proxyDiagnostic; 
 	@EJB
 	private IDaoTypeDiagnostic proxyTypeDiagnostic; 
+	@EJB 
+	private IDaoIndicateur proxyIndicateur; 
+	@EJB
+	private IDaoHistoriqueDiagnostic proxyHistoDiag; 
 	
 	private List<Diagnostic> listeDiag; 
 	private List<Diagnostic> listeDiagIntervEnCours = new ArrayList<Diagnostic>(); 
 	private List<Diagnostic> listeDiagEnAttente = new ArrayList<Diagnostic>(); 
-	private List<Diagnostic> listeDiagArchives = new ArrayList<Diagnostic>(); 
+	private List<Diagnostic> listeDiagArchives = new ArrayList<Diagnostic>();
+	
+	private boolean ERPinterventionEnCours = false;
+	private boolean ERPinterventionEnAttente = false;
+	private boolean ERPinterventionArchives = false;
 		
 	@Override
 	public List<Diagnostic> recupereToutDiagnostic() {
 	
-		listeDiag = proxyDiagnostic.recupereToutDiagnostic(); 
-		for (Diagnostic d : listeDiag)
+		List<Diagnostic> liste = proxyDiagnostic.recupereToutDiagnostic(); 
+		
+		for (Diagnostic d : liste)
 		{
-			if(d.getTraite()!=0) 
+			if(d.getTraite()!= 0)
+			{
 				listeDiagArchives.add(d); 
+			}
 			else
+			{
 				if(proxyDiagnostic.recupereSiIntervEnCoursParDiag(d.getIdDiagnostic())) 
-						listeDiagIntervEnCours.add(d); 
-					else 
-						listeDiagEnAttente.add(d);				
+				{
+					listeDiagIntervEnCours.add(d); 
+				}
+				else 
+				{
+					listeDiagEnAttente.add(d);	
+				}
+			}
 		}
-		return listeDiag;
+		return liste;
 	}
 	
 	@Override
@@ -69,22 +91,16 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 		int typeDiag = diagnostic.getTypeDiagnostic().getIdTypeDiagnostic();
 		
 		//on affiche les Erp avec leurs diags avec leurs Type de diag
-		List<Diagnostic> liste =  proxyDiagnostic.recupereDiagnosticParErp(diagnostic.getErp());
+		List<Diagnostic> liste =  proxyDiagnostic.recupereDiagnosticNonTraitesParErp(diagnostic.getErp());
 		for (Diagnostic diag2 : liste) {
 			if(diag2.getTraite() == 0 && diag2.getTypeDiagnostic().getIdTypeDiagnostic() == typeDiag)
 			{
 				ajoutAutorise = false;
-				System.out.println(diag2.getErp().getIdErp() + "/" + diag2.getIdDiagnostic() + "/" + diag2.getTypeDiagnostic().getNomType());
-				System.out.println(ajoutAutorise);
-				System.out.println(diag2.getTraite() + diag2.getTypeDiagnostic().getIdTypeDiagnostic());
 			}	
 		} 
-		if (ajoutAutorise == true) {
-			System.out.println("on est dans le business");
-			System.out.println("2222222222222222222222222222222222222");	
+		if (ajoutAutorise == true) {	
 			proxyDiagnostic.ajouterDiagnostic(diagnostic);
-			System.out.println(ajoutAutorise);
-			return "Intervention enregristrée avec succès";
+			return "Intervention enregistrée avec succès";
 				
 		}else
 		{
@@ -93,9 +109,11 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 	}
 
 	@Override
-	public void modifierDiagnostic(Diagnostic diagnostic) {
-		// TODO Auto-generated method stub
-		
+	public String modifierDiagnostic(Diagnostic diagnostic, Utilisateur user) {
+		Diagnostic diagInitial = proxyDiagnostic.recupereDiagnostic(diagnostic.getIdDiagnostic());
+		proxyDiagnostic.modifierDiagnostic(diagnostic, user);
+		proxyHistoDiag.historiser(diagInitial, diagnostic, user);
+		return "Ok modif";
 	}
 
 	@Override
@@ -144,5 +162,71 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 
 	public void setProxyDiagnostic(IDaoDiagnostic proxyDiagnostic) {
 		this.proxyDiagnostic = proxyDiagnostic;
+	}
+	
+
+	@Override
+	public List<Indicateur> recupererIndicateursParDiag(Diagnostic diagEnCours) {
+		List<Indicateur> listeIndicateurs = proxyIndicateur.recupereIndicateur();
+		List<Indicateur> listeIndicateursParDiag = new ArrayList<Indicateur>(); 
+		for(Indicateur i : listeIndicateurs){
+			if(i.getTypeDiagnostic().getIdTypeDiagnostic() == diagEnCours.getTypeDiagnostic().getIdTypeDiagnostic()){
+				listeIndicateursParDiag.add(i); 
+			}
+		}
+		return listeIndicateursParDiag;
+	}
+
+	@Override
+	public List<Diagnostic> recupereDiagnosticNonTraitesParErp(Erp erp) {
+		return proxyDiagnostic.recupereDiagnosticNonTraitesParErp(erp);
+	}
+
+	@Override
+	public List<Diagnostic> recupereToutDiagnosticParErp(Erp erp) {
+		
+		List<Diagnostic> liste = proxyDiagnostic.recupereToutDiagnosticParErp(erp); 
+		
+		for (Diagnostic d : liste)
+		{
+			if(d.getTraite()!= 0)
+			{
+				ERPinterventionArchives = true;
+			}
+			else
+			{
+				if(proxyDiagnostic.recupereSiIntervEnCoursParDiag(d.getIdDiagnostic())) 
+				{
+					ERPinterventionEnCours = true;
+				}
+				else 
+				{
+					ERPinterventionEnAttente = true;
+				}
+			}
+		}		
+		return liste;
+	}
+
+	public boolean interventionEnCoursSurERP()
+	{
+		return ERPinterventionEnCours;
+	}
+	
+	public boolean interventionEnAttenteSurERP()
+	{
+		return ERPinterventionEnAttente;
+	}
+	
+	public boolean interventionArchivesSurERP()
+	{
+		return ERPinterventionArchives;
+	}
+
+
+	@Override
+	public boolean recupererDiagSansInterv(Integer idDiag) {
+		//si la methode du Dao retourne false, c'est qu'il n'y a aucune intervention dessous
+		return proxyDiagnostic.recupereSiIntervEnCoursParDiag(idDiag); 
 	}
 }

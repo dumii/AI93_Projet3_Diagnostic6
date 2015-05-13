@@ -287,7 +287,7 @@ public class DaoPublicImpl implements IDaoPublic {
 	@Override
 	public List<TypeErp> listerTypeErp() {
 		
-		Query query = em.createQuery("SELECT e FROM TypeErp e");
+		Query query = em.createQuery("SELECT e FROM TypeErp e where e.idTypeErp in (select t.typeErp from Erp t)");
 		List<TypeErp> liste = query.getResultList();
 		return liste;
 	}
@@ -297,6 +297,27 @@ public class DaoPublicImpl implements IDaoPublic {
 		
 		Query query = em.createQuery("SELECT e FROM TypeDiagnostic e");
 		List<TypeDiagnostic> liste = query.getResultList();
+		return liste;
+	}
+
+	@Override
+	public List<Erp> recupererErpParTypeDiagnostic(Integer idTypeDiagSelect) {
+		
+		Query query = em.createQuery("SELECT e FROM Erp e inner join fetch  e.listeDiagnosticErp l where l.typeDiagnostic.idTypeDiagnostic = :pid ");
+									
+		query.setParameter("pid", idTypeDiagSelect);
+		List<Erp> liste = query.getResultList();
+		for(Erp e : liste){
+			System.out.println(e.getNomErp());
+		}
+		return liste;
+	}
+
+	@Override
+	public List<Erp> recupererErpParTravauxEnCours(boolean booleenTravaux) {
+		
+		Query query = em.createQuery("SELECT e FROM TypeDiagnostic e");
+		List<Erp> liste = query.getResultList();
 		return liste;
 	}
 

@@ -1,150 +1,293 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
 
 <h:head>
-	<title>
-		Accueil
-	</title>
-	
+	<title>Accueil</title>
+
 	<link href="css/styleAcceuil.css" rel="stylesheet" type="text/css" />
-	
- 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css"/>
+
+	<link rel="stylesheet"
+		href="//code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css" />
 	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-	<script type="jqplot/jquery.jqplot.js"></script>
-
+	
+	<script type="jqplot/jquery.jqplot.js"/>
 	<link rel="stylesheet" type="text/css" href="css/jquery.jqplot.css" />
-	<script language="javascript" type="text/javascript" src="jqplot/excanvas.js"/>
-	<script language="javascript" type="text/javascript" src="jqplot/jquery.jqplot.min.js"></script>
-	<script type="text/javascript" src="jqplot/jquery.jqplot.min.js"></script>
-	<script type="text/javascript" src="jqplot/jqplot.pieRenderer.min.js"></script>
-	<script type="text/javascript" src="jqplot/jqplot.donutRenderer.min.js"></script>
-	<script type="text/javascript" src="jqplot/jqplot.barRenderer.min.js"></script>
-	<script type="text/javascript" src="jqplot/jqplot.categoryAxisRenderer.min.js"></script>
-	<script type="text/javascript" src="jqplot/jqplot.pointLabels.min.js"></script>
+	<script language="javascript" type="text/javascript" src="jqplot/excanvas.js" />
+	<script language="javascript" type="text/javascript" src="jqplot/jquery.jqplot.min.js"/>
+	<script type="text/javascript" src="jqplot/jquery.jqplot.min.js"/>
+	<script type="text/javascript" src="jqplot/jqplot.pieRenderer.min.js"/>
+	<script type="text/javascript" src="jqplot/jqplot.donutRenderer.min.js"/>
+	<script type="text/javascript" src="jqplot/jqplot.barRenderer.min.js"/>
+	<script type="text/javascript" src="jqplot/jqplot.categoryAxisRenderer.min.js"/>
+	<script type="text/javascript" src="jqplot/jqplot.pointLabels.min.js"/>
 
-</h:head> 
-<body> 
+
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart","bar"]});
+      google.setOnLoadCallback(drawChart);
+      
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Type', 'Nombre'],
+          ['Terminées',#{mbPublic.nbInterventionTerminees}],
+          ['Planifiées',#{mbPublic.nbInterventionPlanifiees}],
+          ['En cours', #{mbPublic.nbInterventionEnCours}],
+          ['En attente',  #{mbPublic.nbInterventionDiagnostiquees}]          
+        ]);
+
+        var options = {
+
+          legend:{textStyle:{fontSize:'14', fontName:'Corbel'}}, 
+          title: 'Avancée des travaux de mise aux normes des ERP',
+          titleTextStyle:{fontSize:'15', fontName:'Corbel'},
+          is3D: true
+          
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+      }
+    </script>
+	
+	<script type="text/javascript">
+      
+		
+
+
+		google.setOnLoadCallback(drawChart);
+	      function drawChart() {
+	        var data = google.visualization.arrayToDataTable([
+				['Diagnostics', 'Total', 'Aux normes'],
+				['Accessibilité', #{mbPublic.nbDiagnosticAccessibilitéTotal}, #{mbPublic.nbDiagnosticAccessibilitéTraites}],
+				['Energie', #{mbPublic.nbDiagnosticEnergieTotal}, #{mbPublic.nbDiagnosticEnergieTraites}],
+				['Sécurité', #{mbPublic.nbDiagnosticSecuriteTotal}, #{ mbPublic.nbDiagnosticSecuriteTraites}],
+				['Hygiène', #{mbPublic.nbDiagnosticHygieneTotal}, #{mbPublic.nbDiagnosticHygieneTraites}]
+				]);
+
+	        var options = {    
+	    	        
+	        	width: '100%',
+	  	        heigh: 150,
+
+	          chart: {
+	            title: 'Etat des diagnostics',
+	            fontName:'Corbel',
+	            color :'red'
+	          },
+	          bars: 'horizontal' // Required for Material Bar Charts.
+	        };
+
+	        var chart = new google.charts.Bar(document.getElementById('barchart_material'));
+
+	        chart.draw(data, options);
+	      }
+
+	      
+	      
+    </script>
+
+</h:head>
+<body>
 	<div id="enTete">
-	
-		<img id="logoAccueil" src="images/Logo2.png" onclick="javascript:location.reload();" />
-			
-		
-		
+
+		<img id="logoAccueil" src="images/Logo2.png"
+			onclick="javascript:location.reload();" />
+
 	</div>
-	
-	
-		<div id="DivPrincipale">
-			<div id="statistiques">
+
+
+	<div id="DivPrincipale">
+		<div id="statistiques">
+			<div>
 				<div>
-					<div>
-					<h:outputLabel value="Statistique du mois de mai" id="enteteStatistiques" />
-					</div>
+					<h:outputLabel value="Ville de Malakoff : situation des ERP "
+						id="enteteStatistiques" />
 				</div>
-				<div id="graphs">
-					<div id="chart1" style="height:250px;width:33%;float:left; margin-left: 1px; margin-top:4px;">
-						
-					</div>
-					<div id="chart2" style="height:250px;width:33%;float:left;margin-top:4px; ">
-						
-					</div>
-					<div id="chart3" style="height:250px;width:33%;float:left;margin-top:4px; ">
-						
-					</div>
+				
+			</div>
+			<div id="graphs">
+				
+				<div class = "conteneur1" >
+				<div id="piechart_3d" style="height: 210px; width: auto">
+				</div>
+				</div>
+				<div class = "conteneur2" >
+				<div id="barchart_material" style="height:  210px; width: 0 auto">
+
+				</div>
 				</div>
 			</div>
-			<div class="lesPublications">
-				<div id="publications">
-					<div>
-						<img src="images/acceuil/flechegauche2.png" alt="Publication suivante" style="float:left; width: 8%; cursor: pointer;position: absolute; z-index:1"/>
-						<img src="http://media.topito.com/wp-content/uploads/2013/04/Animal12.jpg" alt="Image publication1" style="width: 100%;position: relative; z-index:0"/>
-						<h:outputLabel value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
-					</div>
-				</div>
-				<div id="publications">
-					<div>
-						<img src="images/acceuil/flechedroite2.png" alt="Publication Précédente" style="float:right; width: 8%; cursor: pointer;position: absolute; z-index:1; margin-left: 29%"/>
-						<img src="http://flepi.net/images/animaux-etrange-560x373.jpg" alt="Publication suivante" style="width: 100%;position: relative; z-index:0" />
-						<h:outputLabel value="Sed ut perspiciatis  dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?" />
-					
-					</div>
-				</div>
-			</div>
-			<div id="commentaireAll">
-				<div id="commentaires">
-						<ui:repeat var="" value="">
-							<span><h:outputText value="John" /> le <h:outputText value="21/04/2015" /></span>
-							<div style="border: #BDBDBD solid 1px;border-radius: 7px; "><h:outputText value="Ce site est vraiment génial!"/></div>
-						</ui:repeat>
-				</div>
-				<div class="ajoutCommentaires">
-					<span>Commentaire de <h:inputText value="" id="commentateur"/><input type="button" value="Envoyer" style="border-radius:5px"/></span>
-						
-						<div>
-						<h:inputTextarea value="" styleClass="zoneCommentaire" />				
-						</div>
-				</div>	
-			</div>		
 		</div>
-		<div id="divMap"><img src="images/louis/IMG_20150505_173225.jpg" alt="Youpla" style="width: 100%" /></div>
+		<div class="lesPublications">
+			<div id="publications">
+				<div>
+					<img src="images/flecheGauche.png"
+						alt="Publication suivante"
+						style="float: left;  cursor: pointer; position: absolute; z-index: 1" />
+					<img
+						src="http://media.topito.com/wp-content/uploads/2013/04/Animal12.jpg"
+						alt="Image publication1"
+						style="width: 100%; position: relative; z-index: 0" />
+					<h:outputLabel
+						value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
+				</div>
+			</div>
+			<div id="publications">
+				<div>
+					<img src="images/flecheDroite.png"
+						alt="Publication Précédente"
+						style="float: right;  cursor: pointer; position: absolute; z-index: 1; margin-left: 33%" />
+					<img src="http://flepi.net/images/animaux-etrange-560x373.jpg"
+						alt="Publication suivante"
+						style="width: 100%; position: relative; z-index: 0" />
+					<h:outputLabel
+						value="Sed ut perspiciatis  dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?" />
+
+				</div>
+			</div>
+		</div>
+		<div id="commentaireAll">
+			<div id="commentaires">
+				<ui:repeat var="" value="">
+					<span><h:outputText value="John" /> le <h:outputText
+							value="21/04/2015" /></span>
+					<div style="border: #BDBDBD solid 1px; border-radius: 7px;">
+						<h:outputText value="Ce site est vraiment génial!" />
+					</div>
+				</ui:repeat>
+			</div>
+			<div class="ajoutCommentaires">
+				<span>Commentaire de <h:inputText value="" id="commentateur" /><input
+					type="button" value="Envoyer" style="border-radius: 5px" /></span>
+
+				<div>
+					<h:inputTextarea value="" styleClass="zoneCommentaire" />
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+	<div id="divMap"></div>
 	<div id="login">
-		<input type="button" value="Espace professionel" class="boutonOuvertureLogin" onclick="ouvertureLogin('login2')"/>
-		
-		<div id="login2" style="display: none;"> 
-		
-		<div id="champIdentifiant"><h:outputLabel value="Identifiant:"/> </div>
-		<div id="champIdentifiant"><h:inputText value="" id="identifiant"/></div>
-		<div id="champIdentifiant"><h:outputLabel value="Mot de passe:" /></div>
-		<div id="champIdentifiant"><h:inputText value="" id="motDePasse" /></div>
-		<div id="champIdentifiant"><h:button value="Connexion" styleClass="boutonConnexion"></h:button></div>
-		
+		<input type="button" value="Espace professionel"
+			class="boutonOuvertureLogin" onclick="ouvertureLogin('login2')" />
+
+		<div id="login2" style="display: none;">
+			<f:view>
+				<h:form>
+					<div id="champIdentifiant">
+						<h:outputText rendered="#{mbUtilisateur.utilisateur != null}"
+							value="#{mbUtilisateur.utilisateur.nomUtilisateur}" />
+					</div>
+					<div id="champIdentifiant">
+						<h:outputLabel value="Identifiant:" />
+					</div>
+					<div id="champIdentifiant">
+						<h:inputText value="#{mbUtilisateur.login}" id="identifiant" />
+					</div>
+					<div id="champIdentifiant">
+						<h:outputLabel value="Mot de passe:" />
+					</div>
+					<div id="champIdentifiant">
+						<h:inputSecret value="#{mbUtilisateur.motDePasse}" id="motDePasse" />
+						<h:outputLabel value="#{mbUtilisateur.message}"
+							styleClass="errorLogin" />
+					</div>
+					<div id="champIdentifiant">
+						<h:commandButton value="Connexion" styleClass="boutonConnexion"
+							action="#{mbUtilisateur.seConnecter()}" type="submit" />
+					</div>
+					<div id="champIdentifiant">
+						<h:commandButton value="Deconnexion" styleClass="boutonConnexion"
+							action="#{mbUtilisateur.logout()}"/>
+					</div>
+				</h:form>
+			</f:view>
 		</div>
 	</div>
-	
+
 	<div id="BandeauRecherche">
-		
-		
+
+
 		<div>
-		<h:form>
+
 			<div id="divEnteteRecherche">
 				<h:outputText value="Recherche" />
 			</div>
-			<div >
+			<div>
 				<div id="champDeRecherche">
 					<h:form>
 						<f:view>
-					<div id="champsDeRecherche"><h:outputLabel value="Type d'ERP:" /></div>
-					<div id="champsDeRecherche"><h:selectOneMenu  value="#{mbPublic.idErpSelect}" id="listBox1" style="width:75%" >
-					<f:selectItems value="#{mbPublic.listeTypeErp}" var="listeErp"
-						itemLabel="#{listeErp.typeErpCourt}"
-						itemValue="#{listeErp.idTypeErp}"
-						></f:selectItems>
-					</h:selectOneMenu></div>
-					<div id="champsDeRecherche"><h:outputLabel value="Type de diagnostic recherché:" /></div>
-					<div id="champsDeRecherche"><h:selectOneMenu  value="#{mbPublic.idDiagSelect}" id="listBox2" style="width:75%; margin-bottom: 2px" >
-					<f:selectItems value="#{mbPublic.listeTypeDiagnostic}" var="listeDiag"
-						itemLabel="#{listeDiag.nomType}"
-						itemValue="#{listeDiag.idTypeDiagnostic}"
-						></f:selectItems>
-					</h:selectOneMenu>
-					</div>
+							<div id="champsDeRecherche">
+								<h:outputLabel value="Type d'ERP:" />
+							</div>
+							<div id="champsDeRecherche">
+								<h:selectOneMenu value="#{mbPublic.idTypeErpSelect}"
+									id="listBox1" style="width:75%">
+									<f:selectItem itemLabel="Sélectionnez ..." />
+									<f:selectItems value="#{mbPublic.listeTypeErp}" var="listeErp2"
+										itemLabel="#{listeErp2.typeErpCourt}"
+										itemValue="#{listeErp2.idTypeErp}">
+									</f:selectItems>
+									<a4j:ajax event="change"
+										listener="#{mbPublic.recup2()}" render="resultatErp" />
+								</h:selectOneMenu>
+							</div>
+							<div id="champsDeRecherche">
+								<h:outputLabel value="Type de diagnostic recherché:" />
+							</div>
+							<div id="champsDeRecherche">
+								<h:selectOneMenu value="#{mbPublic.idTypeDiagSelect}"
+									id="listBox2" style="width:75%; margin-bottom: 2px">
+									<f:selectItem itemLabel="Sélectionnez ..." />
+									<f:selectItems value="#{mbPublic.listeTypeDiagnostic}"
+										var="listeDiag" itemLabel="#{listeDiag.nomType}"
+										itemValue="#{listeDiag.idTypeDiagnostic}">
+									</f:selectItems>
+									<a4j:ajax event="change"
+										listener="#{mbPublic.recup2()}" render="resultatErp" />
+
+								</h:selectOneMenu>
+							</div>
+							<div id="champsDeRecherche">
+								<h:selectBooleanCheckbox value="#{mbPublic.booleenTravaux}" />
+								<h:outputText value="Travaux en cours" />
+							</div>
+							<div id="resultatsDeRecherche">
+
+								<a4j:commandButton event="click" listener="#{mbPublic.recup2()}"
+									render="resultatErp" value="Trouver" />
+
+								<h:selectOneListbox    value="#{mbPublic.idTypeErpRecherche}"
+									id="resultatErp" styleClass="resultatErp">
+									<f:selectItems value="#{mbPublic.recup2()}" var="listeErp3"
+										itemLabel="#{listeErp3.nomErp}" itemValue="#{listeErp3.idErp}" ></f:selectItems>
+
+								</h:selectOneListbox>
+							</div>
 						</f:view>
 					</h:form>
 				</div>
-				<div id="resultatsDeRecherche">
-					<input type="button" value="Trouver" class="boutonTrouver" onclick="changementDivPrincipale('divMap','DivPrincipale')"/>		
-				</div>
-			
+
+
 			</div>
-		</h:form>
+
 		</div>
-		
-	
-</div>
-<script>
+
+
+	</div>
+
+	<script>
+jQuery.noConflict();
 $(function(){
 	   $(window).scroll(function () {//Au scroll dans la fenetre on déclenche la fonction
 	      if ($(this).scrollTop() > 0) { //si on a défilé de plus de 150px du haut vers le bas
@@ -154,95 +297,11 @@ $(function(){
 	      }
 	   });
 	 });
-
-$(document).ready(function(){ 
-	  var data = [
-	    ['Terminées', #{mbPublic.nbInterventionTerminees}],['Planifiées', #{mbPublic.nbInterventionPlanifiees}], ['En cours', #{mbPublic.nbInterventionEnCours}], 
-	    ['En attente', #{mbPublic.nbInterventionDiagnostiquees}]
-	  ];
-	  var plot1 = jQuery.jqplot ('chart1', [data], 
-	    { title:'Avancée des travaux',
-	      seriesDefaults: {
-	        // Make this a pie chart.
-	        renderer: jQuery.jqplot.PieRenderer, 
-	        rendererOptions: {
-	          // Put data labels on the pie slices.
-	          // By default, labels show the percentage of the slice.
-	          showDataLabels: true
-	        }
-	      }, 
-	      legend: { show:true, location: 'e' }
-	    }
-	    
-	  );
-	});
-$(document).ready(function(){
-	  var data = [
-	    ['Aux normes', #{mbPublic.nbERpAuxNormes}],['En cours', #{mbPublic.nbErpEnCoursDeNormalité}],
-	  ];
-	  var plot2 = jQuery.jqplot ('chart2', [data], 
-	    {
-		    title:'Erp aux normes',
-		    
-	      	seriesDefaults: {
-		      
-	        renderer: jQuery.jqplot.PieRenderer, 
-	        rendererOptions: {
-	          // Turn off filling of slices.
-	          fill: false,
-	          showDataLabels: true, 
-	          // Add a margin to seperate the slices.
-	          sliceMargin: 4, 
-	          // stroke the slices with a little thicker line.
-	          lineWidth: 5,
-	          
-	        }
-	      }, 
-	      legend: { show:true, location: 'e' }
-	    }
-	  );
-	});
-
-$(document).ready(function(){
-    var s1 = [#{mbPublic.nbDiagnosticAccessibilitéTraites}, #{mbPublic.nbDiagnosticEnergieTraites},#{ mbPublic.nbDiagnosticSecuriteTraites}, #{mbPublic.nbDiagnosticHygieneTraites}];
-    var s2 = [#{mbPublic.nbDiagnosticAccessibilitéTotal}, #{mbPublic.nbDiagnosticEnergieTotal}, #{mbPublic.nbDiagnosticSecuriteTotal}, #{mbPublic.nbDiagnosticHygieneTotal}];
-    var ticks = ['Accessibilité', 'Energie', 'Sécurité', 'Hygiène'];
-     
-    plot2 = $.jqplot('chart3', [s1, s2], {
-        title:'Rapport par type',
-        
-        seriesDefaults: {
-        	
-            renderer:$.jqplot.BarRenderer,
-            pointLabels: { show: true },
-            
-        },
-        axes: {
-        	
-            xaxis: {
-            	tickOptions: {textColor: '#394241'},
-                renderer: $.jqplot.CategoryAxisRenderer,
-                ticks: ticks
-            }
-        	
-        }
-    });
- 
-    $('#chart3').bind('jqplotDataHighlight', 
-        function (ev, seriesIndex, pointIndex, data) {
-            $('#info2').html('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
-        }
-    );
-         
-    $('#chart2').bind('jqplotDataUnhighlight', 
-        function (ev) {
-            $('#info2').html('Nothing');
-        }
-    );
-});
-
 </script>
-<script>
+
+	<script>
+	jQuery.noConflict();
+	
 function ouvertureLogin(id)
 {
   if (document.getElementById(id).style.display == 'none') {
@@ -253,21 +312,30 @@ function ouvertureLogin(id)
   }
 }
 
-
 function changementDivPrincipale(div1,div2)
 {
    d1 = document.getElementById(div1);
    d2 = document.getElementById(div2);
-   if( d2.style.display == "none" )
-   {
-      d1.style.display = "none";
-      d2.style.display = "block";
+   if( d1.style.display == "none" )
+   {  
    }
    else
    {
       d1.style.display = "block";
       d2.style.display = "none";
    }
+}
+
+</script>
+	<script>
+	jQuery.noConflict();
+function connection(idProfil)
+{
+		if(idProfil == 2){
+			
+		location.href="http://localhost:9090/Diagnostic6_WEB/consultationDiagnostic.jsf"
+			return false;
+		}
 }
 </script>
 </body>

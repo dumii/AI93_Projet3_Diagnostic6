@@ -7,17 +7,68 @@
 	margin-top : 5%;
 	margin-left: 1%;
 	margin-right: 1%;
+	border:#cccccc solid 1px;
+	background-color: white ;
+}
+
+/*****************************/
+/*     Style du bouton       */
+/*****************************/
+
+.btn {
+  background: #3498db;
+  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+  background-image: -o-linear-gradient(top, #3498db, #2980b9);
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  -webkit-border-radius: 5;
+  -moz-border-radius: 5;
+  border-radius: 5px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  margin-left:10px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+  color: #ffffff;
+}
+
+a:visited 
+{
+	color: #ffffff !important;
 }
 
 /******************************************/
-/*Style générale du tableau et des entêtes*/
+/*Style gÃ©nÃ©ral du tableau et des entÃªtes*/
 /******************************************/
 
-table {
+#monTableau, #monTableauAnomalie
+{
     border-collapse: collapse;
-    border:#cccccc solid 1px;
     width: 100%;
 }
+
+#monTableauAnomalie
+{
+	margin-top:30px;
+}
+
+#monTableauAnomalie tr:nth-child(4n)
+{
+	background-color: #E9EFF8 ;
+}
+
 
 th, td 
 {
@@ -25,17 +76,16 @@ th, td
 	border-bottom:#cccccc solid 1px;
 }
 
-/******************************************/
-/*  Mise en forme du contenue du tableau  */
-/******************************************/
-
-#table-header1, #table-header2, #table-header3
+.table-header1, 
+.table-header2, 
+.table-header3,
+.table2-header1
 {
 	background-image:linear-gradient(#fAfAfA, #f2f2f2);
-	border:#cccccc solid 1px;
 }
 
-#table-header1
+.table-header1,
+.table2-header1
 {
 	font-size: 1.1em;
 	text-align:left;	
@@ -43,46 +93,256 @@ th, td
 	height: 40px;
 }
 
-#table-header3
+.table-header3
 {
 	height: 45px;
 }
 
-#table-header2, #table-header3
+.table-header2, 
+.table-header3
 {
 	font-size: 0.9em;
 	color: #424242;
 }
 
-.NomIntervention
-{
-	width: 20%;
-}
-
-#table-header2 > :not(.NomIntervention)
+.table-header3 .Temps
 {
 	width: 16%;
 }
 
-.NomIntervention, #ligneBlanche > td:first-of-type, #ligneBleue > td:first-of-type
+#date1, 
+{
+	text-align:left;
+}
+
+#date3
+{
+	text-align:right;
+}
+
+#reculer
+{
+	float:left;
+}
+
+#avancer
+{
+	float:right;
+}
+
+/******************************************/
+/*  Mise en forme du contenu du tableau   */
+/******************************************/
+
+/*  PropriÃ©tÃ©s communes   */
+
+.NomIntervention
+{
+	width: 16%;
+}
+
+.Etat
+{
+	width: 4%;
+}
+
+.Etat, 
+tr:not(.ligneOrange) > td:nth-of-type(2)
 {
 	border-right: #3399ff solid 1px;
 }
 
-
-#ligneBlanche
+.NomIntervention:hover,
+.Etat:hover,
+.ligneBleueType td:first-of-type:hover,
+.ligneBleueIntervention td:first-of-type:hover,
+.ligneBleueIntervention2 td:first-of-type:hover,
+#reculer:hover,
+#avancer:hover
 {
-	background-color: #E9EFF8;
-	height: 30px;
+    cursor: pointer;
 }
 
-#ligneBleue
+.tiretsBleus
+{
+	border-right: #3399ff dashed 1px;
+	width: 8%;
+}
+
+.traitsGris
+{
+	border-right:#cccccc solid 1px;
+	width: 8%;
+}
+
+/*  Anomalie   */
+
+.ligneBlanche
 {
 	background-color: #FFFFFF ;
 	height: 30px;
 }
 
-span
+.spanAnomalie
 {
 	margin-left:50px;
 }
+
+
+/*  Intervention   */
+
+.spanIntervention
+{
+	margin-left:100px;
+}
+
+.ligneBleueType
+{
+	background-color: #E9EFF8 ;
+	height: 30px;
+}
+
+.ligneBleueIntervention,
+.ligneBleueIntervention2
+{
+	height: 30px;
+}
+
+.ligneBleueIntervention img
+{
+	display:block;
+	margin:auto;
+}
+
+/*  Description Intervention   */
+
+.ligneOrange,
+.ligneOrange2
+{
+	display:none;
+	background-color: #FFE6D5 ;
+	height: 80px;
+}
+
+.ligneOrange div,
+.ligneOrange2 div
+{
+	width:19%;
+	float:left;
+	margin-left:15px;
+	margin-bottom:5px;
+}
+
+.ligneOrange div:nth-of-type(4),
+.ligneOrange2 div:nth-of-type(4)
+{
+	width:43%;
+}
+
+.ligneOrange div:nth-of-type(3),
+.ligneOrange2 div:nth-of-type(3)
+{
+	width:15%;
+}
+
+.ligneOrange h4,
+.ligneOrange2 h4
+{
+	margin-top:5px;
+}
+
+.ligneOrange input,
+.ligneOrange2 input
+{
+	width:49%;
+}
+
+.ligneOrange select, 
+.ligneOrange2 select 
+{
+	width:49.5%;
+}
+
+.ligneOrange label,
+.ligneOrange2 label
+{
+	display:inline-block;
+	width:49%;
+}
+
+.ligneOrange input[type="number"],
+.ligneOrange2 input[type="number"]
+{
+	background-image:linear-gradient(#f2f2f2, white);
+}
+
+.ligneOrange input[type="button"],
+.ligneOrange2 input[type="button"]
+{
+	font-size: 0.8em;
+}
+
+.ligneOrange p,
+.ligneOrange2 p
+{
+	font-size:small;
+	background-image:linear-gradient(#f2f2f2, white);
+	border:#cccccc solid 1px;
+	margin:0;
+	text-align:justify;
+	color:darkgray;
+}
+
+.localisationAnomalie
+{
+	height:35.5px;
+
+}
+
+.preconisationAnomalie > p
+{
+	height:80px;
+}
+
+.ligneOrange div:nth-of-type(2),
+.ligneOrange div:nth-of-type(5),
+.ligneOrange2 div:nth-of-type(2),
+.ligneOrange2 div:nth-of-type(5)
+{
+	padding-top:45px;
+}
+
+.ligneOrange div:nth-of-type(3) label,
+.ligneOrange div:nth-of-type(4) label,
+.ligneOrange div:nth-of-type(5) label,
+.ligneOrange2 div:nth-of-type(3) label,
+.ligneOrange2 div:nth-of-type(4) label,
+.ligneOrange2 div:nth-of-type(5) label
+{
+	width:100%;
+}
+
+
+/*  Rectangle Intervention   */
+
+.rectangle
+{
+	width: 30%;
+	background-color: #FFCC66 ;
+	border: #CC3300 solid 1px;
+	border-radius:5px;
+	margin-left: 0%;
+  	padding-bottom: 3px;
+  	padding-top: 3px;
+}
+
+.dateFin
+{
+	float:right;
+}
+
+.dateFin, .dateDebut
+{
+	font-size:smaller;
+}
+.troll span input{width:45.5% !important;}

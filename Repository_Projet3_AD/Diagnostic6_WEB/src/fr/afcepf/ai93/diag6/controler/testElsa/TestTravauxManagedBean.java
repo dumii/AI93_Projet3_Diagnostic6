@@ -1,17 +1,25 @@
 package fr.afcepf.ai93.diag6.controler.testElsa;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import fr.afcepf.ai93.diag6.api.business.diagnostic.IBusinessAnomalie;
 import fr.afcepf.ai93.diag6.api.business.autres.IBusinessArtisan;
 import fr.afcepf.ai93.diag6.api.business.travaux.IBusinessIntervention;
+import fr.afcepf.ai93.diag6.controler.autres.UtilisateurManagedBean;
 import fr.afcepf.ai93.diag6.entity.autres.Artisan;
+import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
 import fr.afcepf.ai93.diag6.entity.travaux.EtatAvancementTravaux;
 import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
@@ -26,6 +34,11 @@ public class TestTravauxManagedBean {
 	@EJB
 	private IBusinessAnomalie proxyAnomalie;
 	
+	//récupération de la valeur "login" de la session utilisateur 
+	@ManagedProperty(value="#{mbUtilisateur}")
+	private UtilisateurManagedBean mbUtilisateur;
+
+	private String login;
 
 	private IBusinessArtisan proxyArtisan;
 	private List<Intervention> travaux;
@@ -42,6 +55,22 @@ public class TestTravauxManagedBean {
 	private String resultat;
 	private Date dateChoisie;
 	
+	public UtilisateurManagedBean getMbUtilisateur() {
+		return mbUtilisateur;
+	}
+
+	public void setMbUtilisateur(UtilisateurManagedBean mbUtilisateur) {
+		this.mbUtilisateur = mbUtilisateur;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
 	private Intervention interventionAdd;
 	
 	//Initialisation de la liste d'interventions au chargement de la page
@@ -118,7 +147,7 @@ public class TestTravauxManagedBean {
 		try
 		{
 			//On ajoute dans la base de données et on rafraîchit la liste d'interventions à l'écran
-			resultat = proxyBusiness.ajouterIntervention(interventionAdd);			
+			resultat = proxyBusiness.ajouterIntervention(interventionAdd, anom);			
 		}
 		catch (Exception e)
 		{

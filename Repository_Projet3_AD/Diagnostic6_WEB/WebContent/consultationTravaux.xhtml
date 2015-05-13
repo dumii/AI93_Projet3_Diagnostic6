@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+<ui:composition template="/WEB-INF/Template4Diagnostic6.xhtml">
+
+	<ui:define name="boutonDeconnexion">
+	<f:event listener="#{mbConsultationTravaux.loadChantier()}" type="preRenderView"/> 
+		<h:form>
+			<h:commandButton value="Deconnexion" styleClass="logoDeconnexion"
+				action="#{mbUtilisateur.logout()}"
+				image="images/iconeDeconnexion2.png" title="Deconnexion" />
+		</h:form>
+	</ui:define>
+
+	<ui:define name="title">Diagnostic 6 - Consultation intervention</ui:define>
+
+	<ui:define name="head">
+		<link href="css/consultationTravaux.css" rel="stylesheet"
+			type="text/css" />
+	</ui:define>
+
+
+
+
+	<ui:define name="accordeon1">
+		ERP avec des interventions en cours (#{mbArborescenceTravaux.listeERPIntervEnCours.size()})
+	</ui:define>
+
+	<ui:define name="arborescence1">
+		<h:form>
+			<rich:tree id="tree1" nodeType="#{node.type}" var="node"
+				value="#{mbArborescenceTravaux.rootNodes1}" toggleType="client"
+				selectionType="ajax"
+				selectionChangeListener="#{mbArborescenceTravaux.selectionChanged}">
+				<rich:treeNode type="typeErp">
+                    #{node.name}
+                </rich:treeNode>
+				<rich:treeNode type="erp">  
+                	<h:outputLabel value="#{node.name}" >
+                		<f:ajax event="click" 
+                				listener="#{mbConsultationTravaux.clickNode(mbArborescenceTravaux.currentSelection.idERP)}" 
+                				render=":toto:lblReponseAjax"/>
+                	</h:outputLabel>
+                </rich:treeNode>
+			</rich:tree> 
+		</h:form>
+	</ui:define>
+
+	<ui:define name="accordeon2">
+		ERP en attente d'intervention (#{mbArborescenceTravaux.listeERPIntervAttente.size()})
+	</ui:define>
+
+	<ui:define name="arborescence2">
+		<h:form>
+			<rich:tree id="tree2" nodeType="#{node.type}" var="node"
+				value="#{mbArborescenceTravaux.rootNodes2}" toggleType="client"
+				selectionType="ajax"
+				selectionChangeListener="#{mbArborescenceTravaux.selectionChanged}">
+				<rich:treeNode type="typeErp">
+                    #{node.name}
+                </rich:treeNode>
+				<rich:treeNode type="erp">  
+                	<h:outputLabel value="#{node.name}" >
+                		<f:ajax event="click" 
+                				listener="#{mbConsultationTravaux.clickNode(mbArborescenceTravaux.currentSelection.idERP)}" 
+                				render=":toto:lblReponseAjax"/>
+                	</h:outputLabel>
+                </rich:treeNode>
+			</rich:tree>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="accordeon3">
+		ERP archivés (#{mbArborescenceTravaux.listeERPIntervArchive.size()})
+	</ui:define>
+
+	<ui:define name="arborescence3">
+		<h:form>
+			<rich:tree id="tree3" nodeType="#{node.type}" var="node"
+				value="#{mbArborescenceTravaux.rootNodes3}" toggleType="client"
+				selectionType="ajax"
+				selectionChangeListener="#{mbArborescenceTravaux.selectionChanged}">
+				<rich:treeNode type="typeErp">
+                    #{node.name}
+                </rich:treeNode>
+				<rich:treeNode type="erp">  
+                	<h:outputLabel value="#{node.name}" >
+                		<f:ajax event="click" 
+                				listener="#{mbConsultationTravaux.clickNode(mbArborescenceTravaux.currentSelection.idERP)}" 
+                				render=":toto:lblReponseAjax"/>
+                	</h:outputLabel>
+                </rich:treeNode>
+			</rich:tree>
+		</h:form>
+	</ui:define>
+
+
+	
+
+	<ui:define name="content">
+		<f:view>
+
+			<div id="content">
+				<h:form id="toto">
+ 
+					<h:panelGroup id="lblReponseAjax" layout="block" >
+
+						<div class="mini-barreEtat">
+							<h2>
+								Chantier - #{mbConsultationTravaux.monERP.nomErp}
+								
+								<h:commandLink action="planningTravaux" class="btn" value="Consulter le planning d'interventions">
+      									<f:param name="id" value="#{mbConsultationTravaux.monERP.idErp}" />
+   								</h:commandLink>
+							</h2>
+							
+						</div>
+
+						<!-- Section INFORMATIONS ERP -->
+						<div id="InfoErpDiagnostic">
+
+							<h3>Informations sur l'ERP</h3>
+
+							<div class="formulaire">
+								<h:outputLabel class="intitule" value="ERP concerné : " />
+								<h:outputLabel class="valeur"
+									value="#{mbConsultationTravaux.monERP.nomErp}" />
+
+								<h:outputLabel class="intitule" value="Catégorie : " />
+								<h:outputLabel class="valeur"
+									value="#{mbConsultationTravaux.monERP.categorieErp.denominationCategorieErp}" />
+
+								<h:outputLabel class="intitule" value="Fonction : " />
+								<h:outputLabel class="valeur"
+									value="#{mbConsultationTravaux.monERP.typeErp.denominationTypeErp} #{mbConsultationTravaux.monERP.typeErp.typeErp}" />
+
+								<h:outputLabel class="intitule" value="Adresse : " />
+								<h:outputLabel class="valeur" value="#{mbConsultationTravaux.monERP.numVoieErp} #{mbConsultationTravaux.monERP.nomVoieErp} #{mbConsultationTravaux.monERP.localisation.codePostal} #{mbConsultationTravaux.monERP.localisation.ville}" escape="false" />
+
+								<h:outputLabel class="intitule" value="Propriétaire : " />
+								<h:outputLabel class="valeur"
+									value="#{mbConsultationTravaux.monERP.proprietaire.nomProprietaire.toUpperCase()} #{mbConsultationTravaux.monERP.proprietaire.prenomProprietaire}" />
+
+								<h:outputLabel class="intitule" value="Coordonnées : " />
+								<h:outputLabel class="valeur"
+									value="Tél : #{mbConsultationTravaux.monERP.proprietaire.telProprietaire} 
+                        	&lt;br /&gt; Mail : #{mbConsultationTravaux.monERP.proprietaire.mailProprietaire}
+                        	&lt;br /&gt; #{mbConsultationTravaux.monERP.proprietaire.numVoieProprietaire} #{mbConsultationTravaux.monERP.proprietaire.nomVoieProprietaire} 
+                        	 #{mbConsultationTravaux.monERP.proprietaire.localisation.codePostal} #{mbConsultationTravaux.monERP.proprietaire.localisation.ville}"
+									escape="false" />
+							</div>
+							
+							<div class="formulaire">
+								<h:outputLabel class="intitule" value="Nombre total d'interventions : " />
+								<h:outputText class="valeur" id="totalIntervention" value="#{mbConsultationTravaux.nombreTotalIntervention}"/>
+								<ul class="liste1">
+									<li>Terminées : #{mbConsultationTravaux.nombreInterventionTerminees}</li>
+									<li>En cours : #{mbConsultationTravaux.nombreInterventionEnCours}</li>
+									<li>En attente : #{mbConsultationTravaux.nombreInterventionEnAttente}</li>
+									<li>Suspendues : #{mbConsultationTravaux.nombreInterventionSuspendues}</li>
+								</ul>
+
+								<h:outputLabel class="intitule" value="Coût total des interventions : " />
+								<h:outputLabel class="valeur" value="#{mbConsultationTravaux.coutTotal} €"/>
+
+								<h:outputLabel class="intitule" value="Début du chantier : " />
+								<h:outputLabel class="valeur" value="#{mbConsultationTravaux.formater.format(mbConsultationTravaux.dateDebut)}"/>
+
+								<h:outputLabel class="intitule" value="Fin du chantier : " />
+								<h:outputLabel class="valeur" value="#{mbConsultationTravaux.formater.format(mbConsultationTravaux.dateFin)}"/>
+								
+							</div>
+							
+						</div>
+
+						<!-- Section INFORMATIONS DIAGNOSTICS -->
+						<div id="InfoErpDiagnostic">
+
+							<h3>Diagnostics enregistrés sur cet ERP</h3>
+
+							<ui:repeat var="diagnostic"
+								value="#{mbConsultationTravaux.listeDiagnosticERP}">
+
+								<div class="diagnostic">
+									<h:outputLabel class="intitule" value="Titre du diagnostic : " />
+									<h:outputLabel class="valeur" value="#{diagnostic.intituleDiagnostic}" />
+									
+									<h:commandLink action="consultationDiagnostic" value="Lien vers la fiche du diagnostic">
+      									<f:param name="id" value="#{diagnostic.idDiagnostic}" />
+   									</h:commandLink>
+   									
+									<h:outputLabel class="intitule"
+										value="Nombre d'interventions : " />
+										
+									<h:outputLabel class="valeur" value="#{mbConsultationTravaux.tableauNombreInterventions [mbConsultationTravaux.listeDiagnosticERP.indexOf(diagnostic)][0]}" />
+									
+									<h:outputLabel class="intitule"	value="Etat d'avancement des travaux : " />
+									<img id="iconeEtat - #{diagnostic.idDiagnostic}"
+										 class="etatTravaux"
+										 src="#{mbConsultationTravaux.terminesOuTravauxEnCours(mbConsultationTravaux.tableauNombreInterventions [mbConsultationTravaux.listeDiagnosticERP.indexOf(diagnostic)][1],mbConsultationTravaux.tableauNombreInterventions [mbConsultationTravaux.listeDiagnosticERP.indexOf(diagnostic)][0])}"/>
+									
+									<ul class="liste2">
+										<li>Terminées : #{mbConsultationTravaux.tableauNombreInterventions [mbConsultationTravaux.listeDiagnosticERP.indexOf(diagnostic)][1]}</li>
+										<li>En cours : #{mbConsultationTravaux.tableauNombreInterventions [mbConsultationTravaux.listeDiagnosticERP.indexOf(diagnostic)][2]}</li>
+										<li>En attente : #{mbConsultationTravaux.tableauNombreInterventions [mbConsultationTravaux.listeDiagnosticERP.indexOf(diagnostic)][3]}</li>
+										<li>Suspendues : #{mbConsultationTravaux.tableauNombreInterventions [mbConsultationTravaux.listeDiagnosticERP.indexOf(diagnostic)][4]}</li>
+									</ul>
+								</div>
+							</ui:repeat>
+						</div>
+					</h:panelGroup>
+				</h:form>
+			</div>
+		</f:view>
+
+<script type="text/javascript">
+function mettreAjourInformations()
+{
+	// 
+}
+</script>
+		
+	</ui:define>
+</ui:composition>
+</html>

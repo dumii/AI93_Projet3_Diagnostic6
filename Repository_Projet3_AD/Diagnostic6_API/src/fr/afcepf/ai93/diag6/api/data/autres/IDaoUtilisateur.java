@@ -14,10 +14,13 @@ public interface IDaoUtilisateur {
 
     public boolean supprimerUtilisateur(Utilisateur utilisateur);
 
-    public boolean modifierUtilisateur(Utilisateur utilisateur);
+    public void modifierUtilisateur(Utilisateur utilisateur);
 
     public Utilisateur recupereUtilisateur(int idUtilisateur);
 
     public List<Utilisateur> trouverUtilisateur(String nom);
+    
+    
+    public Utilisateur seConnecter(String login, String motDePasse);
     
 }

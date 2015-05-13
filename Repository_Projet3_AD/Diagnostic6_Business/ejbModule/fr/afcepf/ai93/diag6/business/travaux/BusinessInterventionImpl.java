@@ -12,6 +12,7 @@ import fr.afcepf.ai93.diag6.api.data.travaux.IDaoHistoriqueIntervention;
 import fr.afcepf.ai93.diag6.api.data.travaux.IDaoIntervention;
 import fr.afcepf.ai93.diag6.api.data.travaux.IDaoTypeIntervention;
 import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
+import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
 import fr.afcepf.ai93.diag6.entity.travaux.EtatAvancementTravaux;
 import fr.afcepf.ai93.diag6.entity.travaux.HistoriqueIntervention;
 import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
@@ -48,11 +49,11 @@ public class BusinessInterventionImpl implements IBusinessIntervention {
 	 */
 	
 	@Override
-	public String ajouterIntervention(Intervention intervention) {
+	public String ajouterIntervention(Intervention intervention, Anomalie anomalie) {
 		
 		//Vérification de l'existence ou non d'intervention sur l'anomalie (une seule intervention par anomalie autorisée)
 		boolean ajoutAutorise = true;
-		List<Intervention> liste = proxyIntervention.rechercherInterventionSurAnomalie(intervention.getAnomalie().getIdAnomalie());
+		List<Intervention> liste = proxyIntervention.rechercherInterventionSurAnomalie(anomalie.getIdAnomalie());
 		if (liste.size() > 0)
 		{
 			ajoutAutorise = false;
@@ -80,14 +81,14 @@ public class BusinessInterventionImpl implements IBusinessIntervention {
 		int idAvancementInitial = interventionInitiale.getEtatAvancementTravaux().getIdEtatAvancement();
 		int idAvancementNouveau = intervention.getEtatAvancementTravaux().getIdEtatAvancement();
 		
-		if (idAvancementInitial <= idAvancementNouveau)
+		if (idAvancementInitial >= idAvancementNouveau)
 		{
 			proxyIntervention.modifierIntervention(intervention);
 			proxyHistorique.historiser(interventionInitiale, intervention, user);
 			return "Modification enregistrée avec succès";
 		}
 		else
-		{		
+		{					
 			return "Modification illégale de l'état d'avancement des travaux";
 		}
 	}
@@ -117,28 +118,30 @@ public class BusinessInterventionImpl implements IBusinessIntervention {
 		return proxyIntervention.recupereInterventionparType(type);
 	}
 
-	public IDaoIntervention getProxyIntervention() {
-		return proxyIntervention;
+	@Override
+	public TypeIntervention recupererTypeParIntervention(
+			Intervention intervention) {
+		return proxyTypeIntervention.recupererTypeParIntervention(intervention);
 	}
 
-	public void setProxyIntervention(IDaoIntervention proxyIntervention) {
-		this.proxyIntervention = proxyIntervention;
+	@Override
+	public List<EtatAvancementTravaux> recupererEtatDisponibles(
+			Intervention intervention) {
+		return proxyEtatAvancement.recupererEtatDisponibles(intervention);
 	}
 
-	public IDaoTypeIntervention getProxyTypeIntervention() {
-		return proxyTypeIntervention;
+	@Override
+	public EtatAvancementTravaux recupererEtatParIntervention(
+			Intervention intervention) {
+		return proxyEtatAvancement.recupererEtatParIntervention(intervention);
 	}
 
-	public void setProxyTypeIntervention(IDaoTypeIntervention proxyTypeIntervention) {
-		this.proxyTypeIntervention = proxyTypeIntervention;
+	@Override
+	public int nombreInterventionDiag(int idDiag) {
+		return proxyIntervention.nombreInterventionDiag(idDiag);
 	}
 
-	public IDaoAvancementIntervention getProxyEtatAvancement() {
-		return proxyEtatAvancement;
-	}
-
-	public void setProxyEtatAvancement(
-			IDaoAvancementIntervention proxyEtatAvancement) {
-		this.proxyEtatAvancement = proxyEtatAvancement;
+	public TypeIntervention recupererTypeParID(int idType) {
+		return proxyTypeIntervention.recupererTypeParID(idType);
 	}
 }

@@ -19,10 +19,11 @@ import fr.afcepf.ai93.diag6.entity.diagnostic.HistoriqueAnomalie;
 public class DaoHistoriqueAnomalieImpl implements IDaoHistoriqueAnomalie {
 
 	
-	private final static String MODIF_INDICATEUR = "indicateur";
-	private final static String MODIF_DESCRIPTION = "descriptionAnomalie";
-	private final static String MODIF_PRECONISATION = "preconisationAnomalie";
-	private final static String MODIF_COUT_ESTIME = "coutEstimeAnomalie";
+	private final static String MODIF_INDICATEUR = "Indicateur";
+	private final static String MODIF_DESCRIPTION = "Description anomalie";
+	private final static String MODIF_PRECONISATION = "Preconisation anomalie";
+	private final static String MODIF_COUT_ESTIME = "Coût estimé anomalie";
+	private final static String SUPPRESSION_ANOMALIE = "Suppression anomalie";
 	
 	@PersistenceContext(unitName="Malak_Diag_Data")
 	private EntityManager em;
@@ -85,5 +86,24 @@ public class DaoHistoriqueAnomalieImpl implements IDaoHistoriqueAnomalie {
 			historique.setNouvelleDonnee(""+coutNouveauEstime);
 			em.persist(historique);
 		}
+	}
+
+	@Override
+	public void historiserSuppression(Anomalie anomalieInitiale,
+			Anomalie anomalie, Utilisateur user) {
+		//historisation suppression en une seule ligne, pour simplifier; à modifier si jamais on se décide de faire "restaurer à la version précédente" 
+		HistoriqueAnomalie historique = new HistoriqueAnomalie();
+		historique.setAnomalie(anomalie);
+		historique.setUtilisateur(user);
+		historique.setDateModification(new Date());
+		
+		historique.setTypeModification(SUPPRESSION_ANOMALIE);
+		historique.setAncienneDonnee(MODIF_INDICATEUR+" "+anomalieInitiale.getIndicateur().getLibelleIndicateur() + 
+				MODIF_DESCRIPTION +" "+anomalieInitiale.getDescriptionAnomalie() +
+				MODIF_PRECONISATION +" "+anomalieInitiale.getPreconisationAnomalie() + 
+				MODIF_COUT_ESTIME + " " + anomalieInitiale.getCoutEstimeAnomalie() +
+				" sur diagnostic "+anomalieInitiale.getDiagnostic().getIntituleDiagnostic());
+		historique.setNouvelleDonnee("Supprimé");
+		em.persist(historique);
 	}
 }

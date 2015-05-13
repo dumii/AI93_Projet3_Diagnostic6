@@ -3,6 +3,7 @@
 	<name>Diagnostic6_WEB</name>
 	<comment></comment>
 	<projects>
+		<project>Diagnostic6_Entity</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

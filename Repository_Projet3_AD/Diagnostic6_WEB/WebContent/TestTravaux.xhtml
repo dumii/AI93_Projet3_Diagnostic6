@@ -8,8 +8,16 @@
 
 <h:head></h:head> 
 <body>
+	
+
 	<f:view>
 		<h:form>
+		<div id="champIdentifiant">
+						<h:commandButton value="Deconnexion" styleClass="boutonConnexion"
+							action="#{mbUtilisateur.logout()}" image="images/iconeDeconnexion2.png"/>
+		</div>
+					
+		<div><h:outputText value="#{mbTestTravaux.login}" /></div>
 			<h:outputLabel value="Enter your name: " />
     <h:inputText value="Hello 1" />
     <h:outputLabel value="Enter your name: " />

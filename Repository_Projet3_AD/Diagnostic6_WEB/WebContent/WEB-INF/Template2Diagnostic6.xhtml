@@ -29,6 +29,7 @@
 			<input type="text" value="Entrez votre recherche ici ..."/>
 			<input type="image" src="images/Loupe.png"/>
 			<div id="resultatRecherche">blabla</div>
+			<div class="boutonDeconnexion"></div>
 		</h:form>
 		
 		<a href=""><img class="logoMenu" id="logoErp" src="images/ERPIconeBleue2.png" /></a>
@@ -37,7 +38,10 @@
 		
 		<a href=""><img class="logoMenu" id="logoTrav" src="images/BuildingConstruction_icon.png" /></a>
 		
-		<a href=""><img class="logoMenu" id="logoTabBord" src="images/TableauBordIconeOrange.png" /></a>
+		<a href="http://localhost:9090/Diagnostic6_WEB/planningTravaux.jsf"><img class="logoMenu" id="logoTabBord" src="images/TableauBordIconeOrange.png" /></a>
+		
+		
+		<ui:insert name="boutonDeconnexion" />
 		
 	</div>
 	
@@ -55,29 +59,17 @@
   		<div id="accordion">
 			<h3><ui:insert name="accordeon1"/></h3>
 			<div>
-				<p>
-					<ul>
-						<li><ui:insert name="arborescence1"/></li>
-					</ul>
-				</p>
+				<ui:insert name="arborescence1"/>
 			</div>
  
 			<h3><ui:insert name="accordeon2"/></h3>
 			<div>
-				<p>
-					<ul>
-						<li><ui:insert name="arborescence2"/></li>
-					</ul>
-				</p>
+				<ui:insert name="arborescence2"/>
 			</div>
 
 			<h3><ui:insert name="accordeon3"/></h3>
 			<div>
-				<p>
-					<ul>
-						<li><ui:insert name="arborescence3"/></li>
-					</ul>
-				</p>
+				<ui:insert name="arborescence3"/>
 			</div>			
 		</div>
 			
@@ -111,9 +103,10 @@
 			
 		</fieldset>
 	</div>
-
+	<div class="content">	
 	<ui:insert name="content" />
-		
+	
+	</div>
 <script>
 jQuery.noConflict();
 
