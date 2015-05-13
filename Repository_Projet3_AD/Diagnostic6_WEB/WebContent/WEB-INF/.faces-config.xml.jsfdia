@@ -14,6 +14,9 @@
    <PROCESS-ITEM-OUTPUT ID="planningTravaux::#planningTravaux.jsf"
     NAME="output1" PATH="/planningTravaux.jsf"
     TARGET="rules:#planningTravaux.jsf" TITLE="planningTravaux" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="historiqueTravaux::#historiqueTravaux.jsf"
+    NAME="output2" PATH="/historiqueTravaux.jsf"
+    TARGET="rules:#historiqueTravaux.jsf" TITLE="historiqueTravaux" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#accueilTravaux.jsf"
@@ -47,4 +50,9 @@
     TITLE="consultationDiagnostic" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#historiqueTravaux.xhtml"
+  PATH="/historiqueTravaux.xhtml" SHAPE="196,434,0,0"
+  model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#historiqueTravaux.jsf"
+  PATH="/historiqueTravaux.jsf" SHAPE="496,241,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>

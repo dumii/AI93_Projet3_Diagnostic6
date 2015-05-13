@@ -12,14 +12,11 @@ import javax.persistence.Query;
 
 import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoDiagnostic;
 import fr.afcepf.ai93.diag6.api.data.travaux.IDaoIntervention;
-<<<<<<< HEAD
 import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
-=======
 import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
 import fr.afcepf.ai93.diag6.entity.travaux.TypeIntervention;
->>>>>>> branch 'master' of https://github.com/dumii/AI93_Projet3_Diagnostic6.git
 
 @Stateless
 @Remote(IDaoIntervention.class)
@@ -56,33 +53,14 @@ public class DaoInterventionImpl implements IDaoIntervention {
 	}
 	
 	@Override
-<<<<<<< HEAD
-	public boolean rechercherInterventionSurAnomalie(int idAnomalie) {
-		Query query = em.createQuery("SELECT e from Intervention e WHERE e.id = :pid");
-		query.setParameter("pid", idAnomalie);
-		List<Intervention> liste = query.getResultList();
-		
-		if (liste.size() > 0)
-		{
-			return false;
-		}
-		else
-		{
-			return true;
-		}
-=======
 	public List<Intervention> rechercherInterventionSurAnomalie(int idAnomalie) {
 		Query query = em.createQuery("SELECT e from Intervention e WHERE e.anomalie.idAnomalie = :pid");
 		query.setParameter("pid", idAnomalie);
 		List<Intervention> liste = new ArrayList<>();
 		liste = query.getResultList();
 		return liste;
->>>>>>> branch 'master' of https://github.com/dumii/AI93_Projet3_Diagnostic6.git
 	}
-<<<<<<< HEAD
-}
-=======
->>>>>>> branch 'master' of https://github.com/dumii/AI93_Projet3_Diagnostic6.git
+
 
 	@Override
 	public List<Intervention> recupereInterventionparType(TypeIntervention type) {
