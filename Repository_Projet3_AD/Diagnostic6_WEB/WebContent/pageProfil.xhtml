@@ -24,14 +24,12 @@
 		
 			<div id="content">
 			<h:form>
-					<h:form>
+			
 						<h:inputText value="#{mbUtilisateur.idUtil}" />
 						<a4j:commandLink value="Recuperer utilisateur"
-							action="#{mbUtilisateur.recupUtilisateur()}"
-							render="lblReponseAjax" />
-					</h:form>
+							action="#{mbUtilisateur.recupUtilisateur()}"/>
 
-					<h:form>
+
 			<h:panelGroup id="lblReponseAjax" layout="block" >	
 			
 				<div id="contenuProfil">
@@ -51,35 +49,30 @@
 							<h:outputText value="Prénom : " style="color: #000063; "/>
 							<h:outputText value="#{mbUtilisateur.utilisateur.prenomUtilisateur}" />
 							<h:outputText value="Téléphone : " style="color: #000063; "/>
-							<h:inputText value="#{mbUtilisateur.utilisateur.telUtilisateur} " />
+							<h:inputText value="#{mbUtilisateur.utilisateur.telUtilisateur}" />
 							<h:outputText value="Mail : " style="color: #000063; text-align:right;"/>
-							<h:inputText value="#{mbUtilisateur.utilisateur.emailUtilisateur} " />
+							<h:inputText value="#{mbUtilisateur.utilisateur.emailUtilisateur}" />
 						</h:panelGrid>
 						<div class="ligne_verticale" ></div>
 						<h:panelGrid columns="2" id="donneeCompte" style="width:260px;">
 								<h:outputText value="Login : " style="color: #000063;"/>
 								<h:outputText value="#{mbUtilisateur.utilisateur.loginUtilisateur}" />
 								<h:outputText value="Mot de Passe : " style="color: #000063; "/>
-								<h:outputText value="#{mbUtilisateur.utilisateur.motDePasseUtilisateur}" />
-								<h:outputText value="Nouveaux MdP : " style="color: #000063; "/>
-								 <h:inputText  />
-								<h:outputText value="Confirmer MdP : " style="color: #000063; "/>
-								 <h:inputText  />
+								<h:outputText value="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"/>
+								<h:outputText value="Changer MdP : " style="color: #000063; "/>
+								<h:inputSecret value="#{mbUtilisateur.utilisateur.motDePasseUtilisateur}"/>
 						</h:panelGrid>
 						<div class="ligne_verticale" ></div>
 						<h:panelGrid columns="1" id="donneeNote" style="text-align:left; width:260px;">
 								<h:outputText value="Enregistré depuis le : " style="color: #000063;"/>
-								<h:outputText value="#{mbUtilisateur.formater.format(mbUtilisateur.utilisateur.dateEnregistrement)} " />
+								<h:outputText value="#{mbUtilisateur.formater.format(mbUtilisateur.utilisateur.dateEnregistrement)}" />
 								<h:outputText value="Notes Personnelles : " style="color: #000063;"/>
 								<textarea  />
-								
 						</h:panelGrid>
 
 						</h:panelGrid>
 						<h:panelGrid columns="3" style="width:100%; text-align:center; margin-top:1%;" styleClass="buttContenuProfil">
-							<h:commandButton action="#{mbUtilisateur.modificationUtilisateur()}" value="Enregistrer Nouvelles Coordonnées" styleClass="enrNewCoor"/>
-							<h:commandButton action="#{mbUtilisateur.modificationUtilisateur()}" value="Enregistrer Nouveaux Mot de Passe"  styleClass="enrNewMdP"/>
-							<h:commandButton value="Sauvegarder"  styleClass="saveNotes"/>
+							<h:commandButton action="#{mbUtilisateur.modificationUtilisateur()}" value="Sauvegarder Modification"  styleClass="saveModif" />
 						</h:panelGrid>
 				</div>
 				
@@ -106,7 +99,6 @@
 				</h:panelGrid>
 				
 			</h:panelGroup>
-			</h:form>
 			</h:form>
 			</div>
 <link href="css/profil.css" rel="stylesheet" type="text/css" />

@@ -36,7 +36,8 @@
 	background:#FEFEE2 ;
 	margin-top:-1%;
 	color: #000063;
-	font-family: Corbel;
+	/*font-family: Corbel;*/
+	font-family: Arial, Verdana, sans-serif;
 	padding-left:1%;
 	font-size: 17px;
 }
@@ -47,38 +48,29 @@
     border-left:1px solid #cccccc;
     height:130px;
 }
-.enrNewCoor
+
+#enrNewCoor
 {
 	background:#FEFEE2 ;
 	background-color:#FEFEE2;
 	width:193px;
 	height:20px;
 	color: #000063;
-	font-family: Corbel;
+	/*font-family: Corbel;*/
+	font-family: Arial, Verdana, sans-serif;
 	background-image: none;
 	font-size: 15px;
 }
 
-.enrNewMdP
+
+
+.saveModif
 {
 	background-color:#FEFEE2 ;
 	background:#FEFEE2;
 	width:193px;
 	height:20px;
 	color: #000063;
-	font-family: Corbel;
-	background-image: none;
-	font-size: 15px;
-}
-
-.saveNotes
-{
-	background:#FEFEE2 ;
-	background-color:#FEFEE2;
-	width:193px;
-	height:20px;
-	color: #000063;
-	font-family: Corbel;
 	background-image: none;
 	font-size: 15px;
 }
@@ -86,7 +78,6 @@
 #buttContenuProfil
 {
 	width: 100%;
-	
 }
 
 /*************************/
@@ -115,7 +106,8 @@
 	background:#FEFEE2 ;
 	margin-top:-1%;
 	color: #000063;
-	font-family: Corbel;
+	/*font-family: Corbel;*/
+	font-family: Arial, Verdana, sans-serif;
 	padding-left:1%;
 }
 
@@ -139,6 +131,7 @@
 	background:#FEFEE2 ;
 	margin-top:-1%;
 	color: #000063;
-	font-family: Corbel;
+	/*font-family: Corbel;*/
+	font-family: Arial, Verdana, sans-serif;
 	padding-left:1%;
 }
