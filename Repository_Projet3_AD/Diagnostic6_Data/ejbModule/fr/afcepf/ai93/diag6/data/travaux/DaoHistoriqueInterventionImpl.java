@@ -14,6 +14,7 @@ import fr.afcepf.ai93.diag6.api.data.travaux.IDaoHistoriqueIntervention;
 import fr.afcepf.ai93.diag6.api.data.travaux.IDaoIntervention;
 import fr.afcepf.ai93.diag6.api.data.travaux.IDaoTypeIntervention;
 import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
+import fr.afcepf.ai93.diag6.entity.erp.Erp;
 import fr.afcepf.ai93.diag6.entity.travaux.EtatAvancementTravaux;
 import fr.afcepf.ai93.diag6.entity.travaux.HistoriqueIntervention;
 import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
@@ -41,6 +42,16 @@ public class DaoHistoriqueInterventionImpl implements IDaoHistoriqueIntervention
 	public List<HistoriqueIntervention> recupereToutHistoriqueIntervention() {
 		Query query = em.createQuery("SELECT h from HistoriqueIntervention h");
 		List<HistoriqueIntervention> liste = query.getResultList();
+		return liste;
+	}
+	
+	
+	///changer ici! (j'ai peut être fait une connerie en récupérant un ERP alors que seul son ID me suffit
+	@Override
+	public List<HistoriqueIntervention> recupereHistoriqueInterventionParERP(
+			Erp erp) {
+		Query query = em.createQuery("SELECT h from HistoriqueIntervention h WHERE h.");
+		List<HistoriqueIntervention> liste = query.getResultList();		
 		return liste;
 	}
 
@@ -121,4 +132,6 @@ public class DaoHistoriqueInterventionImpl implements IDaoHistoriqueIntervention
 			em.persist(historique);
 		}		
 	}
+
+
 }

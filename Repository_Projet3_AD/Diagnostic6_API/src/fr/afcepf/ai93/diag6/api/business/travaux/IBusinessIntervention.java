@@ -5,6 +5,7 @@ import java.util.List;
 
 import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
+import fr.afcepf.ai93.diag6.entity.erp.Erp;
 import fr.afcepf.ai93.diag6.entity.travaux.EtatAvancementTravaux;
 import fr.afcepf.ai93.diag6.entity.travaux.HistoriqueIntervention;
 import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
@@ -14,6 +15,8 @@ public interface IBusinessIntervention {
 
 	//Intervention	
 	public List<HistoriqueIntervention> recupereToutHistoriqueIntervention();
+	
+	public List<HistoriqueIntervention> recupereHistoriqueInterventionParERP(Erp erp);
 	
 	public List<Intervention> recupereToutesIntervention();
 	
