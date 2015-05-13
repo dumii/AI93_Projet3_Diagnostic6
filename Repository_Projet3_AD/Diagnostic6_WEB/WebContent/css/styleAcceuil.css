@@ -1,8 +1,4 @@
-html
-{
-	overflow: scroll;
-	
-}
+
 .fixEntete{
  z-index: 9999;
  position: fixed;
@@ -29,7 +25,7 @@ html
 	margin-right: 20px;
 	margin-top: 20px;
 	border-radius: 7px;
-	display: none;
+	/*display: none;*/
 }
 
 #DivPrincipale
@@ -42,7 +38,7 @@ html
 	margin-right: 20px;
 	margin-top: 20px;
 	border-radius: 7px;
-	
+	/*display: none;*/
 	
 }
 
@@ -117,7 +113,6 @@ margin-right: 2px;
 margin-top: 4px; 
 margin-bottom: 4px; 
 border : #BDBDBD solid 1px;
-font-family: 'Corbel';
 color: red;
 
 }
@@ -352,7 +347,6 @@ body
 	margin: 0 0 0 0;
 	padding: 0 0 0 0;
 	overflow-y: auto;
-	font-family: Corbel;
 	background-attachment: fixed;
 }
 

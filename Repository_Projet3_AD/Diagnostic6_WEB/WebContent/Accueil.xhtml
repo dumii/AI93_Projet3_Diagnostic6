@@ -9,28 +9,16 @@
 <h:head>
 	<title>Accueil</title>
 
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 	<link href="css/styleAcceuil.css" rel="stylesheet" type="text/css" />
 
 	<link rel="stylesheet"
 		href="//code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css" />
 	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-	
-	<script type="jqplot/jquery.jqplot.js"/>
-	<link rel="stylesheet" type="text/css" href="css/jquery.jqplot.css" />
-	<script language="javascript" type="text/javascript" src="jqplot/excanvas.js" />
-	<script language="javascript" type="text/javascript" src="jqplot/jquery.jqplot.min.js"/>
-	<script type="text/javascript" src="jqplot/jquery.jqplot.min.js"/>
-	<script type="text/javascript" src="jqplot/jqplot.pieRenderer.min.js"/>
-	<script type="text/javascript" src="jqplot/jqplot.donutRenderer.min.js"/>
-	<script type="text/javascript" src="jqplot/jqplot.barRenderer.min.js"/>
-	<script type="text/javascript" src="jqplot/jqplot.categoryAxisRenderer.min.js"/>
-	<script type="text/javascript" src="jqplot/jqplot.pointLabels.min.js"/>
 
-
-
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart","bar"]});
       google.setOnLoadCallback(drawChart);
       
@@ -56,11 +44,8 @@
         chart.draw(data, options);
       }
     </script>
-	
-	<script type="text/javascript">
-      
-		
 
+	<script type="text/javascript">
 
 		google.setOnLoadCallback(drawChart);
 	      function drawChart() {
@@ -94,8 +79,52 @@
 	      
     </script>
 
+
+	<script type="text/javascript"
+		src="http://maps.google.com/maps/api/js?sensor=false&amp;signed_in=true&amp;libraries=places"></script>
+
+
+
+	<script type="text/javascript">
+	var geocoder;
+		var carte;
+		var marker;
+		
+			function initialiser() {
+				geocoder = new google.maps.Geocoder();				
+				var latlng = new google.maps.LatLng(48.817221, 2.297347);
+				//objet contenant des propriétés avec des identificateurs prédéfinis dans Google Maps permettant
+				//de définir des options d'affichage de notre carte
+				var options = {
+					center: latlng,
+					zoom: 15,
+				};
+				
+				//constructeur de la carte qui prend en paramêtre le conteneur HTML
+				//dans lequel la carte doit s'afficher et les options
+				carte = new google.maps.Map(document.getElementById("carte"), options);
+				
+				//Création d'un marqueur
+				var marqueur = new google.maps.Marker({
+					position: new google.maps.LatLng(46.779331, 6.659431),
+					map: carte,
+					draggable: true,
+					title: 'un marqueur',
+					icon: "http://images.clipartpanda.com/google-map-icon-14165-google-maps-pin-blue-design.png"
+				});
+			}
+
+			function loadAddress(){
+	console.log(carte);
+
+				}
+				
+				
+</script>
+
+
 </h:head>
-<body>
+<body onload="initialiser()">
 	<div id="enTete">
 
 		<img id="logoAccueil" src="images/Logo2.png"
@@ -111,27 +140,25 @@
 					<h:outputLabel value="Ville de Malakoff : situation des ERP "
 						id="enteteStatistiques" />
 				</div>
-				
+
 			</div>
 			<div id="graphs">
-				
-				<div class = "conteneur1" >
-				<div id="piechart_3d" style="height: 210px; width: auto">
-				</div>
-				</div>
-				<div class = "conteneur2" >
-				<div id="barchart_material" style="height:  210px; width: 0 auto">
 
+				<div class="conteneur1">
+					<div id="piechart_3d" style="height: 210px; width: auto"></div>
 				</div>
+				<div class="conteneur2">
+					<div id="barchart_material" style="height: 210px; width: 0 auto">
+
+					</div>
 				</div>
 			</div>
 		</div>
 		<div class="lesPublications">
 			<div id="publications">
 				<div>
-					<img src="images/flecheGauche.png"
-						alt="Publication suivante"
-						style="float: left;  cursor: pointer; position: absolute; z-index: 1" />
+					<img src="images/flecheGauche.png" alt="Publication suivante"
+						style="float: left; cursor: pointer; position: absolute; z-index: 1" />
 					<img
 						src="http://media.topito.com/wp-content/uploads/2013/04/Animal12.jpg"
 						alt="Image publication1"
@@ -140,19 +167,10 @@
 						value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
 				</div>
 			</div>
-			<div id="publications">
-				<div>
-					<img src="images/flecheDroite.png"
-						alt="Publication Précédente"
-						style="float: right;  cursor: pointer; position: absolute; z-index: 1; margin-left: 33%" />
-					<img src="http://flepi.net/images/animaux-etrange-560x373.jpg"
-						alt="Publication suivante"
-						style="width: 100%; position: relative; z-index: 0" />
-					<h:outputLabel
-						value="Sed ut perspiciatis  dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?" />
 
-				</div>
-			</div>
+			<div id="carte" style="width: 49.5; height: 450px"></div>
+			<div></div>
+
 		</div>
 		<div id="commentaireAll">
 			<div id="commentaires">
@@ -176,7 +194,7 @@
 
 
 	</div>
-	<div id="divMap"></div>
+
 	<div id="login">
 		<input type="button" value="Espace professionel"
 			class="boutonOuvertureLogin" onclick="ouvertureLogin('login2')" />
@@ -208,7 +226,7 @@
 					</div>
 					<div id="champIdentifiant">
 						<h:commandButton value="Deconnexion" styleClass="boutonConnexion"
-							action="#{mbUtilisateur.logout()}"/>
+							action="#{mbUtilisateur.logout()}" />
 					</div>
 				</h:form>
 			</f:view>
@@ -218,70 +236,70 @@
 	<div id="BandeauRecherche">
 
 
+
+
+		<div id="divEnteteRecherche">
+			<h:outputText value="Recherche" />
+		</div>
 		<div>
+			<div id="champDeRecherche">
+				<h:form>
+					<f:view>
+						<div id="champsDeRecherche">
+							<h:outputLabel value="Type d'ERP:" />
+						</div>
+						<div id="champsDeRecherche">
+							<h:selectOneMenu value="#{mbPublic.idTypeErpSelect}"
+								id="listBox1" style="width:75%">
+								<f:selectItem itemLabel="Sélectionnez ..." />
+								<f:selectItems value="#{mbPublic.listeTypeErp}" var="listeErp2"
+									itemLabel="#{listeErp2.typeErpCourt}"
+									itemValue="#{listeErp2.idTypeErp}">
+								</f:selectItems>
+								<a4j:ajax event="change" listener="#{mbPublic.recup2()}"
+									render="resultatErp" />
+							</h:selectOneMenu>
+						</div>
+						<div id="champsDeRecherche">
+							<h:outputLabel value="Type de diagnostic recherché:" />
+						</div>
+						<div id="champsDeRecherche">
+							<h:selectOneMenu value="#{mbPublic.idTypeDiagSelect}"
+								id="listBox2" style="width:75%; margin-bottom: 2px">
+								<f:selectItem itemLabel="Sélectionnez ..." />
+								<f:selectItems value="#{mbPublic.listeTypeDiagnostic}"
+									var="listeDiag" itemLabel="#{listeDiag.nomType}"
+									itemValue="#{listeDiag.idTypeDiagnostic}">
+								</f:selectItems>
+								<a4j:ajax event="change" listener="#{mbPublic.recup2()}"
+									render="resultatErp" />
 
-			<div id="divEnteteRecherche">
-				<h:outputText value="Recherche" />
+							</h:selectOneMenu>
+						</div>
+						<div id="champsDeRecherche">
+							<h:selectBooleanCheckbox value="#{mbPublic.booleenTravaux}" />
+							<h:outputText value="Travaux en cours" />
+						</div>
+						<div id="resultatsDeRecherche">
+
+
+
+							<h:selectOneListbox value="#{mbPublic.idErpRecherche}"
+								id="resultatErp" styleClass="resultatErp">
+								<f:selectItems value="#{mbPublic.recup2()}" var="listeErp3"
+									itemLabel="#{listeErp3.nomErp}" itemValue="#{listeErp3.idErp}"></f:selectItems>
+								<a4j:ajax event="click" listener="#{mbPublic.afficherDansMap()}"
+									render="totop" />
+							</h:selectOneListbox>
+						</div>
+					</f:view>
+				</h:form>
 			</div>
-			<div>
-				<div id="champDeRecherche">
-					<h:form>
-						<f:view>
-							<div id="champsDeRecherche">
-								<h:outputLabel value="Type d'ERP:" />
-							</div>
-							<div id="champsDeRecherche">
-								<h:selectOneMenu value="#{mbPublic.idTypeErpSelect}"
-									id="listBox1" style="width:75%">
-									<f:selectItem itemLabel="Sélectionnez ..." />
-									<f:selectItems value="#{mbPublic.listeTypeErp}" var="listeErp2"
-										itemLabel="#{listeErp2.typeErpCourt}"
-										itemValue="#{listeErp2.idTypeErp}">
-									</f:selectItems>
-									<a4j:ajax event="change"
-										listener="#{mbPublic.recup2()}" render="resultatErp" />
-								</h:selectOneMenu>
-							</div>
-							<div id="champsDeRecherche">
-								<h:outputLabel value="Type de diagnostic recherché:" />
-							</div>
-							<div id="champsDeRecherche">
-								<h:selectOneMenu value="#{mbPublic.idTypeDiagSelect}"
-									id="listBox2" style="width:75%; margin-bottom: 2px">
-									<f:selectItem itemLabel="Sélectionnez ..." />
-									<f:selectItems value="#{mbPublic.listeTypeDiagnostic}"
-										var="listeDiag" itemLabel="#{listeDiag.nomType}"
-										itemValue="#{listeDiag.idTypeDiagnostic}">
-									</f:selectItems>
-									<a4j:ajax event="change"
-										listener="#{mbPublic.recup2()}" render="resultatErp" />
 
-								</h:selectOneMenu>
-							</div>
-							<div id="champsDeRecherche">
-								<h:selectBooleanCheckbox value="#{mbPublic.booleenTravaux}" />
-								<h:outputText value="Travaux en cours" />
-							</div>
-							<div id="resultatsDeRecherche">
-
-								<a4j:commandButton event="click" listener="#{mbPublic.recup2()}"
-									render="resultatErp" value="Trouver" />
-
-								<h:selectOneListbox    value="#{mbPublic.idTypeErpRecherche}"
-									id="resultatErp" styleClass="resultatErp">
-									<f:selectItems value="#{mbPublic.recup2()}" var="listeErp3"
-										itemLabel="#{listeErp3.nomErp}" itemValue="#{listeErp3.idErp}" ></f:selectItems>
-
-								</h:selectOneListbox>
-							</div>
-						</f:view>
-					</h:form>
-				</div>
-
-
-			</div>
 
 		</div>
+
+
 
 
 	</div>
@@ -337,6 +355,52 @@ function connection(idProfil)
 			return false;
 		}
 }
+
 </script>
+	<h:panelGroup id="totop">
+		<script>
+function codeAddress() {
+	var address = '#{mbPublic.adressErp}';
+	
+	geocoder.geocode( { 'address': address}, function(results, status) {
+		if (status == google.maps.GeocoderStatus.OK) {
+			carte.setCenter(results[0].geometry.location);
+			marker = new google.maps.Marker({
+				map: carte,
+				position: results[0].geometry.location
+			});
+		} else {
+			alert("Geocode was not successful for the following reason: " + status);
+		}
+	});				 var request = {
+		    placeId: 'ChIJN1t_tDeuEmsRUsoyG83frY4'
+	  };
+
+var infowindow = new google.maps.InfoWindow();
+var service = new google.maps.places.PlacesService(carte);
+
+service.getDetails(request, function(place, status) {
+if (status == google.maps.places.PlacesServiceStatus.OK) {
+marker = new google.maps.Marker({
+  map: carte,
+  position: place.geometry.location
+});
+google.maps.event.addListener(marker, 'click', function() {
+    console.log("marker click")
+  infowindow.setContent(place.name);
+  infowindow.open(carte, this);
+});
+}
+console.log(status);
+});
+
+}
+ 
+	initialiser()
+	codeAddress();	
+	loadAddress();
+	google.maps.event.trigger(carte, 'resize');
+	</script>
+	</h:panelGroup>
 </body>
 </html>
