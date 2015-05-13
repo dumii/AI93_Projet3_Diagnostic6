@@ -42,6 +42,8 @@ public interface IBusinessDiagnostic {
 	    public List<Diagnostic> recupereDiagnosticNonTraitesParErp(Erp erp);
 
 		public List<Indicateur> recupererIndicateursParDiag(Diagnostic diagEnCours);
+		
+		public List<Indicateur> recupereIndicateurParTypeDiagnostic(int idTypeDiagnostic);
 
 		public List<Diagnostic> recupereToutDiagnosticParErp(Erp e);
 		

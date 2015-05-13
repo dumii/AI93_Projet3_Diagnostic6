@@ -229,4 +229,10 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 		//si la methode du Dao retourne false, c'est qu'il n'y a aucune intervention dessous
 		return proxyDiagnostic.recupereSiIntervEnCoursParDiag(idDiag); 
 	}
+
+	@Override
+	public List<Indicateur> recupereIndicateurParTypeDiagnostic(
+			int idTypeDiagnostic) {
+		return proxyIndicateur.recupereIndicateurParTypeDiagnostic(idTypeDiagnostic);
+	}
 }

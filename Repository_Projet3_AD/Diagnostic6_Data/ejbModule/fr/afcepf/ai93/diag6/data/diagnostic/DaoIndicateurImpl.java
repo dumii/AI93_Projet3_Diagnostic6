@@ -19,14 +19,22 @@ import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
 @Stateless
 @Remote(IDaoIndicateur.class)
 public class DaoIndicateurImpl implements IDaoIndicateur {
-@PersistenceContext(unitName="Malak_Diag_Data")
-private EntityManager em; 
+	@PersistenceContext(unitName="Malak_Diag_Data")
+	private EntityManager em; 
 
-@Override
-public List<Indicateur> recupereIndicateur() {
-	Query requete = em.createQuery("SELECT d FROM Indicateur d"); 
-	List<Indicateur> liste = requete.getResultList(); 
-	return liste;
-}
+	@Override
+	public List<Indicateur> recupereIndicateur() {
+		Query requete = em.createQuery("SELECT d FROM Indicateur d"); 
+		List<Indicateur> liste = requete.getResultList(); 
+		return liste;
+	}
+
+	@Override
+	public List<Indicateur> recupereIndicateurParTypeDiagnostic(int idTypeDiagnostic) {
+		Query query = em.createQuery("SELECT d.listeIndicateursTypeDiagnostic FROM TypeDiagnostic d WHERE d.idTypeDiagnostic = :pid");
+		query.setParameter("pid", idTypeDiagnostic);
+		List<Indicateur> liste = query.getResultList(); 
+		return liste;
+	}
 
 }
