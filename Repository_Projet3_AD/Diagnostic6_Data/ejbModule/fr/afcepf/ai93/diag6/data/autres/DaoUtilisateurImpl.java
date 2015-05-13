@@ -51,6 +51,7 @@ public class DaoUtilisateurImpl implements IDaoUtilisateur {
 	@Override
 	public void modifierUtilisateur(Utilisateur utilisateur) {
 		em.merge(utilisateur);
+		System.out.println("j'ai modifié");
 	}
 
 	@Override

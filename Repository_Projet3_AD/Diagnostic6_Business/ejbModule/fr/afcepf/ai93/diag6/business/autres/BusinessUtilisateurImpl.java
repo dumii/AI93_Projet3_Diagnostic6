@@ -45,8 +45,9 @@ public class BusinessUtilisateurImpl implements IBusinessUtilisateur {
 
 	@Override
 	public String modifierUtilisateur(Utilisateur utilisateur) {
-		Utilisateur utiliInitial = proxiDaoUtilisateur.recupereUtilisateur(utilisateur.getIdUtilisateur());
+		//Utilisateur utiliInitial = proxiDaoUtilisateur.recupereUtilisateur(utilisateur.getIdUtilisateur());
 		proxiDaoUtilisateur.modifierUtilisateur(utilisateur);
+		System.out.println("appel fonction dans biz");
 		return "Ok modif";
 	}
 

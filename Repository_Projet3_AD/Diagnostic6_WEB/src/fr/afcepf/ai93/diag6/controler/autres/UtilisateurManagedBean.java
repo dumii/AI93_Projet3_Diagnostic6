@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.io.IOException;
 
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -12,6 +13,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+
 
 
 
@@ -30,6 +32,7 @@ import fr.afcepf.ai93.diag6.api.business.autres.IBusinessUtilisateur;
 import fr.afcepf.ai93.diag6.api.business.publics.IBusinessPublic;
 import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
+import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
 
 
 
@@ -57,8 +60,8 @@ public class UtilisateurManagedBean implements Serializable {
 	private String motDePasse;
 
 	private String message = "";
-	private Utilisateur utilisateur;
-	private Utilisateur umodif = new Utilisateur();
+	private Utilisateur utilisateur = new Utilisateur();
+	//private Utilisateur umodif = new Utilisateur();
 	
 	private int idUtil;
 	
@@ -142,18 +145,20 @@ public class UtilisateurManagedBean implements Serializable {
 	}
 	
 	public void modificationUtilisateur(){
-		System.out.println("je modifie l'utilisateur");
-		System.out.println(umodif.getIdUtilisateur() + " = " + utilisateur.getIdUtilisateur());
-		if(umodif.getIdUtilisateur() != utilisateur.getIdUtilisateur()) {
-			System.out.println("Utilisateu pris en compte pour la modification : " + utilisateur.getIdUtilisateur());
-			umodif = utilisateur;
-		} else {
-			System.out.println("je passe dans le else");
-			proxyBusinessUtilisateur.modifierUtilisateur(utilisateur);
-			umodif = new Utilisateur();
-			recupUtilisateur();
-		}
+		System.out.println("33333333333333333333333 je modifie l'utilisateur 33333333333333333333333");
+
+		proxyBusinessUtilisateur.modifierUtilisateur(utilisateur);
+//		if(umodif.getIdUtilisateur() != utilisateur.getIdUtilisateur()) {
+//			System.out.println("Utilisateu pris en compte pour la modification : " + utilisateur.getIdUtilisateur());
+//			umodif = utilisateur;
+//		} else {
+//			System.out.println("je passe dans le else");
+//			proxyBusinessUtilisateur.modifierUtilisateur(utilisateur);
+//			umodif = new Utilisateur();
+//			//recupUtilisateur();
+//		}
 	}
+
 	
 	
 ////////////////////////////// GETTER / SETTER ///////////////////////////////
@@ -228,13 +233,13 @@ public class UtilisateurManagedBean implements Serializable {
 	}
 
 
-	public Utilisateur getUmodif() {
-		return umodif;
-	}
-
-
-	public void setUmodif(Utilisateur umodif) {
-		this.umodif = umodif;
-	}
+//	public Utilisateur getUmodif() {
+//		return umodif;
+//	}
+//
+//
+//	public void setUmodif(Utilisateur umodif) {
+//		this.umodif = umodif;
+//	}
 
 }

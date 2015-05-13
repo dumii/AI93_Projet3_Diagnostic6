@@ -42,7 +42,7 @@ public class Utilisateur implements Serializable {
 	private String emailUtilisateur;
 	
 	@Column(name="telephone")
-	private Integer telUtilisateur;
+	private int telUtilisateur;
 	
 	@Column(name="mot_de_passe")
 	private String motDePasseUtilisateur;
