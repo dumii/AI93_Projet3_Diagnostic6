@@ -13,11 +13,12 @@ import fr.afcepf.ai93.diag6.entity.travaux.TypeIntervention;
 
 public interface IBusinessIntervention {
 
-	//Intervention	
+	//Historique
 	public List<HistoriqueIntervention> recupereToutHistoriqueIntervention();
 	
 	public List<HistoriqueIntervention> recupereHistoriqueInterventionParERP(Erp erp);
 	
+	//Intervention	
 	public List<Intervention> recupereToutesIntervention();
 	
 	public List<Intervention> recupereInterventionParType(TypeIntervention type);
