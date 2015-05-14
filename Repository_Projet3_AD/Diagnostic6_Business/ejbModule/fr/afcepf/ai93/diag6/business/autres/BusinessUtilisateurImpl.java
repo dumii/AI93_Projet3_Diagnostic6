@@ -21,12 +21,12 @@ import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
 public class BusinessUtilisateurImpl implements IBusinessUtilisateur {
 
 	@EJB
-	public IDaoUtilisateur proxiDaoUtilisateur;
+	public IDaoUtilisateur proxyUser;
 	
 	@Override
 	public List<Utilisateur> recupereToutUtilisateur() {
 		
-		List<Utilisateur> liste = proxiDaoUtilisateur.recupereToutUtilisateur();
+		List<Utilisateur> liste = proxyUser.recupereToutUtilisateur();
 		
 		return liste;
 	}
@@ -45,8 +45,8 @@ public class BusinessUtilisateurImpl implements IBusinessUtilisateur {
 
 	@Override
 	public String modifierUtilisateur(Utilisateur utilisateur) {
-		Utilisateur utiliInitial = proxiDaoUtilisateur.recupereUtilisateur(utilisateur.getIdUtilisateur());
-		proxiDaoUtilisateur.modifierUtilisateur(utilisateur);
+		Utilisateur utiliInitial = proxyUser.recupereUtilisateur(utilisateur.getIdUtilisateur());
+		proxyUser.modifierUtilisateur(utilisateur);
 		return "Ok modif";
 	}
 
@@ -100,8 +100,7 @@ public class BusinessUtilisateurImpl implements IBusinessUtilisateur {
 
 	@Override
 	public Utilisateur recupereUtilisateur(int idUtilisateur) {
-		// TODO Auto-generated method stub
-		return proxiDaoUtilisateur.recupereUtilisateur(idUtilisateur);
+		return proxyUser.recupereUtilisateur(idUtilisateur);
 	}
 
 	@Override
@@ -112,8 +111,7 @@ public class BusinessUtilisateurImpl implements IBusinessUtilisateur {
 
 	@Override
 	public Utilisateur seConnecter(String login, String motDePasse) {
-		// TODO Auto-generated method stub
-		return proxiDaoUtilisateur.seConnecter(login, motDePasse);
+		return proxyUser.seConnecter(login, motDePasse);
 	}
 
 	

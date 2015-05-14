@@ -1,4 +1,4 @@
-package fr.afcepf.ai93.diag6.controler.gestionnaires;
+package fr.afcepf.ai93.diag6.controler.diagnostic;
 
 import java.io.Serializable;
 import java.util.ArrayList;

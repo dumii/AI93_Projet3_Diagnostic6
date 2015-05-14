@@ -1,0 +1,261 @@
+/*************************************/
+/* Mini Barre d'�tat Consultation Diagnostic */
+/*************************************/
+
+.logoDeconnexion{
+	margin-top: -68px;
+	height: 30px;
+	width: auto;
+	float: right;
+	margin-right: 30px;
+
+}
+
+h2{
+  	background-size: 100%;
+  	padding-left: 11px;
+  	font-family: Arial, Verdana, sans-serif;
+	background-attachment: fixed;
+  	color: #D90000;
+  	display: block;
+  	font-size: 1.17em;
+  	-webkit-margin-before: 1em;
+  	-webkit-margin-after: 1em;
+  	-webkit-margin-start: 0px;
+  	-webkit-margin-end: 0px;
+  	font-weight: bold;
+
+  	margin:0px;
+  	margin-top:3px;
+}
+
+#content
+{
+	margin-top : 7%;
+	margin-left: 19%;
+	width: 55%;
+	background-color: white;
+  	border: #cccccc solid 1px;
+  	padding-bottom:5px;
+}
+
+.mini-barreEtat
+{
+	background-image:linear-gradient(#f9f9f9, #f1f1f1);
+	border:#cccccc solid 1px;
+	height: 27px;
+	/*position: fixed;*/
+}
+
+.btn {
+  background: #3c9647;
+
+  background-image: -webkit-linear-gradient(top, #3c9647, #237a3f);
+  background-image: -moz-linear-gradient(top, #3c9647, #237a3f);
+  background-image: -ms-linear-gradient(top, #3c9647, #237a3f);
+  background-image: -o-linear-gradient(top, #3c9647, #237a3f);
+  background-image: linear-gradient(to bottom, #3c9647, #237a3f);
+  
+  -webkit-border-radius: 5;
+  -moz-border-radius: 5;
+  border-radius: 3px;
+  
+  padding-bottom:1px;
+  padding-top:4px;
+  padding-left:5px;
+  padding-right:5px;
+  margin-top:-2px;
+  
+  float:right;
+  height:20px;
+
+  font-family: Arial;
+  color: #ffffff;
+  font-size: small;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #3ea83e;
+  background-image: -webkit-linear-gradient(top, #3ea83e, #32a349);
+  background-image: -moz-linear-gradient(top, #3ea83e, #32a349);
+  background-image: -ms-linear-gradient(top, #3ea83e, #32a349);
+  background-image: -o-linear-gradient(top, #3ea83e, #32a349);
+  background-image: linear-gradient(to bottom, #3ea83e, #32a349);
+  text-decoration: none;
+  color: #ffffff;
+}
+
+a:visited 
+{
+	color: #ffffff !important;
+}
+
+/*************************************/
+/* Erp */
+/*************************************/
+#InfoErpDiagnostic
+{
+	background: ghostwhite;
+	margin-left: 1%;
+	width: 97.5%;
+	margin-top: 16px;
+	border:#cccccc solid 1px;
+	display:inline-block;
+}
+
+#InfoErpDiagnostic h3
+{
+	margin: 0px;
+	background-image:linear-gradient(#f9f9f9, #f1f1f1);
+	text-align: left;
+	color: CornflowerBlue;
+	font-size: 1.17em;
+	height: 27px;
+}
+
+.formulaire
+{
+	margin-top:10px;
+	font-size: small;
+	float:left;
+	width:45%;
+	margin-left:20px;
+	padding-left:20px;
+}
+
+.formulaire label
+{
+	font-size:11px;
+	padding-bottom:3px;
+	padding-top:3px;
+	display:inline-block;
+	font-family: Arial, Verdana, sans-serif;
+	vertical-align:top;
+}
+
+.formulaire:first-of-type .intitule
+{
+	width:28%;
+	font-weight:bold;
+}
+
+.formulaire:last-of-type .intitule
+{
+	width:40%;
+	font-weight:bold;
+}
+
+.formulaire:first-of-type .valeur
+{
+	width:71%;
+}
+
+.formulaire:last-of-type .valeur
+{
+	width:50%;
+	padding-left:20px;
+}
+
+.liste1
+{
+	font-size:xx-small;
+	margin-top:0;
+	margin-left:35%;
+	font-family: Arial, Verdana, sans-serif;
+	vertical-align:top;
+}
+
+/*************************************/
+/* Diagnostic */
+/*************************************/
+
+.diagnostic
+{
+	border:#E9EFF8 solid 1px;
+	background-color: ghostwhite;
+	border-radius:3px;
+	margin:2px;
+	height:70px;
+}
+
+.diagnostic label
+{
+	font-size:11px;
+	padding-bottom:3px;
+	padding-top:3px;
+	display:inline-block;
+	font-family: Arial, Verdana, sans-serif;
+	vertical-align:top;
+}
+
+.diagnostic .intitule
+{
+	width:20%;
+	font-weight:bold;
+}
+
+.diagnostic .valeur
+{
+	width: 50%;
+}
+
+.etatTravaux
+{
+	height:45px;
+	float:right;
+	margin-right:10px;
+}
+
+/*************************************/
+/* Structure détaillée */
+/*************************************/
+
+table
+{
+	font-family: Arial, Verdana, sans-serif;
+	font-size:11px;
+	text-align:center;
+
+	width:49%;
+
+	border-collapse: collapse;
+	border:#cccccc solid 1px;
+	
+	margin:5px;
+}
+
+table th
+{
+	width:33%;
+	height:25px;
+	background-image:linear-gradient(#fAfAfA, #f2f2f2);
+	border:#cccccc solid 1px;
+}
+
+table td
+{
+	border:#cccccc solid 1px;
+	height:15px;
+}
+
+table:first-of-type
+{
+	float:left;
+	margin-right:10px;
+}
+
+table:nth-of-type
+{
+	float:right;
+}
+
+table tr:nth-child(odd)
+{
+	background:white;
+}
+
+table tr:nth-child(even)
+{
+	background:#E9EFF8;
+}
