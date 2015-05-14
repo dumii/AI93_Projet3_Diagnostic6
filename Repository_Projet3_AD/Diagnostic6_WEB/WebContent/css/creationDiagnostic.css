@@ -108,7 +108,7 @@ h2{
   color: #ffffff;
 }
 
-a:visited 
+#content a:visited 
 {
 	color: #ffffff !important;
 	text-decoration: none !important;
@@ -117,7 +117,7 @@ a:visited
 /*************************************/
 /* Erp */
 /*************************************/
-#informations, #ajoutAnomalies
+#ajoutAnomalies
 {
 	display:none;
 }
@@ -193,6 +193,39 @@ a:visited
 .formulaire input
 {
 	width:54% !important;
+}
+
+#choixERP
+{
+	font-weight:bold;
+	
+	padding-bottom:3px;
+	padding-top:3px;
+	font-family: Arial, Verdana, sans-serif;
+}
+
+#choixERP label,
+#choixERP input,
+#choixERP select
+{
+	font-size:11px;
+	width:20%;
+	display:inline-block;
+	margin-left:5%;
+	margin-right:5%;
+	margin-top:1%;
+	margin-bottom:1%;
+	vertical-align:top;
+}
+
+#choixERP label
+{
+	text-align:end;
+}
+
+#choixERP select
+{
+	height:100px;
 }
 /*************************************/
 /* Diagnostic */

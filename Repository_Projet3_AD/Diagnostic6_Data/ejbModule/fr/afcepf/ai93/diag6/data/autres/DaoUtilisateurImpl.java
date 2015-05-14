@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import fr.afcepf.ai93.diag6.api.data.autres.IDaoUtilisateur;
 import fr.afcepf.ai93.diag6.api.data.publics.IDaoPublic;
 import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
+import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
 
 @Stateless
 @Remote(IDaoUtilisateur.class)
@@ -48,8 +49,10 @@ public class DaoUtilisateurImpl implements IDaoUtilisateur {
 
 	@Override
 	public Utilisateur recupereUtilisateur(int idUtilisateur) {
-		// TODO Auto-generated method stub
-		return null;
+		Query query = em.createQuery("SELECT e from Utilisateur e WHERE e.idUtilisateur = :pid");
+		query.setParameter("pid", idUtilisateur);
+		Utilisateur user = (Utilisateur) query.getSingleResult();
+		return user;
 	}
 
 	@Override

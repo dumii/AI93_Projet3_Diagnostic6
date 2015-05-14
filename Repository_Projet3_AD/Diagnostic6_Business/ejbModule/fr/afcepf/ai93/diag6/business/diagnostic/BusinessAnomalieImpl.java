@@ -34,6 +34,7 @@ public class BusinessAnomalieImpl implements IBusinessAnomalie {
 
 	@Override
 	public String ajouterAnomalie(Anomalie anomalie) {
+		/*
 		//Récupération du diagnostic sur lequel l'utilisateur souhaite ajouter l'anomalie
 		Diagnostic diagnostic = proxyDiagnostic.recupereDiagnostic(anomalie.getDiagnostic().getIdDiagnostic());
 		
@@ -48,7 +49,9 @@ public class BusinessAnomalieImpl implements IBusinessAnomalie {
 		else
 		{
 			return "L'ajout n'est pas autorisé sur un diagnostic traité";
-		}		
+		}*/	
+		proxyAnomalie.ajouterAnomalie(anomalie);
+		return "Ajout réussi";
 	}
 
 	@Override

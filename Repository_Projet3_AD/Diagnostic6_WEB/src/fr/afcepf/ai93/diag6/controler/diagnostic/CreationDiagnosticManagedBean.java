@@ -94,8 +94,6 @@ public class CreationDiagnosticManagedBean{
 		listeERP = proxyERP.rechercheErpParNom(nomErpEntre);	
 		monERP = new Erp();
 		user = proxyUser.recupereUtilisateur(2);
-		System.out.println(user.getIdUtilisateur());
-		System.out.println(user.getNomUtilisateur());
 		
 		nouveauDiagnostic = new Diagnostic();
 		idDiagnostic = proxyDiagnostic.getMaxId() + 1;	
@@ -357,6 +355,18 @@ public class CreationDiagnosticManagedBean{
 		nouveauDiagnostic.setListeAnomaliesDiagnostic(listeAnomalies);	
 		nouveauDiagnostic.setErp(monERP);
 		monERP.getListeDiagnosticErp().add(nouveauDiagnostic);
+		TypeDiagnostic type = proxyDiagnostic.recupereTypeDiagnosticParID(idTypeDiagnostic);
+		nouveauDiagnostic.setTypeDiagnostic(type);
+		nouveauDiagnostic.setExpert(expert);
+		String intitule = idDiagnostic + " Diag " + type.getNomType() + " " + monERP.getNomErp();
+		nouveauDiagnostic.setIntituleDiagnostic(intitule);
+		
+		proxyDiagnostic.ajouterDiagnostic(nouveauDiagnostic);
+		
+		for (Anomalie anom : listeAnomalies)
+		{
+			proxyAnomalie.ajouterAnomalie(anom);
+		}
 		
 		init();
 	}

@@ -15,6 +15,13 @@
 			<script type="text/javascript" src="JavaScript/creationDiagnostic.js"></script>
 	</ui:define>
 		
+	<ui:define name="bouton">
+		<h:form>
+			<h:commandLink action="consultationDiagnostic" class="boutonJquery" value="Retour">
+   			</h:commandLink>
+   		</h:form>
+	</ui:define>
+	
 	
 	<ui:define name="content"> 
 		<div id="content"> 
@@ -40,7 +47,7 @@
 							</h2>
 							
 						</div>
-
+	
 						<!-- Section SELECTION ERP -->
 						<div class="InfoErpDiagnostic" id="choixERP">
 
@@ -54,15 +61,14 @@
 							 			  	render="maListe"/>
 								</h:inputText>
 								<h:selectOneListbox id="maListe" 
-												   value="#{mbCreationDiagnostic.monERP.idErp}"
-												   onchange="afficherPanel1()">
+												   value="#{mbCreationDiagnostic.monERP.idErp}">
 									<f:selectItems value="#{mbCreationDiagnostic.listeERP}"
 												   var="erp"
 												   itemLabel="#{erp.nomErp}"
 												   itemValue="#{erp.idErp}"/>
 									<a4j:ajax event="change"
 							 				  listener="#{mbCreationDiagnostic.rechercheTypeDiagnosticDispo()}"
-							 				  render="selectFirst, informations, infos1, infos2"/>
+							 				  render="toto"/>
 								</h:selectOneListbox>
 							</div>
 						
@@ -73,9 +79,9 @@
 
 							<h3>Informations sur l'ERP</h3>
 
-							<div class="formulaire" id="infos1">
+							<div class="formulaire" >
 								<h:outputLabel class="intitule" value="ERP concerné : " />
-								<h:outputLabel class="valeur"
+								<h:outputLabel class="valeur" id="infos1"
 									value="#{mbCreationDiagnostic.monERP.nomErp}" />
 
 								<h:outputLabel class="intitule" value="Catégorie : " />

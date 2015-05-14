@@ -10,4 +10,6 @@ public interface IDaoTypeDiagnostic {
 	public List<TypeDiagnostic> recupereTypeDiagnostic();
 	
 	public List<TypeDiagnostic> recupereTypeDiagnosticParErp(Erp erp);
+	
+	 public TypeDiagnostic recupereTypeDiagnosticParID(int idTypeDiagnostic);
 }

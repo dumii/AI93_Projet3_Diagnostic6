@@ -265,4 +265,9 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 
 		return listeFinale;
 	}
+
+	@Override
+	public TypeDiagnostic recupereTypeDiagnosticParID(int idTypeDiagnostic) {
+		return proxyTypeDiagnostic.recupereTypeDiagnosticParID(idTypeDiagnostic);
+	}
 }

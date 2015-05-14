@@ -36,4 +36,12 @@ public class DaoTypeDiagnosticImpl implements IDaoTypeDiagnostic {
 		List<TypeDiagnostic> liste = requete.getResultList();
 		return liste;
 	}
+
+	@Override
+	public TypeDiagnostic recupereTypeDiagnosticParID(int idTypeDiagnostic) {
+		Query requete = em.createQuery("SELECT a FROM TypeDiagnostic a WHERE a.idTypeDiagnostic = :pid");
+		requete.setParameter("pid", idTypeDiagnostic);
+		TypeDiagnostic type = (TypeDiagnostic) requete.getSingleResult();
+		return type;
+	}
 }

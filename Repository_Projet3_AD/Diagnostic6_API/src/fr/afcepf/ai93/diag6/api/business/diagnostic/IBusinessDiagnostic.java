@@ -33,6 +33,8 @@ public interface IBusinessDiagnostic {
 	    public List<TypeDiagnostic> recupereTypeDiagnostic();
 	    
 	    public List<TypeDiagnostic> recupereTypeDiagnosticDospoParERP(Erp erp);
+	    
+	    public TypeDiagnostic recupereTypeDiagnosticParID(int idTypeDiagnostic);
 
 
 	    public Diagnostic recupereDiagnostic(int idDiagnostic);

@@ -14,13 +14,3 @@ function typeDiagTitre(monSelect)
 	
 	document.getElementById("ajoutAnomalies").style.display = "inline-block";
 }
-
-/**
- * Affichage du panels 1
- * 
- */
-function afficherPanel1()
-{
-	var element = document.getElementById("informations");
-	element.style.display = "inline-block";
-}
