@@ -15,18 +15,7 @@
 /* Div générale          */
 /*************************/
 
-#divMap
-{
-	border: #BDBDBD solid 1px;
-	width: 75%;
-	height: auto;
-	float: left;
-	margin-left: 20px;
-	margin-right: 20px;
-	margin-top: 20px;
-	border-radius: 7px;
-	/*display: none;*/
-}
+
 
 #DivPrincipale
 {
@@ -37,7 +26,7 @@
 	margin-left: 20px;
 	margin-right: 20px;
 	margin-top: 20px;
-	border-radius: 7px;
+	border-radius: 2px;
 	/*display: none;*/
 	
 }
@@ -50,45 +39,95 @@
 
 #statistiques
 {
-	border: #BDBDBD solid 1px;
-	height: 237px;
+	border: #E6ECF7 solid 1px;
+	height: 244px;
 	width: auto;
 	margin: 2px;
-	border-radius: 7px;
+	border-radius: 2px;
 	background: #F9FAFA;
  	background-size: contain;
-	
-	
-	/*background-image:linear-gradient(#E0ECF8, #5D7A8C);
-	/*opacity: 0.5;*/
+
 }
 
  #enteteStatistiques
 {
-	font-size: 15px;
-	border-radius: 5px;
+	font-size: 22px;
+	font-weight:bold;
+	border-radius: 2px;
 	text-align: center;
-	border: #BDBDBD solid 1px;
+	border: #E6ECF7 solid 1px;
 	margin-left: 7%;
 	margin-right: 7%;
-	/*background-image:linear-gradient(#E0ECF8, #5D7A8C);*/
-	background: url("../images/barreDeMenu4.png");
+	background-image:linear-gradient(white,#E9EAED);
  	background-size: contain;
 	padding: 2px;
 	margin-top: 10px;
 }
 
-#publications
+
+.lesPublications
 {
-	float:left;
-	border: #BDBDBD solid 1px;
-	margin-left: 1px;
-	margin-right: 1px;
-	width: 49.5%;
+	width: auto;
+	clear:both;
+	display:inline-block;
+	/*border: #E6ECF7 solid 1px;*/
 	height: auto;
-	border-radius: 7px;
-	/*background-image:linear-gradient(#E0ECF8, #5D7A8C);*/
+	margin: 2px;
+	margin-top: 20px;
+	
+}
+
+.publications
+{	
+	padding-left: 3px;
+	padding-right: 3px;
+	text-align:justify;
+	float:left;
+	margin: 1px;
+	width: 70%;
+	height: auto;
+	border-radius: 2px;
 	display: table;
+	background: white;
+	margin-top: 20px;
+}
+
+
+.wrapSpecial1
+{
+	border-radius: 2px;
+	padding-left: 3px;
+	padding-right: 3px;
+	background: white;
+	text-align:justify;
+	width: 55%;
+	float: left;
+}
+#photoMalakoff
+{
+	width: 42%;
+	float: right;
+}
+.utiles
+{
+	float: right;
+	margin: 1px;
+	width: 28%;
+	height: auto;
+	border-radius: 2px;
+	display: table;
+	border: #E6ECF7 solid 1px;
+	background:#E9EAED;
+	margin-top: 20px;
+}
+.map
+{
+	margin: 1px;
+	width: 100%;
+	height: auto;
+	border-radius: 2px;
+	display: table;
+	
 }
 
 
@@ -100,7 +139,7 @@ float: left;
 margin-left: 2px; 
 margin-top: 4px; 
 margin-bottom: 4px;
-border : #BDBDBD solid 1px;
+border : #E6ECF7 solid 1px;
 
 }
 
@@ -112,14 +151,11 @@ float: right;
 margin-right: 2px; 
 margin-top: 4px; 
 margin-bottom: 4px; 
-border : #BDBDBD solid 1px;
+border : #E6ECF7 solid 1px;
 color: red;
 
 }
 				
-
-
-
 
 #commentaireAll
 {
@@ -134,7 +170,7 @@ color: red;
 	float:left;
 	width:49%;
 	margin-top:15px;
-	border-radius: 7px;
+	border-radius: 2px;
 	/*background-image:linear-gradient(#E0ECF8, #5D7A8C);*/
 	background: url("../images/barreDeMenu4.png");
  	background-size: contain;
@@ -143,8 +179,8 @@ color: red;
 .ajoutCommentaires
 {
 	
-	border: #BDBDBD solid 1px;
-	border-radius: 7px;
+	border: #E6ECF7 solid 1px;
+	border-radius: 2px;
 	margin-top: 15px;
 	width: 49%;
 	/*background-image:linear-gradient(#E0ECF8, #5D7A8C);*/
@@ -174,12 +210,12 @@ color: red;
 
 {
 	
-	border: #BDBDBD solid 1px;
-	width: 19%;
+	border: #E6ECF7 solid 1px;
+	width: 20%;
 	height: auto;
 	float: left;
 	margin-top: 20px;
-	border-radius: 7px;
+	border-radius: 2px;
 	/*background-image:linear-gradient(#E0ECF8, #5D7A8C);
 	/*opacity: 0.5;*/
 	background: #F9FAFA;
@@ -188,18 +224,18 @@ color: red;
 
 #divEnteteRecherche
 {
-	border: #BDBDBD solid 1px;
-	width: 80%;
+	border: #E6ECF7 solid 1px;
+	width: 86%;
 	margin-top: 10px;
 	text-align:center;
 	margin-left: 7%;
 	margin-right: 7%;	
-	/*background-image:linear-gradient(#E0ECF8, #5D7A8C);*/
-	background: url("../images/barreDeMenu4.png");
+	background-image:linear-gradient(white,#E9EAED);
+	/*background: url("../images/barreDeMenu4.png");*/
  	background-size: contain;
 	color: black;
 	font-size: 20px; 
-	border-radius: 7px;
+	border-radius: 2px;
 	
 	
 }
@@ -207,13 +243,14 @@ color: red;
 
 #champDeRecherche
 {
-	border: #BDBDBD solid 1px;
-	width: 80%;
+	border: #E6ECF7 solid 1px;
+	width: 86%;
 	margin-top: 10px;
-	border-radius: 7px;
+	border-radius: 2px;
 	vertical-align: middle;
 	margin-left: 7%;
 	margin-right: 7%;
+	margin-bottom: 10px;
 }
 
 #champsDeRecherche
@@ -226,13 +263,13 @@ color: red;
 #resultatsDeRecherche
 {
 	/*border: #BDBDBD solid 1px;*/
-	width: 80%;
+	width: 86%;
 	margin-top: 10px;
 	height : auto;
 	vertical-align: middle;
 	margin-left: 7%;
 	margin-right: 7%;
-	border-radius: 7px;
+	border-radius: 2px;
 	margin-bottom: 10px;
 }
 
@@ -248,13 +285,13 @@ color: red;
 	margin-top: 1px;
 	margin-bottom: 1px;
 	border-style: solid;
-	border-color: #BDBDBD;
+	border-color: #E6ECF7;
 	max-height: 335px;
 }
 
 .boutonTrouver
 {
-	border: #BDBDBD solid 1px;
+	border: #E6ECF7 solid 1px;
 	/*background-image:linear-gradient(#E0ECF8, #5D7A8C);*/
 	background: url("../images/barreDeMenu4.png");
  	background-size: contain;
@@ -262,7 +299,7 @@ color: red;
 	font-size: 20px;
 
 	width: 70%;
-	border-radius: 5px;
+	border-radius: 2px;
 	margin-left: 5%;
  	margin-right: 5%;
 	
@@ -276,12 +313,12 @@ color: red;
 
 #login
 {
-	border: #BDBDBD solid 1px;
-	width: 19%;
+	border: #E6ECF7 solid 1px;
+	width: 20%;
 	height: auto;
 	float: left;
 	margin-top: 20px;
-	border-radius: 7px;
+	border-radius: 2px;
 	/*background-image:linear-gradient(#E0ECF8, #5D7A8C);*/
 	background: #F9FAFA;
  	background-size: contain;
@@ -290,44 +327,46 @@ color: red;
 
 .boutonOuvertureLogin
 {
-	border: #BDBDBD solid 1px;
+	border: #E6ECF7 solid 1px;
 	width: 86%;
 	margin-top: 10px;
 	margin-bottom: 10px;
 	text-align:center;
 	margin-left: 7%;
-	margin-right: 7%;	
-	/*background-image:linear-gradient(#E0ECF8, #5D7A8C);*/
-	background: url("../images/barreDeMenu4.png");
- 	background-size: contain;
-	color: black;
+	margin-right: 7%;
 	font-size: 20px; 
-	border-radius: 5px;
+	border-radius: 2px;
+	background-image:linear-gradient(white,#E9EAED)!important;
 }
 
 .boutonConnexion
 {
-	border: #BDBDBD solid 1px;
-	/*background-image:linear-gradient(#E0ECF8, #5D7A8C);*/
-	background: url("../images/barreDeMenu4.png");
+	border: #E6ECF7 solid 1px;
+	background-image:linear-gradient(white,#E9EAED)!important;
  	background-size: contain;
 	color: black;
 	font-size: 20px; 
 	vertical-align: middle;
 	margin: 0 auto;
 	width: 70%;
-	border-radius: 5px;
+	border-radius: 2px;
 	margin-top: 1px;
 	margin-bottom: 2px;
 	
 }
-#champIdentifiant
+
+.identifiants
 {
-	
+	width: 69%;
+}
+.champIdentifiant
+{
+	clear:both;
 	vertical-align: middle;
 	margin: 0 auto;
 	width: 86%;
 	margin-top: 1px;
+	margin-left: 20%;
 }
 
 
@@ -383,7 +422,7 @@ body
 {
 	height: 19px;
 	float: right;
-	border: #BDBDBD solid 1px;
+	border: #E6ECF7 solid 1px;
 	/*
 	border-top-right-radius: 3px;
 	border-bottom-right-radius: 3px;
