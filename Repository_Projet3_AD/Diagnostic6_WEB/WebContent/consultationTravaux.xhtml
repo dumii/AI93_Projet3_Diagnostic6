@@ -24,6 +24,10 @@
 			type="text/css" />
 	</ui:define>
 	
+	<ui:define name="accordeon1">
+		ERP avec des interventions en cours (#{mbArborescenceTravaux.listeERPIntervEnCours.size()})
+	</ui:define>
+	
 	<ui:define name="arborescence1">
 		<h:form>
 			<rich:tree id="tree1" nodeType="#{node.type}" var="node"

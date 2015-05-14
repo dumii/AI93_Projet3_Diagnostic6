@@ -57,15 +57,11 @@ body
     width: 200px;
 }
 
-#rechercheBandeau > input[type="image"]
+.logoRecherche
 {
 	height: 19px;
-	float: right;
 	border: #BDBDBD solid 1px;
-	/*
-	border-top-right-radius: 3px;
-	border-bottom-right-radius: 3px;
-	*/
+	margin-right:250px;
 }
 
 #rechercheBandeau > div
@@ -82,20 +78,18 @@ body
 	margin-bottom: 2%;
 }
 
-#logoErp {
-	margin-left: 31%;
-}
-
-.logoMenu {
-	margin-top: 1%;
-	height: 93%;
+.logoMenu, .logoMenu2 {
+	height: 90px;
 	width: auto;
+	float:right;
+	display:inline-block;
+	margin-top:-50px;
+	margin-left:5px;
 }
 
-
-#logoTabBord
+.logoMenu2
 {
-	margin-left: 5%;
+	margin-left:100px;
 }
 
 .lienAccueil {
