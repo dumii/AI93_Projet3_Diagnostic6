@@ -1,0 +1,108 @@
+/********************/
+/* Creation Artisan */
+/********************/
+
+#content
+{
+	margin-top : 7%;
+	margin-left: 22%;
+	width: 55%;
+}
+
+/***********************/
+/*  contenu du Profil  */
+/***********************/
+
+#titreArtisan
+{
+	background:#FEFEE2 ;
+	border:#cccccc solid 1px;
+	border-radius: 10px;
+	color: #000063;
+	/*font-family: Corbel;*/
+	font-family: Arial, Verdana, sans-serif;
+	font-size: 16px;
+	Margin-left:24%;
+	Width:50%;
+	text-align: center;
+	height: 27px;
+	padding-bottom: 2%;
+}
+
+#contenuArtisan
+{
+	font-size: small;
+}
+
+/**********************/
+/*  Creation Artisan  */
+/**********************/
+#creationArtisan
+{
+	margin-top: -189%;
+	background-image:linear-gradient(#FEFEE2, #E5EBEF);
+	border:#cccccc solid 1px;
+	border-radius: 10px;
+	padding-bottom: 1%;
+	width:352px;
+}
+
+#titreCreation
+{
+	background:#FEFEE2 ;
+	padding-left:1%;
+	font-size: 15px;
+	color: #000063;
+	font-family: Arial, Verdana, sans-serif;
+}
+
+/**************************/
+/*  Consultation Artisan  */
+/**************************/
+#consultationArtisan
+{
+	margin-top:1%;
+	background-image:linear-gradient(#FEFEE2, #E5EBEF);
+	border:#cccccc solid 1px;
+	border-radius: 10px;
+	padding-bottom: 1%;
+	width:352px;
+}
+
+#titreConsultation
+{
+	background:#FEFEE2 ;
+	padding-left:1%;
+	font-size: 15px;
+	color: #000063;
+	font-family: Arial, Verdana, sans-serif;
+	
+}
+
+#typeArtisanTable1
+{
+	color: #000063;
+	width: 127px;
+	background:#C0DEDE;
+}
+#typeArtisanTable2
+{
+	color: #000063;
+	width: 221px;
+	background:#C0DEDE;
+}
+
+.titreTableArtisan
+{
+	color: #000063;
+	width: 127px;
+}
+
+.ligne_horizontale
+{
+    width:280px;
+    border-bottom:1px solid #cccccc;
+    height:5px;
+    margin-left:10%;
+}
+

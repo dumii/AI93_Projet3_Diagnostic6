@@ -148,15 +148,7 @@ public class UtilisateurManagedBean implements Serializable {
 		System.out.println("33333333333333333333333 je modifie l'utilisateur 33333333333333333333333");
 
 		proxyBusinessUtilisateur.modifierUtilisateur(utilisateur);
-//		if(umodif.getIdUtilisateur() != utilisateur.getIdUtilisateur()) {
-//			System.out.println("Utilisateu pris en compte pour la modification : " + utilisateur.getIdUtilisateur());
-//			umodif = utilisateur;
-//		} else {
-//			System.out.println("je passe dans le else");
-//			proxyBusinessUtilisateur.modifierUtilisateur(utilisateur);
-//			umodif = new Utilisateur();
-//			//recupUtilisateur();
-//		}
+
 	}
 
 	

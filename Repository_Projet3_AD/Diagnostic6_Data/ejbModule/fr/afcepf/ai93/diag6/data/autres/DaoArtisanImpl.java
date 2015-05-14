@@ -30,7 +30,7 @@ public class DaoArtisanImpl implements IDaoArtisan {
 	}
 
 	@Override
-	public void ajouterArtisant(Artisan artisan) {
+	public void ajouterArtisan(Artisan artisan) {
 		em.persist(artisan);
 		
 	}

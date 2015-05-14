@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+<h:head>
+
+	<link rel="stylesheet"
+		href="//code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css" />
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+</h:head>
+
+<ui:composition template="/WEB-INF/Template2Diagnostic6.xhtml">
+	<ui:define name="title">Diagnostic 6 - Artisan</ui:define>
+	<ui:define name="head">
+	
+	</ui:define>
+	<ui:define name="content">
+		<f:view>
+		
+		
+			<div id="content">
+			<h:form>
+						
+
+
+			<h:panelGroup id="lblReponseAjax" layout="block" >	
+				
+				<div id="titreArtisan">
+					<h2 style="margin-top: 2%;">
+						Gestion des Experts
+					</h2>
+				</div>
+				
+				<div id="contenuArtisan">
+					<h:panelGrid columns="2" style="width:100%;">
+						
+						<h:panelGroup>
+							<div id="creationArtisan">
+								<div id="titreCreation">
+									<h3>Enregistrer un expert</h3>
+								</div>
+								<h:panelGrid columns="2" style="width:100%;">
+									<h:outputText value="Nom : " style="color: #000063;" />
+									<h:inputText value="#{mbExpert.expert.nomExpert}" />
+									<h:outputText value="Prenom : " style="color: #000063;" />
+									<h:inputText value="#{mbExpert.expert.prenomExpert}" />
+									<h:outputText value="Téléphone : " style="color: #000063;" />
+									<h:inputText value="#{mbExpert.expert.telExpert}" />
+									<h:outputText value="Mail : " style="color: #000063;" />
+									<h:inputText value="#{mbExpert.expert.mailExpert}" />
+									<h:outputText value="numéro de la rue : " style="color: #000063;" />
+									<h:inputText value="#{mbExpert.expert.numVoieExpert}" />
+									<h:outputText value="nom de la rue : " style="color: #000063;" />
+									<h:inputText value="#{mbExpert.expert.nomVoieExpert}" />
+									<h:outputText value="Code Postal : " style="color: #000063;" />
+									<h:inputText value="#{mbExpert.localisation.codePostal}" />
+									<h:outputText value="Localité : " style="color: #000063;" />
+									<h:inputText value="#{mbExpert.localisation.ville}" />
+								</h:panelGrid>
+								<h:commandButton value="Enregister Expert" action="#{mbArtisan.enregistrerArtisan()}" />
+							</div>
+						</h:panelGroup>
+								
+
+						<h:panelGroup>
+							<div id="consultationArtisan">
+								<div id="titreConsultation">
+									<h3>Experts enregistrés</h3>
+								</div>
+								<a4j:repeat	value="#{mbExpert.listeExpert}" var="expe" id="repeat">
+										<table>
+											<tr>
+												<td class="titreTableArtisan">Nom : </td>
+												<td>#{expe.nomExpert}</td>
+											</tr>
+											<tr>
+												<td class="titreTableArtisan">Prenom : </td>
+												<td>#{expe.prenomExpert}</td>
+											</tr>
+											<tr>
+												<td class="titreTableArtisan">Téléphone : </td>
+												<td>#{expe.telExpert}</td>
+											</tr>
+											<tr>
+												<td class="titreTableArtisan">Mail : </td>
+												<td>#{expe.mailExpert}</td>
+											</tr>
+											<tr>
+												<td class="titreTableArtisan">Adresse : </td>
+												<td>#{expe.numVoieExpert} #{expe.nomVoieExpert}</td>
+											</tr>
+											<tr>
+												<td class="titreTableArtisan">Localité : </td>
+												<td>#{expe.localisation.codePostal} #{expe.localisation.ville}</td>
+											</tr>
+										</table>
+											<div class="ligne_horizontale" ></div>
+								</a4j:repeat>
+							</div>	
+						</h:panelGroup>
+						
+						
+
+					</h:panelGrid>
+				</div>
+			
+			</h:panelGroup>
+				
+			</h:form>
+			</div>
+<link href="css/creationExpert.css" rel="stylesheet" type="text/css" />
+<script>
+$( "#radio" ).buttonset();
+$( "#accordion" ).accordion();
+$("button").button();
+
+
+</script>
+		</f:view>
+</ui:define>
+</ui:composition>
+</html>

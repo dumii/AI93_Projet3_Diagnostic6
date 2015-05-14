@@ -25,7 +25,7 @@ public class Localisation implements Serializable{
 	private Integer idLocalisation;
 	
 	@Column(name="code_postal")
-	private Integer codePostal;
+	private int codePostal;
 	
 	@Column(name="ville")
 	private String ville;
