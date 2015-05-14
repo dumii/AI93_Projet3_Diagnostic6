@@ -4,8 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -14,18 +16,24 @@ import javax.servlet.http.HttpServletRequest;
 import fr.afcepf.ai93.diag6.api.data.autres.IDaoUtilisateur;
 import fr.afcepf.ai93.diag6.api.data.publics.IDaoPublic;
 import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
+import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
+
+
+
 
 @Stateless
 @Remote(IDaoUtilisateur.class)
 public class DaoUtilisateurImpl implements IDaoUtilisateur {
+
 
 	@PersistenceContext(unitName="Malak_Diag_Data")
 	EntityManager em;
 	
 	@Override
 	public List<Utilisateur> recupereToutUtilisateur() {
-		// TODO Auto-generated method stub
-		return null;
+		Query requete = em.createQuery("SELECT u FROM Utilisateur u"); 
+		List<Utilisateur> listeToutUtili = requete.getResultList(); 
+		return listeToutUtili;
 	}
 
 	@Override
@@ -41,15 +49,16 @@ public class DaoUtilisateurImpl implements IDaoUtilisateur {
 	}
 
 	@Override
-	public boolean modifierUtilisateur(Utilisateur utilisateur) {
-		// TODO Auto-generated method stub
-		return false;
+	public void modifierUtilisateur(Utilisateur utilisateur) {
+		em.merge(utilisateur);
 	}
 
 	@Override
 	public Utilisateur recupereUtilisateur(int idUtilisateur) {
-		// TODO Auto-generated method stub
-		return null;
+		Query query = em.createQuery("SELECT u FROM Utilisateur u WHERE u.idUtilisateur = :pid");
+		query.setParameter("pid", idUtilisateur);
+		Utilisateur utilisateur = (Utilisateur) query.getSingleResult();
+		return utilisateur;
 	}
 
 	@Override

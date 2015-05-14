@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+<h:head>
+
+	<link rel="stylesheet"
+		href="//code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css" />
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+</h:head>
+
+<ui:composition template="/WEB-INF/Template4Diagnostic6.xhtml">
+	<ui:define name="title">Diagnostic 6 - Profil</ui:define>
+	<ui:define name="head">
+	
+	</ui:define>
+	<ui:define name="content">
+		<f:view>
+		
+		
+			<div id="content">
+			<h:form>
+					<h:form>
+						<h:inputText value="#{mbUtilisateur.idUtil}" />
+						<a4j:commandLink value="Recuperer utilisateur"
+							action="#{mbUtilisateur.recupUtilisateur()}"
+							render="lblReponseAjax" />
+					</h:form>
+
+					<h:form>
+			<h:panelGroup id="lblReponseAjax" layout="block" >	
+			
+				<div id="contenuProfil">
+
+					<div id="titreProfil">
+						<h3>
+							Profil Personnel
+							<!-- <h:outputText value="#{mbUtilisateur.nomProfil}" /> -->
+						</h3>
+					</div>
+					<h:panelGrid columns="5" style="width:100%;">
+					
+					
+						<h:panelGrid columns="2" id="donneeCoordonnee" style=" width:260px;">
+							<h:outputText value="Nom : " style="color: #000063; "/>
+							<h:outputText value="#{mbUtilisateur.utilisateur.nomUtilisateur}" />
+							<h:outputText value="Prénom : " style="color: #000063; "/>
+							<h:outputText value="#{mbUtilisateur.utilisateur.prenomUtilisateur}" />
+							<h:outputText value="Téléphone : " style="color: #000063; "/>
+							<h:inputText value="#{mbUtilisateur.utilisateur.telUtilisateur} " />
+							<h:outputText value="Mail : " style="color: #000063; text-align:right;"/>
+							<h:inputText value="#{mbUtilisateur.utilisateur.emailUtilisateur} " />
+						</h:panelGrid>
+						<div class="ligne_verticale" ></div>
+						<h:panelGrid columns="2" id="donneeCompte" style="width:260px;">
+								<h:outputText value="Login : " style="color: #000063;"/>
+								<h:outputText value="#{mbUtilisateur.utilisateur.loginUtilisateur}" />
+								<h:outputText value="Mot de Passe : " style="color: #000063; "/>
+								<h:outputText value="#{mbUtilisateur.utilisateur.motDePasseUtilisateur}" />
+								<h:outputText value="Nouveaux MdP : " style="color: #000063; "/>
+								 <h:inputText  />
+								<h:outputText value="Confirmer MdP : " style="color: #000063; "/>
+								 <h:inputText  />
+						</h:panelGrid>
+						<div class="ligne_verticale" ></div>
+						<h:panelGrid columns="1" id="donneeNote" style="text-align:left; width:260px;">
+								<h:outputText value="Enregistré depuis le : " style="color: #000063;"/>
+								<h:outputText value="#{mbUtilisateur.formater.format(mbUtilisateur.utilisateur.dateEnregistrement)} " />
+								<h:outputText value="Notes Personnelles : " style="color: #000063;"/>
+								<textarea  />
+								
+						</h:panelGrid>
+
+						</h:panelGrid>
+						<h:panelGrid columns="3" style="width:100%; text-align:center; margin-top:1%;" styleClass="buttContenuProfil">
+							<h:commandButton action="#{mbUtilisateur.modificationUtilisateur()}" value="Enregistrer Nouvelles Coordonnées" styleClass="enrNewCoor"/>
+							<h:commandButton action="#{mbUtilisateur.modificationUtilisateur()}" value="Enregistrer Nouveaux Mot de Passe"  styleClass="enrNewMdP"/>
+							<h:commandButton value="Sauvegarder"  styleClass="saveNotes"/>
+						</h:panelGrid>
+				</div>
+				
+				<h:panelGrid columns="2" styleClass="gestionNotifFavoris" style="width:100%;">
+					<h:panelGrid style="width:100%;">
+						<div id="gestionNotification">
+							<div id="titreNotif">
+								<h3>
+									Gestion des Notifications :
+								</h3>
+							</div>
+						</div>
+					</h:panelGrid>
+					<h:panelGrid style="width:100%;">
+						<div id="gestionFavoris">
+							<div id="titreFavoris">
+								<h3>
+									Gestion des Favoris :
+								</h3>
+							</div>
+						
+						</div>
+					</h:panelGrid>
+				</h:panelGrid>
+				
+			</h:panelGroup>
+			</h:form>
+			</h:form>
+			</div>
+<link href="css/profil.css" rel="stylesheet" type="text/css" />
+<script>
+$( "#radio" ).buttonset();
+$( "#accordion" ).accordion();
+$("button").button();
+
+
+</script>
+		</f:view>
+</ui:define>
+</ui:composition>
+</html>
