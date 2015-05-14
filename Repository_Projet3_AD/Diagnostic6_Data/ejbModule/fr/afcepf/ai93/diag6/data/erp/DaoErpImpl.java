@@ -104,6 +104,8 @@ public class DaoErpImpl implements IDaoErp {
 		Query query = em.createQuery("SELECT e FROM Erp e WHERE e.nomErp like :pid");
 		query.setParameter("pid","%"+stringCherche+"%");
 		List<Erp> liste = query.getResultList();
+		return liste;
+	}
 
 	public Acces recupereAccesParID(int idAcces) {
 		Query query = em.createQuery("SELECT e from Acces e WHERE e.idAcces = :pid");

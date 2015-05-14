@@ -26,7 +26,7 @@ public class BusinessUtilisateurImpl implements IBusinessUtilisateur {
 	@Override
 	public List<Utilisateur> recupereToutUtilisateur() {
 		
-		List<Utilisateur> liste = proxiDaoUtilisateur.recupereToutUtilisateur();
+		List<Utilisateur> liste = proxyUser.recupereToutUtilisateur();
 		
 		return liste;
 	}
