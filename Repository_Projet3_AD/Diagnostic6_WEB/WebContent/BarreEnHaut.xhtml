@@ -19,16 +19,23 @@
 
 </h:head> 
 <h:body> 
-
+	<f:view>
 	<div id="enTete">
 	
 		<a href=""><img id="logoAccueil" src="images/Logo2.png" /></a>
 			
 		<h:form id="rechercheBandeau" action="">
-			 <h:inputText value="#{mbRecherche.stringCherche}"  
-			 				onkeypress="#{mbRecherche.rechercherString()}" />
-			 <input type="image" src="images/Loupe.png" onkeypress="#{mbRecherche.rechercherString()}" />
-			<div id="resultatRecherche">
+			  <h:inputText value="#{mbRecherche.stringCherche}" id="textInputRecherche" autocomplete="off"
+			  		onkeypress="#{mbRecherche.rechercherString()}" onblur="Show_Div(resultatRecherche)"> 
+					<a4j:ajax event="click"
+							listener="#{mbRecherche.rechercherString()}"
+							oncomplete="Show_Div(resultatRecherche)">
+					</a4j:ajax>
+			 </h:inputText>
+			<input type="image" src="images/Loupe.png" id="boutonRecherche" 
+			 		onkeypress="#{mbRecherche.rechercherString()}" onclick="Show_Div(resultatRecherche)" />
+			
+			<div id="resultatRecherche">	
 				<div class="resultatsTheme">
 					<div class="titreTheme">Diagnostics</div>
 					<ui:repeat var="diag" value="#{mbRecherche.listeDiagTrouves}" >
@@ -74,7 +81,16 @@
 	<ui:insert name="content" />
 	</div>
 
-
+<script type="text/javascript">
+        function Show_Div(Div_id) {
+            if (false == $(Div_id).is(':visible')) {
+                $(Div_id).show(250);
+            }
+            else {
+                $(Div_id).hide(250);
+            }
+        }
+    </script>
+</f:view>
 </h:body>
-
 </ui:composition>

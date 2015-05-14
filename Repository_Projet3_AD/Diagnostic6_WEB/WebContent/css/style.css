@@ -73,7 +73,7 @@ body
 	width: 89.5%;
   	background-color: white;
   	margin-left: 1px;
-	
+	display: none;
 }
 
 #logoAccueil {

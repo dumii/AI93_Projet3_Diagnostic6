@@ -33,10 +33,7 @@ public class BarreRechercheMultiCritManagedBean implements Serializable  {
 	
 	@PostConstruct
 	public void init() {
-//		stringCherche=""; 
-//		rechercheDiagnostic();
-//		rechercheErp(); 
-//		rechercheChantiers(); 
+		stringCherche=""; 
 	}
 
 	public void rechercherString(){
