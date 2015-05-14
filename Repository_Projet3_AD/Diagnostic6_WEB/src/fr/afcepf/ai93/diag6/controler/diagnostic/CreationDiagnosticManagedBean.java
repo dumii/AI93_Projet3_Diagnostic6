@@ -10,6 +10,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import fr.afcepf.ai93.diag6.api.business.autres.IBusinessExpert;
+import fr.afcepf.ai93.diag6.api.business.autres.IBusinessUtilisateur;
 import fr.afcepf.ai93.diag6.api.business.diagnostic.IBusinessAnomalie;
 import fr.afcepf.ai93.diag6.api.business.diagnostic.IBusinessDiagnostic;
 import fr.afcepf.ai93.diag6.api.business.erp.IBusinessErp;
@@ -40,13 +41,18 @@ public class CreationDiagnosticManagedBean{
 	private IBusinessExpert proxyExpert;
 	@EJB
 	private IBusinessErp proxyERP;
+	@EJB
+	private IBusinessUtilisateur proxyUser;
 	
 	//A conserver
+	private List<Erp> listeERP;
 	private Erp monERP;
+	private String nomErpEntre;
 	private Utilisateur user;
 	private Date dateSaisie;
 	
 	private Diagnostic nouveauDiagnostic;
+	private int idDiagnostic;
 	private Anomalie anomalie;
 	
 	private List<Expert> listeExperts;
@@ -84,14 +90,21 @@ public class CreationDiagnosticManagedBean{
 
 	@PostConstruct
 	public void init(){
-		monERP = proxyERP.recupererErpParId(10);
-		monERP.setListeDiagnosticErp(proxyDiagnostic.recupereToutDiagnosticParErp(monERP));
+		nomErpEntre = "";
+		listeERP = proxyERP.rechercheErpParNom(nomErpEntre);	
+		monERP = new Erp();
+		user = proxyUser.recupereUtilisateur(2);
 		
 		nouveauDiagnostic = new Diagnostic();
-		listeAnomalies = new ArrayList<>();		
-		nouveauDiagnostic.setListeAnomaliesDiagnostic(listeAnomalies);
+		idDiagnostic = proxyDiagnostic.getMaxId() + 1;	
 		
-		monERP.getListeDiagnosticErp().add(nouveauDiagnostic);
+		listeAnomalies = new ArrayList<>();	
+		
+		listeVoirie = new ArrayList<>();		
+		listePiece = new ArrayList<>();
+		
+		listeTypeDiag = proxyDiagnostic.recupereTypeDiagnostic();		
+		listeExperts = proxyExpert.recupereToutExpert();
 		
 		initialisationDonnées();
 	}
@@ -99,20 +112,8 @@ public class CreationDiagnosticManagedBean{
 	public void initialisationDonnées() {
 		
 		anomalie = new Anomalie();
-		
-		listeBatimentERP = proxyERP.recupererBatParErp(monERP.getIdErp());
-		
-		recupererBatiment();
-		
-		listeVoirie = new ArrayList<>();
-		
-		listePiece = new ArrayList<>();
-		
-		listeTypeDiag = proxyDiagnostic.recupereTypeDiagnostic();
-		
-		listeExperts = proxyExpert.recupereToutExpert();
-		
-		choixBatvoirie = "";
+
+		choixBatvoirie = "batiment";
 		choixAccesEtageAscenceurEscalier = "";
 		display = "";
 		displayPiece = "";
@@ -236,25 +237,156 @@ public class CreationDiagnosticManagedBean{
 		listeBatiment.add("Etage");
 	}
 	
-
-	
 	public void ajouterAnomalieAuTableau()
 	{
+		if (choixBatvoirie.equals("batiment"))
+		{
+			if(choixAccesEtageAscenceurEscalier.equals("Acces"))
+			{
+				Acces acces = proxyERP.recupereAccesParID(idItemSelectionne);			
+				anomalie.setAcces(acces);
+			}
+			else if(choixAccesEtageAscenceurEscalier.equals("Etage"))
+			{
+				Piece piece = proxyERP.recuperePieceParID(idItemSelectionne);
+				anomalie.setPiece(piece);
+			}
+			else if(choixAccesEtageAscenceurEscalier.equals("Escalier"))
+			{
+				Escalier escalier = proxyERP.recupereEscalierParID(idItemSelectionne);				
+				anomalie.setEscalier(escalier);
+			}
+			else if(choixAccesEtageAscenceurEscalier.equals("Ascenceur"))
+			{
+				Ascenceur ascenceur = proxyERP.recupereAscenceurParID(idItemSelectionne);			
+				anomalie.setAscenceur(ascenceur);
+			}
+		}
+		else
+		{
+			Voirie voirie = proxyERP.recupereVoirieParID(idItemSelectionne);
+			anomalie.setVoirie(voirie);
+		}
+		
+		Indicateur indicateur = proxyAnomalie.recupereIndicateurParID(idIndicateur);
+		anomalie.setIndicateur(indicateur);
+		
 		listeAnomalies.add(anomalie); 
 		initialisationDonnées();
-	}
-	
-	public void modifierAnomalieDuTableau()
-	{
-		//modification, méthode à faire ailleurs que dans le managed bean
 	}
 
 	public void retirerAnomalieDuTableau(Anomalie anomalieRetire)
 	{
 		listeAnomalies.remove(anomalieRetire);
-		//initialisationDonnées();
+	}
+	
+	public String localisationAnomalieOne(Anomalie anom){
+		if(anom.getVoirie() != null)
+		{
+			return anom.getVoirie().getDesignationVoirie();
+		}
+		else
+		{
+			if (anom.getPiece() != null)
+			{
+				return anom.getPiece().getEtage().getBatiment().getIntituleBatiment();
+			}
+			else
+			{
+				if (anom.getAscenceur() != null)
+				{
+					return anom.getAscenceur().getBatiment().getIntituleBatiment();
+				}
+				else
+				{
+					if (anom.getEscalier() != null)
+					{
+						return anom.getEscalier().getBatiment().getIntituleBatiment();
+					}
+					else
+					{
+						return anom.getAcces().getBatiment().getIntituleBatiment();
+					}
+				}
+			} 
+		}
+	}
+	
+	public String localisationAnomalieTwo(Anomalie anom){
+		if(anom.getVoirie() != null)
+		{
+			return anom.getVoirie().getTypeVoirie().getLibelleTypeVoirie();
+		}
+		else
+		{
+			if (anom.getPiece() != null)
+			{
+				return anom.getPiece().getDenominationPiece() + " - " + anom.getPiece().getEtage().getNomEtage();
+			}
+			else
+			{
+				if (anom.getAscenceur() != null)
+				{
+					return anom.getAscenceur().getDenominationAscenceur();
+				}
+				else
+				{
+					if (anom.getEscalier() != null)
+					{
+						return anom.getEscalier().getDenominationEscalier();
+					}
+					else
+					{
+						return anom.getAcces().getTypeAcces().getLibelleTypeAcces();
+					}
+				}
+			} 
+		}
 	}
 
+	public void enregistrerDiagnostic()
+	{
+		monERP = proxyERP.recupererErpParId(monERP.getIdErp());
+		monERP.setListeDiagnosticErp(proxyDiagnostic.recupereToutDiagnosticParErp(monERP));
+		Date dateSaisie = new Date();
+		nouveauDiagnostic.setDateSaisieDiagnostic(dateSaisie);
+		nouveauDiagnostic.setTraite(0);
+		nouveauDiagnostic.setNomDiagnostiqueur(user.getNomUtilisateur());
+		nouveauDiagnostic.setListeAnomaliesDiagnostic(listeAnomalies);	
+		nouveauDiagnostic.setErp(monERP);
+		monERP.getListeDiagnosticErp().add(nouveauDiagnostic);
+		TypeDiagnostic type = proxyDiagnostic.recupereTypeDiagnosticParID(idTypeDiagnostic);
+		nouveauDiagnostic.setTypeDiagnostic(type);
+		nouveauDiagnostic.setExpert(expert);
+		String intitule = idDiagnostic + " Diag " + type.getNomType() + " " + monERP.getNomErp();
+		nouveauDiagnostic.setIntituleDiagnostic(intitule);
+		
+		proxyDiagnostic.ajouterDiagnostic(nouveauDiagnostic);
+		
+		for (Anomalie anom : listeAnomalies)
+		{
+			proxyAnomalie.ajouterAnomalie(anom);
+		}
+		
+		init();
+	}
+	
+	public void rechercheErpParNom()
+	{
+		listeERP = proxyERP.rechercheErpParNom(nomErpEntre);
+	}
+	
+	public void rechercheTypeDiagnosticDispo()
+	{
+		monERP = proxyERP.recupererErpParId(monERP.getIdErp());
+		
+		listeBatimentERP = proxyERP.recupererBatParErp(monERP.getIdErp());		
+		recupererBatiment();
+		chargerListeStructure();
+		
+		listeTypeDiag = proxyDiagnostic.recupereTypeDiagnosticDospoParERP(monERP);
+	}
+	
 	//Getters et setters
 
 	public IBusinessDiagnostic getProxyDiagnostic() {
@@ -320,15 +452,6 @@ public class CreationDiagnosticManagedBean{
 	public void setResultat(String resultat) {
 		this.resultat = resultat;
 	}
-
-	public int getIdIndicateur() {
-		return idIndicateur;
-	}
-
-	public void setIdIndicateur(int idIndicateur) {
-		this.idIndicateur = idIndicateur;
-	}
-
 
 	public List<Expert> getListeExperts() {
 		return listeExperts;
@@ -542,5 +665,36 @@ public class CreationDiagnosticManagedBean{
 		public void setValue(int value) {
 			this.value = value;
 		}
+	}
+
+	public int getIdIndicateur() {
+		return idIndicateur;
+	}
+	public void setIdIndicateur(int idIndicateur) {
+		this.idIndicateur = idIndicateur;
+	}
+	public IBusinessUtilisateur getProxyUser() {
+		return proxyUser;
+	}
+	public void setProxyUser(IBusinessUtilisateur proxyUser) {
+		this.proxyUser = proxyUser;
+	}
+	public int getIdDiagnostic() {
+		return idDiagnostic;
+	}
+	public void setIdDiagnostic(int idDiagnostic) {
+		this.idDiagnostic = idDiagnostic;
+	}
+	public List<Erp> getListeERP() {
+		return listeERP;
+	}
+	public void setListeERP(List<Erp> listeERP) {
+		this.listeERP = listeERP;
+	}
+	public String getNomErpEntre() {
+		return nomErpEntre;
+	}
+	public void setNomErpEntre(String nomErpEntre) {
+		this.nomErpEntre = nomErpEntre;
 	}
 }

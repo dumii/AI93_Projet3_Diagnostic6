@@ -9,6 +9,7 @@ import fr.afcepf.ai93.diag6.entity.erp.Erp;
 public interface IDaoDiagnostic {
 
 	public List<Diagnostic> recupereToutDiagnostic();
+	
 	public boolean recupereSiIntervEnCoursParDiag(int idDiag);
 
     public void ajouterDiagnostic(Diagnostic diagnostic);
@@ -28,5 +29,7 @@ public interface IDaoDiagnostic {
     public List<Diagnostic> recupereDiagnosticNonTraitesParErp(Erp erp);
     
 	public List<Diagnostic> recupereToutDiagnosticParErp(Erp e);
+	
+	public int getMaxId();
     
 }

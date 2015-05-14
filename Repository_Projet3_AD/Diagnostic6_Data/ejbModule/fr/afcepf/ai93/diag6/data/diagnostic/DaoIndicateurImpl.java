@@ -37,4 +37,12 @@ public class DaoIndicateurImpl implements IDaoIndicateur {
 		return liste;
 	}
 
+	@Override
+	public Indicateur recupereIndicateurParID(int idIndicateur) {
+		Query query = em.createQuery("SELECT d FROM Indicateur d WHERE d.idIndicateur = :pid");
+		query.setParameter("pid", idIndicateur);
+		Indicateur indicateur = (Indicateur)query.getSingleResult(); 
+		return indicateur;
+	}
+
 }

@@ -234,4 +234,39 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 			int idTypeDiagnostic) {
 		return proxyIndicateur.recupereIndicateurParTypeDiagnostic(idTypeDiagnostic);
 	}
+
+	@Override
+	public int getMaxId() {
+		return proxyDiagnostic.getMaxId();
+	}
+
+	@Override
+	public List<TypeDiagnostic> recupereTypeDiagnosticDospoParERP(Erp erp) {
+		List<TypeDiagnostic> listeTousTypes = proxyTypeDiagnostic.recupereTypeDiagnostic();
+		List<TypeDiagnostic> listeTypeERP = proxyTypeDiagnostic.recupereTypeDiagnosticParErp(erp);
+		List<TypeDiagnostic> listeFinale = new ArrayList<TypeDiagnostic>();
+
+		for (TypeDiagnostic type : listeTousTypes)
+		{
+			boolean ajout = true;
+			for (TypeDiagnostic type2 : listeTypeERP)
+			{
+				if (type.getIdTypeDiagnostic() == type2.getIdTypeDiagnostic())
+				{
+					ajout = false;
+				}
+			}
+			if (ajout)
+			{
+				listeFinale.add(type);
+			}
+		}
+
+		return listeFinale;
+	}
+
+	@Override
+	public TypeDiagnostic recupereTypeDiagnosticParID(int idTypeDiagnostic) {
+		return proxyTypeDiagnostic.recupereTypeDiagnosticParID(idTypeDiagnostic);
+	}
 }

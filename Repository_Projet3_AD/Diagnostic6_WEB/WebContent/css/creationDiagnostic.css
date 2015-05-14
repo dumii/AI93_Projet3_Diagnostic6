@@ -1,4 +1,26 @@
 /*************************************/
+/* Messages d'erreurs */
+/*************************************/
+
+.colonneBouton label
+{
+	display:none;
+	font-size:smaller;
+	width:100%;
+	color:red;
+}
+
+.mini-barreEtat label
+{
+	display:none;
+	float:right;
+	margin-top:5px;
+	font-size:10px;
+	font-weight:normal;
+	color:red;
+}
+
+/*************************************/
 /* Mini Barre d'�tat Consultation Diagnostic */
 /*************************************/
 
@@ -86,7 +108,7 @@ h2{
   color: #ffffff;
 }
 
-a:visited 
+#content a:visited 
 {
 	color: #ffffff !important;
 	text-decoration: none !important;
@@ -95,7 +117,12 @@ a:visited
 /*************************************/
 /* Erp */
 /*************************************/
-#InfoErpDiagnostic
+#ajoutAnomalies
+{
+	display:none;
+}
+
+.InfoErpDiagnostic
 {
 	background: ghostwhite;
 	margin-left: 1%;
@@ -105,7 +132,7 @@ a:visited
 	display:inline-block;
 }
 
-#InfoErpDiagnostic h3
+.InfoErpDiagnostic h3
 {
 	margin: 0px;
 	background-image:linear-gradient(#f9f9f9, #f1f1f1);
@@ -166,6 +193,39 @@ a:visited
 .formulaire input
 {
 	width:54% !important;
+}
+
+#choixERP
+{
+	font-weight:bold;
+	
+	padding-bottom:3px;
+	padding-top:3px;
+	font-family: Arial, Verdana, sans-serif;
+}
+
+#choixERP label,
+#choixERP input,
+#choixERP select
+{
+	font-size:11px;
+	width:20%;
+	display:inline-block;
+	margin-left:5%;
+	margin-right:5%;
+	margin-top:1%;
+	margin-bottom:1%;
+	vertical-align:top;
+}
+
+#choixERP label
+{
+	text-align:end;
+}
+
+#choixERP select
+{
+	height:100px;
 }
 /*************************************/
 /* Diagnostic */
@@ -271,7 +331,7 @@ table select
 	width:100%;
 }
 
-table input, label:first-of-type
+table input
 {
 	display:inline-block;
 	width:45%;
