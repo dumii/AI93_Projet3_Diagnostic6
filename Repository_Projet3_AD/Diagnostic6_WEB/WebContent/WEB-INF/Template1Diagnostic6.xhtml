@@ -24,8 +24,29 @@
 			
 		<h:form id="rechercheBandeau" action="">
 			<input type="text" value="Entrez votre recherche ici ..."/>
-			<input type="image" src="images/Loupe.png"/>
-			<div id="resultatRecherche">blabla</div>
+			<input type="image" src="images/Loupe.png" />
+			<div id="resultatRecherche">
+				<div class="titreResultat">
+				Diagnostics
+					<ui:repeat var="diag" value="#{mbRecherche.listeDiagTrouves}">
+						#{diag.intituleDiagnostic}
+					</ui:repeat>
+				</div>
+				
+				<div class="titreResultat">
+				Travaux
+					<ui:repeat var="trav" value="#{mbRecherche.listeChantiersTrouves}">
+						#{trav.nomChantier}
+					</ui:repeat>
+				</div>
+				
+				<div class="titreResultat">
+				Patrimoine
+					<ui:repeat var="erp" value="#{mbRecherche.listeErpTrouves}">
+						#{erp.nomErp}
+					</ui:repeat>
+				</div>
+			</div>
 		</h:form>
 		
 		<a href=""><img class="logoMenu" id="logoErp" src="images/ERPIconeBleue2.png" /></a>

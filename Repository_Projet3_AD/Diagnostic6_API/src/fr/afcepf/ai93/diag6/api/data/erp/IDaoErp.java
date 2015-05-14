@@ -32,5 +32,7 @@ public interface IDaoErp {
 
 	public List<Ascenceur> recupererAscenceursParBat(int idBatiment);
 
-	public List<Voirie> recupererVoirieParErp(int idErp);	
+	public List<Voirie> recupererVoirieParErp(int idErp);
+
+	public List<Erp> recupereErpParNom(String stringCherche);	
 }

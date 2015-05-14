@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import fr.afcepf.ai93.diag6.api.data.erp.IDaoErp;
+import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
 import fr.afcepf.ai93.diag6.entity.erp.Acces;
 import fr.afcepf.ai93.diag6.entity.erp.Ascenceur;
 import fr.afcepf.ai93.diag6.entity.erp.Batiment;
@@ -96,5 +97,13 @@ public class DaoErpImpl implements IDaoErp {
 		query.setParameter("pid", idErp);
 		Erp erp = (Erp) query.getSingleResult();
 		return erp;
+	}
+
+	@Override
+	public List<Erp> recupereErpParNom(String stringCherche) {
+		Query query = em.createQuery("SELECT e FROM Erp e WHERE e.nomErp like :pid");
+		query.setParameter("pid","%"+stringCherche+"%");
+		List<Erp> liste = query.getResultList();
+		return liste;
 	}
 }

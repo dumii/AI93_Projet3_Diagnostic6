@@ -42,4 +42,6 @@ public interface IBusinessIntervention {
 	public EtatAvancementTravaux recupererEtatParIntervention (Intervention intervention);
 
 	int nombreInterventionDiag(int idDiag);
+
+	public boolean voirSiInterventionEnCoursParErp(int idErp);
 }

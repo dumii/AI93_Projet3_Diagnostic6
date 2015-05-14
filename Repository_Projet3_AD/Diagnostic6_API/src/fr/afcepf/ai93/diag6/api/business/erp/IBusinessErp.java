@@ -43,7 +43,7 @@ public interface IBusinessErp {
 	public List<TypeErp> recupererToutTypeErp();
 	
 	public List<CategorieErp> recupererToutCategorieErp();
-	
 
+	public List<Erp> recupereErpParNom(String stringCherche);
 
 }
