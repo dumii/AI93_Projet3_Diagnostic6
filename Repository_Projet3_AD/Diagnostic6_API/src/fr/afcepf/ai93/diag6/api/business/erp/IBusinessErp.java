@@ -16,11 +16,16 @@ import fr.afcepf.ai93.diag6.entity.erp.Voirie;
 public interface IBusinessErp {
 
 	//ERP
+	
 	public List<Erp> recupereToutErp();
+	
+	public List<Erp> rechercheErpParNom(String nomERP);
 	
 	public Erp recupererErpParId(int idErp);
 
+	
 	//Elements de l'ERP
+	
 	public List<Batiment> recupererBatParErp(int idErp);
 
 	public List<Etage> recupererEtagesParBat(int idBatiment);
@@ -35,14 +40,15 @@ public interface IBusinessErp {
 
 	public List<Voirie> recupererVoirieParErp(int idErp);
 
+	
 	//Type d'ERP
+	
 	public List<TypeErp> recupererListeTypeERP();
-
-
 	
 	public List<TypeErp> recupererToutTypeErp();
 	
 	public List<CategorieErp> recupererToutCategorieErp();
+	
 	
 	//Structure de l'ERP
 	public Acces recupereAccesParID(int idAcces);

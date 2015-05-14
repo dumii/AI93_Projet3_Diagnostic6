@@ -117,7 +117,12 @@ a:visited
 /*************************************/
 /* Erp */
 /*************************************/
-#InfoErpDiagnostic
+#informations, #ajoutAnomalies
+{
+	display:none;
+}
+
+.InfoErpDiagnostic
 {
 	background: ghostwhite;
 	margin-left: 1%;
@@ -127,7 +132,7 @@ a:visited
 	display:inline-block;
 }
 
-#InfoErpDiagnostic h3
+.InfoErpDiagnostic h3
 {
 	margin: 0px;
 	background-image:linear-gradient(#f9f9f9, #f1f1f1);

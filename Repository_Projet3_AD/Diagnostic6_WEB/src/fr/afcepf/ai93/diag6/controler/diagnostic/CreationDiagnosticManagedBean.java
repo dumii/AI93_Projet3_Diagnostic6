@@ -45,7 +45,9 @@ public class CreationDiagnosticManagedBean{
 	private IBusinessUtilisateur proxyUser;
 	
 	//A conserver
+	private List<Erp> listeERP;
 	private Erp monERP;
+	private String nomErpEntre;
 	private Utilisateur user;
 	private Date dateSaisie;
 	
@@ -88,15 +90,23 @@ public class CreationDiagnosticManagedBean{
 
 	@PostConstruct
 	public void init(){
-		monERP = proxyERP.recupererErpParId(10);
-		monERP.setListeDiagnosticErp(proxyDiagnostic.recupereToutDiagnosticParErp(monERP));
-		
+		nomErpEntre = "";
+		listeERP = proxyERP.rechercheErpParNom(nomErpEntre);	
+		monERP = new Erp();
 		user = proxyUser.recupereUtilisateur(2);
+		System.out.println(user.getIdUtilisateur());
+		System.out.println(user.getNomUtilisateur());
 		
 		nouveauDiagnostic = new Diagnostic();
-		idDiagnostic = proxyDiagnostic.getMaxId() + 1;
+		idDiagnostic = proxyDiagnostic.getMaxId() + 1;	
 		
-		listeAnomalies = new ArrayList<>();		
+		listeAnomalies = new ArrayList<>();	
+		
+		listeVoirie = new ArrayList<>();		
+		listePiece = new ArrayList<>();
+		
+		listeTypeDiag = proxyDiagnostic.recupereTypeDiagnostic();		
+		listeExperts = proxyExpert.recupereToutExpert();
 		
 		initialisationDonnées();
 	}
@@ -104,19 +114,7 @@ public class CreationDiagnosticManagedBean{
 	public void initialisationDonnées() {
 		
 		anomalie = new Anomalie();
-		
-		listeBatimentERP = proxyERP.recupererBatParErp(monERP.getIdErp());
-		
-		recupererBatiment();
-		
-		listeVoirie = new ArrayList<>();
-		
-		listePiece = new ArrayList<>();
-		
-		listeTypeDiag = proxyDiagnostic.recupereTypeDiagnostic();
-		
-		listeExperts = proxyExpert.recupereToutExpert();
-		
+
 		choixBatvoirie = "batiment";
 		choixAccesEtageAscenceurEscalier = "";
 		display = "";
@@ -350,6 +348,8 @@ public class CreationDiagnosticManagedBean{
 
 	public void enregistrerDiagnostic()
 	{
+		monERP = proxyERP.recupererErpParId(monERP.getIdErp());
+		monERP.setListeDiagnosticErp(proxyDiagnostic.recupereToutDiagnosticParErp(monERP));
 		Date dateSaisie = new Date();
 		nouveauDiagnostic.setDateSaisieDiagnostic(dateSaisie);
 		nouveauDiagnostic.setTraite(0);
@@ -357,7 +357,26 @@ public class CreationDiagnosticManagedBean{
 		nouveauDiagnostic.setListeAnomaliesDiagnostic(listeAnomalies);	
 		nouveauDiagnostic.setErp(monERP);
 		monERP.getListeDiagnosticErp().add(nouveauDiagnostic);
+		
+		init();
 	}
+	
+	public void rechercheErpParNom()
+	{
+		listeERP = proxyERP.rechercheErpParNom(nomErpEntre);
+	}
+	
+	public void rechercheTypeDiagnosticDispo()
+	{
+		monERP = proxyERP.recupererErpParId(monERP.getIdErp());
+		
+		listeBatimentERP = proxyERP.recupererBatParErp(monERP.getIdErp());		
+		recupererBatiment();
+		chargerListeStructure();
+		
+		listeTypeDiag = proxyDiagnostic.recupereTypeDiagnosticDospoParERP(monERP);
+	}
+	
 	//Getters et setters
 
 	public IBusinessDiagnostic getProxyDiagnostic() {
@@ -655,5 +674,17 @@ public class CreationDiagnosticManagedBean{
 	}
 	public void setIdDiagnostic(int idDiagnostic) {
 		this.idDiagnostic = idDiagnostic;
+	}
+	public List<Erp> getListeERP() {
+		return listeERP;
+	}
+	public void setListeERP(List<Erp> listeERP) {
+		this.listeERP = listeERP;
+	}
+	public String getNomErpEntre() {
+		return nomErpEntre;
+	}
+	public void setNomErpEntre(String nomErpEntre) {
+		this.nomErpEntre = nomErpEntre;
 	}
 }

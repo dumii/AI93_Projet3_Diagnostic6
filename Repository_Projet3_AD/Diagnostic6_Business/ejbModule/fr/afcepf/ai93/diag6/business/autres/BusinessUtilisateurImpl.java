@@ -19,7 +19,7 @@ import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 public class BusinessUtilisateurImpl implements IBusinessUtilisateur {
 
 	@EJB
-	public IDaoUtilisateur proxiDaoUtilisateur;
+	public IDaoUtilisateur proxyUser;
 	
 	@Override
 	public List<Utilisateur> recupereToutUtilisateur() {
@@ -95,8 +95,7 @@ public class BusinessUtilisateurImpl implements IBusinessUtilisateur {
 
 	@Override
 	public Utilisateur recupereUtilisateur(int idUtilisateur) {
-		// TODO Auto-generated method stub
-		return null;
+		return proxyUser.recupereUtilisateur(idUtilisateur);
 	}
 
 	@Override
@@ -107,8 +106,7 @@ public class BusinessUtilisateurImpl implements IBusinessUtilisateur {
 
 	@Override
 	public Utilisateur seConnecter(String login, String motDePasse) {
-		// TODO Auto-generated method stub
-		return proxiDaoUtilisateur.seConnecter(login, motDePasse);
+		return proxyUser.seConnecter(login, motDePasse);
 	}
 
 	

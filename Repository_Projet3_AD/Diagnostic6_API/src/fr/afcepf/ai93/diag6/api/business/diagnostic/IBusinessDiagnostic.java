@@ -31,6 +31,8 @@ public interface IBusinessDiagnostic {
 	    public List<HistoriqueDiagnostic> recupereToutHistoriqueDiagnostic();
 
 	    public List<TypeDiagnostic> recupereTypeDiagnostic();
+	    
+	    public List<TypeDiagnostic> recupereTypeDiagnosticDospoParERP(Erp erp);
 
 
 	    public Diagnostic recupereDiagnostic(int idDiagnostic);

@@ -137,4 +137,12 @@ public class DaoErpImpl implements IDaoErp {
 		Voirie voirie = (Voirie) query.getSingleResult();
 		return voirie;
 	}
+
+	@Override
+	public List<Erp> rechercheErpParNom(String nomERP) {
+		Query requete = em.createQuery("SELECT e FROM Erp e WHERE e.nomErp LIKE :pid"); 
+		requete.setParameter("pid", "%" + nomERP + "%");
+		List<Erp> liste = requete.getResultList(); 
+		return liste;
+	}
 }

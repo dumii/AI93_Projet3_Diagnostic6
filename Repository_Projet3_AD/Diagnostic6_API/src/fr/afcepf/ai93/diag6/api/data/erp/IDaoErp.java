@@ -16,6 +16,8 @@ public interface IDaoErp {
 
 	//ERP
 	public List<Erp> recupereToutErp();
+	
+	public List<Erp> rechercheErpParNom(String nomERP);
 
 	public Erp recupererErpParId(int idErp);
 	

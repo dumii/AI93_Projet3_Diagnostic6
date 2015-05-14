@@ -14,91 +14,7 @@
 			type="text/css" />
 			<script type="text/javascript" src="JavaScript/creationDiagnostic.js"></script>
 	</ui:define>
-	
-	<ui:define name="accordeon1">
-		Diagnostics avec des interventions en cours (#{mbArborescenceDiagnostic.listeDiagnosticsIntervEnCours.size()})
-	</ui:define>
-
-	<ui:define name="arborescence1">
-		<h:form>
-			<rich:tree id="tree1" nodeType="#{node.type}" var="node"
-				value="#{mbArborescenceDiagnostic.rootNodes1}" toggleType="client"
-				selectionType="ajax"
-				selectionChangeListener="#{mbArborescenceDiagnostic.selectionChanged}">
-				<rich:treeNode type="typeErp">
-                    #{node.name}
-                </rich:treeNode>
-				<rich:treeNode type="erp">
-                    #{node.name}
-                </rich:treeNode>
-				<rich:treeNode type="diagnostic">
-					<h:outputLabel
-						value="#{node.intitule} - #{node.name} - #{node.idDiag}">
-						<f:ajax event="click"
-							listener="#{mbDonneesGenerales.clickNode(mbArborescenceDiagnostic.currentSelection.idDiag)}"
-							render=":toto:lblReponseAjax" />
-					</h:outputLabel>
-				</rich:treeNode>
-			</rich:tree>
-		</h:form>
-	</ui:define>
-
-	<ui:define name="accordeon2">
-		Diagnostics avec des interventions en attente (#{mbArborescenceDiagnostic.listeDiagnosticsIntervAttente.size()})
-	</ui:define>
-
-	<ui:define name="arborescence2">
-		<h:form>
-			<rich:tree id="tree2" nodeType="#{node.type}" var="node"
-				value="#{mbArborescenceDiagnostic.rootNodes2}" toggleType="client"
-				selectionType="ajax"
-				selectionChangeListener="#{mbArborescenceDiagnostic.selectionChanged}">
-				<rich:treeNode type="typeErp">
-                    #{node.name}
-                </rich:treeNode>
-				<rich:treeNode type="erp">
-                    #{node.name}
-                </rich:treeNode>
-				<rich:treeNode type="diagnostic">
-					<h:outputLabel
-						value="#{node.intitule} - #{node.name} - #{node.idDiag}">
-						<f:ajax event="click"
-							listener="#{mbDonneesGenerales.clickNode(mbArborescenceDiagnostic.currentSelection.idDiag)}"
-							render=":toto:lblReponseAjax" />
-					</h:outputLabel>
-				</rich:treeNode>
-			</rich:tree>
-		</h:form>
-	</ui:define>
-
-	<ui:define name="accordeon3">
-		Diagnostics archivés (#{mbArborescenceDiagnostic.listeDiagnosticsIntervArchive.size()})
-	</ui:define>
-
-	<ui:define name="arborescence3">
-		<h:form>
-			<rich:tree id="tree3" nodeType="#{node.type}" var="node"
-				value="#{mbArborescenceDiagnostic.rootNodes3}" toggleType="client"
-				selectionType="ajax"
-				selectionChangeListener="#{mbArborescenceDiagnostic.selectionChanged}">
-				<rich:treeNode type="typeErp">
-                    #{node.name}
-                </rich:treeNode>
-				<rich:treeNode type="erp">
-                    #{node.name}
-                </rich:treeNode>
-				<rich:treeNode type="diagnostic">
-					<h:outputLabel
-						value="#{node.intitule} - #{node.name} - #{node.idDiag}">
-						<f:ajax event="click"
-							listener="#{mbDonneesGenerales.clickNode(mbArborescenceDiagnostic.currentSelection.idDiag)}"
-							render=":toto:lblReponseAjax" />
-					</h:outputLabel>
-				</rich:treeNode>
-			</rich:tree>
-		</h:form>
-	</ui:define>
-	
+		
 	
 	<ui:define name="content"> 
 		<div id="content"> 
@@ -115,7 +31,9 @@
 								#{mbCreationDiagnostic.monERP.nomErp}
 								
 								<h:commandLink class="btn" value="Enregistrer" id="boutonAjouterDiagnostic">
-								<f:ajax event="click" execute="@form" render="totop"/>
+									<a4j:ajax event="click" 
+											render="toto"
+											listener="#{mbCreationDiagnostic.enregistrerDiagnostic()}"/>
    								</h:commandLink>
    								<h:outputLabel value="Tous les champs ne sont pas remplis." id="messageErreurDiagnostic1"/>
    								<h:outputLabel value="Aucune anomalie n'a été renseignée." id="messageErreurDiagnostic2"/>
@@ -123,12 +41,39 @@
 							
 						</div>
 
+						<!-- Section SELECTION ERP -->
+						<div class="InfoErpDiagnostic" id="choixERP">
+
+							<h3>Sélection de l'ERP</h3>
+
+							<div class="selection">
+								<h:outputLabel class="intitule" value="Nom de l'ERP : " />
+								<h:inputText class="valeur" value="#{mbCreationDiagnostic.nomErpEntre}">
+									<f:ajax event="keydown"
+							 			  	listener="#{mbCreationDiagnostic.rechercheErpParNom()}"
+							 			  	render="maListe"/>
+								</h:inputText>
+								<h:selectOneListbox id="maListe" 
+												   value="#{mbCreationDiagnostic.monERP.idErp}"
+												   onchange="afficherPanel1()">
+									<f:selectItems value="#{mbCreationDiagnostic.listeERP}"
+												   var="erp"
+												   itemLabel="#{erp.nomErp}"
+												   itemValue="#{erp.idErp}"/>
+									<a4j:ajax event="change"
+							 				  listener="#{mbCreationDiagnostic.rechercheTypeDiagnosticDispo()}"
+							 				  render="selectFirst, informations, infos1, infos2"/>
+								</h:selectOneListbox>
+							</div>
+						
+						</div>
+						
 						<!-- Section INFORMATIONS ERP -->
-						<div id="InfoErpDiagnostic">
+						<div class="InfoErpDiagnostic" id="informations">
 
 							<h3>Informations sur l'ERP</h3>
 
-							<div class="formulaire">
+							<div class="formulaire" id="infos1">
 								<h:outputLabel class="intitule" value="ERP concerné : " />
 								<h:outputLabel class="valeur"
 									value="#{mbCreationDiagnostic.monERP.nomErp}" />
@@ -157,10 +102,11 @@
 									escape="false" />
 							</div>
 							
-							<div class="formulaire">
+							<div class="formulaire" id="infos2">
 								<!-- Sélection du type de diagnostic -->
 								<h:outputLabel class="intitule" value="Type de diagnostic : " />								
-										<h:selectOneMenu 	value="#{mbCreationDiagnostic.idTypeDiagnostic}"
+										<h:selectOneMenu 	id="selectFirst"
+															value="#{mbCreationDiagnostic.idTypeDiagnostic}"
 															class="infosDiagnostic"
 															onchange="typeDiagTitre(this)">
 											<f:selectItem itemLabel="-- Sélectionnez un type de diagnostic --" itemValue="0"/>
@@ -208,7 +154,7 @@
 						</div>
 						
 						<!-- Section AJOUT ANOMALIES -->
-						<div id="InfoErpDiagnostic">
+						<div class="InfoErpDiagnostic" id="ajoutAnomalies">
 
 							<h3>Ajout d'anomalies</h3>
 							<h:panelGroup id="totop">
@@ -356,81 +302,10 @@
 								
 								</ui:repeat>
 							</table>
-	<script>   
-		 $("#boutonAjouterAnomalie").click(function() {
-		    console.log("toto"); 
-			var champsRemplis = true;
-			$(".infosAnomalie :selected").each(function(){
-				if (this.value == 0)
-				{
-					champsRemplis = false;
-				}
-			});
-
-			$(".infosAnomalieText").each(function(){
-				if (this.value == "")
-				{
-					champsRemplis = false;
-				}
-			});
-
-			var cout = $(".infosAnomalieCout").val();
-			if (isNaN(cout) || cout == "")
-			{
-  					champsRemplis = false;
-			}
-
-			if (champsRemplis == false)
-			{
-				$(".colonneBouton label").show();
-				return false; 
-			}
-			else
-			{
-				$(".colonneBouton label").hide();
-			}
-	    });    
-
-</script> 
+	
 							
 							</h:panelGroup>
-					 	</div>
-					 	<script>   
-		$("h2 a").click(function() {
-			var champsRemplis = true;
-			$(".infosDiagnostic :selected").each(function(){
-				if (this.value == 0)
-				{
-					champsRemplis = false;
-				}
-			});
-			var date = "#{mbCreationDiagnostic.nouveauDiagnostic.dateRealisationDiagnostic}";
-			if (date == "")
-			{
-				champsRemplis = false;
-			}
-
-			if (champsRemplis == false)
-			{
-				$(".mini-barreEtat label:first-of-type").show();
-				return false; 
-			}
-			else
-			{
-				$(".mini-barreEtat label:first-of-type").hide();
-
-				if (#{mbCreationDiagnostic.listeAnomalies.size()} > 0)
-				{
-					$(".mini-barreEtat label:last-of-type").hide();
-				}
-				else
-				{
-					$(".mini-barreEtat label:last-of-type").show();
-					return false; 
-				}
-			}
-		});
-		</script>						
+					 	</div>					
 					</h:panelGroup>
 				</h:form>
 			</f:view>

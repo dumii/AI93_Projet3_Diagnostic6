@@ -9,7 +9,9 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoTypeDiagnostic;
+import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
 import fr.afcepf.ai93.diag6.entity.diagnostic.TypeDiagnostic;
+import fr.afcepf.ai93.diag6.entity.erp.Erp;
 
 @Stateless
 @Remote(IDaoTypeDiagnostic.class)
@@ -22,6 +24,16 @@ public class DaoTypeDiagnosticImpl implements IDaoTypeDiagnostic {
 	public List<TypeDiagnostic> recupereTypeDiagnostic() {
 		Query query = em.createQuery("SELECT e from TypeDiagnostic e");
 		List<TypeDiagnostic> liste = query.getResultList();
+		return liste;
+	}
+
+	@Override
+	public List<TypeDiagnostic> recupereTypeDiagnosticParErp(Erp erp) {
+		//Recherche des différents types de diagnostic sur un ERP et pour lesquels le diagnostic a le statut "non traité" (traite = 0)
+		Query requete = em.createQuery("SELECT a.typeDiagnostic FROM Diagnostic a WHERE a.erp.idErp = :pid AND a.traite = :ptraite");
+		requete.setParameter("pid", erp.getIdErp());
+		requete.setParameter("ptraite", 0);
+		List<TypeDiagnostic> liste = requete.getResultList();
 		return liste;
 	}
 }

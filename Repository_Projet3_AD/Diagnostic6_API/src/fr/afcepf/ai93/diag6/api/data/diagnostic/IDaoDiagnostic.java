@@ -9,6 +9,7 @@ import fr.afcepf.ai93.diag6.entity.erp.Erp;
 public interface IDaoDiagnostic {
 
 	public List<Diagnostic> recupereToutDiagnostic();
+	
 	public boolean recupereSiIntervEnCoursParDiag(int idDiag);
 
     public void ajouterDiagnostic(Diagnostic diagnostic);

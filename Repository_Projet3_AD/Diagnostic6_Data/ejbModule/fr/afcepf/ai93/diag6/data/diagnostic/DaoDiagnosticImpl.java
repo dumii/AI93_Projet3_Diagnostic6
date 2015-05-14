@@ -36,11 +36,12 @@ public class DaoDiagnosticImpl implements IDaoDiagnostic {
 		requete.setParameter("id", idDiag);
 		List<Anomalie> listeAnomaliesAvecIntervention = requete.getResultList();
 		for (Anomalie a : listeAnomaliesAvecIntervention)
-
+		{
 			if (listeAnomaliesAvecIntervention.size() > 0)
 			{
 				return true;
 			}
+		}
 		return false;
 	}
 
