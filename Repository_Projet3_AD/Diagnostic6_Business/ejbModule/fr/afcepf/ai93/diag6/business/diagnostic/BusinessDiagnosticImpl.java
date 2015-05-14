@@ -146,8 +146,7 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 
 	@Override
 	public List<Diagnostic> rechercheDiagnostics(String nomDiagnostic) {
-		// TODO Auto-generated method stub
-		return null;
+		return proxyDiagnostic.rechercheDiagnostics(nomDiagnostic);
 	}
 
 	@Override

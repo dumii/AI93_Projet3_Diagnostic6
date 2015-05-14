@@ -121,4 +121,8 @@ public class BusinessErp implements IBusinessErp {
 		return proxyCategorieErp.recupererToutCategorieErp();
 	}
 
+	@Override
+	public List<Erp> recupereErpParNom(String stringCherche) {
+		return proxyErp.recupereErpParNom(stringCherche);
+	}
 }

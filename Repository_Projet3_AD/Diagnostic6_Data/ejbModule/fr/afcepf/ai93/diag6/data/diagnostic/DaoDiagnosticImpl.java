@@ -76,7 +76,8 @@ public class DaoDiagnosticImpl implements IDaoDiagnostic {
 
 	@Override
 	public List<Diagnostic> rechercheDiagnostics(String nomDiagnostic) {
-		Query query = em.createQuery("SELECT d FROM Diagnostic d WHERE d.intitule = :pid");
+		Query query = em.createQuery("SELECT d FROM Diagnostic d WHERE d.intituleDiagnostic like :pid");
+		query.setParameter("pid","%"+nomDiagnostic+"%");
 		List<Diagnostic> liste = query.getResultList();
 		return liste;
 	}
