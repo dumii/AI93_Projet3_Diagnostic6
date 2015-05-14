@@ -33,4 +33,15 @@ public interface IDaoErp {
 	public List<Ascenceur> recupererAscenceursParBat(int idBatiment);
 
 	public List<Voirie> recupererVoirieParErp(int idErp);	
+	
+	//Structure de l'ERP
+	public Acces recupereAccesParID(int idAcces);
+	
+	public Escalier recupereEscalierParID(int idEscalier);
+	
+	public Ascenceur recupereAscenceurParID(int idAscenceur);
+	
+	public Piece recuperePieceParID(int idPiece);
+	
+	public Voirie recupereVoirieParID(int idVoirie);
 }

@@ -28,5 +28,7 @@ public interface IDaoDiagnostic {
     public List<Diagnostic> recupereDiagnosticNonTraitesParErp(Erp erp);
     
 	public List<Diagnostic> recupereToutDiagnosticParErp(Erp e);
+	
+	public int getMaxId();
     
 }

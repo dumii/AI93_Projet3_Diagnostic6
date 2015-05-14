@@ -44,6 +44,16 @@ public interface IBusinessErp {
 	
 	public List<CategorieErp> recupererToutCategorieErp();
 	
+	//Structure de l'ERP
+	public Acces recupereAccesParID(int idAcces);
+	
+	public Escalier recupereEscalierParID(int idEscalier);
+	
+	public Ascenceur recupereAscenceurParID(int idAscenceur);
+	
+	public Piece recuperePieceParID(int idPiece);
+	
+	public Voirie recupereVoirieParID(int idVoirie);
 
 
 }

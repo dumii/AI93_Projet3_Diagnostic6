@@ -121,4 +121,29 @@ public class BusinessErp implements IBusinessErp {
 		return proxyCategorieErp.recupererToutCategorieErp();
 	}
 
+	@Override
+	public Acces recupereAccesParID(int idAcces) {
+		return proxyErp.recupereAccesParID(idAcces);
+	}
+
+	@Override
+	public Escalier recupereEscalierParID(int idEscalier) {
+		return proxyErp.recupereEscalierParID(idEscalier);
+	}
+
+	@Override
+	public Ascenceur recupereAscenceurParID(int idAscenceur) {
+		return proxyErp.recupereAscenceurParID(idAscenceur);
+	}
+
+	@Override
+	public Piece recuperePieceParID(int idPiece) {
+		return proxyErp.recuperePieceParID(idPiece);
+	}
+
+	@Override
+	public Voirie recupereVoirieParID(int idVoirie) {
+		return proxyErp.recupereVoirieParID(idVoirie);
+	}
+
 }

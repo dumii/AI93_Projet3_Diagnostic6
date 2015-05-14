@@ -235,4 +235,9 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 			int idTypeDiagnostic) {
 		return proxyIndicateur.recupereIndicateurParTypeDiagnostic(idTypeDiagnostic);
 	}
+
+	@Override
+	public int getMaxId() {
+		return proxyDiagnostic.getMaxId();
+	}
 }

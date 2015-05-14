@@ -8,10 +8,98 @@
 
 <ui:composition template="/WEB-INF/Template2Diagnostic6.xhtml">
 	<ui:define name="title">Diagnostic 6 - Création diagnostic</ui:define>
+	
 	<ui:define name="head">
 		<link href="css/creationDiagnostic.css" rel="stylesheet"
 			type="text/css" />
+			<script type="text/javascript" src="JavaScript/creationDiagnostic.js"></script>
 	</ui:define>
+	
+	<ui:define name="accordeon1">
+		Diagnostics avec des interventions en cours (#{mbArborescenceDiagnostic.listeDiagnosticsIntervEnCours.size()})
+	</ui:define>
+
+	<ui:define name="arborescence1">
+		<h:form>
+			<rich:tree id="tree1" nodeType="#{node.type}" var="node"
+				value="#{mbArborescenceDiagnostic.rootNodes1}" toggleType="client"
+				selectionType="ajax"
+				selectionChangeListener="#{mbArborescenceDiagnostic.selectionChanged}">
+				<rich:treeNode type="typeErp">
+                    #{node.name}
+                </rich:treeNode>
+				<rich:treeNode type="erp">
+                    #{node.name}
+                </rich:treeNode>
+				<rich:treeNode type="diagnostic">
+					<h:outputLabel
+						value="#{node.intitule} - #{node.name} - #{node.idDiag}">
+						<f:ajax event="click"
+							listener="#{mbDonneesGenerales.clickNode(mbArborescenceDiagnostic.currentSelection.idDiag)}"
+							render=":toto:lblReponseAjax" />
+					</h:outputLabel>
+				</rich:treeNode>
+			</rich:tree>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="accordeon2">
+		Diagnostics avec des interventions en attente (#{mbArborescenceDiagnostic.listeDiagnosticsIntervAttente.size()})
+	</ui:define>
+
+	<ui:define name="arborescence2">
+		<h:form>
+			<rich:tree id="tree2" nodeType="#{node.type}" var="node"
+				value="#{mbArborescenceDiagnostic.rootNodes2}" toggleType="client"
+				selectionType="ajax"
+				selectionChangeListener="#{mbArborescenceDiagnostic.selectionChanged}">
+				<rich:treeNode type="typeErp">
+                    #{node.name}
+                </rich:treeNode>
+				<rich:treeNode type="erp">
+                    #{node.name}
+                </rich:treeNode>
+				<rich:treeNode type="diagnostic">
+					<h:outputLabel
+						value="#{node.intitule} - #{node.name} - #{node.idDiag}">
+						<f:ajax event="click"
+							listener="#{mbDonneesGenerales.clickNode(mbArborescenceDiagnostic.currentSelection.idDiag)}"
+							render=":toto:lblReponseAjax" />
+					</h:outputLabel>
+				</rich:treeNode>
+			</rich:tree>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="accordeon3">
+		Diagnostics archivés (#{mbArborescenceDiagnostic.listeDiagnosticsIntervArchive.size()})
+	</ui:define>
+
+	<ui:define name="arborescence3">
+		<h:form>
+			<rich:tree id="tree3" nodeType="#{node.type}" var="node"
+				value="#{mbArborescenceDiagnostic.rootNodes3}" toggleType="client"
+				selectionType="ajax"
+				selectionChangeListener="#{mbArborescenceDiagnostic.selectionChanged}">
+				<rich:treeNode type="typeErp">
+                    #{node.name}
+                </rich:treeNode>
+				<rich:treeNode type="erp">
+                    #{node.name}
+                </rich:treeNode>
+				<rich:treeNode type="diagnostic">
+					<h:outputLabel
+						value="#{node.intitule} - #{node.name} - #{node.idDiag}">
+						<f:ajax event="click"
+							listener="#{mbDonneesGenerales.clickNode(mbArborescenceDiagnostic.currentSelection.idDiag)}"
+							render=":toto:lblReponseAjax" />
+					</h:outputLabel>
+				</rich:treeNode>
+			</rich:tree>
+		</h:form>
+	</ui:define>
+	
+	
 	<ui:define name="content"> 
 		<div id="content"> 
 			<f:view>
@@ -21,11 +109,16 @@
 					<h:panelGroup id="lblReponseAjax" layout="block" >
 
 						<div class="mini-barreEtat">
-							<h2>
-								Diagnostic - #{mbCreationDiagnostic.monERP.nomErp}
+							<h2 id="titreDiagnostic">
+								#{mbCreationDiagnostic.idDiagnostic} Diagnostic
+								<span id="spanTypeSelectionne"></span> 
+								#{mbCreationDiagnostic.monERP.nomErp}
 								
-								<h:commandLink class="btn" value="Enregistrer">
+								<h:commandLink class="btn" value="Enregistrer" id="boutonAjouterDiagnostic">
+								<f:ajax event="click" execute="@form" render="totop"/>
    								</h:commandLink>
+   								<h:outputLabel value="Tous les champs ne sont pas remplis." id="messageErreurDiagnostic1"/>
+   								<h:outputLabel value="Aucune anomalie n'a été renseignée." id="messageErreurDiagnostic2"/>
 							</h2>
 							
 						</div>
@@ -67,7 +160,9 @@
 							<div class="formulaire">
 								<!-- Sélection du type de diagnostic -->
 								<h:outputLabel class="intitule" value="Type de diagnostic : " />								
-										<h:selectOneMenu 	value="#{mbCreationDiagnostic.idTypeDiagnostic}">
+										<h:selectOneMenu 	value="#{mbCreationDiagnostic.idTypeDiagnostic}"
+															class="infosDiagnostic"
+															onchange="typeDiagTitre(this)">
 											<f:selectItem itemLabel="-- Sélectionnez un type de diagnostic --" itemValue="0"/>
 											<f:selectItems	value="#{mbCreationDiagnostic.listeTypeDiag}"
 								   							var="var"
@@ -80,7 +175,8 @@
 
 								<!-- Sélection de l'expert et informations sur l'expert -->
 								<h:outputLabel class="intitule" value="Expert diagnostiqueur : " />
-									<h:selectOneMenu 	value="#{mbCreationDiagnostic.idExpert}">
+									<h:selectOneMenu 	value="#{mbCreationDiagnostic.idExpert}"
+														class="infosDiagnostic">
 											<f:selectItem itemLabel="-- Sélectionnez un expert diagnostiqueur --" itemValue="0"/>
 											<f:selectItems	value="#{mbCreationDiagnostic.listeExperts}"
 								   							var="var"
@@ -102,11 +198,11 @@
 								
 								<!-- Sélection du type de diagnostic -->
 								<h:outputLabel class="intitule" value="Date de réalisation : " />
-								<rich:calendar 	
+								<rich:calendar 
 												value="#{mbCreationDiagnostic.nouveauDiagnostic.dateRealisationDiagnostic}"
-												   datePattern="dd/MM/yyyy"
-												   popup="true"
-												   inputStyle="width:45.5%"/>
+												datePattern="dd/MM/yyyy"
+												popup="true"
+												inputStyle="width:45.5%"/>
 							</div>
 							
 						</div>
@@ -121,8 +217,8 @@
 								<tr>
 									<th>Choix bâtiment ou voirie</th>
 									<th>Liste bâtiments ou voiries</th>
-									<th>Liste éléments de structure</th>
-									<th>liste pièce (le cas échéant)</th>
+									<th>Indicateur et coût estimé</th>
+									<th></th>
 								</tr>
 								
 								<tr>
@@ -149,7 +245,7 @@
 								  								itemValue="#{var.idBatiment}"/>
 								  				<a4j:ajax event="change"
 							 						 listener="#{mbCreationDiagnostic.recupererBatiment()}"
-							 						 render="selectThree"/>
+							 						 render="selectThree, selectFour"/>
 										</h:selectOneMenu>
 									</td>
 									
@@ -204,22 +300,23 @@
 								  								itemValue="#{var.idIndicateur}"/>
 										</h:selectOneMenu>
 										
-										<h:outputLabel value="Coût estimé :" />
+										<h:outputLabel value="Coût estimé :"/>
 										<h:inputText value="#{mbCreationDiagnostic.anomalie.coutEstimeAnomalie}" class="infosAnomalieCout"/>
 									</td>
 									
-									<td>
-									<h:commandLink  >
-										<img id="boutonAjouterAnomalie" 
-											 src="images/creationDiagnostic/ajouter.png"/>
-											 <f:ajax event="click" execute="@form" render="totop" listener="#{mbCreationDiagnostic.ajouterAnomalieAuTableau()}"/>
-									</h:commandLink>     
+									<td rowspan="2" class="colonneBouton">
+										<h:commandLink  >
+											<img id="boutonAjouterAnomalie" 
+												 src="images/creationDiagnostic/ajouter.png"/>
+												 <f:ajax event="click" execute="@form" render="totop" listener="#{mbCreationDiagnostic.ajouterAnomalieAuTableau()}"/>
+										</h:commandLink>  
+										<h:outputLabel value="Tous les champs ne sont pas remplis." id="messageErreurAnomalie"/>   
 									</td>
  
 								</tr>
 								 
 								<tr>
-									<td colspan="4">
+									<td colspan="3">
 										<h:outputLabel value="Description de l'anomalie : " />
 										<h:outputLabel value="Préconisation de l'expert : " />
 										
@@ -230,13 +327,13 @@
 								<ui:repeat var="anomalie" value="#{mbCreationDiagnostic.listeAnomalies}">
 									
 									<tr>
-										<td>bat ou voirie (méthode qui renvoie le bon string avec l'intitulé du bat)</td>
-										<td>structure (méthode qui renvoie le bon string avec le type et le nom)</td>
-										<td>indicateur et cout estime</td>
+										<td>#{mbCreationDiagnostic.localisationAnomalieOne(anomalie)}</td>
+										<td>#{mbCreationDiagnostic.localisationAnomalieTwo(anomalie)}</td>
+										<td>Indicateur : #{anomalie.indicateur.libelleIndicateur}
+											<br/>
+											Coût estimé : #{anomalie.coutEstimeAnomalie}
+										</td>
 										<td>
-											<h:commandLink  >
-												<img src="images/creationDiagnostic/DiagnosticBoutonModifier.26.26.png"/>
-											 </h:commandLink> 
 											 <h:commandLink action="#{mbCreationDiagnostic.retirerAnomalieDuTableau(anomalie)}" >
 												<img src="images/creationDiagnostic/supprimer.png"/>
 											 </h:commandLink> 
@@ -244,15 +341,23 @@
 									</tr>
 									
 									<tr>
-										<td colspan="4">  
+										<td colspan="2">  
+											Description de l'anomalie :
+											<br/>
 											#{anomalie.descriptionAnomalie}
+										</td>
+										
+										<td colspan="2">  
+											Préconisation de l'expert :
+											<br/>
+											#{anomalie.preconisationAnomalie}
 										</td>
 									</tr>
 								
 								</ui:repeat>
 							</table>
-							<script>   
-	    $("#boutonAjouterAnomalie").click(function() {
+	<script>   
+		 $("#boutonAjouterAnomalie").click(function() {
 		    console.log("toto"); 
 			var champsRemplis = true;
 			$(".infosAnomalie :selected").each(function(){
@@ -277,16 +382,55 @@
 
 			if (champsRemplis == false)
 			{
-				alert("Tous les champs ne sont pas remplis");
+				$(".colonneBouton label").show();
 				return false; 
+			}
+			else
+			{
+				$(".colonneBouton label").hide();
 			}
 	    });    
 
 </script> 
 							
-												</h:panelGroup>
+							</h:panelGroup>
 					 	</div>
-						
+					 	<script>   
+		$("h2 a").click(function() {
+			var champsRemplis = true;
+			$(".infosDiagnostic :selected").each(function(){
+				if (this.value == 0)
+				{
+					champsRemplis = false;
+				}
+			});
+			var date = "#{mbCreationDiagnostic.nouveauDiagnostic.dateRealisationDiagnostic}";
+			if (date == "")
+			{
+				champsRemplis = false;
+			}
+
+			if (champsRemplis == false)
+			{
+				$(".mini-barreEtat label:first-of-type").show();
+				return false; 
+			}
+			else
+			{
+				$(".mini-barreEtat label:first-of-type").hide();
+
+				if (#{mbCreationDiagnostic.listeAnomalies.size()} > 0)
+				{
+					$(".mini-barreEtat label:last-of-type").hide();
+				}
+				else
+				{
+					$(".mini-barreEtat label:last-of-type").show();
+					return false; 
+				}
+			}
+		});
+		</script>						
 					</h:panelGroup>
 				</h:form>
 			</f:view>

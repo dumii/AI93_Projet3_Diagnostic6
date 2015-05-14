@@ -115,4 +115,11 @@ public class DaoDiagnosticImpl implements IDaoDiagnostic {
 		List<Diagnostic> liste = requete.getResultList();
 		return liste;
 	}
+
+	@Override
+	public int getMaxId() {
+		Query query = em.createQuery("SELECT MAX(idDiagnostic) from Diagnostic");
+		int maxId = (int) query.getSingleResult();
+		return maxId;
+	}
 }

@@ -97,4 +97,44 @@ public class DaoErpImpl implements IDaoErp {
 		Erp erp = (Erp) query.getSingleResult();
 		return erp;
 	}
+
+	@Override
+	public Acces recupereAccesParID(int idAcces) {
+		Query query = em.createQuery("SELECT e from Acces e WHERE e.idAcces = :pid");
+		query.setParameter("pid", idAcces);
+		Acces acces = (Acces) query.getSingleResult();
+		return acces;
+	}
+
+	@Override
+	public Escalier recupereEscalierParID(int idEscalier) {
+		Query query = em.createQuery("SELECT e from Escalier e WHERE e.idEscalier = :pid");
+		query.setParameter("pid", idEscalier);
+		Escalier escalier = (Escalier) query.getSingleResult();
+		return escalier;
+	}
+
+	@Override
+	public Ascenceur recupereAscenceurParID(int idAscenceur) {
+		Query query = em.createQuery("SELECT e from Ascenceur e WHERE e.idAscenceur = :pid");
+		query.setParameter("pid", idAscenceur);
+		Ascenceur ascenceur = (Ascenceur) query.getSingleResult();
+		return ascenceur;
+	}
+
+	@Override
+	public Piece recuperePieceParID(int idPiece) {
+		Query query = em.createQuery("SELECT e from Piece e WHERE e.idPiece = :pid");
+		query.setParameter("pid", idPiece);
+		Piece piece = (Piece) query.getSingleResult();
+		return piece;
+	}
+
+	@Override
+	public Voirie recupereVoirieParID(int idVoirie) {
+		Query query = em.createQuery("SELECT e from Voirie e WHERE e.idVoirie = :pid");
+		query.setParameter("pid", idVoirie);
+		Voirie voirie = (Voirie) query.getSingleResult();
+		return voirie;
+	}
 }

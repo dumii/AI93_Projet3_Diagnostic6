@@ -1,4 +1,26 @@
 /*************************************/
+/* Messages d'erreurs */
+/*************************************/
+
+.colonneBouton label
+{
+	display:none;
+	font-size:smaller;
+	width:100%;
+	color:red;
+}
+
+.mini-barreEtat label
+{
+	display:none;
+	float:right;
+	margin-top:5px;
+	font-size:10px;
+	font-weight:normal;
+	color:red;
+}
+
+/*************************************/
 /* Mini Barre d'�tat Consultation Diagnostic */
 /*************************************/
 
@@ -271,7 +293,7 @@ table select
 	width:100%;
 }
 
-table input, label:first-of-type
+table input
 {
 	display:inline-block;
 	width:45%;

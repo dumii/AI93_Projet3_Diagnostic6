@@ -9,4 +9,6 @@ public interface IDaoIndicateur {
 	public List<Indicateur> recupereIndicateur();
 	
 	public List<Indicateur> recupereIndicateurParTypeDiagnostic(int idTypeDiagnostic);
+	
+	public Indicateur recupereIndicateurParID(int idIndicateur);
 }
