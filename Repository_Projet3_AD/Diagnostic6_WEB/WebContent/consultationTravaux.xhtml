@@ -23,9 +23,78 @@
 		<link href="css/consultationTravaux.css" rel="stylesheet"
 			type="text/css" />
 	</ui:define>
+	
+	<ui:define name="arborescence1">
+		<h:form>
+			<rich:tree id="tree1" nodeType="#{node.type}" var="node"
+				value="#{mbArborescenceTravaux.rootNodes1}" toggleType="client"
+				selectionType="ajax"
+				selectionChangeListener="#{mbArborescenceTravaux.selectionChanged}">
+				<rich:treeNode type="typeErp">
+                    #{node.name}
+                </rich:treeNode>
+				<rich:treeNode type="erp">  
+                	<h:outputLabel value="#{node.name}" >
+                		<f:ajax event="click" 
+                				listener="#{mbConsultationTravaux.clickNode(mbArborescenceTravaux.currentSelection.idERP)}" 
+                				render=":toto:lblReponseAjax"/>
+                	</h:outputLabel>
+                </rich:treeNode>
+			</rich:tree> 
+		</h:form>
+	</ui:define>
+
+	<ui:define name="accordeon2">
+		ERP en attente d'intervention (#{mbArborescenceTravaux.listeERPIntervAttente.size()})
+	</ui:define>
+
+	<ui:define name="arborescence2">
+		<h:form>
+			<rich:tree id="tree2" nodeType="#{node.type}" var="node"
+				value="#{mbArborescenceTravaux.rootNodes2}" toggleType="client"
+				selectionType="ajax"
+				selectionChangeListener="#{mbArborescenceTravaux.selectionChanged}">
+				<rich:treeNode type="typeErp">
+                    #{node.name}
+                </rich:treeNode>
+				<rich:treeNode type="erp">  
+                	<h:outputLabel value="#{node.name}" >
+                		<f:ajax event="click" 
+                				listener="#{mbConsultationTravaux.clickNode(mbArborescenceTravaux.currentSelection.idERP)}" 
+                				render=":toto:lblReponseAjax"/>
+                	</h:outputLabel>
+                </rich:treeNode>
+			</rich:tree>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="accordeon3">
+		ERP archivés (#{mbArborescenceTravaux.listeERPIntervArchive.size()})
+	</ui:define>
+
+	<ui:define name="arborescence3">
+		<h:form>
+			<rich:tree id="tree3" nodeType="#{node.type}" var="node"
+				value="#{mbArborescenceTravaux.rootNodes3}" toggleType="client"
+				selectionType="ajax"
+				selectionChangeListener="#{mbArborescenceTravaux.selectionChanged}">
+				<rich:treeNode type="typeErp">
+                    #{node.name}
+                </rich:treeNode>
+				<rich:treeNode type="erp">  
+                	<h:outputLabel value="#{node.name}" >
+                		<f:ajax event="click" 
+                				listener="#{mbConsultationTravaux.clickNode(mbArborescenceTravaux.currentSelection.idERP)}" 
+                				render=":toto:lblReponseAjax"/>
+                	</h:outputLabel>
+                </rich:treeNode>
+			</rich:tree>
+		</h:form>
+	</ui:define>
 
 
 	<ui:define name="content">
+		<f:event listener="#{mbConsultationTravaux.loadChantier()}" type="preRenderView"/>
 		<f:view>
 
 			<div id="content">
