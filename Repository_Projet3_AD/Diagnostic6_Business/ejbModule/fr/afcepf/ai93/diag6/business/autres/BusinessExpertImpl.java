@@ -34,4 +34,9 @@ public class BusinessExpertImpl implements IBusinessExpert {
 		return "Supression effectuée avec succès";
 	}
 
+	@Override
+	public Expert recupererExpertParId(int idExpert) {
+		return proxyExpert.recupererExpertParId(idExpert);
+	}
+
 }

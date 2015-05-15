@@ -13,9 +13,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.print.attribute.standard.DateTimeAtCompleted;
-
-import org.richfaces.resource.PostConstructResource;
 
 import fr.afcepf.ai93.diag6.api.business.autres.IBusinessExpert;
 import fr.afcepf.ai93.diag6.api.business.diagnostic.IBusinessAnomalie;
@@ -54,6 +51,7 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 	private IBusinessIntervention proxyBusinessIntervention; 
 	@EJB
 	private IBusinessExpert proxyBusinessExpert; 
+	
 	@ManagedProperty(value = "#{mbUtilisateur}")
 	private UtilisateurManagedBean user; 
 
@@ -67,7 +65,7 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 	private List<Indicateur> listeIndicateursParDiagnostic; 
 	private List<Expert> listeExperts;
 	private Diagnostic dmodif = new Diagnostic(); 
-	SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy",Locale.FRENCH);
+	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MMMM/yyyy");
 
 	
 	@PostConstruct
@@ -99,7 +97,6 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 		recupererIndicateurParTypeDiag(); 
 		recupererExperts(); 
 		amodif=new Anomalie(); 
-		System.out.println("utilisateur connecté : "+user.getUtilisateur().getNomUtilisateur());
 	}
 
 	private void recupererExperts() {
@@ -258,7 +255,10 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 			System.out.println("Diag pris en compte pour la modification : " + diagnosticSelectionne.getIdDiagnostic());
 			dmodif = diagnosticSelectionne;
 		} else {
-			proxyBusinessDiagnostic.modifierDiagnostic(diagnosticSelectionne,user.getUtilisateur());
+			System.out.println("je passe ici");
+			Utilisateur user = new Utilisateur();
+			user.setIdUtilisateur(1);
+			proxyBusinessDiagnostic.modifierDiagnostic(diagnosticSelectionne,user);
 			dmodif=new Diagnostic(); 
 			recupererDiagnostic(); 
 		}

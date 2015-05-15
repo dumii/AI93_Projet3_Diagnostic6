@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import fr.afcepf.ai93.diag6.api.data.erp.IDaoErp;
+import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
 import fr.afcepf.ai93.diag6.entity.erp.Acces;
 import fr.afcepf.ai93.diag6.entity.erp.Ascenceur;
 import fr.afcepf.ai93.diag6.entity.erp.Batiment;
@@ -96,5 +97,60 @@ public class DaoErpImpl implements IDaoErp {
 		query.setParameter("pid", idErp);
 		Erp erp = (Erp) query.getSingleResult();
 		return erp;
+	}
+
+	@Override
+	public List<Erp> recupereErpParNom(String stringCherche) {
+		Query query = em.createQuery("SELECT e FROM Erp e WHERE e.nomErp like :pid");
+		query.setParameter("pid","%"+stringCherche+"%");
+		List<Erp> liste = query.getResultList();
+		return liste;
+	}
+
+	public Acces recupereAccesParID(int idAcces) {
+		Query query = em.createQuery("SELECT e from Acces e WHERE e.idAcces = :pid");
+		query.setParameter("pid", idAcces);
+		Acces acces = (Acces) query.getSingleResult();
+		return acces;
+	}
+
+	@Override
+	public Escalier recupereEscalierParID(int idEscalier) {
+		Query query = em.createQuery("SELECT e from Escalier e WHERE e.idEscalier = :pid");
+		query.setParameter("pid", idEscalier);
+		Escalier escalier = (Escalier) query.getSingleResult();
+		return escalier;
+	}
+
+	@Override
+	public Ascenceur recupereAscenceurParID(int idAscenceur) {
+		Query query = em.createQuery("SELECT e from Ascenceur e WHERE e.idAscenceur = :pid");
+		query.setParameter("pid", idAscenceur);
+		Ascenceur ascenceur = (Ascenceur) query.getSingleResult();
+		return ascenceur;
+	}
+
+	@Override
+	public Piece recuperePieceParID(int idPiece) {
+		Query query = em.createQuery("SELECT e from Piece e WHERE e.idPiece = :pid");
+		query.setParameter("pid", idPiece);
+		Piece piece = (Piece) query.getSingleResult();
+		return piece;
+	}
+
+	@Override
+	public Voirie recupereVoirieParID(int idVoirie) {
+		Query query = em.createQuery("SELECT e from Voirie e WHERE e.idVoirie = :pid");
+		query.setParameter("pid", idVoirie);
+		Voirie voirie = (Voirie) query.getSingleResult();
+		return voirie;
+	}
+
+	@Override
+	public List<Erp> rechercheErpParNom(String nomERP) {
+		Query requete = em.createQuery("SELECT e FROM Erp e WHERE e.nomErp LIKE :pid"); 
+		requete.setParameter("pid", "%" + nomERP + "%");
+		List<Erp> liste = requete.getResultList(); 
+		return liste;
 	}
 }

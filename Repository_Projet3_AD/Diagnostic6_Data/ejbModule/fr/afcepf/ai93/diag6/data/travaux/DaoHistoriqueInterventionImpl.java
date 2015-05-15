@@ -1,5 +1,8 @@
 package fr.afcepf.ai93.diag6.data.travaux;
 
+import java.util.ArrayList;
+import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.List;
 
@@ -7,6 +10,8 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+
 import javax.persistence.Query;
 
 import fr.afcepf.ai93.diag6.api.data.travaux.IDaoAvancementIntervention;
@@ -14,6 +19,8 @@ import fr.afcepf.ai93.diag6.api.data.travaux.IDaoHistoriqueIntervention;
 import fr.afcepf.ai93.diag6.api.data.travaux.IDaoIntervention;
 import fr.afcepf.ai93.diag6.api.data.travaux.IDaoTypeIntervention;
 import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
+import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
+import fr.afcepf.ai93.diag6.entity.erp.Erp;
 import fr.afcepf.ai93.diag6.entity.travaux.EtatAvancementTravaux;
 import fr.afcepf.ai93.diag6.entity.travaux.HistoriqueIntervention;
 import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
@@ -42,6 +49,94 @@ public class DaoHistoriqueInterventionImpl implements IDaoHistoriqueIntervention
 		Query query = em.createQuery("SELECT h from HistoriqueIntervention h");
 		List<HistoriqueIntervention> liste = query.getResultList();
 		return liste;
+	}
+	
+	
+	///changer ici! (j'ai peut être fait une connerie en récupérant un ERP alors que seul son ID me suffit
+	@Override
+	public List<HistoriqueIntervention> recupereHistoriqueInterventionParERP(
+			Erp erp) {
+		
+		int coucou = erp.getIdErp();
+		
+		Query req = em.createQuery("SELECT h.intervention.listeHistoriqueIntervention FROM Anomalie h WHERE h.diagnostic.erp.idErp = :id");
+		req.setParameter("id", coucou);
+		List<HistoriqueIntervention> liste = req.getResultList();	
+		return liste;
+		
+		
+		// ne fonctionne pas
+		
+		
+		/*
+		Query req = em.createQuery("SELECT h FROM "+
+			"(((HistoriqueIntervention h "+
+			"inner join fetch intervention "+
+			"on h.idIntervention = intervention.idIntervention) "+
+			"inner join Anomalie "+
+			"on intervention.idAnomalie = anomalie.idAnomalie) "+
+			"inner join fetch Diagnostic "+
+			"on anomalie.idDiagnostic = diagnostic.idDiagnostic) "+
+			"inner join fetch Erp "+
+			"on diagnostic.idErp = erp.idErp "+
+			"where erp.idErp = :id");
+		req.setParameter("id", coucou);
+		List<HistoriqueIntervention> liste = req.getResultList();	
+		return liste;
+		*/	
+		/*
+		//recuperation de
+		Query reqERP = em.createQuery("select e.id from Erp e where e.id = :id");
+		reqERP.setParameter("id", coucou);
+		//recuperation des interventions ayant un historique
+		Query reqHisto = em.createQuery("Select h.idIntervention from HistoriqueIntervention h");
+		List<Integer> listeHisto = reqHisto.getResultList();
+		//par chaque intervention, on fais une boucle
+		List<Integer> listeAnom = new ArrayList();
+		List<Integer> tmp = new ArrayList();
+		for(Integer id : listeHisto)
+		{
+			//pour chaque intervention de la liste, on cherche les anomalies
+			Query reqIntervention = em.createQuery("select i.idAnomalie from Intervention i where :id = i.idIntervention");
+			reqIntervention.setParameter("id", id);
+			tmp = reqIntervention.getResultList();
+			// qu'on ajoute à une liste
+			for (Integer lol : tmp)
+			{
+				listeAnom.add(lol);
+			}
+		}
+		//pour chaque anomalie, on cherche le diagnostics
+		List<Integer> listeDiag= new ArrayList();
+		List<Integer> tampon = new ArrayList();
+		for (Integer i : listeAnom)
+		{
+			Query reqAnom = em.createQuery("select a.idDiagnostic from Anomalie a where a.idAnomalie = :id");
+			reqAnom.setParameter("id", i);
+			tampon = reqAnom.getResultList();
+			for (Integer ok : tampon)
+			{
+				listeDiag.add(ok);
+			}
+		}
+		//pour chaque diagnostic on cherche l'erp
+		List<Integer> listeErp = new ArrayList();
+		List<Integer> wesh = new ArrayList();
+		for (Integer d : listeDiag)
+		{
+			Query reqDiag =em.createQuery("select d.idErp from Diagnostic d where d.idDiagnostic = :id");
+			reqDiag.setParameter("id", d);
+			wesh = reqDiag.getResultList();
+			for (Integer yo : listeErp)
+			{
+				listeErp.add(yo);
+			}
+		}
+		
+		Query req = em.createQuery("select e from Erp e where e.idErp = :id");
+		req.setParameter("id", coucou);
+		List<HistoriqueIntervention> list = req.getResultList();
+		return list;*/
 	}
 
 	@Override
@@ -121,4 +216,6 @@ public class DaoHistoriqueInterventionImpl implements IDaoHistoriqueIntervention
 			em.persist(historique);
 		}		
 	}
+
+
 }

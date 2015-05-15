@@ -31,6 +31,10 @@ public interface IBusinessDiagnostic {
 	    public List<HistoriqueDiagnostic> recupereToutHistoriqueDiagnostic();
 
 	    public List<TypeDiagnostic> recupereTypeDiagnostic();
+	    
+	    public List<TypeDiagnostic> recupereTypeDiagnosticDospoParERP(Erp erp);
+	    
+	    public TypeDiagnostic recupereTypeDiagnosticParID(int idTypeDiagnostic);
 
 
 	    public Diagnostic recupereDiagnostic(int idDiagnostic);
@@ -42,6 +46,8 @@ public interface IBusinessDiagnostic {
 	    public List<Diagnostic> recupereDiagnosticNonTraitesParErp(Erp erp);
 
 		public List<Indicateur> recupererIndicateursParDiag(Diagnostic diagEnCours);
+		
+		public List<Indicateur> recupereIndicateurParTypeDiagnostic(int idTypeDiagnostic);
 
 		public List<Diagnostic> recupereToutDiagnosticParErp(Erp e);
 		
@@ -53,5 +59,7 @@ public interface IBusinessDiagnostic {
 		public boolean interventionArchivesSurERP();
 
 		public boolean recupererDiagSansInterv(Integer idDiag);
+		
+		public int getMaxId();
 
 }

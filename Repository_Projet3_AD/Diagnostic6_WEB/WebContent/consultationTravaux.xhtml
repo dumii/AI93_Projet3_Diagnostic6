@@ -6,7 +6,8 @@
 	xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich">
 
-<ui:composition template="/WEB-INF/Template4Diagnostic6.xhtml">
+<ui:composition template="/WEB-INF/Template5Diagnostic6.xhtml">
+
 
 	<ui:define name="boutonDeconnexion">
 	<f:event listener="#{mbConsultationTravaux.loadChantier()}" type="preRenderView"/> 
@@ -23,14 +24,11 @@
 		<link href="css/consultationTravaux.css" rel="stylesheet"
 			type="text/css" />
 	</ui:define>
-
-
-
-
+	
 	<ui:define name="accordeon1">
 		ERP avec des interventions en cours (#{mbArborescenceTravaux.listeERPIntervEnCours.size()})
 	</ui:define>
-
+	
 	<ui:define name="arborescence1">
 		<h:form>
 			<rich:tree id="tree1" nodeType="#{node.type}" var="node"
@@ -100,9 +98,8 @@
 	</ui:define>
 
 
-	
-
 	<ui:define name="content">
+		<f:event listener="#{mbConsultationTravaux.loadChantier()}" type="preRenderView"/>
 		<f:view>
 
 			<div id="content">
@@ -114,7 +111,10 @@
 							<h2>
 								Chantier - #{mbConsultationTravaux.monERP.nomErp}
 								
-								<h:commandLink action="planningTravaux" class="btn" value="Consulter le planning d'interventions">
+								<h:commandLink action="planningTravaux" class="btn" value="Planning d'interventions">
+      									<f:param name="id" value="#{mbConsultationTravaux.monERP.idErp}" />
+   								</h:commandLink>
+   								<h:commandLink action="historiqueTravaux" class="btn" value="Historique d'interventions">
       									<f:param name="id" value="#{mbConsultationTravaux.monERP.idErp}" />
    								</h:commandLink>
 							</h2>
@@ -156,7 +156,7 @@
 							</div>
 							
 							<div class="formulaire">
-								<h:outputLabel class="intitule" value="Nombre total d'interventions : " />
+								<h:outputLabel class="intitule" value="Total d'interventions sur l'ERP : " />
 								<h:outputText class="valeur" id="totalIntervention" value="#{mbConsultationTravaux.nombreTotalIntervention}"/>
 								<ul class="liste1">
 									<li>Terminées : #{mbConsultationTravaux.nombreInterventionTerminees}</li>
@@ -187,44 +187,43 @@
 								value="#{mbConsultationTravaux.listeDiagnosticERP}">
 
 								<div class="diagnostic">
-									<h:outputLabel class="intitule" value="Titre du diagnostic : " />
-									<h:outputLabel class="valeur" value="#{diagnostic.intituleDiagnostic}" />
+									<div class="formulaire2">
+										<h:outputLabel class="intitule" value="Titre du diagnostic : " />									
+										<h:outputLabel class="valeur" value="#{diagnostic.intituleDiagnostic}" />
 									
-									<h:commandLink action="consultationDiagnostic" value="Lien vers la fiche du diagnostic">
-      									<f:param name="id" value="#{diagnostic.idDiagnostic}" />
-   									</h:commandLink>
-   									
-									<h:outputLabel class="intitule"
-										value="Nombre d'interventions : " />
-										
-									<h:outputLabel class="valeur" value="#{mbConsultationTravaux.tableauNombreInterventions [mbConsultationTravaux.listeDiagnosticERP.indexOf(diagnostic)][0]}" />
+										<h:outputLabel class="intitule" value="Total d'interventions sur le diagnostic: " />							
+										<h:outputLabel class="valeur" value="#{mbConsultationTravaux.tableauNombreInterventions [mbConsultationTravaux.listeDiagnosticERP.indexOf(diagnostic)][0]}" />
+										<ul class="liste2">
+											<li>Terminées : #{mbConsultationTravaux.tableauNombreInterventions [mbConsultationTravaux.listeDiagnosticERP.indexOf(diagnostic)][1]}</li>
+											<li>En cours : #{mbConsultationTravaux.tableauNombreInterventions [mbConsultationTravaux.listeDiagnosticERP.indexOf(diagnostic)][2]}</li>
+											<li>En attente : #{mbConsultationTravaux.tableauNombreInterventions [mbConsultationTravaux.listeDiagnosticERP.indexOf(diagnostic)][3]}</li>
+											<li>Suspendues : #{mbConsultationTravaux.tableauNombreInterventions [mbConsultationTravaux.listeDiagnosticERP.indexOf(diagnostic)][4]}</li>
+										</ul>
+									</div>
+								
+									<div class="formulaire2">
+										<h:outputLabel class="intitule" value="Nombre d'anomalies sur le diagnostic: " />							
+										<h:outputLabel class="valeur" value="#{diagnostic.listeAnomaliesDiagnostic.size()}" />
+									</div>
+								
+									<div class="formulaire2">									
+										<h:outputLabel class="intitule"	value="Etat d'avancement des travaux : " />
+										<h:outputLabel class="valeur" value="#{mbConsultationTravaux.terminesOuTravauxEnCoursToString(mbConsultationTravaux.tableauNombreInterventions [mbConsultationTravaux.listeDiagnosticERP.indexOf(diagnostic)][1],mbConsultationTravaux.tableauNombreInterventions [mbConsultationTravaux.listeDiagnosticERP.indexOf(diagnostic)][0])}" />
 									
-									<h:outputLabel class="intitule"	value="Etat d'avancement des travaux : " />
-									<img id="iconeEtat - #{diagnostic.idDiagnostic}"
-										 class="etatTravaux"
-										 src="#{mbConsultationTravaux.terminesOuTravauxEnCours(mbConsultationTravaux.tableauNombreInterventions [mbConsultationTravaux.listeDiagnosticERP.indexOf(diagnostic)][1],mbConsultationTravaux.tableauNombreInterventions [mbConsultationTravaux.listeDiagnosticERP.indexOf(diagnostic)][0])}"/>
-									
-									<ul class="liste2">
-										<li>Terminées : #{mbConsultationTravaux.tableauNombreInterventions [mbConsultationTravaux.listeDiagnosticERP.indexOf(diagnostic)][1]}</li>
-										<li>En cours : #{mbConsultationTravaux.tableauNombreInterventions [mbConsultationTravaux.listeDiagnosticERP.indexOf(diagnostic)][2]}</li>
-										<li>En attente : #{mbConsultationTravaux.tableauNombreInterventions [mbConsultationTravaux.listeDiagnosticERP.indexOf(diagnostic)][3]}</li>
-										<li>Suspendues : #{mbConsultationTravaux.tableauNombreInterventions [mbConsultationTravaux.listeDiagnosticERP.indexOf(diagnostic)][4]}</li>
-									</ul>
+										<img id="iconeEtat - #{diagnostic.idDiagnostic}"
+											 class="etatTravaux"
+										 	src="#{mbConsultationTravaux.terminesOuTravauxEnCours(mbConsultationTravaux.tableauNombreInterventions [mbConsultationTravaux.listeDiagnosticERP.indexOf(diagnostic)][1],mbConsultationTravaux.tableauNombreInterventions [mbConsultationTravaux.listeDiagnosticERP.indexOf(diagnostic)][0])}"/>
+										<h:commandLink action="consultationDiagnostic" value="Lien vers la fiche du diagnostic">
+      										<f:param name="id" value="#{diagnostic.idDiagnostic}" />
+   										</h:commandLink>
+									</div>
 								</div>
 							</ui:repeat>
 						</div>
 					</h:panelGroup>
 				</h:form>
 			</div>
-		</f:view>
-
-<script type="text/javascript">
-function mettreAjourInformations()
-{
-	// 
-}
-</script>
-		
+		</f:view>	
 	</ui:define>
 </ui:composition>
 </html>
