@@ -13,6 +13,7 @@ import fr.afcepf.ai93.diag6.api.data.travaux.IDaoIntervention;
 import fr.afcepf.ai93.diag6.api.data.travaux.IDaoTypeIntervention;
 import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
+import fr.afcepf.ai93.diag6.entity.erp.Erp;
 import fr.afcepf.ai93.diag6.entity.travaux.EtatAvancementTravaux;
 import fr.afcepf.ai93.diag6.entity.travaux.HistoriqueIntervention;
 import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
@@ -146,6 +147,12 @@ public class BusinessInterventionImpl implements IBusinessIntervention {
 	}
 
 	@Override
+	public List<HistoriqueIntervention> recupereHistoriqueInterventionParERP(
+			Erp erp) 
+	{
+		return proxyHistorique.recupereHistoriqueInterventionParERP(erp);
+	}
+		@Override
 	public boolean voirSiInterventionEnCoursParErp(int idErp) {
 		int a = 0;
 		a = proxyIntervention.nombreInterventionEnCoursPlanifSuspParErp(idErp); 

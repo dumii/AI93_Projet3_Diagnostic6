@@ -13,6 +13,10 @@
    <from-outcome>planningTravaux</from-outcome>
    <to-view-id>/planningTravaux.jsf</to-view-id>
   </navigation-case>
+  <navigation-case>
+   <from-outcome>historiqueTravaux</from-outcome>
+   <to-view-id>/historiqueTravaux.jsf</to-view-id>
+  </navigation-case>
  </navigation-rule>
  <navigation-rule>
   <from-view-id>/accueilTravaux.jsf</from-view-id>

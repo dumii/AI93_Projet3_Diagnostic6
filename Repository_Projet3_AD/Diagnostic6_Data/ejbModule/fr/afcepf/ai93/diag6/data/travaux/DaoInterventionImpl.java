@@ -14,6 +14,8 @@ import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoDiagnostic;
 import fr.afcepf.ai93.diag6.api.data.travaux.IDaoIntervention;
 import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
+import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
+import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
 import fr.afcepf.ai93.diag6.entity.travaux.TypeIntervention;
 
 @Stateless
@@ -58,6 +60,7 @@ public class DaoInterventionImpl implements IDaoIntervention {
 		liste = query.getResultList();
 		return liste;
 	}
+
 
 	@Override
 	public List<Intervention> recupereInterventionparType(TypeIntervention type) {
