@@ -12,4 +12,7 @@ public interface IDaoHistoriqueDiagnostic {
 	public List<HistoriqueDiagnostic> recupereToutHistoriqueDiagnostic();
 	
 	public void historiser(Diagnostic diagnosticInitial, Diagnostic diagnostic, Utilisateur user);
+
+	public List<HistoriqueDiagnostic> recupereHistoriqueDiagnosticParDiag(
+			int idDiagEnCours);
 }

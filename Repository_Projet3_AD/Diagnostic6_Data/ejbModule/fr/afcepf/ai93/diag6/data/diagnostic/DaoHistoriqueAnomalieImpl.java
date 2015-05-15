@@ -13,6 +13,7 @@ import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoHistoriqueAnomalie;
 import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
 import fr.afcepf.ai93.diag6.entity.diagnostic.HistoriqueAnomalie;
+import fr.afcepf.ai93.diag6.entity.diagnostic.HistoriqueDiagnostic;
 
 @Stateless
 @Remote(IDaoHistoriqueAnomalie.class)
@@ -105,5 +106,13 @@ public class DaoHistoriqueAnomalieImpl implements IDaoHistoriqueAnomalie {
 				" sur diagnostic "+anomalieInitiale.getDiagnostic().getIntituleDiagnostic());
 		historique.setNouvelleDonnee("Supprimé");
 		em.persist(historique);
+	}
+
+	@Override
+	public List<HistoriqueAnomalie> recupereHistoriqueAnomalieParDiag(
+			int idDiagEnCours) {
+		Query requete = em.createQuery("SELECT anomh FROM HistoriqueAnomalie anomh"); 
+		List<HistoriqueAnomalie> listeToutHistAnom = requete.getResultList(); 
+		return listeToutHistAnom;
 	}
 }

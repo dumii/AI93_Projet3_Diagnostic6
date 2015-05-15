@@ -29,5 +29,8 @@ public interface IBusinessAnomalie {
 
     //Indicateur d'anomalie
     public List<Indicateur> recupereIndicateur();
+
+	public List<HistoriqueAnomalie> recupereHistoriqueAnomalieParDiag(int idDiagEnCours);
+
     
 }

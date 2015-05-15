@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+<ui:composition template="/WEB-INF/Template2Diagnostic6.xhtml">
+	<ui:define name="boutonDeconnexion">
+		<f:event listener="#{mbDonneesGenerales.loadDiagnostic()}"
+			type="preRenderView" />
+		<h:form>
+			<h:commandButton value="Deconnexion" styleClass="logoDeconnexion"
+				action="#{mbUtilisateur.logout()}"
+				image="images/iconeDeconnexion2.png" title="Deconnexion" />
+		</h:form>
+	</ui:define>
+
+	<ui:define name="title">Diagnostic 6 - Historique des diagnostics</ui:define>
+	<ui:define name="head">
+		<link href="css/historiqueDiagnostic.css" rel="stylesheet"
+			type="text/css" />
+	</ui:define>
+
+
+
+	<ui:define name="content">
+		<center>
+			<table width="925px">
+				<thead>
+					<tr>
+						<th scope="col">Identifiant Diagnostic</th>
+						<th scope="col">Utilisateur</th>
+						<th scope="col">Dernière modification</th>
+						<th scope="col">Type de modification</th>
+						<th scope="col">Ancienne donnée</th>
+						<th scope="col">Nouvelle donnée</th>
+					</tr>
+
+				</thead>
+				<tbody>
+					<ui:repeat var="diag" value="#{mbHistoriqueDiag.listeDiagnostics}">
+						<tr>
+							<td><strong class="">#{diag.diagnostic.intituleDiagnostic}</strong> <span class="text-offset">effectué par #{diag.diagnostic.nomDiagnostiqueur}</span></td>
+							<td class="utilisateur">#{diag.utilisateur.prenomUtilisateur} #{diag.utilisateur.nomUtilisateur}</td>
+							<td class="dateModif">#{diag.dateModification}</td>
+							<td class="typeModif">#{diag.typeModification}</td>
+							<td class="ancienneDonnée">#{diag.ancienneDonnee}</td>
+							<td class="nouvelleDonnée">#{diag.nouvelleDonnee}</td>
+						</tr>
+					</ui:repeat>			
+				</tbody>
+			</table>
+			
+			<br/>
+			<br/>
+			
+			<table width="950px">
+				<thead>
+					<tr>
+						<th scope="col">Identifiant Anomalie</th>
+						<th scope="col">Utilisateur</th>
+						<th scope="col">Dernière modification</th>
+						<th scope="col">Type de modification</th>
+						<th scope="col">Ancienne donnée</th>
+						<th scope="col">Nouvelle donnée</th>
+					</tr>
+				</thead>
+				<tbody>
+					<ui:repeat var="anom" value="#{mbHistoriqueDiag.listeAnomalies}">
+						<tr>
+						<td><strong class=""></strong>#{anom.anomalie.diagnostic.intituleDiagnostic}, Anomalie no #{anom.anomalie.idAnomalie} <span class="text-offset"></span></td>
+							<td class="utilisateur">#{anom.utilisateur.prenomUtilisateur} #{anom.utilisateur.nomUtilisateur}</td>
+							<td class="dateModif">#{anom.dateModification}</td>
+							<td class="typeModif">#{anom.typeModification}</td>
+							<td class="ancienneDonnée">#{anom.ancienneDonnee}</td>
+							<td class="nouvelleDonnée">#{anom.nouvelleDonnee}</td>
+						</tr>
+					</ui:repeat>							
+				</tbody>
+			</table>
+			
+		</center>
+		<script>
+
+		$( "#buttShowEDD" ).click(function() {
+			$( "#ErpDiagDetaille" ).toggle( "blind", 500 );
+		});
+
+
+  function ouverture(){
+		$( ".tableErpDiagGeneral" ).toggle();
+		}
+
+  function notification() 
+  { 
+	  $( "#notificationGrisee" ).toggle();
+	  $( "#notificationRouge" ).toggle();
+	  	document.getElementById(notificationGrisee).src = url;
+  }
+  function denotification() 
+  { 
+	  $( "#notificationRouge" ).toggle();
+	  $( "#notificationGrisee" ).toggle();
+	  	document.getElementById(notificationRouge).src = url;
+  }
+  function favorisation() 
+  { 
+	  $( "#favoritesGrisee" ).toggle();
+	  $( "#favoriteJaune" ).toggle();
+	  document.getElementById(favoritesGrisee).src = url;
+  }
+  function defavorisation() 
+  { 
+	  $( "#favoriteJaune" ).toggle();
+	  $( "#favoritesGrisee" ).toggle();
+	  document.getElementById(favoriteJaune).src = url;
+  }
+	
+</script>
+
+	</ui:define>
+
+</ui:composition>
+</html>

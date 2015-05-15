@@ -144,4 +144,10 @@ public class BusinessAnomalieImpl implements IBusinessAnomalie {
 	public void setProxyIndicateur(IDaoIndicateur proxyIndicateur) {
 		this.proxyIndicateur = proxyIndicateur;
 	}
+
+	@Override
+	public List<HistoriqueAnomalie> recupereHistoriqueAnomalieParDiag(
+			int idDiagEnCours) {
+		return proxyHistorique.recupereHistoriqueAnomalieParDiag(idDiagEnCours);
+	}
 }

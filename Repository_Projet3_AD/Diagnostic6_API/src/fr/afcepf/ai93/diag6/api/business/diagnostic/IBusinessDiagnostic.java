@@ -54,4 +54,9 @@ public interface IBusinessDiagnostic {
 
 		public boolean recupererDiagSansInterv(Integer idDiag);
 
+		public List<HistoriqueDiagnostic> recupereHistoriqueDiagnosticParDiag(
+				int idDiagEnCours);
+
+
+
 }

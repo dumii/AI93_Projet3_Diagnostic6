@@ -37,7 +37,7 @@ public class DaoHistoriqueDiagnosticImpl implements IDaoHistoriqueDiagnostic {
 	}
 	
 	//comparaison successive de chacun des attributs du nouveau et de l'ancien diagnostic.
-	// s'il s'avèe que des valeurs différent, on les "historisent" dans la table associée
+	// s'il s'avère que des valeurs différent, on les "historisent" dans la table associée
 	@Override
 	public void historiser(Diagnostic diagnosticInitial, Diagnostic diagnostic,
 			Utilisateur user) {
@@ -79,6 +79,14 @@ public class DaoHistoriqueDiagnosticImpl implements IDaoHistoriqueDiagnostic {
 			historique.setNouvelleDonnee(""+dateNouvelle);
 			em.persist(historique);
 		}
+	}
+
+	@Override
+	public List<HistoriqueDiagnostic> recupereHistoriqueDiagnosticParDiag(
+			int idDiagEnCours) {
+		Query requete = em.createQuery("SELECT dh FROM HistoriqueDiagnostic dh"); 
+		List<HistoriqueDiagnostic> listeToutHistDiag = requete.getResultList(); 
+		return listeToutHistDiag;
 	}
 }
 
