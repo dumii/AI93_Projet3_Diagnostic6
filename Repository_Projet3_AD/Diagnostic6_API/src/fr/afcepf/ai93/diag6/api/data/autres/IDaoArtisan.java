@@ -10,9 +10,9 @@ public interface IDaoArtisan {
 
 	public List<Artisan> recupererToutArtisan();
 	
-	public void ajouterArtisant(Artisan artisan);
+	public void ajouterArtisan(Artisan artisan);
 	
-	public boolean supprimerArtisan(Artisan artisan);
+	public String supprimerArtisan(Artisan artisan);
 	
 	public List<Artisan> recupererArtisansParTypeIntervention(TypeIntervention type);
 	

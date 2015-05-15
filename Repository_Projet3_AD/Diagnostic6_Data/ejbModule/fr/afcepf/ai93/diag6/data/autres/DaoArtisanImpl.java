@@ -11,6 +11,8 @@ import javax.persistence.Query;
 
 import fr.afcepf.ai93.diag6.api.data.autres.IDaoArtisan;
 import fr.afcepf.ai93.diag6.entity.autres.Artisan;
+import fr.afcepf.ai93.diag6.entity.autres.Expert;
+import fr.afcepf.ai93.diag6.entity.autres.Localisation;
 import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
 import fr.afcepf.ai93.diag6.entity.autres.TypeArtisan;
 import fr.afcepf.ai93.diag6.entity.travaux.TypeIntervention;
@@ -30,15 +32,34 @@ public class DaoArtisanImpl implements IDaoArtisan {
 	}
 
 	@Override
-	public void ajouterArtisant(Artisan artisan) {
+	public void ajouterArtisan(Artisan artisan) {
+		Localisation local = artisan.getLocalisation();
+		try {
+			local = (Localisation) em.createQuery("SELECT l FROM Localisation l WHERE l.codePostal =:paramCp AND l.ville =:pville")
+					.setParameter("paramCp", artisan.getLocalisation().getCodePostal())
+					.setParameter("pville", artisan.getLocalisation().getVille()).getSingleResult();
+			artisan.setLocalisation(local);
+		} catch (Exception e) {
+			e.printStackTrace();
+			em.persist(local);
+			artisan.setLocalisation(local);
+		}
 		em.persist(artisan);
 		
 	}
 	
 	@Override
-	public boolean supprimerArtisan(Artisan artisan) {
-		em.merge(artisan);
-		return true;
+	public String supprimerArtisan(Artisan artisan) {
+		System.out.println("début methode delete dao");
+		try {
+			artisan = (Artisan)em.find(Artisan.class, artisan.getIdArtisan());
+			em.merge(artisan);
+			System.out.println("requete delete dao effectuée");
+			return "L'expert a été supprimé";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "ail";
 	}
 
 	@Override

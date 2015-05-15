@@ -30,13 +30,16 @@ public class BusinessArtisanImpl implements IBusinessArtisan {
 	}
 
 	@Override
-	public void ajouterArtisant(Artisan artisan) {
-		proxyArtisan.ajouterArtisant(artisan);
+	public String ajouterArtisan(Artisan artisan) {
+		proxyArtisan.ajouterArtisan(artisan);
+		return "Ajout effectué avec succès";
 	}
 
 	@Override
-	public boolean supprimerArtisan(Artisan artisan) {
-		return proxyArtisan.supprimerArtisan(artisan);
+	public String supprimerArtisan(Artisan artisan) {
+		proxyArtisan.supprimerArtisan(artisan);
+		return "Supression effectuée avec succès";
+		
 	}
 
 	@Override

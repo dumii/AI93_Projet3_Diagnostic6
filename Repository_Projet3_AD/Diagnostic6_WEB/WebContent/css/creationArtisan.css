@@ -1,0 +1,145 @@
+/********************/
+/* Creation Artisan */
+/********************/
+
+#content
+{
+	margin-top : 7%;
+	margin-left: 22%;
+	width: 55%;
+}
+
+/***********************/
+/*  contenu du Profil  */
+/***********************/
+
+#titreArtisan
+{
+	background:#FEFEE2 ;
+	border:#cccccc solid 1px;
+	border-radius: 10px;
+	text-align: center;
+	height: 20px;
+	padding-bottom: 5%;
+}
+
+h2{
+  	background-size: 100%;
+  	margin: 0 0 0 0;
+  	font-family: Arial, Verdana, sans-serif;
+	background-attachment: fixed;
+  	color: #000063;
+  	display: block;
+  	font-size: 1.17em;
+  	-webkit-margin-before: 1em;
+  	-webkit-margin-after: 1em;
+  	-webkit-margin-start: 0px;
+  	-webkit-margin-end: 0px;
+  	font-weight: bold;
+  	margin: 0px;
+}
+
+#contenuArtisan
+{
+	font-size: small;
+}
+
+/**********************/
+/*  Creation Artisan  */
+/**********************/
+
+
+
+#creationArtisan
+{
+	/*margin-top: -2221%;*/
+	margin-top: 2%;
+	background-image:linear-gradient(#FEFEE2, #E5EBEF);
+	border:#cccccc solid 1px;
+	border-radius: 10px;
+	padding-bottom: 4%;
+	width:352px;
+}
+
+#titreCreation
+{
+	background:#FEFEE2 ;
+	padding-left:1%;
+	font-size: 15px;
+	color: #000063;
+	font-family: Arial, Verdana, sans-serif;
+}
+
+#buttEnregistre
+{
+	margin-top:2%;
+	margin-left:43%;
+}
+
+/**************************/
+/*  Consultation Artisan  */
+/**************************/
+#consultationArtisan
+{
+	margin-top:-85%;
+	background-image:linear-gradient(#FEFEE2, #E5EBEF);
+	border:#cccccc solid 1px;
+	border-radius: 10px;
+	padding-bottom: 1%;
+	width:352px;
+}
+
+#buttSuppr
+{
+	float:right;
+	padding-right:5%;
+}
+
+#tableArtisan
+{
+	margin-top:2%;
+}
+
+#titreConsultation
+{
+	background:#FEFEE2 ;
+	padding-left:1%;
+	font-size: 15px;
+	color: #000063;
+	font-family: Arial, Verdana, sans-serif;
+	
+}
+
+#typeArtisanTable1
+{
+	color: #000063;
+	width: 127px;
+	background:#C0DEDE;
+}
+#typeArtisanTable2
+{
+	color: #000063;
+	width: 221px;
+	background:#C0DEDE;
+}
+
+.titreTableArtisan
+{
+	color: #000063;
+	width: 127px;
+}
+
+.ligne_horizontale
+{
+    width:280px;
+    border-bottom:1px solid #cccccc;
+    height:5px;
+    margin-left:10%;
+}
+
+#checkSuppression
+{
+	color: #000063;
+	padding-left:37%;
+}
+

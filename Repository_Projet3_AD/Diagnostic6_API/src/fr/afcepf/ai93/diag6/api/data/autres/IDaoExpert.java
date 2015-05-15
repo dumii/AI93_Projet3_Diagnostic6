@@ -12,5 +12,5 @@ public interface IDaoExpert {
 
     public void ajouterExpert(Expert expert );
 
-    public void supprimerExpert(Expert expert);
+    public String supprimerExpert(Expert expert);
 }
