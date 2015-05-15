@@ -9,8 +9,10 @@ import javax.ejb.Stateless;
 
 import fr.afcepf.ai93.diag6.api.business.autres.IBusinessUtilisateur;
 import fr.afcepf.ai93.diag6.api.business.publics.IBusinessPublic;
+import fr.afcepf.ai93.diag6.api.data.autres.IDaoNotifs;
 import fr.afcepf.ai93.diag6.api.data.autres.IDaoUtilisateur;
 import fr.afcepf.ai93.diag6.entity.autres.Favoris;
+import fr.afcepf.ai93.diag6.entity.autres.Notifications;
 import fr.afcepf.ai93.diag6.entity.autres.ProfilUtilisateur;
 import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
@@ -22,6 +24,8 @@ public class BusinessUtilisateurImpl implements IBusinessUtilisateur {
 
 	@EJB
 	public IDaoUtilisateur proxyUser;
+	@EJB
+	public IDaoNotifs proxyNotif;
 	
 	@Override
 	public List<Utilisateur> recupereToutUtilisateur() {
@@ -112,6 +116,11 @@ public class BusinessUtilisateurImpl implements IBusinessUtilisateur {
 	@Override
 	public Utilisateur seConnecter(String login, String motDePasse) {
 		return proxyUser.seConnecter(login, motDePasse);
+	}
+
+	@Override
+	public List<Notifications> recupereToutNotification() {
+		return proxyNotif.recupereToutNotification();
 	}
 
 	

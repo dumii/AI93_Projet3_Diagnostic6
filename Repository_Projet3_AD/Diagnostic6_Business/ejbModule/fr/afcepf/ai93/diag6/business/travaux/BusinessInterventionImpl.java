@@ -7,6 +7,7 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 import fr.afcepf.ai93.diag6.api.business.travaux.IBusinessIntervention;
+import fr.afcepf.ai93.diag6.api.data.autres.IDaoNotifs;
 import fr.afcepf.ai93.diag6.api.data.travaux.IDaoAvancementIntervention;
 import fr.afcepf.ai93.diag6.api.data.travaux.IDaoHistoriqueIntervention;
 import fr.afcepf.ai93.diag6.api.data.travaux.IDaoIntervention;
@@ -31,6 +32,8 @@ public class BusinessInterventionImpl implements IBusinessIntervention {
 	private IDaoAvancementIntervention proxyEtatAvancement;
 	@EJB
 	private IDaoHistoriqueIntervention proxyHistorique;
+	@EJB
+	private IDaoNotifs proxyNotifs;
 	
 	@Override
 	public List<HistoriqueIntervention> recupereToutHistoriqueIntervention() {
@@ -86,6 +89,10 @@ public class BusinessInterventionImpl implements IBusinessIntervention {
 		{
 			proxyIntervention.modifierIntervention(intervention);
 			proxyHistorique.historiser(interventionInitiale, intervention, user);
+			//dans le cas où l'intervention passe en statut "Terminé", une notification est transmise au gestionnaire de diagnostic
+			if(idAvancementNouveau==1){
+				proxyNotifs.envoyerNotificationAuGDiag(2,intervention.getAnomalie().getDiagnostic().getErp(),intervention); 
+			}
 			return "Modification enregistrée avec succès";
 		}
 		else

@@ -26,21 +26,24 @@
 			
 		<h:form id="rechercheBandeau" action="">
 			  <h:inputText value="#{mbRecherche.stringCherche}" id="textInputRecherche" autocomplete="off"
-			  		onkeypress="#{mbRecherche.rechercherString()}" onblur="Show_Div(resultatRecherche)"> 
-					<a4j:ajax event="click"
+			  		onkeypress="#{mbRecherche.rechercherString()}" onblur="PasShow_Div(resultatRecherche)" > 
+					<a4j:ajax event="keyup"
 							listener="#{mbRecherche.rechercherString()}"
-							oncomplete="Show_Div(resultatRecherche)">
+							oncomplete="Show_Div(resultatRecherche)"
+							render="rechercheBandeau">
 					</a4j:ajax>
 			 </h:inputText>
 			<input type="image" src="images/Loupe.png" id="boutonRecherche" 
 			 		onkeypress="#{mbRecherche.rechercherString()}" onclick="Show_Div(resultatRecherche)" />
-			
 			<div id="resultatRecherche">	
 				<div class="resultatsTheme">
 					<div class="titreTheme">Diagnostics</div>
 					<ui:repeat var="diag" value="#{mbRecherche.listeDiagTrouves}" >
 						<div class="resUnitaire">
-						#{diag.intituleDiagnostic}
+						<h:commandLink value="#{diag.intituleDiagnostic}" 
+								action="consultationDiagnostic"> 
+								<f:param name="id" value="#{diag.idDiagnostic}"></f:param>
+						 </h:commandLink>
 						</div>
 					</ui:repeat>
 				</div>
@@ -49,7 +52,10 @@
 					<div class="titreTheme">Travaux</div>
 					<ui:repeat var="trav" value="#{mbRecherche.listeChantiersTrouves}">
 						<div class="resUnitaire">
-						Chantier en cours #{trav.nomChantier}
+						<h:commandLink value="Chantier en cours #{trav.nomChantier}" 
+								action="consultationTravaux"> 
+								<f:param name="id" value="#{trav.erpChantier.idErp}"></f:param>
+						 </h:commandLink>
 						</div>
 					</ui:repeat>
 				</div>
@@ -58,7 +64,10 @@
 					<div class="titreTheme">Patrimoine</div>
 					<ui:repeat var="erp" value="#{mbRecherche.listeErpTrouves}">
 						<div class="resUnitaire">
-						#{erp.nomErp}
+						<h:commandLink value="#{erp.nomErp}" 
+								action="consultationERP"> 
+								<f:param name="id" value="#{erp.idErp}"></f:param>
+						 </h:commandLink>
 						</div>
 					</ui:repeat>
 				</div>
@@ -85,6 +94,14 @@
         function Show_Div(Div_id) {
             if (false == $(Div_id).is(':visible')) {
                 $(Div_id).show(250);
+            }
+            else {
+                //$(Div_id).hide(250);
+            }
+        }
+        function PasShow_Div(Div_id) {
+            if (false == $(Div_id).is(':visible')) {
+                //$(Div_id).show(250);
             }
             else {
                 $(Div_id).hide(250);
