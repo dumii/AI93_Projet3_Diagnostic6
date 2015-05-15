@@ -110,15 +110,48 @@
 	</div>
 		
 		
-	<div id="bandeauDroite">
+		<div id="bandeauDroite">
 		<h:form>
 		<fieldset id="connection">
-			<legend>Bonjour <ui:insert name="nomUtilisateur"/></legend>
+			<legend>Bonjour 
+			#{mbNotifs.user.utilisateur.prenomUtilisateur} #{mbNotifs.user.utilisateur.nomUtilisateur}<ui:insert name="nomUtilisateur"/>
+			<h:commandButton action="#{mbUtilisateur.logout()}" image="images/iconeDeconnexion2.png" class="logoDeconnexion"/></legend>
+			#{mbNotifs.user.utilisateur.profilUtilisateur.nomProfil}
+			<br />
+			<h:commandLink value="Mon compte" 
+						   action="/pageProfil"> 
+				  <f:param name="id" value="#{mbNotifs.user.utilisateur.idUtilisateur}"></f:param>
+			</h:commandLink>
 			<ui:insert name="roleUtilisateur"/>
 		</fieldset>
-		<h:commandButton action="#{mbUtilisateur.logout()}" image="images/iconeDeconnexion2.png" class="logoDeconnexion"/>
-		
+		<fieldset id="Notifications">
+			<legend>Notifications</legend>
+			<ui:repeat var="notif" value="#{mbNotifs.listeNotifs}" >
+						<h:panelGroup layout="block"
+								rendered="#{mbNotifs.user.utilisateur.profilUtilisateur.idProfil==2}">
+								<h:outputText value="L'intervention no #{notif.intervention.idIntervention} a été terminée" />
+									<br />
+									<h:commandLink value="Voir le chantier #{notif.erp.nomErp}" 
+										action="planningTravaux"> 
+										<f:param name="id" value="#{notif.erp.idErp}"></f:param>
+						 			</h:commandLink>
+						 			<br />
+						</h:panelGroup>
+						
+						<h:panelGroup layout="block"
+								rendered="#{mbNotifs.user.utilisateur.profilUtilisateur.idProfil==3}">
+									<h:outputText value="Un nouveau diagnostic a été ajouté" />
+									<br />
+									<h:commandLink value="Voir le diagnostic : #{notif.diagnostic.intituleDiagnostic}" 
+										action="consultationDiagnostic"> 
+										<f:param name="id" value="#{notif.diagnostic.idDiagnostic}"></f:param>
+						 			</h:commandLink>
+						 			<br />
+						</h:panelGroup>
+			</ui:repeat>
+		</fieldset>
 		</h:form>
+		<ui:insert name="boutonDeconnexion" />
 	</div>
 	
 	<div class="content">	

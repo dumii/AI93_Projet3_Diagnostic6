@@ -186,6 +186,8 @@ fieldset
 	font-size: small;
 	padding: 6px;
  	margin-bottom: 12px;
+  	font-family: Arial,sans-serif;
+  	font-size: 12px;
 }
 
 fieldset > legend
@@ -196,10 +198,17 @@ fieldset > legend
 	color: #333366;
 	width: 100%;
 }
+fieldset > a
+{
+	color: black;
+	font-size: 12px;
+	text-decoration: none;
+}
 
 .logoDeconnexion{
 	height: 30px;
 	width: auto;
 	float: right;
-	margin-right: 5px;
+	margin-right: 0px;
+	margin-top: -16px;
 }
