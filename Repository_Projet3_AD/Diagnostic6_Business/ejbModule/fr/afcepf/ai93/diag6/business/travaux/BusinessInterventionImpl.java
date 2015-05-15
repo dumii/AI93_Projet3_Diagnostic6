@@ -7,12 +7,14 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 import fr.afcepf.ai93.diag6.api.business.travaux.IBusinessIntervention;
+import fr.afcepf.ai93.diag6.api.data.autres.IDaoNotifs;
 import fr.afcepf.ai93.diag6.api.data.travaux.IDaoAvancementIntervention;
 import fr.afcepf.ai93.diag6.api.data.travaux.IDaoHistoriqueIntervention;
 import fr.afcepf.ai93.diag6.api.data.travaux.IDaoIntervention;
 import fr.afcepf.ai93.diag6.api.data.travaux.IDaoTypeIntervention;
 import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
+import fr.afcepf.ai93.diag6.entity.erp.Erp;
 import fr.afcepf.ai93.diag6.entity.travaux.EtatAvancementTravaux;
 import fr.afcepf.ai93.diag6.entity.travaux.HistoriqueIntervention;
 import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
@@ -30,6 +32,8 @@ public class BusinessInterventionImpl implements IBusinessIntervention {
 	private IDaoAvancementIntervention proxyEtatAvancement;
 	@EJB
 	private IDaoHistoriqueIntervention proxyHistorique;
+	@EJB
+	private IDaoNotifs proxyNotifs;
 	
 	@Override
 	public List<HistoriqueIntervention> recupereToutHistoriqueIntervention() {
@@ -85,6 +89,10 @@ public class BusinessInterventionImpl implements IBusinessIntervention {
 		{
 			proxyIntervention.modifierIntervention(intervention);
 			proxyHistorique.historiser(interventionInitiale, intervention, user);
+			//dans le cas où l'intervention passe en statut "Terminé", une notification est transmise au gestionnaire de diagnostic
+			if(idAvancementNouveau==1){
+				proxyNotifs.envoyerNotificationAuGDiag(2,intervention.getAnomalie().getDiagnostic().getErp(),intervention); 
+			}
 			return "Modification enregistrée avec succès";
 		}
 		else
@@ -146,6 +154,12 @@ public class BusinessInterventionImpl implements IBusinessIntervention {
 	}
 
 	@Override
+	public List<HistoriqueIntervention> recupereHistoriqueInterventionParERP(
+			Erp erp) 
+	{
+		return proxyHistorique.recupereHistoriqueInterventionParERP(erp);
+	}
+		@Override
 	public boolean voirSiInterventionEnCoursParErp(int idErp) {
 		int a = 0;
 		a = proxyIntervention.nombreInterventionEnCoursPlanifSuspParErp(idErp); 

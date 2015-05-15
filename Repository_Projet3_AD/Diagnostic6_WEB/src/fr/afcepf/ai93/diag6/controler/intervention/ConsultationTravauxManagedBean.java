@@ -186,13 +186,33 @@ public class ConsultationTravauxManagedBean {
 	
 	public String terminesOuTravauxEnCours(int nombreTermines, int nombreTotal)
 	{		
-		if (nombreTermines == nombreTotal)
+		if (nombreTotal == 0)
 		{
-			return "images/travauxTermines.png";
+			return "images/pasDeTravaux.png";
+		}
+		else if (nombreTermines == nombreTotal)
+		{
+			return "images/travauxTermines.56.64.png";
 		}
 		else
 		{
-			return "images/travauxEnCours.png";
+			return "images/travauxEnCours.53.65.png";
+		}
+	}
+	
+	public String terminesOuTravauxEnCoursToString(int nombreTermines, int nombreTotal)
+	{		
+		if (nombreTotal == 0)
+		{
+			return "Aucunes interventions de programmées";
+		}
+		else if (nombreTermines == nombreTotal)
+		{
+			return "Interventions terminées";
+		}
+		else
+		{
+			return "Interventions en cours";
 		}
 	}
 	

@@ -8,6 +8,7 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 import fr.afcepf.ai93.diag6.api.business.diagnostic.IBusinessDiagnostic;
+import fr.afcepf.ai93.diag6.api.data.autres.IDaoNotifs;
 import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoDiagnostic;
 import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoHistoriqueDiagnostic;
 import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoIndicateur;
@@ -31,6 +32,8 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 	private IDaoIndicateur proxyIndicateur; 
 	@EJB
 	private IDaoHistoriqueDiagnostic proxyHistoDiag; 
+	@EJB
+	private IDaoNotifs proxyNotifs; 
 	
 	private List<Diagnostic> listeDiag; 
 	private List<Diagnostic> listeDiagIntervEnCours = new ArrayList<Diagnostic>(); 
@@ -100,6 +103,7 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 		} 
 		if (ajoutAutorise == true) {	
 			proxyDiagnostic.ajouterDiagnostic(diagnostic);
+			proxyNotifs.envoyerNotificationAuGTravaux(3,getMaxId()); 
 			return "Intervention enregistrée avec succès";
 				
 		}else

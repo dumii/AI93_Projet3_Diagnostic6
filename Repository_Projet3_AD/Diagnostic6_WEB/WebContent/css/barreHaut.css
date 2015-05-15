@@ -3,8 +3,10 @@
 	font-size: 11px;
 }
 
-.resultatsTheme{
-	
+.resUnitaire > a{
+	font-size: 10px;
+	text-decoration:none;
+	color:black;
 }
 
 .titreTheme{

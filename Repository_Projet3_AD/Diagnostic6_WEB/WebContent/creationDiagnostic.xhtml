@@ -36,7 +36,6 @@
 								#{mbCreationDiagnostic.idDiagnostic} Diagnostic
 								<span id="spanTypeSelectionne"></span> 
 								#{mbCreationDiagnostic.monERP.nomErp}
-								
 								<h:commandLink class="btn" value="Enregistrer" id="boutonAjouterDiagnostic">
 									<a4j:ajax event="click" 
 											render="toto"
@@ -66,7 +65,7 @@
 												   var="erp"
 												   itemLabel="#{erp.nomErp}"
 												   itemValue="#{erp.idErp}"/>
-									<a4j:ajax event="cha nge"
+									<a4j:ajax event="change"
 							 				  listener="#{mbCreationDiagnostic.rechercheTypeDiagnosticDispo()}"
 							 				  render="toto"/>
 								</h:selectOneListbox>

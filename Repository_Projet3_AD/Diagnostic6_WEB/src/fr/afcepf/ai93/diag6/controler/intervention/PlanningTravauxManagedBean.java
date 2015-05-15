@@ -98,6 +98,7 @@ public class PlanningTravauxManagedBean {
 		listeTypesERP = new ArrayList<>();
 		listeArtisans = proxyArtisan.recupererToutArtisan();
 		listeTousEtats = proxyIntervention.recupererTousEtats();
+		listeTousTypes = proxyIntervention.recupererTousTypesIntervention();
 		
 		chargerListeAnomalieEtIntervention();
 		
@@ -107,6 +108,9 @@ public class PlanningTravauxManagedBean {
 	
 	public String ajouterIntervention (Intervention intervention, Anomalie anom) throws ParseException
 	{
+		System.out.println("tot");
+		System.out.println("intervention : " + intervention);
+		
 		if (intervention.getCoutIntervention() != 0)
 		{
 			if (intervention.getDateDebutIntervention() != null)
@@ -115,11 +119,12 @@ public class PlanningTravauxManagedBean {
 				{
 					intervention.setAnomalie(anom);
 					proxyIntervention.ajouterIntervention(intervention, anom);
+					initialisationDesDonnees();
 				}
 			}
 		}	
-		init();
-		return "Ajout effectué avec succès";
+		
+		return "";
 	}
 	
 	public String modifier(Intervention intervention) throws ParseException
@@ -133,8 +138,6 @@ public class PlanningTravauxManagedBean {
 	}
 	
 	public void chargerTypesInterventionEtIntervention() {
-		
-		listeTousTypes = proxyIntervention.recupererTousTypesIntervention();
 		
 		for (TypeIntervention type : listeTousTypes)
 		{
@@ -190,9 +193,9 @@ public class PlanningTravauxManagedBean {
 					listeAnomalieSansInterventionERP.add(anom);
 					
 					anom.setIntervention(new Intervention());
-					anom.getIntervention().setEtatAvancementTravaux(new EtatAvancementTravaux());
-					anom.getIntervention().setArtisan(new Artisan());
-					anom.getIntervention().setTypeIntervention(new TypeIntervention());
+					anom.getIntervention().setEtatAvancementTravaux(listeTousEtats.get(0));
+					anom.getIntervention().setArtisan(listeArtisans.get(0));
+					anom.getIntervention().setTypeIntervention(listeTousTypes.get(0));
 				}
 			}
 		}		

@@ -3,6 +3,7 @@ package fr.afcepf.ai93.diag6.api.business.autres;
 import java.util.List;
 
 import fr.afcepf.ai93.diag6.entity.autres.Favoris;
+import fr.afcepf.ai93.diag6.entity.autres.Notifications;
 import fr.afcepf.ai93.diag6.entity.autres.ProfilUtilisateur;
 import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 
@@ -37,4 +38,6 @@ public interface IBusinessUtilisateur {
     public List<Utilisateur> trouverUtilisateur(String nom);
     
     public Utilisateur seConnecter(String login, String motDePasse);
+
+	public List<Notifications> recupereToutNotification();
 }

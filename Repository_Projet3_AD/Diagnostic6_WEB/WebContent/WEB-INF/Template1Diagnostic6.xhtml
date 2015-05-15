@@ -20,11 +20,11 @@
 
 	<div id="enTete">
 	
-		<a href=""><img id="logoAccueil" src="images/Logo2.png" /></a>
+		<h:commandButton action="/Accueil" image="images/Logo2.png" class="logoAccueil"/>
 			
 		<h:form id="rechercheBandeau" action="">
 			<input type="text" value="Entrez votre recherche ici ..."/>
-			<input type="image" src="images/Loupe.png" class="logoRecherche"/>
+			<input type="image" src="images/Loupe.png" />
 			<div id="resultatRecherche">
 				<div class="titreResultat">
 				Diagnostics
@@ -58,8 +58,7 @@
 	
 		</h:form>
 	</div>
-
 	<ui:insert name="content" />
+
 </h:body>
-	
 </html>
