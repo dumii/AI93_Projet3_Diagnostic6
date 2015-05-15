@@ -64,9 +64,9 @@ public class UtilisateurManagedBean implements Serializable {
 	
 	@PostConstruct
 	private void init() {
-		idUtil=1;
+		// idUtil=1;
 		formater = new SimpleDateFormat("dd/MM/yyyy");
-		recupUtilisateur();
+		// recupUtilisateur();
 		//System.out.println("Coucou  "+utilisateur.getDateEnregistrement());
 		//System.out.println(formater.format(utilisateur.getDateEnregistrement()));
 		
@@ -90,17 +90,17 @@ public class UtilisateurManagedBean implements Serializable {
 			
 			int idProfil = this.utilisateur.getProfilUtilisateur().getIdProfil(); 
 			
-			if (idProfil == 5){
+			if (idProfil < 4 ){
 
 				ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 				try {
-					ec.redirect(ec.getRequestContextPath() + "/TestTravaux.jsf");
+					ec.redirect(ec.getRequestContextPath() + "/TableauDeBord.jsf");
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
-			if (idProfil == 3){
+			if (idProfil == 5){
 
 				ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 				try {
@@ -110,7 +110,7 @@ public class UtilisateurManagedBean implements Serializable {
 					e.printStackTrace();
 				}
 			}
-			if (idProfil == 2){
+			if (idProfil == 4){
 
 				ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 				try {
@@ -134,12 +134,12 @@ public class UtilisateurManagedBean implements Serializable {
 		ec.redirect("http://localhost:9090/Diagnostic6_WEB/Accueil.jsf");
 	}
 	
-	public void recupUtilisateur()
-	{
-		System.out.println("1111111111111111111111 je suis entré dans ma méthode 1111111111111111111111111");
-		utilisateur = proxyBusinessUtilisateur.recupereUtilisateur(idUtil);
-		System.out.println("2222222222222222222222 je suis sorti de ma méthode 222222222222222222222222");
-	}
+//	public void recupUtilisateur()
+//	{
+//		System.out.println("1111111111111111111111 je suis entré dans ma méthode 1111111111111111111111111");
+//		utilisateur = proxyBusinessUtilisateur.recupereUtilisateur(idUtil);
+//		System.out.println("2222222222222222222222 je suis sorti de ma méthode 222222222222222222222222");
+//	}
 	
 	public void modificationUtilisateur(){
 		System.out.println("je modifie l'utilisateur");
@@ -151,7 +151,7 @@ public class UtilisateurManagedBean implements Serializable {
 			System.out.println("je passe dans le else");
 			proxyBusinessUtilisateur.modifierUtilisateur(utilisateur);
 			umodif = new Utilisateur();
-			recupUtilisateur();
+			//recupUtilisateur();
 		}
 	}
 	

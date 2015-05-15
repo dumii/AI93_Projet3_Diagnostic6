@@ -7,137 +7,262 @@
 	xmlns:rich="http://richfaces.org/rich">
 
 <h:head>
-
+	<title>D6 Tableau de bord</title>
 </h:head>
 <body>
 	<ui:composition template="/WEB-INF/Template3Diagnostic6.xhtml">
-
+		<ui:define name="title">D6 Tableau de bord</ui:define>
 		<ui:define name="head">
 			<link href="css/tableauDeBord.css" rel="stylesheet" type="text/css" />
+
 		</ui:define>
-		
+
 		<ui:define name="content">
-		<div id="content">
-			<h:form>
-				<a4j:outputPanel id="panel" layout="block">
-					<a4j:repeat value="#{mbTableauDeBord.listeErpFiltree}" var="o"
-						rows="20" id="repeat" styleClass="border-radius: 5px;">
-						<rich:panel header="#{o.nomErp}"
-							style="border-radius: 5px; position:relative;float:left; width:60%; padding:1px; background-color:#f7f7f7; border-display:none;margin-left: 14%;" styleClass="richpanel">
-							<h:button clas="bouton" value="Planning" />
-							<a4j:repeat value="#{o.listeDiagnosticErp}" var="d" rows="20"
-								id="repeat" styleClass="height: 75px; border-radius: 5px;">
-								<rich:panel
-									style="height: 95px; margin-top: 3px; border-radius: 5px; background-color: #EFF2FB"
-									id="repeater">
-									<div class="logoTypeDiag">
-										<h:panelGroup layout="block"
-											rendered="#{d.typeDiagnostic.idTypeDiagnostic==1}">
-											<img src="images/tableauDeBord/TypeAcces.75.71.png" alt=""
-												id="iconeTypeDiag" />
-										</h:panelGroup>
-										<h:panelGroup layout="block"
-											rendered="#{d.typeDiagnostic.idTypeDiagnostic==2}">
-											<img src="images/tableauDeBord/TypeEnergie.75.71.png" alt=""
-												id="iconeTypeDiag" />
-										</h:panelGroup>
-										<h:panelGroup layout="block"
-											rendered="#{d.typeDiagnostic.idTypeDiagnostic==3}">
-											<img src="images/tableauDeBord/TypeSecurite.75.75.png" alt=""
-												id="iconeTypeDiag" />
-										</h:panelGroup>
-										<h:panelGroup layout="block"
-											rendered="#{d.typeDiagnostic.idTypeDiagnostic==4}">
-											<img src="images/tableauDeBord/TypeHygiene.75.71.png" alt=""
-												id="iconeTypeDiag" />
-										</h:panelGroup>
-									</div>
-									<div class="intituleDiag">
-										<h:outputText value="#{d.typeDiagnostic.nomType}"  />
-									</div>
-									<div class="nbInterDiag">
-										<h:outputText
-											value="#{mbTableauDeBord.calculAnomaliesParDiag(o, d)}" />
-										<h:outputText value=" anomalies" />
-										<br />
-										<!-- <h:outputText
-											value="#{mbTableauDeBord.calculInterventionsParDiag(d)}" />
-										<h:outputText value=" interventions" /> -->
-									</div>
-									<div class="logoIndicateur">
-										<h:panelGroup layout="block"
-											rendered="#{mbTableauDeBord.calculerMoyenneParDiag(d) == 1}">
-											<img
-												src="images/tableauDeBord/Indicateur Vert 1 - 153.75.png"
-												alt="" id="iconeIndicateur" />
-										</h:panelGroup>
-										<h:panelGroup layout="block"
-											rendered="#{mbTableauDeBord.niveauMoyen == 2}">
-											<img
-												src="images/tableauDeBord/Indicateur Jaune 2 - 153.75.png"
-												alt="" id="iconeIndicateur" />
-										</h:panelGroup>
-										<h:panelGroup layout="block"
-											rendered="#{mbTableauDeBord.niveauMoyen == 3}">
-											<img
-												src="images/tableauDeBord/Indicateur Orange 3 - 152.75.png"
-												alt="" id="iconeIndicateur" />
-										</h:panelGroup>
-										<h:panelGroup layout="block"
-											rendered="#{mbTableauDeBord.niveauMoyen == 4}">
-											<img
-												src="images/tableauDeBord/Indicateur Rouge 4 - 153.75.png"
-												alt="" id="iconeIndicateur" />
-										</h:panelGroup>
-									</div>
-									<div class="logoEtatAvancement">
-										<h:panelGroup layout="block"
-											rendered="#{mbTableauDeBord.calculEtatAvancement(d) == 1}">
-											<img src="images/tableauDeBord/iconeValider5.png" alt=""
-												id="iconeEtatAvancement" />
-										</h:panelGroup>
-										<h:panelGroup layout="block"
-											rendered="#{mbTableauDeBord.etatTmp == 2}">
-											<img src="images/tableauDeBord/iconeSuspendue5.png" alt=""
-												id="iconeEtatAvancement" />
-										</h:panelGroup>
-										<h:panelGroup layout="block"
-											rendered="#{mbTableauDeBord.etatTmp == 3}">
-											<img src="images/tableauDeBord/iconeEnCours5.png" alt=""
-												id="iconeEtatAvancement" />
-										</h:panelGroup>
-										<h:panelGroup layout="block"
-											rendered="#{mbTableauDeBord.etatTmp == 4}">
-											<img src="images/tableauDeBord/iconeSuspendue5.png" alt=""
-												id="iconeEtatAvancement" />
-										</h:panelGroup>
-										<h:panelGroup layout="block"
-											rendered="#{mbTableauDeBord.etatTmp == 5}">
-											<img src="images/tableauDeBord/iconeEnAttente5.png" alt=""
-												id="iconeEtatAvancement" />
-										</h:panelGroup>
-									</div>
-									<div class="boutonsActions">
-										<div>
-											<h:button class="bouton" value="Diagnostic" />
-											<br />
-											
-										</div>
-									</div>
-								</rich:panel>
 
-							</a4j:repeat>
-							<h:panelGrid columns="2">
+			<div id="content">
+				<h:form>
+					<f:view>
+						<div class="panelFiltres">
+							<rich:panel headerClass="piotr" styleClass="filtres piotr2">
+								<f:facet name="header">
+									<h:outputText value="Nom ERP : "></h:outputText>
+								</f:facet>
+								<rich:select styleClass="" enableManualInput="true"
+									defaultLabel="Rechercher / sélectionner"
+									value="#{mbTableauDeBord.idErpSelectionne}" id="choixNomErp">
+									<f:selectItems value="#{mbTableauDeBord.listeErpComplete}"
+										var="lst" itemLabel="#{lst.nomErp}" itemValue="#{lst.idErp}">
+									</f:selectItems>
+									<a4j:ajax event="change" onbegin="charger()"
+										oncomplete="fini()" listener="#{mbTableauDeBord.filtrer()}"
+										render="panel" />
+								</rich:select>
+							</rich:panel>
 
-							</h:panelGrid>
-						</rich:panel>
-					</a4j:repeat>
-				</a4j:outputPanel>
+							<rich:panel headerClass="piotr" styleClass="filtres piotr2">
+								<f:facet name="header">
+									<h:outputText value="Type ERP :"></h:outputText>
+								</f:facet>
+								<rich:select enableManualInput="true"
+									defaultLabel="Rechercher / sélectionner"
+									value="#{mbTableauDeBord.idTypeErp}" id="choixTypeErp">
+									<f:selectItems value="#{mbTableauDeBord.listeTypesErpComplete}"
+										var="lst" itemLabel="#{lst.typeErpCourt}"
+										itemValue="#{lst.idTypeErp}">
+									</f:selectItems>
+									<a4j:ajax event="change" onbegin="charger()"
+										oncomplete="fini()" listener="#{mbTableauDeBord.filtrer()}"
+										render="panel" />
+								</rich:select>
+							</rich:panel>
 
-			</h:form>
+							<rich:panel headerClass="piotr" styleClass="filtres piotr2">
+								<f:facet name="header">
+									<h:outputText value="Type de diagnostic :"></h:outputText>
+								</f:facet>
+								<rich:select enableManualInput="true"
+									defaultLabel="Rechercher / sélectionner"
+									value="#{mbTableauDeBord.idTypeDiagnostic}" id="choixTypeDiag">
+									<f:selectItems
+										value="#{mbTableauDeBord.listeTypesDiagnosticComplete}"
+										var="lst" itemLabel="#{lst.nomType}"
+										itemValue="#{lst.idTypeDiagnostic}">
+									</f:selectItems>
+									<a4j:ajax event="change" onbegin="charger()"
+										oncomplete="fini()" listener="#{mbTableauDeBord.filtrer()}"
+										render="panel" />
+								</rich:select>
+							</rich:panel>
+
+							<rich:panel headerClass="piotr" styleClass="filtres piotr2">
+								<f:facet name="header">
+									<h:outputText value="Niveau moyen de l'indicateur :"></h:outputText>
+								</f:facet>
+								<rich:select enableManualInput="true"
+									defaultLabel="Rechercher / sélectionner"
+									value="#{mbTableauDeBord.idNiveau}" id="choixNiveau">
+									<f:selectItem itemValue="1" itemLabel="1 Priorité faible" />
+									<f:selectItem itemValue="2" itemLabel="2 Acceptable" />
+									<f:selectItem itemValue="3" itemLabel="3 Prioritaire" />
+									<f:selectItem itemValue="4" itemLabel="4 Critique" />
+									<a4j:ajax event="change" onbegin="charger()"
+										oncomplete="fini()" listener="#{mbTableauDeBord.filtrer()}"
+										render="panel" />
+								</rich:select>
+							</rich:panel>
+
+							<rich:panel headerClass="piotr" styleClass="filtres piotr2"
+								style="width:19.8%!important">
+								<f:facet name="header">
+									<h:outputText value="Etat d'avancement des travaux :"></h:outputText>
+								</f:facet>
+								<rich:select enableManualInput="true"
+									defaultLabel="Rechercher / sélectionner"
+									value="#{mbTableauDeBord.idEtatAvancementSelectionne}"
+									id="choixEtatInterv">
+									<f:selectItems value="#{mbTableauDeBord.listeEtatsComplete}"
+										var="lst" itemLabel="#{lst.intituleEtatAvancement}"
+										itemValue="#{lst.idEtatAvancement}">
+									</f:selectItems>
+									<a4j:ajax event="change" onbegin="charger()"
+										oncomplete="fini()" listener="#{mbTableauDeBord.filtrer()}"
+										render="panel" />
+								</rich:select>
+							</rich:panel>
+
+						</div>
+
+
+						<div class="affiche">
+							<a4j:outputPanel id="panel" layout="block">
+								<a4j:repeat value="#{mbTableauDeBord.listeErpFiltree}" var="o"
+									rows="20" id="repeat">
+									<rich:panel
+										style="border-radius: 2px; 
+						position:relative;float:left; width:60%; background-color:#FDFDFE; 
+						border-display:none;margin-left: 14%; margin-bottom: 3px;border-color: #E6ECF7;"
+										styleClass="richpanel">
+										<f:facet name="header">
+											<h:outputText value="#{o.nomErp}" />
+											<h:commandLink class="boutonPlanning"
+												value="Consulter le planning"></h:commandLink>
+										</f:facet>
+										<a4j:repeat value="#{o.listeDiagnosticErp}" var="d" rows="20"
+											id="repeat"
+											styleClass="height: 75px; border-radius: 2px;border-color: E6ECF7">
+											<rich:panel
+												style="height: 95px; margin-top: 3px; border-radius: 2px; border-color: #E6ECF7;background-color: #EFF2FB"
+												id="repeater">
+												<div class="logoTypeDiag">
+													<h:panelGroup layout="block"
+														rendered="#{d.typeDiagnostic.idTypeDiagnostic==1}">
+														<img src="images/tableauDeBord/TypeAcces.75.71.png" alt=""
+															id="iconeTypeDiag" />
+													</h:panelGroup>
+													<h:panelGroup layout="block"
+														rendered="#{d.typeDiagnostic.idTypeDiagnostic==2}">
+														<img src="images/tableauDeBord/TypeEnergie.75.71.png"
+															alt="" id="iconeTypeDiag" />
+													</h:panelGroup>
+													<h:panelGroup layout="block"
+														rendered="#{d.typeDiagnostic.idTypeDiagnostic==3}">
+														<img src="images/tableauDeBord/TypeSecurite.75.75.png"
+															alt="" id="iconeTypeDiag" />
+													</h:panelGroup>
+													<h:panelGroup layout="block"
+														rendered="#{d.typeDiagnostic.idTypeDiagnostic==4}">
+														<img src="images/tableauDeBord/TypeHygiene.75.71.png"
+															alt="" id="iconeTypeDiag" />
+													</h:panelGroup>
+												</div>
+												<div class="intituleDiag">
+													<h:outputText value="#{d.typeDiagnostic.nomType}" />
+												</div>
+												<div class="nbInterDiag">
+													<h:outputText
+														value="#{mbTableauDeBord.calculAnomaliesParDiag(o, d)}" />
+													<h:outputText value=" anomalies" />
+													<br />
+													<h:outputText
+														value="#{mbTableauDeBord.calculInterventionsParDiag(d)}" />
+													<h:outputText value=" interventions" />
+												</div>
+												<div class="logoIndicateur">
+													<h:panelGroup layout="block"
+														rendered="#{mbTableauDeBord.calculerMoyenneParDiag(d) == 1}">
+														<img
+															src="images/tableauDeBord/Indicateur Vert 1 - 153.75.png"
+															alt="" id="iconeIndicateur" />
+													</h:panelGroup>
+													<h:panelGroup layout="block"
+														rendered="#{mbTableauDeBord.niveauMoyen == 2}">
+														<img
+															src="images/tableauDeBord/Indicateur Jaune 2 - 153.75.png"
+															alt="" id="iconeIndicateur" />
+													</h:panelGroup>
+													<h:panelGroup layout="block"
+														rendered="#{mbTableauDeBord.niveauMoyen == 3}">
+														<img
+															src="images/tableauDeBord/Indicateur Orange 3 - 152.75.png"
+															alt="" id="iconeIndicateur" />
+													</h:panelGroup>
+													<h:panelGroup layout="block"
+														rendered="#{mbTableauDeBord.niveauMoyen == 4}">
+														<img
+															src="images/tableauDeBord/Indicateur Rouge 4 - 153.75.png"
+															alt="" id="iconeIndicateur" />
+													</h:panelGroup>
+												</div>
+												<div class="logoEtatAvancement">
+													<h:panelGroup layout="block"
+														rendered="#{mbTableauDeBord.calculEtatAvancement(d) == 1}">
+														<img src="images/tableauDeBord/iconeValider5.png" alt=""
+															id="iconeEtatAvancement" />
+													</h:panelGroup>
+													<h:panelGroup layout="block"
+														rendered="#{mbTableauDeBord.etatTmp == 2}">
+														<img src="images/tableauDeBord/iconeEnAttente5.png" alt=""
+															id="iconeEtatAvancement" />
+													</h:panelGroup>
+													<h:panelGroup layout="block"
+														rendered="#{mbTableauDeBord.etatTmp == 3}">
+														<img src="images/tableauDeBord/iconeEnCours5.png" alt=""
+															id="iconeEtatAvancement" />
+													</h:panelGroup>
+													<h:panelGroup layout="block"
+														rendered="#{mbTableauDeBord.etatTmp == 4}">
+														<img src="images/tableauDeBord/iconeSuspendue5.png" alt=""
+															id="iconeEtatAvancement" />
+													</h:panelGroup>
+													<h:panelGroup layout="block"
+														rendered="#{mbTableauDeBord.etatTmp == 5}">
+														<img src="images/tableauDeBord/iconeEnAttente5.png" alt=""
+															id="iconeEtatAvancement" />
+													</h:panelGroup>
+												</div>
+												<div class="boutonsActions">
+													<div>
+														<h:button class="bouton" value="Diagnostic" />
+														<br />
+
+													</div>
+												</div>
+												<div id="chargement" style="display: none">
+													<img src="images/attente.gif"
+														style="width: 150px; height: 150px; margin-left: 400px;" />
+												</div>
+											</rich:panel>
+
+										</a4j:repeat>
+									</rich:panel>
+								</a4j:repeat>
+							</a4j:outputPanel>
+						</div>
+
+						<script type="text/javascript">
+function charger() {
+	with(document.getElementById("chargement")) {
+		style.display = "block";
+		style.position = "absolute";
+		style.top = "0px";
+		style.right = "0px";
+		style.width = "800px";
+		style.height = "800px";
+	}
+}
+function fini () {
+	with(document.getElementById("chargement")) {
+		style.display = "none";
+	}	
+}
+</script>
+
+					</f:view>
+
+				</h:form>
 			</div>
 		</ui:define>
-		
+
 	</ui:composition>
 
 
