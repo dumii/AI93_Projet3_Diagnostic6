@@ -23,10 +23,11 @@
 <body> 
 	<div id="enTete">
 	
-		<a href=""><img id="logoAccueil" src="images/Logo2.png" onclick="javascript:document.location.href='../Diagnostic6_WEB/Accueil.jsf'"/></a>
+		<h:form id="rechercheBandeau">
+		<h:commandButton action="/Accueil" image="images/Logo2.png" class="logoAccueil"/>
 			
-		<h:form id="rechercheBandeau" action="">
-		<input type="text" value="Entrez votre recherche ici ..."/>
+		
+			<input type="text" value="Entrez votre recherche ici ..."/>
 			<input type="image" src="images/Loupe.png" class="logoRecherche"/>
 			<div id="resultatRecherche">
 				<div class="titreResultat">
@@ -50,13 +51,15 @@
 					</ui:repeat>
 				</div>
 			</div>
+		
 		<h:commandButton action="/TableauDeBord" image="images/TableauBordIconeOrange.png" class="logoMenu2" id="logoTabBord"/>
 			
 		<h:commandButton action="/accueilTravaux" image="images/BuildingConstruction_icon.png" class="logoMenu" id="logoTrav"/>
 			
 		<h:commandButton action="/accueilDiagnostic" image="images/DiagnosticIconeBleue.png" class="logoMenu" id="logoDiag"/>
 			
-		<h:commandButton action="/accueilERP" image="images/ERPIconeBleue2.png" class="logoMenu" id="logoErp"/>	
+		<h:commandButton action="/accueilERP" image="images/ERPIconeBleue2.png" class="logoMenu" id="logoErp"/>		
+		
 		</h:form>
 		<ui:insert name="boutonDeconnexion" />
 		
@@ -67,31 +70,11 @@
 			<legend>Bonjour <ui:insert name="nomUtilisateur"/></legend>
 			<ui:insert name="roleUtilisateur"/>
 		</fieldset>
-		
-		<fieldset id="favoris">
-			<legend>Mes favoris</legend>
-		</fieldset>
-		
-		<fieldset id="notification">
-			<legend>Dernières actualités</legend>
-			
-			<article>
-				<header><ui:insert name="motifNotification"/></header>
-				<time><ui:insert name="dateNotification"/></time>
-				<section><ui:insert name="notification"/></section>
-			</article>
-			
-			<article>
-				<header><ui:insert name="motifNotification"/></header>
-				<time><ui:insert name="dateNotification"/></time>
-				<section><ui:insert name="notification"/></section>
-			</article>
-			
-		</fieldset>
+		<ui:insert name="boutonDeconnexion" />
 	</div>
-	<div class="content">
-		<ui:insert name="content"/>
-	</div>
+	
+	<ui:insert name="content" />
+	
 <script>
 			jQuery.noConflict();
 			$(function(){

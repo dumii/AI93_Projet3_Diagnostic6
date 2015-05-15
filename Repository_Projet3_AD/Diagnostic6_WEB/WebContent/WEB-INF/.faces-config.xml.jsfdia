@@ -8,6 +8,8 @@
     NAME="output" PATH="/creationDiagnostic.jsf"
     SHAPE="113,104,272,104,272,80,407,80"
     TARGET="rules:#creationDiagnostic.jsf" TITLE="creationDiagnostic" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="Accueil::#Accueil.jsf" NAME="output1"
+    PATH="/Accueil.jsf" TARGET="rules:#Accueil.jsf" TITLE="Accueil" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#consultationTravaux.jsf"
@@ -27,6 +29,8 @@
    <PROCESS-ITEM-OUTPUT ID="historiqueTravaux::#historiqueTravaux.jsf"
     NAME="output2" PATH="/historiqueTravaux.jsf"
     TARGET="rules:#historiqueTravaux.jsf" TITLE="historiqueTravaux" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="Accueil::#Accueil.jsf" NAME="output3"
+    PATH="/Accueil.jsf" TARGET="rules:#Accueil.jsf" TITLE="Accueil" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#accueilTravaux.jsf"
@@ -41,6 +45,8 @@
    <PROCESS-ITEM-OUTPUT ID="TableauDeBord::#TableauDeBord.jsf"
     NAME="output1" PATH="/TableauDeBord.jsf"
     TARGET="rules:#TableauDeBord.jsf" TITLE="TableauDeBord" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="Accueil::#Accueil.jsf" NAME="output2"
+    PATH="/Accueil.jsf" TARGET="rules:#Accueil.jsf" TITLE="Accueil" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#planningTravaux.jsf"
@@ -52,10 +58,12 @@
     PATH="/consultationTravaux.jsf"
     SHAPE="153,504,158,504,158,416,72,416,72,328,87,328"
     TARGET="rules:#consultationTravaux.jsf" TITLE="consultationTravaux" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="Accueil::#Accueil.jsf" NAME="output1"
+    PATH="/Accueil.jsf" TARGET="rules:#Accueil.jsf" TITLE="Accueil" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#accueilDiagnostic.jsf"
-  PATH="/accueilDiagnostic.jsf" SHAPE="728,296,50,57" model-entity="JSFProcessGroup">
+  PATH="/accueilDiagnostic.jsf" SHAPE="912,224,50,57" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#accueilDiagnostic.jsf:0" NAME="item"
    PATH="/accueilDiagnostic.jsf" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
@@ -66,6 +74,8 @@
    <PROCESS-ITEM-OUTPUT ID="TableauDeBord::#TableauDeBord.jsf"
     NAME="output1" PATH="/TableauDeBord.jsf"
     TARGET="rules:#TableauDeBord.jsf" TITLE="TableauDeBord" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="Accueil::#Accueil.jsf" NAME="output2"
+    PATH="/Accueil.jsf" TARGET="rules:#Accueil.jsf" TITLE="Accueil" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#creationDiagnostic.jsf"
@@ -78,6 +88,8 @@
     SHAPE="457,104,464,104,464,40,40,40,40,80,63,80"
     TARGET="rules:#consultationDiagnostic.jsf"
     TITLE="consultationDiagnostic" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="Accueil::#Accueil.jsf" NAME="output1"
+    PATH="/Accueil.jsf" TARGET="rules:#Accueil.jsf" TITLE="Accueil" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#TableauDeBord.jsf" PATH="/TableauDeBord.jsf"
@@ -92,6 +104,8 @@
     TARGET="rules:#accueilTravaux.jsf" TITLE="accueilTravaux" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT ID="Accueil::#Accueil.jsf" NAME="output2"
     PATH="/Accueil.jsf" TARGET="rules:#Accueil.jsf" TITLE="Accueil" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="Accueil1::#Accueil.jsf" NAME="output3"
+    PATH="/Accueil.jsf" TARGET="rules:#Accueil.jsf" TITLE="Accueil1" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#Accueil.jsf" PATH="/Accueil.jsf"
@@ -103,9 +117,12 @@
     TARGET="rules:#TableauDeBord.jsf" TITLE="TableauDeBord" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#historiqueTravaux.xhtml"
-  PATH="/historiqueTravaux.xhtml" SHAPE="196,434,0,0"
-  model-entity="JSFProcessGroup" persistent="true"/>
  <PROCESS-ITEM NAME="rules:#historiqueTravaux.jsf"
-  PATH="/historiqueTravaux.jsf" SHAPE="496,241,0,0" model-entity="JSFProcessGroup"/>
+  PATH="/historiqueTravaux.jsf" SHAPE="496,241,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#historiqueTravaux.jsf:0" NAME="item"
+   PATH="/historiqueTravaux.jsf" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="Accueil::#Accueil.jsf" NAME="output"
+    PATH="/Accueil.jsf" TARGET="rules:#Accueil.jsf" TITLE="Accueil" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
 </PROCESS>

@@ -45,7 +45,8 @@ body
     width: 200px;
     display:inline-block;
     vertical-align:top;
-    margin-top:5.3%;
+    margin-top:4%;
+    margin-left:100px;
     margin-right:-5px;
 }
 
@@ -54,7 +55,8 @@ body
 	display:inline-block;
 	height: 17px;
 	border: #BDBDBD solid 1px;
-	margin-top:5%;
+	vertical-align:top;
+	margin-top:3.8%;
 	margin-left:0;
 	margin-right:50px;
 }
@@ -68,8 +70,8 @@ body
 }
 
 .logoAccueil {
-	margin-left: 7%;
-	height: 73%;
+	display:inline-block;
+	height: 55px;
 	margin-bottom: 2%;
 	margin-top:4px;
 }

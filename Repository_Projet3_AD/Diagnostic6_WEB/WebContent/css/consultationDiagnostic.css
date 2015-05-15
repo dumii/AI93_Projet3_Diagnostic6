@@ -1,19 +1,6 @@
 /*************************************/
-/* Bordure à supprimer  */
+/* Mini Barre d'ï¿½tat Consultation Diagnostic */
 /*************************************/
-
-/*************************************/
-/* Mini Barre d'état Consultation Diagnostic */
-/*************************************/
-
-.logoDeconnexion{
-	margin-top: -68px;
-	height: 55px;
-	width: auto;
-	float: right;
-	margin-right: 30px;
-
-}
 
 h2{
   	background-size: 100%;
@@ -32,20 +19,14 @@ h2{
   	margin: 0px;
 }
 
-html
-{
-	overflow: scroll;
-}
-
 #content
 {
 	margin-top : 7%;
-	margin-left: 19%;
-	width: 55%;
+	margin-left: 20%;
+	width: 58.5%;;
 	background-color: white;
   	border: #cccccc solid 1px;
-	
-	
+  	padding-bottom:5px;
 }
 
 .mini-barreEtat
@@ -53,7 +34,6 @@ html
 	background-image:linear-gradient(#f9f9f9, #f1f1f1);
 	border:#cccccc solid 1px;
 	height: 27px;
-	/*position: fixed;*/
 }
 
 .mini-barreEtat-boutons
@@ -72,7 +52,7 @@ html
 }
 
 /*************************************/
-/* Erp Diagnostic Infos Générales */
+/* Erp Diagnostic Infos Gï¿½nï¿½rales */
 /*************************************/
 #ErpDiagGeneral
 {
@@ -113,7 +93,7 @@ html
 }
 
 /*************************************/
-/* Erp Diagnostic Infos Détaillées */
+/* Erp Diagnostic Infos Dï¿½taillï¿½es */
 /*************************************/
 #infoDetaille
 {
