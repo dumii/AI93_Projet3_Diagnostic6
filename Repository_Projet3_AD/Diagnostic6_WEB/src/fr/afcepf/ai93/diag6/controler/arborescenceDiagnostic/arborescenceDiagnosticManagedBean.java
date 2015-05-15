@@ -73,6 +73,11 @@ public class arborescenceDiagnosticManagedBean implements Serializable {
 		listeDiagnosticsIntervEnCours = proxyDiagnostic.recupereToutDiagnosticIntervEnCours();
 		listeDiagnosticsIntervAttente = proxyDiagnostic.recupereToutDiagnosticEnAttente();
 		listeDiagnosticsIntervArchive = proxyDiagnostic.recupereToutDiagnosticArchives();
+		
+		System.out.println("listeDiagnostic : " + listeDiagnostic.size());
+		System.out.println("listeDiagnosticsIntervEnCours : " + listeDiagnosticsIntervEnCours.size());
+		System.out.println("listeDiagnosticsIntervAttente : " + listeDiagnosticsIntervAttente.size());
+		System.out.println("listeDiagnosticsIntervArchive : " + listeDiagnosticsIntervArchive.size());
 
 		chargerArborescence1();
 		chargerArborescence2();
