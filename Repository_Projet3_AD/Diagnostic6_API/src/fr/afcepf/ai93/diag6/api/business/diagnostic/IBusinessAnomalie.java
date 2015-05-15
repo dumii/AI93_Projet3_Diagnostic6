@@ -30,4 +30,6 @@ public interface IBusinessAnomalie {
     //Indicateur d'anomalie
     public List<Indicateur> recupereIndicateur();
     
+    public Indicateur recupereIndicateurParID(int idIndicateur);
+    
 }

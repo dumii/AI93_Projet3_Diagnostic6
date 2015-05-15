@@ -6,7 +6,11 @@
 	xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich">
 
+<<<<<<< HEAD
 <ui:composition template="/WEB-INF/Template5Diagnostic6.xhtml">
+=======
+<ui:composition template="/WEB-INF/Template2Diagnostic6.xhtml">
+>>>>>>> branch 'master' of https://github.com/dumii/AI93_Projet3_Diagnostic6.git
 
 	<ui:define name="boutonDeconnexion">
 	<f:event listener="#{mbConsultationTravaux.loadChantier()}" type="preRenderView"/> 
@@ -23,14 +27,11 @@
 		<link href="css/consultationTravaux.css" rel="stylesheet"
 			type="text/css" />
 	</ui:define>
-
-
-
-
+	
 	<ui:define name="accordeon1">
 		ERP avec des interventions en cours (#{mbArborescenceTravaux.listeERPIntervEnCours.size()})
 	</ui:define>
-
+	
 	<ui:define name="arborescence1">
 		<h:form>
 			<rich:tree id="tree1" nodeType="#{node.type}" var="node"
@@ -100,9 +101,8 @@
 	</ui:define>
 
 
-	
-
 	<ui:define name="content">
+		<f:event listener="#{mbConsultationTravaux.loadChantier()}" type="preRenderView"/>
 		<f:view>
 
 			<div id="content">
@@ -229,15 +229,7 @@
 					</h:panelGroup>
 				</h:form>
 			</div>
-		</f:view>
-
-<script type="text/javascript">
-function mettreAjourInformations()
-{
-	// 
-}
-</script>
-		
+		</f:view>	
 	</ui:define>
 </ui:composition>
 </html>

@@ -36,11 +36,12 @@ public class DaoDiagnosticImpl implements IDaoDiagnostic {
 		requete.setParameter("id", idDiag);
 		List<Anomalie> listeAnomaliesAvecIntervention = requete.getResultList();
 		for (Anomalie a : listeAnomaliesAvecIntervention)
-
+		{
 			if (listeAnomaliesAvecIntervention.size() > 0)
 			{
 				return true;
 			}
+		}
 		return false;
 	}
 
@@ -76,7 +77,8 @@ public class DaoDiagnosticImpl implements IDaoDiagnostic {
 
 	@Override
 	public List<Diagnostic> rechercheDiagnostics(String nomDiagnostic) {
-		Query query = em.createQuery("SELECT d FROM Diagnostic d WHERE d.intitule = :pid");
+		Query query = em.createQuery("SELECT d FROM Diagnostic d WHERE d.intituleDiagnostic like :pid");
+		query.setParameter("pid","%"+nomDiagnostic+"%");
 		List<Diagnostic> liste = query.getResultList();
 		return liste;
 	}
@@ -114,5 +116,12 @@ public class DaoDiagnosticImpl implements IDaoDiagnostic {
 		requete.setParameter("pid", e.getIdErp());
 		List<Diagnostic> liste = requete.getResultList();
 		return liste;
+	}
+
+	@Override
+	public int getMaxId() {
+		Query query = em.createQuery("SELECT MAX(idDiagnostic) from Diagnostic");
+		int maxId = (int) query.getSingleResult();
+		return maxId;
 	}
 }

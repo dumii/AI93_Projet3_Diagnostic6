@@ -24,6 +24,10 @@
    <from-outcome>consultationTravaux</from-outcome>
    <to-view-id>/consultationTravaux.jsf</to-view-id>
   </navigation-case>
+  <navigation-case>
+   <from-outcome>TableauDeBord</from-outcome>
+   <to-view-id>/TableauDeBord.jsf</to-view-id>
+  </navigation-case>
  </navigation-rule>
  <navigation-rule>
   <from-view-id>/planningTravaux.jsf</from-view-id>
@@ -37,6 +41,46 @@
   <navigation-case>
    <from-outcome>consultationDiagnostic</from-outcome>
    <to-view-id>/consultationDiagnostic.jsf</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>TableauDeBord</from-outcome>
+   <to-view-id>/TableauDeBord.jsf</to-view-id>
+  </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+  <from-view-id>/creationDiagnostic.jsf</from-view-id>
+  <navigation-case>
+   <from-outcome>consultationDiagnostic</from-outcome>
+   <to-view-id>/consultationDiagnostic.jsf</to-view-id>
+  </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+  <from-view-id>/consultationDiagnostic.jsf</from-view-id>
+  <navigation-case>
+   <from-outcome>creationDiagnostic</from-outcome>
+   <to-view-id>/creationDiagnostic.jsf</to-view-id>
+  </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+  <from-view-id>/Accueil.jsf</from-view-id>
+  <navigation-case>
+   <from-outcome>TableauDeBord</from-outcome>
+   <to-view-id>/TableauDeBord.jsf</to-view-id>
+  </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+  <from-view-id>/TableauDeBord.jsf</from-view-id>
+  <navigation-case>
+   <from-outcome>accueilDiagnostic</from-outcome>
+   <to-view-id>/accueilDiagnostic.jsf</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>accueilTravaux</from-outcome>
+   <to-view-id>/accueilTravaux.jsf</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>Accueil</from-outcome>
+   <to-view-id>/Accueil.jsf</to-view-id>
   </navigation-case>
  </navigation-rule>
 </faces-config>

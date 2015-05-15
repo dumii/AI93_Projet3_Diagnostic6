@@ -152,4 +152,12 @@ public class BusinessInterventionImpl implements IBusinessIntervention {
 	{
 		return proxyHistorique.recupereHistoriqueInterventionParERP(erp);
 	}
+		@Override
+	public boolean voirSiInterventionEnCoursParErp(int idErp) {
+		int a = 0;
+		a = proxyIntervention.nombreInterventionEnCoursPlanifSuspParErp(idErp); 
+		if(a>0)
+			return true; 
+		return false; 
+	}
 }
