@@ -144,7 +144,8 @@
 									<rich:calendar value="#{intervention.dateFinIntervention}"
 												   datePattern="dd/MM/yyyy"
 												   popup="true"
-												   inputStyle="width:45.5%"/>
+												   inputStyle="width:45.5%"
+												   styleClass="troll"/>
 												   
 									<input type="text" id="DateFin - #{intervention.idIntervention}"
 									value="#{mbPlanningTravaux.formater.format(intervention.dateFinIntervention)}"
@@ -235,14 +236,15 @@
 									<rich:calendar value="#{anom.intervention.dateDebutIntervention}"
 												   datePattern="dd/MM/yyyy"
 												   popup="true"
-												   inputStyle="width:45.5%"/>
+												   inputStyle="width:45.5%"
+												   styleClass="troll"/>
 									
 								<h:outputLabel value="Date de fin :" />
-								#{anom.intervention}dqsd 
 									<rich:calendar value="#{anom.intervention.dateFinIntervention}"
 												   datePattern="dd/MM/yyyy"
 												   popup="true"
-												   inputStyle="width:45.5%"/>
+												   inputStyle="width:45.5%"
+												   styleClass="troll"/>
 							   
 								<h:commandButton value="Ajouter" action="#{mbPlanningTravaux.ajouterIntervention(anom.intervention, anom)}"/>							</div>
 							

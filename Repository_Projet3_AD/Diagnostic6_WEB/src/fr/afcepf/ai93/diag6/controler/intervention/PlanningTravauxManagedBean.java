@@ -68,7 +68,7 @@ public class PlanningTravauxManagedBean {
 	
 	//Initialisation de la liste d'interventions au chargement de la page
 	@PostConstruct
-	public void init() throws ParseException
+	public void init()
 	{
 
 	}
