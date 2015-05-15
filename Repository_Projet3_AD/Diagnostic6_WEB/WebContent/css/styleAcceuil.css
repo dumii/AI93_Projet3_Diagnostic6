@@ -70,7 +70,6 @@
 	width: auto;
 	clear:both;
 	display:inline-block;
-	/*border: #E6ECF7 solid 1px;*/
 	height: auto;
 	margin: 2px;
 	margin-top: 20px;
@@ -90,6 +89,7 @@
 	display: table;
 	background: white;
 	margin-top: 20px;
+	font-family: sans-serif;
 }
 
 
@@ -100,13 +100,15 @@
 	padding-right: 3px;
 	background: white;
 	text-align:justify;
-	width: 55%;
+	width: 49.2%;
 	float: left;
+	font-family: sans-serif;
 }
 #photoMalakoff
 {
-	width: 42%;
+	width: 49.2%;
 	float: right;
+	border: #E6ECF7 solid 2px;
 }
 .utiles
 {
@@ -119,6 +121,7 @@
 	border: #E6ECF7 solid 1px;
 	background:#E9EAED;
 	margin-top: 20px;
+	font-family: sans-serif;
 }
 .map
 {
@@ -387,6 +390,7 @@ body
 	padding: 0 0 0 0;
 	overflow-y: auto;
 	background-attachment: fixed;
+	font-family: sans-serif;
 }
 
 

@@ -49,4 +49,6 @@ public interface IDaoErp {
 	public Piece recuperePieceParID(int idPiece);
 	
 	public Voirie recupereVoirieParID(int idVoirie);
+
+	public List<Erp> rechercheErpParInterventionEnCours();
 }
