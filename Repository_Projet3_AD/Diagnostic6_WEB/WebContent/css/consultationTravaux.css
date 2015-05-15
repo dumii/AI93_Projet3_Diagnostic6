@@ -170,12 +170,32 @@ a:visited
 /* Diagnostic */
 /*************************************/
 
-
-.diagnostic a
+.formulaire2:first-of-type
 {
-	display: inline-block;
-	width: 16%;
-	vertical-align: top;
+	margin-top:10px;
+	font-size: small;
+	float:left;
+	width:45%;
+}
+
+.formulaire2:nth-of-type(2),
+.formulaire2:nth-of-type(3)
+{
+	margin-top:10px;
+	font-size: small;
+	float:left;
+	width:27%;
+}
+
+.formulaire2 label
+{
+	font-size:11px;
+	padding-bottom:3px;
+	padding-top:3px;
+	display:inline-block;
+	font-family: Arial, Verdana, sans-serif;
+	vertical-align:top;
+	width:50%;
 }
 
 .diagnostic
@@ -184,41 +204,27 @@ a:visited
 	background-color: ghostwhite;
 	border-radius:3px;
 	margin:2px;
-}
-
-.diagnostic label
-{
-	font-size:11px;
-	padding-bottom:3px;
-	padding-top:3px;
 	display:inline-block;
-	font-family: Arial, Verdana, sans-serif;
-	vertical-align:top;
 }
 
 .diagnostic .intitule
 {
-	width:15%;
 	font-weight:bold;
 }
 
-.diagnostic .valeur
-{
-	width: 15%;
-}
 
 .liste2
 {
 	font-size:xx-small;
-
+	margin-top:0;
+	margin-left:40%;
+	font-family: Arial, Verdana, sans-serif;
+	vertical-align:top;
 }
 
 .etatTravaux
 {
-	display : block;
 	height:65px;
-	margin: auto;
-
-
+	float:right;
+	margin-right:20px;
 }
-
