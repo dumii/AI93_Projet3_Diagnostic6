@@ -16,4 +16,7 @@ public interface IDaoHistoriqueAnomalie {
 
 	public void historiserSuppression(Anomalie anomalieInitiale,
 			Anomalie anomalie, Utilisateur user);
+
+	public List<HistoriqueAnomalie> recupereHistoriqueAnomalieParDiag(
+			int idDiagEnCours);
 }

@@ -59,7 +59,10 @@ public interface IBusinessDiagnostic {
 		public boolean interventionArchivesSurERP();
 
 		public boolean recupererDiagSansInterv(Integer idDiag);
-		
+
+		public List<HistoriqueDiagnostic> recupereHistoriqueDiagnosticParDiag(
+				int idDiagEnCours);
+
 		public int getMaxId();
 
 }

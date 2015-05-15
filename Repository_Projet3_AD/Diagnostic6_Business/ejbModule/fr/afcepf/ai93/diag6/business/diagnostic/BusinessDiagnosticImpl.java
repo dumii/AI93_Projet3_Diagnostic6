@@ -234,6 +234,12 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 	}
 
 	@Override
+	public List<HistoriqueDiagnostic> recupereHistoriqueDiagnosticParDiag(
+			int idDiagEnCours) {
+		return proxyHistoDiag.recupereHistoriqueDiagnosticParDiag(idDiagEnCours);
+	}
+
+
 	public List<Indicateur> recupereIndicateurParTypeDiagnostic(
 			int idTypeDiagnostic) {
 		return proxyIndicateur.recupereIndicateurParTypeDiagnostic(idTypeDiagnostic);
@@ -273,4 +279,5 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 	public TypeDiagnostic recupereTypeDiagnosticParID(int idTypeDiagnostic) {
 		return proxyTypeDiagnostic.recupereTypeDiagnosticParID(idTypeDiagnostic);
 	}
+
 }

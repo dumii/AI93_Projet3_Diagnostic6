@@ -1,13 +1,12 @@
-
-
-
 html
 {
 	overflow: scroll;
 }
 
-#panel{
+.affiche{
+	clear:both;
 	font-family: Corbel;
+	margin-top: 15px;
 }
 
 .logoTypeDiag{
@@ -32,7 +31,7 @@ html
 	float: left;
 	width: 18%;
 	text-align: middle;
-	line-height: 75px;
+	line-height: 30px;
 	font-family: Corbel;
 	font-size: 12px;
 	font-weight: bold;
@@ -78,6 +77,78 @@ html
 	clear:both;
 	font-size: 16px !important;
 	font-family: Corbel !important;
-	border-radius: 5px;
-	background: #6c8be7 !important;
+}
+
+.boutonPlanning
+{
+	float: right;
+	font-size: 12px;
+	font-family: Corbel;
+	font-color: White;
+	background-color: #OOFFOO;
+}
+
+
+.panelFiltres
+{
+	margin-left: 14%;
+	width: 60%;
+	margin-bottom: 5px;
+	border-style: solid;
+	border-color: #E9EFF8;
+	border-width:1px;
+	height: 77px;
+}
+
+#filtres.rf-p
+{
+	float: left!important;
+	width: 20px!important;
+}
+.rf-p-hdr.piotr {
+	width: 98% !important;
+	height: 40px !important;
+	background-color: #f7f7f7 !important;
+	background-image: none !important;
+	margin-left: 1px!important;
+	/*margin-right: 1px!important;*/
+	border-radius : 3px!important;
+	border-width: 0px!important;
+}
+.piotr2 {
+	width: 19.7% !important;
+	height: 75px !important;
+	background-color: #EFF2FB !important;
+	background-image: none !important;
+	float:left !important;
+	border-radius : 3px!important;
+	/*margin-bottom: 0px;*/
+	border-width: 0px!important;
+	border-collapse: collapse;
+}
+
+.piotr3{
+	width: 50px !important;	
+	
+}
+
+input.rf-sel-inp{
+	width:125px !important;
+	height:100% !important;
+}
+
+.rf-sel-cntr{
+	margin-left: -6px!important;
+	margin-bottom: 2%!important;
+	vertical-align: bottom;
+	}
+
+.rf-p-hdr{
+	border-radius:2px!important;
+	border-width: 0px!important;
+	width: 99.8%!important;
+	background-image:linear-gradient(white,#E9EAED)!important;
+	margin-left: -1px!important;
+	
+
 }

@@ -149,7 +149,13 @@ public class BusinessAnomalieImpl implements IBusinessAnomalie {
 	}
 
 	@Override
+	public List<HistoriqueAnomalie> recupereHistoriqueAnomalieParDiag(
+			int idDiagEnCours) {
+		return proxyHistorique.recupereHistoriqueAnomalieParDiag(idDiagEnCours);
+	}
+
 	public Indicateur recupereIndicateurParID(int idIndicateur) {
 		return proxyIndicateur.recupereIndicateurParID(idIndicateur);
+
 	}
 }

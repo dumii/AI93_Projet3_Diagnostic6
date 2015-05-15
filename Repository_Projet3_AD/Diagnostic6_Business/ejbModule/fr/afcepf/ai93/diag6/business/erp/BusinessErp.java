@@ -154,4 +154,11 @@ public class BusinessErp implements IBusinessErp {
 	public List<Erp> rechercheErpParNom(String nomERP) {
 		return proxyErp.rechercheErpParNom(nomERP);
 	}
+	
+	@Override
+	public List<Erp> rechercheErpParInterventionEnCours(){
+		return proxyErp.rechercheErpParInterventionEnCours();
+	
+	}
+	
 }

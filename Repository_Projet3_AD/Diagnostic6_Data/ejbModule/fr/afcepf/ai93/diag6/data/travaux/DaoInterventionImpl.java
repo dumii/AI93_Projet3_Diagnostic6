@@ -73,8 +73,9 @@ public class DaoInterventionImpl implements IDaoIntervention {
 	@Override
 	public int nombreInterventionDiag(int idDiag) {
 		Query sql = em.createNativeQuery(
-				"select count(intervention.id_intervention) from  anomalie, intervention WHERE anomalie.no_diagnostic = 1 "
+				"select count(intervention.id_intervention) from  anomalie, intervention WHERE anomalie.no_diagnostic = :pid "
 				+ " and anomalie.id_anomalie = intervention.id_anomalie");
+		sql.setParameter("pid", idDiag);
 		BigInteger retour = (BigInteger) sql.getSingleResult();
 		return retour.intValue();
 	}
