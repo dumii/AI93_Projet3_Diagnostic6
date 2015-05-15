@@ -20,7 +20,7 @@
 	<ui:define name="title">Diagnostic 6 - Consultation intervention</ui:define>
 
 	<ui:define name="head">
-		<link href="css/accueilProfessionnels.css" rel="stylesheet"
+		<link href="css/historiqueTravaux.css" rel="stylesheet"
 			type="text/css" />
 	</ui:define>
 
@@ -97,9 +97,9 @@
 	<ui:define name="content">
 		<div id="content">
 			<h:form>
-					<h:commandButton
-						action="#{mbHistoriqueTravaux.recupereHistoriqueInterventionParERP()}"
-						value="coucou" />
+				<div id="InfoErpDiagnostic">
+
+					<h3>Historique des interventions - #{mbHistoriqueTravaux.monERP.nomErp}</h3>
 
 					<table>
 						<tr>
@@ -125,8 +125,8 @@
 
 					</table>
 
-
-				</h:form>	
+				</div>
+			</h:form>	
 		</div>
 	</ui:define>
 

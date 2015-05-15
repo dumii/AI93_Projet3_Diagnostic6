@@ -54,23 +54,43 @@ a
 /* Tableau */
 /*************************************/
 
+#InfoErpDiagnostic
+{
+	background: ghostwhite;
+	margin-left: 1%;
+	width: 97.5%;
+	margin-top: 16px;
+	border:#cccccc solid 1px;
+	display:inline-block;
+}
+
+#InfoErpDiagnostic h3
+{
+	margin: 0px;
+	background-image:linear-gradient(#f9f9f9, #f1f1f1);
+	text-align: left;
+	color: CornflowerBlue;
+	font-size: 1.17em;
+	height: 27px;
+}
+
 table
 {
 	font-family: Arial, Verdana, sans-serif;
 	font-size:11px;
 	text-align:center;
 
-	width:49%;
+	width:100%;
 
 	border-collapse: collapse;
 	border:#cccccc solid 1px;
 	
-	margin:5px;
+	margin-top:5px;
 }
 
 table th
 {
-	width:33%;
+	width:20%;
 	height:25px;
 	background-image:linear-gradient(#fAfAfA, #f2f2f2);
 	border:#cccccc solid 1px;
