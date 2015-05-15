@@ -72,7 +72,7 @@ body
 	display: none;
 }
 
-#logoAccueil {
+.logoAccueil {
 	margin-left: 7%;
 	height: 73%;
 	margin-bottom: 2%;

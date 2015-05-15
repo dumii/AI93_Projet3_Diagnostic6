@@ -14,10 +14,10 @@
 
 		<ui:define name="head">
 			<link href="css/tableauDeBord.css" rel="stylesheet" type="text/css" />
-
-
 		</ui:define>
+		
 		<ui:define name="content">
+		<div id="content">
 			<h:form>
 				<a4j:outputPanel id="panel" layout="block">
 					<a4j:repeat value="#{mbTableauDeBord.listeErpFiltree}" var="o"
@@ -135,7 +135,7 @@
 				</a4j:outputPanel>
 
 			</h:form>
-
+			</div>
 		</ui:define>
 		
 	</ui:composition>

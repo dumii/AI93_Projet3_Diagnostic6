@@ -62,8 +62,11 @@ public class TableauDeBordManagedBean {
 			for(Diagnostic d : listDiag){
 				List<Anomalie> listAnom = proxyBusinessAnomalie.recupereAnomalieParDiagnostic(d.getIdDiagnostic());
 				for(Anomalie a : listAnom){
-					List<Intervention> listeBidon = proxyBusinessIntervention.rechercherInterventionSurAnomalie(a.getIdAnomalie()); 
-					a.setIntervention(listeBidon.get(0));
+					List<Intervention> listeBidon = proxyBusinessIntervention.rechercherInterventionSurAnomalie(a.getIdAnomalie());
+					if (listeBidon.size() > 0 )
+					{
+						a.setIntervention(listeBidon.get(0));
+					}
 				}
 				d.setListeAnomaliesDiagnostic(listAnom);
 			}
@@ -155,13 +158,19 @@ public class TableauDeBordManagedBean {
 	}
 	
 	public int calculEtatAvancement(Diagnostic d){
+		List<Anomalie> listeAnomAvecInterv = new ArrayList<>();
+		
 		for(Anomalie a : listeAnomaliesParDiagTmp){
 			List<Intervention> listeBidon = proxyBusinessIntervention.rechercherInterventionSurAnomalie(a.getIdAnomalie()); 
-			a.setIntervention(listeBidon.get(0));
+			if (listeBidon.size() > 0)
+			{
+				listeAnomAvecInterv.add(a);
+				a.setIntervention(listeBidon.get(0));
+			}
 		}
 		d.setListeAnomaliesDiagnostic(listeAnomaliesParDiagTmp);
 		List<Intervention> listeInterv = new ArrayList<>(); 
-		for(Anomalie a : d.getListeAnomaliesDiagnostic()){
+		for(Anomalie a : listeAnomAvecInterv){
 			listeInterv.add(a.getIntervention()); 
 			if(a.getIntervention().getEtatAvancementTravaux().getIdEtatAvancement()==3){
 				etatTmp = 3; //="En cours", car si une seule intervention de ce diagnostic est en cours, tout le diagnostic est en cours
