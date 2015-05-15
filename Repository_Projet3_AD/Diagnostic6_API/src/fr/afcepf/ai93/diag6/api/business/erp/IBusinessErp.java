@@ -63,4 +63,6 @@ public interface IBusinessErp {
 	
 	public Voirie recupereVoirieParID(int idVoirie);
 
+	public List<Erp> rechercheErpParInterventionEnCours();
+
 }

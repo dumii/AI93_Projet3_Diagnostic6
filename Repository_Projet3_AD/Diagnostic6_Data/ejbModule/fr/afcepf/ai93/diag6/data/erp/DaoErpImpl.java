@@ -153,4 +153,13 @@ public class DaoErpImpl implements IDaoErp {
 		List<Erp> liste = requete.getResultList(); 
 		return liste;
 	}
+	
+	@Override
+	public List<Erp> rechercheErpParInterventionEnCours(){
+		Query requete = em.createQuery("SELECT distinct a.diagnostic.erp FROM Anomalie a WHERE a.intervention.etatAvancementTravaux.idEtatAvancement = 3");		
+		List<Erp> liste = requete.getResultList(); 
+		
+		
+		return liste;
+	}
 }

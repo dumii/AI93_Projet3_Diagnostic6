@@ -320,31 +320,64 @@ public class PublicManagedBean{
 
 
 		listeErp = new ArrayList<>();
-		listeErp = proxyBusinessErp.recupereToutErp();
+
 
 		List<Erp> listeTempByTypeErp = new ArrayList<>();
 		List<Erp> listeTempByTypeDiag = new ArrayList<>();
+		List<Erp> listeTempDiag2 = new ArrayList<>();
+		
+		List<Erp> listeTemp = proxyBusinessErp.rechercheErpParInterventionEnCours();
+		listeErp = proxyBusinessErp.recupereToutErp();
 
-		if(idTypeErpSelect != null && idTypeErpSelect != 0){
-			for (Erp e : listeErp){
-				if(e.getTypeErp().getIdTypeErp() == idTypeErpSelect){
-					listeTempByTypeErp.add(e);
-				}
-			}
-			
+		
+		for (Erp e : listeTemp){
+			System.out.println( "liste travaux "+e.getNomErp());
 		}
+
+
 
 		if(idTypeDiagSelect != null && idTypeDiagSelect != 0){
 
 			listeTempByTypeDiag= proxyBusinessPublic.recupererErpParTypeDiagnostic(idTypeDiagSelect);
-			
 		}
-
 
 		if((idTypeErpSelect == null || idTypeErpSelect == 0) && (idTypeDiagSelect == null || idTypeDiagSelect == 0)){
 			listeErp = proxyBusinessErp.recupereToutErp();
-			
+
 		}
+
+		if (booleenTravaux){
+
+			listeErp = listeTemp;
+			
+			
+			if(idTypeErpSelect != null && idTypeErpSelect != 0){
+				for (Erp e : listeErp){
+					if(e.getTypeErp().getIdTypeErp() == idTypeErpSelect){
+						listeTempByTypeErp.add(e);
+					}
+				}
+			}
+
+			for (Erp e: listeErp){
+				for(Erp e2 : listeTempByTypeDiag){
+
+					if (e.getIdErp() == e2.getIdErp()){
+
+						
+							listeTempDiag2.add(e);
+						
+					}
+				}
+			}
+			
+			listeTempByTypeDiag = listeTempDiag2;
+			
+			for(Erp e : listeTempDiag2){
+				System.out.println(" ***************** "+e.getNomErp());
+			}
+		}
+
 		if((idTypeErpSelect != null && idTypeErpSelect != 0) && (idTypeDiagSelect != null && idTypeDiagSelect != 0)){
 
 			List<Erp> liste = new ArrayList<>();
@@ -361,20 +394,20 @@ public class PublicManagedBean{
 				}
 			}
 			listeErp = liste;
-			
+
 		}
 		if((idTypeErpSelect == null || idTypeErpSelect == 0) && (idTypeDiagSelect != null && idTypeDiagSelect != 0)){
 			listeErp = listeTempByTypeDiag;
-		
+
 		}
 		if((idTypeErpSelect != null && idTypeErpSelect != 0) && ( idTypeDiagSelect == null || idTypeDiagSelect == 0)){
 			listeErp = listeTempByTypeErp;
-		
+
 		}
 
 		return listeErp;
-	}
 
+	}
 	public String afficherDansMap() {
 		System.out.println("coucou");
 		Erp erp = proxyBusinessErp.recupererErpParId(idErpRecherche);
@@ -382,5 +415,4 @@ public class PublicManagedBean{
 		System.out.println(adressErp);
 		return adressErp;
 	}
-
 }

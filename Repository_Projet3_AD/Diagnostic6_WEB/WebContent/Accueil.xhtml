@@ -356,7 +356,10 @@
 							</h:selectOneMenu>
 						</div>
 						<div id="champsDeRecherche">
-							<h:selectBooleanCheckbox value="#{mbPublic.booleenTravaux}" />
+							<h:selectBooleanCheckbox value="#{mbPublic.booleenTravaux}">
+							<a4j:ajax event="change" listener="#{mbPublic.recup2()}"
+									render="resultatErp" />
+									</h:selectBooleanCheckbox>
 							<h:outputText value="Travaux en cours" />
 						</div>
 						<div id="resultatsDeRecherche">
@@ -451,9 +454,7 @@ function codeAddress() {
 				map: carte,
 				position: results[0].geometry.location
 			});
-		} else {
-			alert("Geocode was not successful for the following reason: " + status);
-		}
+		} 
 	});				 var request = {
 		    placeId: 'ChIJN1t_tDeuEmsRUsoyG83frY4'
 	  };
@@ -477,7 +478,6 @@ console.log(status);
 });
 
 }
- 
 	initialiser()
 	codeAddress();	
 	loadAddress();
