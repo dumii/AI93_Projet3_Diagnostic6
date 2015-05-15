@@ -4,20 +4,25 @@
 
 body
 {
-background-image: url("../images/ArrierePlan.png");
-background-size: 100%;
-margin: 0 0 0 0;
-padding: 0 0 0 0;
-font-family: sans-serif;
-background-attachment: fixed;
+	background-image: url("../images/ArrierePlan.png");
+	background-size: 100%;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	font-family: sans-serif;
+	background-attachment: fixed;
 }
+
+.content
+{
+	margin-top:100px;
+}
+
 
 /****************************/
 /* Barre de menu principale */
 /****************************/
 
-#enTete
-{
+#enTete {
 	height: 75px;
 	width: 100%;	
 	background-image: url("../images/barreDeMenu4.png"), url("../images/ArrierePlan.png");
@@ -29,157 +34,170 @@ background-attachment: fixed;
 	margin-top: -6.3em;
 }
 
-‪#rechercheBandeau‬
-{
-display:inline-block;
-padding-left: 5%;
-vertical-align:top;
+#rechercheBandeau {
+	display:inline-block;
+	padding-left: 5%;
+	vertical-align:top;
 }
 
 #rechercheBandeau > input[type="text"]
-{ 
-width: 200px;
-display:inline-block;
-vertical-align:top;
-margin-top:5.3%;
-margin-right:-5px;
+{   
+    width: 200px;
+    display:inline-block;
+    vertical-align:top;
+    margin-top:5.3%;
+    margin-right:-5px;
 }
 
 .logoRecherche
 {
-display:inline-block;
-height: 17px;
-border: ‪#BDBDBD‬ solid 1px;
-margin-top:5%;
-margin-left:0;
-margin-right:50px;
+	display:inline-block;
+	height: 17px;
+	border: #BDBDBD solid 1px;
+	margin-top:5%;
+	margin-left:0;
+	margin-right:50px;
 }
 
 #rechercheBandeau > div
 {
-width: 89.5%;
-background-color: white;
-margin-left: 1px;
-display: none;
+	width: 89.5%;
+  	background-color: white;
+  	margin-left: 1px;
+	display: none;
 }
 
 .logoAccueil {
-margin-left: 7%;
-height: 73%;
-margin-bottom: 2%;
-margin-top:4px;
+	margin-left: 7%;
+	height: 73%;
+	margin-bottom: 2%;
+	margin-top:4px;
 }
 
 .logoMenu, .logoMenu2 {
-height: 80px;
-margin-top:8px;
-width: auto;
-float:right;
-display:inline-block;
-margin-left:10px;
+	height: 80px;
+	margin-top:8px;
+	width: auto;
+	float:right;
+	display:inline-block;
+	margin-left:10px;
 }
 
 .logoMenu2
 {
-margin-left:80px;
+	margin-left:80px;
 }
 
-.lienAccueil
-{
-height: 87px;
-width: 287px;
+.lienAccueil {
+	height: 87px;
+	width: 287px;
 }
+
+
 
 /**************************/
 /* Barre de menu lat�rale */
 /**************************/
-‪
+
 #bandeauGauche
 {
-position: fixed;
-width: 200px;
-margin-left: 3%;
-margin-top:-3px;
+	position: fixed;
+  	width: 200px;
+  	margin-left: 3%;
+  	margin-top:-3px;
 }
 
-‪#boutonAjouter
+#boutonAjouter
 {
-width: 100%;
+	width: 100%;
 }
-‪
-‪#accordion‬
+
+#radio
 {
-font-size: x-small;
+	font-size: x-small;
+	margin-right: 0px;
+}
+
+#radio > label
+{
+	width: 65px;
+	height: 20px;
+}
+
+#accordion
+{
+	font-size: x-small;
 }
 
 #accordion > div
 {
-height: 200px;
+	height: 200px;
 }
 
 .boutonJquery {
--webkit-border-radius: 2;
--moz-border-radius: 2;
-border-radius: 2px;
-font-family: Arial;
-text-align:center;
-color: ‪#0073ea‬;
-font-size: 20px;
-background: ‪#f6f6f6‬;
-padding: 10px 20px 10px 20px;
-border: solid ‪#dddddd‬ 1px;
-text-decoration: none;
-display:inline-block;
-width:79%;
+  -webkit-border-radius: 2;
+  -moz-border-radius: 2;
+  border-radius: 2px;
+  font-family: Arial;
+  text-align:center;
+  color: #0073ea;
+  font-size: 20px;
+  background: #f6f6f6;
+  padding: 10px 20px 10px 20px;
+  border: solid #dddddd 1px;
+  text-decoration: none;
+
+  display:inline-block;
+  width:79%;
+
 }
 
 .boutonJquery:hover {
-background: #0073ea;
-text-decoration: none;
-border-radius: 4px;
-color:white;
+  background: #0073ea;
+  text-decoration: none;
+  border-radius: 4px;
+  color:white;
 }
 
 a:visited 
 {
-color: #0073ea !important;
-text-decoration: none !important;
+	color: #0073ea !important;
+	text-decoration: none !important;
 }
+/**************************/
+/*  Barre de menu droite  */
+/**************************/
 
-/**************************/
-/* Barre de menu droite */
-/**************************/
-‪#bandeauDroite‬
+#bandeauDroite
 {
-margin-left: 80%;
-width: 200px;
-background-color: white;
-border: #BDBDBD solid 1px;
-border-radius: 1px;
-position: fixed;
+	margin-left: 80%;
+ 	width: 200px;
+ 	background-color: white;
+ 	border: #BDBDBD solid 1px;
+	border-radius: 1px;
+	position: fixed;
 }
 
 fieldset
 {
-border: none !important;
-font-size: small;
-padding: 6px;
-margin-bottom: 12px;
+	border: none !important;
+	font-size: small;
+	padding: 6px;
+ 	margin-bottom: 12px;
 }
 
 fieldset > legend
 {
-border-bottom: #333366 solid 1px;
-font-weight: bold;
-font-size: larger;
-color: #333366;
-width: 100%;
+	border-bottom: #333366 solid 1px;
+	font-weight: bold;
+	font-size: larger;
+	color: #333366;
+	width: 100%;
 }
 
-.logoDeconnexion
-{
-height: 30px;
-width: auto;
-float: right;
-margin-right: 5px;
+.logoDeconnexion{
+	height: 30px;
+	width: auto;
+	float: right;
+	margin-right: 5px;
 }
