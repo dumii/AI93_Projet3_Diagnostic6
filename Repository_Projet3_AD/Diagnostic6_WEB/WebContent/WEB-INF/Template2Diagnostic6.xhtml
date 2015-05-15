@@ -117,8 +117,11 @@
 		<h:form>
 		<fieldset id="connection">
 			<legend>Bonjour <ui:insert name="nomUtilisateur"/></legend>
+			#{mbNotifs.user.utilisateur.profilUtilisateur.nomProfil}
 			<ui:insert name="roleUtilisateur"/>
+		
 		</fieldset>
+		
 		<h:commandButton action="#{mbUtilisateur.logout()}" image="images/iconeDeconnexion2.png" class="logoDeconnexion"/>
 		
 		</h:form>
