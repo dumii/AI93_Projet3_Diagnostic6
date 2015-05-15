@@ -275,7 +275,7 @@ color: red;
 
 .resultatErp
 {
-	height: 145px;
+	height: 100%!important;
 }
 .listBox4
 {
