@@ -51,7 +51,7 @@ public class BusinessUtilisateurImpl implements IBusinessUtilisateur {
 	public String modifierUtilisateur(Utilisateur utilisateur) {
 
 		//Utilisateur utiliInitial = proxiDaoUtilisateur.recupereUtilisateur(utilisateur.getIdUtilisateur());
-		proxiDaoUtilisateur.modifierUtilisateur(utilisateur);
+		proxyUser.modifierUtilisateur(utilisateur);
 		System.out.println("appel fonction dans biz");
 
 		Utilisateur utiliInitial = proxyUser.recupereUtilisateur(utilisateur.getIdUtilisateur());
