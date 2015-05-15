@@ -160,7 +160,6 @@ public class UtilisateurManagedBean implements Serializable {
 //			proxyBusinessUtilisateur.modifierUtilisateur(utilisateur);
 //			umodif = new Utilisateur();
 //			//recupUtilisateur();
-//		}
 	}
 	
 	
