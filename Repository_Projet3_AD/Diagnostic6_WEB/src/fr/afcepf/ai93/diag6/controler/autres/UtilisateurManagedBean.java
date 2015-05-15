@@ -90,17 +90,17 @@ public class UtilisateurManagedBean implements Serializable {
 			
 			int idProfil = this.utilisateur.getProfilUtilisateur().getIdProfil(); 
 			
-			if (idProfil == 5){
+			if (idProfil < 4 ){
 
 				ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 				try {
-					ec.redirect(ec.getRequestContextPath() + "/pageProfil.jsf");
+					ec.redirect(ec.getRequestContextPath() + "/TableauDeBord.jsf");
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
-			if (idProfil == 3){
+			if (idProfil == 5){
 
 				ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 				try {
@@ -110,7 +110,7 @@ public class UtilisateurManagedBean implements Serializable {
 					e.printStackTrace();
 				}
 			}
-			if (idProfil == 2){
+			if (idProfil == 4){
 
 				ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 				try {
