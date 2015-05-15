@@ -1,6 +1,7 @@
 package fr.afcepf.ai93.diag6.controler.testElsa;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,9 +20,10 @@ import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
 import fr.afcepf.ai93.diag6.entity.erp.Erp;
+import fr.afcepf.ai93.diag6.entity.erp.TypeErp;
 import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
 
-@ManagedBean(name="mbConsultationTravaux")
+@ManagedBean(name="mbTestTableauBord")
 @SessionScoped
 public class EssaiTableauDeBordManagedBean {
 
@@ -36,188 +38,186 @@ public class EssaiTableauDeBordManagedBean {
 	@EJB
 	private IBusinessErp proxyERP;
 	
-	//Utilisateur connecté
-	private Utilisateur user;
+	private List<Erp> listeBrute;
+	private List<Erp> listeNette;
+	private List<Erp> listeNetteAffichee;
+	private static final int MAX_INDICATEUR_TYPE_1 = 4;
+	private static final int MAX_INDICATEUR_TYPE_2 = 7;
+	private static final int MAX_INDICATEUR_TYPE_3 = 2;
+	private static final int MAX_INDICATEUR_TYPE_4 = 3;
 	
-	//Informations relatives à l'ERP
-	private Erp monERP;
-	private int idERP;
-	private List<Diagnostic> listeDiagnosticERP;
-	
-	//Statistiques du chantier
-	private int nombreTotalIntervention;
-	private int nombreInterventionTerminees;
-	private int nombreInterventionEnCours;
-	private int nombreInterventionEnAttente;
-	private int nombreInterventionSuspendues;
-	
-	private double coutTotal;
-	
-	private Date dateDebut;
-	private Date dateFin;
-	
-	//Essai
-	private int[][] tableauNombreInterventions;
-	
-	//Autres données
-	private SimpleDateFormat formater;
-	private SimpleDateFormat shortFormater;
+	private List<TypeErp> listeTypes;
+	private int idTypeSelectionne;
 	
 	
-	//Initialisation de la liste d'interventions au chargement de la page
+	//ERP // Diagnostic // Statistiques[0] Indicateur moyen / Statistiques[1] Etat d'avancement
+	private int tableau [][][];
+	
 	@PostConstruct
 	public void init()
 	{
-
-	}
-	
-	//Sélection de l'ERP ou chargement de l'ERP en paramètres
-	public void loadChantier(){
-		String param = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
-		if (param != null && !param.equals(""))
-		{
-			idERP = Integer.parseInt(param);
-			monERP = proxyERP.recupererErpParId(idERP);
-			initialisationDesDonnees();
-		}
-	}
-	
-	public void clickNode (int idERP)
-	{
-		this.idERP = idERP;
-		monERP = proxyERP.recupererErpParId(idERP);
+		listeBrute = proxyERP.recupereToutErp();
+		listeTypes = proxyERP.recupererListeTypeERP();
+		
+		listeNette = new ArrayList<>();
+		
+		idTypeSelectionne = 0;
 		initialisationDesDonnees();
 	}
 	
 	//Méthodes	
 	public void initialisationDesDonnees()
 	{
-		formater = new SimpleDateFormat("dd/MM/yyyy");
-		shortFormater = new SimpleDateFormat("dd/MM");
+		tableau = new int[listeBrute.size()][4][3];
 		
-		listeDiagnosticERP = proxyDiagnostic.recupereToutDiagnosticParErp(monERP);
+		int indexERP = 0;
 		
-		nombreTotalIntervention = 0;
-		nombreInterventionTerminees = 0;
-		nombreInterventionEnCours = 0;
-		nombreInterventionEnAttente = 0;
-		nombreInterventionSuspendues = 0;
-		coutTotal = 0;
-
-		dateDebut = new Date();
-		dateFin = new Date();
-		
-		tableauNombreInterventions = new int[listeDiagnosticERP.size()][5];
-		int index = 0;
-		
-		for (Diagnostic diagnostic : listeDiagnosticERP)
-		{
-			diagnostic.setListeAnomaliesDiagnostic(proxyAnomalie.recupereAnomalieParDiagnostic(diagnostic.getIdDiagnostic()));
-			compterInterventions(diagnostic.getListeAnomaliesDiagnostic(), index);
-			index++;
-		}
-		
-		for (int i=0 ; i<tableauNombreInterventions.length ; i++)
-		{
-			nombreTotalIntervention += tableauNombreInterventions[i][0];
-			nombreInterventionTerminees += tableauNombreInterventions[i][1];
-			nombreInterventionEnCours += tableauNombreInterventions[i][2];
-			nombreInterventionEnAttente += tableauNombreInterventions[i][3];
-			nombreInterventionSuspendues += tableauNombreInterventions[i][4];
-		}
-	}
-
-	public void compterInterventions(List<Anomalie> liste, int index)
-	{
-		int nombreTotal = 0;
-		int nombreTermines = 0;
-		int nombreEnCours = 0;
-		int nombreEnAttente = 0;
-		int nombreSuspendes = 0;
-		
-		for (Anomalie anomalie : liste)
-		{
-			List<Intervention> listeIntervention = proxyIntervention.rechercherInterventionSurAnomalie(anomalie.getIdAnomalie()); 
-			if (listeIntervention.size() > 0)
+		for (Erp erp : listeBrute)
+		{			
+			erp.setListeDiagnosticErp(proxyDiagnostic.recupereToutDiagnosticParErp(erp));
+			
+			int indexDiagnostic = 0;
+			
+			for (Diagnostic diagnostic : erp.getListeDiagnosticErp())
 			{
-				Intervention intervention = listeIntervention.get(0);
-				int idEtatAvancement = intervention.getEtatAvancementTravaux().getIdEtatAvancement();
-				coutTotal += intervention.getCoutIntervention();
+				int idTypeDiagnostic = diagnostic.getTypeDiagnostic().getIdTypeDiagnostic();
 				
-				switch (idEtatAvancement) {
-				//Termines
-				case 1:
-					nombreTotal++;
-					nombreTermines++;
-					break;
-				//Suspendues
-				case 2:
-					nombreTotal++;
-					nombreSuspendes++;
-					break;
-				//En cours
-				case 3:
-					nombreTotal++;
-					nombreEnCours++;
-					break;
-				//En attente
-				case 4:
-					nombreTotal++;
-					nombreEnAttente++;
-					break;
+				
+				int sommeIndicateur = 0;
+				
+				int nombreInterventions = 0;
+				int nombreTermines = 0;
+				
+				diagnostic.setListeAnomaliesDiagnostic(proxyAnomalie.recupereAnomalieParDiagnostic(diagnostic.getIdDiagnostic()));
+				
+				for (Anomalie anomalie : diagnostic.getListeAnomaliesDiagnostic())
+				{
+					anomalie.setIndicateur(proxyAnomalie.recupereIndicateurParID(anomalie.getIndicateur().getIdIndicateur()));
+					sommeIndicateur += anomalie.getIndicateur().getValeurIndicateur();
+					
+					List<Intervention> listeIntervention = proxyIntervention.rechercherInterventionSurAnomalie(anomalie.getIdAnomalie()); 
+					if (listeIntervention.size() > 0)
+					{
+						Intervention intervention = listeIntervention.get(0);
+						int idEtatAvancement = intervention.getEtatAvancementTravaux().getIdEtatAvancement();
+						
+						nombreInterventions++;
+						
+						if (idEtatAvancement == 1)
+						{
+							nombreTermines++;
+						}
+					}
 				}
 				
-				if (intervention.getDateDebutIntervention().compareTo(dateDebut) == -1)
+				int moyenneIndicateur = 0;
+				
+				if (diagnostic.getListeAnomaliesDiagnostic().size() > 0)
 				{
-					dateDebut = intervention.getDateDebutIntervention();
+					switch (idTypeDiagnostic) {
+						case 1: moyenneIndicateur = (sommeIndicateur*4) / (MAX_INDICATEUR_TYPE_1*diagnostic.getListeAnomaliesDiagnostic().size());				
+						break;
+						case 2: moyenneIndicateur = (sommeIndicateur*4) / (MAX_INDICATEUR_TYPE_2*diagnostic.getListeAnomaliesDiagnostic().size());					
+						break;
+						case 3: moyenneIndicateur = (sommeIndicateur*4) / (MAX_INDICATEUR_TYPE_3*diagnostic.getListeAnomaliesDiagnostic().size());			
+						break;
+						case 4: moyenneIndicateur = (sommeIndicateur*4) / (MAX_INDICATEUR_TYPE_4*diagnostic.getListeAnomaliesDiagnostic().size());		
+						break;
+					}
 				}
-				if (intervention.getDateFinIntervention().compareTo(dateFin) == 1)
+				
+				int idEtatAvancement = terminesOuTravauxEnCours(nombreTermines, nombreInterventions);
+				
+				//Indicateur moyen
+				tableau[indexERP][indexDiagnostic][0] = moyenneIndicateur;
+				//Etat d'avancement moyen
+				tableau[indexERP][indexDiagnostic][1] = idEtatAvancement;
+				//Nombre d'interventions
+				tableau[indexERP][indexDiagnostic][2] = nombreInterventions;
+				
+				indexDiagnostic++;
+			}
+			indexERP++;
+			
+			if (erp.getListeDiagnosticErp().size() > 0)
+			{
+				listeNette.add(erp);
+			}
+		}
+		listeNetteAffichee = listeNette;
+	}
+	
+	public void filtresERP()
+	{
+		//la liste nette affichée est régénérée à chaque fois
+		listeNetteAffichee = new ArrayList<>();
+		
+		//Et on teste chacun des filtres
+		if (idTypeSelectionne != 0)
+		{
+			for (Erp erp : listeNette)
+			{
+				if (erp.getTypeErp().getIdTypeErp() == idTypeSelectionne)
 				{
-					dateFin = intervention.getDateFinIntervention();
+					listeNetteAffichee.add(erp);
 				}
 			}
 		}
-		tableauNombreInterventions[index][0] = nombreTotal;
-		tableauNombreInterventions[index][1] = nombreTermines;
-		tableauNombreInterventions[index][2] = nombreEnCours;
-		tableauNombreInterventions[index][3] = nombreEnAttente;
-		tableauNombreInterventions[index][4] = nombreSuspendes;
 	}
-	
-	public String terminesOuTravauxEnCours(int nombreTermines, int nombreTotal)
+
+	public int terminesOuTravauxEnCours(int nombreTermines, int nombreTotal)
 	{		
 		if (nombreTotal == 0)
 		{
-			return "images/pasDeTravaux.png";
+			//Pas de travaux
+			return 4;
 		}
 		else if (nombreTermines == nombreTotal)
 		{
-			return "images/travauxTermines.56.64.png";
+			//Terminés
+			return 1;
 		}
 		else
 		{
-			return "images/travauxEnCours.53.65.png";
+			//En attente ou suspendus
+			return 2;
 		}
 	}
 	
-	public String terminesOuTravauxEnCoursToString(int nombreTermines, int nombreTotal)
+	public String imageTypeDiagnostic (int idTypeDiagnostic)
+	{
+		switch (idTypeDiagnostic) {
+			case 1: return "images/TypesDiagnosticIcones/TypeAcces.75.71.png";
+			case 2: return "images/TypesDiagnosticIcones/TypeEnergie.75.71.png";
+			case 3: return "images/TypesDiagnosticIcones/TypeSecurite.75.75.png";
+			case 4: return "images/TypesDiagnosticIcones/TypeHygiene.75.71.png";
+			default : return "images/TypesDiagnosticIcones/TypeAcces.75.71.png";
+			//prévoir icône pas de travaux
+		}
+	}
+	
+	public String imageIndicateurMoyen (int indicateur)
+	{
+		switch (indicateur) {
+		case 1: return "images/tableauDeBord/Indicateur1.png";
+		case 2: return "images/tableauDeBord/Indicateur2.png";
+		case 3: return "images/tableauDeBord/Indicateur3.png";
+		case 4: return "images/tableauDeBord/Indicateur4.png";
+		default : return "images/tableauDeBord/Indicateur1.png";
+		//prévoir icône pas d'anomalie
+		}
+	}
+	
+	public String imageEtatAvancement(int idEtatAvancement)
 	{		
-		if (nombreTotal == 0)
-		{
-			return "Aucunes interventions de programmées";
-		}
-		else if (nombreTermines == nombreTotal)
-		{
-			return "Interventions terminées";
-		}
-		else
-		{
-			return "Interventions en cours";
+		switch (idEtatAvancement) {
+		case 1: return "images/tableauDeBord/iconeValider5.png";
+		case 2: return "images/tableauDeBord/iconeEnCours5.png";
+		case 4: return "images/tableauDeBord/iconeEnAttente5.png";
+		default : return "images/tableauDeBord/iconeEnAttente5.png";		
 		}
 	}
-	
-	//Getters et Setters
-	
+
 	public IBusinessIntervention getProxyIntervention() {
 		return proxyIntervention;
 	}
@@ -250,38 +250,6 @@ public class EssaiTableauDeBordManagedBean {
 		this.proxyArtisan = proxyArtisan;
 	}
 
-	public Utilisateur getUser() {
-		return user;
-	}
-
-	public void setUser(Utilisateur user) {
-		this.user = user;
-	}
-
-	public Erp getMonERP() {
-		return monERP;
-	}
-
-	public void setMonERP(Erp monERP) {
-		this.monERP = monERP;
-	}
-
-	public SimpleDateFormat getFormater() {
-		return formater;
-	}
-
-	public void setFormater(SimpleDateFormat formater) {
-		this.formater = formater;
-	}
-
-	public SimpleDateFormat getShortFormater() {
-		return shortFormater;
-	}
-
-	public void setShortFormater(SimpleDateFormat shortFormater) {
-		this.shortFormater = shortFormater;
-	}
-
 	public IBusinessErp getProxyERP() {
 		return proxyERP;
 	}
@@ -290,83 +258,71 @@ public class EssaiTableauDeBordManagedBean {
 		this.proxyERP = proxyERP;
 	}
 
-	public List<Diagnostic> getListeDiagnosticERP() {
-		return listeDiagnosticERP;
+	public List<Erp> getListeBrute() {
+		return listeBrute;
 	}
 
-	public void setListeDiagnosticERP(List<Diagnostic> listeDiagnosticERP) {
-		this.listeDiagnosticERP = listeDiagnosticERP;
+	public void setListeBrute(List<Erp> listeBrute) {
+		this.listeBrute = listeBrute;
 	}
 
-	public int getNombreTotalIntervention() {
-		return nombreTotalIntervention;
+	public List<Erp> getListeNette() {
+		return listeNette;
 	}
 
-	public void setNombreTotalIntervention(int nombreTotalIntervention) {
-		this.nombreTotalIntervention = nombreTotalIntervention;
+	public void setListeNette(List<Erp> listeNette) {
+		this.listeNette = listeNette;
 	}
 
-	public int getNombreInterventionTerminees() {
-		return nombreInterventionTerminees;
+	public int[][][] getTableau() {
+		return tableau;
 	}
 
-	public void setNombreInterventionTerminees(int nombreInterventionTerminees) {
-		this.nombreInterventionTerminees = nombreInterventionTerminees;
+	public void setTableau(int[][][] tableau) {
+		this.tableau = tableau;
 	}
 
-	public int getNombreInterventionEnCours() {
-		return nombreInterventionEnCours;
+	public static int getMaxIndicateurType1() {
+		return MAX_INDICATEUR_TYPE_1;
 	}
 
-	public void setNombreInterventionEnCours(int nombreInterventionEnCours) {
-		this.nombreInterventionEnCours = nombreInterventionEnCours;
+	public static int getMaxIndicateurType2() {
+		return MAX_INDICATEUR_TYPE_2;
 	}
 
-	public int getNombreInterventionEnAttente() {
-		return nombreInterventionEnAttente;
+	public static int getMaxIndicateurType3() {
+		return MAX_INDICATEUR_TYPE_3;
 	}
 
-	public void setNombreInterventionEnAttente(int nombreInterventionEnAttente) {
-		this.nombreInterventionEnAttente = nombreInterventionEnAttente;
+	public static int getMaxIndicateurType4() {
+		return MAX_INDICATEUR_TYPE_4;
 	}
 
-	public int getNombreInterventionSuspendues() {
-		return nombreInterventionSuspendues;
+	public List<Erp> getListeNetteAffichee() {
+		return listeNetteAffichee;
 	}
 
-	public void setNombreInterventionSuspendues(int nombreInterventionSuspendues) {
-		this.nombreInterventionSuspendues = nombreInterventionSuspendues;
+	public void setListeNetteAffichee(List<Erp> listeNetteAffichee) {
+		this.listeNetteAffichee = listeNetteAffichee;
 	}
 
-	public double getCoutTotal() {
-		return coutTotal;
+	public List<TypeErp> getListeTypes() {
+		return listeTypes;
 	}
 
-	public void setCoutTotal(double coutTotal) {
-		this.coutTotal = coutTotal;
+	public void setListeTypes(List<TypeErp> listeTypes) {
+		this.listeTypes = listeTypes;
 	}
 
-	public Date getDateDebut() {
-		return dateDebut;
+	public int getIdTypeSelectionne() {
+		return idTypeSelectionne;
 	}
 
-	public void setDateDebut(Date dateDebut) {
-		this.dateDebut = dateDebut;
+	public void setIdTypeSelectionne(int idTypeSelectionne) {
+		this.idTypeSelectionne = idTypeSelectionne;
 	}
-
-	public Date getDateFin() {
-		return dateFin;
-	}
-
-	public void setDateFin(Date dateFin) {
-		this.dateFin = dateFin;
-	}
-
-	public int[][] getTableauNombreInterventions() {
-		return tableauNombreInterventions;
-	}
-
-	public void setTableauNombreInterventions(int[][] tableauNombreInterventions) {
-		this.tableauNombreInterventions = tableauNombreInterventions;
-	}
+	
+	//Getters et Setters
+	
+	
 }

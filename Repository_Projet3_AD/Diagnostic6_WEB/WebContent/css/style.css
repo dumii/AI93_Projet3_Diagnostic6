@@ -38,7 +38,6 @@ body
 	display:inline-block;
 	padding-left: 5%;
 	vertical-align:top;
-	display:none;
 }
 
 #rechercheBandeau > input[type="text"]
@@ -49,6 +48,7 @@ body
     margin-top:4%;
     margin-left:100px;
     margin-right:-5px;
+
 }
 
 #boutonRecherche
@@ -71,6 +71,7 @@ body
 	z-index:9999;
 	border:#cccccc solid 1px;
 	box-shadow: 1px 1px 12px #555;
+		display:none;
 }
 
 .logoAccueil {
