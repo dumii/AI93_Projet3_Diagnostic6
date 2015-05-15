@@ -22,10 +22,10 @@
 <body> 
 	<div id="enTete">
 	
-		<a href=""><img id="logoAccueil" src="images/Logo2.png" /></a>
-			
-		<h:form id="rechercheBandeau" action="">
-		<input type="text" value="Entrez votre recherche ici ..."/>
+		<h:commandButton action="/Accueil" image="images/Logo2.png" class="logoAccueil"/>
+				
+		<h:form id="rechercheBandeau">
+			<input type="text" value="Entrez votre recherche ici ..."/>
 			<input type="image" src="images/Loupe.png" class="logoRecherche"/>
 			<div id="resultatRecherche">
 				<div class="titreResultat">
@@ -55,22 +55,16 @@
 			
 		<h:commandButton action="/accueilDiagnostic" image="images/DiagnosticIconeBleue.png" class="logoMenu" id="logoDiag"/>
 			
-		<h:commandButton action="/accueilERP" image="images/ERPIconeBleue2.png" class="logoMenu" id="logoErp"/>	
-		
+		<h:commandButton action="/accueilERP" image="images/ERPIconeBleue2.png" class="logoMenu" id="logoErp"/>			
+	
 		</h:form>
-		<ui:insert name="boutonDeconnexion" />
+		
 		
 	</div>
 	
 	<div id="bandeauGauche">	
 		<div>
 			<ui:insert name="bouton"/>
-		</div>
-		
-		<div id="radio">
-			<input type="radio" id="radio1" name="radio"/><label for="radio1">Date</label>
-			<input type="radio" id="radio2" name="radio"/><label for="radio2"><ui:insert name="radiofiltre2"/></label>
-			<input type="radio" id="radio3" name="radio"/><label for="radio3"><ui:insert name="radiofiltre3"/></label>
 		</div>
   	
   		<div id="accordion">
@@ -94,31 +88,14 @@
 		
 		
 	<div id="bandeauDroite">
+		<h:form>
 		<fieldset id="connection">
 			<legend>Bonjour <ui:insert name="nomUtilisateur"/></legend>
 			<ui:insert name="roleUtilisateur"/>
 		</fieldset>
+		<h:commandButton action="#{mbUtilisateur.logout()}" image="images/iconeDeconnexion2.png" class="logoDeconnexion"/>
 		
-		<fieldset id="favoris">
-			<legend>Mes favoris</legend>
-		</fieldset>
-		
-		<fieldset id="notification">
-			<legend>Dernières actualités</legend>
-			
-			<article>
-				<header><ui:insert name="motifNotification"/></header>
-				<time><ui:insert name="dateNotification"/></time>
-				<section><ui:insert name="notification"/></section>
-			</article>
-			
-			<article>
-				<header><ui:insert name="motifNotification"/></header>
-				<time><ui:insert name="dateNotification"/></time>
-				<section><ui:insert name="notification"/></section>
-			</article>
-			
-		</fieldset>
+		</h:form>
 	</div>
 	<div class="content">	
 	<ui:insert name="content" />
