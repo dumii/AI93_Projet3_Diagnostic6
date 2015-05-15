@@ -63,6 +63,10 @@ public class DaoHistoriqueDiagnosticImpl implements IDaoHistoriqueDiagnostic {
 
 		if (expertInitiale != expertNouvelle)
 		{
+			historique = new HistoriqueDiagnostic();
+			historique.setDiagnostic(diagnostic);
+			historique.setUtilisateur(user);
+			historique.setDateModification(new Date());
 			historique.setTypeModification(MODIF_EXPERT);
 			historique.setAncienneDonnee(""+expertInitiale);
 			historique.setNouvelleDonnee(""+expertNouvelle);
@@ -74,6 +78,10 @@ public class DaoHistoriqueDiagnosticImpl implements IDaoHistoriqueDiagnostic {
 
 		if (!dateInitiale.equals(dateNouvelle))
 		{
+			historique = new HistoriqueDiagnostic();
+			historique.setDiagnostic(diagnostic);
+			historique.setUtilisateur(user);
+			historique.setDateModification(new Date());
 			historique.setTypeModification(MODIF_DATE_REALISATION);
 			historique.setAncienneDonnee(""+dateInitiale);
 			historique.setNouvelleDonnee(""+dateNouvelle);
