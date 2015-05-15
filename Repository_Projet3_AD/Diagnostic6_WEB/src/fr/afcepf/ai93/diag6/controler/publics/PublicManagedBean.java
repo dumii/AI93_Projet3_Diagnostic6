@@ -325,8 +325,6 @@ public class PublicManagedBean{
 		List<Erp> listeTempByTypeErp = new ArrayList<>();
 		List<Erp> listeTempByTypeDiag = new ArrayList<>();
 
-
-
 		if(idTypeErpSelect != null && idTypeErpSelect != 0){
 			for (Erp e : listeErp){
 				if(e.getTypeErp().getIdTypeErp() == idTypeErpSelect){

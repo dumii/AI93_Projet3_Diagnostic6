@@ -7,14 +7,14 @@
 	xmlns:rich="http://richfaces.org/rich">
 
 <h:head>
-
+<title>D6 Tableau de bord</title>
 </h:head>
 <body>
 	<ui:composition template="/WEB-INF/Template3Diagnostic6.xhtml">
-
+		<ui:define name="title">D6 Tableau de bord</ui:define>
 		<ui:define name="head">
 			<link href="css/tableauDeBord.css" rel="stylesheet" type="text/css" />
-
+			
 
 		</ui:define>
 		<ui:define name="content">
@@ -22,7 +22,7 @@
 			<f:view>
 
 				<h:form>
-					<div class="panelFiltres">
+					<div class="panelFiltres" >
 						<rich:panel headerClass="piotr" styleClass="filtres piotr2">
 							<f:facet name="header">
 								<h:outputText value="Nom ERP : "></h:outputText>
@@ -87,7 +87,7 @@
 							</rich:select>
 						</rich:panel>
 
-						<rich:panel headerClass="piotr" styleClass="filtres piotr2">
+						<rich:panel headerClass="piotr" styleClass="filtres piotr2" style="width:19.8%!important">
 							<f:facet name="header">
 								<h:outputText value="Etat d'avancement des travaux :"></h:outputText>
 							</f:facet>
@@ -106,14 +106,15 @@
 
 					</div>
 
+
 					<div class="affiche">
 						<a4j:outputPanel id="panel" layout="block">
 							<a4j:repeat value="#{mbTableauDeBord.listeErpFiltree}" var="o"
 								rows="20" id="repeat">
 								<rich:panel
-									style="border-radius: 5px; 
-						position:relative;float:left; width:60%; padding:1px; background-color:#f7f7f7; 
-						border-display:none;margin-left: 14%;"
+									style="border-radius: 2px; 
+						position:relative;float:left; width:60%; background-color:#FDFDFE; 
+						border-display:none;margin-left: 14%; margin-bottom: 3px;border-color: #E6ECF7;"
 									styleClass="richpanel">
 									<f:facet name="header">
 										<h:outputText value="#{o.nomErp}" />
@@ -121,9 +122,9 @@
 											value="Consulter le planning"></h:commandLink>
 									</f:facet>
 									<a4j:repeat value="#{o.listeDiagnosticErp}" var="d" rows="20"
-										id="repeat" styleClass="height: 75px; border-radius: 5px;">
+										id="repeat" styleClass="height: 75px; border-radius: 2px;border-color: E6ECF7">
 										<rich:panel
-											style="height: 95px; margin-top: 3px; border-radius: 5px; background-color: #EFF2FB"
+											style="height: 95px; margin-top: 3px; border-radius: 2px; border-color: #E6ECF7;background-color: #EFF2FB"
 											id="repeater">
 											<div class="logoTypeDiag">
 												<h:panelGroup layout="block"
