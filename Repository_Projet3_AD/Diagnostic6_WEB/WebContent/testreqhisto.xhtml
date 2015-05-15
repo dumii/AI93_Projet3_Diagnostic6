@@ -14,7 +14,12 @@
         <f:view>
         <h:form>
         <h:commandButton action="#{mbHistoriqueTravaux.recupereHistoriqueInterventionParERP()}" value="coucou" />
-        
+        <rich:dataTable var="toto" id="table" value="#{mbHistoriqueTravaux.listeInterventions}">
+        <rich:column>
+        <f:facet name="header">coucou </f:facet>
+        #{toto.idHistoriqueIntervention}
+        </rich:column>
+        </rich:dataTable>
         </h:form>
         </f:view>
         </f:facet>

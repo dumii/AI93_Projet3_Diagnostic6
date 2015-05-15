@@ -57,10 +57,18 @@ public class DaoHistoriqueInterventionImpl implements IDaoHistoriqueIntervention
 	public List<HistoriqueIntervention> recupereHistoriqueInterventionParERP(
 			Erp erp) {
 		
+		int coucou = erp.getIdErp();
+		
+		Query req = em.createQuery("SELECT h.intervention.listeHistoriqueIntervention FROM Anomalie h WHERE h.diagnostic.erp.idErp = :id");
+		req.setParameter("id", coucou);
+		List<HistoriqueIntervention> liste = req.getResultList();	
+		return liste;
+		
+		
 		// ne fonctionne pas
 		
 		
-		int coucou = erp.getIdErp();/*
+		/*
 		Query req = em.createQuery("SELECT h FROM "+
 			"(((HistoriqueIntervention h "+
 			"inner join fetch intervention "+
@@ -74,8 +82,9 @@ public class DaoHistoriqueInterventionImpl implements IDaoHistoriqueIntervention
 			"where erp.idErp = :id");
 		req.setParameter("id", coucou);
 		List<HistoriqueIntervention> liste = req.getResultList();	
-		return liste;*/	
-		
+		return liste;
+		*/	
+		/*
 		//recuperation de
 		Query reqERP = em.createQuery("select e.id from Erp e where e.id = :id");
 		reqERP.setParameter("id", coucou);
@@ -127,7 +136,7 @@ public class DaoHistoriqueInterventionImpl implements IDaoHistoriqueIntervention
 		Query req = em.createQuery("select e from Erp e where e.idErp = :id");
 		req.setParameter("id", coucou);
 		List<HistoriqueIntervention> list = req.getResultList();
-		return list;
+		return list;*/
 	}
 
 	@Override
