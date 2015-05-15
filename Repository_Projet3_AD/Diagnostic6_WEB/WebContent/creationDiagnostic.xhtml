@@ -1,0 +1,321 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+<ui:composition template="/WEB-INF/Template2Diagnostic6.xhtml">
+	<ui:define name="title">Diagnostic 6 - Création diagnostic</ui:define>
+	
+	<ui:define name="head">
+		<link href="css/creationDiagnostic.css" rel="stylesheet"
+			type="text/css" />
+			<script type="text/javascript" src="JavaScript/creationDiagnostic.js"></script>
+	</ui:define>
+		
+	<ui:define name="bouton">
+		<h:form>
+			<h:commandLink action="consultationDiagnostic" class="boutonJquery" value="Retour">
+   			</h:commandLink>
+   		</h:form>
+	</ui:define>
+	
+	
+	<ui:define name="content"> 
+		<div id="content"> 
+			<f:view>
+				
+				<h:form id="toto">
+ 
+					<h:panelGroup id="lblReponseAjax" layout="block" >
+
+						<div class="mini-barreEtat">
+							<h2 id="titreDiagnostic">
+								#{mbCreationDiagnostic.idDiagnostic} Diagnostic
+								<span id="spanTypeSelectionne"></span> 
+								#{mbCreationDiagnostic.monERP.nomErp}
+								<h:commandLink class="btn" value="Enregistrer" id="boutonAjouterDiagnostic">
+									<a4j:ajax event="click" 
+											render="toto"
+											listener="#{mbCreationDiagnostic.enregistrerDiagnostic()}"/>
+   								</h:commandLink>
+   								<h:outputLabel value="Tous les champs ne sont pas remplis." id="messageErreurDiagnostic1"/>
+   								<h:outputLabel value="Aucune anomalie n'a été renseignée." id="messageErreurDiagnostic2"/>
+							</h2>
+							
+						</div>
+	
+						<!-- Section SELECTION ERP -->
+						<div class="InfoErpDiagnostic" id="choixERP">
+
+							<h3>Sélection de l'ERP</h3>
+
+							<div class="selection">
+								<h:outputLabel class="intitule" value="Nom de l'ERP : " />
+								<h:inputText class="valeur" value="#{mbCreationDiagnostic.nomErpEntre}">
+									<f:ajax event="keydown"
+							 			  	listener="#{mbCreationDiagnostic.rechercheErpParNom()}"
+							 			  	render="maListe"/>
+								</h:inputText>
+								<h:selectOneListbox id="maListe" 
+												   value="#{mbCreationDiagnostic.monERP.idErp}">
+									<f:selectItems value="#{mbCreationDiagnostic.listeERP}"
+												   var="erp"
+												   itemLabel="#{erp.nomErp}"
+												   itemValue="#{erp.idErp}"/>
+									<a4j:ajax event="change"
+							 				  listener="#{mbCreationDiagnostic.rechercheTypeDiagnosticDispo()}"
+							 				  render="toto"/>
+								</h:selectOneListbox>
+							</div>
+						
+						</div>
+						
+						<!-- Section INFORMATIONS ERP -->
+						<div class="InfoErpDiagnostic" id="informations">
+
+							<h3>Informations sur l'ERP</h3>
+
+							<div class="formulaire" >
+								<h:outputLabel class="intitule" value="ERP concerné : " />
+								<h:outputLabel class="valeur" id="infos1"
+									value="#{mbCreationDiagnostic.monERP.nomErp}" />
+
+								<h:outputLabel class="intitule" value="Catégorie : " />
+								<h:outputLabel class="valeur"
+									value="#{mbCreationDiagnostic.monERP.categorieErp.denominationCategorieErp}" />
+
+								<h:outputLabel class="intitule" value="Fonction : " />
+								<h:outputLabel class="valeur"
+									value="#{mbCreationDiagnostic.monERP.typeErp.denominationTypeErp} #{mbConsultationTravaux.monERP.typeErp.typeErpCourt}" />
+
+								<h:outputLabel class="intitule" value="Adresse : " />
+								<h:outputLabel class="valeur" value="#{mbConsultationTravaux.monERP.numVoieErp} #{mbConsultationTravaux.monERP.nomVoieErp} #{mbConsultationTravaux.monERP.localisation.codePostal} #{mbConsultationTravaux.monERP.localisation.ville}" escape="false" />
+
+								<h:outputLabel class="intitule" value="Propriétaire : " />
+								<h:outputLabel class="valeur"
+									value="#{mbCreationDiagnostic.monERP.proprietaire.nomProprietaire.toUpperCase()} #{mbConsultationTravaux.monERP.proprietaire.prenomProprietaire}" />
+
+								<h:outputLabel class="intitule" value="Coordonnées : " />
+								<h:outputLabel class="valeur"
+									value="Tél : #{mbCreationDiagnostic.monERP.proprietaire.telProprietaire} 
+                        	&lt;br /&gt; Mail : #{mbCreationDiagnostic.monERP.proprietaire.mailProprietaire}
+                        	&lt;br /&gt; #{mbCreationDiagnostic.monERP.proprietaire.numVoieProprietaire} #{mbCreationDiagnostic.monERP.proprietaire.nomVoieProprietaire} 
+                        	 #{mbCreationDiagnostic.monERP.proprietaire.localisation.codePostal} #{mbCreationDiagnostic.monERP.proprietaire.localisation.ville}"
+									escape="false" />
+							</div>
+							
+							<div class="formulaire" id="infos2">
+								<!-- Sélection du type de diagnostic -->
+								<h:outputLabel class="intitule" value="Type de diagnostic : " />								
+										<h:selectOneMenu 	id="selectFirst"
+															value="#{mbCreationDiagnostic.idTypeDiagnostic}"
+															class="infosDiagnostic"
+															onchange="typeDiagTitre(this)">
+											<f:selectItem itemLabel="-- Sélectionnez un type de diagnostic --" itemValue="0"/>
+											<f:selectItems	value="#{mbCreationDiagnostic.listeTypeDiag}"
+								   							var="var"
+								  							itemLabel="#{var.nomType}"
+								  							itemValue="#{var.idTypeDiagnostic}"/>
+								  			<a4j:ajax event="change"
+							 						 listener="#{mbCreationDiagnostic.recupererIndicateurParType()}"
+							 						 render="selectSix"/>	
+										</h:selectOneMenu>
+
+								<!-- Sélection de l'expert et informations sur l'expert -->
+								<h:outputLabel class="intitule" value="Expert diagnostiqueur : " />
+									<h:selectOneMenu 	value="#{mbCreationDiagnostic.idExpert}"
+														class="infosDiagnostic">
+											<f:selectItem itemLabel="-- Sélectionnez un expert diagnostiqueur --" itemValue="0"/>
+											<f:selectItems	value="#{mbCreationDiagnostic.listeExperts}"
+								   							var="var"
+								  							itemLabel="#{var.nomExpert} #{var.prenomExpert}"
+								  							itemValue="#{var.idExpert}"/>
+								  			<a4j:ajax event="change"
+							 						 listener="#{mbCreationDiagnostic.chargerInfosExpert()}"
+							 						 render="infosExpert"/>	
+										</h:selectOneMenu>
+
+								
+								<h:outputLabel class="intitule" value="Coordonnées : " />
+								<h:outputLabel class="valeur"	id="infosExpert"
+									value="Tél : #{mbCreationDiagnostic.expert.telExpert} 
+									&lt;br /&gt; Mail : #{mbCreationDiagnostic.expert.mailExpert} 
+									&lt;br /&gt; #{mbCreationDiagnostic.expert.numVoieExpert} #{mbCreationDiagnostic.expert.nomVoieExpert} 
+									#{mbCreationDiagnostic.expert.localisation.codePostal} #{mbCreationDiagnostic.expert.localisation.ville}"
+									escape="false" />
+								
+								<!-- Sélection du type de diagnostic -->
+								<h:outputLabel class="intitule" value="Date de réalisation : " />
+								<rich:calendar 
+												value="#{mbCreationDiagnostic.nouveauDiagnostic.dateRealisationDiagnostic}"
+												datePattern="dd/MM/yyyy"
+												popup="true"
+												inputStyle="width:45.5%"/>
+							</div>
+							
+						</div>
+						
+						<!-- Section AJOUT ANOMALIES -->
+						<div class="InfoErpDiagnostic" id="ajoutAnomalies">
+
+							<h3>Ajout d'anomalies</h3>
+							<h:panelGroup id="totop">
+							
+							<table>
+								<tr>
+									<th>Choix bâtiment ou voirie</th>
+									<th>Liste bâtiments ou voiries</th>
+									<th>Indicateur et coût estimé</th>
+									<th></th>
+								</tr>
+								
+								<tr>
+									<td>
+									
+										<!-- Sélection bâtiment ou voirie -->
+										<h:selectOneMenu 	value="#{mbCreationDiagnostic.choixBatvoirie}">
+											<f:selectItem itemLabel="Bâtiment" itemValue="batiment"/>
+											<f:selectItem itemLabel="Voirie" itemValue="voirie"/>
+											<a4j:ajax event="change"
+							 						 listener="#{mbCreationDiagnostic.chargerListeStructure()}"
+							 						 render="selectTwo, selectThree, selectFour"/>
+										</h:selectOneMenu>
+										
+										<!-- Si bâtiment choisie : afficher liste des bâtiments de l'ERP -->
+										<h:selectOneMenu 	id="selectTwo"
+															value="#{mbCreationDiagnostic.idBatimentSelectionne}"
+															style="display:#{mbCreationDiagnostic.display}"
+															class="infosAnomalie">
+												<f:selectItem itemLabel="-- Sélectionnez un bâtiment --" itemValue="0"/>
+												<f:selectItems	value="#{mbCreationDiagnostic.listeBatimentERP}"
+								   								var="var"
+								  								itemLabel="#{var.intituleBatiment}"
+								  								itemValue="#{var.idBatiment}"/>
+								  				<a4j:ajax event="change"
+							 						 listener="#{mbCreationDiagnostic.recupererBatiment()}"
+							 						 render="selectThree, selectFour"/>
+										</h:selectOneMenu>
+									</td>
+									
+									<td>
+									<!-- Si bâtiment choisie : afficher liste des structures possibles -->
+										<h:selectOneMenu 	id="selectThree"
+															value="#{mbCreationDiagnostic.choixAccesEtageAscenceurEscalier}"
+															style="display:#{mbCreationDiagnostic.display}"
+															class="infosAnomalie">
+											<f:selectItem itemLabel="-- Sélectionnez une structure --" itemValue="0"/>
+											<f:selectItems	value="#{mbCreationDiagnostic.listeBatiment}"
+								   							var="var"
+								  							itemLabel="#{var}"
+								  							itemValue="#{var}"/>
+								  			<a4j:ajax event="change"
+							 						 listener="#{mbCreationDiagnostic.chargerListeItems()}"
+							 						 render="selectFour, selectFive"/>	
+										</h:selectOneMenu>
+										
+										<!-- Afficher liste des items selon la structure choisie -->
+										<h:selectOneMenu 	id="selectFour"
+															value="#{mbCreationDiagnostic.idItemSelectionne}"
+															class="infosAnomalie">
+												<f:selectItem itemLabel="-- Sélectionnez un item --" itemValue="0"/>
+												<f:selectItems	value="#{mbCreationDiagnostic.chargerListeItems()}"
+								   								var="var"
+								  								itemLabel="#{var.label}"
+								  								itemValue="#{var.value}"/>
+										</h:selectOneMenu>
+										
+										<!-- Afficher liste des pièces si l'étage a été sélectionné -->
+										<h:selectOneMenu 	id="selectFive"
+															value="#{mbCreationDiagnostic.idPieceSelectionne}"
+															style="display:#{mbCreationDiagnostic.cacherSelectPiece()}">
+												<f:selectItems	value="#{mbCreationDiagnostic.listePiece}"
+								   								var="var"
+								  								itemLabel="#{var.denominationPiece}"
+								  								itemValue="#{var.idPiece}"/>
+										</h:selectOneMenu>
+										
+									</td>
+									
+									<td>
+										<!-- Sélection de l'indicateur -->
+										<h:selectOneMenu 	id="selectSix"
+															value="#{mbCreationDiagnostic.idIndicateur}"
+															class="infosAnomalie">
+												<f:selectItem itemLabel="-- Sélectionnez l'indicateur --" itemValue="0"/>
+												<f:selectItems	value="#{mbCreationDiagnostic.listeIndicateur}"
+								   								var="var"
+								  								itemLabel="#{var.libelleIndicateur}"
+								  								itemValue="#{var.idIndicateur}"/>
+										</h:selectOneMenu>
+										
+										<h:outputLabel value="Coût estimé :"/>
+										<h:inputText value="#{mbCreationDiagnostic.anomalie.coutEstimeAnomalie}" class="infosAnomalieCout"/>
+									</td>
+									
+									<td rowspan="2" class="colonneBouton">
+										<h:commandLink  >
+											<img id="boutonAjouterAnomalie" 
+												 src="images/creationDiagnostic/ajouter.png"/>
+												 <f:ajax event="click" execute="@form" render="totop" listener="#{mbCreationDiagnostic.ajouterAnomalieAuTableau()}"/>
+										</h:commandLink>  
+										<h:outputLabel value="Tous les champs ne sont pas remplis." id="messageErreurAnomalie"/>   
+									</td>
+ 
+								</tr>
+								 
+								<tr>
+									<td colspan="3">
+										<h:outputLabel value="Description de l'anomalie : " />
+										<h:outputLabel value="Préconisation de l'expert : " />
+										
+										<h:inputTextarea value="#{mbCreationDiagnostic.anomalie.descriptionAnomalie}" class="infosAnomalieText"/>
+										<h:inputTextarea value="#{mbCreationDiagnostic.anomalie.preconisationAnomalie}" class="infosAnomalieText"/>
+									</td>
+								</tr>
+								<ui:repeat var="anomalie" value="#{mbCreationDiagnostic.listeAnomalies}">
+									
+									<tr>
+										<td>#{mbCreationDiagnostic.localisationAnomalieOne(anomalie)}</td>
+										<td>#{mbCreationDiagnostic.localisationAnomalieTwo(anomalie)}</td>
+										<td>Indicateur : #{anomalie.indicateur.libelleIndicateur}
+											<br/>
+											Coût estimé : #{anomalie.coutEstimeAnomalie}
+										</td>
+										<td>
+											 <h:commandLink action="#{mbCreationDiagnostic.retirerAnomalieDuTableau(anomalie)}" >
+												<img src="images/creationDiagnostic/supprimer.png"/>
+											 </h:commandLink> 
+										</td>
+									</tr>
+									
+									<tr>
+										<td colspan="2">  
+											Description de l'anomalie :
+											<br/>
+											#{anomalie.descriptionAnomalie}
+										</td>
+										
+										<td colspan="2">  
+											Préconisation de l'expert :
+											<br/>
+											#{anomalie.preconisationAnomalie}
+										</td>
+									</tr>
+								
+								</ui:repeat>
+							</table>
+	
+							
+							</h:panelGroup>
+					 	</div>					
+					</h:panelGroup>
+				</h:form>
+			</f:view>
+		</div>
+	</ui:define>
+
+</ui:composition>
+</html>

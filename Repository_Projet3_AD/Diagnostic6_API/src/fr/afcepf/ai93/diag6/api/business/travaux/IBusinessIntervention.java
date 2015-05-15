@@ -5,6 +5,7 @@ import java.util.List;
 
 import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
+import fr.afcepf.ai93.diag6.entity.erp.Erp;
 import fr.afcepf.ai93.diag6.entity.travaux.EtatAvancementTravaux;
 import fr.afcepf.ai93.diag6.entity.travaux.HistoriqueIntervention;
 import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
@@ -12,9 +13,12 @@ import fr.afcepf.ai93.diag6.entity.travaux.TypeIntervention;
 
 public interface IBusinessIntervention {
 
-	//Intervention	
+	//Historique
 	public List<HistoriqueIntervention> recupereToutHistoriqueIntervention();
 	
+	public List<HistoriqueIntervention> recupereHistoriqueInterventionParERP(Erp erp);
+	
+	//Intervention	
 	public List<Intervention> recupereToutesIntervention();
 	
 	public List<Intervention> recupereInterventionParType(TypeIntervention type);
@@ -42,4 +46,6 @@ public interface IBusinessIntervention {
 	public EtatAvancementTravaux recupererEtatParIntervention (Intervention intervention);
 
 	int nombreInterventionDiag(int idDiag);
+
+	public boolean voirSiInterventionEnCoursParErp(int idErp);
 }

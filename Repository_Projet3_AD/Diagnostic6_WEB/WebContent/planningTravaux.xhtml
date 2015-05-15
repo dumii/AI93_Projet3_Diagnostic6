@@ -18,7 +18,7 @@
 	<f:event listener="#{mbPlanningTravaux.loadChantier()}" type="preRenderView"/>
 		<div id="content">
 		<f:view>
-		<h:form>
+		<h:form id="toto">
 		<br/>
 		<h:commandLink action="consultationTravaux" class="btn" value="Retour vers la fiche de consultation">
       			<f:param name="id" value="#{mbPlanningTravaux.monERP.idErp}" />
@@ -237,15 +237,14 @@
 												   popup="true"
 												   inputStyle="width:45.5%"/>
 									
-								<h:outputLabel value="Date de fin :" /> 
+								<h:outputLabel value="Date de fin :" />
+								#{anom.intervention}dqsd 
 									<rich:calendar value="#{anom.intervention.dateFinIntervention}"
 												   datePattern="dd/MM/yyyy"
 												   popup="true"
 												   inputStyle="width:45.5%"/>
 							   
-								<h:commandButton value="Ajouter"
-												 action="#{mbPlanningTravaux.ajouterIntervention(anom.intervention, anom)}" />			
-							</div>
+								<h:commandButton value="Ajouter" action="#{mbPlanningTravaux.ajouterIntervention(anom.intervention, anom)}"/>							</div>
 							
 							<div>
 								<h:outputLabel value="Type d'intervention :" />

@@ -9,8 +9,10 @@ import javax.ejb.Stateless;
 
 import fr.afcepf.ai93.diag6.api.business.autres.IBusinessUtilisateur;
 import fr.afcepf.ai93.diag6.api.business.publics.IBusinessPublic;
+import fr.afcepf.ai93.diag6.api.data.autres.IDaoNotifs;
 import fr.afcepf.ai93.diag6.api.data.autres.IDaoUtilisateur;
 import fr.afcepf.ai93.diag6.entity.autres.Favoris;
+import fr.afcepf.ai93.diag6.entity.autres.Notifications;
 import fr.afcepf.ai93.diag6.entity.autres.ProfilUtilisateur;
 import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
@@ -21,12 +23,14 @@ import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
 public class BusinessUtilisateurImpl implements IBusinessUtilisateur {
 
 	@EJB
-	public IDaoUtilisateur proxiDaoUtilisateur;
+	public IDaoUtilisateur proxyUser;
+	@EJB
+	public IDaoNotifs proxyNotif;
 	
 	@Override
 	public List<Utilisateur> recupereToutUtilisateur() {
 		
-		List<Utilisateur> liste = proxiDaoUtilisateur.recupereToutUtilisateur();
+		List<Utilisateur> liste = proxyUser.recupereToutUtilisateur();
 		
 		return liste;
 	}
@@ -45,8 +49,8 @@ public class BusinessUtilisateurImpl implements IBusinessUtilisateur {
 
 	@Override
 	public String modifierUtilisateur(Utilisateur utilisateur) {
-		Utilisateur utiliInitial = proxiDaoUtilisateur.recupereUtilisateur(utilisateur.getIdUtilisateur());
-		proxiDaoUtilisateur.modifierUtilisateur(utilisateur);
+		Utilisateur utiliInitial = proxyUser.recupereUtilisateur(utilisateur.getIdUtilisateur());
+		proxyUser.modifierUtilisateur(utilisateur);
 		return "Ok modif";
 	}
 
@@ -100,8 +104,7 @@ public class BusinessUtilisateurImpl implements IBusinessUtilisateur {
 
 	@Override
 	public Utilisateur recupereUtilisateur(int idUtilisateur) {
-		// TODO Auto-generated method stub
-		return proxiDaoUtilisateur.recupereUtilisateur(idUtilisateur);
+		return proxyUser.recupereUtilisateur(idUtilisateur);
 	}
 
 	@Override
@@ -112,8 +115,12 @@ public class BusinessUtilisateurImpl implements IBusinessUtilisateur {
 
 	@Override
 	public Utilisateur seConnecter(String login, String motDePasse) {
-		// TODO Auto-generated method stub
-		return proxiDaoUtilisateur.seConnecter(login, motDePasse);
+		return proxyUser.seConnecter(login, motDePasse);
+	}
+
+	@Override
+	public List<Notifications> recupereToutNotification() {
+		return proxyNotif.recupereToutNotification();
 	}
 
 	

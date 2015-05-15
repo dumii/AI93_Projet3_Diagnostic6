@@ -33,4 +33,6 @@ public interface IBusinessAnomalie {
 	public List<HistoriqueAnomalie> recupereHistoriqueAnomalieParDiag(int idDiagEnCours);
 
     
+    public Indicateur recupereIndicateurParID(int idIndicateur);
+  
 }

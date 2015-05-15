@@ -8,6 +8,7 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 import fr.afcepf.ai93.diag6.api.business.diagnostic.IBusinessDiagnostic;
+import fr.afcepf.ai93.diag6.api.data.autres.IDaoNotifs;
 import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoDiagnostic;
 import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoHistoriqueDiagnostic;
 import fr.afcepf.ai93.diag6.api.data.diagnostic.IDaoIndicateur;
@@ -31,6 +32,8 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 	private IDaoIndicateur proxyIndicateur; 
 	@EJB
 	private IDaoHistoriqueDiagnostic proxyHistoDiag; 
+	@EJB
+	private IDaoNotifs proxyNotifs; 
 	
 	private List<Diagnostic> listeDiag; 
 	private List<Diagnostic> listeDiagIntervEnCours = new ArrayList<Diagnostic>(); 
@@ -100,6 +103,7 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 		} 
 		if (ajoutAutorise == true) {	
 			proxyDiagnostic.ajouterDiagnostic(diagnostic);
+			proxyNotifs.envoyerNotificationAuGTravaux(3,getMaxId()); 
 			return "Intervention enregistrée avec succès";
 				
 		}else
@@ -146,8 +150,7 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 
 	@Override
 	public List<Diagnostic> rechercheDiagnostics(String nomDiagnostic) {
-		// TODO Auto-generated method stub
-		return null;
+		return proxyDiagnostic.rechercheDiagnostics(nomDiagnostic);
 	}
 
 	@Override
@@ -234,6 +237,47 @@ public class BusinessDiagnosticImpl implements IBusinessDiagnostic {
 	public List<HistoriqueDiagnostic> recupereHistoriqueDiagnosticParDiag(
 			int idDiagEnCours) {
 		return proxyHistoDiag.recupereHistoriqueDiagnosticParDiag(idDiagEnCours);
+	}
+
+
+	public List<Indicateur> recupereIndicateurParTypeDiagnostic(
+			int idTypeDiagnostic) {
+		return proxyIndicateur.recupereIndicateurParTypeDiagnostic(idTypeDiagnostic);
+	}
+
+	@Override
+	public int getMaxId() {
+		return proxyDiagnostic.getMaxId();
+	}
+
+	@Override
+	public List<TypeDiagnostic> recupereTypeDiagnosticDospoParERP(Erp erp) {
+		List<TypeDiagnostic> listeTousTypes = proxyTypeDiagnostic.recupereTypeDiagnostic();
+		List<TypeDiagnostic> listeTypeERP = proxyTypeDiagnostic.recupereTypeDiagnosticParErp(erp);
+		List<TypeDiagnostic> listeFinale = new ArrayList<TypeDiagnostic>();
+
+		for (TypeDiagnostic type : listeTousTypes)
+		{
+			boolean ajout = true;
+			for (TypeDiagnostic type2 : listeTypeERP)
+			{
+				if (type.getIdTypeDiagnostic() == type2.getIdTypeDiagnostic())
+				{
+					ajout = false;
+				}
+			}
+			if (ajout)
+			{
+				listeFinale.add(type);
+			}
+		}
+
+		return listeFinale;
+	}
+
+	@Override
+	public TypeDiagnostic recupereTypeDiagnosticParID(int idTypeDiagnostic) {
+		return proxyTypeDiagnostic.recupereTypeDiagnosticParID(idTypeDiagnostic);
 	}
 
 }

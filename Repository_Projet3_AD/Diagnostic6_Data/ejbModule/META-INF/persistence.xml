@@ -35,6 +35,7 @@
 		<class>fr.afcepf.ai93.diag6.entity.autres.Localisation</class>
 		<class>fr.afcepf.ai93.diag6.entity.autres.ProfilUtilisateur</class>
 		<class>fr.afcepf.ai93.diag6.entity.autres.Utilisateur</class>
+		<class>fr.afcepf.ai93.diag6.entity.autres.Notifications</class>
 		
 	<properties>
 	

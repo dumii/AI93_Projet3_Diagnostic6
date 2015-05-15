@@ -1,9 +1,11 @@
 package fr.afcepf.ai93.diag6.controler.gestionnaires;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -11,8 +13,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-
-import org.richfaces.resource.PostConstructResource;
 
 import fr.afcepf.ai93.diag6.api.business.autres.IBusinessExpert;
 import fr.afcepf.ai93.diag6.api.business.diagnostic.IBusinessAnomalie;
@@ -51,6 +51,7 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 	private IBusinessIntervention proxyBusinessIntervention; 
 	@EJB
 	private IBusinessExpert proxyBusinessExpert; 
+	
 	@ManagedProperty(value = "#{mbUtilisateur}")
 	private UtilisateurManagedBean user; 
 
@@ -64,6 +65,8 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 	private List<Indicateur> listeIndicateursParDiagnostic; 
 	private List<Expert> listeExperts;
 	private Diagnostic dmodif = new Diagnostic(); 
+	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MMMM/yyyy");
+
 	
 	@PostConstruct
 	public void init()
@@ -94,7 +97,6 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 		recupererIndicateurParTypeDiag(); 
 		recupererExperts(); 
 		amodif=new Anomalie(); 
-		System.out.println("utilisateur connecté : "+user.getUtilisateur().getNomUtilisateur());
 	}
 
 	private void recupererExperts() {
@@ -195,15 +197,15 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 				interventionAnomalieEnCours = i; 	
 			}
 			if(interventionAnomalieEnCours.getEtatAvancementTravaux().getIdEtatAvancement()==3){
-				return "Une intervention est planifiée sur cette anomalie à partir du "+interventionAnomalieEnCours.getDateDebutIntervention(); 
+				return "Une intervention est planifiée sur cette anomalie à partir du "+ dateFormat.format(interventionAnomalieEnCours.getDateDebutIntervention()); 
 			}
 			else{
 				if(interventionAnomalieEnCours.getEtatAvancementTravaux().getIdEtatAvancement()==2){
-					return "Une intervention est en cours sur cette anomalie depuis le "+ interventionAnomalieEnCours.getDateDebutIntervention() +
-							" et prendra fin le "+interventionAnomalieEnCours.getDateFinIntervention(); 
+					return "Une intervention est en cours sur cette anomalie depuis le "+ dateFormat.format(interventionAnomalieEnCours.getDateDebutIntervention()) +
+							" et prendra fin le "+dateFormat.format(interventionAnomalieEnCours.getDateFinIntervention()); 
 				}
 				else{
-					return "L'intervention sur cette anomalie a pris fin le "+ interventionAnomalieEnCours.getDateFinIntervention(); 
+					return "L'intervention sur cette anomalie a pris fin le "+ dateFormat.format(interventionAnomalieEnCours.getDateFinIntervention()); 
 				}
 			}
 		}
@@ -253,7 +255,10 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 			System.out.println("Diag pris en compte pour la modification : " + diagnosticSelectionne.getIdDiagnostic());
 			dmodif = diagnosticSelectionne;
 		} else {
-			proxyBusinessDiagnostic.modifierDiagnostic(diagnosticSelectionne,user.getUtilisateur());
+			System.out.println("je passe ici");
+			Utilisateur user = new Utilisateur();
+			user.setIdUtilisateur(1);
+			proxyBusinessDiagnostic.modifierDiagnostic(diagnosticSelectionne,user);
 			dmodif=new Diagnostic(); 
 			recupererDiagnostic(); 
 		}

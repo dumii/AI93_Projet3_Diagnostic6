@@ -20,30 +20,51 @@
 
 	<div id="enTete">
 	
-		<a href=""><img id="logoAccueil" src="images/Logo2.png" /></a>
+		<h:commandButton action="/Accueil" image="images/Logo2.png" class="logoAccueil"/>
 			
 		<h:form id="rechercheBandeau" action="">
 			<input type="text" value="Entrez votre recherche ici ..."/>
-			<input type="image" src="images/Loupe.png"/>
-			<div id="resultatRecherche">blabla</div>
+			<input type="image" src="images/Loupe.png" />
+			<div id="resultatRecherche">
+				<div class="titreResultat">
+				Diagnostics
+					<ui:repeat var="diag" value="#{mbRecherche.listeDiagTrouves}">
+						#{diag.intituleDiagnostic}
+					</ui:repeat>
+				</div>
+				
+				<div class="titreResultat">
+				Travaux
+					<ui:repeat var="trav" value="#{mbRecherche.listeChantiersTrouves}">
+						#{trav.nomChantier}
+					</ui:repeat>
+				</div>
+				
+				<div class="titreResultat">
+				Patrimoine
+					<ui:repeat var="erp" value="#{mbRecherche.listeErpTrouves}">
+						#{erp.nomErp}
+					</ui:repeat>
+				</div>
+			</div>
+			
+			<h:commandButton action="/TableauDeBord" image="images/TableauBordIconeOrange.png" class="logoMenu2" id="logoTabBord"/>
+			
+			<h:commandButton action="/accueilTravaux" image="images/BuildingConstruction_icon.png" class="logoMenu" id="logoTrav"/>
+			
+			<h:commandButton action="/accueilDiagnostic" image="images/DiagnosticIconeBleue.png" class="logoMenu" id="logoDiag"/>
+			
+			<h:commandButton action="/accueilERP" image="images/ERPIconeBleue2.png" class="logoMenu" id="logoErp"/>			
+	
+>>>>>>> branch 'master' of https://github.com/dumii/AI93_Projet3_Diagnostic6.git
 		</h:form>
-		
-		<a href=""><img class="logoMenu" id="logoErp" src="images/ERPIconeBleue2.png" /></a>
-		
-		<a href=""><img class="logoMenu" id="logoDiag" src="images/DiagnosticIconeBleue.png" /></a>
-		
-		<a href=""><img class="logoMenu" id="logoTrav" src="images/BuildingConstruction_icon.png" /></a>
-		
-		<a href=""><img class="logoMenu" id="logoTabBord" src="images/TableauBordIconeOrange.png" /></a>
-		
-		
 	</div>
-
 	<ui:insert name="content" />
 
-	<div class="content">
-	<ui:insert name="content" />
-	</div>
-</body>
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/heads/vendreid
+</h:body>
 
 </html>
