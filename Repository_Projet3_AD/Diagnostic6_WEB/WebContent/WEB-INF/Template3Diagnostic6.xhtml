@@ -15,39 +15,65 @@
 	<link href="css/style.css" rel="stylesheet" type="text/css" />
 	
  	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css"/>
+ 	<link href="css/barreHaut.css" rel="stylesheet" type="text/css"/>
 	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<ui:insert name="head"></ui:insert>
 
 </h:head> 
 <body> 
+<f:view>
 	<div id="enTete">
 	
 		<h:form id="rechercheBandeau">
 		<h:commandButton action="/Accueil" image="images/Logo2.png" class="logoAccueil"/>
 			
 		
-			<input type="text" value="Entrez votre recherche ici ..."/>
-			<input type="image" src="images/Loupe.png" class="logoRecherche"/>
-			<div id="resultatRecherche">
-				<div class="titreResultat">
-				Diagnostics
-					<ui:repeat var="diag" value="#{mbRecherche.listeDiagTrouves}">
-						#{diag.intituleDiagnostic}
+			<h:commandButton action="/Accueil" image="images/Logo2.png" class="logoAccueil"/>
+			  <h:inputText value="#{mbRecherche.stringCherche}" id="textInputRecherche" autocomplete="off"
+			  		onkeypress="#{mbRecherche.rechercherString()}" onblur="PasShow_Div(resultatRecherche)" > 
+					<a4j:ajax event="keyup"
+							listener="#{mbRecherche.rechercherString()}"
+							oncomplete="Show_Div(resultatRecherche)"
+							render="rechercheBandeau">
+					</a4j:ajax>
+			 </h:inputText>
+			<input type="image" src="images/Loupe.png" id="boutonRecherche" 
+			 		onkeypress="#{mbRecherche.rechercherString()}" onclick="Show_Div(resultatRecherche)" />
+			<div id="resultatRecherche">	
+				<div class="resultatsTheme">
+					<div class="titreTheme">Diagnostics</div>
+					<ui:repeat var="diag" value="#{mbRecherche.listeDiagTrouves}" >
+						<div class="resUnitaire">
+						<h:commandLink value="#{diag.intituleDiagnostic}" 
+								action="consultationDiagnostic"> 
+								<f:param name="id" value="#{diag.idDiagnostic}"></f:param>
+						 </h:commandLink>
+						</div>
 					</ui:repeat>
 				</div>
 				
-				<div class="titreResultat">
-				Travaux
+				<div class="resultatsTheme">
+					<div class="titreTheme">Travaux</div>
 					<ui:repeat var="trav" value="#{mbRecherche.listeChantiersTrouves}">
-						#{trav.nomChantier}
+						<div class="resUnitaire">
+						<h:commandLink value="Chantier en cours #{trav.nomChantier}" 
+								action="consultationTravaux"> 
+								<f:param name="id" value="#{trav.erpChantier.idErp}"></f:param>
+						 </h:commandLink>
+						</div>
 					</ui:repeat>
 				</div>
 				
-				<div class="titreResultat">
-				Patrimoine
+				<div class="resultatsTheme">
+					<div class="titreTheme">Patrimoine</div>
 					<ui:repeat var="erp" value="#{mbRecherche.listeErpTrouves}">
-						#{erp.nomErp}
+						<div class="resUnitaire">
+						<h:commandLink value="#{erp.nomErp}" 
+								action="consultationERP"> 
+								<f:param name="id" value="#{erp.idErp}"></f:param>
+						 </h:commandLink>
+						</div>
 					</ui:repeat>
 				</div>
 			</div>
@@ -94,5 +120,24 @@ jQuery.noConflict();
   $( "#accordion" ).accordion();
   $("button").button();
 </script>
+<script type="text/javascript">
+        function Show_Div(Div_id) {
+            if (false == $(Div_id).is(':visible')) {
+                $(Div_id).show(250);
+            }
+            else {
+                //$(Div_id).hide(250);
+            }
+        }
+        function PasShow_Div(Div_id) {
+            if (false == $(Div_id).is(':visible')) {
+                //$(Div_id).show(250);
+            }
+            else {
+                $(Div_id).hide(250);
+            }
+        }
+    </script>
+        </f:view>
 </body>
 </html>
