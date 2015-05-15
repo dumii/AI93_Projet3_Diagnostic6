@@ -173,7 +173,7 @@ function afficherMasquerEtatAvancement(idIntervention, idEtat)
 		document.getElementById("iconeEtat - "+idIntervention).src = "images/iconeEnAttente.26.26.png";
 		break;	
 	case "2":
-		document.getElementById("iconeEtat - "+idIntervention).src = "images/bird.26.26.png";		
+		document.getElementById("iconeEtat - "+idIntervention).src = "images/iconeSuspendue2.26.26.png";		
 		break;
 	}
 }
