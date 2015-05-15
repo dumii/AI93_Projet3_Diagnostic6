@@ -24,6 +24,7 @@ public class BusinessExpertImpl implements IBusinessExpert {
 
 	@Override
 	public String ajouterExpert(Expert expert) {
+		
 		proxyExpert.ajouterExpert(expert);
 		return "Ajout effectué avec succès";
 	}

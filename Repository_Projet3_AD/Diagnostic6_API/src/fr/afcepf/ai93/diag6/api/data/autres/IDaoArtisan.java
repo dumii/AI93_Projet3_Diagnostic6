@@ -12,7 +12,7 @@ public interface IDaoArtisan {
 	
 	public void ajouterArtisan(Artisan artisan);
 	
-	public boolean supprimerArtisan(Artisan artisan);
+	public String supprimerArtisan(Artisan artisan);
 	
 	public List<Artisan> recupererArtisansParTypeIntervention(TypeIntervention type);
 	

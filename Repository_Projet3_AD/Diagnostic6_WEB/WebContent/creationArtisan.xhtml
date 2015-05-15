@@ -36,11 +36,11 @@
 				</div>
 				
 				<div id="contenuArtisan">
-					<h:panelGrid columns="2" style="width:100%;">
+					<h:panelGrid columns="2" style="width:100%;" escape="false">
 						
 						<h:panelGroup>
-							<div id="creationArtisan">
-								<div id="titreCreation">
+							<div id="creationArtisan" >
+								<div id="titreCreation" >
 									<h3>Enregistrer un artisan</h3>
 								</div>
 								<h:panelGrid columns="2" style="width:100%;">
@@ -49,13 +49,13 @@
 									<h:outputText value="Prenom : " style="color: #000063;" />
 									<h:inputText value="#{mbArtisan.artisan.prenomArtisan}" />
 									<h:outputText value="Type : " style="color: #000063;" />
-									<h:selectOneMenu value="#{mbArtisan.listeTypes}">
+									<h:selectOneMenu value="#{mbArtisan.idTypeArtiSelect}">
 									<f:selectItems	value="#{mbArtisan.listeTypes}"
 								   					var="var"
 								  					itemLabel="#{var.typeIntervention}"
 								  					itemValue="#{var.idTypeIntervention}"/>								
 									</h:selectOneMenu>
-									<h:outputText value="Téléphone : " style="color: #000063;" />
+									<h:outputText value="Téléphone : (0)" style="color: #000063;" />
 									<h:inputText value="#{mbArtisan.artisan.telArtisan}" />
 									<h:outputText value="Mail : " style="color: #000063;" />
 									<h:inputText value="#{mbArtisan.artisan.mailArtisan}" />
@@ -67,14 +67,15 @@
 									<h:inputText value="#{mbArtisan.localisation.codePostal}" />
 									<h:outputText value="Localité : " style="color: #000063;" />
 									<h:inputText value="#{mbArtisan.localisation.ville}" />
-									
-									
-								
+
 								</h:panelGrid>
-								<h:commandButton value="Enregister Artisan" action="#{mbArtisan.enregistrerArtisan()}" />
-							</div>
+								<div id="buttEnregistre">
+									<h:commandButton value="Enregister Artisan" action="#{mbArtisan.enregistrerArtisan()}" style="color: #000063;"/>
+								</div>
+								</div>
 						</h:panelGroup>
-								
+						<h:panelGroup></h:panelGroup>
+						<h:panelGroup></h:panelGroup>
 
 						<h:panelGroup>
 							<div id="consultationArtisan">
@@ -89,7 +90,7 @@
 											</tr>
 										</table>
 										<a4j:repeat	value="#{mbArtisan.listArtisan}" var="arti" id="repeat">
-										<table>
+										<table id="tableArtisan">
 											<tr>
 												<td class="titreTableArtisan">Nom : </td>
 												<td>#{arti.nomArtisan}</td>
@@ -99,7 +100,7 @@
 												<td>#{arti.prenomArtisan}</td>
 											</tr>
 											<tr>
-												<td class="titreTableArtisan">Téléphone : </td>
+												<td class="titreTableArtisan">Téléphone : (0)</td>
 												<td>#{arti.telArtisan}</td>
 											</tr>
 											<tr>
@@ -115,12 +116,16 @@
 												<td>#{arti.localisation.codePostal} #{arti.localisation.ville}</td>
 											</tr>
 										</table>
-											<h:selectManyCheckbox value="supprimer" />
+										<div id="checkSuppression">
+											<div style="padding-left: 3.5%;"><img src="images/utilisateur/supprimer-utilisateur-icone-.38.38.png"/></div>
+											<div><h:commandLink action="#{mbArtisan.supprimerArtisan(arti)}" value="Supprimer" /></div>
+										</div>
 											<div class="ligne_horizontale" ></div>
 										</a4j:repeat>
 								</a4j:repeat>
 							</div>	
 						</h:panelGroup>
+						
 						
 						
 

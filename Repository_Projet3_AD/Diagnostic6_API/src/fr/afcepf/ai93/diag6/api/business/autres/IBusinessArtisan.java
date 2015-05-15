@@ -14,7 +14,7 @@ public interface IBusinessArtisan {
 	
 	public String ajouterArtisan(Artisan artisan);
 	
-	public boolean supprimerArtisan(Artisan artisan);
+	public String supprimerArtisan(Artisan artisan);
 	
 	public List<Artisan> recupererArtisansParTypeIntervention(TypeIntervention type);
 	

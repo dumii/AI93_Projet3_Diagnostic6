@@ -32,11 +32,21 @@ public class ExpertManagedBean implements Serializable {
 	
 	public void enregistrerExpert(){
 		System.out.println("111111111111111111111 je rentre dans l'ajout ArtisanManagedBean 11111111111111111111111");
+		expert.setLocalisation(localisation);
 		proxyBusinessExpert.ajouterExpert(expert);
+		
+		init();
 	}
 	
+	public String supprimerExpert(Expert exp){
+		System.out.println("je rentre dans la méthode delete expert managedbean");
+		proxyBusinessExpert.supprimerExpert(exp);
+		System.out.println("appel au business Delete fait");
+		init();
+		return "suppression réalisée";
+	}
 	
-//////////////////////////////GETTER / SETTER ///////////////////////////////
+////////////////////////////// GETTER / SETTER ///////////////////////////////
 
 	public IBusinessExpert getProxyBusinessExpert() {
 		return proxyBusinessExpert;

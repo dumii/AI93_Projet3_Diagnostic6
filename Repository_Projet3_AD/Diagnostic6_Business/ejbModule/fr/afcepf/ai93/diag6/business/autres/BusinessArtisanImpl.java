@@ -36,8 +36,10 @@ public class BusinessArtisanImpl implements IBusinessArtisan {
 	}
 
 	@Override
-	public boolean supprimerArtisan(Artisan artisan) {
-		return proxyArtisan.supprimerArtisan(artisan);
+	public String supprimerArtisan(Artisan artisan) {
+		proxyArtisan.supprimerArtisan(artisan);
+		return "Supression effectuée avec succès";
+		
 	}
 
 	@Override

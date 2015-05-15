@@ -18,15 +18,25 @@
 	background:#FEFEE2 ;
 	border:#cccccc solid 1px;
 	border-radius: 10px;
-	color: #000063;
-	/*font-family: Corbel;*/
-	font-family: Arial, Verdana, sans-serif;
-	font-size: 16px;
-	Margin-left:24%;
-	Width:50%;
 	text-align: center;
-	height: 27px;
-	padding-bottom: 2%;
+	height: 20px;
+	padding-bottom: 5%;
+}
+
+h2{
+  	background-size: 100%;
+  	margin: 0 0 0 0;
+  	font-family: Arial, Verdana, sans-serif;
+	background-attachment: fixed;
+  	color: #000063;
+  	display: block;
+  	font-size: 1.17em;
+  	-webkit-margin-before: 1em;
+  	-webkit-margin-after: 1em;
+  	-webkit-margin-start: 0px;
+  	-webkit-margin-end: 0px;
+  	font-weight: bold;
+  	margin: 0px;
 }
 
 #contenuArtisan
@@ -37,13 +47,17 @@
 /**********************/
 /*  Creation Artisan  */
 /**********************/
+
+
+
 #creationArtisan
 {
-	margin-top: -189%;
+	/*margin-top: -2221%;*/
+	margin-top: 2%;
 	background-image:linear-gradient(#FEFEE2, #E5EBEF);
 	border:#cccccc solid 1px;
 	border-radius: 10px;
-	padding-bottom: 1%;
+	padding-bottom: 4%;
 	width:352px;
 }
 
@@ -56,17 +70,34 @@
 	font-family: Arial, Verdana, sans-serif;
 }
 
+#buttEnregistre
+{
+	margin-top:2%;
+	margin-left:43%;
+}
+
 /**************************/
 /*  Consultation Artisan  */
 /**************************/
 #consultationArtisan
 {
-	margin-top:1%;
+	margin-top:-85%;
 	background-image:linear-gradient(#FEFEE2, #E5EBEF);
 	border:#cccccc solid 1px;
 	border-radius: 10px;
 	padding-bottom: 1%;
 	width:352px;
+}
+
+#buttSuppr
+{
+	float:right;
+	padding-right:5%;
+}
+
+#tableArtisan
+{
+	margin-top:2%;
 }
 
 #titreConsultation
@@ -104,5 +135,11 @@
     border-bottom:1px solid #cccccc;
     height:5px;
     margin-left:10%;
+}
+
+#checkSuppression
+{
+	color: #000063;
+	padding-left:37%;
 }
 

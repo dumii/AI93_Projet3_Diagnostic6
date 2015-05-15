@@ -1,5 +1,5 @@
 /********************/
-/* Creation Artisan */
+/* Creation Expert */
 /********************/
 
 #content
@@ -13,37 +13,48 @@
 /*  contenu du Profil  */
 /***********************/
 
-#titreArtisan
+#titreExpert
 {
 	background:#FEFEE2 ;
 	border:#cccccc solid 1px;
 	border-radius: 10px;
-	color: #000063;
-	/*font-family: Corbel;*/
-	font-family: Arial, Verdana, sans-serif;
-	font-size: 16px;
-	Margin-left:24%;
-	Width:50%;
 	text-align: center;
-	height: 27px;
-	padding-bottom: 2%;
+	height: 20px;
+	padding-bottom: 5%;
 }
 
-#contenuArtisan
+h2{
+  	background-size: 100%;
+  	margin: 0 0 0 0;
+  	font-family: Arial, Verdana, sans-serif;
+	background-attachment: fixed;
+  	color: #000063;
+  	display: block;
+  	font-size: 1.17em;
+  	-webkit-margin-before: 1em;
+  	-webkit-margin-after: 1em;
+  	-webkit-margin-start: 0px;
+  	-webkit-margin-end: 0px;
+  	font-weight: bold;
+  	margin: 0px;
+}
+
+#contenuExpert
 {
 	font-size: small;
 }
 
 /**********************/
-/*  Creation Artisan  */
+/*  Creation Expert  */
 /**********************/
-#creationArtisan
+#creationExpert
 {
-	margin-top:-189%;
+	/*margin-top:-225%;*/
+	margin-top:2%;
 	background-image:linear-gradient(#FEFEE2, #E5EBEF);
 	border:#cccccc solid 1px;
 	border-radius: 10px;
-	padding-bottom: 1%;
+	padding-bottom: 4%;
 	width:352px;
 }
 
@@ -56,12 +67,18 @@
 	font-family: Arial, Verdana, sans-serif;
 }
 
-/**************************/
-/*  Consultation Artisan  */
-/**************************/
-#consultationArtisan
+#buttEnregistre
 {
-	margin-top:1%;
+	margin-top:2%;
+	margin-left:43%;
+}
+
+/**************************/
+/*  Consultation Expert  */
+/**************************/
+#consultationExpert
+{
+	margin-top:-79%;
 	background-image:linear-gradient(#FEFEE2, #E5EBEF);
 	border:#cccccc solid 1px;
 	border-radius: 10px;
@@ -75,24 +92,21 @@
 	padding-left:1%;
 	font-size: 15px;
 	color: #000063;
-	font-family: Arial, Verdana, sans-serif;
-	
+	font-family: Arial, Verdana, sans-serif;	
 }
 
-#typeArtisanTable1
+#buttSuppr
 {
-	color: #000063;
-	width: 127px;
-	background:#C0DEDE;
-}
-#typeArtisanTable2
-{
-	color: #000063;
-	width: 221px;
-	background:#C0DEDE;
+	float:right;
+	padding-right:5%;
 }
 
-.titreTableArtisan
+#tableExpert
+{
+	margin-top:2%;
+}
+
+.titreTableExpert
 {
 	color: #000063;
 	width: 127px;
@@ -104,5 +118,11 @@
     border-bottom:1px solid #cccccc;
     height:5px;
     margin-left:10%;
+}
+
+#checkSuppression
+{
+	color: #000063;
+	padding-left:37%;
 }
 

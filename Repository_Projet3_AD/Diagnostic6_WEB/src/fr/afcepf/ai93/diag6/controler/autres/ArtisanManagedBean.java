@@ -30,6 +30,7 @@ public class ArtisanManagedBean implements Serializable {
 	private List<Localisation> listeLocalisation;
 	private Localisation localisation = new Localisation();
 	
+	private int idTypeArtiSelect;
 	
 	@PostConstruct
 	public void init(){
@@ -41,8 +42,18 @@ public class ArtisanManagedBean implements Serializable {
 	
 	public void enregistrerArtisan(){
 		System.out.println("111111111111111111111 je rentre dans l'ajout ArtisanManagedBean 11111111111111111111111");
+		artisan.setLocalisation(localisation);
 		proxyBusinessArtisan.ajouterArtisan(artisan);
 		
+		init();
+	}
+	
+	public String supprimerArtisan(Artisan arti){
+		System.out.println("je rentre dans la méthode delete expert managedbean");
+		proxyBusinessArtisan.supprimerArtisan(arti);
+		System.out.println("appel au business Delete fait");
+		init();
+		return "suppression réalisée";
 	}
 	
 
@@ -91,6 +102,14 @@ public class ArtisanManagedBean implements Serializable {
 	}
 	public void setLocalisation(Localisation localisation) {
 		this.localisation = localisation;
+	}
+
+	public int getIdTypeArtiSelect() {
+		return idTypeArtiSelect;
+	}
+
+	public void setIdTypeArtiSelect(int idTypeArtiSelect) {
+		this.idTypeArtiSelect = idTypeArtiSelect;
 	}
 	
 //	public void recupArtisan()
