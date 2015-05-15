@@ -10,11 +10,6 @@
 
 	<ui:define name="boutonDeconnexion">
 	<f:event listener="#{mbConsultationTravaux.loadChantier()}" type="preRenderView"/> 
-		<h:form>
-			<h:commandButton value="Deconnexion" styleClass="logoDeconnexion"
-				action="#{mbUtilisateur.logout()}"
-				image="images/iconeDeconnexion2.png" title="Deconnexion" />
-		</h:form>
 	</ui:define>
 
 	<ui:define name="title">Diagnostic 6 - Consultation intervention</ui:define>

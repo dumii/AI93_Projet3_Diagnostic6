@@ -17,6 +17,10 @@
    <from-outcome>historiqueTravaux</from-outcome>
    <to-view-id>/historiqueTravaux.jsf</to-view-id>
   </navigation-case>
+  <navigation-case>
+   <from-outcome>Accueil</from-outcome>
+   <to-view-id>/Accueil.jsf</to-view-id>
+  </navigation-case>
  </navigation-rule>
  <navigation-rule>
   <from-view-id>/accueilTravaux.jsf</from-view-id>
@@ -28,12 +32,20 @@
    <from-outcome>TableauDeBord</from-outcome>
    <to-view-id>/TableauDeBord.jsf</to-view-id>
   </navigation-case>
+  <navigation-case>
+   <from-outcome>Accueil</from-outcome>
+   <to-view-id>/Accueil.jsf</to-view-id>
+  </navigation-case>
  </navigation-rule>
  <navigation-rule>
   <from-view-id>/planningTravaux.jsf</from-view-id>
   <navigation-case>
    <from-outcome>consultationTravaux</from-outcome>
    <to-view-id>/consultationTravaux.jsf</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>Accueil</from-outcome>
+   <to-view-id>/Accueil.jsf</to-view-id>
   </navigation-case>
  </navigation-rule>
  <navigation-rule>
@@ -46,6 +58,10 @@
    <from-outcome>TableauDeBord</from-outcome>
    <to-view-id>/TableauDeBord.jsf</to-view-id>
   </navigation-case>
+  <navigation-case>
+   <from-outcome>Accueil</from-outcome>
+   <to-view-id>/Accueil.jsf</to-view-id>
+  </navigation-case>
  </navigation-rule>
  <navigation-rule>
   <from-view-id>/creationDiagnostic.jsf</from-view-id>
@@ -53,12 +69,20 @@
    <from-outcome>consultationDiagnostic</from-outcome>
    <to-view-id>/consultationDiagnostic.jsf</to-view-id>
   </navigation-case>
+  <navigation-case>
+   <from-outcome>Accueil</from-outcome>
+   <to-view-id>/Accueil.jsf</to-view-id>
+  </navigation-case>
  </navigation-rule>
  <navigation-rule>
   <from-view-id>/consultationDiagnostic.jsf</from-view-id>
   <navigation-case>
    <from-outcome>creationDiagnostic</from-outcome>
    <to-view-id>/creationDiagnostic.jsf</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>Accueil</from-outcome>
+   <to-view-id>/Accueil.jsf</to-view-id>
   </navigation-case>
  </navigation-rule>
  <navigation-rule>
@@ -78,6 +102,17 @@
    <from-outcome>accueilTravaux</from-outcome>
    <to-view-id>/accueilTravaux.jsf</to-view-id>
   </navigation-case>
+  <navigation-case>
+   <from-outcome>Accueil</from-outcome>
+   <to-view-id>/Accueil.jsf</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>Accueil1</from-outcome>
+   <to-view-id>/Accueil.jsf</to-view-id>
+  </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+  <from-view-id>/historiqueTravaux.jsf</from-view-id>
   <navigation-case>
    <from-outcome>Accueil</from-outcome>
    <to-view-id>/Accueil.jsf</to-view-id>

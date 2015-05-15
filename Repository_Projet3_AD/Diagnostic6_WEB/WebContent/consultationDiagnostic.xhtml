@@ -10,11 +10,6 @@
 	<ui:define name="boutonDeconnexion">
 		<f:event listener="#{mbDonneesGenerales.loadDiagnostic()}"
 			type="preRenderView" />
-		<h:form>
-			<h:commandButton value="Deconnexion" styleClass="logoDeconnexion"
-				action="#{mbUtilisateur.logout()}"
-				image="images/iconeDeconnexion2.png" title="Deconnexion" />
-		</h:form>
 	</ui:define>
 	<ui:define name="title">Diagnostic 6 - Consultation diagnostic</ui:define>
 	<ui:define name="head">
@@ -154,16 +149,12 @@
 												action="#{mbDonneesGenerales.modificationDiagnostic()}"
 												value="#{mbDonneesGenerales.clickChangeBouton()}"
 												id="modifAnom">
-												<f:attribute name="style"
-																value="display:#{mbDonneesGenerales.isGestConnected()};"></f:attribute>
 											</h:commandButton>
 											<h:commandButton
 												action="#{mbDonneesGenerales.annulerModifDiagnostic()}"
 												value="Annuler" id="annulModif" oncomplete="ouverture()">
 												<f:attribute name="disabled"
 													value="#{mbDonneesGenerales.isEnableDiag()}"></f:attribute>
-													<f:attribute name="style"
-																value="display:#{mbDonneesGenerales.isGestConnected()};"></f:attribute>
 											</h:commandButton>
 
 										</h:panelGroup>
@@ -359,22 +350,16 @@
 															action="#{mbDonneesGenerales.modificationAnomalie(o)}"
 															value="#{mbDonneesGenerales.clickChangeBouton(o)}"
 															id="modifAnom">
-															<f:attribute name="style"
-																value="display:#{mbDonneesGenerales.isGestConnected()};"></f:attribute>
 														</h:commandButton>
 														<h:commandButton
 															action="#{mbDonneesGenerales.annulerModifAnomalie(o)}"
 															value="Annuler" id="annulModif">
 															<f:attribute name="disabled"
 																value="#{mbDonneesGenerales.isEnable(o)}"></f:attribute>
-																<f:attribute name="style"
-																value="display:#{mbDonneesGenerales.isGestConnected()};"></f:attribute>
 														</h:commandButton>
 														<h:commandButton
 															action="#{mbDonneesGenerales.suppressionAnomalie(o)}"
 															value="Suppression">
-															<f:attribute name="style"
-																value="display:#{mbDonneesGenerales.isGestConnected()};"></f:attribute> 
 														</h:commandButton>
 													</div>
 												</h:panelGroup>
