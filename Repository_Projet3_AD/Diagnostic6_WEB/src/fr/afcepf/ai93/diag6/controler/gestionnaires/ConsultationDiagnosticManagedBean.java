@@ -292,7 +292,6 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 	}
 	
 	public String isGestConnected(){
-		System.out.println("id gest connecté"+user.getUtilisateur().getProfilUtilisateur().getIdProfil());
 		if(user.getUtilisateur().getProfilUtilisateur().getIdProfil()==2){
 			return "";
 		}
