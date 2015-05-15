@@ -89,8 +89,8 @@ public class BusinessInterventionImpl implements IBusinessIntervention {
 			proxyIntervention.modifierIntervention(intervention);
 			proxyHistorique.historiser(interventionInitiale, intervention, user);
 			//dans le cas où l'intervention passe en statut "Terminé", une notification est transmise au gestionnaire de diagnostic
-			if(idAvancementNouveau==4){
-				proxyNotifs.envoyerNotificationAuGDiag(2,intervention); 
+			if(idAvancementNouveau==1){
+				proxyNotifs.envoyerNotificationAuGDiag(2,intervention.getAnomalie().getDiagnostic().getErp(),intervention); 
 			}
 			return "Modification enregistrée avec succès";
 		}

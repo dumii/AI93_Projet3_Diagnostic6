@@ -25,10 +25,25 @@
 			
 		<h:form>
 			<div id="notifs">	
-					<ui:repeat var="not" value="#{mbNotifs.listeNotifs}" >
-						<h:outputText value="not." />
+					<ui:repeat var="notif" value="#{mbNotifs.listeNotifs}" >
+						<h:panelGroup layout="block"
+								rendered="#{mbNotifs.user.utilisateur.profilUtilisateur.idProfil==2}">
+								<h:outputText value="L'intervention no #{notif.intervention.idIntervention} a été terminée" />
+									<h:commandLink value="Voir le chantier #{notif.erp.nomErp}" 
+										action="planningTravaux"> 
+										<f:param name="id" value="#{notif.erp.idErp}"></f:param>
+						 			</h:commandLink>
+						</h:panelGroup>
+						
+						<h:panelGroup layout="block"
+								rendered="#{mbNotifs.user.utilisateur.profilUtilisateur.idProfil==3}">
+									<h:outputText value="Un nouveau diagnostic a été ajouté" />
+									<h:commandLink value="Voir le diagnostic : #{notif.diagnostic.intituleDiagnostic}" 
+										action="consultationDiagnostic"> 
+										<f:param name="id" value="#{notif.diagnostic.idDiagnostic}"></f:param>
+						 			</h:commandLink>
+						</h:panelGroup>
 					</ui:repeat>
-			
 			</div>
 		</h:form>
 		
