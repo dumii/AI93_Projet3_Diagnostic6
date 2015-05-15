@@ -8,6 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import com.sun.xml.internal.ws.streaming.TidyXMLStreamReader;
+
 import fr.afcepf.ai93.diag6.api.data.autres.IDaoExpert;
 import fr.afcepf.ai93.diag6.entity.autres.Expert;
 
@@ -33,6 +35,14 @@ public class DaoExpertImpl implements IDaoExpert {
 	@Override
 	public void supprimerExpert(Expert expert) {
 		em.remove(expert);
+	}
+
+	@Override
+	public Expert recupererExpertParId(int idExpert) {
+		Query query = em.createQuery("SELECT e from Expert e WHERE e.idExpert =:pid");
+		query.setParameter("pid", idExpert);
+		Expert expert = (Expert)query.getSingleResult();
+		return expert;
 	}
 
 }

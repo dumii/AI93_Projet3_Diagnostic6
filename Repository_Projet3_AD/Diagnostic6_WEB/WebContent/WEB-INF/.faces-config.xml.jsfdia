@@ -1,43 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PROCESS model-entity="JSFProcess">
  <PROCESS-ITEM NAME="rules:#consultationDiagnostic.jsf"
-  PATH="/consultationDiagnostic.jsf" SHAPE="240,33,0,0" model-entity="JSFProcessGroup"/>
+  PATH="/consultationDiagnostic.jsf" SHAPE="64,72,50,41" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#consultationDiagnostic.jsf:0" NAME="item"
+   PATH="/consultationDiagnostic.jsf" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="creationDiagnostic::#creationDiagnostic.jsf"
+    NAME="output" PATH="/creationDiagnostic.jsf"
+    SHAPE="113,104,272,104,272,80,407,80"
+    TARGET="rules:#creationDiagnostic.jsf" TITLE="creationDiagnostic" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#consultationTravaux.jsf"
-  PATH="/consultationTravaux.jsf" SHAPE="328,288,50,57" model-entity="JSFProcessGroup">
+  PATH="/consultationTravaux.jsf" SHAPE="88,320,50,57" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#consultationTravaux.jsf:0" NAME="item"
    PATH="/consultationTravaux.jsf" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
     ID="consultationDiagnostic::#consultationDiagnostic.jsf"
     NAME="output" PATH="/consultationDiagnostic.jsf"
+    SHAPE="137,352,216,352,216,216,48,216,48,80,63,80"
     TARGET="rules:#consultationDiagnostic.jsf"
     TITLE="consultationDiagnostic" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT ID="planningTravaux::#planningTravaux.jsf"
     NAME="output1" PATH="/planningTravaux.jsf"
+    SHAPE="137,368,152,368,152,424,72,424,72,480,103,480"
     TARGET="rules:#planningTravaux.jsf" TITLE="planningTravaux" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#accueilTravaux.jsf"
-  PATH="/accueilTravaux.jsf" SHAPE="32,129,0,0" model-entity="JSFProcessGroup">
+  PATH="/accueilTravaux.jsf" SHAPE="472,344,50,41" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#accueilTravaux.jsf:0" NAME="item"
    PATH="/accueilTravaux.jsf" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
     ID="consultationTravaux::#consultationTravaux.jsf" NAME="output"
     PATH="/consultationTravaux.jsf"
+    SHAPE="521,376,528,376,528,280,80,280,80,328,87,328"
     TARGET="rules:#consultationTravaux.jsf" TITLE="consultationTravaux" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="TableauDeBord::#TableauDeBord.jsf"
+    NAME="output1" PATH="/TableauDeBord.jsf"
+    TARGET="rules:#TableauDeBord.jsf" TITLE="TableauDeBord" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#planningTravaux.jsf"
-  PATH="/planningTravaux.jsf" SHAPE="32,241,0,0" model-entity="JSFProcessGroup">
+  PATH="/planningTravaux.jsf" SHAPE="104,472,50,41" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#planningTravaux.jsf:0" NAME="item"
    PATH="/planningTravaux.jsf" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
     ID="consultationTravaux::#consultationTravaux.jsf" NAME="output"
     PATH="/consultationTravaux.jsf"
+    SHAPE="153,504,158,504,158,416,72,416,72,328,87,328"
     TARGET="rules:#consultationTravaux.jsf" TITLE="consultationTravaux" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#accueilDiagnostic.jsf"
-  PATH="/accueilDiagnostic.jsf" SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  PATH="/accueilDiagnostic.jsf" SHAPE="728,296,50,57" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#accueilDiagnostic.jsf:0" NAME="item"
    PATH="/accueilDiagnostic.jsf" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
@@ -45,6 +60,44 @@
     NAME="output" PATH="/consultationDiagnostic.jsf"
     TARGET="rules:#consultationDiagnostic.jsf"
     TITLE="consultationDiagnostic" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="TableauDeBord::#TableauDeBord.jsf"
+    NAME="output1" PATH="/TableauDeBord.jsf"
+    TARGET="rules:#TableauDeBord.jsf" TITLE="TableauDeBord" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#creationDiagnostic.jsf"
+  PATH="/creationDiagnostic.jsf" SHAPE="408,72,50,41" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#creationDiagnostic.jsf:0" NAME="item"
+   PATH="/creationDiagnostic.jsf" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="consultationDiagnostic::#consultationDiagnostic.jsf"
+    NAME="output" PATH="/consultationDiagnostic.jsf"
+    SHAPE="457,104,464,104,464,40,40,40,40,80,63,80"
+    TARGET="rules:#consultationDiagnostic.jsf"
+    TITLE="consultationDiagnostic" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#TableauDeBord.jsf" PATH="/TableauDeBord.jsf"
+  SHAPE="288,433,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#TableauDeBord.jsf:0" NAME="item"
+   PATH="/TableauDeBord.jsf" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="accueilDiagnostic::#accueilDiagnostic.jsf"
+    NAME="output" PATH="/accueilDiagnostic.jsf"
+    TARGET="rules:#accueilDiagnostic.jsf" TITLE="accueilDiagnostic" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="accueilTravaux::#accueilTravaux.jsf"
+    NAME="output1" PATH="/accueilTravaux.jsf"
+    TARGET="rules:#accueilTravaux.jsf" TITLE="accueilTravaux" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="Accueil::#Accueil.jsf" NAME="output2"
+    PATH="/Accueil.jsf" TARGET="rules:#Accueil.jsf" TITLE="Accueil" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#Accueil.jsf" PATH="/Accueil.jsf"
+  SHAPE="528,593,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#Accueil.jsf:0" NAME="item"
+   PATH="/Accueil.jsf" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="TableauDeBord::#TableauDeBord.jsf"
+    NAME="output" PATH="/TableauDeBord.jsf"
+    TARGET="rules:#TableauDeBord.jsf" TITLE="TableauDeBord" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
 </PROCESS>
