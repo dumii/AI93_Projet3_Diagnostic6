@@ -137,8 +137,14 @@
 									value="#{mbConsultationERP.monERP.typeErp.denominationTypeErp} #{mbConsultationERP.monERP.typeErp.typeErp}" />
 
 								<h:outputLabel class="intitule" value="Adresse : " />
-								<h:outputLabel class="valeur" value="#{mbConsultationERP.monERP.numVoieErp} #{mbConsultationERP.monERP.nomVoieErp} #{mbConsultationTravaux.monERP.localisation.codePostal} #{mbConsultationTravaux.monERP.localisation.ville}" escape="false" />
+								<h:outputLabel class="valeur" value="#{mbConsultationERP.monERP.numVoieErp} #{mbConsultationERP.monERP.nomVoieErp} 
+								&lt;br /&gt;#{mbConsultationERP.monERP.localisation.codePostal} #{mbConsultationERP.monERP.localisation.ville}" 
+								escape="false" />
 
+							</div>
+							
+							<div class="formulaire">
+								
 								<h:outputLabel class="intitule" value="Propriétaire : " />
 								<h:outputLabel class="valeur"
 									value="#{mbConsultationERP.monERP.proprietaire.nomProprietaire.toUpperCase()} #{mbConsultationERP.monERP.proprietaire.prenomProprietaire}" />
@@ -148,29 +154,8 @@
 									value="Tél : #{mbConsultationERP.monERP.proprietaire.telProprietaire} 
                         	&lt;br /&gt; Mail : #{mbConsultationERP.monERP.proprietaire.mailProprietaire}
                         	&lt;br /&gt; #{mbConsultationERP.monERP.proprietaire.numVoieProprietaire} #{mbConsultationERP.monERP.proprietaire.nomVoieProprietaire} 
-                        	 #{mbConsultationERP.monERP.proprietaire.localisation.codePostal} #{mbConsultationERP.monERP.proprietaire.localisation.ville}"
+                        	&lt;br /&gt; #{mbConsultationERP.monERP.proprietaire.localisation.codePostal} #{mbConsultationERP.monERP.proprietaire.localisation.ville}"
 									escape="false" />
-							</div>
-							
-							<div class="formulaire">
-								<h:outputLabel class="intitule" value="Nombre total d'interventions : " />
-								<h:outputText class="valeur" id="totalIntervention" value="..."/>
-								<ul class="liste1">
-									<li>Terminées : </li>
-									<li>En cours : </li>
-									<li>En attente : </li>
-									<li>Suspendues : </li>
-								</ul>
-
-								<h:outputLabel class="intitule" value="Coût total des interventions : " />
-								<h:outputLabel class="valeur" value="..."/>
-
-								<h:outputLabel class="intitule" value="Début du chantier : " />
-								<h:outputLabel class="valeur" value="..."/>
-
-								<h:outputLabel class="intitule" value="Fin du chantier : " />
-								<h:outputLabel class="valeur" value="..."/>
-								
 							</div>
 							
 						</div>
@@ -178,7 +163,7 @@
 						<!-- Section INFORMATIONS DIAGNOSTICS -->
 						<div id="InfoErpDiagnostic">
 
-							<h3>Diagnostics enregistrés sur cet ERP</h3>
+							<h3>Diagnostics enregistrés sur cet ERP (#{mbConsultationERP.monERP.listeDiagnosticErp.size()})</h3>
 
 							<ui:repeat var="diagnostic"
 								value="#{mbConsultationERP.monERP.listeDiagnosticErp}">
