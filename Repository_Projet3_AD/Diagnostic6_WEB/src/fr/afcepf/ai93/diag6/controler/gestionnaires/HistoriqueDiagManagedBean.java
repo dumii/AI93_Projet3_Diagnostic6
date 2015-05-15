@@ -6,9 +6,11 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import fr.afcepf.ai93.diag6.api.business.diagnostic.IBusinessAnomalie;
 import fr.afcepf.ai93.diag6.api.business.diagnostic.IBusinessDiagnostic;
+import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
 import fr.afcepf.ai93.diag6.entity.diagnostic.HistoriqueAnomalie;
 import fr.afcepf.ai93.diag6.entity.diagnostic.HistoriqueDiagnostic;
 
@@ -23,21 +25,33 @@ public class HistoriqueDiagManagedBean {
 	
 	private List<HistoriqueDiagnostic> listeDiagnostics;
 	private List<HistoriqueAnomalie> listeAnomalies; 
+	private Diagnostic monDiagnostic;
 
 	@PostConstruct
 	private void init() {
-		recupererHistoriqueDiagParDiag(1); 
-		recupererHistoriqueAnomalieParDiag(1); 
+		 
 	}
 	
-	private void recupererHistoriqueDiagParDiag(int idDiagEnCours) {
-		listeDiagnostics = proxyBusinessDiagnostic.recupereHistoriqueDiagnosticParDiag(idDiagEnCours);
-		
+	public void loadHistorique(){
+		String param = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
+		if (param != null && !param.equals(""))
+		{
+			int idDiagnostic = Integer.parseInt(param);
+			monDiagnostic = proxyBusinessDiagnostic.recupereDiagnostic(idDiagnostic);
+			initialisationDesDonnees();
+		}
 	}
 	
-	private void recupererHistoriqueAnomalieParDiag(int idDiagEnCours) {
-		listeAnomalies = proxyBusinessAnomalie.recupereHistoriqueAnomalieParDiag(idDiagEnCours);
-		
+	public void clickNode (int idERP)
+	{
+		monDiagnostic = proxyBusinessDiagnostic.recupereDiagnostic(idERP);
+		initialisationDesDonnees();
+	}
+
+	public void initialisationDesDonnees()
+	{
+		listeDiagnostics = proxyBusinessDiagnostic.recupereHistoriqueDiagnosticParDiag(monDiagnostic.getIdDiagnostic());
+		listeAnomalies = proxyBusinessAnomalie.recupereHistoriqueAnomalieParDiag(monDiagnostic.getIdDiagnostic());		
 	}
 
 	public List<HistoriqueDiagnostic> getListeDiagnostics() {
@@ -72,6 +86,14 @@ public class HistoriqueDiagManagedBean {
 
 	public void setProxyBusinessAnomalie(IBusinessAnomalie proxyBusinessAnomalie) {
 		this.proxyBusinessAnomalie = proxyBusinessAnomalie;
+	}
+
+	public Diagnostic getMonDiagnostic() {
+		return monDiagnostic;
+	}
+
+	public void setMonDiagnostic(Diagnostic monDiagnostic) {
+		this.monDiagnostic = monDiagnostic;
 	}
 	
 }

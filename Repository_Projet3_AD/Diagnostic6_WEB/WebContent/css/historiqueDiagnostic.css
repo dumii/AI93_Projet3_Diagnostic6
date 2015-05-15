@@ -1,58 +1,102 @@
-table {
-  border-collapse: separate;
-  border-spacing: 0;
-  color: #4a4a4d;
-  font: 14px/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif;
+/*************************************/
+/* Mini Barre d'�tat Consultation Diagnostic */
+/*************************************/
+
+h2{
+  	background-size: 100%;
+  	padding-left: 11px;
+  	font-family: Arial, Verdana, sans-serif;
+	background-attachment: fixed;
+  	color: #D90000;
+  	display: block;
+  	font-size: 1.17em;
+  	-webkit-margin-before: 1em;
+  	-webkit-margin-after: 1em;
+  	-webkit-margin-start: 0px;
+  	-webkit-margin-end: 0px;
+  	font-weight: bold;
+
+  	margin:0px;
+  	margin-top:3px;
 }
-th,
-td {
-  padding: 10px 15px;
-  vertical-align: middle;
+
+#content
+{
+	margin-left: 20%;
+	padding-bottom:5px;
+
+	width: 58.5%;
+
+	background-color: white;
+  	border: #cccccc solid 1px;
+  	border-radius:1px;  	
+  	
+  	font-size:smaller;
 }
-thead {
-  background: #395870;
-  background: linear-gradient(#49708f, #293f50);
-  color: #fff;
-  font-size: 11px;
-  text-transform: uppercase;
+
+.italique
+{
+	font-style:italic;
 }
-th:border-left {
-  border-top-left-radius: 5px;
-  text-align: left;
+
+a:visited !important
+{
+	color: black;
 }
-th:border-right {
-  border-top-right-radius: 5px;
+
+a
+{
+	text-decoration: none;
 }
-tbody tr:nth-child(even) {
-  background: #f0f0f2;
+
+/*************************************/
+/* Tableau */
+/*************************************/
+
+#InfoErpDiagnostic
+{
+	background: ghostwhite;
+	margin-left: 1%;
+	width: 97.5%;
+	margin-top: 16px;
+	border:#cccccc solid 1px;
+	display:inline-block;
 }
-td {
-  border-bottom: 1px solid #cecfd5;
-  border-right: 1px solid #cecfd5;
+
+#InfoErpDiagnostic h3
+{
+	margin: 0px;
+	background-image:linear-gradient(#f9f9f9, #f1f1f1);
+	text-align: left;
+	color: CornflowerBlue;
+	font-size: 1.17em;
+	height: 27px;
 }
-td:first-child {
-  border-left: 1px solid #cecfd5;
+
+table
+{
+	font-family: Arial, Verdana, sans-serif;
+	font-size:11px;
+	text-align:center;
+
+	width:100%;
+
+	border-collapse: collapse;
+	border:#cccccc solid 1px;
+	
+	margin-top:5px;
 }
-.item1 {
-  color: #395870;
-  display: block;
+
+table th
+{
+	width:16%;
+	height:25px;
+	background-image:linear-gradient(#fAfAfA, #f2f2f2);
+	border:#cccccc solid 1px;
 }
-.item2 {
-  color: #7c7c80;
-  font-size: 12px;
-}
-.item3,
-.item4 {
-  text-align: center;
-}
-.item5 {
-  text-align: right;
-}
-.item6 {
-  display: block;
-}
-tfoot tr:last-child {
-  background: #f0f0f2;
-  color: #395870;
-  font-weight: bold;
+
+table td
+{
+	border:#cccccc solid 1px;
+	height:15px;
 }

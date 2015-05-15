@@ -7,10 +7,7 @@
 	xmlns:rich="http://richfaces.org/rich">
 
 <ui:composition template="/WEB-INF/Template2Diagnostic6.xhtml">
-	<ui:define name="boutonDeconnexion">
-		<f:event listener="#{mbDonneesGenerales.loadDiagnostic()}"
-			type="preRenderView" />
-	</ui:define>
+
 	<ui:define name="title">Diagnostic 6 - Consultation diagnostic</ui:define>
 	<ui:define name="head">
 		<link href="css/consultationDiagnostic.css" rel="stylesheet"
@@ -106,7 +103,8 @@
 
 	<ui:define name="content">
 		<f:view>
-
+<f:event listener="#{mbDonneesGenerales.loadDiagnostic()}"
+			type="preRenderView" />
 			<div id="content">
 
 				<h:form id="toto">
@@ -115,24 +113,9 @@
 						<div class="mini-barreEtat">
 							<h2>
 								#{mbDonneesGenerales.diagnosticSelectionne.intituleDiagnostic}
-								<div class="mini-barreEtat-boutons">
-									<a href=""> <img class="boutons-mini-barreEtat"
-										id="notificationGrisee" name="notificationG"
-										src="images/consultationDiagnostic/NotificationIconeDiagGrise.26.26.nette.png"
-										onClick="notification(this.src)" /></a> <a href=""> <img
-										class="boutons-mini-barreEtat" id="notificationRouge"
-										name="notificationR"
-										src="images/consultationDiagnostic/NotifIconeDiagRouge.26.26.png"
-										onClick="denotification(this.src)" /></a> <a href=""> <img
-										class="boutons-mini-barreEtat" id="favoritesGrisee"
-										name="favorite"
-										src="images/consultationDiagnostic/NoFavoritesIcon.26.26.png"
-										onClick="favorisation(this.src)" /></a> <a href=""> <img
-										class="boutons-mini-barreEtat" id="favoriteJaune"
-										name="favorite"
-										src="images/consultationDiagnostic/FavoriteIcon.26.26.png"
-										onClick="defavorisation(this.src)" /></a>
-								</div>
+								<h:commandLink action="historiqueDiagnostic" class="btn" value="Historique du diagnostic">
+      									<f:param name="id" value="#{mbDonneesGenerales.diagnosticSelectionne.idDiagnostic}" />
+   								</h:commandLink>
 							</h2>
 						</div>
 						<!-- Section INFORMATIONS GENERALES -->
@@ -451,18 +434,6 @@
 	  $( "#notificationRouge" ).toggle();
 	  $( "#notificationGrisee" ).toggle();
 	  	document.getElementById(notificationRouge).src = url;
-  }
-  function favorisation() 
-  { 
-	  $( "#favoritesGrisee" ).toggle();
-	  $( "#favoriteJaune" ).toggle();
-	  document.getElementById(favoritesGrisee).src = url;
-  }
-  function defavorisation() 
-  { 
-	  $( "#favoriteJaune" ).toggle();
-	  $( "#favoritesGrisee" ).toggle();
-	  document.getElementById(favoriteJaune).src = url;
   }
 	
 </script>

@@ -6,16 +6,8 @@
 	xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich">
 
-<ui:composition template="/WEB-INF/Template2Diagnostic6.xhtml">
-	<ui:define name="boutonDeconnexion">
-		<f:event listener="#{mbDonneesGenerales.loadDiagnostic()}"
-			type="preRenderView" />
-		<h:form>
-			<h:commandButton value="Deconnexion" styleClass="logoDeconnexion"
-				action="#{mbUtilisateur.logout()}"
-				image="images/iconeDeconnexion2.png" title="Deconnexion" />
-		</h:form>
-	</ui:define>
+<ui:composition template="/WEB-INF/Template5Diagnostic6.xhtml">
+
 
 	<ui:define name="title">Diagnostic 6 - Historique des diagnostics</ui:define>
 	<ui:define name="head">
@@ -23,54 +15,128 @@
 			type="text/css" />
 	</ui:define>
 
+<ui:define name="accordeon1">
+		Diagnostics avec des interventions en cours (#{mbArborescenceDiagnostic.listeDiagnosticsIntervEnCours.size()})
+	</ui:define>
 
+	<ui:define name="arborescence1">
+		<h:form>
+			<rich:tree id="tree1" nodeType="#{node.type}" var="node"
+				value="#{mbArborescenceDiagnostic.rootNodes1}" toggleType="client"
+				selectionType="ajax"
+				selectionChangeListener="#{mbArborescenceDiagnostic.selectionChanged}">
+				<rich:treeNode type="typeErp">
+                    #{node.name}
+                </rich:treeNode>
+				<rich:treeNode type="erp">
+                    #{node.name}
+                </rich:treeNode>
+				<rich:treeNode type="diagnostic">
+					<h:commandLink action="consultationDiagnostic" value="#{node.intitule} - #{node.name} - #{node.idDiag}">
+      					<f:param name="id" value="#{mbArborescenceDiagnostic.currentSelection.idDiag}" />
+   					</h:commandLink>        
+                </rich:treeNode>                
+			</rich:tree>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="accordeon2">
+		Diagnostics avec des interventions en attente (#{mbArborescenceDiagnostic.listeDiagnosticsIntervAttente.size()})
+	</ui:define>
+
+	<ui:define name="arborescence2">
+		<h:form>
+			<rich:tree id="tree2" nodeType="#{node.type}" var="node"
+				value="#{mbArborescenceDiagnostic.rootNodes2}" toggleType="client"
+				selectionType="ajax"
+				selectionChangeListener="#{mbArborescenceDiagnostic.selectionChanged}">
+				<rich:treeNode type="typeErp">
+                    #{node.name}
+                </rich:treeNode>
+				<rich:treeNode type="erp">
+                    #{node.name}
+                </rich:treeNode>
+				<rich:treeNode type="diagnostic">
+					<h:commandLink action="consultationDiagnostic" value="#{node.intitule} - #{node.name} - #{node.idDiag}">
+      					<f:param name="id" value="#{mbArborescenceDiagnostic.currentSelection.idDiag}" />
+   					</h:commandLink>        
+                </rich:treeNode>                
+			</rich:tree>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="accordeon3">
+		ERP archivés (#{mbArborescenceTravaux.listeERPIntervArchive.size()})
+	</ui:define>
+
+	<ui:define name="arborescence3">
+		<h:form>
+			<rich:tree id="tree3" nodeType="#{node.type}" var="node"
+				value="#{mbArborescenceDiagnostic.rootNodes3}" toggleType="client"
+				selectionType="ajax"
+				selectionChangeListener="#{mbArborescenceDiagnostic.selectionChanged}">
+				<rich:treeNode type="typeErp">
+                    #{node.name}
+                </rich:treeNode>
+				<rich:treeNode type="erp">
+                    #{node.name}
+                </rich:treeNode>
+				<rich:treeNode type="diagnostic">
+					<h:commandLink action="consultationDiagnostic" value="#{node.intitule} - #{node.name} - #{node.idDiag}">
+      					<f:param name="id" value="#{mbArborescenceDiagnostic.currentSelection.idDiag}" />
+   					</h:commandLink>        
+                </rich:treeNode>                
+			</rich:tree>
+		</h:form>
+	</ui:define>
 
 	<ui:define name="content">
-		<center>
-			<table width="925px">
-				<thead>
-					<tr>
-						<th scope="col">Identifiant Diagnostic</th>
-						<th scope="col">Utilisateur</th>
-						<th scope="col">Dernière modification</th>
-						<th scope="col">Type de modification</th>
-						<th scope="col">Ancienne donnée</th>
-						<th scope="col">Nouvelle donnée</th>
-					</tr>
+	<f:view>
+	<f:event listener="#{mbHistoriqueDiag.loadHistorique()}"
+			type="preRenderView" />
+		<div id="content">
+			<h:form id="toto">
+				<div id="InfoErpDiagnostic">
 
-				</thead>
-				<tbody>
+					<h3>Historique du diagnostic et des anomalies - #{mbHistoriqueDiag.monDiagnostic.intituleDiagnostic}</h3>
+
+					<table>
+						<tr>
+							<th>Identifiant Diagnostic</th>
+							<th>Utilisateur</th>
+							<th>Dernière modification</th>
+							<th>Type de modification</th>
+							<th>Ancienne donnée</th>
+							<th>Nouvelle donnée</th>
+						</tr>
+						
 					<ui:repeat var="diag" value="#{mbHistoriqueDiag.listeDiagnostics}">
 						<tr>
-							<td><strong class="">#{diag.diagnostic.intituleDiagnostic}</strong> <span class="text-offset">effectué par #{diag.diagnostic.nomDiagnostiqueur}</span></td>
-							<td class="utilisateur">#{diag.utilisateur.prenomUtilisateur} #{diag.utilisateur.nomUtilisateur}</td>
-							<td class="dateModif">#{diag.dateModification}</td>
-							<td class="typeModif">#{diag.typeModification}</td>
-							<td class="ancienneDonnée">#{diag.ancienneDonnee}</td>
-							<td class="nouvelleDonnée">#{diag.nouvelleDonnee}</td>
+							<td>#{diag.diagnostic.intituleDiagnostic} effectué par #{diag.diagnostic.nomDiagnostiqueur}</td>
+							<td>#{diag.utilisateur.prenomUtilisateur} #{diag.utilisateur.nomUtilisateur}</td>
+							<td>#{diag.dateModification}</td>
+							<td>#{diag.typeModification}</td>
+							<td>#{diag.ancienneDonnee}</td>
+							<td>#{diag.nouvelleDonnee}</td>
 						</tr>
 					</ui:repeat>			
-				</tbody>
 			</table>
 			
 			<br/>
-			<br/>
 			
-			<table width="950px">
-				<thead>
+			<table>
 					<tr>
-						<th scope="col">Identifiant Anomalie</th>
-						<th scope="col">Utilisateur</th>
-						<th scope="col">Dernière modification</th>
-						<th scope="col">Type de modification</th>
-						<th scope="col">Ancienne donnée</th>
-						<th scope="col">Nouvelle donnée</th>
+						<th>Identifiant Anomalie</th>
+						<th>Utilisateur</th>
+						<th>Dernière modification</th>
+						<th>Type de modification</th>
+						<th>Ancienne donnée</th>
+						<th>Nouvelle donnée</th>
 					</tr>
-				</thead>
-				<tbody>
+
 					<ui:repeat var="anom" value="#{mbHistoriqueDiag.listeAnomalies}">
 						<tr>
-						<td><strong class=""></strong>#{anom.anomalie.diagnostic.intituleDiagnostic}, Anomalie no #{anom.anomalie.idAnomalie} <span class="text-offset"></span></td>
+							<td>#{anom.anomalie.diagnostic.intituleDiagnostic}, Anomalie no #{anom.anomalie.idAnomalie}</td>
 							<td class="utilisateur">#{anom.utilisateur.prenomUtilisateur} #{anom.utilisateur.nomUtilisateur}</td>
 							<td class="dateModif">#{anom.dateModification}</td>
 							<td class="typeModif">#{anom.typeModification}</td>
@@ -78,48 +144,12 @@
 							<td class="nouvelleDonnée">#{anom.nouvelleDonnee}</td>
 						</tr>
 					</ui:repeat>							
-				</tbody>
 			</table>
-			
-		</center>
-		<script>
+			</div>
+			</h:form>
+			</div>
 
-		$( "#buttShowEDD" ).click(function() {
-			$( "#ErpDiagDetaille" ).toggle( "blind", 500 );
-		});
-
-
-  function ouverture(){
-		$( ".tableErpDiagGeneral" ).toggle();
-		}
-
-  function notification() 
-  { 
-	  $( "#notificationGrisee" ).toggle();
-	  $( "#notificationRouge" ).toggle();
-	  	document.getElementById(notificationGrisee).src = url;
-  }
-  function denotification() 
-  { 
-	  $( "#notificationRouge" ).toggle();
-	  $( "#notificationGrisee" ).toggle();
-	  	document.getElementById(notificationRouge).src = url;
-  }
-  function favorisation() 
-  { 
-	  $( "#favoritesGrisee" ).toggle();
-	  $( "#favoriteJaune" ).toggle();
-	  document.getElementById(favoritesGrisee).src = url;
-  }
-  function defavorisation() 
-  { 
-	  $( "#favoriteJaune" ).toggle();
-	  $( "#favoritesGrisee" ).toggle();
-	  document.getElementById(favoriteJaune).src = url;
-  }
-	
-</script>
-
+</f:view>
 	</ui:define>
 
 </ui:composition>
