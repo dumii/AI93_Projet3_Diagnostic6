@@ -24,25 +24,42 @@
 			
 		<h:form id="rechercheBandeau" action="">
 			<input type="text" value="Entrez votre recherche ici ..."/>
-			<input type="image" src="images/Loupe.png"/>
-			<div id="resultatRecherche">blabla</div>
+			<input type="image" src="images/Loupe.png" class="logoRecherche"/>
+			<div id="resultatRecherche">
+				<div class="titreResultat">
+				Diagnostics
+					<ui:repeat var="diag" value="#{mbRecherche.listeDiagTrouves}">
+						#{diag.intituleDiagnostic}
+					</ui:repeat>
+				</div>
+				
+				<div class="titreResultat">
+				Travaux
+					<ui:repeat var="trav" value="#{mbRecherche.listeChantiersTrouves}">
+						#{trav.nomChantier}
+					</ui:repeat>
+				</div>
+				
+				<div class="titreResultat">
+				Patrimoine
+					<ui:repeat var="erp" value="#{mbRecherche.listeErpTrouves}">
+						#{erp.nomErp}
+					</ui:repeat>
+				</div>
+			</div>
+			
+			<h:commandButton action="/TableauDeBord" image="images/TableauBordIconeOrange.png" class="logoMenu2" id="logoTabBord"/>
+			
+			<h:commandButton action="/accueilTravaux" image="images/BuildingConstruction_icon.png" class="logoMenu" id="logoTrav"/>
+			
+			<h:commandButton action="/accueilDiagnostic" image="images/DiagnosticIconeBleue.png" class="logoMenu" id="logoDiag"/>
+			
+			<h:commandButton action="/accueilERP" image="images/ERPIconeBleue2.png" class="logoMenu" id="logoErp"/>			
+	
 		</h:form>
-		
-		<a href=""><img class="logoMenu" id="logoErp" src="images/ERPIconeBleue2.png" /></a>
-		
-		<a href=""><img class="logoMenu" id="logoDiag" src="images/DiagnosticIconeBleue.png" /></a>
-		
-		<a href=""><img class="logoMenu" id="logoTrav" src="images/BuildingConstruction_icon.png" /></a>
-		
-		<a href=""><img class="logoMenu" id="logoTabBord" src="images/TableauBordIconeOrange.png" /></a>
-		
-		
 	</div>
 
-
-	<div class="content">
 	<ui:insert name="content" />
-	</div>
 </h:body>
-
+	
 </html>

@@ -100,6 +100,18 @@ html
 	
 }
 
+.forty-percent {
+     width: 27%;
+}
+
+.sixty-percent {
+     width: 73%;
+}
+
+.top-alignment {
+     vertical-align: top;
+}
+
 /*************************************/
 /* Erp Diagnostic Infos Détaillées */
 /*************************************/

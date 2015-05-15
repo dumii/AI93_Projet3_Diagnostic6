@@ -22,4 +22,6 @@ public interface IDaoIntervention {
     public List<Intervention> recupereInterventionparType(TypeIntervention type);
     
     int nombreInterventionDiag(int idDiag);
+
+	public int nombreInterventionEnCoursPlanifSuspParErp(int idErp);
 }

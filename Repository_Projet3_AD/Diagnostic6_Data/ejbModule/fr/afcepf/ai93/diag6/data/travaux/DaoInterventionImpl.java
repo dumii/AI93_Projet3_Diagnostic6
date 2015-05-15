@@ -76,4 +76,20 @@ public class DaoInterventionImpl implements IDaoIntervention {
 		BigInteger retour = (BigInteger) sql.getSingleResult();
 		return retour.intValue();
 	}
+
+	@Override
+	public int nombreInterventionEnCoursPlanifSuspParErp(int idErp) {
+		Query sql = 
+				em.createNativeQuery("select count(intervention.id_intervention) "+
+					"from  anomalie, intervention, diagnostic, erp, etat_avancement_travaux "+
+					"WHERE etat_avancement_travaux.id_etat_avancement in (2,3,4) "+
+					"and etat_avancement_travaux.id_etat_avancement = intervention.id_etat_avancement "+
+					"and anomalie.id_anomalie = intervention.id_anomalie "+
+					"and anomalie.no_diagnostic = diagnostic.no_diagnostic "+
+					"and diagnostic.no_erp = erp.no_erp "+
+					"and erp.no_erp= :pidErp ");
+		sql.setParameter("pidErp", idErp); 
+		BigInteger retour = (BigInteger) sql.getSingleResult();
+		return retour.intValue();
+	}
 }

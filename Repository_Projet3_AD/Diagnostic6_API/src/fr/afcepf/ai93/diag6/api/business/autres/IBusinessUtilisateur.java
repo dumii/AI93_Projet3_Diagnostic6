@@ -14,7 +14,7 @@ public interface IBusinessUtilisateur {
 
     public boolean supprimerUtilisateur(Utilisateur utilisateur);
 
-    public boolean modifierUtilisateur(Utilisateur utilisateur);
+    public String modifierUtilisateur(Utilisateur utilisateur);
 
     public List<ProfilUtilisateur> recupereToutProfil();
 

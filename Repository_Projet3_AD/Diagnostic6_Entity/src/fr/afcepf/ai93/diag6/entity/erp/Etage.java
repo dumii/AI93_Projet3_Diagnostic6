@@ -35,16 +35,6 @@ public class Etage implements Serializable {
 	@OneToMany(mappedBy="etage")
 	private List<Piece> listePiecesEtage;
 
-	
-	
-	public List<Piece> getListePiecesEtage() {
-		return listePiecesEtage;
-	}
-
-	public void setListePiecesEtage(List<Piece> listePiecesEtage) {
-		this.listePiecesEtage = listePiecesEtage;
-	}
-
 	public Integer getIdEtage() {
 		return idEtage;
 	}
@@ -98,7 +88,4 @@ public class Etage implements Serializable {
 		this.batiment = batiment;
 		this.listePiecesEtage = listePiecesEtage;
 	}
-	
-	
-	
 }

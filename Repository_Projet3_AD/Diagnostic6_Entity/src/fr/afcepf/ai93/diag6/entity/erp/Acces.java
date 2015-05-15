@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
 
 @Entity
-@Table(name="acces")
+@Table(name="Acces")
 public class Acces implements Serializable {
 
 	@Id
@@ -81,4 +81,7 @@ public class Acces implements Serializable {
 		this.batiment = batiment;
 	}
 
+	
+	
+	
 }
