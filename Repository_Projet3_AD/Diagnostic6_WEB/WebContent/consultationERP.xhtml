@@ -95,12 +95,12 @@
 	
 
 	<ui:define name="content">
-	<f:event listener="#{mbConsultationERP.loadERP()}" type="preRenderView"/> 
+	
 		<f:view>
 
 			<div id="content">
 				<h:form id="toto">
- 
+ 					<f:event listener="#{mbConsultationERP.loadERP()}" type="preRenderView"/> 
 					<h:panelGroup id="lblReponseAjax" layout="block" >
 
 						<div class="mini-barreEtat">

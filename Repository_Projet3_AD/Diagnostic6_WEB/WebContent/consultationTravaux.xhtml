@@ -91,10 +91,10 @@
 
 	<ui:define name="content">
 		<f:view>
-<f:event listener="#{mbConsultationTravaux.loadChantier()}" type="preRenderView"/> 
+			
 			<div id="content">
 				<h:form id="toto">
- 
+ 					<f:event listener="#{mbConsultationTravaux.loadChantier()}" type="preRenderView"/> 
 					<h:panelGroup id="lblReponseAjax" layout="block" >
 
 						<div class="mini-barreEtat">

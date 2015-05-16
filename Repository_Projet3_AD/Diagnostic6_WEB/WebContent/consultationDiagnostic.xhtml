@@ -103,11 +103,12 @@
 
 	<ui:define name="content">
 		<f:view>
-<f:event listener="#{mbDonneesGenerales.loadDiagnostic()}"
-			type="preRenderView" />
+
 			<div id="content">
 
 				<h:form id="toto">
+				<f:event listener="#{mbDonneesGenerales.loadDiagnostic()}"
+			type="preRenderView" />
 					<h:panelGroup id="lblReponseAjax" layout="block">
 
 						<div class="mini-barreEtat">
