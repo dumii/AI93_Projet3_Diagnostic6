@@ -51,7 +51,8 @@ body
 
 }
 
-#boutonRecherche
+#boutonRecherche,
+.logoRecherche
 {
 	display:inline-block;
 	height: 17px;

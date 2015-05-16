@@ -19,8 +19,10 @@ import fr.afcepf.ai93.diag6.api.business.travaux.IBusinessIntervention;
 import fr.afcepf.ai93.diag6.entity.autres.Utilisateur;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Anomalie;
 import fr.afcepf.ai93.diag6.entity.diagnostic.Diagnostic;
+import fr.afcepf.ai93.diag6.entity.diagnostic.TypeDiagnostic;
 import fr.afcepf.ai93.diag6.entity.erp.Erp;
 import fr.afcepf.ai93.diag6.entity.erp.TypeErp;
+import fr.afcepf.ai93.diag6.entity.travaux.EtatAvancementTravaux;
 import fr.afcepf.ai93.diag6.entity.travaux.Intervention;
 
 @ManagedBean(name="mbTestTableauBord")
@@ -46,8 +48,20 @@ public class EssaiTableauDeBordManagedBean {
 	private static final int MAX_INDICATEUR_TYPE_3 = 2;
 	private static final int MAX_INDICATEUR_TYPE_4 = 3;
 	
+	//Partie filtre
+	private String nomErpEntre;
+	
 	private List<TypeErp> listeTypes;
 	private int idTypeSelectionne;
+	
+	private List<TypeDiagnostic> listeTypesDiagnostic;
+	private int idTypeDiagSelectionne;
+	
+	private List<Integer> listeIndicateur;
+	private int idIndicateurSelectionne;
+	
+	private List<EtatAvancementTravaux> listeEtatAvancement;
+	private int idEtatAvancement;
 	
 	
 	//ERP // Diagnostic // Statistiques[0] Indicateur moyen / Statistiques[1] Etat d'avancement
@@ -57,11 +71,29 @@ public class EssaiTableauDeBordManagedBean {
 	public void init()
 	{
 		listeBrute = proxyERP.recupereToutErp();
-		listeTypes = proxyERP.recupererListeTypeERP();
-		
 		listeNette = new ArrayList<>();
 		
+		//Filtres
+		listeTypes = proxyERP.recupererListeTypeERP();
+		listeTypesDiagnostic = proxyDiagnostic.recupereTypeDiagnostic();
+		listeEtatAvancement = proxyIntervention.recupererTousEtats();
+		//L'état suspendu n'est pas représenté sur le tableau de bord
+		//On le retire de la liste donc
+		listeEtatAvancement.remove(1);
+		
+		listeIndicateur = new ArrayList<>();
+		listeIndicateur.add(1);
+		listeIndicateur.add(2);
+		listeIndicateur.add(3);
+		listeIndicateur.add(4);
+		
+		//Filtres sélectionnés
+		idEtatAvancement = 0;
+		idIndicateurSelectionne = 0;
+		idTypeDiagSelectionne = 0;
 		idTypeSelectionne = 0;
+		nomErpEntre = "";
+		
 		initialisationDesDonnees();
 	}
 	
@@ -152,19 +184,195 @@ public class EssaiTableauDeBordManagedBean {
 		//la liste nette affichée est régénérée à chaque fois
 		listeNetteAffichee = new ArrayList<>();
 		
-		//Et on teste chacun des filtres
-		if (idTypeSelectionne != 0)
-		{
-			for (Erp erp : listeNette)
-			{
-				if (erp.getTypeErp().getIdTypeErp() == idTypeSelectionne)
+		boolean afficherDansResutlat = true;
+		//Et on teste chacun des filtres pour chacun des erp
+		for (Erp erp : listeNette)
+		{			
+			List<Diagnostic> listeDiagnostic = new ArrayList<>();
+			
+			afficherDansResutlat = filtreNomEmp(erp);
+			
+			if (afficherDansResutlat)
+			{			
+				afficherDansResutlat = filtreTypeErp(erp);
+			}
+			
+			if (afficherDansResutlat)
+			{				
+				listeDiagnostic = filtresDiagnostic(erp);
+				
+				if (listeDiagnostic.size() == 0)
 				{
-					listeNetteAffichee.add(erp);
+					afficherDansResutlat = false;
 				}
+			}
+			
+			if (afficherDansResutlat)
+			{
+				listeNetteAffichee.add(erp);
 			}
 		}
 	}
+	
+	public List<Diagnostic> filtresDiagnostic(Erp erp)
+	{	
+		List<Diagnostic> liste = new ArrayList<>();
 
+		for (Diagnostic diagnostic : erp.getListeDiagnosticErp())
+		{
+			boolean afficherDansResutlat = true;
+			
+			afficherDansResutlat = filtreTypeDiagnostic(diagnostic);
+			
+			if (afficherDansResutlat)
+			{
+				afficherDansResutlat = filtreIndicateurMoyenDiagnsotic(erp, diagnostic);
+			}
+			
+			if (afficherDansResutlat)
+			{
+				afficherDansResutlat = filtreEtatAvancementTravaux(erp, diagnostic);
+			}
+			
+			if (afficherDansResutlat)
+			{
+				liste.add(diagnostic);
+			}
+		}
+		return liste;
+	}
+	
+	public boolean filtreNomEmp(Erp erp)
+	{
+		if (!nomErpEntre.equals(""))
+		{
+			if (toLowerCasePerso(erp.getNomErp()).contains(toLowerCasePerso(nomErpEntre)))
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			return true;
+		}
+	}
+	
+	public boolean filtreTypeErp(Erp erp)
+	{
+		if (idTypeSelectionne != 0)
+		{
+			if (erp.getTypeErp().getIdTypeErp() == idTypeSelectionne)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			return true;
+		}
+	}
+	
+	public boolean filtreTypeDiagnostic(Diagnostic diagnostic)
+	{
+		if (idTypeDiagSelectionne != 0)
+		{
+			if (diagnostic.getTypeDiagnostic().getIdTypeDiagnostic() == idTypeDiagSelectionne)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			return true;
+		}
+	}
+	
+	public boolean filtreIndicateurMoyenDiagnsotic(Erp erp, Diagnostic diagnostic)
+	{
+		if (idIndicateurSelectionne != 0)
+		{
+			int indexErp = listeBrute.indexOf(erp);
+			int indexDiag = erp.getListeDiagnosticErp().indexOf(diagnostic);
+			
+			int indicateurDiagnostic = tableau[indexErp][indexDiag][0];
+			
+			if (indicateurDiagnostic == idIndicateurSelectionne)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			return true;
+		}
+	}
+	
+	public boolean filtreEtatAvancementTravaux(Erp erp, Diagnostic diagnostic)
+	{
+		if (idEtatAvancement != 0)
+		{
+			int indexErp = listeBrute.indexOf(erp);
+			int indexDiag = erp.getListeDiagnosticErp().indexOf(diagnostic);
+			
+			int etatAvancement = tableau[indexErp][indexDiag][1];
+			
+			if (etatAvancement == idEtatAvancement)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			return true;
+		}
+	}
+
+	public String displayDiagnostic(Erp erp, Diagnostic diagnostic)
+	{
+		boolean display = true;
+		
+		display = filtreTypeDiagnostic(diagnostic);
+		
+		if (display)
+		{
+			display = filtreIndicateurMoyenDiagnsotic(erp, diagnostic);
+		}
+		
+		if (display)
+		{
+			display = filtreEtatAvancementTravaux(erp, diagnostic);
+		}
+		
+		if (display)
+		{
+			return "";
+		}
+		else
+		{
+			return "none";
+		}
+	}
+	
 	public int terminesOuTravauxEnCours(int nombreTermines, int nombreTotal)
 	{		
 		if (nombreTotal == 0)
@@ -180,7 +388,7 @@ public class EssaiTableauDeBordManagedBean {
 		else
 		{
 			//En attente ou suspendus
-			return 2;
+			return 3;
 		}
 	}
 	
@@ -212,11 +420,51 @@ public class EssaiTableauDeBordManagedBean {
 	{		
 		switch (idEtatAvancement) {
 		case 1: return "images/tableauDeBord/iconeValider5.png";
-		case 2: return "images/tableauDeBord/iconeEnCours5.png";
+		case 3: return "images/tableauDeBord/iconeEnCours5.png";
 		case 4: return "images/tableauDeBord/iconeEnAttente5.png";
 		default : return "images/tableauDeBord/iconeEnAttente5.png";		
 		}
 	}
+	
+	static public String toLowerCasePerso (String string)
+	{
+		char [] charsData = new char [string.length ()];
+		string.getChars (0, charsData.length, charsData, 0);
+
+		char c;
+		for (int i = 0; i < charsData.length; i++) 
+			if ( (c = charsData [i]) >= 'A' && c <= 'Z')
+				charsData [i] = (char)(c - 'A' + 'a');
+			else
+				switch (c)
+				{
+				case '\u00e0' :
+				case '\u00e2' :
+				case '\u00e4' : charsData [i] = 'a';
+				break;
+				case '\u00e7' : charsData [i] = 'c';
+				break;
+				case '\u00e8' :
+				case '\u00e9' :
+				case '\u00ea' :
+				case '\u00eb' : charsData [i] = 'e';
+				break;
+				case '\u00ee' :
+				case '\u00ef' : charsData [i] = 'i';
+				break;
+				case '\u00f4' :
+				case '\u00f6' : charsData [i] = 'o';
+				break;
+				case '\u00f9' :
+				case '\u00fb' :
+				case '\u00fc' : charsData [i] = 'u';
+				break;
+				}
+
+		return new String (charsData);
+	}
+
+	//Getters et Setters
 
 	public IBusinessIntervention getProxyIntervention() {
 		return proxyIntervention;
@@ -321,8 +569,61 @@ public class EssaiTableauDeBordManagedBean {
 	public void setIdTypeSelectionne(int idTypeSelectionne) {
 		this.idTypeSelectionne = idTypeSelectionne;
 	}
-	
-	//Getters et Setters
-	
-	
+
+	public String getNomErpEntre() {
+		return nomErpEntre;
+	}
+
+	public void setNomErpEntre(String nomErpEntre) {
+		this.nomErpEntre = nomErpEntre;
+	}
+
+	public List<TypeDiagnostic> getListeTypesDiagnostic() {
+		return listeTypesDiagnostic;
+	}
+
+	public void setListeTypesDiagnostic(List<TypeDiagnostic> listeTypesDiagnostic) {
+		this.listeTypesDiagnostic = listeTypesDiagnostic;
+	}
+
+	public int getIdTypeDiagSelectionne() {
+		return idTypeDiagSelectionne;
+	}
+
+	public void setIdTypeDiagSelectionne(int idTypeDiagSelectionne) {
+		this.idTypeDiagSelectionne = idTypeDiagSelectionne;
+	}
+
+	public List<Integer> getListeIndicateur() {
+		return listeIndicateur;
+	}
+
+	public void setListeIndicateur(List<Integer> listeIndicateur) {
+		this.listeIndicateur = listeIndicateur;
+	}
+
+	public int getIdIndicateurSelectionne() {
+		return idIndicateurSelectionne;
+	}
+
+	public void setIdIndicateurSelectionne(int idIndicateurSelectionne) {
+		this.idIndicateurSelectionne = idIndicateurSelectionne;
+	}
+
+	public List<EtatAvancementTravaux> getListeEtatAvancement() {
+		return listeEtatAvancement;
+	}
+
+	public void setListeEtatAvancement(
+			List<EtatAvancementTravaux> listeEtatAvancement) {
+		this.listeEtatAvancement = listeEtatAvancement;
+	}
+
+	public int getIdEtatAvancement() {
+		return idEtatAvancement;
+	}
+
+	public void setIdEtatAvancement(int idEtatAvancement) {
+		this.idEtatAvancement = idEtatAvancement;
+	}
 }
