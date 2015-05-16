@@ -119,6 +119,7 @@ public class EssaiTableauDeBordManagedBean {
 				
 				int nombreInterventions = 0;
 				int nombreTermines = 0;
+				int nombreEnCours = 0;
 				
 				diagnostic.setListeAnomaliesDiagnostic(proxyAnomalie.recupereAnomalieParDiagnostic(diagnostic.getIdDiagnostic()));
 				
@@ -139,6 +140,11 @@ public class EssaiTableauDeBordManagedBean {
 						{
 							nombreTermines++;
 						}
+						
+						if (idEtatAvancement == 3 || idEtatAvancement == 4)
+						{
+							nombreEnCours++;
+						}
 					}
 				}
 				
@@ -158,7 +164,7 @@ public class EssaiTableauDeBordManagedBean {
 					}
 				}
 				
-				int idEtatAvancement = terminesOuTravauxEnCours(nombreTermines, nombreInterventions);
+				int idEtatAvancement = terminesOuTravauxEnCours(nombreTermines, nombreInterventions, nombreEnCours);
 				
 				//Indicateur moyen
 				tableau[indexERP][indexDiagnostic][0] = moyenneIndicateur;
@@ -373,22 +379,27 @@ public class EssaiTableauDeBordManagedBean {
 		}
 	}
 	
-	public int terminesOuTravauxEnCours(int nombreTermines, int nombreTotal)
+	public int terminesOuTravauxEnCours(int nombreTermines, int nombreTotal, int nombreEnCours)
 	{		
 		if (nombreTotal == 0)
 		{
 			//Pas de travaux
-			return 4;
+			return 0;
 		}
 		else if (nombreTermines == nombreTotal)
 		{
 			//Terminés
 			return 1;
 		}
+		else if (nombreEnCours > 0)
+		{
+			//Cours
+			return 3;
+		}
 		else
 		{
-			//En attente ou suspendus
-			return 3;
+			//Travaux en attente ou suspendus
+			return 2;
 		}
 	}
 	
@@ -407,10 +418,10 @@ public class EssaiTableauDeBordManagedBean {
 	public String imageIndicateurMoyen (int indicateur)
 	{
 		switch (indicateur) {
-		case 1: return "images/tableauDeBord/Indicateur1.png";
-		case 2: return "images/tableauDeBord/Indicateur2.png";
-		case 3: return "images/tableauDeBord/Indicateur3.png";
-		case 4: return "images/tableauDeBord/Indicateur4.png";
+		case 4: return "images/tableauDeBord/Indicateur1.png";
+		case 3: return "images/tableauDeBord/Indicateur2.png";
+		case 2: return "images/tableauDeBord/Indicateur3.png";
+		case 1: return "images/tableauDeBord/Indicateur4.png";
 		default : return "images/tableauDeBord/Indicateur1.png";
 		//prévoir icône pas d'anomalie
 		}
@@ -421,8 +432,9 @@ public class EssaiTableauDeBordManagedBean {
 		switch (idEtatAvancement) {
 		case 1: return "images/tableauDeBord/iconeValider5.png";
 		case 3: return "images/tableauDeBord/iconeEnCours5.png";
-		case 4: return "images/tableauDeBord/iconeEnAttente5.png";
-		default : return "images/tableauDeBord/iconeEnAttente5.png";		
+		case 2: return "images/tableauDeBord/iconeEnAttente5.png";
+		case 0: return "images/tableauDeBord/pasDeTravauxTableauBord.50.50.png";
+		default : return "images/tableauDeBord/pasDeTravauxTableauBord.50.50.png";		
 		}
 	}
 	
