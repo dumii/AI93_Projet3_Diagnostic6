@@ -82,6 +82,13 @@ a:visited
 	color: #ffffff !important;
 }
 
+
+#content a:visited 
+{
+	color: #ffffff !important;
+	text-decoration: none !important;
+}
+
 /*************************************/
 /* Erp Diagnostic Infos G�n�rales */
 /*************************************/

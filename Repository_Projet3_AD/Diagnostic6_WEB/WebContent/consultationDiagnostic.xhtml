@@ -13,6 +13,12 @@
 		<link href="css/consultationDiagnostic.css" rel="stylesheet"
 			type="text/css" />
 	</ui:define>
+	
+	<ui:define name="bouton">
+		<h:form>
+			<h:commandLink action="creationDiagnostic" value="Ajouter un diagnostic" class="btn2" />
+		</h:form>
+	</ui:define>
 
 	<ui:define name="accordeon1">
 		Diagnostics avec des interventions en cours (#{mbArborescenceDiagnostic.listeDiagnosticsIntervEnCours.size()})

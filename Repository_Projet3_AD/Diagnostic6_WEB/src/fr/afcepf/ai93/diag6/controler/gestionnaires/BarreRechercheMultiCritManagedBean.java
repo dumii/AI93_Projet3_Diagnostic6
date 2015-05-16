@@ -47,14 +47,10 @@ public class BarreRechercheMultiCritManagedBean implements Serializable  {
 	
 	private void rechercheDiagnostic(){
 		listeDiagTrouves = proxyBusinessDiag.rechercheDiagnostics(stringCherche); 
-		for(Diagnostic d : listeDiagTrouves)
-			System.out.println("diagnostic trouvé : "+d.getIntituleDiagnostic());
 	}
 	
 	private void rechercheErp(){
 		listeErpTrouves = proxyBusinessErp.recupereErpParNom(stringCherche); 
-		for(Erp e : listeErpTrouves)
-			System.out.println("erp trouvé :" + e.getNomErp());
 	}
 	
 	private void rechercheChantiers(){
