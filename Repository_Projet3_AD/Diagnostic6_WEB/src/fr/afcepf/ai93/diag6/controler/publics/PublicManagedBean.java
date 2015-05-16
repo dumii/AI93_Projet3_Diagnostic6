@@ -301,6 +301,10 @@ public class PublicManagedBean{
 		listeTypeDiagnostic = proxyBusinessPublic.listerTypeDiagnostic();
 
 		listeErp= proxyBusinessErp.recupereToutErp();
+		
+		idTypeDiagSelect = 0;
+		idTypeErpSelect = 0;
+		idErpRecherche = 1;
 
 	}
 
@@ -318,9 +322,7 @@ public class PublicManagedBean{
 
 	public List<Erp> recup2(){
 
-
 		listeErp = new ArrayList<>();
-
 
 		List<Erp> listeTempByTypeErp = new ArrayList<>();
 		List<Erp> listeTempByTypeDiag = new ArrayList<>();
@@ -329,56 +331,41 @@ public class PublicManagedBean{
 		List<Erp> listeTemp = proxyBusinessErp.rechercheErpParInterventionEnCours();
 		listeErp = proxyBusinessErp.recupereToutErp();
 
-		
 		for (Erp e : listeTemp){
 			System.out.println( "liste travaux "+e.getNomErp());
 		}
 
-
-
-		if(idTypeDiagSelect != null && idTypeDiagSelect != 0){
-
+		if(idTypeDiagSelect != 0){
 			listeTempByTypeDiag= proxyBusinessPublic.recupererErpParTypeDiagnostic(idTypeDiagSelect);
 		}
 
-		if((idTypeErpSelect == null || idTypeErpSelect == 0) && (idTypeDiagSelect == null || idTypeDiagSelect == 0)){
+		if((idTypeErpSelect == 0) && (idTypeDiagSelect == 0)){
 			listeErp = proxyBusinessErp.recupereToutErp();
-
 		}
 
-		if (booleenTravaux){
-
+		if((idTypeErpSelect != 0) && (idTypeDiagSelect ==0)){
 			listeErp = listeTemp;
-			
-			
-			if(idTypeErpSelect != null && idTypeErpSelect != 0){
-				for (Erp e : listeErp){
-					if(e.getTypeErp().getIdTypeErp() == idTypeErpSelect){
-						listeTempByTypeErp.add(e);
-					}
+			for (Erp e : listeErp){
+				if(e.getTypeErp().getIdTypeErp() == idTypeErpSelect){
+					listeTempByTypeErp.add(e);
 				}
 			}
 
 			for (Erp e: listeErp){
 				for(Erp e2 : listeTempByTypeDiag){
-
 					if (e.getIdErp() == e2.getIdErp()){
-
-						
-							listeTempDiag2.add(e);
-						
+						listeTempDiag2.add(e);
 					}
 				}
 			}
-			
+
 			listeTempByTypeDiag = listeTempDiag2;
-			
 			for(Erp e : listeTempDiag2){
 				System.out.println(" ***************** "+e.getNomErp());
 			}
 		}
 
-		if((idTypeErpSelect != null && idTypeErpSelect != 0) && (idTypeDiagSelect != null && idTypeDiagSelect != 0)){
+		if((idTypeErpSelect != 0) && (idTypeDiagSelect != 0)){
 
 			List<Erp> liste = new ArrayList<>();
 
@@ -396,11 +383,11 @@ public class PublicManagedBean{
 			listeErp = liste;
 
 		}
-		if((idTypeErpSelect == null || idTypeErpSelect == 0) && (idTypeDiagSelect != null && idTypeDiagSelect != 0)){
+		if((idTypeErpSelect == 0) && (idTypeDiagSelect != 0)){
 			listeErp = listeTempByTypeDiag;
 
 		}
-		if((idTypeErpSelect != null && idTypeErpSelect != 0) && ( idTypeDiagSelect == null || idTypeDiagSelect == 0)){
+		if((idTypeErpSelect != 0) && ( idTypeDiagSelect == 0)){
 			listeErp = listeTempByTypeErp;
 
 		}
