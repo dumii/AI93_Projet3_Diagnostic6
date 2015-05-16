@@ -84,10 +84,10 @@ public class EssaiTableauDeBordManagedBean {
 		listeEtatAvancement.add(new Item("Pas de travaux", 5));
 		
 		listeIndicateur = new ArrayList<>();
-		listeIndicateur.add(new Item("Aux normes", 4));
-		listeIndicateur.add(new Item("Non prioritaire", 3));
-		listeIndicateur.add(new Item("Prioritaire", 2));
-		listeIndicateur.add(new Item("Critique", 1));
+		listeIndicateur.add(new Item("1 - Aux normes", 4));
+		listeIndicateur.add(new Item("2 - Non prioritaire", 3));
+		listeIndicateur.add(new Item("3 - Prioritaire", 2));
+		listeIndicateur.add(new Item("4 - Critique", 1));
 		
 		//Filtres sélectionnés
 		idEtatAvancement = 0;
@@ -433,9 +433,9 @@ public class EssaiTableauDeBordManagedBean {
 	{		
 		switch (idEtatAvancement) {
 		case 1: return "images/tableauDeBord/iconeValider5.png";
-		case 3: return "images/tableauDeBord/iconeEnCours5.png";
-		case 2: return "images/tableauDeBord/iconeEnAttente5.png";
-		case 0: return "images/tableauDeBord/pasDeTravauxTableauBord.50.50.png";
+		case 2: return "images/tableauDeBord/iconeEnCours5.png";
+		case 3: return "images/tableauDeBord/iconeEnAttente5.png";
+		case 5: return "images/tableauDeBord/pasDeTravauxTableauBord.50.50.png";
 		default : return "images/tableauDeBord/pasDeTravauxTableauBord.50.50.png";		
 		}
 	}
