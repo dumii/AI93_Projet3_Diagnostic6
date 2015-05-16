@@ -229,7 +229,7 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 			amodif = a;
 		} else {
 			Utilisateur user = new Utilisateur();
-			user.setIdUtilisateur(1);
+			user.setIdUtilisateur(7);
 			proxyBusinessAnomalie.modifierAnomalie(a, user); 
 			amodif=new Anomalie(); 
 			recupererDiagnostic(); 
@@ -238,10 +238,10 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 	
 	public void modificationDiagnostic(){
 		if(dmodif.getIdDiagnostic() != diagnosticSelectionne.getIdDiagnostic()) {
-			dmodif = diagnosticSelectionne;
+		dmodif = diagnosticSelectionne;
 		} else {
 			Utilisateur user = new Utilisateur();
-			user.setIdUtilisateur(1);
+			user.setIdUtilisateur(7);
 			proxyBusinessDiagnostic.modifierDiagnostic(diagnosticSelectionne,user);
 			dmodif=new Diagnostic(); 
 			recupererDiagnostic(); 
@@ -292,7 +292,7 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 		}
 		else{
 			Utilisateur user = new Utilisateur();
-			user.setIdUtilisateur(1);
+			user.setIdUtilisateur(7);
 			proxyBusinessAnomalie.supprimerAnomalie(a, user); 
 			//amodif=new Anomalie(); 
 			recupererDiagnostic(); 
