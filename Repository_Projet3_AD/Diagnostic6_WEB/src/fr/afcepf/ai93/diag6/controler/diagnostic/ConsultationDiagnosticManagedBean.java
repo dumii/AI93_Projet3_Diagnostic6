@@ -232,7 +232,7 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 		} else {
 			System.out.println("je passe ici");
 			Utilisateur user = new Utilisateur();
-			user.setIdUtilisateur(1);
+			user.setIdUtilisateur(7);
 			proxyBusinessAnomalie.modifierAnomalie(a, user); 
 			amodif=new Anomalie(); 
 			recupererDiagnostic(); 
@@ -241,15 +241,13 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 	
 	public void modificationDiagnostic(){
 		
-		System.out.println("je modifie le diagnostic");
-		System.out.println(dmodif.getIdDiagnostic() + " = " + diagnosticSelectionne.getIdDiagnostic());
 		if(dmodif.getIdDiagnostic() != diagnosticSelectionne.getIdDiagnostic()) {
-			System.out.println("Diag pris en compte pour la modification : " + diagnosticSelectionne.getIdDiagnostic());
+			
 			dmodif = diagnosticSelectionne;
 		} else {
-			System.out.println("je passe ici");
+			
 			Utilisateur user = new Utilisateur();
-			user.setIdUtilisateur(1);
+			user.setIdUtilisateur(7);
 			proxyBusinessDiagnostic.modifierDiagnostic(diagnosticSelectionne,user);
 			dmodif=new Diagnostic(); 
 			recupererDiagnostic(); 
@@ -275,8 +273,6 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 	
 	public boolean isEnableDiag() {
 		
-		System.out.println("*******************************diag modif : "+dmodif.getIdDiagnostic());
-		System.out.println("diagnostic selectionné++++++++++++++++++++++++++++++++++++++++++++++"+diagnosticSelectionne.getIdDiagnostic());
 		if(diagnosticSelectionne.getIdDiagnostic() == dmodif.getIdDiagnostic()) {
 			return false;
 		}
@@ -298,14 +294,14 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 	}
 	
 	public String suppressionAnomalie(Anomalie a){
-		System.out.println("delete debut");
+		
 		if(verifInterventionSurAnomalie(a)==true){
 			System.out.println("Vous ne pouvez pas supprimer");
 			return "Vous ne pouvez pas supprimer une anomalie ayant une intervention dessous"; 
 		}
 		else{
 			Utilisateur user = new Utilisateur();
-			user.setIdUtilisateur(1);
+			user.setIdUtilisateur(7);
 			proxyBusinessAnomalie.supprimerAnomalie(a, user); 
 			//amodif=new Anomalie(); 
 			recupererDiagnostic(); 
