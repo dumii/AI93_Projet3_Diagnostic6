@@ -175,7 +175,9 @@
 								   					var="var"
 								  					itemLabel="#{var.nomArtisan}"
 								  					itemValue="#{var.idArtisan}"/>								
-								</h:selectOneMenu>	
+								</h:selectOneMenu>
+								
+								<h:commandLink action="creationArtisan" value="Ajouter un artisan" />	
 								
 								<h:outputLabel value="Coût (€):" />
 								<h:inputText value="#{intervention.coutIntervention}" />	
@@ -246,8 +248,10 @@
 												   inputStyle="width:45.5%"
 												   styleClass="troll"/>
 							   
-								<h:commandButton value="Ajouter" action="#{mbPlanningTravaux.ajouterIntervention(anom.intervention, anom)}"/>							</div>
-							
+								<h:commandButton value="Ajouter" action="#{mbPlanningTravaux.ajouterIntervention(anom.intervention, anom)}"/>
+								<h:outputLabel value="#{mbPlanningTravaux.labelErreur}" class="labelErreur"/>
+								</div>
+								
 							<div>
 								<h:outputLabel value="Type d'intervention :" />
 								
@@ -268,6 +272,8 @@
 								  					itemLabel="#{var.nomArtisan}"
 								  					itemValue="#{var.idArtisan}"/>								
 								</h:selectOneMenu>	
+								
+								<h:commandLink action="creationArtisan" value="Ajouter un artisan" />
 								
 								<h:outputLabel value="Coût (€):" />
 								<h:inputText value="#{anom.intervention.coutIntervention}" />	

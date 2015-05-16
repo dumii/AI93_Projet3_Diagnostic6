@@ -41,17 +41,13 @@ public class ArtisanManagedBean implements Serializable {
 	}
 	
 	public void enregistrerArtisan(){
-		System.out.println("111111111111111111111 je rentre dans l'ajout ArtisanManagedBean 11111111111111111111111");
 		artisan.setLocalisation(localisation);
-		proxyBusinessArtisan.ajouterArtisan(artisan);
-		
+		proxyBusinessArtisan.ajouterArtisan(artisan);		
 		init();
 	}
 	
 	public String supprimerArtisan(Artisan arti){
-		System.out.println("je rentre dans la méthode delete expert managedbean");
 		proxyBusinessArtisan.supprimerArtisan(arti);
-		System.out.println("appel au business Delete fait");
 		init();
 		return "suppression réalisée";
 	}

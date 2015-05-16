@@ -2,7 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+      xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:a4j="http://richfaces.org/a4j"
+	  xmlns:rich="http://richfaces.org/rich">  
 
 <h:head>
 	<title>
@@ -11,6 +13,7 @@
 	
 	<link href="css/style.css" rel="stylesheet" type="text/css" />
  	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css"/>
+	<link href="css/barreHaut.css" rel="stylesheet" type="text/css"/>
 	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<ui:insert name="head"></ui:insert>
@@ -19,36 +22,20 @@
 <h:body> 
 
 	<div id="enTete">
-	
-		
-		<h:form id="rechercheBandeau">
+
+		<h:form id="rechercheBandeau" action="">
 		<h:commandButton action="/Accueil" image="images/Logo2.png" class="logoAccueil"/>
-				
+			  <h:inputText value="#{mbRecherche.stringCherche}" id="textInputRecherche" autocomplete="off"
+			  		onkeypress="#{mbRecherche.rechercherString()}" onblur="PasShow_Div(resultatRecherche)" > 
+					<a4j:ajax event="keyup"
+							listener="#{mbRecherche.rechercherString()}"
+							oncomplete="Show_Div(resultatRecherche)"
+							render="rechercheBandeau">
+					</a4j:ajax>
+			 </h:inputText>
+			<input type="image" src="images/Loupe.png" id="boutonRecherche" 
+			 		onkeypress="#{mbRecherche.rechercherString()}" onclick="Show_Div(resultatRecherche)" />		
 		
-			<input type="text" value="Entrez votre recherche ici ..."/>
-			<input type="image" src="images/Loupe.png" class="logoRecherche"/>
-			<div id="resultatRecherche">
-				<div class="titreResultat">
-				Diagnostics
-					<ui:repeat var="diag" value="#{mbRecherche.listeDiagTrouves}">
-						#{diag.intituleDiagnostic}
-					</ui:repeat>
-				</div>
-				
-				<div class="titreResultat">
-				Travaux
-					<ui:repeat var="trav" value="#{mbRecherche.listeChantiersTrouves}">
-						#{trav.nomChantier}
-					</ui:repeat>
-				</div>
-				
-				<div class="titreResultat">
-				Patrimoine
-					<ui:repeat var="erp" value="#{mbRecherche.listeErpTrouves}">
-						#{erp.nomErp}
-					</ui:repeat>
-				</div>
-			</div>
 		
 		<h:commandButton action="/TableauDeBord" image="images/TableauBordIconeOrange.png" class="logoMenu2" id="logoTabBord"/>
 			
@@ -57,8 +44,45 @@
 		<h:commandButton action="/accueilDiagnostic" image="images/DiagnosticIconeBleue.png" class="logoMenu" id="logoDiag"/>
 			
 		<h:commandButton action="/accueilERP" image="images/ERPIconeBleue2.png" class="logoMenu" id="logoErp"/>			
-	
+
+		<div id="resultatRecherche">	
+				<div class="resultatsTheme">
+					<div class="titreTheme">Diagnostics</div>
+					<ui:repeat var="diag" value="#{mbRecherche.listeDiagTrouves}" >
+						<div class="resUnitaire">
+						<h:commandLink value="#{diag.intituleDiagnostic}" 
+								action="consultationDiagnostic"> 
+								<f:param name="id" value="#{diag.idDiagnostic}"></f:param>
+						 </h:commandLink>
+						</div>
+					</ui:repeat>
+				</div>
+				<div class="resultatsTheme">
+					<div class="titreTheme">Travaux</div>
+					<ui:repeat var="trav" value="#{mbRecherche.listeChantiersTrouves}">
+						<div class="resUnitaire">
+						<h:commandLink value="Chantier en cours #{trav.nomChantier}" 
+								action="consultationTravaux"> 
+								<f:param name="id" value="#{trav.erpChantier.idErp}"></f:param>
+						 </h:commandLink>
+						</div>
+					</ui:repeat>
+				</div>
+				
+				<div class="resultatsTheme">
+					<div class="titreTheme">Patrimoine</div>
+					<ui:repeat var="erp" value="#{mbRecherche.listeErpTrouves}">
+						<div class="resUnitaire">
+						<h:commandLink value="#{erp.nomErp}" 
+								action="consultationERP"> 
+								<f:param name="id" value="#{erp.idErp}"></f:param>
+						 </h:commandLink>
+						</div>
+					</ui:repeat>
+				</div>
+			</div>
 		</h:form>
+		
 		
 	</div>
 	

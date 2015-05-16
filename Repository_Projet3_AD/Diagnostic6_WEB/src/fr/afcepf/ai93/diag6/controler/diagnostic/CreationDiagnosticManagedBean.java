@@ -72,6 +72,9 @@ public class CreationDiagnosticManagedBean{
 	private int idBatimentSelectionne;
 	private int idItemSelectionne;
 	
+	private String labelErreur1;
+	private String labelErreur2;
+	
 	//Stockage du choix de la première et de la seconde comboBox
 	private String choixBatvoirie;
 	
@@ -110,6 +113,9 @@ public class CreationDiagnosticManagedBean{
 	}
 	//Méthodes	
 	public void initialisationDonnées() {
+		
+		labelErreur1 = "";
+		labelErreur2 = "";
 		
 		anomalie = new Anomalie();
 
@@ -268,11 +274,46 @@ public class CreationDiagnosticManagedBean{
 			anomalie.setVoirie(voirie);
 		}
 		
-		Indicateur indicateur = proxyAnomalie.recupereIndicateurParID(idIndicateur);
-		anomalie.setIndicateur(indicateur);
-		
-		listeAnomalies.add(anomalie); 
-		initialisationDonnées();
+		if (idItemSelectionne != 0)
+		{
+			if (anomalie.getCoutEstimeAnomalie() != 0)
+			{
+				if (idIndicateur != 0)
+				{
+					if (!anomalie.getDescriptionAnomalie().equals(""))
+					{
+						if (anomalie.getPreconisationAnomalie().equals(""))
+						{
+							Indicateur indicateur = proxyAnomalie.recupereIndicateurParID(idIndicateur);
+							anomalie.setIndicateur(indicateur);
+							
+							listeAnomalies.add(anomalie); 
+							initialisationDonnées();
+						}
+						else
+						{
+							labelErreur2 = "Tous les champs ne sont pas remplis";
+						}
+					}
+					else
+					{
+						labelErreur2 = "Tous les champs ne sont pas remplis";
+					}
+				}
+				else
+				{
+					labelErreur2 = "Tous les champs ne sont pas remplis";
+				}
+			}
+			else
+			{
+				labelErreur2 = "Tous les champs ne sont pas remplis";
+			}
+		}
+		else
+		{
+			labelErreur2 = "Tous les champs ne sont pas remplis";
+		}
 	}
 
 	public void retirerAnomalieDuTableau(Anomalie anomalieRetire)
@@ -346,29 +387,50 @@ public class CreationDiagnosticManagedBean{
 
 	public void enregistrerDiagnostic()
 	{
-		monERP = proxyERP.recupererErpParId(monERP.getIdErp());
-		monERP.setListeDiagnosticErp(proxyDiagnostic.recupereToutDiagnosticParErp(monERP));
-		Date dateSaisie = new Date();
-		nouveauDiagnostic.setDateSaisieDiagnostic(dateSaisie);
-		nouveauDiagnostic.setTraite(0);
-		nouveauDiagnostic.setNomDiagnostiqueur(user.getNomUtilisateur());
-		nouveauDiagnostic.setListeAnomaliesDiagnostic(listeAnomalies);	
-		nouveauDiagnostic.setErp(monERP);
-		monERP.getListeDiagnosticErp().add(nouveauDiagnostic);
-		TypeDiagnostic type = proxyDiagnostic.recupereTypeDiagnosticParID(idTypeDiagnostic);
-		nouveauDiagnostic.setTypeDiagnostic(type);
-		nouveauDiagnostic.setExpert(expert);
-		String intitule = idDiagnostic + " Diag " + type.getNomType() + " " + monERP.getNomErp();
-		nouveauDiagnostic.setIntituleDiagnostic(intitule);
-		
-		proxyDiagnostic.ajouterDiagnostic(nouveauDiagnostic);
-		
-		for (Anomalie anom : listeAnomalies)
+		if (idExpert != 0)
 		{
-			proxyAnomalie.ajouterAnomalie(anom);
+			if (nouveauDiagnostic.getDateRealisationDiagnostic() != null)
+			{
+				if (listeAnomalies.size() > 0)
+				{
+					monERP = proxyERP.recupererErpParId(monERP.getIdErp());
+					monERP.setListeDiagnosticErp(proxyDiagnostic.recupereToutDiagnosticParErp(monERP));
+					Date dateSaisie = new Date();
+					nouveauDiagnostic.setDateSaisieDiagnostic(dateSaisie);
+					nouveauDiagnostic.setTraite(0);
+					nouveauDiagnostic.setNomDiagnostiqueur(user.getNomUtilisateur());
+					nouveauDiagnostic.setListeAnomaliesDiagnostic(listeAnomalies);	
+					nouveauDiagnostic.setErp(monERP);
+					monERP.getListeDiagnosticErp().add(nouveauDiagnostic);
+					TypeDiagnostic type = proxyDiagnostic.recupereTypeDiagnosticParID(idTypeDiagnostic);
+					nouveauDiagnostic.setTypeDiagnostic(type);
+					nouveauDiagnostic.setExpert(expert);
+					String intitule = idDiagnostic + " Diag " + type.getNomType() + " " + monERP.getNomErp();
+					nouveauDiagnostic.setIntituleDiagnostic(intitule);
+
+					proxyDiagnostic.ajouterDiagnostic(nouveauDiagnostic);
+
+					for (Anomalie anom : listeAnomalies)
+					{
+						proxyAnomalie.ajouterAnomalie(anom);
+					}
+
+					init();
+				}
+				else
+				{
+					labelErreur1 = "Aucune anomalies n'a été renseignée";
+				}
+			}
+			else
+			{
+				labelErreur1 = "Tous les champs ne sont pas remplis";
+			}
+		}	
+		else
+		{
+			labelErreur1 = "Tous les champs ne sont pas remplis";
 		}
-		
-		init();
 	}
 	
 	public void rechercheErpParNom()
@@ -696,5 +758,17 @@ public class CreationDiagnosticManagedBean{
 	}
 	public void setNomErpEntre(String nomErpEntre) {
 		this.nomErpEntre = nomErpEntre;
+	}
+	public String getLabelErreur1() {
+		return labelErreur1;
+	}
+	public void setLabelErreur1(String labelErreur1) {
+		this.labelErreur1 = labelErreur1;
+	}
+	public String getLabelErreur2() {
+		return labelErreur2;
+	}
+	public void setLabelErreur2(String labelErreur2) {
+		this.labelErreur2 = labelErreur2;
 	}
 }

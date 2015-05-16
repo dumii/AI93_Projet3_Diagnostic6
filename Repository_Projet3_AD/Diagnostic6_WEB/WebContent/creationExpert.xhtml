@@ -1,132 +1,194 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:a4j="http://richfaces.org/a4j"
-      xmlns:rich="http://richfaces.org/rich"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<h:head>
-
-	<link rel="stylesheet"
-		href="//code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css" />
-	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-</h:head>
 
 <ui:composition template="/WEB-INF/Template2Diagnostic6.xhtml">
 	<ui:define name="title">Diagnostic 6 - Expert</ui:define>
 	<ui:define name="head">
-	
+		<link href="css/creationArtisan.css" rel="stylesheet" type="text/css" />
 	</ui:define>
+
+	<ui:define name="accordeon1">
+		Diagnostics avec des interventions en cours (#{mbArborescenceDiagnostic.listeDiagnosticsIntervEnCours.size()})
+	</ui:define>
+
+	<ui:define name="arborescence1">
+		<h:form>
+			<rich:tree id="tree1" nodeType="#{node.type}" var="node"
+				value="#{mbArborescenceDiagnostic.rootNodes1}" toggleType="client"
+				selectionType="ajax"
+				selectionChangeListener="#{mbArborescenceDiagnostic.selectionChanged}">
+				<rich:treeNode type="typeErp">
+                    #{node.name}
+                </rich:treeNode>
+				<rich:treeNode type="erp">
+                    #{node.name}
+                </rich:treeNode>
+				<rich:treeNode type="diagnostic">
+					<h:commandLink action="consultationDiagnostic"
+						value="#{node.intitule} - #{node.name} - #{node.idDiag}">
+						<f:param name="id"
+							value="#{mbArborescenceDiagnostic.currentSelection.idDiag}" />
+					</h:commandLink>
+				</rich:treeNode>
+			</rich:tree>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="accordeon2">
+		Diagnostics avec des interventions en attente (#{mbArborescenceDiagnostic.listeDiagnosticsIntervAttente.size()})
+	</ui:define>
+
+	<ui:define name="arborescence2">
+		<h:form>
+			<rich:tree id="tree2" nodeType="#{node.type}" var="node"
+				value="#{mbArborescenceDiagnostic.rootNodes2}" toggleType="client"
+				selectionType="ajax"
+				selectionChangeListener="#{mbArborescenceDiagnostic.selectionChanged}">
+				<rich:treeNode type="typeErp">
+                    #{node.name}
+                </rich:treeNode>
+				<rich:treeNode type="erp">
+                    #{node.name}
+                </rich:treeNode>
+				<rich:treeNode type="diagnostic">
+					<h:commandLink action="consultationDiagnostic"
+						value="#{node.intitule} - #{node.name} - #{node.idDiag}">
+						<f:param name="id"
+							value="#{mbArborescenceDiagnostic.currentSelection.idDiag}" />
+					</h:commandLink>
+				</rich:treeNode>
+			</rich:tree>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="accordeon3">
+		ERP archivés (#{mbArborescenceTravaux.listeERPIntervArchive.size()})
+	</ui:define>
+
+	<ui:define name="arborescence3">
+		<h:form>
+			<rich:tree id="tree3" nodeType="#{node.type}" var="node"
+				value="#{mbArborescenceDiagnostic.rootNodes3}" toggleType="client"
+				selectionType="ajax"
+				selectionChangeListener="#{mbArborescenceDiagnostic.selectionChanged}">
+				<rich:treeNode type="typeErp">
+                    #{node.name}
+                </rich:treeNode>
+				<rich:treeNode type="erp">
+                    #{node.name}
+                </rich:treeNode>
+				<rich:treeNode type="diagnostic">
+					<h:commandLink action="consultationDiagnostic"
+						value="#{node.intitule} - #{node.name} - #{node.idDiag}">
+						<f:param name="id"
+							value="#{mbArborescenceDiagnostic.currentSelection.idDiag}" />
+					</h:commandLink>
+				</rich:treeNode>
+			</rich:tree>
+		</h:form>
+	</ui:define>
+
 	<ui:define name="content">
 		<f:view>
-		
-		
 			<div id="content">
-			<h:form>
+				<h:form id="toto">
 
-			<h:panelGroup id="lblReponseAjax" layout="block" >	
-				
-				<div id="titreExpert">
-					<h2 style="margin-top: 2%;">
-						Gestion des Experts
-					</h2>
-				</div>
-				
-				<div id="contenuExpert">
-					<h:panelGrid columns="2" style="width:100%;">
-						
-						<h:panelGroup >
-							<div id="creationExpert">
-								<div id="titreCreation">
-									<h3>Enregistrer un expert</h3>
-								</div>
-								<h:panelGrid columns="2" style="width:100%;">
-									<h:outputText value="Nom : " style="color: #000063;" />
-									<h:inputText value="#{mbExpert.expert.nomExpert}" />
-									<h:outputText value="Prenom : " style="color: #000063;" />
-									<h:inputText value="#{mbExpert.expert.prenomExpert}" />
-									<h:outputText value="Téléphone : (0)" style="color: #000063;" />
-									<h:inputText value="#{mbExpert.expert.telExpert}" />
-									<h:outputText value="Mail : " style="color: #000063;" />
-									<h:inputText value="#{mbExpert.expert.mailExpert}" />
-									<h:outputText value="numéro de la rue : " style="color: #000063;" />
-									<h:inputText value="#{mbExpert.expert.numVoieExpert}" />
-									<h:outputText value="nom de la rue : " style="color: #000063;" />
-									<h:inputText value="#{mbExpert.expert.nomVoieExpert}" />
-									<h:outputText value="Code Postal : " style="color: #000063;" />
-									<h:inputText value="#{mbExpert.localisation.codePostal}" />
-									<h:outputText value="Localité : " style="color: #000063;" />
-									<h:inputText value="#{mbExpert.localisation.ville}" />
-								</h:panelGrid>
-								<div id="buttEnregistre">
-								<h:commandButton value="Enregister Expert" action="#{mbExpert.enregistrerExpert()}" style="color: #000063;"/>
-								</div>
+					<h:panelGroup id="lblReponseAjax" layout="block">
+
+						<div class="mini-barreEtat">
+							<h2>Gestion des Experts</h2>
+						</div>
+
+						<div id="InfoErpDiagnostic">
+
+							<h3>Enregistrer un expert</h3>
+
+							<div class="formulaire">
+								<h:outputLabel class="intitule" value="Nom : " />
+								<h:inputText value="#{mbExpert.expert.nomExpert}" class="valeur" />
+
+								<h:outputLabel class="intitule" value="Prénom : " />
+								<h:inputText value="#{mbExpert.expert.prenomExpert}"
+									class="valeur" />
+
+								<h:outputLabel class="intitule" value="Téléphone : " />
+								<h:inputText value="(0) #{mbExpert.expert.telExpert}"
+									class="valeur" />
+
+								<h:outputLabel class="intitule" value="Mail : " />
+								<h:inputText value="#{mbExpert.expert.mailExpert}"
+									class="valeur" />
+
 							</div>
-						</h:panelGroup>
-						<h:panelGroup></h:panelGroup>
-						<h:panelGroup></h:panelGroup>
-								
 
-						<h:panelGroup>
-							<div id="consultationExpert">
-								<div id="titreConsultation">
-									<h3>Experts enregistrés</h3>
+							<div class="formulaire">
+
+								<h:outputLabel class="intituleAdresse" value="Adresse : " />
+								<h:outputLabel class="adresse" value="Numéro de rue : " />
+								<h:inputText value="#{mbExpert.expert.numVoieExpert}"
+									class="valeur" />
+
+								<h:outputLabel class="adresse" value="Nom de rue : " />
+								<h:inputText value="#{mbExpert.expert.nomVoieExpert}"
+									class="valeur" />
+
+								<h:outputLabel class="adresse" value="Code postal : " />
+								<h:inputText value="#{mbExpert.localisation.codePostal}"
+									class="valeur" />
+
+								<h:outputLabel class="adresse" value="Ville : " />
+								<h:inputText value="#{mbExpert.localisation.ville}"
+									class="valeur" />
+							</div>
+							<h:commandLink action="#{mbExpert.enregistrerExpert()}"
+								class="enregistrer" value="Enregister Artisan" />
+						</div>
+
+						<div class="artisans">
+							<h3>Experts enregistrés</h3>
+
+							<ui:repeat var="expert" value="#{mbExpert.listeExpert}">
+
+								<div class="formulaireArtisan">
+
+									<h:outputLabel class="intitule" value="Nom : " />
+									<h:outputLabel class="valeur" value="#{expert.nomExpert}" />
+
+									<h:outputLabel class="intitule" value="Préom : " />
+									<h:outputLabel class="valeur" value="#{expert.prenomExpert}" />
+
+									<h:outputLabel class="intitule" value="Téléhones : " />
+									<h:outputLabel class="valeur" value="#{expert.telExpert}" />
+
+									<h:outputLabel class="intitule" value="Mail : " />
+									<h:outputLabel class="valeur" value="#{expert.mailExpert}" />
+
+									<h:outputLabel class="intitule" value="Adresse : " />
+									<h:outputLabel class="valeur"
+										value="#{expert.numVoieExpert} #{expert.nomVoieExpert} 
+									&lt;br /&gt; #{expert.localisation.codePostal} #{expert.localisation.ville}"
+										escape="false" />
+
+									<img
+										src="images/utilisateur/supprimer-utilisateur-icone-.38.38.png"
+										class="iconeSuppression" />
+									<h:commandLink action="#{mbExpert.supprimerExpert(expert)}"
+										value="Supprimer" />
+
 								</div>
-								<a4j:repeat	value="#{mbExpert.listeExpert}" var="expe" id="repeat">
-										<table id="tableExpert">
-											<tr>
-												<td class="titreTableExpert">Nom : </td>
-												<td>#{expe.nomExpert}</td>
-											</tr>
-											<tr>
-												<td class="titreTableExpert">Prenom : </td>
-												<td>#{expe.prenomExpert}</td>
-											</tr>
-											<tr>
-												<td class="titreTableExpert">Téléphone : (0)</td>
-												<td>#{expe.telExpert}</td>
-											</tr>
-											<tr>
-												<td class="titreTableExpert">Mail : </td>
-												<td>#{expe.mailExpert}</td>
-											</tr>
-											<tr>
-												<td class="titreTableExpert">Adresse : </td>
-												<td>#{expe.numVoieExpert} #{expe.nomVoieExpert}</td>
-											</tr>
-											<tr>
-												<td class="titreTableExpert">Localité : </td>
-												<td>#{expe.localisation.codePostal} #{expe.localisation.ville}</td>
-											</tr>
-										</table>
-										<div id="checkSuppression">
-											<div style="padding-left: 3.5%;"><img src="images/utilisateur/supprimer-utilisateur-icone-.38.38.png"/></div>
-											<div><h:commandLink action="#{mbExpert.supprimerExpert(expe)}" value="Supprimer" /></div>
-										</div>
-											<div class="ligne_horizontale" ></div>
-								</a4j:repeat>
-							</div>	
-						</h:panelGroup>
-						
-						
 
-					</h:panelGrid>
-				</div>
-			
-			</h:panelGroup>
-				
-			</h:form>
+							</ui:repeat>
+						</div>
+					</h:panelGroup>
+				</h:form>
 			</div>
-<link href="css/creationExpert.css" rel="stylesheet" type="text/css" />
-<script>
-$( "#radio" ).buttonset();
-$( "#accordion" ).accordion();
-$("button").button();
-
-
-</script>
 		</f:view>
-</ui:define>
+	</ui:define>
 </ui:composition>
 </html>

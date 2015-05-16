@@ -130,7 +130,9 @@
 									value="#{mbConsultationTravaux.monERP.typeErp.denominationTypeErp} #{mbConsultationTravaux.monERP.typeErp.typeErp}" />
 
 								<h:outputLabel class="intitule" value="Adresse : " />
-								<h:outputLabel class="valeur" value="#{mbConsultationTravaux.monERP.numVoieErp} #{mbConsultationTravaux.monERP.nomVoieErp} #{mbConsultationTravaux.monERP.localisation.codePostal} #{mbConsultationTravaux.monERP.localisation.ville}" escape="false" />
+								<h:outputLabel class="valeur" value="#{mbConsultationTravaux.monERP.numVoieErp} #{mbConsultationTravaux.monERP.nomVoieErp} 
+								&lt;br /&gt; #{mbConsultationTravaux.monERP.localisation.codePostal} #{mbConsultationTravaux.monERP.localisation.ville}" 
+								escape="false" />
 
 								<h:outputLabel class="intitule" value="Propriétaire : " />
 								<h:outputLabel class="valeur"

@@ -64,6 +64,7 @@ public class PlanningTravauxManagedBean {
 	private Date date2;
 	private Date date3;
 	private String moisAnnee;
+	private String labelErreur;
 	
 	
 	//Initialisation de la liste d'interventions au chargement de la page
@@ -89,6 +90,7 @@ public class PlanningTravauxManagedBean {
 	{
 		formater = new SimpleDateFormat("dd/MM/yyyy");
 		shortFormater = new SimpleDateFormat("dd/MM");
+		labelErreur = "";
 		
 		déterminerDates();
 
@@ -107,10 +109,7 @@ public class PlanningTravauxManagedBean {
 	
 	
 	public String ajouterIntervention (Intervention intervention, Anomalie anom) throws ParseException
-	{
-		System.out.println("tot");
-		System.out.println("intervention : " + intervention);
-		
+	{		
 		if (intervention.getCoutIntervention() != 0)
 		{
 			if (intervention.getDateDebutIntervention() != null)
@@ -121,8 +120,20 @@ public class PlanningTravauxManagedBean {
 					proxyIntervention.ajouterIntervention(intervention, anom);
 					initialisationDesDonnees();
 				}
+				else
+				{
+					labelErreur = "Tous les champs ne sont pas remplis";
+				}
 			}
-		}	
+			else
+			{
+				labelErreur = "Tous les champs ne sont pas remplis";
+			}
+		}
+		else
+		{
+			labelErreur = "Tous les champs ne sont pas remplis";
+		}
 		
 		return "";
 	}
@@ -482,6 +493,14 @@ public class PlanningTravauxManagedBean {
 
 	public void setListeTousEtats(List<EtatAvancementTravaux> listeTousEtats) {
 		this.listeTousEtats = listeTousEtats;
+	}
+
+	public String getLabelErreur() {
+		return labelErreur;
+	}
+
+	public void setLabelErreur(String labelErreur) {
+		this.labelErreur = labelErreur;
 	}
 
 

@@ -1,34 +1,13 @@
-/********************/
-/* Creation Artisan */
-/********************/
-
-#content
-{
-	margin-top : 7%;
-	margin-left: 22%;
-	width: 55%;
-}
-
-/***********************/
-/*  contenu du Profil  */
-/***********************/
-
-#titreArtisan
-{
-	background:#FEFEE2 ;
-	border:#cccccc solid 1px;
-	border-radius: 10px;
-	text-align: center;
-	height: 20px;
-	padding-bottom: 5%;
-}
+/*************************************/
+/* Mini Barre d'�tat Consultation Diagnostic */
+/*************************************/
 
 h2{
   	background-size: 100%;
-  	margin: 0 0 0 0;
+  	padding-left: 11px;
   	font-family: Arial, Verdana, sans-serif;
 	background-attachment: fixed;
-  	color: #000063;
+  	color: #D90000;
   	display: block;
   	font-size: 1.17em;
   	-webkit-margin-before: 1em;
@@ -36,110 +15,179 @@ h2{
   	-webkit-margin-start: 0px;
   	-webkit-margin-end: 0px;
   	font-weight: bold;
-  	margin: 0px;
+
+  	margin:0px;
+  	margin-top:3px;
 }
 
-#contenuArtisan
+#content
 {
+	margin-top : 7%;
+	margin-left: 20%;
+	width: 58.5%;;
+	background-color: white;
+  	border: #cccccc solid 1px;
+  	padding-bottom:5px;
+}
+
+.mini-barreEtat
+{
+	background-image:linear-gradient(#f9f9f9, #f1f1f1);
+	border:#cccccc solid 1px;
+	height: 27px;
+}
+
+/*************************************/
+/* Artisan */
+/*************************************/
+#InfoErpDiagnostic,
+.artisans
+{
+	background: ghostwhite;
+	margin-left: 1%;
+	width: 97.5%;
+	margin-top: 16px;
+	border:#cccccc solid 1px;
+	display:inline-block;
+}
+
+#InfoErpDiagnostic h3,
+.artisans h3
+{
+	margin: 0px;
+	background-image:linear-gradient(#f9f9f9, #f1f1f1);
+	text-align: left;
+	color: CornflowerBlue;
+	font-size: 1em;
+	height: 27px;
+}
+
+.formulaire
+{
+	margin-top:10px;
 	font-size: small;
+	float:left;
+	width:49%;
+	margin-left:5px;
 }
 
-/**********************/
-/*  Creation Artisan  */
-/**********************/
-
-
-
-#creationArtisan
+.formulaire label
 {
-	/*margin-top: -2221%;*/
-	margin-top: 2%;
-	background-image:linear-gradient(#FEFEE2, #E5EBEF);
-	border:#cccccc solid 1px;
-	border-radius: 10px;
-	padding-bottom: 4%;
-	width:352px;
-}
-
-#titreCreation
-{
-	background:#FEFEE2 ;
-	padding-left:1%;
-	font-size: 15px;
-	color: #000063;
+	font-size:11px;
+	padding-bottom:3px;
+	padding-top:3px;
+	display:inline-block;
 	font-family: Arial, Verdana, sans-serif;
+	vertical-align:top;	
 }
 
-#buttEnregistre
+.intituleAdresse
 {
-	margin-top:2%;
-	margin-left:43%;
+	font-weight:bold;
+	width:100%;
 }
 
-/**************************/
-/*  Consultation Artisan  */
-/**************************/
-#consultationArtisan
+.intitule
 {
-	margin-top:-85%;
-	background-image:linear-gradient(#FEFEE2, #E5EBEF);
-	border:#cccccc solid 1px;
-	border-radius: 10px;
-	padding-bottom: 1%;
-	width:352px;
+	font-weight:bold;
+	width:50%;
 }
 
-#buttSuppr
+.adresse
+{
+	width:44%;
+	padding-left:20px;
+}
+
+.valeur
+{
+	width:49%;
+}
+
+.formulaire select
+{
+	width:49.6%;
+}
+
+.formulaire input[type="submit"]
+{
+	margin-left:50px;
+}
+
+.enregistrer {
+  display:inline-block;
+  background: #3c9647;
+
+  background-image: -webkit-linear-gradient(top, #3c9647, #237a3f);
+  background-image: -moz-linear-gradient(top, #3c9647, #237a3f);
+  background-image: -ms-linear-gradient(top, #3c9647, #237a3f);
+  background-image: -o-linear-gradient(top, #3c9647, #237a3f);
+  background-image: linear-gradient(to bottom, #3c9647, #237a3f);
+  
+  -webkit-border-radius: 5;
+  -moz-border-radius: 5;
+  border-radius: 3px;
+  
+  padding-top:4px;
+  padding-left:5px;
+  padding-right:5px;
+  margin-left:5px;
+  margin-bottom:5px;
+  margin-top:10px;
+
+  height:20px;
+
+  font-family: Arial;
+  color: #ffffff;
+  font-size: small;
+  text-decoration: none;
+}
+
+.enregistrer:hover {
+  background: #3ea83e;
+  background-image: -webkit-linear-gradient(top, #3ea83e, #32a349);
+  background-image: -moz-linear-gradient(top, #3ea83e, #32a349);
+  background-image: -ms-linear-gradient(top, #3ea83e, #32a349);
+  background-image: -o-linear-gradient(top, #3ea83e, #32a349);
+  background-image: linear-gradient(to bottom, #3ea83e, #32a349);
+  text-decoration: none;
+  color: #ffffff;
+}
+
+a:visited 
+{
+	color: #ffffff !important;
+}
+
+/*************************************/
+/* Liste Artisans */
+/*************************************/
+.formulaireArtisan
+{
+	margin-top:10px;
+	padding-bottom:20px;
+	margin-bottom:20px;
+	font-size: small;
+	width:98%;
+	margin-left:5px;
+	border-bottom:#333366 solid 1px;
+}
+
+.formulaireArtisan label
+{
+	display:inline-block;
+	margin:5px;
+	width:35%;
+}
+
+.iconeSuppression
+{
+	margin-left:20%;
+	display:inline-block;
+}
+
+.formulaireArtisan a
 {
 	float:right;
-	padding-right:5%;
+	display:inline-block;
 }
-
-#tableArtisan
-{
-	margin-top:2%;
-}
-
-#titreConsultation
-{
-	background:#FEFEE2 ;
-	padding-left:1%;
-	font-size: 15px;
-	color: #000063;
-	font-family: Arial, Verdana, sans-serif;
-	
-}
-
-#typeArtisanTable1
-{
-	color: #000063;
-	width: 127px;
-	background:#C0DEDE;
-}
-#typeArtisanTable2
-{
-	color: #000063;
-	width: 221px;
-	background:#C0DEDE;
-}
-
-.titreTableArtisan
-{
-	color: #000063;
-	width: 127px;
-}
-
-.ligne_horizontale
-{
-    width:280px;
-    border-bottom:1px solid #cccccc;
-    height:5px;
-    margin-left:10%;
-}
-
-#checkSuppression
-{
-	color: #000063;
-	padding-left:37%;
-}
-
