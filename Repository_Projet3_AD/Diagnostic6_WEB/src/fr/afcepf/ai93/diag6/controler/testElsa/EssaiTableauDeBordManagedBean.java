@@ -141,7 +141,7 @@ public class EssaiTableauDeBordManagedBean {
 							nombreTermines++;
 						}
 						
-						if (idEtatAvancement == 3 || idEtatAvancement == 4)
+						if (idEtatAvancement == 3)
 						{
 							nombreEnCours++;
 						}
