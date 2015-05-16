@@ -133,18 +133,16 @@
 												action="#{mbDonneesGenerales.modificationDiagnostic()}"
 												value="#{mbDonneesGenerales.clickChangeBouton()}"
 												id="modifAnom">
-												<f:attribute name="style"
-																value="display:#{mbDonneesGenerales.isGestConnected()};"></f:attribute>
-											</h:commandButton>
+												
+							</h:commandButton>
 											<h:commandButton
 												action="#{mbDonneesGenerales.annulerModifDiagnostic()}"
 												value="Annuler" id="annulModif" oncomplete="ouverture()">
 												<f:attribute name="disabled"
 													value="#{mbDonneesGenerales.isEnableDiag()}">
 													</f:attribute>
-													<f:attribute name="style"
-																value="display:#{mbDonneesGenerales.isGestConnected()};"></f:attribute>
-											</h:commandButton>
+													
+</h:commandButton>
 
 										</h:panelGroup>
 									</h3>
@@ -339,22 +337,19 @@
 															action="#{mbDonneesGenerales.modificationAnomalie(o)}"
 															value="#{mbDonneesGenerales.clickChangeBouton(o)}"
 															id="modifAnom">
-															<f:attribute name="style"
-																value="display:#{mbDonneesGenerales.isGestConnected()};"></f:attribute>
+															
 														</h:commandButton>
 														<h:commandButton
 															action="#{mbDonneesGenerales.annulerModifAnomalie(o)}"
 															value="Annuler" id="annulModif">
 															<f:attribute name="disabled"
 																value="#{mbDonneesGenerales.isEnable(o)}"></f:attribute>
-																<f:attribute name="style"
-																value="display:#{mbDonneesGenerales.isGestConnected()};"></f:attribute>
+																
 														</h:commandButton>
 														<h:commandButton
 															action="#{mbDonneesGenerales.suppressionAnomalie(o)}"
 															value="Suppression">
-															<f:attribute name="style"
-																value="display:#{mbDonneesGenerales.isGestConnected()};"></f:attribute>
+															
 														</h:commandButton>
 													</div>
 												</h:panelGroup>
