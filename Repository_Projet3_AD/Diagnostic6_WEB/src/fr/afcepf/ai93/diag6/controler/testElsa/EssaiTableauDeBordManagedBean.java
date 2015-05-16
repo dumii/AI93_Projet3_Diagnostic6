@@ -57,10 +57,10 @@ public class EssaiTableauDeBordManagedBean {
 	private List<TypeDiagnostic> listeTypesDiagnostic;
 	private int idTypeDiagSelectionne;
 	
-	private List<Integer> listeIndicateur;
+	private List<Item> listeIndicateur;
 	private int idIndicateurSelectionne;
-	
-	private List<EtatAvancementTravaux> listeEtatAvancement;
+
+	private List<Item> listeEtatAvancement;
 	private int idEtatAvancement;
 	
 	
@@ -76,16 +76,18 @@ public class EssaiTableauDeBordManagedBean {
 		//Filtres
 		listeTypes = proxyERP.recupererListeTypeERP();
 		listeTypesDiagnostic = proxyDiagnostic.recupereTypeDiagnostic();
-		listeEtatAvancement = proxyIntervention.recupererTousEtats();
-		//L'état suspendu n'est pas représenté sur le tableau de bord
-		//On le retire de la liste donc
-		listeEtatAvancement.remove(1);
+
+		listeEtatAvancement = new ArrayList<>();
+		listeEtatAvancement.add(new Item("Travaux terminés", 1));
+		listeEtatAvancement.add(new Item("Travaux en cours", 2));
+		listeEtatAvancement.add(new Item("Travaux en attente", 3));
+		listeEtatAvancement.add(new Item("Pas de travaux", 5));
 		
 		listeIndicateur = new ArrayList<>();
-		listeIndicateur.add(1);
-		listeIndicateur.add(2);
-		listeIndicateur.add(3);
-		listeIndicateur.add(4);
+		listeIndicateur.add(new Item("Aux normes", 4));
+		listeIndicateur.add(new Item("Non prioritaire", 3));
+		listeIndicateur.add(new Item("Prioritaire", 2));
+		listeIndicateur.add(new Item("Critique", 1));
 		
 		//Filtres sélectionnés
 		idEtatAvancement = 0;
@@ -384,7 +386,7 @@ public class EssaiTableauDeBordManagedBean {
 		if (nombreTotal == 0)
 		{
 			//Pas de travaux
-			return 0;
+			return 5;
 		}
 		else if (nombreTermines == nombreTotal)
 		{
@@ -394,12 +396,12 @@ public class EssaiTableauDeBordManagedBean {
 		else if (nombreEnCours > 0)
 		{
 			//Cours
-			return 3;
+			return 2;
 		}
 		else
 		{
 			//Travaux en attente ou suspendus
-			return 2;
+			return 3;
 		}
 	}
 	
@@ -606,14 +608,6 @@ public class EssaiTableauDeBordManagedBean {
 		this.idTypeDiagSelectionne = idTypeDiagSelectionne;
 	}
 
-	public List<Integer> getListeIndicateur() {
-		return listeIndicateur;
-	}
-
-	public void setListeIndicateur(List<Integer> listeIndicateur) {
-		this.listeIndicateur = listeIndicateur;
-	}
-
 	public int getIdIndicateurSelectionne() {
 		return idIndicateurSelectionne;
 	}
@@ -622,20 +616,56 @@ public class EssaiTableauDeBordManagedBean {
 		this.idIndicateurSelectionne = idIndicateurSelectionne;
 	}
 
-	public List<EtatAvancementTravaux> getListeEtatAvancement() {
-		return listeEtatAvancement;
-	}
-
-	public void setListeEtatAvancement(
-			List<EtatAvancementTravaux> listeEtatAvancement) {
-		this.listeEtatAvancement = listeEtatAvancement;
-	}
-
 	public int getIdEtatAvancement() {
 		return idEtatAvancement;
 	}
 
 	public void setIdEtatAvancement(int idEtatAvancement) {
 		this.idEtatAvancement = idEtatAvancement;
+	}
+	
+	public List<Item> getListeIndicateur() {
+		return listeIndicateur;
+	}
+
+	public void setListeIndicateur(List<Item> listeIndicateur) {
+		this.listeIndicateur = listeIndicateur;
+	}
+
+	public List<Item> getListeEtatAvancement() {
+		return listeEtatAvancement;
+	}
+
+	public void setListeEtatAvancement(List<Item> listeEtatAvancement) {
+		this.listeEtatAvancement = listeEtatAvancement;
+	}
+
+	//Classe interne
+	public class Item{
+
+		private String label;
+		private int value;
+
+		public Item(String label, int value)
+		{
+			this.label = label;
+			this.value = value;
+		}
+
+		public String getLabel() {
+			return label;
+		}
+
+		public void setLabel(String label) {
+			this.label = label;
+		}
+
+		public int getValue() {
+			return value;
+		}
+
+		public void setValue(int value) {
+			this.value = value;
+		}
 	}
 }

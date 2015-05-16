@@ -64,8 +64,8 @@
 							<f:selectItem itemLabel="-- Filtrer par niveau d'indicateur --"
 										  itemValue="0"/>
 							<f:selectItems var="type" value="#{mbTestTableauBord.listeIndicateur}"
-										  itemLabel="#{type}"
-										  itemValue="#{type}"/>
+										  itemLabel="#{type.label}"
+										  itemValue="#{type.value}"/>
 							<a4j:ajax event="change"
 									  listener="#{mbTestTableauBord.filtresERP()}"
 									  render="onTouchePas"/>
@@ -76,8 +76,8 @@
 							<f:selectItem itemLabel="-- Filtrer par état d'avancement --"
 										  itemValue="0"/>
 							<f:selectItems var="type" value="#{mbTestTableauBord.listeEtatAvancement}"
-										  itemLabel="#{type.intituleEtatAvancement}"
-										  itemValue="#{type.idEtatAvancement}"/>
+										  itemLabel="#{type.label}"
+										  itemValue="#{type.value}"/>
 							<a4j:ajax event="change"
 									  listener="#{mbTestTableauBord.filtresERP()}"
 									  render="onTouchePas"/>
