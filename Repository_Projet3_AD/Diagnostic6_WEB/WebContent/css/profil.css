@@ -1,136 +1,196 @@
 /*************************************/
-/* Bordure à supprimer  */
+/* Mini Barre d'ï¿½tat Consultation Diagnostic */
 /*************************************/
 
-/***********/
-/* Content */
-/***********/
+h2{
+  	background-size: 100%;
+  	padding-left: 11px;
+  	font-family: Arial, Verdana, sans-serif;
+	background-attachment: fixed;
+  	color: #D90000;
+  	display: block;
+  	font-size: 1.17em;
+  	-webkit-margin-before: 1em;
+  	-webkit-margin-after: 1em;
+  	-webkit-margin-start: 0px;
+  	-webkit-margin-end: 0px;
+  	font-weight: bold;
+
+  	margin:0px;
+  	margin-top:3px;
+}
 
 #content
 {
-	margin-top : 10%;
-	margin-left: 10%;
-	width: 63%;
-	/*
+	margin-top : 7%;
+	margin-left: 20%;
+	width: 58.5%;;
 	background-color: white;
   	border: #cccccc solid 1px;
-  	*/
+  	padding-bottom:5px;
 }
 
-/***********************/
-/*  contenu du Profil  */
-/***********************/
-
-#contenuProfil
+.mini-barreEtat
 {
-	background-image:linear-gradient(#FEFEE2, #f1f1f1);
+	background-image:linear-gradient(#f9f9f9, #f1f1f1);
 	border:#cccccc solid 1px;
-	border-radius: 10px;
-	padding-bottom: 1%;
+	height: 27px;
+	/*position: fixed;*/
+}
+
+.btn {
+  background: #3c9647;
+
+  background-image: -webkit-linear-gradient(top, #3c9647, #237a3f);
+  background-image: -moz-linear-gradient(top, #3c9647, #237a3f);
+  background-image: -ms-linear-gradient(top, #3c9647, #237a3f);
+  background-image: -o-linear-gradient(top, #3c9647, #237a3f);
+  background-image: linear-gradient(to bottom, #3c9647, #237a3f);
+  
+  -webkit-border-radius: 5;
+  -moz-border-radius: 5;
+  border-radius: 3px;
+  
+  padding-bottom:1px;
+  padding-top:4px;
+  padding-left:5px;
+  padding-right:5px;
+  margin-top:-2px;
+  
+  float:right;
+  height:20px;
+
+  font-family: Arial;
+  color: #ffffff;
+  font-size: small;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #3ea83e;
+  background-image: -webkit-linear-gradient(top, #3ea83e, #32a349);
+  background-image: -moz-linear-gradient(top, #3ea83e, #32a349);
+  background-image: -ms-linear-gradient(top, #3ea83e, #32a349);
+  background-image: -o-linear-gradient(top, #3ea83e, #32a349);
+  background-image: linear-gradient(to bottom, #3ea83e, #32a349);
+  text-decoration: none;
+  color: #ffffff;
+}
+
+a:visited 
+{
+	color: #ffffff !important;
+}
+
+/*************************************/
+/* Erp */
+/*************************************/
+#InfoErpDiagnostic
+{
+	background: ghostwhite;
+	margin-left: 1%;
+	width: 97.5%;
+	margin-top: 16px;
+	border:#cccccc solid 1px;
+	display:inline-block;
+}
+
+#InfoErpDiagnostic h3
+{
+	margin: 0px;
+	background-image:linear-gradient(#f9f9f9, #f1f1f1);
+	text-align: left;
+	color: CornflowerBlue;
+	font-size: 1.17em;
+	height: 27px;
+}
+
+.formulaire
+{
+	margin-top:10px;
 	font-size: small;
+	float:left;
+	width:49%;
+	margin-left:5px;
+	height:120px;
 }
 
-#titreProfil
+.formulaire label
 {
-	background:#FEFEE2 ;
-	margin-top:-1%;
-	color: #000063;
-	/*font-family: Corbel;*/
+	font-size:11px;
+	padding-bottom:3px;
+	padding-top:3px;
+	display:inline-block;
 	font-family: Arial, Verdana, sans-serif;
-	padding-left:1%;
-	font-size: 17px;
+	vertical-align:top;
+	margin-top:5px;
+	margin-bottom:5px;
+	width:50%;
 }
 
-.ligne_verticale
+.formulaire:first-of-type
 {
-    width:5px;
-    border-left:1px solid #cccccc;
-    height:130px;
+	border-right:gray solid 1px;
+	border-image: -webkit-linear-gradient(top, ghostwhite 10%, #B5D5FF 0%) 1 repeat;
+	border-image: -webkit-linear-gradient(bottom, ghostwhite 5%, #B5D5FF 0%) 1 repeat;
+	border-left:0px;
+	border-bottom:0px;
+	border-top:0px;
 }
 
-#enrNewCoor
+.intitule
 {
-	background:#FEFEE2 ;
-	background-color:#FEFEE2;
-	width:193px;
-	height:20px;
-	color: #000063;
-	/*font-family: Corbel;*/
-	font-family: Arial, Verdana, sans-serif;
-	background-image: none;
-	font-size: 15px;
+	font-weight:bold;
 }
 
 
 
-.saveModif
-{
-	background-color:#FEFEE2 ;
-	background:#FEFEE2;
-	width:193px;
-	height:20px;
-	color: #000063;
-	background-image: none;
-	font-size: 15px;
+
+.saveModif {
+  -webkit-border-radius: 2;
+  -moz-border-radius: 2;
+  border-radius: 2px;
+  font-family: Arial;
+  text-align:center;
+  color: #0073ea;
+  font-size: 15px;
+  background: #f6f6f6;
+  padding: 5px 10px 5px 10px;
+  border: solid #dddddd 1px;
+  text-decoration: none;
+  font-weight:bold;
+
+  display:inline-block;
+  width:50%;
+  margin-left:22%;
+  margin-bottom:10px;
+
 }
 
-#buttContenuProfil
-{
-	width: 100%;
+.saveModif:hover {
+  background: #0073ea;
+  text-decoration: none;
+  border-radius: 4px;
+  color:white;
 }
 
-/*************************/
-/*  Gestion Notification */
-/*************************/
-.gestionNotifFavoris
+a:visited 
 {
-	/*float:left;*/
-	width: 100%;
-	margin-top:2%;
+	color: #0073ea !important;
+	text-decoration: none !important;
 }
 
-#gestionNotification
+.formulaire2 a
 {
-	background-image:linear-gradient(#FEFEE2, #f1f1f1);
-	border:#cccccc solid 1px;
-	width: 384px;
-	/* width: 97%; */
-	
-	border-radius: 10px;
-	
+	margin-bottom:20px;
 }
 
-#titreNotif
+.formulaire2
 {
-	background:#FEFEE2 ;
-	margin-top:-1%;
-	color: #000063;
-	/*font-family: Corbel;*/
-	font-family: Arial, Verdana, sans-serif;
-	padding-left:1%;
-}
-
-/********************/
-/*  Gestion Favoris */
-/********************/
-
-#gestionFavoris
-{
-	background-image:linear-gradient(#FEFEE2, #f1f1f1);
-	border:#cccccc solid 1px;
-	/*margin-left:3%;*/
-	width: 384px;
-	/* width: 97%; */
-	
-	border-radius: 10px;
-}
-
-#titreFavoris
-{
-	background:#FEFEE2 ;
-	margin-top:-1%;
-	color: #000063;
-	/*font-family: Corbel;*/
-	font-family: Arial, Verdana, sans-serif;
-	padding-left:1%;
+	margin-top: x;
+	font-size: small;
+	float:left;
+	margin-left:5px;
+	margin-bottom:5px;
+	display:inline-block;
 }

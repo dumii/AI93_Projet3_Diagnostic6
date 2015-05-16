@@ -1,10 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:a4j="http://richfaces.org/a4j"
-      xmlns:rich="http://richfaces.org/rich"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
 
@@ -13,103 +13,102 @@
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 </h:head>
 
-<ui:composition template="/WEB-INF/Template4Diagnostic6.xhtml">
+<ui:composition template="/WEB-INF/Template3Diagnostic6.xhtml">
 	<ui:define name="title">Diagnostic 6 - Profil</ui:define>
 	<ui:define name="head">
-	
+		<link href="css/profil.css" rel="stylesheet" type="text/css" />
 	</ui:define>
+
+
 	<ui:define name="content">
+
 		<f:view>
-		
-		
+
 			<div id="content">
-			<h:form>
-			
-						<h:inputText value="#{mbUtilisateur.idUtil}" />
-						<a4j:commandLink value="Recuperer utilisateur"
-							action="#{mbUtilisateur.recupUtilisateur()}"/>
+				<h:form id="toto">
+					<f:event listener="#{mbConsultationERP.loadERP()}"
+						type="preRenderView" />
+					<h:panelGroup id="lblReponseAjax" layout="block">
 
+						<div id="InfoErpDiagnostic">
 
-			<h:panelGroup id="lblReponseAjax" layout="block" >	
-			
-				<div id="contenuProfil">
+							<h3>Profil Personnel</h3>
 
-					<div id="titreProfil">
-						<h3>
-							Profil Personnel
-							<!-- <h:outputText value="#{mbUtilisateur.nomProfil}" /> -->
-						</h3>
-					</div>
-					<h:panelGrid columns="5" style="width:100%;">
-					
-					
-						<h:panelGrid columns="2" id="donneeCoordonnee" style=" width:260px;">
-							<h:outputText value="Nom : " style="color: #000063; "/>
-							<h:outputText value="#{mbUtilisateur.utilisateur.nomUtilisateur}" />
-							<h:outputText value="Prénom : " style="color: #000063; "/>
-							<h:outputText value="#{mbUtilisateur.utilisateur.prenomUtilisateur}" />
-							<h:outputText value="Téléphone : " style="color: #000063; "/>
-							<h:inputText value="#{mbUtilisateur.utilisateur.telUtilisateur}" />
-							<h:outputText value="Mail : " style="color: #000063; text-align:right;"/>
-							<h:inputText value="#{mbUtilisateur.utilisateur.emailUtilisateur}" />
-						</h:panelGrid>
-						<div class="ligne_verticale" ></div>
-						<h:panelGrid columns="2" id="donneeCompte" style="width:260px;">
-								<h:outputText value="Login : " style="color: #000063;"/>
-								<h:outputText value="#{mbUtilisateur.utilisateur.loginUtilisateur}" />
-								<h:outputText value="Mot de Passe : " style="color: #000063; "/>
-								<h:outputText value="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"/>
-								<h:outputText value="Changer MdP : " style="color: #000063; "/>
-								<h:inputSecret value="#{mbUtilisateur.utilisateur.motDePasseUtilisateur}"/>
-						</h:panelGrid>
-						<div class="ligne_verticale" ></div>
-						<h:panelGrid columns="1" id="donneeNote" style="text-align:left; width:260px;">
-								<h:outputText value="Enregistré depuis le : " style="color: #000063;"/>
-								<h:outputText value="#{mbUtilisateur.formater.format(mbUtilisateur.utilisateur.dateEnregistrement)}" />
-								<h:outputText value="Notes Personnelles : " style="color: #000063;"/>
-								<textarea  />
-						</h:panelGrid>
+							<div class="formulaire">
+								<h:outputLabel class="intitule" value="Nom : " />
+								<h:outputLabel class="valeur"
+									value="#{mbUtilisateur.utilisateur.nomUtilisateur}" />
 
-						</h:panelGrid>
-						<h:panelGrid columns="3" style="width:100%; text-align:center; margin-top:1%;" styleClass="buttContenuProfil">
-							<h:commandButton action="#{mbUtilisateur.modificationUtilisateur()}" value="Sauvegarder Modification"  styleClass="saveModif" />
-						</h:panelGrid>
-				</div>
-				
-				<h:panelGrid columns="2" styleClass="gestionNotifFavoris" style="width:100%;">
-					<h:panelGrid style="width:100%;">
-						<div id="gestionNotification">
-							<div id="titreNotif">
-								<h3>
-									Gestion des Notifications :
-								</h3>
+								<h:outputLabel class="intitule" value="Prénom : " />
+								<h:outputLabel class="valeur"
+									value="#{mbUtilisateur.utilisateur.prenomUtilisateur}" />
+
+								<h:outputLabel class="intitule" value="Téléphone : " />
+								<h:inputText class="valeur"
+									value="#{mbUtilisateur.utilisateur.telUtilisateur}" />
+
+								<h:outputLabel class="intitule" value="Adresse mail : " />
+								<h:inputText class="valeur"
+									value="#{mbUtilisateur.utilisateur.emailUtilisateur}" />
+
+							</div>
+
+							<div class="formulaire">
+								<h:outputLabel class="intitule" value="Enregistré depuis le : " />
+								<h:outputLabel class="valeur"
+									value="#{mbUtilisateur.utilisateur.dateEnregistrement}" />
+
+								<h:outputLabel class="intitule" value="Login : " />
+								<h:outputLabel class="valeur"
+									value="#{mbUtilisateur.utilisateur.loginUtilisateur}" />
+
+								<h:outputLabel class="intitule"
+									value="Changer le mot de passe : " />
+								<input type="password" class="valeur"
+									value="#{mbUtilisateur.utilisateur.motDePasseUtilisateur}" />
+							</div>
+
+							<h:commandLink
+								action="#{mbUtilisateur.modificationUtilisateur()}"
+								value="Sauvegarder Modification" class="saveModif" />
+						</div>
+
+						<div id="InfoErpDiagnostic">
+
+							<h3>Notifications</h3>
+
+							<div class="formulaire2">
+								<ui:repeat var="notif" value="#{mbNotifs.listeNotifs}">
+									<h:panelGroup layout="block"
+										rendered="#{mbNotifs.user.utilisateur.profilUtilisateur.idProfil==2}">
+										<h:outputText
+											value="L'intervention #{notif.intervention.idIntervention} est terminée" />
+										<br />
+										<h:commandLink value="Voir le chantier #{notif.erp.nomErp}"
+											action="planningTravaux">
+											<f:param name="id" value="#{notif.erp.idErp}"></f:param>
+										</h:commandLink>
+										
+									</h:panelGroup>
+										<br />
+										<br />
+									<h:panelGroup layout="block"
+										rendered="#{mbNotifs.user.utilisateur.profilUtilisateur.idProfil==3}">
+										<h:outputText value="Un nouveau diagnostic a été ajouté" />
+										<br />
+										<h:commandLink
+											value="Voir le diagnostic : #{notif.diagnostic.intituleDiagnostic}"
+											action="consultationDiagnostic">
+											<f:param name="id" value="#{notif.diagnostic.idDiagnostic}"></f:param>
+										</h:commandLink>
+									</h:panelGroup>
+								</ui:repeat>
 							</div>
 						</div>
-					</h:panelGrid>
-					<h:panelGrid style="width:100%;">
-						<div id="gestionFavoris">
-							<div id="titreFavoris">
-								<h3>
-									Gestion des Favoris :
-								</h3>
-							</div>
-						
-						</div>
-					</h:panelGrid>
-				</h:panelGrid>
-				
-			</h:panelGroup>
-			</h:form>
+					</h:panelGroup>
+				</h:form>
 			</div>
-<link href="css/profil.css" rel="stylesheet" type="text/css" />
-<script>
-$( "#radio" ).buttonset();
-$( "#accordion" ).accordion();
-$("button").button();
-
-
-</script>
 		</f:view>
-</ui:define>
+	</ui:define>
 </ui:composition>
 </html>

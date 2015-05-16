@@ -60,18 +60,12 @@ public class UtilisateurManagedBean implements Serializable {
 
 	private String message = "";
 	private Utilisateur utilisateur = new Utilisateur();
-	//private Utilisateur umodif = new Utilisateur();
 	
 	private int idUtil;
 	
 	@PostConstruct
 	private void init() {
-		// idUtil=1;
 		formater = new SimpleDateFormat("dd/MM/yyyy");
-		// recupUtilisateur();
-		//System.out.println("Coucou  "+utilisateur.getDateEnregistrement());
-		//System.out.println(formater.format(utilisateur.getDateEnregistrement()));
-		
 	}
 
 
@@ -135,33 +129,11 @@ public class UtilisateurManagedBean implements Serializable {
 		ec.invalidateSession();
 		ec.redirect("http://localhost:9090/Diagnostic6_WEB/Accueil.jsf");
 	}
-	
-//	public void recupUtilisateur()
-//	{
-//		System.out.println("1111111111111111111111 je suis entré dans ma méthode 1111111111111111111111111");
-//		utilisateur = proxyBusinessUtilisateur.recupereUtilisateur(idUtil);
-//		System.out.println("2222222222222222222222 je suis sorti de ma méthode 222222222222222222222222");
-//	}
+
 	
 	public void modificationUtilisateur(){
-
-		System.out.println("33333333333333333333333 je modifie l'utilisateur 33333333333333333333333");
-
 		proxyBusinessUtilisateur.modifierUtilisateur(utilisateur);
-
-
-//		System.out.println("je modifie l'utilisateur");
-//		System.out.println(umodif.getIdUtilisateur() + " = " + utilisateur.getIdUtilisateur());
-//		if(umodif.getIdUtilisateur() != utilisateur.getIdUtilisateur()) {
-//			System.out.println("Utilisateu pris en compte pour la modification : " + utilisateur.getIdUtilisateur());
-//			umodif = utilisateur;
-//		} else {
-//			System.out.println("je passe dans le else");
-//			proxyBusinessUtilisateur.modifierUtilisateur(utilisateur);
-//			umodif = new Utilisateur();
-//			//recupUtilisateur();
 	}
-	
 	
 ////////////////////////////// GETTER / SETTER ///////////////////////////////
 
@@ -233,15 +205,4 @@ public class UtilisateurManagedBean implements Serializable {
 	public void setShortFormater(SimpleDateFormat shortFormater) {
 		this.shortFormater = shortFormater;
 	}
-
-
-//	public Utilisateur getUmodif() {
-//		return umodif;
-//	}
-//
-//
-//	public void setUmodif(Utilisateur umodif) {
-//		this.umodif = umodif;
-//	}
-
 }
