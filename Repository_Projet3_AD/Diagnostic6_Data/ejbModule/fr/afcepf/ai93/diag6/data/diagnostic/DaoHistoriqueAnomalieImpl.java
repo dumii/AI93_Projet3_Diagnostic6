@@ -60,6 +60,10 @@ public class DaoHistoriqueAnomalieImpl implements IDaoHistoriqueAnomalie {
 		
 		if (!descriptionInitiale.equals(descriptionNouvelle))
 		{
+			historique = new HistoriqueAnomalie();
+			historique.setAnomalie(anomalie);
+			historique.setUtilisateur(user);
+			historique.setDateModification(new Date());
 			historique.setTypeModification(MODIF_DESCRIPTION);
 			historique.setAncienneDonnee(descriptionInitiale);
 			historique.setNouvelleDonnee(descriptionNouvelle);
@@ -71,6 +75,10 @@ public class DaoHistoriqueAnomalieImpl implements IDaoHistoriqueAnomalie {
 		
 		if (!preconisationInitiale.equals(preconisationNouvelle))
 		{
+			historique = new HistoriqueAnomalie();
+			historique.setAnomalie(anomalie);
+			historique.setUtilisateur(user);
+			historique.setDateModification(new Date());
 			historique.setTypeModification(MODIF_PRECONISATION);
 			historique.setAncienneDonnee(preconisationInitiale);
 			historique.setNouvelleDonnee(preconisationNouvelle);
@@ -82,6 +90,10 @@ public class DaoHistoriqueAnomalieImpl implements IDaoHistoriqueAnomalie {
 		
 		if (coutInitialEstime != coutNouveauEstime)
 		{
+			historique = new HistoriqueAnomalie();
+			historique.setAnomalie(anomalie);
+			historique.setUtilisateur(user);
+			historique.setDateModification(new Date());
 			historique.setTypeModification(MODIF_COUT_ESTIME);
 			historique.setAncienneDonnee(""+coutInitialEstime);
 			historique.setNouvelleDonnee(""+coutNouveauEstime);
