@@ -44,10 +44,14 @@ public class HistoriqueTravauxManagedBean {
 	private Erp monERP;
 	private List<HistoriqueIntervention> listeInterventions;
 	
+	private SimpleDateFormat formater;
+	private SimpleDateFormat shortFormater;
+	
 	@PostConstruct
 	public void init()
 	{
-
+		formater = new SimpleDateFormat("dd/MM/yyyy");
+		shortFormater = new SimpleDateFormat("dd/MM");
 	}
 
 	//Sélection de l'ERP ou chargement de l'ERP en paramètres
@@ -55,7 +59,6 @@ public class HistoriqueTravauxManagedBean {
 		String param = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
 		if (param != null && !param.equals(""))
 		{
-			System.out.println("coucou");
 			int idERP2 = Integer.parseInt(param);
 			monERP = proxyERP.recupererErpParId(idERP2);
 			initialisationDesDonnees();
@@ -104,5 +107,29 @@ public class HistoriqueTravauxManagedBean {
 	public void setListeInterventions(
 			List<HistoriqueIntervention> listeInterventions) {
 		this.listeInterventions = listeInterventions;
+	}
+
+	public IBusinessIntervention getProxyIntervention() {
+		return proxyIntervention;
+	}
+
+	public void setProxyIntervention(IBusinessIntervention proxyIntervention) {
+		this.proxyIntervention = proxyIntervention;
+	}
+
+	public SimpleDateFormat getFormater() {
+		return formater;
+	}
+
+	public void setFormater(SimpleDateFormat formater) {
+		this.formater = formater;
+	}
+
+	public SimpleDateFormat getShortFormater() {
+		return shortFormater;
+	}
+
+	public void setShortFormater(SimpleDateFormat shortFormater) {
+		this.shortFormater = shortFormater;
 	}
 }
