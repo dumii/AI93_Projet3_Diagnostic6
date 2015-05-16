@@ -74,7 +74,7 @@
 					<td class="traitsGris"></td>
 				</tr>
 				
-				<a4j:repeat var="intervention" value="#{item.listeInterventionTypeIntervention}">
+				<ui:repeat var="intervention" value="#{item.listeInterventionTypeIntervention}">
 					
 					
 					<tr id="T#{item.idTypeIntervention} - A#{intervention.anomalie.idAnomalie}" class="ligneBleueIntervention">
@@ -151,7 +151,7 @@
 									value="#{mbPlanningTravaux.formater.format(intervention.dateFinIntervention)}"
 									style="display:none"/>
 							   
-								<h:commandButton action="#{mbPlanningTravaux.modifier(intervention)}"
+								<h:commandButton action="#{mbPlanningTravaux.modifier(intervention, item)}"
 									   					value="Modifier" />			
 							</div>
 							
@@ -201,7 +201,7 @@
 							</td>
 						
 					</tr>
-				</a4j:repeat>							
+				</ui:repeat>							
 			</ui:repeat>		
 			</h:panelGroup>
 		</table>

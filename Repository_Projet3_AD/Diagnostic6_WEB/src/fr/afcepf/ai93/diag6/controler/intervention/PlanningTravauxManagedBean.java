@@ -138,12 +138,15 @@ public class PlanningTravauxManagedBean {
 		return "";
 	}
 	
-	public String modifier(Intervention intervention) throws ParseException
+	public String modifier(Intervention intervention, TypeIntervention type) throws ParseException
 	{
+		
+		int index = type.getListeInterventionTypeIntervention().indexOf(intervention);
+		Intervention monIntervention = type.getListeInterventionTypeIntervention().get(index);
 		Utilisateur user = new Utilisateur();
 		user.setIdUtilisateur(2);
-		proxyIntervention.modifierIntervention(intervention, user);
-		init();
+		proxyIntervention.modifierIntervention(intervention, monIntervention.getIdIntervention(), user);
+		initialisationDesDonnees();
 		
 		return "";
 	}

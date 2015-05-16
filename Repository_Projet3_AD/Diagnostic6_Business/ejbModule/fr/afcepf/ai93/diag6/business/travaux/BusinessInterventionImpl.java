@@ -76,9 +76,9 @@ public class BusinessInterventionImpl implements IBusinessIntervention {
 	}
 
 	@Override
-	public String modifierIntervention(Intervention intervention, Utilisateur user) {
+	public String modifierIntervention(Intervention intervention, int IdIntervention, Utilisateur user) {
 		
-		Intervention interventionInitiale = proxyIntervention.recupereIntervention(intervention.getIdIntervention());
+		Intervention interventionInitiale = proxyIntervention.recupereIntervention(IdIntervention);
 		
 		//L'état d'avancement d'une intervention ne peut passer que de "En attente" vers "Terminés"
 		//Soit l'idEtatAvancement ne peut passer que de 4 à 1

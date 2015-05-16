@@ -25,7 +25,7 @@ public interface IBusinessIntervention {
 
     public String ajouterIntervention(Intervention intervention, Anomalie anomalie);
 
-    public String modifierIntervention(Intervention intervention, Utilisateur user);
+    public String modifierIntervention(Intervention intervention, int idIntervention, Utilisateur user);
 
     public Intervention recupereIntervention(int idIntervention);
     
