@@ -225,12 +225,9 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 	}
 	
 	public void modificationAnomalie(Anomalie a){
-		System.out.println(amodif.getIdAnomalie() + " = " + a.getIdAnomalie());
 		if(amodif.getIdAnomalie() != a.getIdAnomalie()) {
-			System.out.println("Anomalie prise en compte pour la modification : " + a.getIdAnomalie());
 			amodif = a;
 		} else {
-			System.out.println("je passe ici");
 			Utilisateur user = new Utilisateur();
 			user.setIdUtilisateur(1);
 			proxyBusinessAnomalie.modifierAnomalie(a, user); 
@@ -240,14 +237,9 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 	}
 	
 	public void modificationDiagnostic(){
-		
-		System.out.println("je modifie le diagnostic");
-		System.out.println(dmodif.getIdDiagnostic() + " = " + diagnosticSelectionne.getIdDiagnostic());
 		if(dmodif.getIdDiagnostic() != diagnosticSelectionne.getIdDiagnostic()) {
-			System.out.println("Diag pris en compte pour la modification : " + diagnosticSelectionne.getIdDiagnostic());
 			dmodif = diagnosticSelectionne;
 		} else {
-			System.out.println("je passe ici");
 			Utilisateur user = new Utilisateur();
 			user.setIdUtilisateur(1);
 			proxyBusinessDiagnostic.modifierDiagnostic(diagnosticSelectionne,user);
@@ -274,9 +266,6 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 	}
 	
 	public boolean isEnableDiag() {
-		
-		System.out.println("*******************************diag modif : "+dmodif.getIdDiagnostic());
-		System.out.println("diagnostic selectionné++++++++++++++++++++++++++++++++++++++++++++++"+diagnosticSelectionne.getIdDiagnostic());
 		if(diagnosticSelectionne.getIdDiagnostic() == dmodif.getIdDiagnostic()) {
 			return false;
 		}
@@ -298,9 +287,7 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 	}
 	
 	public String suppressionAnomalie(Anomalie a){
-		System.out.println("delete debut");
 		if(verifInterventionSurAnomalie(a)==true){
-			System.out.println("Vous ne pouvez pas supprimer");
 			return "Vous ne pouvez pas supprimer une anomalie ayant une intervention dessous"; 
 		}
 		else{
@@ -326,10 +313,8 @@ public class ConsultationDiagnosticManagedBean implements Serializable {
 	
 	public boolean isSelected(){
 		if(diagnosticSelectionne != null){
-			System.out.println("il a été sélectionné");
 			return true;
 		}
-		System.out.println("pas sélectionné");
 		return false; 
 	}
 
